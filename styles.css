@@ -4814,3 +4814,13 @@ body.modal-open {
     font-size: 11px;
   }
 }
+
+/* ---------- 언어 버튼 6개: 좁은 화면에서는 국기만 ---------- */
+@media (max-width: 430px) {
+  .lang-btn span {
+    display: none;
+  }
+  .lang-btn {
+    padding: 3px 4px;
+  }
+}

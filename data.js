@@ -9,7 +9,7 @@
 window.TEAFaiData = (function () {
   "use strict";
 
-  var LANGS = ["ko", "en", "zh-CN", "zh-TW", "yue"];
+  var LANGS = ["ko", "en", "zh-CN", "zh-TW", "ja", "yue"];
 
   /* 광동어(yue)는 아직 차별 문구를 따로 쓰지 않았습니다. 번체 중국어 문구를 그대로 쓰고,
      없는 항목은 영어까지 내려갑니다(화면이 비지 않게). */
@@ -18,7 +18,22 @@ window.TEAFaiData = (function () {
     en: ["en", "ko"],
     "zh-CN": ["zh-CN", "zh-TW", "en"],
     "zh-TW": ["zh-TW", "zh-CN", "en"],
+    ja: ["ja", "en"],
     yue: ["yue", "zh-TW", "zh-CN", "en"]
+  };
+
+  /* 계열 이름은 일본어를 따로 적어 둡니다(차별 설명은 영어로 내려갑니다) */
+  var JA_GROUPS = {
+    green: "緑茶",
+    white: "白茶",
+    yellow: "黄茶",
+    oolong: "烏龍茶",
+    black: "紅茶",
+    dark: "黒茶・プーアル茶",
+    blended: "ブレンド・着香茶",
+    herbal: "代用茶・伝統茶",
+    herb: "ハーブティー",
+    fruit: "フルーツティー"
   };
 
   /* ---------------- 계열 (6) ---------------- */
@@ -16795,6 +16810,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-biluochun": {
@@ -16803,6 +16819,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-maofeng": {
@@ -16811,6 +16828,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-sencha": {
@@ -16819,6 +16837,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-gyokuro": {
@@ -16827,6 +16846,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-matcha": {
@@ -16835,6 +16855,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-jeju": {
@@ -16843,6 +16864,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "white-silverneedle": {
@@ -16851,6 +16873,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-peony": {
@@ -16859,6 +16882,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-shoumei": {
@@ -16867,6 +16891,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-aged": {
@@ -16875,6 +16900,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-gongmei": {
@@ -16883,6 +16909,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-luanguapian": {
@@ -16891,6 +16918,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-houkui": {
@@ -16899,6 +16927,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-maojian": {
@@ -16907,6 +16936,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-lushan": {
@@ -16915,6 +16945,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-hojicha": {
@@ -16923,6 +16954,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-genmaicha": {
@@ -16931,6 +16963,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-hadong": {
@@ -16939,6 +16972,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "green-sejak": {
@@ -16947,6 +16981,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "green-jungjak": {
@@ -16955,6 +16990,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "green-daejak": {
@@ -16963,6 +16999,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "green-jukro": {
@@ -16971,6 +17008,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "yellow-junshan": {
@@ -16979,6 +17017,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-mengding": {
@@ -16987,6 +17026,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-huoshan": {
@@ -16995,6 +17035,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-tieguanyin": {
@@ -17003,6 +17044,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-dahongpao": {
@@ -17011,6 +17053,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-dancong": {
@@ -17019,6 +17062,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-dongding": {
@@ -17027,6 +17071,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-alishan": {
@@ -17035,6 +17080,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-beauty": {
@@ -17043,6 +17089,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-si-ji-chun": {
@@ -17051,6 +17098,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-jin-xuan": {
@@ -17059,6 +17107,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-pouchong": {
@@ -17067,6 +17116,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "black-darjeeling-first": {
@@ -17075,6 +17125,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-darjeeling-second": {
@@ -17083,6 +17134,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-assam": {
@@ -17091,6 +17143,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-nilgiri": {
@@ -17099,6 +17152,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-nuwaraeliya": {
@@ -17107,6 +17161,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-udapussellawa": {
@@ -17115,6 +17170,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-uva": {
@@ -17123,6 +17179,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-dimbula": {
@@ -17131,6 +17188,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-sabaragamuwa": {
@@ -17139,6 +17197,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-kandy": {
@@ -17147,6 +17206,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-ruhuna": {
@@ -17155,6 +17215,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "斯里兰卡",
     "zh-TW": "斯里蘭卡",
     "yue": "斯里蘭卡",
+    "ja": "スリランカ",
     "code": "lk"
   },
   "black-keemun": {
@@ -17163,6 +17224,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "black-lapsang": {
@@ -17171,6 +17233,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "black-jinjunmei": {
@@ -17179,6 +17242,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "black-dianhong": {
@@ -17187,6 +17251,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-masala": {
@@ -17195,6 +17260,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-sikkim": {
@@ -17203,6 +17269,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-nepal": {
@@ -17211,6 +17278,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "尼泊尔",
     "zh-TW": "尼泊爾",
     "yue": "尼泊爾",
+    "ja": "ネパール",
     "code": "np"
   },
   "black-kenya": {
@@ -17219,6 +17287,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "肯尼亚",
     "zh-TW": "肯亞",
     "yue": "肯雅",
+    "ja": "ケニア",
     "code": "ke"
   },
   "black-jaksal": {
@@ -17227,6 +17296,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "black-ruby18": {
@@ -17235,6 +17305,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "dark-sheng": {
@@ -17243,6 +17314,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-shou": {
@@ -17251,6 +17323,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-anhua": {
@@ -17259,6 +17332,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-liubao": {
@@ -17267,6 +17341,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-cheongtaejeon": {
@@ -17275,6 +17350,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "blend-earlgrey": {
@@ -17283,6 +17359,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "英国",
     "zh-TW": "英國",
     "yue": "英國",
+    "ja": "イギリス",
     "code": "uk"
   },
   "blend-ladygrey": {
@@ -17291,6 +17368,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "英国",
     "zh-TW": "英國",
     "yue": "英國",
+    "ja": "イギリス",
     "code": "uk"
   },
   "blend-englishbreakfast": {
@@ -17299,6 +17377,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "英国",
     "zh-TW": "英國",
     "yue": "英國",
+    "ja": "イギリス",
     "code": "uk"
   },
   "blend-afternoon": {
@@ -17307,6 +17386,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "英国",
     "zh-TW": "英國",
     "yue": "英國",
+    "ja": "イギリス",
     "code": "uk"
   },
   "blend-jasmine": {
@@ -17315,6 +17395,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-hongkong": {
@@ -17323,6 +17404,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "香港",
     "zh-TW": "香港",
     "yue": "香港",
+    "ja": "香港",
     "code": "hk"
   },
   "fruit-daechu": {
@@ -17331,6 +17413,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-ginger": {
@@ -17339,6 +17422,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "fruit-yuja": {
@@ -17347,6 +17431,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "fruit-omija": {
@@ -17355,6 +17440,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-ssanghwa": {
@@ -17363,6 +17449,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-dunggulle": {
@@ -17371,6 +17458,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-buckwheat": {
@@ -17379,6 +17467,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-barley": {
@@ -17387,6 +17476,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-brownrice": {
@@ -17395,6 +17485,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-persimmon": {
@@ -17403,6 +17494,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-mulberry": {
@@ -17411,6 +17503,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-lotus": {
@@ -17419,6 +17512,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-balloonflower": {
@@ -17427,6 +17521,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-mugwort": {
@@ -17435,6 +17530,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-tteokcha": {
@@ -17443,6 +17539,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-chamomile": {
@@ -17451,6 +17548,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "埃及",
     "zh-TW": "埃及",
     "yue": "埃及",
+    "ja": "エジプト",
     "code": "eg"
   },
   "herb-peppermint": {
@@ -17459,6 +17557,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "英国",
     "zh-TW": "英國",
     "yue": "英國",
+    "ja": "イギリス",
     "code": "uk"
   },
   "herb-hibiscus": {
@@ -17467,6 +17566,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "苏丹",
     "zh-TW": "蘇丹",
     "yue": "蘇丹",
+    "ja": "スーダン",
     "code": "sd"
   },
   "herb-rooibos": {
@@ -17475,6 +17575,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "南非",
     "zh-TW": "南非",
     "yue": "南非",
+    "ja": "南アフリカ",
     "code": "za"
   },
   "herb-mate": {
@@ -17483,6 +17584,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "阿根廷",
     "zh-TW": "阿根廷",
     "yue": "阿根廷",
+    "ja": "アルゼンチン",
     "code": "ar"
   },
   "herb-lavender": {
@@ -17491,6 +17593,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "法国",
     "zh-TW": "法國",
     "yue": "法國",
+    "ja": "フランス",
     "code": "fr"
   },
   "herb-lemongrass": {
@@ -17499,6 +17602,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "泰国",
     "zh-TW": "泰國",
     "yue": "泰國",
+    "ja": "タイ",
     "code": "th"
   },
   "herb-chrysanthemum": {
@@ -17507,6 +17611,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "fruit-mogwa": {
@@ -17515,6 +17620,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "fruit-gingerlemon": {
@@ -17523,6 +17629,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "fruit-applecinnamon": {
@@ -17531,6 +17638,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "德国",
     "zh-TW": "德國",
     "yue": "德國",
+    "ja": "ドイツ",
     "code": "de"
   },
   "fruit-peach": {
@@ -17539,6 +17647,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "德国",
     "zh-TW": "德國",
     "yue": "德國",
+    "ja": "ドイツ",
     "code": "de"
   },
   "fruit-berryhibiscus": {
@@ -17547,6 +17656,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "德国",
     "zh-TW": "德國",
     "yue": "德國",
+    "ja": "ドイツ",
     "code": "de"
   },
   "fruit-bloodorange": {
@@ -17555,6 +17665,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "德国",
     "zh-TW": "德國",
     "yue": "德國",
+    "ja": "ドイツ",
     "code": "de"
   },
   "fruit-passionfruit": {
@@ -17563,6 +17674,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "德国",
     "zh-TW": "德國",
     "yue": "德國",
+    "ja": "ドイツ",
     "code": "de"
   },
   "green-zhuyeqing": {
@@ -17571,6 +17683,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-enshi-yulu": {
@@ -17579,6 +17692,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-anji-baipian": {
@@ -17587,6 +17701,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-gougunao": {
@@ -17595,6 +17710,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-wuyuan-mingmei": {
@@ -17603,6 +17719,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-mengding-ganlu": {
@@ -17611,6 +17728,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-hanzhong-xianhao": {
@@ -17619,6 +17737,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-huiming": {
@@ -17627,6 +17746,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-boseong": {
@@ -17635,6 +17755,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "green-sanxia-biluochun": {
@@ -17643,6 +17764,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "green-kabusecha": {
@@ -17651,6 +17773,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-kamairicha": {
@@ -17659,6 +17782,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "日本",
     "zh-TW": "日本",
     "yue": "日本",
+    "ja": "日本",
     "code": "jp"
   },
   "green-dafo-longjing": {
@@ -17667,6 +17791,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "green-laoshan": {
@@ -17675,6 +17800,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-xingongyi": {
@@ -17683,6 +17809,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-yueguangbai": {
@@ -17691,6 +17818,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "white-lingyun-baihao": {
@@ -17699,6 +17827,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-beigang-maojian": {
@@ -17707,6 +17836,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-weishan-maojian": {
@@ -17715,6 +17845,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-wenzhou-huangtang": {
@@ -17723,6 +17854,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-wanxi-huangdacha": {
@@ -17731,6 +17863,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "yellow-yuanan-luyuan": {
@@ -17739,6 +17872,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-rougui": {
@@ -17747,6 +17881,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-shuixian": {
@@ -17755,6 +17890,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-dayuling": {
@@ -17763,6 +17899,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-shanlinxi": {
@@ -17771,6 +17908,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-lishan": {
@@ -17779,6 +17917,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-huangjingui": {
@@ -17787,6 +17926,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-benshan": {
@@ -17795,6 +17935,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-foshou": {
@@ -17803,6 +17944,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-muzha-tieguanyin": {
@@ -17811,6 +17953,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-dancong-milan": {
@@ -17819,6 +17962,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-dancong-yashixiang": {
@@ -17827,6 +17971,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "oolong-hongshui": {
@@ -17835,6 +17980,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "oolong-thai-doi": {
@@ -17843,6 +17989,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "泰国",
     "zh-TW": "泰國",
     "yue": "泰國",
+    "ja": "タイ",
     "code": "th"
   },
   "oolong-vietnam-mocchau": {
@@ -17851,6 +17998,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "越南",
     "zh-TW": "越南",
     "yue": "越南",
+    "ja": "ベトナム",
     "code": "vn"
   },
   "black-lapsang-unsmoked": {
@@ -17859,6 +18007,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "black-yingde": {
@@ -17867,6 +18016,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "black-rize": {
@@ -17875,6 +18025,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "土耳其",
     "zh-TW": "土耳其",
     "yue": "土耳其",
+    "ja": "トルコ",
     "code": "tr"
   },
   "black-cameron": {
@@ -17883,6 +18034,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "马来西亚",
     "zh-TW": "馬來西亞",
     "yue": "馬來西亞",
+    "ja": "マレーシア",
     "code": "my"
   },
   "black-rwanda": {
@@ -17891,6 +18043,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "卢旺达",
     "zh-TW": "盧安達",
     "yue": "盧安達",
+    "ja": "ルワンダ",
     "code": "rw"
   },
   "black-dooars": {
@@ -17899,6 +18052,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-darjeeling-autumn": {
@@ -17907,6 +18061,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "印度",
     "zh-TW": "印度",
     "yue": "印度",
+    "ja": "インド",
     "code": "in"
   },
   "black-yeongdeok": {
@@ -17915,6 +18070,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "dark-fuzhuan": {
@@ -17923,6 +18079,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-qianliang": {
@@ -17931,6 +18088,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-kangzhuan": {
@@ -17939,6 +18097,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-tibetan": {
@@ -17947,6 +18106,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-laoqingzhuan": {
@@ -17955,6 +18115,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "dark-tianjian": {
@@ -17963,6 +18124,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-guihua": {
@@ -17971,6 +18133,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-milk-oolong": {
@@ -17979,6 +18142,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "台湾",
     "zh-TW": "台灣",
     "yue": "台灣",
+    "ja": "台湾",
     "code": "tw"
   },
   "blend-rose": {
@@ -17987,6 +18151,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-lychee": {
@@ -17995,6 +18160,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "中国",
     "zh-TW": "中國",
     "yue": "中國",
+    "ja": "中国",
     "code": "cn"
   },
   "blend-thaitea": {
@@ -18003,6 +18169,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "泰国",
     "zh-TW": "泰國",
     "yue": "泰國",
+    "ja": "タイ",
     "code": "th"
   },
   "blend-yuenyeung": {
@@ -18011,6 +18178,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "香港",
     "zh-TW": "香港",
     "yue": "香港",
+    "ja": "香港",
     "code": "hk"
   },
   "blend-moroccan-mint": {
@@ -18019,6 +18187,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "摩洛哥",
     "zh-TW": "摩洛哥",
     "yue": "摩洛哥",
+    "ja": "モロッコ",
     "code": "ma"
   },
   "blend-russian-caravan": {
@@ -18027,6 +18196,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "俄罗斯",
     "zh-TW": "俄羅斯",
     "yue": "俄羅斯",
+    "ja": "ロシア",
     "code": "ru"
   },
   "blend-irish-breakfast": {
@@ -18035,6 +18205,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "爱尔兰",
     "zh-TW": "愛爾蘭",
     "yue": "愛爾蘭",
+    "ja": "アイルランド",
     "code": "ie"
   },
   "herb-cassia-seed": {
@@ -18043,6 +18214,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-burdock": {
@@ -18051,6 +18223,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-gugija": {
@@ -18059,6 +18232,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-cornus": {
@@ -18067,6 +18241,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-dandelion": {
@@ -18075,6 +18250,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   },
   "herb-cornsilk": {
@@ -18083,6 +18259,7 @@ window.TEAFaiData = (function () {
     "zh-CN": "韩国",
     "zh-TW": "韓國",
     "yue": "韓國",
+    "ja": "韓国",
     "code": "kr"
   }
 };
@@ -18185,6 +18362,11 @@ window.TEAFaiData = (function () {
 
   function groupPost(g, lang) {
     var text = textFor(g, lang);
+    if (lang === "ja" && JA_GROUPS[g.id]) {
+      var jaName = JA_GROUPS[g.id];
+      if (!text || !text.name) text = { name: jaName };
+      else text.name = jaName;
+    }
     var o = {};
     var k;
     for (k in g) {
@@ -18200,6 +18382,13 @@ window.TEAFaiData = (function () {
 
   function teaPost(entry, group, lang) {
     var text = textFor(entry, lang);
+    /* 일본어는 아직 차별 문구를 다 옮기지 않았습니다. 이름만은 한자(원어)로 보여 주고,
+       나머지 설명은 영어 문구로 내려갑니다. */
+    if (lang === "ja" && (!text || !text.name)) {
+      var kanji = entry.hz || entry.hs || "";
+      if (kanji) text = { name: kanji, oneLine: text.oneLine };
+      else if (!text || !text.name) text = textFor(entry, "en");
+    }
     var extra = extraFor(entry, lang);
     var o = {
       id: entry.id,

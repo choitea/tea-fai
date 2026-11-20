@@ -164,6 +164,16 @@ def hongkong_colonial():
     return "".join(s)
 
 
+def japan():
+    """일장기 — 흰 바탕 가운데 붉은 원(지름 = 세로의 3/5)."""
+    return (
+        f'<rect width="{W}" height="{H}" fill="#FFFFFF"/>'
+        f'<circle cx="{W/2}" cy="{H/2}" r="{H*0.30:.2f}" fill="#BC002D"/>'
+        f'<rect x="0.25" y="0.25" width="{W-0.5}" height="{H-0.5}" fill="none" '
+        f'stroke="#00000018" stroke-width="0.5"/>'
+    )
+
+
 def wrap(name, body, label):
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
@@ -185,6 +195,7 @@ def main():
     )
     wrap("zh-CN", china(), "五星红旗 (简体中文)")
     wrap("zh-TW", taiwan(), "青天白日滿地紅 (繁體中文)")
+    wrap("ja", japan(), "日の丸 (日本語)")
     wrap("yue", hongkong_colonial(), "英屬香港旗 (粵語)")
     print("flags:", sorted(p.name for p in OUT.glob("*.svg")))
 

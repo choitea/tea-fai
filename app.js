@@ -1536,7 +1536,7 @@
   function l10n(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    /* 광동어는 따로 적어 둔 문구가 없으므로 번체 중국어 문구를 씁니다 */
+    /* 광동어는 번체 중국어, 일본어는 일본어 문구를 쓰고 없으면 영어로 */
     var key = lang === "yue" ? "zh-TW" : lang;
     return obj[key] || obj.en || obj.ko || "";
   }

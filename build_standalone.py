@@ -54,7 +54,7 @@ html = html.replace('src="icons/logo_tea_mark.svg"', f'src="{svg_uri}"')
 
 # 국기 SVG 는 i18n.js 의 mountSwitcher 가 <img> 로 그리므로 data URI 로 함께 품습니다
 flags = {}
-for code, fname in (("ko", "ko"), ("en", "en"), ("zh-CN", "zh-CN"), ("zh-TW", "zh-TW"), ("yue", "yue")):
+for code, fname in (("ko", "ko"), ("en", "en"), ("zh-CN", "zh-CN"), ("zh-TW", "zh-TW"), ("ja", "ja"), ("yue", "yue")):
     raw = (BASE / "icons" / "flags" / (fname + ".svg")).read_bytes()
     flags[code] = "data:image/svg+xml;base64," + base64.b64encode(raw).decode("ascii")
 flag_js = "<script>window.TeaFaiFlags = " + json.dumps(flags) + ";</script>\n    "
