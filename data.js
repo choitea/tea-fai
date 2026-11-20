@@ -23,6 +23,19 @@ window.TEAFaiData = (function () {
   };
 
   /* 계열 이름은 일본어를 따로 적어 둡니다(차별 설명은 영어로 내려갑니다) */
+  var JA_GROUP_LINES = {
+    green: "摘んだあと24時間でほぼすべてが決まる、時間との勝負。",
+    white: "萎凋して乾かす、それだけ。だから葉の質がそのまま出る。",
+    yellow: "悶黄というひと工程が生むやわらかな甘み。六大茶類で最も希少。",
+    oolong: "狙ったところで正確に止める半発酵の芸術。",
+    black: "完全発酵。赤い水色とミルクに負けない力はここから生まれる。",
+    dark: "時間が保存期間ではなく材料になるお茶。",
+    blended: "茶葉を混ぜ、香りを着せるお茶。朝のブレンドから香港式の一杯まで。",
+    herbal: "茶の木の代わりに穀物・根・実を煮出した一杯。カフェインなしで一日のそばに。",
+    herb: "ハーブをそのまま淹れる、香りのための一杯。",
+    fruit: "果実と花の甘酸っぱさを湯にほどいた一杯。"
+  };
+
   var JA_GROUPS = {
     green: "緑茶",
     white: "白茶",
@@ -18366,6 +18379,7 @@ window.TEAFaiData = (function () {
       var jaName = JA_GROUPS[g.id];
       if (!text || !text.name) text = { name: jaName };
       else text.name = jaName;
+      if (JA_GROUP_LINES[g.id]) text.oneLine = JA_GROUP_LINES[g.id];
     }
     var o = {};
     var k;
