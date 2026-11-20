@@ -4234,14 +4234,14 @@ body.modal-open {
      열립니다. 서버를 붙일 때는 schema.sql 의 정책을 먼저 적용하세요.
    ============================================================ */
 window.SUPABASE_CONFIG = {
-  url: "",            // 예: "https://xxxxxxxx.supabase.co"
-  anonKey: "",        // Supabase Dashboard → Project Settings → API → anon public
-  enabled: false,     // true 로 바꾸고 url·anonKey 를 채우면 서버 모드
+  url: "https://zbjvwvaluywjxzvnohcv.supabase.co",
+  anonKey: "sb_publishable_HtZSSUA4WzFwY3SrskQeEw_rBjlhuUn",  // 공개용 publishable 키 (RLS 로만 쓰기 허용)
+  enabled: true,      // true 이고 url·anonKey 가 있으면 서버 모드
   tables: {
     posts: "community_posts",
     applications: "shop_applications"
   },
-  timeoutMs: 6000
+  timeoutMs: 8000
 };
 
 window.TeaFaiSupabase = (function () {
@@ -4272,7 +4272,7 @@ window.TeaFaiSupabase = (function () {
   }
 
   /* 서버가 느리거나 막혀도 화면이 멈추지 않도록 시간 제한을 둡니다 */
-  function request(method, table, body, query) {
+  function request(method, table, body, query, prefer) {
     if (!isConfigured()) {
       return Promise.resolve({ ok: false, mode: "local", reason: "not_configured" });
     }
@@ -4291,7 +4291,7 @@ window.TeaFaiSupabase = (function () {
     }
     return fetch(endpoint(table, query), {
       method: method,
-      headers: headers({ Prefer: "return=representation" }),
+      headers: headers({ Prefer: prefer || "return=representation" }),
       body: body == null ? undefined : JSON.stringify(body),
       signal: ctrl ? ctrl.signal : undefined
     })
@@ -4347,7 +4347,18 @@ window.TeaFaiSupabase = (function () {
   }
 
   function submitPost(post) {
-    return request("POST", cfg().tables.posts, postRow(post));
+    var row = postRow(post);
+    return request("POST", cfg().tables.posts, row).then(function (res) {
+      /* teas 카탈로그(93종) 시드가 아직 없는 프로젝트에서는 tea_id 가
+         외래키(23503)에 걸립니다. 그때는 차 이름만 남기고 다시 저장합니다. */
+      if (res && !res.ok && row.tea_id && (res.status === 409 || res.status === 400) &&
+          /23503|foreign key/i.test(String(res.reason || ""))) {
+        var retry = {};
+        for (var k in row) if (k !== "tea_id") retry[k] = row[k];
+        return request("POST", cfg().tables.posts, retry);
+      }
+      return res;
+    });
   }
 
   /* 공개 글 읽기 — 최신순. 실패하면 로컬 글만 보여 줍니다. */
@@ -4384,8 +4395,10 @@ window.TeaFaiSupabase = (function () {
     };
   }
 
+  /* 신청서에는 이름·연락처가 들어 있어 anon 에게 SELECT 권한을 열지 않았습니다.
+     그래서 RETURNING 없이 보냅니다(return=minimal). */
   function submitApplication(app) {
-    return request("POST", cfg().tables.applications, applicationRow(app));
+    return request("POST", cfg().tables.applications, applicationRow(app), null, "return=minimal");
   }
 
   /* 화면에 현재 저장 위치를 알려 줄 문구용 */
