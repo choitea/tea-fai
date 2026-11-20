@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>티파이 — 차 백과 &amp; 우림 타이머</title>
-    <meta name="description" content="녹차·백차·우롱차·홍차·흑차·얼그레이의 우림 온도와 시간, 차 백과, 시음 노트를 한 곳에. 《찻잎의 시간, 오늘의 한 잔》과 《얼그레이의 모든 것》을 바탕으로 만든 티파이 앱." />
+    <title>티키피디아 — 차 백과 &amp; 우림 타이머</title>
+    <meta
+      name="description"
+      data-i18n-content="meta.desc"
+      content="녹차·백차·황차·우롱차·홍차·흑차·가향차·허브차의 우림 온도와 시간, 차 백과, 시음 노트를 한 곳에. 《찻잎의 시간, 오늘의 한 잔》과 《얼그레이의 모든 것》을 바탕으로 만든 티키피디아 앱."
+    />
     <meta name="theme-color" content="#F7F3EB" />
     <meta name="color-scheme" content="light" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="티파이" />
+    <meta name="apple-mobile-web-app-title" content="티키피디아" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
     <link rel="icon" type="image/png" href="icons/icon-192.png" />
@@ -69,10 +73,6 @@
           <circle cx="12" cy="12" r="8.5" />
           <path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5z" />
         </symbol>
-        <symbol id="ic-bookstore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v16H5.5A1.5 1.5 0 0 1 4 18.5z" />
-          <path d="M13.6 4.6l3.9 1a1.5 1.5 0 0 1 1.1 1.8l-3.1 11.6a1.5 1.5 0 0 1-1.8 1.1l-3.9-1" />
-        </symbol>
         <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="m9 5.5 6.5 6.5L9 18.5" />
         </symbol>
@@ -93,9 +93,9 @@
     <header class="app-header">
       <div class="brand">
         <span class="brand-mark">茶</span>
-        <span class="brand-name">티파이<em>Tea Fai</em></span>
+        <span class="brand-name"><span data-i18n="brand.name">티키피디아</span><em data-i18n="brand.sub">Teakipedia</em></span>
       </div>
-      <span class="header-note">차 백과 · 우리기</span>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="언어" data-i18n-aria="a11y.lang"></div>
     </header>
 
     <main class="viewport">
@@ -103,26 +103,26 @@
       <section class="view active" id="view-home" aria-labelledby="homeTitle">
         <div class="view-head">
           <p class="eyebrow" id="homeDate">오늘</p>
-          <h1 id="homeTitle">오늘은 어떤<br />한 잔이 필요하세요?</h1>
-          <p>기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
+          <h1 id="homeTitle" data-i18n-html="home.title">오늘은 어떤<br />한 잔이 필요하세요?</h1>
+          <p data-i18n="home.lead">기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
         </div>
 
-        <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택"></div>
+        <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택" data-i18n-aria="a11y.mood"></div>
         <div id="recoArea" style="margin-top: 14px"></div>
 
         <div class="section-head">
-          <h2>티파이 채널</h2>
-          <span>차 한 잔과 함께</span>
+          <h2 data-i18n="home.channel">티파이 채널</h2>
+          <span data-i18n="home.channelSub">차 한 잔과 함께</span>
         </div>
         <div class="banner-row">
           <a class="banner" href="https://youtu.be/5fkX0dfnHmE" target="_blank" rel="noopener">
-            <span class="banner-label">Lo-fi playlist</span>
-            <span class="banner-title">우리기 좋은<br />로파이</span>
+            <span class="banner-label" data-i18n="home.lofiLabel">Lo-fi playlist</span>
+            <span class="banner-title" data-i18n-html="home.lofiTitle">우리기 좋은<br />로파이</span>
             <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
           </a>
           <a class="banner sleep" href="https://youtu.be/sRJH76ZkajY" target="_blank" rel="noopener">
-            <span class="banner-label">Sleep sound</span>
-            <span class="banner-title">잠들기 전<br />수면 사운드</span>
+            <span class="banner-label" data-i18n="home.sleepLabel">Sleep sound</span>
+            <span class="banner-title" data-i18n-html="home.sleepTitle">잠들기 전<br />수면 사운드</span>
             <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
           </a>
         </div>
@@ -131,15 +131,15 @@
           <a class="link-row" href="https://rotroka.upaper.kr" target="_blank" rel="noopener">
             <span class="lr-ico"><svg><use href="#ic-book" /></svg></span>
             <span class="lr-text">
-              <b>전자책 《찻잎의 시간, 오늘의 한 잔》</b>
-              <span>유페이퍼 서점 · 얼그레이 편도 함께</span>
+              <b data-i18n="home.bookTitle">전자책 《찻잎의 시간, 오늘의 한 잔》</b>
+              <span data-i18n="home.bookSub">유페이퍼 서점 · 얼그레이 편도 함께</span>
             </span>
             <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
           </a>
           <a class="link-row" href="https://blog.naver.com/hongkongtea_kr" target="_blank" rel="noopener">
             <span class="lr-ico"><svg><use href="#ic-globe" /></svg></span>
             <span class="lr-text">
-              <b>네이버 블로그</b>
+              <b data-i18n="home.blogTitle">네이버 블로그</b>
               <span>blog.naver.com/hongkongtea_kr</span>
             </span>
             <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
@@ -147,33 +147,36 @@
           <a class="link-row" href="https://www.youtube.com/@TeaFai" target="_blank" rel="noopener">
             <span class="lr-ico"><svg><use href="#ic-youtube" /></svg></span>
             <span class="lr-text">
-              <b>유튜브 채널 @TeaFai</b>
-              <span>차 이야기와 우리기 영상</span>
+              <b data-i18n="home.youtubeTitle">유튜브 채널 @TeaFai</b>
+              <span data-i18n="home.youtubeSub">차 이야기와 우리기 영상</span>
             </span>
             <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
           </a>
         </div>
 
         <div class="quote">
-          <span class="eyebrow">책에서 한 줄</span>
-          <p>녹차는 1분을 기다리고, 우롱차는 30초를 기다리고, 흑차는 20년을 기다린다. 같은 잎이 어떤 시간을 통과했는지 알면, 우리가 컵 앞에서 보내는 3분도 그 시간의 일부가 된다.</p>
-          <cite>《찻잎의 시간, 오늘의 한 잔》 에필로그</cite>
+          <span class="eyebrow" data-i18n="home.quoteKicker">책에서 한 줄</span>
+          <p data-i18n="home.quote">
+            녹차는 1분을 기다리고, 우롱차는 30초를 기다리고, 흑차는 20년을 기다린다. 같은 잎이 어떤 시간을 통과했는지 알면, 우리가 컵 앞에서 보내는 3분도 그 시간의 일부가 된다.
+          </p>
+          <cite data-i18n="home.quoteCite">《찻잎의 시간, 오늘의 한 잔》 에필로그</cite>
         </div>
 
         <div id="recentNote"></div>
 
-        <p class="legal-link"><a href="privacy.html">개인정보처리방침</a></p>
+        <p class="legal-link"><a href="privacy.html" data-i18n="home.privacy">개인정보처리방침</a></p>
       </section>
 
       <!-- ───────── 우림 타이머 ───────── -->
       <section class="view" id="view-timer" aria-labelledby="timerTitle">
         <div class="view-head" style="margin-bottom: 12px">
-          <p class="eyebrow">Steeping timer</p>
-          <h1 id="timerTitle">우림 타이머</h1>
-          <p>차를 고르고 몇 번째 포인지 고르면 책의 기준 시간으로 맞춰 드립니다.</p>
+          <p class="eyebrow" data-i18n="timer.kicker">Steeping timer</p>
+          <h1 id="timerTitle" data-i18n="timer.title">우림 타이머</h1>
+          <p data-i18n="timer.lead">차를 고르고 몇 번째 포인지 고르면 책의 기준 시간으로 맞춰 드립니다.</p>
         </div>
 
-        <div class="chip-row" id="teaChips" role="group" aria-label="차 종류 선택"></div>
+        <div class="chip-row" id="groupChips" role="group" aria-label="계열 선택" data-i18n-aria="a11y.group"></div>
+        <div class="chip-row" id="teaChips" role="group" aria-label="차 종류 선택" data-i18n-aria="a11y.tea"></div>
 
         <div class="timer-stage">
           <div class="ring" id="ring">
@@ -184,38 +187,38 @@
             <div class="ring-inner">
               <div class="ring-time" id="ringTime" role="timer" aria-live="off">01:30</div>
               <div class="ring-tea" id="ringTea">녹차 · 1포</div>
-              <div class="ring-state" id="ringState">준비</div>
+              <div class="ring-state" id="ringState" data-i18n="state.ready">준비</div>
             </div>
           </div>
         </div>
 
-        <div class="steep-row" id="steepRow" role="group" aria-label="포 수 선택"></div>
+        <div class="steep-row" id="steepRow" role="group" aria-label="포 수 선택" data-i18n-aria="a11y.steep"></div>
 
         <div class="adjust-row">
-          <button class="adjust-btn" id="minus10" type="button" aria-label="10초 줄이기">−10</button>
+          <button class="adjust-btn" id="minus10" type="button" aria-label="10초 줄이기" data-i18n-aria="a11y.minus">−10</button>
           <span class="adjust-label" id="adjustLabel">±10초</span>
-          <button class="adjust-btn" id="plus10" type="button" aria-label="10초 늘리기">+10</button>
+          <button class="adjust-btn" id="plus10" type="button" aria-label="10초 늘리기" data-i18n-aria="a11y.plus">+10</button>
         </div>
 
         <div class="timer-actions">
-          <button class="btn btn-primary" id="startBtn" type="button">우리기 시작</button>
-          <button class="btn btn-outline" id="resetBtn" type="button">초기화</button>
+          <button class="btn btn-primary" id="startBtn" type="button" data-i18n="btn.start">우리기 시작</button>
+          <button class="btn btn-outline" id="resetBtn" type="button" data-i18n="btn.reset">초기화</button>
         </div>
 
         <p class="steep-note" id="steepNote"></p>
 
         <div class="panel">
           <div class="panel-head">
-            <h3>이 차의 우리기</h3>
+            <h3 data-i18n="timer.panel">이 차의 우리기</h3>
             <span class="eyebrow" id="panelTemp">75℃</span>
           </div>
           <dl id="brewInfo"></dl>
           <div class="mute-row">
             <p>
-              <svg id="muteIcon" width="15" height="15" style="vertical-align:-3px;margin-right:5px;color:#8b8371"><use href="#ic-sound" /></svg>알림음
+              <svg id="muteIcon" width="15" height="15" style="vertical-align:-3px;margin-right:5px;color:#8b8371"><use href="#ic-sound" /></svg><span data-i18n="timer.mute">알림음</span>
               <small id="muteDesc">은은한 종소리로 알려 드립니다</small>
             </p>
-            <button class="switch" id="muteToggle" type="button" role="switch" aria-checked="false" aria-label="알림음 음소거"></button>
+            <button class="switch" id="muteToggle" type="button" role="switch" aria-checked="false" aria-label="알림음 음소거" data-i18n-aria="a11y.mute"></button>
           </div>
         </div>
       </section>
@@ -223,89 +226,98 @@
       <!-- ───────── 차 백과 ───────── -->
       <section class="view" id="view-guide" aria-labelledby="guideTitle">
         <div class="view-head" style="margin-bottom: 12px">
-          <p class="eyebrow">Tea encyclopedia</p>
-          <h1 id="guideTitle">차 백과</h1>
-          <p>산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책에서 정리했습니다.</p>
+          <p class="eyebrow" data-i18n="guide.kicker">Tea encyclopedia</p>
+          <h1 id="guideTitle" data-i18n="guide.title">차 백과</h1>
+          <p data-i18n="guide.lead">산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책과 중국차대백과사전의 계보를 따라 정리했습니다.</p>
         </div>
 
         <div class="search-box">
           <svg><use href="#ic-search" /></svg>
-          <input type="search" id="searchInput" placeholder="차 이름, 향, 산지로 찾기" autocomplete="off" aria-label="차 백과 검색" />
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="차 이름, 향, 산지로 찾기"
+            data-i18n-ph="guide.search"
+            autocomplete="off"
+            aria-label="차 백과 검색"
+            data-i18n-aria="a11y.search"
+          />
         </div>
-        <div class="chip-row" id="filterChips" role="group" aria-label="차류 필터"></div>
+        <div class="chip-row" id="filterChips" role="group" aria-label="차류 필터" data-i18n-aria="a11y.filter"></div>
         <div id="teaList" style="margin-top: 14px"></div>
 
         <div class="app-footer">
-          <b>출처</b> — 《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》(최티).<br />
-          수치는 책의 부록 표와 각 장의 서술을 그대로 옮겼습니다. 입맛에 맞춰 ±10초로 조율해 보세요.<br />
-          <a href="privacy.html">개인정보처리방침</a>
+          <b data-i18n="guide.source">출처</b> — <span data-i18n="guide.sourceText">《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》(최티).</span><br />
+          <span data-i18n="guide.sourceNote">수치는 책의 부록 표와 각 장의 서술을 그대로 옮겼습니다. 입맛에 맞춰 ±10초로 조율해 보세요.</span><br />
+          <a href="privacy.html" data-i18n="home.privacy">개인정보처리방침</a>
         </div>
       </section>
 
       <!-- ───────── 시음 노트 ───────── -->
       <section class="view" id="view-notes" aria-labelledby="notesTitle">
         <div class="view-head" style="margin-bottom: 12px">
-          <p class="eyebrow">Tasting notes</p>
-          <h1 id="notesTitle">시음 노트</h1>
-          <p>오늘 우린 차를 한 줄로 남겨 두면, 다음 잔이 조금 더 정확해집니다.</p>
+          <p class="eyebrow" data-i18n="notes.kicker">Tasting notes</p>
+          <h1 id="notesTitle" data-i18n="notes.title">시음 노트</h1>
+          <p data-i18n="notes.lead">오늘 우린 차를 한 줄로 남겨 두면, 다음 잔이 조금 더 정확해집니다.</p>
         </div>
 
         <div class="note-stats">
           <div class="note-stat">
-            <span>기록한 잔</span>
+            <span data-i18n="notes.statCups">기록한 잔</span>
             <b id="statCount">0<small>잔</small></b>
           </div>
           <div class="note-stat">
-            <span>평균 별점</span>
+            <span data-i18n="notes.statAvg">평균 별점</span>
             <b id="statAvg">—</b>
           </div>
         </div>
 
         <form class="form-card" id="noteForm" autocomplete="off">
           <div class="field">
-            <label for="noteTea">차 종류</label>
+            <label for="noteTea" data-i18n="notes.formTea">차 종류</label>
             <select id="noteTea"></select>
           </div>
           <div class="field">
-            <label for="noteName">이름 · 산지</label>
-            <input type="text" id="noteName" placeholder="예: 하동 우전, 2026 봄" maxlength="60" />
+            <label for="noteName" data-i18n="notes.formName">이름 · 산지</label>
+            <input type="text" id="noteName" placeholder="예: 하동 우전, 2026 봄" data-i18n-ph="notes.namePh" maxlength="60" />
           </div>
           <div class="field">
-            <label id="starLabel">별점</label>
+            <label id="starLabel" data-i18n="notes.formRating">별점</label>
             <div class="stars" id="starRow" role="group" aria-labelledby="starLabel"></div>
           </div>
           <div class="field">
-            <label for="noteText">한 줄 감상</label>
-            <textarea id="noteText" placeholder="예: 75도에서 1분, 떫음 없이 단맛이 오래 남았다." maxlength="200"></textarea>
+            <label for="noteText" data-i18n="notes.formText">한 줄 감상</label>
+            <textarea id="noteText" placeholder="예: 75도에서 1분, 떫음 없이 단맛이 오래 남았다." data-i18n-ph="notes.textPh" maxlength="200"></textarea>
           </div>
-          <button class="btn btn-dark btn-block" type="submit">노트 저장</button>
+          <button class="btn btn-dark btn-block" type="submit" data-i18n="notes.save">노트 저장</button>
         </form>
 
         <div class="section-head">
-          <h2>기록</h2>
+          <h2 data-i18n="notes.log">기록</h2>
           <span id="noteCountLabel">0잔</span>
         </div>
         <div id="noteList"></div>
       </section>
     </main>
 
-    <nav class="tabbar" aria-label="주요 화면">
+    <nav class="tabbar" aria-label="주요 화면" data-i18n-aria="a11y.tabbar">
       <button class="tab active" type="button" data-view="home" aria-current="page">
-        <svg><use href="#ic-home" /></svg><span>오늘의 차</span>
+        <svg><use href="#ic-home" /></svg><span data-i18n="tab.home">오늘의 차</span>
       </button>
       <button class="tab" type="button" data-view="timer">
-        <svg><use href="#ic-timer" /></svg><span>우림 타이머</span>
+        <svg><use href="#ic-timer" /></svg><span data-i18n="tab.timer">우림 타이머</span>
       </button>
       <button class="tab" type="button" data-view="guide">
-        <svg><use href="#ic-book" /></svg><span>차 백과</span>
+        <svg><use href="#ic-book" /></svg><span data-i18n="tab.guide">차 백과</span>
       </button>
       <button class="tab" type="button" data-view="notes">
-        <svg><use href="#ic-note" /></svg><span>시음 노트</span>
+        <svg><use href="#ic-note" /></svg><span data-i18n="tab.notes">시음 노트</span>
       </button>
     </nav>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="i18n.js"></script>
     <script src="data.js"></script>
     <script src="app.js"></script>
   </body>

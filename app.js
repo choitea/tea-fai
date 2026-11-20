@@ -1,12 +1,12 @@
 /* ============================================================
-   티파이(Tea Fai) — 화면 로직
+   티키피디아(Teakipedia) — 화면 로직
    · 오늘의 차 / 우림 타이머 / 차 백과 / 시음 노트
    ============================================================ */
 (function () {
   "use strict";
 
   var D = window.TEAFaiData;
-  var teas = D.teas;
+  var L = window.TEAFaiI18N;
 
   var NOTES_KEY = "teafai.notes.v1";
   var MUTE_KEY = "teafai.muted.v1";
@@ -15,9 +15,17 @@
   var RING_R = 116;
   var RING_C = 2 * Math.PI * RING_R;
 
+  var lang = L.detect();
+
   /* ---------------- 공용 유틸 ---------------- */
+  function t(key, vars) {
+    return L.t(lang, key, vars);
+  }
   function $(sel, root) {
     return (root || document).querySelector(sel);
+  }
+  function $$(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
   function pad2(n) {
     return (n < 10 ? "0" : "") + n;
@@ -26,13 +34,8 @@
     sec = Math.max(0, Math.round(sec));
     return pad2(Math.floor(sec / 60)) + ":" + pad2(sec % 60);
   }
-  function fmtKo(sec) {
-    sec = Math.max(0, Math.round(sec));
-    var m = Math.floor(sec / 60);
-    var s = sec % 60;
-    if (m && s) return m + "분 " + s + "초";
-    if (m) return m + "분";
-    return s + "초";
+  function fmtDur(sec) {
+    return L.fmtDuration(lang, sec);
   }
   function clamp(v, lo, hi) {
     return Math.min(hi, Math.max(lo, v));
@@ -81,33 +84,30 @@
 
   /* ---------------- 화면 전환 ---------------- */
   var currentView = "home";
-  var viewTitles = {
-    home: "티파이 — 차 백과 & 우림 타이머",
-    timer: "우림 타이머 — 티파이",
-    guide: "차 백과 — 티파이",
-    notes: "시음 노트 — 티파이"
-  };
+  var VIEWS = ["home", "timer", "guide", "notes"];
+
+  function titleFor(view) {
+    return t("title." + view);
+  }
 
   function go(view) {
-    if (!viewTitles[view]) return;
+    if (VIEWS.indexOf(view) < 0) return;
     currentView = view;
-    var sections = document.querySelectorAll(".view");
-    for (var i = 0; i < sections.length; i++) {
-      sections[i].classList.toggle("active", sections[i].id === "view-" + view);
-    }
-    var tabs = document.querySelectorAll(".tab");
-    for (var j = 0; j < tabs.length; j++) {
-      var on = tabs[j].getAttribute("data-view") === view;
-      tabs[j].classList.toggle("active", on);
-      if (on) tabs[j].setAttribute("aria-current", "page");
-      else tabs[j].removeAttribute("aria-current");
-    }
-    document.title = viewTitles[view];
+    $$(".view").forEach(function (sec) {
+      sec.classList.toggle("active", sec.id === "view-" + view);
+    });
+    $$(".tab").forEach(function (tab) {
+      var on = tab.getAttribute("data-view") === view;
+      tab.classList.toggle("active", on);
+      if (on) tab.setAttribute("aria-current", "page");
+      else tab.removeAttribute("aria-current");
+    });
+    document.title = titleFor(view);
     window.scrollTo(0, 0);
     if (view === "home") renderRecentNote();
   }
 
-  document.querySelectorAll(".tab").forEach(function (tab) {
+  $$(".tab").forEach(function (tab) {
     tab.addEventListener("click", function () {
       go(tab.getAttribute("data-view"));
     });
@@ -133,17 +133,7 @@
   function renderHomeDate() {
     var node = $("#homeDate");
     if (!node) return;
-    var now = new Date();
-    var days = ["일", "월", "화", "수", "목", "금", "토"];
-    node.textContent =
-      now.getFullYear() +
-      "년 " +
-      (now.getMonth() + 1) +
-      "월 " +
-      now.getDate() +
-      "일 " +
-      days[now.getDay()] +
-      "요일";
+    node.textContent = L.fmtDate(lang, new Date());
   }
 
   function renderMoodChips() {
@@ -171,28 +161,34 @@
     var mood = moodById(homeState.mood);
     var tea = D.byId(mood.teaId);
     var alt = D.byId(mood.alt);
-    var oxText = /^\d/.test(tea.oxidation) ? "산화 " + tea.oxidation : tea.oxidation;
+    var oxText = /^\d/.test(tea.oxidation || "")
+      ? t("reco.ox", { value: tea.oxidation })
+      : tea.oxidation || "";
 
     area.innerHTML =
       '<article class="reco" data-glyph="' +
-      tea.hanja +
+      esc(tea.hanja) +
       '">' +
       '<div class="reco-top">' +
       "<span>" +
       esc(mood.label) +
-      "</span><span>·</span><span>추천 한 잔</span>" +
+      "</span><span>·</span><span>" +
+      esc(t("reco.pick")) +
+      "</span>" +
       "</div>" +
       '<div class="reco-tea">' +
       '<span class="reco-glyph" style="background:' +
       tea.accent +
-      '33;border-color:' +
+      "33;border-color:" +
       tea.accent +
       '66">' +
-      tea.hanja +
+      esc(tea.hanja) +
       "</span>" +
-      '<span><span class="reco-name">' +
+      "<span>" +
+      '<span class="reco-name">' +
       esc(tea.name) +
-      '</span><span class="reco-sub">' +
+      "</span>" +
+      '<span class="reco-sub">' +
       esc(tea.sub) +
       " · " +
       esc(oxText) +
@@ -207,36 +203,42 @@
       '<div class="reco-stats">' +
       '<div class="reco-stat"><b>' +
       esc(tea.temp) +
-      "℃</b><span>물 온도</span></div>" +
+      "℃</b><span>" +
+      esc(t("reco.temp")) +
+      "</span></div>" +
       '<div class="reco-stat"><b>' +
       esc(tea.leaf) +
       "</b><span>" +
-      esc(tea.water + " 물") +
+      esc(t("reco.leaf", { water: tea.water })) +
       "</span></div>" +
       '<div class="reco-stat"><b>' +
-      fmtKo(tea.steeps[0]) +
-      "</b><span>첫 우리</span></div>" +
+      esc(fmtDur(tea.steeps[0])) +
+      "</b><span>" +
+      esc(t("reco.first")) +
+      "</span></div>" +
       "</div>" +
       '<p class="reco-reason" style="font-size:12px;opacity:.7;margin-bottom:14px">' +
       esc(mood.tip) +
       "</p>" +
       '<div class="reco-actions">' +
-      '<button class="btn btn-primary" type="button" id="recoBrew">바로 우리기</button>' +
+      '<button class="btn btn-primary" type="button" id="recoBrew">' +
+      esc(t("reco.brew")) +
+      "</button>" +
       '<button class="btn btn-ghost" type="button" id="recoAlt">' +
-      esc(alt.name) +
-      "로 보기</button>" +
+      esc(t("reco.alt", { name: alt.name })) +
+      "</button>" +
       "</div>" +
       "</article>";
 
     $("#recoBrew").addEventListener("click", function () {
       setTimerTea(tea.id, 1);
       go("timer");
-      toast(tea.name + " " + fmtKo(tea.steeps[0]) + "로 맞춰 두었습니다");
+      toast(t("toast.recoSet", { name: tea.name, dur: fmtDur(tea.steeps[0]) }));
     });
     $("#recoAlt").addEventListener("click", function () {
       setTimerTea(alt.id, 1);
       go("timer");
-      toast(alt.name + " 타이머로 이동했습니다");
+      toast(t("toast.toTimer", { name: alt.name }));
     });
   }
 
@@ -251,7 +253,11 @@
     var n = notes[0];
     var tea = D.byId(n.teaId);
     wrap.innerHTML =
-      '<div class="section-head"><h2>최근 시음</h2><span>시음 노트</span></div>' +
+      '<div class="section-head"><h2>' +
+      esc(t("home.recentTitle")) +
+      "</h2><span>" +
+      esc(t("home.recentSub")) +
+      "</span></div>" +
       '<button class="note-item" type="button" id="recentNoteBtn" style="display:block;width:100%;text-align:left;padding-right:15px">' +
       '<span class="note-top" style="display:flex"><span class="note-tea" style="background:' +
       tea.accentSoft +
@@ -259,17 +265,17 @@
       tea.accent +
       '">' +
       esc(tea.name) +
-      "</span><span class=\"note-stars\">" +
+      '</span><span class="note-stars">' +
       starsMark(n.rating) +
       "</span>" +
       '<span class="note-date">' +
-      esc(n.dateLabel) +
+      esc(noteDate(n)) +
       "</span></span>" +
       '<span class="note-name" style="display:block;font-size:14.5px">' +
       esc(n.name) +
       "</span>" +
       '<span class="note-text" style="display:block">' +
-      esc(n.note || "감상은 비워 두었습니다.") +
+      esc(n.note || t("home.recentEmpty")) +
       "</span>" +
       "</button>";
     $("#recentNoteBtn").addEventListener("click", function () {
@@ -282,6 +288,7 @@
      ============================================================ */
   var timer = {
     teaId: null,
+    groupId: "green",
     steep: 1,
     adjust: 0,
     total: 90,
@@ -296,26 +303,54 @@
   };
 
   function timerTea() {
-    return D.byId(timer.teaId || "green");
+    return D.byId(timer.teaId || "green-longjing");
   }
-
+  function maxSteep() {
+    return Math.min(3, timerTea().maxSteep || 3);
+  }
   function baseSeconds() {
     var tea = timerTea();
-    return tea.steeps[clamp(timer.steep, 1, 3) - 1];
+    return tea.steeps[clamp(timer.steep, 1, tea.steeps.length) - 1];
+  }
+
+  function renderGroupChips() {
+    var wrap = $("#groupChips");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    D.groups.forEach(function (g) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip small";
+      btn.setAttribute("aria-pressed", String(g.id === timer.groupId));
+      btn.innerHTML =
+        '<span class="dot" style="background:' + g.accent + '"></span><span>' + esc(g.name) + "</span>";
+      btn.addEventListener("click", function () {
+        if (timer.groupId === g.id) return;
+        var list = D.teasOf(g.id);
+        if (list.length) setTimerTea(list[0].id, 1);
+      });
+      wrap.appendChild(btn);
+    });
   }
 
   function renderTeaChips() {
     var wrap = $("#teaChips");
     if (!wrap) return;
     wrap.innerHTML = "";
-    teas.forEach(function (t) {
+    var list = D.teasOf(timer.groupId);
+    list.forEach(function (tea) {
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "chip small";
-      btn.setAttribute("aria-pressed", String(t.id === timer.teaId));
-      btn.innerHTML = "<span>" + esc(t.name) + "</span><span style='opacity:.55;font-size:11px'>" + esc(t.temp) + "℃</span>";
+      btn.setAttribute("aria-pressed", String(tea.id === timer.teaId));
+      btn.innerHTML =
+        "<span>" +
+        esc(tea.name) +
+        "</span><span style='opacity:.55;font-size:11px'>" +
+        esc(tea.temp) +
+        "℃</span>";
       btn.addEventListener("click", function () {
-        setTimerTea(t.id, 1);
+        setTimerTea(tea.id, 1);
       });
       wrap.appendChild(btn);
     });
@@ -326,13 +361,19 @@
     if (!wrap) return;
     var tea = timerTea();
     wrap.innerHTML = "";
-    for (var i = 1; i <= 3; i++) {
+    var count = maxSteep();
+    for (var i = 1; i <= count; i++) {
       (function (idx) {
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = "steep-btn";
         btn.setAttribute("aria-pressed", String(idx === timer.steep));
-        btn.innerHTML = "<b>" + idx + "포</b><span>" + fmtKo(tea.steeps[idx - 1]) + "</span>";
+        btn.innerHTML =
+          "<b>" +
+          esc(t("timer.steep", { n: idx })) +
+          "</b><span>" +
+          esc(fmtDur(tea.steeps[idx - 1])) +
+          "</span>";
         btn.addEventListener("click", function () {
           if (timer.steep === idx && !timer.done) return;
           setTimerSteep(idx);
@@ -340,41 +381,46 @@
         wrap.appendChild(btn);
       })(i);
     }
+    wrap.className = "steep-row" + (count === 2 ? " two" : count === 1 ? " one" : "");
   }
 
   function renderTimerText() {
     var tea = timerTea();
     $("#ringTime").textContent = fmtClock(timer.remaining);
-    $("#ringTea").textContent = tea.name + " · " + timer.steep + "포";
+    $("#ringTea").textContent = t("timer.ring", { name: tea.name, n: timer.steep });
     var stateNode = $("#ringState");
     var ring = $("#ring");
     ring.classList.toggle("running", timer.running);
     ring.classList.toggle("done", timer.done);
-    if (timer.done) stateNode.textContent = "다 우렸습니다";
-    else if (timer.running) stateNode.textContent = "우리는 중";
-    else if (timer.remaining < timer.total) stateNode.textContent = "잠깐 멈춤";
-    else stateNode.textContent = "준비";
+    if (timer.done) stateNode.textContent = t("state.done");
+    else if (timer.running) stateNode.textContent = t("state.running");
+    else if (timer.remaining < timer.total) stateNode.textContent = t("state.paused");
+    else stateNode.textContent = t("state.ready");
 
     var progress = timer.total > 0 ? 1 - timer.remaining / timer.total : 0;
     var circle = $("#ringProgress");
     circle.style.strokeDasharray = String(RING_C);
-    // 남은 시간만큼만 보이는 시계방향 카운트다운 링 (완료되면 앰버 한 바퀴)
     circle.style.strokeDashoffset = timer.done ? "0" : String(-RING_C * clamp(progress, 0, 1));
     circle.style.stroke = timer.done ? "#B97A3D" : tea.accent;
 
     var startBtn = $("#startBtn");
-    if (timer.done) startBtn.textContent = timer.steep < 3 ? "다음 포 우리기" : "다시 우리기";
-    else if (timer.running) startBtn.textContent = "일시정지";
-    else if (timer.remaining < timer.total) startBtn.textContent = "계속하기";
-    else startBtn.textContent = "우리기 시작";
+    if (timer.done) startBtn.textContent = timer.steep < maxSteep() ? t("btn.next") : t("btn.again");
+    else if (timer.running) startBtn.textContent = t("btn.pause");
+    else if (timer.remaining < timer.total) startBtn.textContent = t("btn.resume");
+    else startBtn.textContent = t("btn.start");
 
-    $("#adjustLabel").textContent = timer.adjust === 0 ? "±10초" : (timer.adjust > 0 ? "+" : "") + timer.adjust + "초";
+    $("#adjustLabel").textContent =
+      timer.adjust === 0
+        ? t("adjust.zero")
+        : timer.adjust > 0
+        ? t("adjust.plus", { n: timer.adjust })
+        : t("adjust.minus", { n: timer.adjust });
     $("#minus10").disabled = timer.total <= 10;
     $("#plus10").disabled = timer.total >= 1200;
 
-    var note = tea.steepBasis;
-    if (timer.steep === 3 && (tea.id === "black" || tea.id === "earlgrey")) {
-      note = "이 차는 1~2회가 적정입니다. 세 번째 포는 향이 줄고 떫은맛이 앞서니 짧게 즐기세요. (" + tea.steepBasis + ")";
+    var note = tea.steepBasis || "";
+    if (timer.steep > maxSteep() && tea.steepBasis) {
+      note = t("timer.thirdNote", { basis: tea.steepBasis });
     }
     $("#steepNote").textContent = note;
   }
@@ -383,14 +429,14 @@
     var tea = timerTea();
     $("#panelTemp").textContent = tea.tempRange;
     var rows = [
-      ["물 온도", tea.tempRange + " · 계량은 " + tea.temp + "℃ 기준"],
-      ["잎의 양", tea.leaf + " / " + tea.water + " — " + tea.ratioNote],
-      ["우리는 횟수", tea.rounds],
-      ["이번 포", fmtKo(baseSeconds()) + " (1포 기준 " + fmtKo(tea.steeps[0]) + ")"],
-      ["포인트", tea.brewTip]
+      [t("info.temp"), t("info.tempValue", { range: tea.tempRange, temp: tea.temp })],
+      [t("info.leaf"), t("info.leafValue", { leaf: tea.leaf, water: tea.water, ratio: tea.ratioNote || "" })],
+      [t("info.rounds"), tea.rounds || ""],
+      [t("info.this"), t("info.thisValue", { dur: fmtDur(baseSeconds()), base: fmtDur(tea.steeps[0]) })],
+      [t("info.tip"), tea.brewTip || ""]
     ];
-    if (tea.id === "dark") rows.splice(3, 0, ["세차", "끓는 물로 10~20초, 한두 번"]);
-    if (tea.id === "oolong") rows.splice(3, 0, ["세차", "첫 물은 버려 잎을 데웁니다"]);
+    if (tea.group === "dark") rows.splice(3, 0, [t("info.rinse"), t("rinse.dark")]);
+    if (tea.group === "oolong") rows.splice(3, 0, [t("info.rinse"), t("rinse.oolong")]);
     $("#brewInfo").innerHTML = rows
       .map(function (r) {
         return '<div class="kv"><dt>' + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
@@ -400,8 +446,9 @@
 
   function renderMute() {
     var sw = $("#muteToggle");
+    if (!sw) return;
     sw.setAttribute("aria-checked", String(timer.muted));
-    $("#muteDesc").textContent = timer.muted ? "소리 없이 화면으로만 알려 드립니다" : "은은한 종소리로 알려 드립니다";
+    $("#muteDesc").textContent = timer.muted ? t("timer.muteOff") : t("timer.muteOn");
     var ico = $("#muteIcon");
     if (ico) ico.innerHTML = '<use href="#ic-' + (timer.muted ? "mute" : "sound") + '"/>';
   }
@@ -417,10 +464,13 @@
   }
 
   function setTimerTea(id, steep) {
-    timer.teaId = id;
+    var tea = D.byId(id);
+    timer.teaId = tea.id;
+    timer.groupId = tea.group;
     timer.steep = steep || 1;
     timer.adjust = 0;
-    storeSet(LAST_TEA_KEY, id);
+    storeSet(LAST_TEA_KEY, tea.id);
+    renderGroupChips();
     renderTeaChips();
     renderSteepRow();
     renderBrewInfo();
@@ -462,7 +512,7 @@
     if (timer.running) return;
     if (timer.done) {
       timer.done = false;
-      if (timer.steep < 3) timer.steep += 1;
+      if (timer.steep < maxSteep()) timer.steep += 1;
       timer.adjust = 0;
       renderSteepRow();
       renderBrewInfo();
@@ -500,7 +550,7 @@
         navigator.vibrate([90, 70, 90]);
       } catch (e) {}
     }
-    toast(timerTea().name + " " + timer.steep + "포, 다 우렸습니다. 잎을 건져 주세요");
+    toast(t("toast.done", { name: timerTea().name, n: timer.steep }));
   }
 
   function adjustTimer(delta) {
@@ -509,14 +559,9 @@
     if (!applied) return;
     timer.total = proposed;
     timer.adjust += applied;
-    if (timer.remaining + applied < 1) {
-      timer.remaining = 1;
-    } else {
-      timer.remaining += applied;
-    }
-    if (timer.running) {
-      timer.endAt += applied * 1000;
-    }
+    if (timer.remaining + applied < 1) timer.remaining = 1;
+    else timer.remaining += applied;
+    if (timer.running) timer.endAt += applied * 1000;
     if (timer.done) {
       timer.done = false;
       timer.remaining = timer.total;
@@ -531,9 +576,7 @@
       if (!AC) return;
       if (!timer.audio) timer.audio = new AC();
       if (timer.audio.state === "suspended") timer.audio.resume();
-    } catch (e) {
-      /* 오디오를 못 쓰는 환경이면 조용히 넘어갑니다 */
-    }
+    } catch (e) {}
   }
 
   function playChime() {
@@ -560,15 +603,11 @@
         osc.stop(start + dur + 0.05);
       }
 
-      // 낮게 깔리는 몸통음
       bell(261.63, now, 0.05, 4.2);
-      // 차분한 3도 겹침
       bell(523.25, now + 0.02, 0.07, 3.4);
       bell(659.25, now + 0.22, 0.05, 3.2);
       bell(783.99, now + 0.42, 0.035, 2.8);
-    } catch (e) {
-      /* 무음 처리 */
-    }
+    } catch (e) {}
   }
 
   function requestWakeLock() {
@@ -605,7 +644,7 @@
     });
     $("#resetBtn").addEventListener("click", function () {
       resetTimer();
-      toast("타이머를 초기화했습니다");
+      toast(t("toast.reset"));
     });
     $("#minus10").addEventListener("click", function () {
       adjustTimer(-10);
@@ -633,9 +672,9 @@
   function renderFilterChips() {
     var wrap = $("#filterChips");
     if (!wrap) return;
-    var items = [{ id: "all", name: "전체" }].concat(
-      teas.map(function (t) {
-        return { id: t.id, name: t.name };
+    var items = [{ id: "all", name: t("guide.all") }].concat(
+      D.groups.map(function (g) {
+        return { id: g.id, name: g.name };
       })
     );
     wrap.innerHTML = "";
@@ -654,136 +693,173 @@
     });
   }
 
-  function teaHaystack(tea) {
+  function haystack(item) {
     return [
-      tea.name,
-      tea.sub,
-      tea.oneLine,
-      tea.process,
-      tea.flavor,
-      tea.pairing,
-      tea.keep,
-      tea.brewTip,
-      tea.rounds,
-      tea.keywords,
-      tea.varieties.join(" ")
+      item.name,
+      item.sub,
+      item.oneLine,
+      item.process,
+      item.story,
+      item.origin,
+      item.flavor,
+      item.pairing,
+      item.keep,
+      item.brewTip,
+      item.rounds,
+      item.groupName,
+      (item.varieties || []).join(" "),
+      D.searchText(item.id)
     ]
       .join(" ")
       .toLowerCase();
+  }
+
+  function cardHtml(item) {
+    var open = guideState.open === item.id;
+    var isGroup = item.kind === "group";
+    var native = D.nativeOf(item, lang);
+    var nativeLine = [];
+    if (native) nativeLine.push(esc(native));
+    if (item.sub && item.sub !== native) nativeLine.push(esc(item.sub));
+
+    var facts = [
+      [t("fact.temp"), item.tempRange],
+      [t("fact.leaf"), item.leaf + " / " + item.water],
+      [t("fact.first"), fmtDur(item.steeps[0])]
+    ];
+
+    var details = [];
+    if (isGroup) {
+      details.push([t("detail.process"), item.process]);
+      details.push(["", (item.varieties || []).map(function (v) {
+        return '<span class="tag">' + esc(v) + "</span>";
+      }).join("")]);
+    } else {
+      if (item.origin) details.push([t("detail.origin"), item.origin]);
+      if (item.process) details.push([t("detail.process"), item.process]);
+      if (item.story) details.push([t("detail.story"), item.story]);
+    }
+    if (item.flavor) details.push([t("detail.flavor"), item.flavor]);
+    if (item.pairing) details.push([t("detail.pairing"), item.pairing]);
+    if (item.keep) details.push([t("detail.keep"), item.keep]);
+    if (item.brewTip) details.push([t("detail.brew"), item.brewTip]);
+
+    var detailHtml = details
+      .map(function (d) {
+        if (!d[1]) return "";
+        if (!d[0]) return '<div class="detail"><div class="tags">' + d[1] + "</div></div>";
+        return '<div class="detail"><h4>' + esc(d[0]) + "</h4><p>" + esc(d[1]) + "</p></div>";
+      })
+      .join("");
+
+    return (
+      '<article class="tea-card' +
+      (open ? " open" : "") +
+      (isGroup ? " is-group" : "") +
+      '" data-tea="' +
+      item.id +
+      '">' +
+      '<button class="tea-main" type="button" data-toggle="' +
+      item.id +
+      '" aria-expanded="' +
+      open +
+      '">' +
+      '<div class="tea-head">' +
+      '<span class="tea-glyph" style="background:' +
+      item.accentSoft +
+      ";color:" +
+      item.accent +
+      '">' +
+      esc(item.hanja) +
+      "</span>" +
+      '<span class="tea-title"><b>' +
+      esc(item.name) +
+      '</b><span class="tea-native">' +
+      nativeLine.join(" · ") +
+      '</span><span class="tea-meta">' +
+      esc(item.groupName) +
+      (isGroup ? " · " + esc(t("unit.teas", { n: item.count })) : " · " + esc(item.rounds || "")) +
+      "</span></span>" +
+      '<span class="tea-caret"><svg width="17" height="17"><use href="#ic-caret"/></svg></span>' +
+      "</div>" +
+      '<p class="tea-oneline">' +
+      esc(item.oneLine) +
+      "</p>" +
+      '<div class="ox"><div class="ox-top"><span>' +
+      esc(t("guide.ox")) +
+      "</span><b>" +
+      esc(item.oxidation || "") +
+      '</b></div><div class="ox-track"><div class="ox-fill' +
+      (/^\d/.test(item.oxidation || "") ? "" : " qual") +
+      '" style="width:' +
+      item.oxidationValue +
+      "%;background:" +
+      item.accent +
+      '"></div></div></div>' +
+      '<div class="tea-facts">' +
+      facts
+        .map(function (f) {
+          return '<div class="tea-fact"><span>' + esc(f[0]) + "</span><b>" + esc(f[1]) + "</b></div>";
+        })
+        .join("") +
+      "</div>" +
+      "</button>" +
+      '<div class="tea-more"><div><div class="tea-more-inner">' +
+      detailHtml +
+      '<button class="btn btn-dark btn-block" type="button" data-timer="' +
+      item.id +
+      '">' +
+      esc(t("guide.toTimer")) +
+      "</button>" +
+      "</div></div></div>" +
+      "</article>"
+    );
   }
 
   function renderTeaList() {
     var list = $("#teaList");
     if (!list) return;
     var q = guideState.q.trim().toLowerCase();
-    var shown = teas.filter(function (t) {
-      if (guideState.filter !== "all" && t.id !== guideState.filter) return false;
-      if (!q) return true;
-      return teaHaystack(t).indexOf(q) >= 0;
+    var out = [];
+
+    D.groups.forEach(function (g) {
+      if (guideState.filter !== "all" && guideState.filter !== g.id) return;
+      var cards = [g].concat(D.teasOf(g.id)).filter(function (item) {
+        if (!q) return true;
+        return haystack(item).indexOf(q) >= 0;
+      });
+      if (!cards.length) return;
+      if (guideState.filter === "all") {
+        out.push(
+          '<div class="group-head"><h2>' +
+            esc(g.name) +
+            "</h2><span>" +
+            esc(t("unit.teas", { n: D.teasOf(g.id).length })) +
+            " · " +
+            esc(g.tempRange) +
+            "</span></div>"
+        );
+      }
+      cards.forEach(function (item) {
+        out.push(cardHtml(item));
+      });
     });
 
-    if (!shown.length) {
+    if (!out.length) {
       list.innerHTML =
-        '<div class="empty">‘' +
-        esc(guideState.q) +
-        "’에 해당하는 차를 찾지 못했습니다.<br />산지(하동, 아삼), 향(머스캣, 꿀), 상황(식후)으로 다시 찾아보세요.</div>";
+        '<div class="empty">' +
+        t("guide.empty", { q: esc(guideState.q) }) +
+        "</div>";
       return;
     }
+    list.innerHTML = out.join("");
 
-    list.innerHTML = shown
-      .map(function (t) {
-        var open = guideState.open === t.id;
-        var facts = [
-          ["물 온도", t.tempRange],
-          ["잎 · 물", t.leaf + " / " + t.water],
-          ["첫 우리", fmtKo(t.steeps[0])]
-        ];
-        return (
-          '<article class="tea-card' +
-          (open ? " open" : "") +
-          '" data-tea="' +
-          t.id +
-          '">' +
-          '<button class="tea-main" type="button" data-toggle="' +
-          t.id +
-          '" aria-expanded="' +
-          open +
-          '">' +
-          '<div class="tea-head">' +
-          '<span class="tea-glyph" style="background:' +
-          t.accentSoft +
-          ";color:" +
-          t.accent +
-          '">' +
-          t.hanja +
-          "</span>" +
-          '<span class="tea-title"><b>' +
-          esc(t.name) +
-          "</b><span>" +
-          esc(t.sub) +
-          " · " +
-          esc(t.rounds) +
-          "</span></span>" +
-          '<span class="tea-caret"><svg width="17" height="17"><use href="#ic-caret"/></svg></span>' +
-          "</div>" +
-          '<p class="tea-oneline">' +
-          esc(t.oneLine) +
-          "</p>" +
-          '<div class="ox"><div class="ox-top"><span>산화도</span><b>' +
-          esc(t.oxidation) +
-          '</b></div><div class="ox-track"><div class="ox-fill' +
-          (/^\d/.test(t.oxidation) ? "" : " qual") +
-          '" style="width:' +
-          t.oxidationValue +
-          "%;background:" +
-          t.accent +
-          '"></div></div></div>' +
-          '<div class="tea-facts">' +
-          facts
-            .map(function (f) {
-              return '<div class="tea-fact"><span>' + f[0] + "</span><b>" + esc(f[1]) + "</b></div>";
-            })
-            .join("") +
-          "</div>" +
-          "</button>" +
-          '<div class="tea-more"><div><div class="tea-more-inner">' +
-          '<div class="detail"><h4>제다 핵심</h4><p>' +
-          esc(t.process) +
-          "</p></div>" +
-          '<div class="detail"><h4>대표 품종</h4><div class="tags">' +
-          t.varieties
-            .map(function (v) {
-              return '<span class="tag">' + esc(v) + "</span>";
-            })
-            .join("") +
-          "</div></div>" +
-          '<div class="detail"><h4>향미 노트</h4><p>' +
-          esc(t.flavor) +
-          "</p></div>" +
-          '<div class="detail"><h4>음식 페어링</h4><p>' +
-          esc(t.pairing) +
-          "</p></div>" +
-          '<div class="detail"><h4>보관 · 구매</h4><p>' +
-          esc(t.keep) +
-          "</p></div>" +
-          '<div class="detail"><h4>우리기 포인트</h4><p>' +
-          esc(t.brewTip) +
-          "</p></div>" +
-          '<button class="btn btn-dark btn-block" type="button" data-timer="' +
-          t.id +
-          '">이 차로 타이머 맞추기</button>' +
-          "</div></div></div>" +
-          "</article>"
-        );
-      })
-      .join("");
-
-    list.querySelectorAll("[data-toggle]").forEach(function (btn) {
+    $$("[data-toggle]", list).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-toggle");
         var card = list.querySelector('[data-tea="' + id + '"]');
         var wasOpen = card && card.classList.contains("open");
-        list.querySelectorAll(".tea-card.open").forEach(function (c) {
+        $$(".tea-card.open", list).forEach(function (c) {
           c.classList.remove("open");
           var b = c.querySelector("[data-toggle]");
           if (b) b.setAttribute("aria-expanded", "false");
@@ -800,12 +876,12 @@
         }, 160);
       });
     });
-    list.querySelectorAll("[data-timer]").forEach(function (btn) {
+    $$("[data-timer]", list).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-timer");
         setTimerTea(id, 1);
         go("timer");
-        toast(D.byId(id).name + " 타이머로 이동했습니다");
+        toast(t("toast.toTimer", { name: D.byId(id).name }));
       });
     });
   }
@@ -829,22 +905,28 @@
   function saveNotes(list) {
     storeSet(NOTES_KEY, list);
   }
-
-  function dateLabel(ts) {
-    var d = new Date(ts);
-    return d.getFullYear() + "." + pad2(d.getMonth() + 1) + "." + pad2(d.getDate()) + " " + pad2(d.getHours()) + ":" + pad2(d.getMinutes());
+  function noteDate(n) {
+    return n.createdAt ? L.fmtDateTime(lang, n.createdAt) : n.dateLabel || "";
   }
 
   function renderNoteSelect() {
     var sel = $("#noteTea");
     if (!sel) return;
-    sel.innerHTML = teas
-      .map(function (t) {
-        return '<option value="' + t.id + '">' + esc(t.name) + "</option>";
+    var prev = sel.value;
+    var html = D.groups
+      .map(function (g) {
+        var opts = D.teasOf(g.id)
+          .map(function (tea) {
+            return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
+          })
+          .join("");
+        return '<optgroup label="' + esc(g.name) + '">' + opts + "</optgroup>";
       })
       .join("");
+    sel.innerHTML = html;
     var last = storeGet(LAST_TEA_KEY, null);
-    if (last && D.byId(last).id === last) sel.value = last;
+    if (prev) sel.value = prev;
+    else if (last && D.byId(last).id === last) sel.value = last;
   }
 
   function renderStarRow() {
@@ -857,7 +939,7 @@
         b.type = "button";
         b.className = "star" + (v <= noteState.rating ? " on" : "");
         b.textContent = "★";
-        b.setAttribute("aria-label", v + "점");
+        b.setAttribute("aria-label", t("a11y.star", { n: v }));
         b.setAttribute("aria-pressed", String(v <= noteState.rating));
         b.addEventListener("click", function () {
           noteState.rating = v;
@@ -868,7 +950,7 @@
     }
     var label = document.createElement("span");
     label.className = "stars-num";
-    label.textContent = noteState.rating ? noteState.rating + ".0" : "선택";
+    label.textContent = noteState.rating ? noteState.rating + ".0" : t("notes.starNone");
     row.appendChild(label);
   }
 
@@ -876,21 +958,20 @@
     var notes = loadNotes();
     var list = $("#noteList");
     var count = notes.length;
-    $("#statCount").innerHTML = count + "<small>잔</small>";
-    $("#noteCountLabel").textContent = count + "잔";
+    $("#statCount").innerHTML = count + "<small>" + esc(t("unit.cup")) + "</small>";
+    $("#noteCountLabel").textContent = t("count.cups", { n: count });
 
     if (count) {
       var sum = notes.reduce(function (acc, n) {
         return acc + (Number(n.rating) || 0);
       }, 0);
-      $("#statAvg").innerHTML = (sum / count).toFixed(1) + "<small>점</small>";
+      $("#statAvg").innerHTML = (sum / count).toFixed(1) + "<small>" + esc(t("unit.point")) + "</small>";
     } else {
       $("#statAvg").textContent = "—";
     }
 
     if (!count) {
-      list.innerHTML =
-        '<div class="empty">아직 기록이 없습니다.<br />오늘 우린 차 한 잔을 남겨 보세요. 차 종류와 별점만 있으면 됩니다.</div>';
+      list.innerHTML = '<div class="empty">' + t("notes.empty") + "</div>";
       return;
     }
 
@@ -911,7 +992,7 @@
           starsMark(Number(n.rating)) +
           "</span>" +
           '<span class="note-date">' +
-          esc(n.dateLabel) +
+          esc(noteDate(n)) +
           "</span>" +
           "</div>" +
           '<h3 class="note-name">' +
@@ -921,14 +1002,14 @@
           '<button class="note-del" type="button" data-del="' +
           n.id +
           '" aria-label="' +
-          esc(n.name) +
-          ' 기록 삭제"><svg width="16" height="16"><use href="#ic-trash"/></svg></button>' +
+          esc(t("a11y.delete", { name: n.name })) +
+          '"><svg width="16" height="16"><use href="#ic-trash"/></svg></button>' +
           "</article>"
         );
       })
       .join("");
 
-    list.querySelectorAll("[data-del]").forEach(function (btn) {
+    $$("[data-del]", list).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-del");
         var next = loadNotes().filter(function (n) {
@@ -937,7 +1018,7 @@
         saveNotes(next);
         renderNotes();
         renderRecentNote();
-        toast("기록을 삭제했습니다");
+        toast(t("toast.deleted"));
       });
     });
   }
@@ -948,12 +1029,12 @@
     var name = $("#noteName").value.trim();
     var text = $("#noteText").value.trim();
     if (!name) {
-      toast("차 이름을 적어 주세요 (예: 하동 우전)");
+      toast(t("toast.nameNeeded"));
       $("#noteName").focus();
       return;
     }
     if (!noteState.rating) {
-      toast("별점을 골라 주세요");
+      toast(t("toast.ratingNeeded"));
       return;
     }
     var notes = loadNotes();
@@ -965,7 +1046,7 @@
       rating: noteState.rating,
       note: text,
       createdAt: now,
-      dateLabel: dateLabel(now)
+      dateLabel: L.fmtDateTime(lang, now)
     });
     saveNotes(notes);
     $("#noteName").value = "";
@@ -974,13 +1055,49 @@
     renderStarRow();
     renderNotes();
     renderRecentNote();
-    toast("시음 노트에 남겼습니다");
+    toast(t("toast.saved"));
   }
 
   /* ============================================================
-     시작
+     언어 전환 · 시작
      ============================================================ */
+  function rerender() {
+    renderHomeDate();
+    renderMoodChips();
+    renderReco();
+    renderRecentNote();
+    renderGroupChips();
+    renderTeaChips();
+    renderSteepRow();
+    renderBrewInfo();
+    renderMute();
+    renderTimerText();
+    renderFilterChips();
+    renderTeaList();
+    renderNoteSelect();
+    renderStarRow();
+    renderNotes();
+    document.title = titleFor(currentView);
+  }
+
+  function setLang(next) {
+    var picked = L.normalize(next);
+    if (!picked || picked === lang) return;
+    lang = picked;
+    L.save(lang);
+    L.applyStatic(lang);
+    L.setDocumentLang(lang);
+    D.use(lang);
+    L.mountSwitcher($("#langSwitch"), lang, setLang);
+    rerender();
+  }
+
   function init() {
+    L.applyStatic(lang);
+    L.setDocumentLang(lang);
+    D.use(lang);
+    L.mountSwitcher($("#langSwitch"), lang, setLang);
+
     renderHomeDate();
     homeState.mood = defaultMoodId();
     renderMoodChips();
@@ -988,7 +1105,10 @@
     renderRecentNote();
 
     var lastTea = storeGet(LAST_TEA_KEY, null);
-    timer.teaId = lastTea && D.byId(lastTea).id === lastTea ? lastTea : "green";
+    var startId = lastTea && D.byId(lastTea).id === lastTea ? lastTea : D.teas[0].id;
+    timer.teaId = startId;
+    timer.groupId = D.byId(startId).group;
+    renderGroupChips();
     renderTeaChips();
     renderSteepRow();
     renderBrewInfo();
@@ -998,10 +1118,12 @@
 
     renderFilterChips();
     var input = $("#searchInput");
-    input.addEventListener("input", function () {
-      guideState.q = input.value;
-      renderTeaList();
-    });
+    if (input) {
+      input.addEventListener("input", function () {
+        guideState.q = input.value;
+        renderTeaList();
+      });
+    }
     renderTeaList();
 
     renderNoteSelect();
@@ -1009,15 +1131,15 @@
     renderNotes();
     $("#noteForm").addEventListener("submit", submitNote);
 
-    // 매니페스트 바로가기(#timer, #notes)로 들어오면 해당 화면을 엽니다
+    document.title = titleFor(currentView);
+
     var hash = (location.hash || "").replace("#", "");
-    if (viewTitles[hash] && hash !== "home") go(hash);
+    if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
     window.addEventListener("hashchange", function () {
       var h = (location.hash || "").replace("#", "");
-      if (viewTitles[h]) go(h);
+      if (VIEWS.indexOf(h) >= 0) go(h);
     });
 
-    // 서비스 워커는 http(s)에서만 등록합니다 (파일로 열 때는 조용히 건너뜀)
     if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("sw.js").catch(function () {});

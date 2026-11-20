@@ -4,256 +4,1831 @@
    · 《찻잎의 시간, 오늘의 한 잔》 (최티) — 1~6장, 부록 1·2
    · 《최초의 가향 홍차 — 얼그레이의 모든 것》 (최티) — 1~6장, 부록 1·2
    책에 적힌 수치와 서술만 옮겨 정리했습니다. 없는 값은 만들지 않았습니다.
+   · 계열 6종 + 품종 34종을 한국어·영어·중국어(간체/번체)로 수록
    ============================================================ */
 window.TEAFaiData = (function () {
   "use strict";
 
-  var teas = [
+  var LANGS = ["ko", "en", "zh-CN", "zh-TW"];
+
+  /* ---------------- 계열 (6) ---------------- */
+  var GROUPS = [
     {
       id: "green",
-      name: "녹차",
-      sub: "Green Tea",
+      kind: "group",
       hanja: "綠",
+      sub: "Green Tea",
       accent: "#4F7A4A",
       accentSoft: "#E7EEDF",
-      oneLine: "딴 뒤 24시간 안에 모든 것이 결정되는, 시간과의 싸움.",
-      oxidation: "0%",
-      oxidationValue: 0,
-      oxidationLabel: "산화 없음 · 살청으로 효소를 멈춤",
       temp: 75,
       tempRange: "70~80℃",
       leaf: "2~3g",
       water: "200ml",
-      ratioNote: "150ml에 2~3g — 티스푼 한 스푼 남짓",
       steeps: [90, 30, 60],
-      rounds: "3~4회",
-      steepBasis:
-        "책 기준 첫 우리 1분~1분 30초, 두 번째 30초, 세 번째 1분. 우린 잎은 바로 건집니다.",
-      process:
-        "위조 → 살청(덖음 또는 증청) → 유념 → 건조. 산화 단계가 없습니다. 솥에 덖으면 구수한 고소함이, 수증기로 찌면 해조류 같은 향과 감칠맛이 남습니다.",
-      varieties: ["서호용정(용정차)", "센차·마차·교쿠로", "하동·보성·제주 녹차"],
-      flavor:
-        "아미노산의 감칠맛, 카테킨의 옅은 떫은맛, 클로로필의 풋풋함이 균형을 이룰 때 “봄이 입안에 있다”고 말합니다. 덖음차는 구운 콩·볶은 곡물 쪽, 증청차는 해조류·풀잎 쪽으로 향이 갑니다.",
-      pairing:
-        "회, 초밥, 흰살생선 구이, 나물, 두부 요리. 기름진 고기나 크림 많은 디저트와는 부딪힙니다. 곁들일 것이 필요하면 견과류·약과처럼 기름기 적은 단맛이 좋습니다.",
-      keep:
-        "유통기한보다 제조일을 봅니다. 제조 후 6개월 안, 개봉 후 한 달 안이 이상적입니다. 빛을 막는 질소 충전 알루미늄 파우치를 고르고, 개봉 후에는 작은 밀폐 용기에 담아 냄새 없는 냉장고 채소칸에 둡니다. 100g에 1만~3만원대가 일상적으로 좋은 차를 마시는 구간입니다.",
-      brewTip:
-        "끓인 물을 다른 컵에 한 번 옮겨 부으면 대략 80도. 잎을 넣고 자리를 떠나지 말고, 시간이 되면 바로 건져야 떫어지지 않습니다.",
-      keywords: "용정 센차 마차 하동 보성 제주 우전 세작 덖음 증청 아가리 냉침 감칠맛"
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "녹차",
+        oneLine: "딴 뒤 24시간 안에 모든 것이 결정되는, 시간과의 싸움.",
+        oxidation: "0%",
+        ratioNote: "150ml에 2~3g — 티스푼 한 스푼 남짓",
+        rounds: "3~4회",
+        steepBasis: "책 기준 첫 우리 1분~1분 30초, 두 번째 30초, 세 번째 1분. 우린 잎은 바로 건집니다.",
+        process:
+          "위조 → 살청(덖음 또는 증청) → 유념 → 건조. 산화 단계가 없습니다. 솥에 덖으면 구수한 고소함이, 수증기로 찌면 해조류 같은 향과 감칠맛이 남습니다.",
+        varieties: ["서호용정(용정차)", "센차·마차·교쿠로", "하동·보성·제주 녹차"],
+        flavor:
+          "아미노산의 감칠맛, 카테킨의 옅은 떫은맛, 클로로필의 풋풋함이 균형을 이룰 때 “봄이 입안에 있다”고 말합니다. 덖음차는 구운 콩·볶은 곡물 쪽, 증청차는 해조류·풀잎 쪽으로 향이 갑니다.",
+        pairing:
+          "회, 초밥, 흰살생선 구이, 나물, 두부 요리. 기름진 고기나 크림 많은 디저트와는 부딪힙니다. 곁들일 것이 필요하면 견과류·약과처럼 기름기 적은 단맛이 좋습니다.",
+        keep:
+          "유통기한보다 제조일을 봅니다. 제조 후 6개월 안, 개봉 후 한 달 안이 이상적입니다. 빛을 막는 질소 충전 알루미늄 파우치를 고르고, 개봉 후에는 작은 밀폐 용기에 담아 냄새 없는 냉장고 채소칸에 둡니다. 100g에 1만~3만원대가 일상적으로 좋은 차를 마시는 구간입니다.",
+        brewTip:
+          "끓인 물을 다른 컵에 한 번 옮겨 부으면 대략 80도. 잎을 넣고 자리를 떠나지 말고, 시간이 되면 바로 건져야 떫어지지 않습니다.",
+        keywords: "용정 센차 마차 하동 보성 제주 우전 세작 덖음 증청 아가리 냉침 감칠맛"
+      },
+      en: {
+        name: "Green tea",
+        oneLine: "Everything is decided within 24 hours of picking — a race against time.",
+        oxidation: "0%",
+        ratioNote: "2–3 g to 150 ml — a little more than a level teaspoon",
+        rounds: "3–4 infusions",
+        steepBasis:
+          "By the book: 1 to 1½ minutes for the first infusion, 30 seconds for the second, 1 minute for the third. Lift the leaves out as soon as the time is up.",
+        process:
+          "Withering → firing (pan-firing or steaming) → rolling → drying. There is no oxidation step. Pan-firing leaves a toasted, nutty sweetness; steaming leaves a seaweed-like aroma and savoury umami.",
+        varieties: ["West Lake Longjing", "Sencha, matcha, gyokuro", "Hadong, Boseong and Jeju green teas"],
+        flavor:
+          "When the umami of amino acids, the faint astringency of catechins and the green freshness of chlorophyll are in balance, people say “spring is in the mouth.” Pan-fired teas lean toward roasted soy and toasted grain; steamed teas toward seaweed and cut grass.",
+        pairing:
+          "Sashimi, sushi, grilled white fish, namul herbs and tofu. It clashes with fatty meat and cream-heavy desserts; if you want something alongside, choose a low-fat sweetness such as nuts or yakgwa.",
+        keep:
+          "Look at the production date rather than the expiry date. Ideally within 6 months of production and a month of opening. Choose a light-blocking, nitrogen-flushed aluminium pouch, then keep it in a small airtight tin in the odour-free vegetable drawer of the fridge.",
+        brewTip:
+          "Pour boiling water into another cup first and it lands near 80 °C. Don't walk away once the leaves are in, and lift them out the moment the time is up.",
+        keywords: "longjing sencha matcha hadong boseong jeju ujeon sejack pan-fired steamed umami"
+      },
+      "zh-CN": {
+        name: "绿茶",
+        oneLine: "采下后24小时内一切就已决定——与时间的赛跑。",
+        oxidation: "0%",
+        ratioNote: "150毫升水配2~3克——约一平茶匙多一点",
+        rounds: "3~4泡",
+        steepBasis: "按书中的标准：第一泡1分钟~1分30秒，第二泡30秒，第三泡1分钟。泡完立即把茶叶取出。",
+        process:
+          "萎凋 → 杀青（炒青或蒸青）→ 揉捻 → 干燥。没有发酵环节。炒青留下烘烤般的坚果香，蒸青则留下海苔般的香气与鲜味。",
+        varieties: ["西湖龙井", "煎茶、抹茶、玉露", "河东、宝城、济州绿茶"],
+        flavor:
+          "氨基酸的鲜味、儿茶素淡淡的涩感、叶绿素的青草气三者平衡时，人们会说“春天在口中”。炒青茶香气偏向炒豆与焙谷，蒸青茶偏向海苔与青草。",
+        pairing:
+          "生鱼片、寿司、白身鱼烧烤、野菜、豆腐料理。与油腻的肉类或奶油多的甜点相冲。若想配点心，坚果、药果这类油脂少的甜味更合适。",
+        keep:
+          "看生产日期而不是保质期。生产后6个月内、开封后一个月内最理想。选避光的充氮铝箔袋，开封后装入小密封罐，放在无异味的冰箱蔬菜格。",
+        brewTip: "把沸水先倒入另一个杯子再冲，水温大约80度。放茶后不要离开，时间一到立即取出茶叶，才不会变涩。",
+        keywords: "龙井 煎茶 抹茶 河东 宝城 济州 雨前 雀舌 炒青 蒸青 冷泡 鲜味"
+      },
+      "zh-TW": {
+        name: "綠茶",
+        oneLine: "採下後24小時內一切就已決定——與時間的賽跑。",
+        oxidation: "0%",
+        ratioNote: "150毫升水配2~3公克——約一平茶匙多一點",
+        rounds: "3~4泡",
+        steepBasis: "依書中標準：第一泡1分鐘~1分30秒，第二泡30秒，第三泡1分鐘。泡完立即取出茶葉。",
+        process:
+          "萎凋 → 殺菁（炒菁或蒸菁）→ 揉捻 → 乾燥。沒有發酵環節。炒菁留下烘烤般的堅果香，蒸菁則留下海苔般的香氣與鮮味。",
+        varieties: ["西湖龍井", "煎茶、抹茶、玉露", "河東、寶城、濟州綠茶"],
+        flavor:
+          "胺基酸的鮮味、兒茶素淡淡的澀感、葉綠素的青草氣三者平衡時，人們會說「春天在口中」。炒菁茶香氣偏向炒豆與焙穀，蒸菁茶偏向海苔與青草。",
+        pairing:
+          "生魚片、壽司、白身魚燒烤、野菜、豆腐料理。與油膩的肉類或奶油多的甜點相衝。若想配點心，堅果、藥果這類油脂少的甜味更合適。",
+        keep:
+          "看製造日期而不是有效期限。製造後6個月內、開封後一個月內最理想。選避光的充氮鋁箔袋，開封後裝入小密封罐，放在無異味的冰箱蔬果格。",
+        brewTip: "把沸水先倒入另一個杯子再沖，水溫大約80度。放茶後不要離開，時間一到立即取出茶葉，才不會變澀。",
+        keywords: "龍井 煎茶 抹茶 河東 寶城 濟州 雨前 雀舌 炒菁 蒸菁 冷泡 鮮味"
+      }
     },
     {
       id: "white",
-      name: "백차",
-      sub: "White Tea",
+      kind: "group",
       hanja: "白",
+      sub: "White Tea",
       accent: "#8B7B4F",
       accentSoft: "#EFE8D5",
-      oneLine: "위조하고 말린다. 그게 전부라서 잎의 품질이 그대로 드러난다.",
-      oxidation: "5~10%",
-      oxidationValue: 8,
-      oxidationLabel: "미세한 자연 산화 · 살청 없음",
       temp: 85,
       tempRange: "80~90℃",
       leaf: "3~4g",
       water: "200ml",
-      ratioNote: "은침은 3g, 수미처럼 잎이 두꺼우면 4g",
       steeps: [120, 60, 120],
-      rounds: "4~5회",
-      steepBasis:
-        "책 기준 첫 우리 1분 30초~2분, 두 번째 1분, 세 번째 2분. 오래 두어도 쉽게 떫어지지 않습니다.",
-      process:
-        "위조 → 건조. 유념도 살청도 인위적 산화도 없습니다. 24~48시간 자연 위조 후 40~50도의 낮은 열로 천천히 말리며, 저장 중에도 아주 느린 산화가 이어집니다.",
-      varieties: ["백호은침(싹만)", "백모단(싹 하나에 잎 두 장)", "수미·공미(잎 위주)", "운남 월광백"],
-      flavor:
-        "국물은 아주 연한 살구빛, 향은 은방울꽃·라일락에 가깝습니다. 떫은맛이 거의 없고 단맛이 길게 남습니다. 1~2년이면 대추와 꿀이 더해지고, 3년부터 약재 향, 5~7년이면 짙은 호박색이 됩니다.",
-      pairing:
-        "은침은 견과·대추·밤, 백모단은 담백한 생선과 닭고기, 수미는 전·튀김·고기 요리와 맞습니다. 노백차에 대추와 진피를 넣어 약한 불로 끓이면 겨울을 데우는 차가 됩니다.",
-      keep:
-        "상온에서 직사광선을 피하고 습도 50~60%를 지킵니다. 냉장고는 습기와 냄새, 꺼낼 때의 결로 때문에 피합니다. 초보자는 밀봉해 두는 편이 안전합니다. 이름보다 잎의 상태(은백색 털이 남고 색이 고른지)를 봅니다.",
-      brewTip:
-        "잎이 물 위에 뜨므로 물을 먼저 붓고 잎을 넣거나, 30초 뒤 찻숟가락으로 가볍게 저어 줍니다. 은침은 80~85도, 수미는 90도가 좋습니다.",
-      keywords: "백호은침 백모단 수미 공미 노백차 월광백 복정 정화 대추 약재 숙성"
+      maxSteep: 3,
+      oxidationValue: 8,
+      ko: {
+        name: "백차",
+        oneLine: "위조하고 말린다. 그게 전부라서 잎의 품질이 그대로 드러난다.",
+        oxidation: "5~10%",
+        ratioNote: "은침은 3g, 수미처럼 잎이 두꺼우면 4g",
+        rounds: "4~5회",
+        steepBasis: "책 기준 첫 우리 1분 30초~2분, 두 번째 1분, 세 번째 2분. 오래 두어도 쉽게 떫어지지 않습니다.",
+        process:
+          "위조 → 건조. 유념도 살청도 인위적 산화도 없습니다. 24~48시간 자연 위조 후 40~50도의 낮은 열로 천천히 말리며, 저장 중에도 아주 느린 산화가 이어집니다.",
+        varieties: ["백호은침(싹만)", "백모단(싹 하나에 잎 두 장)", "수미·공미(잎 위주)", "운남 월광백"],
+        flavor:
+          "국물은 아주 연한 살구빛, 향은 은방울꽃·라일락에 가깝습니다. 떫은맛이 거의 없고 단맛이 길게 남습니다. 1~2년이면 대추와 꿀이 더해지고, 3년부터 약재 향, 5~7년이면 짙은 호박색이 됩니다.",
+        pairing:
+          "은침은 견과·대추·밤, 백모단은 담백한 생선과 닭고기, 수미는 전·튀김·고기 요리와 맞습니다. 노백차에 대추와 진피를 넣어 약한 불로 끓이면 겨울을 데우는 차가 됩니다.",
+        keep:
+          "상온에서 직사광선을 피하고 습도 50~60%를 지킵니다. 냉장고는 습기와 냄새, 꺼낼 때의 결로 때문에 피합니다. 초보자는 밀봉해 두는 편이 안전합니다. 이름보다 잎의 상태(은백색 털이 남고 색이 고른지)를 봅니다.",
+        brewTip:
+          "잎이 물 위에 뜨므로 물을 먼저 붓고 잎을 넣거나, 30초 뒤 찻숟가락으로 가볍게 저어 줍니다. 은침은 80~85도, 수미는 90도가 좋습니다.",
+        keywords: "백호은침 백모단 수미 공미 노백차 월광백 복정 정화 대추 약재 숙성"
+      },
+      en: {
+        name: "White tea",
+        oneLine: "Wither and dry — that is all, so the quality of the leaf shows through untouched.",
+        oxidation: "5–10%",
+        ratioNote: "3 g for Silver Needle; 4 g when the leaf is thick, as with Shou Mei",
+        rounds: "4–5 infusions",
+        steepBasis:
+          "By the book: 1½ to 2 minutes for the first infusion, 1 minute for the second, 2 minutes for the third. It turns bitter only slowly.",
+        process:
+          "Withering → drying. No rolling, no firing, no deliberate oxidation. After 24–48 hours of natural withering the leaf is dried slowly at a low 40–50 °C, and a very slow oxidation continues in storage.",
+        varieties: ["Silver Needle (buds only)", "White Peony (one bud, two leaves)", "Shou Mei and Gong Mei (leaf)", "Yunnan Moonlight White"],
+        flavor:
+          "The liquor is a very pale apricot and the aroma sits close to lily of the valley and lilac. Almost no astringency, a long sweetness. Dates and honey join in at one or two years; a medicinal note from three; a deep amber by five to seven.",
+        pairing:
+          "Silver Needle with nuts, dates and chestnuts; White Peony with light fish and chicken; Shou Mei with pancakes, fritters and meat. Simmer aged white tea with dates and dried tangerine peel and it warms a winter evening.",
+        keep:
+          "Room temperature, out of direct sun, at 50–60% humidity. Avoid the fridge — moisture, odours and condensation each time you open it. For a beginner, sealed is safer. Look at the leaf rather than the name: silvery down, even colour.",
+        brewTip:
+          "The leaf floats, so pour the water first and add the leaf, or stir gently with a tea spoon after 30 seconds. Silver Needle likes 80–85 °C; Shou Mei, 90 °C.",
+        keywords: "silver needle white peony shou mei gong mei aged white moonlight zhenghe fuding date medicinal"
+      },
+      "zh-CN": {
+        name: "白茶",
+        oneLine: "萎凋后晒干，如此而已，所以叶子的品质一览无遗。",
+        oxidation: "5~10%",
+        ratioNote: "银针3克，寿眉这种叶厚的则用4克",
+        rounds: "4~5泡",
+        steepBasis: "按书中的标准：第一泡1分30秒~2分钟，第二泡1分钟，第三泡2分钟。放久了也不易变涩。",
+        process:
+          "萎凋 → 干燥。没有揉捻，没有杀青，也没有人为发酵。自然萎凋24~48小时后，以40~50度的低温慢慢烘干，储存中仍持续极缓慢的发酵。",
+        varieties: ["白毫银针（只用芽）", "白牡丹（一芽两叶）", "寿眉、贡眉（以叶为主）", "云南月光白"],
+        flavor:
+          "茶汤颜色极淡的杏色，香气接近铃兰与丁香。几乎没有涩味，甜味悠长。存放1~2年多了枣香与蜜香，3年起有药香，5~7年转为深琥珀色。",
+        pairing:
+          "银针配坚果、红枣、栗子；白牡丹配清淡的鱼与鸡肉；寿眉配煎饼、油炸与肉类料理。老白茶加红枣与陈皮小火煮，是冬天的暖身茶。",
+        keep:
+          "常温避直射光，湿度保持50~60%。避免冰箱，因为湿气、异味以及取出时的结露都不利。新手密封保存更安全。看叶子的状态比看名字可靠。",
+        brewTip: "叶子会浮在水面，所以先注水再放茶，或30秒后用茶匙轻轻拨动。银针80~85度，寿眉90度较好。",
+        keywords: "白毫银针 白牡丹 寿眉 贡眉 老白茶 月光白 政和 福鼎 红枣 药香 陈化"
+      },
+      "zh-TW": {
+        name: "白茶",
+        oneLine: "萎凋後晒乾，如此而已，所以葉子的品質一覽無遺。",
+        oxidation: "5~10%",
+        ratioNote: "銀針3公克，壽眉這種葉厚的則用4公克",
+        rounds: "4~5泡",
+        steepBasis: "依書中標準：第一泡1分30秒~2分鐘，第二泡1分鐘，第三泡2分鐘。放久了也不易變澀。",
+        process:
+          "萎凋 → 乾燥。沒有揉捻，沒有殺菁，也沒有人為發酵。自然萎凋24~48小時後，以40~50度的低溫慢慢烘乾，儲存中仍持續極緩慢的發酵。",
+        varieties: ["白毫銀針（只用芽）", "白牡丹（一芽兩葉）", "壽眉、貢眉（以葉為主）", "雲南月光白"],
+        flavor:
+          "茶湯顏色極淡的杏色，香氣接近鈴蘭與丁香。幾乎沒有澀味，甜味悠長。存放1~2年多了棗香與蜜香，3年起有藥香，5~7年轉為深琥珀色。",
+        pairing:
+          "銀針配堅果、紅棗、栗子；白牡丹配清淡的魚與雞肉；壽眉配煎餅、油炸與肉類料理。老白茶加紅棗與陳皮小火煮，是冬天的暖身茶。",
+        keep:
+          "常溫避直射光，濕度保持50~60%。避免冰箱，因為濕氣、異味以及取出時的結露都不利。新手密封保存更安全。看葉子的狀態比看名字可靠。",
+        brewTip: "葉子會浮在水面，所以先注水再放茶，或30秒後用茶匙輕輕撥動。銀針80~85度，壽眉90度較好。",
+        keywords: "白毫銀針 白牡丹 壽眉 貢眉 老白茶 月光白 政和 福鼎 紅棗 藥香 陳化"
+      }
+    },
+    {
+      id: "yellow",
+      kind: "group",
+      hanja: "黃",
+      sub: "Yellow Tea",
+      accent: "#A98B2E",
+      accentSoft: "#F3EBCE",
+      temp: 85,
+      tempRange: "80~85℃",
+      leaf: "3g",
+      water: "200ml",
+      steeps: [90, 60, 90],
+      maxSteep: 3,
+      oxidationValue: 15,
+      ko: {
+        name: "황차",
+        oneLine: "민황(悶黃)이라는 한 단계가 만드는 부드러운 단맛 — 육대다류 가운데 가장 희귀한 차.",
+        oxidation: "10~20%",
+        ratioNote: "200ml에 3g, 유리잔이면 물을 먼저",
+        rounds: "3~4회",
+        steepBasis: "책 기준 80~85도에서 1~1분 30초, 2포 1분, 3포 1~1분 30초. 뜨거우면 민황의 단맛이 사라집니다.",
+        process:
+          "살청(덖음 또는 증청) → 민황(悶黃) → 건조. 덖거나 찐 잎을 아직 따뜻할 때 더미로 모아 두어 스스로 누렇게 익게 하는 민황이 황차의 핵심 공정입니다.",
+        varieties: ["군산은침(군산도)", "몽정황아(쓰촨 몽정산)", "곽산황아(안후이 곽산)"],
+        flavor:
+          "녹차의 풋풋함과 백차의 부드러움이 만나는 지점. 구운 곡물·버터·삶은 옥수수 같은 단맛이 나고 떫은맛은 거의 없습니다. 물색은 연한 노란빛입니다.",
+        pairing: "담백한 생선찜, 죽, 달걀 요리, 은행, 견과. 매콤한 요리와는 향이 가려집니다.",
+        keep:
+          "개봉 후 한 달 안. 민황을 거친 잎은 습기에 약하므로 밀봉해 냉장하고, 꺼낼 때 결로를 피합니다.",
+        brewTip:
+          "80~85도. 끓는 물을 그대로 붓지 말고 다른 컵에 한 번 옮겨 식힌 뒤 부으세요. 잎이 뜨면 30초 뒤 가볍게 눌러 줍니다.",
+        keywords: "황차 민황 군산은침 몽정황아 곽산황아 육대다류 희귀차 노란차"
+      },
+      en: {
+        name: "Yellow tea",
+        oneLine: "One extra step — sealed yellowing — gives the softest sweetness of the six tea families, and the rarest of them.",
+        oxidation: "10–20%",
+        ratioNote: "3 g to 200 ml; water first in a glass",
+        rounds: "3–4 infusions",
+        steepBasis: "By the book: 80–85 °C for 1 to 1½ minutes, then 1 minute, then 1 to 1½. Too hot and the yellowed sweetness disappears.",
+        process:
+          "Firing (pan or steam) → menhuang (sealed yellowing) → drying. The fired leaf is piled while still warm and left to turn yellow on its own; that resting step is what makes a yellow tea.",
+        varieties: ["Junshan Yinzhen (Junshan Island)", "Mengding Huangya (Mount Mengding, Sichuan)", "Huoshan Huangya (Huoshan, Anhui)"],
+        flavor:
+          "Where green tea's freshness meets white tea's softness: roasted grain, butter and boiled corn, with almost no astringency. The liquor is pale yellow.",
+        pairing: "Steamed fish, congee, egg dishes, ginkgo nuts, nuts. Spicy food buries the aroma.",
+        keep: "Within a month of opening. Yellowed leaf hates damp, so seal it and keep it cold, and let it come up to room temperature sealed.",
+        brewTip:
+          "80–85 °C. Don't pour straight off the boil; move the water to another cup first. If the leaf floats, press it down gently after 30 seconds.",
+        keywords: "yellow tea menhuang junshan yinzhen mengding huangya huoshan six tea families rare"
+      },
+      "zh-CN": {
+        name: "黄茶",
+        oneLine: "多一道“闷黄”，就有了六大茶类里最柔和的甜——也是最稀有的一类。",
+        oxidation: "10~20%",
+        ratioNote: "200毫升配3克，玻璃杯则先注水",
+        rounds: "3~4泡",
+        steepBasis: "按书中的标准：80~85度泡1~1分30秒，第二泡1分钟，第三泡1~1分30秒。水太热闷黄的甜就没了。",
+        process:
+          "杀青（炒或蒸）→ 闷黄 → 干燥。把还温热的叶子堆起来盖上，让它自己转黄，这道闷黄正是黄茶的关键。",
+        varieties: ["君山银针（君山岛）", "蒙顶黄芽（四川蒙顶山）", "霍山黄芽（安徽霍山）"],
+        flavor: "绿茶的新鲜与白茶的柔和在这里相遇：炒谷、黄油、煮玉米般的甜，几乎没有涩味。汤色浅黄。",
+        pairing: "清蒸鱼、粥、蛋类料理、白果、坚果。辛辣的菜会盖住香气。",
+        keep: "开封后一个月内。闷黄的叶子怕潮，密封冷藏，取出时保持密封以免结露。",
+        brewTip: "80~85度。不要直接用沸水，先倒到另一个杯子降温。叶子浮起时30秒后轻轻压一下。",
+        keywords: "黄茶 闷黄 君山银针 蒙顶黄芽 霍山黄芽 六大茶类 稀有"
+      },
+      "zh-TW": {
+        name: "黃茶",
+        oneLine: "多一道「悶黃」，就有了六大茶類裡最柔和的甜——也是最稀有的一類。",
+        oxidation: "10~20%",
+        ratioNote: "200毫升配3公克，玻璃杯則先注水",
+        rounds: "3~4泡",
+        steepBasis: "依書中標準：80~85度泡1~1分30秒，第二泡1分鐘，第三泡1~1分30秒。水太熱悶黃的甜就沒了。",
+        process:
+          "殺菁（炒或蒸）→ 悶黃 → 乾燥。把還溫熱的葉子堆起來蓋上，讓它自己轉黃，這道悶黃正是黃茶的關鍵。",
+        varieties: ["君山銀針（君山島）", "蒙頂黃芽（四川蒙頂山）", "霍山黃芽（安徽霍山）"],
+        flavor: "綠茶的新鮮與白茶的柔和在這裡相遇：炒穀、奶油、煮玉米般的甜，幾乎沒有澀味。湯色淺黃。",
+        pairing: "清蒸魚、粥、蛋類料理、白果、堅果。辛辣的菜會蓋住香氣。",
+        keep: "開封後一個月內。悶黃的葉子怕潮，密封冷藏，取出時保持密封以免結露。",
+        brewTip: "80~85度。不要直接用沸水，先倒到另一個杯子降溫。葉子浮起時30秒後輕輕壓一下。",
+        keywords: "黃茶 悶黃 君山銀針 蒙頂黃芽 霍山黃芽 六大茶類 稀有"
+      }
     },
     {
       id: "oolong",
-      name: "우롱차",
-      sub: "Oolong Tea",
+      kind: "group",
       hanja: "烏",
+      sub: "Oolong Tea",
       accent: "#B97A3D",
       accentSoft: "#F6E7D7",
-      oneLine: "원하는 지점에서 정확히 멈추는 반발효의 예술.",
-      oxidation: "15~70%",
-      oxidationValue: 45,
-      oxidationLabel: "요청으로 가장자리만 붉게 — 녹엽홍양변",
       temp: 95,
       tempRange: "90~95℃",
       leaf: "5~7g",
       water: "200ml",
-      ratioNote: "개완 5~7g에 110ml, 서양식 찻잔 5g에 300ml",
       steeps: [45, 20, 30],
-      rounds: "7~10회",
-      steepBasis:
-        "책 기준 첫 물 30초~1분, 이어서 20초·30초·45초로 늘려 갑니다. 짧게 여러 번이 원칙입니다.",
-      process:
-        "위조 → 요청(4~8회 이상) → 살청 → 유념 → 건조 → 배화. 잎끼리 부딪혀 가장자리만 산화되는 ‘녹엽홍양변’이 우롱차의 핵심입니다.",
-      varieties: ["동방미인", "대만 고산차(아리산·산린시·리산)", "무이암차(대홍포·수선·육계)", "안시 철관음"],
-      flavor:
-        "동방미인은 꿀과 잘 익은 복숭아, 고산차는 난초·크림 같은 청량함, 무이암차는 구운 곡물·코코아에 미네랄감(암운), 철관음은 난초 향과 끝의 옅은 떫은맛입니다.",
-      pairing:
-        "구운 고기, 치즈, 과일과 잘 맞습니다. 우롱 밀크티는 철관음 8g을 95도 200ml에 4분 진하게 우리고 우유 150ml를 더합니다. 우롱 하이볼은 우롱 60ml에 위스키 45ml, 탄산수 90ml.",
-      keep:
-        "청향 스타일(고산차·문산포종)은 개봉 후 밀봉해 냉장·냉동에, 배화를 강하게 한 무이암차와 전통 철관음은 상온에서도 잘 버팁니다. 우린 잎의 재우림은 하루 안에.",
-      brewTip:
-        "첫 물은 세차로 버리면 먼지를 씻고 잎을 데웁니다. 구형으로 뭉친 차는 첫 우리에 충분히 열려야 하므로 30초~1분을 기다립니다.",
-      keywords: "동방미인 고산차 아리산 산린시 리산 다위링 무이암차 대홍포 수선 육계 철관음 요청 배화 암운"
+      maxSteep: 3,
+      oxidationValue: 45,
+      ko: {
+        name: "우롱차",
+        oneLine: "원하는 지점에서 정확히 멈추는 반발효의 예술.",
+        oxidation: "15~70%",
+        ratioNote: "개완 5~7g에 110ml, 서양식 찻잔 5g에 300ml",
+        rounds: "7~10회",
+        steepBasis: "책 기준 첫 물 30초~1분, 이어서 20초·30초·45초로 늘려 갑니다. 짧게 여러 번이 원칙입니다.",
+        process:
+          "위조 → 요청(4~8회 이상) → 살청 → 유념 → 건조 → 배화. 잎끼리 부딪혀 가장자리만 산화되는 ‘녹엽홍양변’이 우롱차의 핵심입니다.",
+        varieties: ["동방미인", "대만 고산차(아리산·산린시·리산)", "무이암차(대홍포·수선·육계)", "안시 철관음"],
+        flavor:
+          "동방미인은 꿀과 잘 익은 복숭아, 고산차는 난초·크림 같은 청량함, 무이암차는 구운 곡물·코코아에 미네랄감(암운), 철관음은 난초 향과 끝의 옅은 떫은맛입니다.",
+        pairing:
+          "구운 고기, 치즈, 과일과 잘 맞습니다. 우롱 밀크티는 철관음 8g을 95도 200ml에 4분 진하게 우리고 우유 150ml를 더합니다. 우롱 하이볼은 우롱 60ml에 위스키 45ml, 탄산수 90ml.",
+        keep:
+          "청향 스타일(고산차·문산포종)은 개봉 후 밀봉해 냉장·냉동에, 배화를 강하게 한 무이암차와 전통 철관음은 상온에서도 잘 버팁니다. 우린 잎의 재우림은 하루 안에.",
+        brewTip:
+          "첫 물은 세차로 버리면 먼지를 씻고 잎을 데웁니다. 구형으로 뭉친 차는 첫 우리에 충분히 열려야 하므로 30초~1분을 기다립니다.",
+        keywords: "동방미인 고산차 아리산 산린시 리산 다위링 무이암차 대홍포 수선 육계 철관음 요청 배화 암운"
+      },
+      en: {
+        name: "Oolong tea",
+        oneLine: "The art of semi-oxidation: stopping at exactly the point you want.",
+        oxidation: "15–70%",
+        ratioNote: "5–7 g to 110 ml in a gaiwan; 5 g to 300 ml in a Western cup",
+        rounds: "7–10 infusions",
+        steepBasis:
+          "By the book: 30 seconds to 1 minute for the first pour, then 20, 30 and 45 seconds, lengthening as you go. Short and many is the rule.",
+        process:
+          "Withering → bruising (four to eight rounds or more) → firing → rolling → drying → roasting. The leaf edges oxidise where the leaves bruise against each other — “green leaf, red border” — and that is the heart of oolong.",
+        varieties: ["Oriental Beauty", "Taiwanese high-mountain tea (Alishan, Shanlinxi, Lishan)", "Wuyi rock tea (Da Hong Pao, Shui Xian, Rou Gui)", "Anxi Tieguanyin"],
+        flavor:
+          "Oriental Beauty brings honey and ripe peach; high-mountain tea an orchid-and-cream coolness; Wuyi rock tea roasted grain and cocoa over a mineral “rock rhyme”; Tieguanyin orchid fragrance with a faint astringency at the end.",
+        pairing:
+          "Grilled meat, cheese and fruit. Oolong milk tea: 8 g of Tieguanyin in 200 ml at 95 °C for 4 minutes, then 150 ml milk. Oolong highball: 60 ml oolong, 45 ml whisky, 90 ml soda.",
+        keep:
+          "Lightly oxidised styles should be sealed and chilled or frozen after opening; heavily roasted Wuyi rock tea and traditional Tieguanyin keep well at room temperature. Re-steep used leaves within the day.",
+        brewTip:
+          "Throw the first pour away as a rinse: it washes off dust and warms the leaf. Tightly rolled tea needs to open fully in the first infusion, so give it 30 seconds to a minute.",
+        keywords: "oriental beauty high mountain alishan shanlinxi lishan wuyi rock da hong pao tieguanyin bruising roasting rock rhyme"
+      },
+      "zh-CN": {
+        name: "乌龙茶",
+        oneLine: "在想要的地方精确停下——半发酵的艺术。",
+        oxidation: "15~70%",
+        ratioNote: "盖碗5~7克配110毫升，西式茶杯5克配300毫升",
+        rounds: "7~10泡",
+        steepBasis: "按书中的标准：第一泡30秒~1分钟，之后20秒、30秒、45秒逐渐加长。短泡多泡是原则。",
+        process:
+          "萎凋 → 摇青（4~8次以上）→ 杀青 → 揉捻 → 干燥 → 焙火。叶子互相碰撞，只有边缘发酵的“绿叶红镶边”，正是乌龙茶的核心。",
+        varieties: ["东方美人", "台湾高山茶（阿里山、杉林溪、梨山）", "武夷岩茶（大红袍、水仙、肉桂）", "安溪铁观音"],
+        flavor:
+          "东方美人是蜂蜜与熟桃，高山茶是兰花与奶油般的清凉，武夷岩茶是焙谷与可可上叠着矿物感（岩韵），铁观音是兰花香与尾端淡淡的涩。",
+        pairing:
+          "烤肉、奶酪、水果都很合。乌龙奶茶：铁观音8克，95度200毫升闷4分钟，再加牛奶150毫升。乌龙高球：乌龙60毫升加威士忌45毫升、苏打水90毫升。",
+        keep: "清香型（高山茶、文山包种）开封后密封冷藏或冷冻；重焙火的武夷岩茶与传统铁观音常温也能放。泡过的叶子要在当天内再泡。",
+        brewTip: "第一泡当洗茶倒掉，可洗去灰尘并温热茶叶。紧结成球状的茶第一泡要充分展开，所以等30秒~1分钟。",
+        keywords: "东方美人 高山茶 阿里山 杉林溪 梨山 武夷岩茶 大红袍 水仙 肉桂 铁观音 摇青 焙火 岩韵"
+      },
+      "zh-TW": {
+        name: "烏龍茶",
+        oneLine: "在想要的地方精確停下——半發酵的藝術。",
+        oxidation: "15~70%",
+        ratioNote: "蓋碗5~7公克配110毫升，西式茶杯5公克配300毫升",
+        rounds: "7~10泡",
+        steepBasis: "依書中標準：第一泡30秒~1分鐘，之後20秒、30秒、45秒逐漸加長。短泡多泡是原則。",
+        process:
+          "萎凋 → 搖菁（4~8次以上）→ 殺菁 → 揉捻 → 乾燥 → 焙火。葉子互相碰撞，只有邊緣發酵的「綠葉紅鑲邊」，正是烏龍茶的核心。",
+        varieties: ["東方美人", "台灣高山茶（阿里山、杉林溪、梨山）", "武夷岩茶（大紅袍、水仙、肉桂）", "安溪鐵觀音"],
+        flavor:
+          "東方美人是蜂蜜與熟桃，高山茶是蘭花與奶油般的清涼，武夷岩茶是焙穀與可可上疊著礦物感（岩韻），鐵觀音是蘭花香與尾端淡淡的澀。",
+        pairing:
+          "烤肉、起司、水果都很合。烏龍奶茶：鐵觀音8公克，95度200毫升悶4分鐘，再加牛奶150毫升。烏龍高球：烏龍60毫升加威士忌45毫升、蘇打水90毫升。",
+        keep: "清香型（高山茶、文山包種）開封後密封冷藏或冷凍；重焙火的武夷岩茶與傳統鐵觀音常溫也能放。泡過的葉子要在當天內再泡。",
+        brewTip: "第一泡當洗茶倒掉，可洗去灰塵並溫熱茶葉。緊結成球狀的茶第一泡要充分展開，所以等30秒~1分鐘。",
+        keywords: "東方美人 高山茶 阿里山 杉林溪 梨山 武夷岩茶 大紅袍 水仙 肉桂 鐵觀音 搖菁 焙火 岩韻"
+      }
     },
     {
       id: "black",
-      name: "홍차",
-      sub: "Black Tea",
+      kind: "group",
       hanja: "紅",
+      sub: "Black Tea",
       accent: "#8C3B2E",
       accentSoft: "#F3E1DC",
-      oneLine: "완전 산화. 붉은색과 우유를 견디는 힘이 여기서 나온다.",
-      oxidation: "80~95%",
-      oxidationValue: 90,
-      oxidationLabel: "완전 산화 · 테아플라빈과 테아루비긴",
       temp: 98,
       tempRange: "95~100℃",
       leaf: "3~5g",
       water: "200ml",
-      ratioNote: "우유를 넣을 차는 5g에 200ml로 더 진하게",
       steeps: [180, 240, 240],
-      rounds: "1~2회",
-      steepBasis:
-        "책 기준 3~5분, 1~2회. 두 번째 우리는 같은 잎에 1분을 더합니다. 세 번째부터는 향보다 떫은맛이 앞섭니다.",
-      process:
-        "위조 → 유념 → 산화(22~26도, 습도 90%에서 2~4시간) → 건조(100도 이상 열풍, 수분 3%). 유념으로 세포를 터뜨려 카테킨이 산소를 만나게 하는 것이 전부입니다.",
-      varieties: ["다즐링(머스캣)", "아삼(몰트·CTC)", "우바(청량감)", "기문(기문향)", "정산소종(훈연)"],
-      flavor:
-        "다즐링은 포도·꽃·살구, 아삼은 몰트와 묵직한 바디, 우바는 멘톨 같은 청량감, 기문은 장미·난초·다크초콜릿, 정산소종은 소나무 훈연 향입니다.",
-      pairing:
-        "다즐링은 스콘·마들렌·과일 타르트, 아삼은 크림치즈 베이글·버터 토스트·초콜릿 케이크, 기문은 다크초콜릿과 잘 맞습니다.",
-      keep:
-        "제조일을 확인하고 1년을 기준으로 봅니다. 빛과 산소, 냄새를 막는 불투명 밀봉 용기에 두고, 향신료나 커피 옆은 피합니다.",
-      brewTip:
-        "물은 반드시 새로 끓인 것을. 5분을 넘기면 떫은맛이 급격히 강해지므로 시간이 되면 잎을 바로 건집니다. 티백은 넣은 뒤 젓지 않습니다.",
-      keywords: "다즐링 아삼 우바 기문 정산소종 금준미 CTC 정통엽 밀크티 스콘 훈연"
+      maxSteep: 2,
+      oxidationValue: 90,
+      ko: {
+        name: "홍차",
+        oneLine: "완전 산화. 붉은색과 우유를 견디는 힘이 여기서 나온다.",
+        oxidation: "80~95%",
+        ratioNote: "우유를 넣을 차는 5g에 200ml로 더 진하게",
+        rounds: "1~2회",
+        steepBasis: "책 기준 3~5분, 1~2회. 두 번째 우리는 같은 잎에 1분을 더합니다. 세 번째부터는 향보다 떫은맛이 앞섭니다.",
+        process:
+          "위조 → 유념 → 산화(22~26도, 습도 90%에서 2~4시간) → 건조(100도 이상 열풍, 수분 3%). 유념으로 세포를 터뜨려 카테킨이 산소를 만나게 하는 것이 전부입니다.",
+        varieties: ["다즐링(머스캣)", "아삼(몰트·CTC)", "우바(청량감)", "기문(기문향)", "정산소종(훈연)"],
+        flavor:
+          "다즐링은 포도·꽃·살구, 아삼은 몰트와 묵직한 바디, 우바는 멘톨 같은 청량감, 기문은 장미·난초·다크초콜릿, 정산소종은 소나무 훈연 향입니다.",
+        pairing:
+          "다즐링은 스콘·마들렌·과일 타르트, 아삼은 크림치즈 베이글·버터 토스트·초콜릿 케이크, 기문은 다크초콜릿과 잘 맞습니다.",
+        keep: "제조일을 확인하고 1년을 기준으로 봅니다. 빛과 산소, 냄새를 막는 불투명 밀봉 용기에 두고, 향신료나 커피 옆은 피합니다.",
+        brewTip:
+          "물은 반드시 새로 끓인 것을. 5분을 넘기면 떫은맛이 급격히 강해지므로 시간이 되면 잎을 바로 건집니다. 티백은 넣은 뒤 젓지 않습니다.",
+        keywords: "다즐링 아삼 우바 기문 정산소종 금준미 CTC 정통엽 밀크티 스콘 훈연"
+      },
+      en: {
+        name: "Black tea",
+        oneLine: "Fully oxidised. The red colour and the strength to carry milk come from here.",
+        oxidation: "80–95%",
+        ratioNote: "For milk tea, use 5 g to 200 ml for a stronger cup",
+        rounds: "1–2 infusions",
+        steepBasis:
+          "By the book: 3–5 minutes, one or two infusions. For the second, add a minute to the same leaf. From the third, astringency overtakes aroma.",
+        process:
+          "Withering → rolling → oxidation (22–26 °C at 90% humidity for 2–4 hours) → drying (hot air above 100 °C down to 3% moisture). All of it is in rolling: breaking the cells so catechins meet oxygen.",
+        varieties: ["Darjeeling (muscatel)", "Assam (malt, CTC)", "Uva (cooling)", "Keemun", "Lapsang Souchong (smoked)"],
+        flavor:
+          "Darjeeling is grape, flower and apricot; Assam malt and a heavy body; Uva a menthol-like coolness; Keemun rose, orchid and dark chocolate; Lapsang Souchong the smell of pine smoke.",
+        pairing:
+          "Darjeeling with scones and fruit tarts; Assam with cream-cheese bagels, buttered toast and chocolate cake; Keemun with dark chocolate.",
+        keep: "Check the production date and think in terms of a year. An opaque, sealed tin away from light, air and odours, and away from spices or coffee.",
+        brewTip:
+          "The water must be freshly boiled. Past five minutes astringency rises sharply, so lift the leaves out on time. Don't stir a tea bag once it is in.",
+        keywords: "darjeeling assam uva keemun lapsang souchong golden tips CTC orthodox milk tea scone smoke"
+      },
+      "zh-CN": {
+        name: "红茶",
+        oneLine: "完全发酵。红色的汤色与承受牛奶的力量都在这里。",
+        oxidation: "80~95%",
+        ratioNote: "要加奶的茶用5克配200毫升，泡得更浓一些",
+        rounds: "1~2泡",
+        steepBasis: "按书中的标准：3~5分钟，1~2泡。第二泡同样的叶子多加1分钟。第三泡起涩味会盖过香气。",
+        process:
+          "萎凋 → 揉捻 → 发酵（22~26度、湿度90%下2~4小时）→ 干燥（100度以上热风，水分降至3%）。全部关键在揉捻：破坏细胞，让儿茶素与氧气相遇。",
+        varieties: ["大吉岭（麝香葡萄香）", "阿萨姆（麦芽香、CTC）", "乌瓦（清凉感）", "祁门", "正山小种（烟熏）"],
+        flavor:
+          "大吉岭是葡萄、花与杏，阿萨姆是麦芽与厚重的口感，乌瓦有薄荷般的清凉，祁门是玫瑰、兰花与黑巧克力，正山小种是松木烟熏香。",
+        pairing: "大吉岭配司康、水果塔；阿萨姆配奶油奶酪贝果、黄油吐司、巧克力蛋糕；祁门配黑巧克力。",
+        keep: "确认生产日期，以一年为基准。放在不透光密封罐中，避开光线、空气与异味，也别放在香料或咖啡旁边。",
+        brewTip: "水一定要现烧。超过5分钟涩味会急剧增强，时间一到就取出茶叶。茶包放入后不要搅拌。",
+        keywords: "大吉岭 阿萨姆 乌瓦 祁门 正山小种 金骏眉 CTC 传统工艺 奶茶 司康 烟熏"
+      },
+      "zh-TW": {
+        name: "紅茶",
+        oneLine: "完全發酵。紅色的湯色與承受牛奶的力量都在這裡。",
+        oxidation: "80~95%",
+        ratioNote: "要加奶的茶用5公克配200毫升，泡得更濃一些",
+        rounds: "1~2泡",
+        steepBasis: "依書中標準：3~5分鐘，1~2泡。第二泡同樣的葉子多加1分鐘。第三泡起澀味會蓋過香氣。",
+        process:
+          "萎凋 → 揉捻 → 發酵（22~26度、濕度90%下2~4小時）→ 乾燥（100度以上熱風，水分降至3%）。全部關鍵在揉捻：破壞細胞，讓兒茶素與氧氣相遇。",
+        varieties: ["大吉嶺（麝香葡萄香）", "阿薩姆（麥芽香、CTC）", "烏瓦（清涼感）", "祁門", "正山小種（煙燻）"],
+        flavor:
+          "大吉嶺是葡萄、花與杏，阿薩姆是麥芽與厚重的口感，烏瓦有薄荷般的清涼，祁門是玫瑰、蘭花與黑巧克力，正山小種是松木煙燻香。",
+        pairing: "大吉嶺配司康、水果塔；阿薩姆配奶油起司貝果、奶油吐司、巧克力蛋糕；祁門配黑巧克力。",
+        keep: "確認製造日期，以一年為基準。放在不透光密封罐中，避開光線、空氣與異味，也別放在香料或咖啡旁邊。",
+        brewTip: "水一定要現燒。超過5分鐘澀味會急劇增強，時間一到就取出茶葉。茶包放入後不要攪拌。",
+        keywords: "大吉嶺 阿薩姆 烏瓦 祁門 正山小種 金駿眉 CTC 傳統工藝 奶茶 司康 煙燻"
+      }
     },
     {
       id: "dark",
-      name: "흑차 · 보이차",
-      sub: "Dark Tea",
+      kind: "group",
       hanja: "黑",
+      sub: "Dark Tea",
       accent: "#5B4636",
       accentSoft: "#EBE3D8",
-      oneLine: "시간이 보관 기간이 아니라 재료가 되는 차.",
-      oxidation: "후발효",
-      oxidationValue: 100,
-      oxidationLabel: "미생물 후발효 · 생차와 숙차",
       temp: 100,
       tempRange: "100℃",
       leaf: "5g",
       water: "100ml",
-      ratioNote: "개완·자사호 5g에 100ml, 세차 1~2회",
       steeps: [20, 25, 30],
-      rounds: "8회 이상",
-      steepBasis:
-        "책 기준 첫 우리 15~20초, 이후 5초씩 늘려 8~10회. 세차는 끓는 물로 10~20초씩 한두 번.",
-      process:
-        "생차는 위조 → 살청 → 유념 → 건조 → 압착 뒤 자연 후발효. 숙차는 여기에 악퇴를 더합니다. 수분 30~40%로 불린 잎을 1미터 더미로 쌓아 50~65도에서 40~70일 삭힙니다.",
-      varieties: ["보이차 생차·숙차", "멍하이·이무·징마이", "육보차", "천량차"],
-      flavor:
-        "테아브라운이 만드는 흙내음 뒤에 대추 같은 단맛과 부드러운 질감이 있습니다. 생차는 5년에 말린 과일·꿀, 10년에 대추·약재, 20년이면 한약방과 오래된 나무 서랍 같은 향이 납니다.",
-      pairing:
-        "기름진 식사, 중식, 육류 뒤에 좋습니다. 공복은 피하고 식후 30분 뒤가 무난합니다. 진하게 우린 숙차에 우유와 연유를 더하면 보이차 밀크티가 됩니다.",
-      keep:
-        "20~25도, 습도 60~70%, 통풍이 되면서 냄새가 배지 않는 곳. 냉장고는 금지입니다. 생차는 약간 통기되게, 숙차는 밀봉해도 됩니다.",
-      brewTip:
-        "잎이 단단하게 압착되어 있어 100도의 끓는 물로 여러 번 우려야 합니다. 병차는 칼로 긁지 말고 차침으로 결을 따라 떼어냅니다.",
-      keywords: "보이차 생차 숙차 악퇴 테아브라운 멍하이 이무 징마이 육보차 자사호 세차 식후차"
+      maxSteep: 3,
+      oxidationValue: 100,
+      ko: {
+        name: "흑차 · 보이차",
+        oneLine: "시간이 보관 기간이 아니라 재료가 되는 차.",
+        oxidation: "후발효",
+        ratioNote: "개완·자사호 5g에 100ml, 세차 1~2회",
+        rounds: "8회 이상",
+        steepBasis: "책 기준 첫 우리 15~20초, 이후 5초씩 늘려 8~10회. 세차는 끓는 물로 10~20초씩 한두 번.",
+        process:
+          "생차는 위조 → 살청 → 유념 → 건조 → 압착 뒤 자연 후발효. 숙차는 여기에 악퇴를 더합니다. 수분 30~40%로 불린 잎을 1미터 더미로 쌓아 50~65도에서 40~70일 삭힙니다.",
+        varieties: ["보이차 생차·숙차", "멍하이·이무·징마이", "육보차", "천량차"],
+        flavor:
+          "테아브라운이 만드는 흙내음 뒤에 대추 같은 단맛과 부드러운 질감이 있습니다. 생차는 5년에 말린 과일·꿀, 10년에 대추·약재, 20년이면 한약방과 오래된 나무 서랍 같은 향이 납니다.",
+        pairing:
+          "기름진 식사, 중식, 육류 뒤에 좋습니다. 공복은 피하고 식후 30분 뒤가 무난합니다. 진하게 우린 숙차에 우유와 연유를 더하면 보이차 밀크티가 됩니다.",
+        keep: "20~25도, 습도 60~70%, 통풍이 되면서 냄새가 배지 않는 곳. 냉장고는 금지입니다. 생차는 약간 통기되게, 숙차는 밀봉해도 됩니다.",
+        brewTip:
+          "잎이 단단하게 압착되어 있어 100도의 끓는 물로 여러 번 우려야 합니다. 병차는 칼로 긁지 말고 차침으로 결을 따라 떼어냅니다.",
+        keywords: "보이차 생차 숙차 악퇴 테아브라운 멍하이 이무 징마이 육보차 자사호 세차 식후차"
+      },
+      en: {
+        name: "Dark tea · Pu-erh",
+        oneLine: "Time is not a shelf life here; it is an ingredient.",
+        oxidation: "Post-fermented",
+        ratioNote: "5 g to 100 ml in a gaiwan or Yixing pot; rinse once or twice",
+        rounds: "8 or more infusions",
+        steepBasis:
+          "By the book: 15–20 seconds for the first infusion, then 5 seconds longer each time, for 8–10 infusions. Rinse once or twice with boiling water for 10–20 seconds.",
+        process:
+          "Sheng: withering → firing → rolling → drying → pressing, then natural post-fermentation. Shou adds wo dui: dampened leaf at 30–40% moisture is piled a metre high and fermented at 50–65 °C for 40–70 days.",
+        varieties: ["Sheng and shou pu-erh", "Menghai, Yiwu, Jingmai", "Liu bao tea", "Qianliang tea"],
+        flavor:
+          "Behind the earthy note made by theabrownin there is a date-like sweetness and a soft texture. Sheng: dried fruit and honey at five years, dates and medicinal herbs at ten, and by twenty a Chinese pharmacy and an old wooden drawer.",
+        pairing:
+          "Good after rich meals, Chinese food and meat. Avoid an empty stomach; 30 minutes after eating is comfortable. Add milk and condensed milk to a strong shou and it becomes pu-erh milk tea.",
+        keep: "20–25 °C, 60–70% humidity, somewhere with air movement and no foreign odours. Never the fridge. Sheng likes a little air; shou can be sealed.",
+        brewTip:
+          "The leaf is pressed tight, so it needs boiling water and several infusions. Don't scrape a cake with a knife; use a tea pick and follow the grain.",
+        keywords: "pu-erh sheng shou wo dui theabrownin menghai yiwu jingmai liubao yixing rinse after meal"
+      },
+      "zh-CN": {
+        name: "黑茶 · 普洱茶",
+        oneLine: "在这里，时间不是保质期而是原料。",
+        oxidation: "后发酵",
+        ratioNote: "盖碗或紫砂壶5克配100毫升，洗茶1~2次",
+        rounds: "8泡以上",
+        steepBasis: "按书中的标准：第一泡15~20秒，之后每次加5秒，共8~10泡。以沸水洗茶10~20秒，一两次。",
+        process:
+          "生茶：萎凋 → 杀青 → 揉捻 → 干燥 → 压制后自然后发酵。熟茶多了渥堆：把含水30~40%的茶叶堆成一米高，在50~65度下发醇40~70天。",
+        varieties: ["普洱生茶、熟茶", "勐海、易武、景迈", "六堡茶", "千两茶"],
+        flavor:
+          "茶褐素带来的陈土香之后，是红枣般的甜味与柔滑的口感。生茶5年是干果与蜂蜜，10年是红枣与药材，20年则像中药铺与老木抽屉。",
+        pairing: "适合油腻的餐食、中餐与肉类之后。避免空腹，饭后30分钟较稳妥。浓泡的熟茶加牛奶与炼乳，就是普洱奶茶。",
+        keep: "20~25度、湿度60~70%，通风且不沾异味的地方。禁止放冰箱。生茶略透气，熟茶可以密封。",
+        brewTip: "茶叶压得紧实，要用100度沸水多泡几次。茶饼不要用刀刮，用茶针顺着纹理撬开。",
+        keywords: "普洱 生茶 熟茶 渥堆 茶褐素 勐海 易武 景迈 六堡 紫砂壶 洗茶 饭后茶"
+      },
+      "zh-TW": {
+        name: "黑茶 · 普洱茶",
+        oneLine: "在這裡，時間不是保存期限而是原料。",
+        oxidation: "後發酵",
+        ratioNote: "蓋碗或紫砂壺5公克配100毫升，洗茶1~2次",
+        rounds: "8泡以上",
+        steepBasis: "依書中標準：第一泡15~20秒，之後每次加5秒，共8~10泡。以沸水洗茶10~20秒，一兩次。",
+        process:
+          "生茶：萎凋 → 殺菁 → 揉捻 → 乾燥 → 壓製後自然後發酵。熟茶多了渥堆：把含水30~40%的茶葉堆成一公尺高，在50~65度下發酵40~70天。",
+        varieties: ["普洱生茶、熟茶", "猛海、易武、景邁", "六堡茶", "千兩茶"],
+        flavor:
+          "茶褐素帶來的陳土香之後，是紅棗般的甜味與柔滑的口感。生茶5年是乾果與蜂蜜，10年是紅棗與藥材，20年則像中藥鋪與老木抽屜。",
+        pairing: "適合油膩的餐食、中餐與肉類之後。避免空腹，飯後30分鐘較穩妥。濃泡的熟茶加牛奶與煉乳，就是普洱奶茶。",
+        keep: "20~25度、濕度60~70%，通風且不沾異味的地方。禁止放冰箱。生茶略透氣，熟茶可以密封。",
+        brewTip: "茶葉壓得緊實，要用100度沸水多泡幾次。茶餅不要用刀刮，用茶針順著紋理撬開。",
+        keywords: "普洱 生茶 熟茶 渥堆 茶褐素 猛海 易武 景邁 六堡 紫砂壺 洗茶 飯後茶"
+      }
     },
     {
-      id: "earlgrey",
-      name: "얼그레이",
-      sub: "Earl Grey",
+      id: "scented",
+      kind: "group",
       hanja: "香",
+      sub: "Scented & Herbal",
       accent: "#6F6486",
       accentSoft: "#ECE8F1",
-      oneLine: "베르가못 향을 입힌 홍차. 이름은 상표가 아니라 200년의 산업사.",
-      oxidation: "완전 산화 + 착향",
-      oxidationValue: 95,
-      oxidationLabel: "홍차 베이스 · 베르가못 오일 0.5~2%",
       temp: 96,
-      tempRange: "95~98℃",
+      tempRange: "85~100℃",
       leaf: "3g",
       water: "200ml",
-      ratioNote: "잎 1에 물 60 — 3g에 200ml. 밀크티는 5g에 150ml",
       steeps: [180, 240, 240],
-      rounds: "1~2회",
-      steepBasis:
-        "책 기준 잎차 3~3분 30초, 두 번째는 +1분. 1분은 향, 3분은 균형, 5분은 떫은맛의 정점입니다.",
-      process:
-        "기문 40~50% · 아삼 20~30% · 실론 20~30%로 바탕을 만들고, 베르가못 오일을 잎 무게의 0.5~2%로 얹습니다. 향을 입히는 방식은 분무·껍질 첨가·꽃잎 첨가·인향 네 가지입니다.",
-      varieties: ["클래식(기문 베이스)", "레이디 그레이", "러시안 얼그레이", "크림·프렌치 얼그레이", "얼그레이 그린·화이트·로이보스"],
-      flavor:
-        "리모넨·리날롤·리날릴 아세테이트가 만드는 시트러스와 꽃. 3분에 향과 맛이 균형을 이루고, 5분이면 떫은맛이 지배합니다. 한 잔 카페인은 40~70mg.",
-      pairing:
-        "스콘과 클로티드 크림, 다크초콜릿, 레몬 타르트, 약과, 훈제 연어. 매운 찌개나 떡볶이와는 향이 부딪힙니다.",
-      keep:
-        "개봉 후 3개월이 향의 정점, 6개월이면 눈에 띄게 약해집니다. 불투명한 밀봉 용기에 두고 냉장고는 피합니다. 100g은 하루 두 잔 기준 30~40일분입니다.",
-      brewTip:
-        "티백은 90~95도에 2분 30초~3분, 흔들지 않습니다. 밀크티는 95~100도에 4~5분 진하게. 런던 포그는 5분 우리고 스팀 밀크와 바닐라를 더합니다.",
-      keywords: "베르가못 착향 레이디그레이 러시안 크림 프렌치 밀크티 런던포그 하이볼 기문 아삼 실론 티백"
+      maxSteep: 3,
+      oxidationValue: 90,
+      ko: {
+        name: "가향차 · 홍콩티 · 허브차",
+        oneLine: "꽃과 향, 그리고 카페인 없이 마시는 잔까지 — 차의 울타리 밖도 담았습니다.",
+        oxidation: "차에 따라 다름",
+        ratioNote: "잎차 3g에 200ml, 꽃차는 2~3g, 밀크티 블렌드는 8g에 200ml",
+        rounds: "1~3회",
+        steepBasis: "향을 입힌 차는 3분 안쪽이 향의 정점입니다. 꽃차·허브차는 5분 이상 우려도 쓰지 않습니다.",
+        process:
+          "가향은 분무·껍질 첨가·꽃잎 첨가·인향 네 갈래로 이루어집니다. 자스민은 밤에 핀 꽃을 홍차·녹차에 여러 번 겹쳐 향을 옮기고, 국화·캐모마일·루이보스는 꽃과 잎을 말려 그대로 우립니다.",
+        varieties: ["얼그레이", "자스민(모리화차)", "홍콩식 밀크티 블렌드", "국화차", "루이보스", "캐모마일"],
+        flavor:
+          "베르가못은 시트러스와 꽃, 자스민은 달콤한 흰 꽃, 국화는 청량한 약재향, 루이보스는 바닐라와 무화과, 캐모마일은 사과와 꿀에 가깝습니다.",
+        pairing:
+          "가향 홍차는 스콘·마들렌·약과, 자스민은 중식과 디저트, 국화는 호두·대추, 루이보스는 우유와 잘 맞습니다. 캐모마일은 꿀 한 스푼이면 충분합니다.",
+        keep:
+          "가향차는 개봉 후 3개월이 향의 정점입니다. 불투명 밀봉 용기에 담아 열·빛·습기를 피하고, 허브차는 1년 안에 드세요.",
+        brewTip:
+          "꽃차와 허브차는 끓는 물 95도에서 5분, 뚜껑을 덮어 향을 잡습니다. 밀크티 블렌드는 5분 진하게 우려야 얼음과 우유에 향이 지지 않습니다.",
+        keywords: "얼그레이 자스민 모리화 홍콩 밀크티 국화 루이보스 캐모마일 허브 카페인 꽃차"
+      },
+      en: {
+        name: "Scented · Hong Kong · Herbal",
+        oneLine: "Flowers, fragrance, and cups without caffeine — the teas beyond the tea bush.",
+        oxidation: "Varies by tea",
+        ratioNote: "3 g leaf to 200 ml; 2–3 g for flowers; 8 g to 200 ml for a milk-tea blend",
+        rounds: "1–3 infusions",
+        steepBasis: "For scented tea, the aroma peaks within 3 minutes. Flower and herbal teas can steep 5 minutes without turning bitter.",
+        process:
+          "Scenting has four routes: spraying, adding peel, adding petals, and absorption (yinxiang). Jasmine is layered with flowers picked at night, again and again; chrysanthemum, chamomile and rooibos are simply dried and steeped.",
+        varieties: ["Earl Grey", "Jasmine", "Hong Kong milk tea blend", "Chrysanthemum", "Rooibos", "Chamomile"],
+        flavor:
+          "Bergamot is citrus and flower, jasmine a sweet white blossom, chrysanthemum a cool medicinal note, rooibos vanilla and fig, chamomile apple and honey.",
+        pairing:
+          "Scented black tea with scones, madeleines and yakgwa; jasmine with Chinese food and desserts; chrysanthemum with walnuts and dates; rooibos with milk. Chamomile needs only a spoon of honey.",
+        keep: "A scented tea peaks within three months of opening. Keep it opaque and sealed, away from heat, light and damp; drink herbal teas within a year.",
+        brewTip:
+          "Flower and herbal teas take boiling water at 95 °C for 5 minutes with a lid on to hold the aroma. A milk-tea blend needs a strong 5-minute steep so milk and ice don't flatten it.",
+        keywords: "earl grey jasmine hong kong milk tea chrysanthemum rooibos chamomile herbal caffeine free flower"
+      },
+      "zh-CN": {
+        name: "加香茶 · 港式 · 花草茶",
+        oneLine: "花香、港式，还有不含咖啡因的一杯——茶树之外的茶也收进来了。",
+        oxidation: "因茶而异",
+        ratioNote: "叶茶3克配200毫升，花茶2~3克，奶茶拼配8克配200毫升",
+        rounds: "1~3泡",
+        steepBasis: "加香茶在3分钟以内香气最好。花草茶泡5分钟以上也不苦涩。",
+        process:
+          "加香有喷雾、加果皮、加花瓣、窨香四种方式。茉莉用夜里开的花一层层与茶坯窨制，菊花、洋甘菊、路易波士则直接干燥后冲泡。",
+        varieties: ["伯爵茶", "茉莉花茶", "港式奶茶拼配", "菊花茶", "路易波士", "洋甘菊"],
+        flavor:
+          "佛手柑是柑橘与花香，茉莉是甜润的白花，菊花是清凉的药香，路易波士像香草与无花果，洋甘菊接近苹果与蜂蜜。",
+        pairing:
+          "加香红茶配司康、玛德莲、药果；茉莉配中餐与甜点；菊花配核桃、红枣；路易波士加牛奶很好。洋甘菊加一勺蜂蜜就够。",
+        keep: "加香茶开封后3个月是香气顶点。放在不透光密封罐，避开热、光与湿气；花草茶请在一年内喝完。",
+        brewTip: "花草茶用95度沸水泡5分钟，盖上盖子留住香气。奶茶拼配要泡足5分钟，才不会在冰和牛奶里失味。",
+        keywords: "伯爵 茉莉 港式奶茶 菊花 路易波士 洋甘菊 花草 无咖啡因 花茶"
+      },
+      "zh-TW": {
+        name: "加香茶 · 港式 · 花草茶",
+        oneLine: "花香、港式，還有不含咖啡因的一杯——茶樹之外的茶也收進來了。",
+        oxidation: "因茶而異",
+        ratioNote: "葉茶3公克配200毫升，花茶2~3公克，奶茶拼配8公克配200毫升",
+        rounds: "1~3泡",
+        steepBasis: "加香茶在3分鐘以內香氣最好。花草茶泡5分鐘以上也不苦澀。",
+        process:
+          "加香有噴霧、加果皮、加花瓣、窨香四種方式。茉莉用夜裡開的花一層層與茶坯窨製，菊花、洋甘菊、路易波士則直接乾燥後沖泡。",
+        varieties: ["伯爵茶", "茉莉花茶", "港式奶茶拼配", "菊花茶", "路易波士", "洋甘菊"],
+        flavor:
+          "佛手柑是柑橘與花香，茉莉是甜潤的白花，菊花是清涼的藥香，路易波士像香草與無花果，洋甘菊接近蘋果與蜂蜜。",
+        pairing:
+          "加香紅茶配司康、瑪德蓮、藥果；茉莉配中餐與甜點；菊花配核桃、紅棗；路易波士加牛奶很好。洋甘菊加一勺蜂蜜就夠。",
+        keep: "加香茶開封後3個月是香氣頂點。放在不透光密封罐，避開熱、光與濕氣；花草茶請在一年內喝完。",
+        brewTip: "花草茶用95度沸水泡5分鐘，蓋上蓋子留住香氣。奶茶拼配要泡足5分鐘，才不會在冰和牛奶裡失味。",
+        keywords: "伯爵 茉莉 港式奶茶 菊花 路易波士 洋甘菊 花草 無咖啡因 花茶"
+      }
+    },
+    {
+      id: "herbal",
+      kind: "group",
+      hanja: "草",
+      sub: "Herbs & Korean Tea",
+      accent: "#6E7F52",
+      accentSoft: "#E9EDDD",
+      temp: 95,
+      tempRange: "90~100℃",
+      leaf: "3g",
+      water: "200ml",
+      steeps: [300, 360, 420],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "허브차 · 한국 전통차",
+        oneLine: "차나무 잎이 아닌 잎과 뿌리, 열매, 꽃으로 우린 잔 — 카페인 없이 하루의 끝에.",
+        oxidation: "무산화 · 카페인 없음",
+        ratioNote: "200ml에 3g, 뿌리·열매는 5g",
+        rounds: "2~3회",
+        steepBasis: "책과 관행 기준 95도에서 5분, 2포 6분. 뿌리·열매는 10분까지 우려도 됩니다.",
+        process:
+          "말리기 → (볶음·덖음) → 우림. 대추·유자·오미자는 설탕에 절여 청으로, 뿌리류는 말려 볶아 우립니다. 떡차는 찐 잎을 눌러 말리며 미생물 발효가 더해집니다.",
+        varieties: ["대추·생강·유자·오미자", "쌍화·둥굴레·도라지", "보리·현미·메밀", "감잎·뽕잎·연잎·쑥", "캐모마일·페퍼민트·히비스커스", "루이보스·마테·라벤더·레몬그라스"],
+        flavor:
+          "곡물의 고소함, 뿌리의 단맛, 꽃의 향 — 각각 다르지만 공통으로 떫음이 적고 몸을 데웁니다.",
+        pairing:
+          "식후, 밤, 감기 기운이 있을 때. 대추·생강·쌍화는 겨울, 유자·오미자는 여름에 어울립니다.",
+        keep: "말린 잎·꽃은 밀봉해 서늘한 곳에 6~12개월. 청(대추·유자·오미자)은 냉장 1년입니다.",
+        brewTip:
+          "뿌리와 열매는 끓는 물에 5~10분 우려야 맛이 납니다. 꽃과 잎은 5분이면 충분합니다.",
+        keywords: "허브 대용차 한방차 대추 생강 유자 오미자 쌍화 둥굴레 보리 현미 감잎 뽕잎 연잎 쑥 떡차 캐모마일 페퍼민트 히비스커스 루이보스 마테 라벤더 레몬그라스"
+      },
+      en: {
+        name: "Herbal & Korean tea",
+        oneLine: "Cups brewed from leaf, root, fruit and flower rather than the tea bush — caffeine-free, for the end of the day.",
+        oxidation: "None · caffeine-free",
+        ratioNote: "3 g to 200 ml; 5 g for roots and fruit",
+        rounds: "2–3 infusions",
+        steepBasis: "95 °C for 5 minutes, then 6. Roots and fruit take up to 10.",
+        process:
+          "Dried → (roasted or pan-fired) → steeped. Dates, citron and schisandra are preserved in sugar as cheong; roots are dried and roasted. Tteokcha is steamed leaf pressed and dried, with microbial fermentation added.",
+        varieties: ["Date · ginger · citron · schisandra", "Ssanghwa · Solomon's seal · balloon flower", "Barley · brown rice · buckwheat", "Persimmon · mulberry · lotus · mugwort", "Chamomile · peppermint · hibiscus", "Rooibos · mate · lavender · lemongrass"],
+        flavor:
+          "Roasted grain, the sweetness of roots, the perfume of flowers — each different, all low in astringency and warming.",
+        pairing: "After meals, at night, or when a cold is coming. Dates, ginger and ssanghwa for winter; citron and schisandra for summer.",
+        keep: "Dried leaf and flowers keep sealed and cool for 6–12 months. Fruit cheong keeps a year in the fridge.",
+        brewTip: "Roots and fruit need 5–10 minutes in boiling water. Flowers and leaf are done in 5.",
+        keywords: "herbal korean tea date ginger citron schisandra ssanghwa barley brown rice persimmon mulberry lotus mugwort tteokcha chamomile peppermint hibiscus rooibos mate lavender lemongrass caffeine free"
+      },
+      "zh-CN": {
+        name: "花草茶 · 韩国传统茶",
+        oneLine: "用叶、根、果实与花泡出的一杯——无咖啡因，适合一天的收尾。",
+        oxidation: "不发酵 · 无咖啡因",
+        ratioNote: "200毫升配3克，根与果实5克",
+        rounds: "2~3泡",
+        steepBasis: "按书与惯例：95度泡5分钟，第二泡6分钟。根与果实可到10分钟。",
+        process:
+          "干燥 → （烘烤·炒）→ 冲泡。红枣、柚子、五味子用糖腌成“청”（蜜渍），根类干燥后烘烤再冲泡。떡차（饼茶）是蒸过的叶子压紧晒干，另有微生物发酵。",
+        varieties: ["红枣·生姜·柚子·五味子", "双和·玉竹·桔梗", "大麦·玄米·荞麦", "柿叶·桑叶·荷叶·艾草", "洋甘菊·薄荷·洛神花", "路易波士·马黛·薰衣草·香茅"],
+        flavor: "谷物的焙香、根的甜、花的香——各不相同，但都涩味低、能让身体暖起来。",
+        pairing: "饭后、夜里、感觉要感冒时。红枣、生姜、双和适合冬天；柚子、五味子适合夏天。",
+        keep: "干燥的叶与花密封放在阴凉处可存6~12个月。蜜渍（红枣·柚子·五味子）冷藏一年。",
+        brewTip: "根与果实要用沸水泡5~10分钟才出味。花与叶5分钟就够。",
+        keywords: "花草茶 韩国传统茶 红枣 生姜 柚子 五味子 双和 玉竹 大麦 玄米 柿叶 桑叶 荷叶 艾草 饼茶 洋甘菊 薄荷 洛神花 路易波士 马黛 薰衣草 香茅 无咖啡因"
+      },
+      "zh-TW": {
+        name: "花草茶 · 韓國傳統茶",
+        oneLine: "用葉、根、果實與花泡出的一杯——無咖啡因，適合一天的收尾。",
+        oxidation: "不發酵 · 無咖啡因",
+        ratioNote: "200毫升配3公克，根與果實5公克",
+        rounds: "2~3泡",
+        steepBasis: "依書與慣例：95度泡5分鐘，第二泡6分鐘。根與果實可到10分鐘。",
+        process:
+          "乾燥 → （烘烤·炒）→ 沖泡。紅棗、柚子、五味子用糖醃成「청」（蜜漬），根類乾燥後烘烤再沖泡。떡차（餅茶）是蒸過的葉子壓緊晒乾，另有微生物發酵。",
+        varieties: ["紅棗·生薑·柚子·五味子", "雙和·玉竹·桔梗", "大麥·玄米·蕎麥", "柿葉·桑葉·荷葉·艾草", "洋甘菊·薄荷·洛神花", "路易波士·馬黛·薰衣草·香茅"],
+        flavor: "穀物的焙香、根的甜、花的香——各不相同，但都澀味低、能讓身體暖起來。",
+        pairing: "飯後、夜裡、感覺要感冒時。紅棗、生薑、雙和適合冬天；柚子、五味子適合夏天。",
+        keep: "乾燥的葉與花密封放在陰涼處可存6~12個月。蜜漬（紅棗·柚子·五味子）冷藏一年。",
+        brewTip: "根與果實要用沸水泡5~10分鐘才出味。花與葉5分鐘就夠。",
+        keywords: "花草茶 韓國傳統茶 紅棗 生薑 柚子 五味子 雙和 玉竹 大麥 玄米 柿葉 桑葉 荷葉 艾草 餅茶 洋甘菊 薄荷 洛神花 路易波士 馬黛 薰衣草 香茅 無咖啡因"
+      }
     }
   ];
 
-  // 홈: 기분·상황별 추천 (책의 서술에서 근거를 가져옴)
-  var moods = [
+  /* ---------------- 품종 (60여 종) ---------------- */
+  var TEAS = [
+    /* ── 녹차 ── */
+    {
+      id: "green-longjing",
+      group: "green",
+      kind: "tea",
+      hanja: "龍",
+      sub: "Xihu Longjing",
+      hz: "西湖龍井",
+      hs: "西湖龙井",
+      rom: "Xihu Longjing",
+      x: {
+        ko: [
+          "살청(솥에서 덖음) → 유념 → 건조. 덖는 열로 효소를 멈추고 손바닥으로 눌러 납작한 잎을 만듭니다.",
+          "청 건륭제가 시후에서 차를 마시고 호숫가 차나무 열여덟 그루를 ‘어전십팔수(御前十八棵)’로 봉했다는 이야기가 전합니다."
+        ],
+        en: [
+          "Firing in a wok → rolling → drying. The wok's heat stops the enzymes and the palm presses the leaf flat.",
+          "Tradition says the Qianlong Emperor, tasting tea at West Lake, honoured eighteen bushes by the shore as imperial tea trees — a title still kept."
+        ],
+        "zh-CN": [
+          "在锅里炒青 → 揉捻 → 干燥。锅温终止酶活性，手掌把叶子压成扁形。",
+          "相传乾隆帝在西湖品茶后，把湖畔十八棵茶树封为“御前十八棵”，至今仍有此说。"
+        ],
+        "zh-TW": [
+          "在鍋裡炒菁 → 揉捻 → 乾燥。鍋溫終止酶活性，手掌把葉子壓成扁形。",
+          "相傳乾隆帝在西湖品茶後，把湖畔十八棵茶樹封為「御前十八棵」，至今仍有此說。"
+        ]
+      },
+      temp: 80,
+      tempRange: "75~80℃",
+      leaf: "3g",
+      water: "150ml",
+      steeps: [90, 30, 45],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "서호용정",
+        oneLine: "볶은 콩 같은 고소함과 납작하게 누른 잎 — 덖음 녹차의 기준.",
+        oxidation: "0%",
+        ratioNote: "150ml에 3g, 유리잔이면 물을 먼저",
+        rounds: "3~4회",
+        steepBasis: "80도에서 1분 30초, 2포 30초, 3포 45초. 잎을 넣은 뒤 젓지 않습니다.",
+        origin: "저장성 항저우 시후 주변. 청명 전에 딴 명전(明前)을 가장 쳐주고, 솥에서 손으로 덖어 납작하게 누른 잎이 표식입니다.",
+        flavor: "볶은 콩·밤·아몬드의 고소함, 옅은 단맛, 끝에 아주 가벼운 떫음. 물색은 연한 연둣빛입니다.",
+        pairing: "용정하인(새우 요리), 생선찜, 두부, 죽. 크림 많은 디저트와는 부딪힙니다.",
+        keep: "개봉 후 한 달 안. 밀봉해 냉장 보관하고, 꺼낼 때는 밀봉 채로 꺼내 결로를 피합니다.",
+        brewTip: "상투법 — 물을 먼저 붓고 잎을 얹으면 잎이 가라앉으며 향이 열립니다."
+      },
+      en: {
+        name: "West Lake Longjing",
+        oneLine: "Roasted-soy sweetness in a flat-pressed leaf — the yardstick for pan-fired green tea.",
+        oxidation: "0%",
+        ratioNote: "3 g to 150 ml; in a glass, water first",
+        rounds: "3–4 infusions",
+        steepBasis: "80 °C: 1½ minutes, then 30 seconds, then 45. Don't stir after the leaf goes in.",
+        origin: "Around West Lake in Hangzhou, Zhejiang. Pre-Qingming picking is the most prized, and the flat leaf pressed by hand in a wok is its signature.",
+        flavor: "Roasted soy, chestnut and almond, a light sweetness, a faint astringency at the end. The liquor is a pale young green.",
+        pairing: "Longjing shrimp, steamed fish, tofu, congee. Cream-heavy desserts clash with it.",
+        keep: "Within a month of opening. Keep it sealed in the fridge and take it out still sealed so condensation stays off the leaf.",
+        brewTip: "Water first, then the leaf: it sinks slowly and the aroma opens as it does."
+      },
+      "zh-CN": {
+        name: "西湖龙井",
+        oneLine: "炒豆般的香气与压扁的叶片——炒青绿茶的标准。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3克，玻璃杯则先注水",
+        rounds: "3~4泡",
+        steepBasis: "80度泡1分30秒，第二泡30秒，第三泡45秒。放茶后不要搅动。",
+        origin: "浙江杭州西湖一带。清明前采的“明前”最受推崇，在锅里手工炒压成扁形的叶片是它的标志。",
+        flavor: "炒豆、栗子、杏仁般的香气，淡淡的甜，尾端极轻的涩。汤色是浅嫩的绿。",
+        pairing: "龙井虾仁、清蒸鱼、豆腐、粥。与奶油多的甜点相冲。",
+        keep: "开封后一个月内。密封冷藏，取出时保持密封以免结露。",
+        brewTip: "上投法——先注水再放茶，叶片下沉时香气才打开。"
+      },
+      "zh-TW": {
+        name: "西湖龍井",
+        oneLine: "炒豆般的香氣與壓扁的葉片——炒菁綠茶的標準。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3公克，玻璃杯則先注水",
+        rounds: "3~4泡",
+        steepBasis: "80度泡1分30秒，第二泡30秒，第三泡45秒。放茶後不要攪動。",
+        origin: "浙江杭州西湖一帶。清明前採的「明前」最受推崇，在鍋裡手工炒壓成扁形的葉片是它的標誌。",
+        flavor: "炒豆、栗子、杏仁般的香氣，淡淡的甜，尾端極輕的澀。湯色是淺嫩的綠。",
+        pairing: "龍井蝦仁、清蒸魚、豆腐、粥。與奶油多的甜點相衝。",
+        keep: "開封後一個月內。密封冷藏，取出時保持密封以免結露。",
+        brewTip: "上投法——先注水再放茶，葉片下沉時香氣才打開。"
+      }
+    },
+    {
+      id: "green-biluochun",
+      group: "green",
+      kind: "tea",
+      hanja: "碧",
+      sub: "Biluochun",
+      hz: "洞庭碧螺春",
+      hs: "洞庭碧螺春",
+      rom: "Dongting Biluochun",
+      x: {
+        ko: [
+          "살청(덖음) → 유념 → 말리기. 잎을 손바닥으로 비벼 달팽이처럼 꼬는 것이 특징입니다.",
+          "원래 이름은 향이 사람을 놀라게 한다는 ‘하살인향(嚇煞人香)’이었는데, 강희제가 우아하지 않다 여겨 ‘벽라춘’으로 고쳤다는 이야기가 전합니다."
+        ],
+        en: [
+          "Pan-firing → rolling → drying, with the leaf rubbed in the palms into snail-like coils.",
+          "The first name meant “a scent that startles”; the Kangxi Emperor is said to have found it unrefined and renamed it Biluochun."
+        ],
+        "zh-CN": [
+          "炒青 → 揉捻 → 干燥。用手掌把叶子搓成螺旋状是它的特点。",
+          "原名“吓煞人香”，相传康熙帝觉得不雅，改名为“碧螺春”。"
+        ],
+        "zh-TW": [
+          "炒菁 → 揉捻 → 乾燥。用手掌把葉子搓成螺旋狀是它的特點。",
+          "原名「嚇煞人香」，相傳康熙帝覺得不雅，改名為「碧螺春」。"
+        ]
+      },
+      temp: 75,
+      tempRange: "70~75℃",
+      leaf: "3g",
+      water: "150ml",
+      steeps: [60, 30, 45],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "벽라춘",
+        oneLine: "달팽이처럼 꼬인 잎에서 과일 향이 난다 — 가장 향기로운 녹차.",
+        oxidation: "0%",
+        ratioNote: "150ml에 3g, 낮은 온도가 핵심",
+        rounds: "3~4회",
+        steepBasis: "75도에서 1분, 2포 30초, 3포 45초. 뜨거우면 떫어지므로 온도를 낮게.",
+        origin: "장쑤성 둥팅산. 이른 봄 첫 싹만 골라 손바닥으로 달팽이 모양으로 말아, ‘백毫’의 솜털이 남습니다.",
+        flavor: "복숭아·살구 같은 과일 향, 크림 같은 부드러움, 끝의 청량한 단맛.",
+        pairing: "흰살생선, 죽, 과일 디저트, 견과. 매운 음식과는 향이 지웁니다.",
+        keep: "제조 후 6개월, 개봉 후 한 달. 알루미늄 파우치에 밀봉해 냉장고 채소칸.",
+        brewTip: "70~75도 물을 먼저 붓고 잎을 넣습니다. 끓인 물은 컵에 옮겨 식힌 뒤 쓰세요."
+      },
+      en: {
+        name: "Biluochun",
+        oneLine: "Fruit aroma in a leaf twisted like a snail — the most fragrant of green teas.",
+        oxidation: "0%",
+        ratioNote: "3 g to 150 ml; low temperature is the whole trick",
+        rounds: "3–4 infusions",
+        steepBasis: "At 75 °C, 1 minute, then 30 seconds, then 45. Hot water makes it bitter, so keep it low.",
+        origin: "Dongting Mountain in Jiangsu. Only the first spring buds, rolled by hand into snail-like coils that keep their white down.",
+        flavor: "Peach and apricot, a creamy softness, a cool sweetness at the end.",
+        pairing: "White fish, congee, fruit desserts, nuts. Spicy food wipes out the aroma.",
+        keep: "Six months from production, a month after opening. Sealed aluminium pouch in the fridge's vegetable drawer.",
+        brewTip: "Pour 70–75 °C water first, then add the leaf. Move boiled water to another cup to cool it."
+      },
+      "zh-CN": {
+        name: "碧螺春",
+        oneLine: "卷成螺旋的叶子里有果香——最香的绿茶。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3克，低温是关键",
+        rounds: "3~4泡",
+        steepBasis: "75度泡1分钟，第二泡30秒，第三泡45秒。水太热会涩，温度要低。",
+        origin: "江苏洞庭山。只取早春第一茬嫩芽，用手掌搓成螺旋状，留着白色的绒毛。",
+        flavor: "桃子、杏子般的果香，奶油般的柔滑，尾端清凉的甜。",
+        pairing: "白身鱼、粥、水果甜点、坚果。与辛辣食物相冲。",
+        keep: "生产后6个月，开封后一个月。密封铝箔袋放入冰箱蔬菜格。",
+        brewTip: "先注70~75度的水再放茶。沸水先倒到另一个杯子降温。"
+      },
+      "zh-TW": {
+        name: "碧螺春",
+        oneLine: "捲成螺旋的葉子裡有果香——最香的綠茶。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3公克，低溫是關鍵",
+        rounds: "3~4泡",
+        steepBasis: "75度泡1分鐘，第二泡30秒，第三泡45秒。水太熱會澀，溫度要低。",
+        origin: "江蘇洞庭山。只取早春第一茬嫩芽，用手掌搓成螺旋狀，留著白色的絨毛。",
+        flavor: "桃子、杏子般的果香，奶油般的柔滑，尾端清涼的甜。",
+        pairing: "白身魚、粥、水果甜點、堅果。與辛辣食物相衝。",
+        keep: "製造後6個月，開封後一個月。密封鋁箔袋放入冰箱蔬果格。",
+        brewTip: "先注70~75度的水再放茶。沸水先倒到另一個杯子降溫。"
+      }
+    },
+    {
+      id: "green-maofeng",
+      group: "green",
+      kind: "tea",
+      hanja: "黃",
+      sub: "Huangshan Maofeng",
+      hz: "黃山毛峯",
+      hs: "黄山毛峰",
+      rom: "Huangshan Maofeng",
+      x: {
+        ko: [
+          "살청 → 유념 → 건조. 잎을 살짝 눌러 황록색으로 만들고 흰 솜털을 남깁니다.",
+          "1890년대 안후이 황산에서 만들어진 비교적 젊은 명차로, 청명 전의 작은 잎을 ‘연심(蓮心)’이라 부릅니다."
+        ],
+        en: [
+          "Firing → rolling → drying, the leaf lightly pressed to a yellow-green with its white down intact.",
+          "A relatively young famous tea, established around Huangshan from the 1890s; pre-Qingming buds are called “lotus hearts.”"
+        ],
+        "zh-CN": [
+          "炒青 → 揉捻 → 干燥。叶子轻压成黄绿色，保留白色绒毛。",
+          "19世纪90年代在安徽黄山一带定型的较年轻名茶，清明前的小芽称为“莲心”。"
+        ],
+        "zh-TW": [
+          "炒菁 → 揉捻 → 乾燥。葉子輕壓成黃綠色，保留白色絨毛。",
+          "19世紀90年代在安徽黃山一帶定型的較年輕名茶，清明前的小芽稱為「蓮心」。"
+        ]
+      },
+      temp: 80,
+      tempRange: "75~85℃",
+      leaf: "3g",
+      water: "150ml",
+      steeps: [90, 30, 60],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "황산모봉",
+        oneLine: "안개 낀 산의 부드러운 고소함 — 중국 녹차의 또 다른 표준.",
+        oxidation: "0%",
+        ratioNote: "150ml에 3g",
+        rounds: "3~4회",
+        steepBasis: "80도에서 1분 30초, 2포 30초, 3포 1분.",
+        origin: "안후이성 황산. 안개와 큰 일교차로 잎이 두툼해지고, 황록색 잎에 흰 솜털이 남습니다.",
+        flavor: "부드러운 고소함과 난초 같은 청량함, 감칠맛이 길게 남습니다.",
+        pairing: "닭고기 요리, 죽, 나물, 은행. 기름진 요리보다 담백한 쪽이 좋습니다.",
+        keep: "개봉 후 한 달, 밀봉 냉장. 냄새가 옮지 않도록 채소칸에 둡니다.",
+        brewTip: "잎이 가늘어 우려내는 시간이 짧습니다. 80도에서 1분 30초를 넘기지 마세요."
+      },
+      en: {
+        name: "Huangshan Maofeng",
+        oneLine: "A soft nuttiness from misty mountains — China's other green-tea standard.",
+        oxidation: "0%",
+        ratioNote: "3 g to 150 ml",
+        rounds: "3–4 infusions",
+        steepBasis: "80 °C: 1½ minutes, then 30 seconds, then 1 minute.",
+        origin: "Huangshan in Anhui. Mist and wide day–night swings thicken the leaf, which dries yellow-green with white down.",
+        flavor: "Soft roasted notes with an orchid freshness, and an umami that stays a long time.",
+        pairing: "Chicken dishes, congee, wild greens, ginkgo nuts. Lighter food suits it better than rich dishes.",
+        keep: "A month after opening, sealed and chilled. Keep it in the vegetable drawer so it picks up no odour.",
+        brewTip: "The leaf is fine, so the steep is short. Don't go past 1½ minutes at 80 °C."
+      },
+      "zh-CN": {
+        name: "黄山毛峰",
+        oneLine: "雾山深处的柔和豆香——中国绿茶的另一种标准。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3克",
+        rounds: "3~4泡",
+        steepBasis: "80度泡1分30秒，第二泡30秒，第三泡1分钟。",
+        origin: "安徽黄山。云雾与昼夜温差让叶片变得肥厚，干茶黄绿并留下白色绒毛。",
+        flavor: "柔和的焙香与兰花般的清凉，鲜味留得久。",
+        pairing: "鸡肉料理、粥、野菜、白果。清淡的菜比油腻的菜更合适。",
+        keep: "开封后一个月，密封冷藏。放在蔬果格避免串味。",
+        brewTip: "叶片细嫩，冲泡时间短。80度不要超过1分30秒。"
+      },
+      "zh-TW": {
+        name: "黃山毛峰",
+        oneLine: "霧山深處的柔和豆香——中國綠茶的另一種標準。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3公克",
+        rounds: "3~4泡",
+        steepBasis: "80度泡1分30秒，第二泡30秒，第三泡1分鐘。",
+        origin: "安徽黃山。雲霧與晝夜溫差讓葉片變得肥厚，乾茶黃綠並留下白色絨毛。",
+        flavor: "柔和的焙香與蘭花般的清涼，鮮味留得久。",
+        pairing: "雞肉料理、粥、野菜、白果。清淡的菜比油膩的菜更合適。",
+        keep: "開封後一個月，密封冷藏。放在蔬果格避免串味。",
+        brewTip: "葉片細嫩，沖泡時間短。80度不要超過1分30秒。"
+      }
+    },
+    {
+      id: "green-sencha",
+      group: "green",
+      kind: "tea",
+      hanja: "煎",
+      sub: "Sencha",
+      hz: "煎茶",
+      hs: "煎茶",
+      rom: "Sencha",
+      x: {
+        ko: [
+          "증청 → 유념 → 건조. 차광하지 않은 잎을 김으로 쪄서 효소를 멈춥니다.",
+          "무로마치 시대에 중국에서 전해진 증청법이 일본에 남아 센차가 되었습니다. 오늘날 일본 녹차 소비의 6할을 차지합니다."
+        ],
+        en: [
+          "Steaming → rolling → drying. Unshaded leaf is steamed to stop the enzymes.",
+          "Steaming came from China in the Muromachi period and stayed in Japan as sencha; it is about 60% of Japanese green-tea consumption today."
+        ],
+        "zh-CN": [
+          "蒸青 → 揉捻 → 干燥。不遮光的叶子用蒸汽杀青。",
+          "室町时代从中国传入的蒸青法在日本留下来，成了煎茶。今天占日本绿茶消费的六成。"
+        ],
+        "zh-TW": [
+          "蒸菁 → 揉捻 → 乾燥。不遮光的葉子用蒸氣殺菁。",
+          "室町時代從中國傳入的蒸菁法在日本留下來，成了煎茶。今天占日本綠茶消費的六成。"
+        ]
+      },
+      temp: 70,
+      tempRange: "70~80℃",
+      leaf: "3g",
+      water: "200ml",
+      steeps: [60, 20, 30],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "센차",
+        oneLine: "증기로 쪄낸 일본의 일상 녹차 — 해조류 향과 감칠맛.",
+        oxidation: "0%",
+        ratioNote: "200ml에 3g, 첫 물은 70도",
+        rounds: "3회",
+        steepBasis: "70도에서 1분, 2포 20초, 3포 30초. 두 번째가 가장 감칠맛이 좋습니다.",
+        origin: "일본 전역. 수확 전 2주간 차광하지 않은 잎을 증청해 말립니다. 이른 봄의 신차가 향이 가장 밝습니다.",
+        flavor: "해조류·풀잎 향, 아미노산의 감칠맛, 끝의 가벼운 떫음. 물색은 노란 연둣빛.",
+        pairing: "주먹밥, 초밥, 튀김, 시오자케. 단맛 디저트보다 짠맛 안주와 어울립니다.",
+        keep: "개봉 후 한 달. 밀봉해 냉장, 가능하면 소분해 냉동 보관합니다.",
+        brewTip: "물을 끓인 뒤 70도까지 식혀 부으세요. 80도면 떫은맛이 확 올라옵니다."
+      },
+      en: {
+        name: "Sencha",
+        oneLine: "Japan's everyday steamed green tea — seaweed aroma and umami.",
+        oxidation: "0%",
+        ratioNote: "3 g to 200 ml; first pour at 70 °C",
+        rounds: "3 infusions",
+        steepBasis: "70 °C: 1 minute, then 20 seconds, then 30. The second infusion carries the most umami.",
+        origin: "Across Japan. Leaf grown without shading, steamed and dried. First-flush shincha is the brightest of the year.",
+        flavor: "Seaweed and cut grass, savoury amino-acid umami, a light astringency at the end. The liquor is yellow-green.",
+        pairing: "Onigiri, sushi, tempura, salted rice. It suits salty snacks better than sweet desserts.",
+        keep: "A month after opening. Sealed and chilled, ideally portioned and frozen.",
+        brewTip: "Boil, then cool to 70 °C before pouring. At 80 °C the astringency jumps."
+      },
+      "zh-CN": {
+        name: "煎茶",
+        oneLine: "蒸汽杀青的日本日常绿茶——海苔香与鲜味。",
+        oxidation: "0%",
+        ratioNote: "200毫升配3克，第一泡70度",
+        rounds: "3泡",
+        steepBasis: "70度泡1分钟，第二泡20秒，第三泡30秒。第二泡鲜味最好。",
+        origin: "日本各地。采摘前两周不遮光的叶子蒸青后干燥。早春的新茶香气最明亮。",
+        flavor: "海苔与青草香、氨基酸的鲜味、尾端轻涩。汤色黄绿。",
+        pairing: "饭团、寿司、天妇罗、盐渍小菜。配咸味小食比甜点更合适。",
+        keep: "开封后一个月。密封冷藏，最好分装冷冻。",
+        brewTip: "水烧开后降到70度再冲。80度涩味明显上升。"
+      },
+      "zh-TW": {
+        name: "煎茶",
+        oneLine: "蒸氣殺菁的日本日常綠茶——海苔香與鮮味。",
+        oxidation: "0%",
+        ratioNote: "200毫升配3公克，第一泡70度",
+        rounds: "3泡",
+        steepBasis: "70度泡1分鐘，第二泡20秒，第三泡30秒。第二泡鮮味最好。",
+        origin: "日本各地。採摘前兩週不遮光的葉子蒸菁後乾燥。早春的新茶香氣最明亮。",
+        flavor: "海苔與青草香、胺基酸的鮮味、尾端輕澀。湯色黃綠。",
+        pairing: "飯糰、壽司、天婦羅、鹽漬小菜。配鹹味小食比甜點更合適。",
+        keep: "開封後一個月。密封冷藏，最好分裝冷凍。",
+        brewTip: "水燒開後降到70度再沖。80度澀味明顯上升。"
+      }
+    },
+    {
+      id: "green-gyokuro",
+      group: "green",
+      kind: "tea",
+      hanja: "玉",
+      sub: "Gyokuro",
+      hz: "玉露",
+      hs: "玉露",
+      rom: "Gyokuro",
+      x: {
+        ko: [
+          "차광(20일 이상) → 증청 → 유념 → 건조. 차광으로 아미노산이 늘고 카테킨이 줄어듭니다.",
+          "1835년 우지의 차농 야마모토 야마키치가 차광 재배를 널리 퍼뜨렸습니다. ‘옥 같은 이슬’이라는 이름은 짙은 감칠맛에서 나왔습니다."
+        ],
+        en: [
+          "Shade for 20 days or more → steam → roll → dry. Shading raises amino acids and lowers catechins.",
+          "In 1835 the Uji grower Yamamoto Yamakichi spread the shaded method; the name “jade dew” comes from the deep umami."
+        ],
+        "zh-CN": [
+          "遮光20天以上 → 蒸青 → 揉捻 → 干燥。遮光使氨基酸增加、儿茶素减少。",
+          "1835年宇治茶农山本山吉推广了遮光栽培。“玉露”之名来自浓厚的鲜味。"
+        ],
+        "zh-TW": [
+          "遮光20天以上 → 蒸菁 → 揉捻 → 乾燥。遮光使胺基酸增加、兒茶素減少。",
+          "1835年宇治茶農山本山吉推廣了遮光栽培。「玉露」之名來自濃厚的鮮味。"
+        ]
+      },
+      temp: 55,
+      tempRange: "50~60℃",
+      leaf: "5g",
+      water: "100ml",
+      steeps: [120, 60, 90],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "교쿠로 (옥로)",
+        oneLine: "차광 재배로 감칠맛을 극한까지 끌어올린, 가장 진한 녹차.",
+        oxidation: "0%",
+        ratioNote: "100ml에 5g, 적은 물에 많은 잎",
+        rounds: "3회",
+        steepBasis: "55도에서 2분, 2포 1분, 3포 1분 30초. 낮은 온도로 천천히.",
+        origin: "일본 우지 등. 수확 전 20일 넘게 차광해 아미노산을 키웁니다. 짙은 녹색의 가늘고 긴 잎.",
+        flavor: "된장·다시마 같은 짙은 감칠맛, 크림 같은 질감, 떫음은 거의 없습니다.",
+        pairing: "그 자체로 마시는 차. 곁들인다면 말린 과일이나 흰떡 정도.",
+        keep: "향이 약해지기 쉬워 개봉 후 3주 안이 좋습니다. 소분 냉동을 권합니다.",
+        brewTip: "55도의 미지근한 물. 뜨거우면 감칠맛이 아니라 떫은맛이 나옵니다."
+      },
+      en: {
+        name: "Gyokuro",
+        oneLine: "Shade-grown to push umami to its limit — the deepest of green teas.",
+        oxidation: "0%",
+        ratioNote: "5 g to 100 ml — much leaf, little water",
+        rounds: "3 infusions",
+        steepBasis: "55 °C: 2 minutes, then 1 minute, then 1½. Low and slow.",
+        origin: "Uji and elsewhere in Japan. Shaded for more than 20 days before picking to build amino acids. Long, thin, deep-green needles.",
+        flavor: "Deep umami like miso and dashi, a creamy texture, almost no astringency.",
+        pairing: "A tea to drink on its own. With anything, dried fruit or plain rice cake.",
+        keep: "The aroma fades quickly; best within three weeks of opening. Portion and freeze.",
+        brewTip: "55 °C — lukewarm water. Hotter water brings astringency instead of umami."
+      },
+      "zh-CN": {
+        name: "玉露",
+        oneLine: "遮光栽培把鲜味推到极致——最浓厚的绿茶。",
+        oxidation: "0%",
+        ratioNote: "100毫升配5克，水少茶多",
+        rounds: "3泡",
+        steepBasis: "55度泡2分钟，第二泡1分钟，第三泡1分30秒。低温慢慢来。",
+        origin: "日本宇治等地。采摘前遮光20天以上以增加氨基酸。叶形细长、深绿。",
+        flavor: "味噌、高汤般的浓厚鲜味，奶油般的质地，几乎没有涩味。",
+        pairing: "适合单独品饮。要配就配干果或白年糕。",
+        keep: "香气容易走失，开封后3周内最好。建议分装冷冻。",
+        brewTip: "用55度的温水。水太热出来的是涩味而不是鲜味。"
+      },
+      "zh-TW": {
+        name: "玉露",
+        oneLine: "遮光栽培把鮮味推到極致——最濃厚的綠茶。",
+        oxidation: "0%",
+        ratioNote: "100毫升配5公克，水少茶多",
+        rounds: "3泡",
+        steepBasis: "55度泡2分鐘，第二泡1分鐘，第三泡1分30秒。低溫慢慢來。",
+        origin: "日本宇治等地。採摘前遮光20天以上以增加胺基酸。葉形細長、深綠。",
+        flavor: "味噌、高湯般的濃厚鮮味，奶油般的質地，幾乎沒有澀味。",
+        pairing: "適合單獨品飲。要配就配乾果或白年糕。",
+        keep: "香氣容易走失，開封後3週內最好。建議分裝冷凍。",
+        brewTip: "用55度的溫水。水太熱出來的是澀味而不是鮮味。"
+      }
+    },
+    {
+      id: "green-matcha",
+      group: "green",
+      kind: "tea",
+      hanja: "抹",
+      sub: "Matcha",
+      hz: "抹茶",
+      hs: "抹茶",
+      rom: "Matcha",
+      x: {
+        ko: [
+          "차광 → 증청 → 건조 → 잎맥 제거 → 석식 분쇄. 가루가 곧 찻잎 전체입니다.",
+          "송대 중국의 점차(點茶)가 일본으로 건너가 발전했습니다. 맷돌 한 대로 한 시간에 40g 남짓만 갈 수 있습니다."
+        ],
+        en: [
+          "Shade → steam → dry → de-stem → stone-mill. The powder is the whole leaf.",
+          "Song-dynasty whisked tea reached Japan and became matcha; one stone mill grinds only about 40 g an hour."
+        ],
+        "zh-CN": [
+          "遮光 → 蒸青 → 干燥 → 去脉 → 石磨研磨。粉末就是整片叶子。",
+          "宋代中国的点茶传到日本后发展成抹茶。一台石磨一小时只能磨出40克左右。"
+        ],
+        "zh-TW": [
+          "遮光 → 蒸菁 → 乾燥 → 去脈 → 石磨研磨。粉末就是整片葉子。",
+          "宋代中國的點茶傳到日本後發展成抹茶。一台石磨一小時只能磨出40克左右。"
+        ]
+      },
+      temp: 80,
+      tempRange: "75~85℃",
+      leaf: "2g",
+      water: "70ml",
+      steeps: [30, 30, 30],
+      maxSteep: 1,
+      oxidationValue: 0,
+      ko: {
+        name: "말차",
+        oneLine: "잎을 갈아 물에 그대로 마시는 차 — 향이 아니라 몸 전체로 마시는 녹차.",
+        oxidation: "0%",
+        ratioNote: "우스차 2g에 70ml, 고이차는 4g에 70ml",
+        rounds: "1회",
+        steepBasis: "80도 70ml에 2g, 30초간 차선으로 W자로 휘저어 거품을 냅니다.",
+        origin: "일본 우지·니시오. 차광한 잎을 증청·건조해 잎맥을 걷어내고 맷돌로 갈아냅니다.",
+        flavor: "짙은 감칠맛과 크림 같은 거품, 끝의 쌉싸름함. 물색은 선명한 녹색입니다.",
+        pairing: "화과자, 양갱, 말차 라테, 바닐라 아이스크림.",
+        keep: "산화가 매우 빨라 개봉 후 2~3주. 밀봉 냉동하고 상온에서 개봉하지 마세요.",
+        brewTip: "물은 80도 이하. 끓는 물을 부으면 쓴맛만 남습니다. 체에 한 번 걸러 덩어리를 풀어 주세요."
+      },
+      en: {
+        name: "Matcha",
+        oneLine: "The whole leaf, ground and drunk — green tea you take in, not just smell.",
+        oxidation: "0%",
+        ratioNote: "2 g to 70 ml for usucha; 4 g to 70 ml for koicha",
+        rounds: "One bowl",
+        steepBasis: "2 g in 70 ml at 80 °C, whisked in a W for 30 seconds until foamy.",
+        origin: "Uji and Nishio in Japan. Shaded leaf is steamed, dried, de-stemmed and ground on stone mills.",
+        flavor: "Deep umami under a creamy foam, a bitter edge at the end. Vivid green.",
+        pairing: "Wagashi, yokan, matcha latte, vanilla ice cream.",
+        keep: "It oxidises fast: two to three weeks after opening. Freeze sealed and never open it at room temperature.",
+        brewTip: "Water below 80 °C. Boiling water leaves only bitterness. Sift once to break up lumps."
+      },
+      "zh-CN": {
+        name: "抹茶",
+        oneLine: "把整片叶子磨碎喝下去——不只是闻香，而是喝进身体的绿茶。",
+        oxidation: "0%",
+        ratioNote: "薄茶2克配70毫升，浓茶4克配70毫升",
+        rounds: "1碗",
+        steepBasis: "80度70毫升配2克，用茶筅以W字形搅打30秒至起泡。",
+        origin: "日本宇治、西尾。遮光的叶子蒸青干燥后去脉，用石磨磨成粉。",
+        flavor: "浓厚的鲜味与奶油般的泡沫，尾端带一点苦。汤色鲜绿。",
+        pairing: "和果子、羊羹、抹茶拿铁、香草冰淇淋。",
+        keep: "氧化极快，开封后2~3周。密封冷冻，不要在常温下开封。",
+        brewTip: "水温80度以下。用沸水只剩苦味。先过筛把结块弄散。"
+      },
+      "zh-TW": {
+        name: "抹茶",
+        oneLine: "把整片葉子磨碎喝下去——不只是聞香，而是喝進身體的綠茶。",
+        oxidation: "0%",
+        ratioNote: "薄茶2公克配70毫升，濃茶4公克配70毫升",
+        rounds: "1碗",
+        steepBasis: "80度70毫升配2公克，用茶筅以W字形攪打30秒至起泡。",
+        origin: "日本宇治、西尾。遮光的葉子蒸菁乾燥後去脈，用石磨磨成粉。",
+        flavor: "濃厚的鮮味與奶油般的泡沫，尾端帶一點苦。湯色鮮綠。",
+        pairing: "和菓子、羊羹、抹茶拿鐵、香草冰淇淋。",
+        keep: "氧化極快，開封後2~3週。密封冷凍，不要在常溫下開封。",
+        brewTip: "水溫80度以下。用沸水只剩苦味。先過篩把結塊弄散。"
+      }
+    },
+    {
+      id: "green-jeju",
+      group: "green",
+      kind: "tea",
+      hanja: "雪",
+      sub: "Jeju Ujeon",
+      hz: "濟州雨前",
+      hs: "济州雨前",
+      rom: "Jeju Ujeon",
+      x: {
+        ko: [
+          "살청 → 유념 → 건조. 제주는 곡우 전 우전, 그 뒤 세작·중작으로 채취 시기를 나눕니다.",
+          "1979년 제주 도순다원에서 녹차 재배가 시작된 뒤, 화산토와 해풍, 큰 일교차를 살린 우전이 명차로 자리 잡았습니다."
+        ],
+        en: [
+          "Firing → rolling → drying. Jeju grades the pick by date: ujeon before Grain Rain, then sejaak and jungjak.",
+          "Green tea came to Jeju in 1979 at the Dosun tea garden; volcanic soil, sea wind and wide day–night swings made ujeon its signature."
+        ],
+        "zh-CN": [
+          "炒青 → 揉捻 → 干燥。济州按采摘时间分级：谷雨前为雨前，之后为细作、中作。",
+          "1979年济州道顺茶园开始种茶，火山土、海风与昼夜温差让雨前成为代表。"
+        ],
+        "zh-TW": [
+          "炒菁 → 揉捻 → 乾燥。濟州按採摘時間分級：穀雨前為雨前，之後為細作、中作。",
+          "1979年濟州道順茶園開始種茶，火山土、海風與晝夜溫差讓雨前成為代表。"
+        ]
+      },
+      temp: 75,
+      tempRange: "70~80℃",
+      leaf: "3g",
+      water: "150ml",
+      steeps: [90, 30, 60],
+      maxSteep: 3,
+      oxidationValue: 0,
+      ko: {
+        name: "제주 우전 (작설)",
+        oneLine: "곡우 전에 딴 한국의 첫 잎 — 봄비 머금은 부드러운 떫음.",
+        oxidation: "0%",
+        ratioNote: "150ml에 3g",
+        rounds: "3~4회",
+        steepBasis: "75도에서 1분 30초, 2포 30초, 3포 1분.",
+        origin: "제주 서광·한남 등. 곡우(4월 20일경) 전에 딴 우전과 그 뒤의 세작으로 나뉩니다. 화산토와 해풍이 잎을 두껍게 합니다.",
+        flavor: "풋풋한 잎 향과 고소함, 옅은 떫음이 끝에서 부드럽게 풀립니다.",
+        pairing: "나물 비빔밥, 생선구이, 전, 유자 디저트.",
+        keep: "제조 후 6개월, 개봉 후 한 달. 밀봉 냉장.",
+        brewTip: "70~80도. 첫 물은 1분 30초를 넘기지 않으면 떫지 않습니다."
+      },
+      en: {
+        name: "Jeju Ujeon",
+        oneLine: "Korea's first leaf, picked before Grain Rain — a soft astringency full of spring rain.",
+        oxidation: "0%",
+        ratioNote: "3 g to 150 ml",
+        rounds: "3–4 infusions",
+        steepBasis: "75 °C: 1½ minutes, then 30 seconds, then 1 minute.",
+        origin: "Seogwang and Hannam on Jeju. Ujeon is picked before Grain Rain (around 20 April); later pickings are sejack. Volcanic soil and sea wind thicken the leaf.",
+        flavor: "Green leaf and toasted notes, with a light astringency that softens at the end.",
+        pairing: "Herb bibimbap, grilled fish, jeon pancakes, citron desserts.",
+        keep: "Six months from production, a month after opening. Sealed and chilled.",
+        brewTip: "70–80 °C. Keep the first pour under 1½ minutes and it won't turn bitter."
+      },
+      "zh-CN": {
+        name: "济州雨前（雀舌）",
+        oneLine: "谷雨前采下的韩国第一片嫩叶——带着春雨的柔和涩感。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3克",
+        rounds: "3~4泡",
+        steepBasis: "75度泡1分30秒，第二泡30秒，第三泡1分钟。",
+        origin: "济州西广、汉南等地。谷雨（4月20日前后）前采的为雨前，之后为细作。火山土与海风让叶片更厚。",
+        flavor: "青草香与焙香，尾端淡淡的涩感柔和地化开。",
+        pairing: "野菜拌饭、烤鱼、煎饼、柚子甜点。",
+        keep: "生产后6个月，开封后一个月。密封冷藏。",
+        brewTip: "70~80度。第一泡不超过1分30秒就不会涩。"
+      },
+      "zh-TW": {
+        name: "濟州雨前（雀舌）",
+        oneLine: "穀雨前採下的韓國第一片嫩葉——帶著春雨的柔和澀感。",
+        oxidation: "0%",
+        ratioNote: "150毫升配3公克",
+        rounds: "3~4泡",
+        steepBasis: "75度泡1分30秒，第二泡30秒，第三泡1分鐘。",
+        origin: "濟州西廣、漢南等地。穀雨（4月20日前後）前採的為雨前，之後為細作。火山土與海風讓葉片更厚。",
+        flavor: "青草香與焙香，尾端淡淡的澀感柔和地化開。",
+        pairing: "野菜拌飯、烤魚、煎餅、柚子甜點。",
+        keep: "製造後6個月，開封後一個月。密封冷藏。",
+        brewTip: "70~80度。第一泡不超過1分30秒就不會澀。"
+      }
+    },
+    /* ── 백차 ── */
+    {
+      id: "white-silverneedle",
+      group: "white",
+      kind: "tea",
+      hanja: "銀",
+      sub: "Silver Needle",
+      hz: "白毫銀針",
+      hs: "白毫银针",
+      rom: "Baihao Yinzhen",
+      x: {
+        ko: [
+          "위조 → 건조. 싹만 골라 유념도 살청도 없이 말립니다.",
+          "‘백호’는 싹을 덮은 은백색 털, ‘은침’은 바늘처럼 뾰족한 모양에서 왔습니다. 푸젠에서는 ‘1년 차, 3년 약, 7년 보배’라 합니다."
+        ],
+        en: [
+          "Withering → drying. Only buds, with no rolling and no firing.",
+          "“Baihao” is the silvery down on the bud and “yinzhen” the needle shape; Fujian says “one year a tea, three years a medicine, seven a treasure.”"
+        ],
+        "zh-CN": [
+          "萎凋 → 干燥。只取芽，不揉捻也不杀青。",
+          "“白毫”指芽上的银白绒毛，“银针”指针形。福建有“一年茶、三年药、七年宝”之说。"
+        ],
+        "zh-TW": [
+          "萎凋 → 乾燥。只取芽，不揉捻也不殺菁。",
+          "「白毫」指芽上的銀白絨毛，「銀針」指針形。福建有「一年茶、三年藥、七年寶」之說。"
+        ]
+      },
+      temp: 85,
+      tempRange: "80~85℃",
+      leaf: "3g",
+      water: "200ml",
+      steeps: [120, 60, 120],
+      maxSteep: 3,
+      oxidationValue: 5,
+      ko: {
+        name: "백호은침",
+        oneLine: "싹에 붙은 은백색 털이 그대로 남은, 백차의 가장 조용한 형태.",
+        oxidation: "5%",
+        ratioNote: "200ml에 3g",
+        rounds: "4~5회",
+        steepBasis: "85도에서 2분, 2포 1분, 3포 2분. 잎이 뜨면 30초 뒤 가볍게 저어 줍니다.",
+        origin: "푸젠성 정화·복정. 봄 첫 싹만 골라 위조 후 말립니다. 은백색 털이 남아 있는지가 등급의 기준입니다.",
+        flavor: "은방울꽃·라일락 같은 향, 아주 연한 살구빛 물색, 떫음 없이 긴 단맛.",
+        pairing: "견과, 대추, 밤, 담백한 생선. 진한 고기와는 어울리지 않습니다.",
+        keep: "상온 50~60% 습도, 직사광선 회피. 냉장고는 결로와 냄새 때문에 피합니다.",
+        brewTip: "잎이 물에 뜨므로 물을 먼저 붓고 잎을 얹은 뒤 30초 후 가볍게 누릅니다."
+      },
+      en: {
+        name: "Silver Needle",
+        oneLine: "The palest form of white tea: a bud still in its silvery down.",
+        oxidation: "5%",
+        ratioNote: "3 g to 200 ml",
+        rounds: "4–5 infusions",
+        steepBasis: "85 °C: 2 minutes, then 1 minute, then 2. If the buds float, stir gently after 30 seconds.",
+        origin: "Zhenghe and Fuding in Fujian. Only the first spring buds, withered and dried. Whether the silver down survives is the grade.",
+        flavor: "Lily of the valley and lilac, a very pale apricot liquor, no astringency and a long sweetness.",
+        pairing: "Nuts, dates, chestnuts, light fish. It does not sit well with heavy meat.",
+        keep: "Room temperature, 50–60% humidity, out of direct sun. Avoid the fridge — condensation and odours.",
+        brewTip: "The buds float: water first, buds on top, then press them down gently after 30 seconds."
+      },
+      "zh-CN": {
+        name: "白毫银针",
+        oneLine: "芽上保留着银白绒毛，白茶里最安静的一种。",
+        oxidation: "5%",
+        ratioNote: "200毫升配3克",
+        rounds: "4~5泡",
+        steepBasis: "85度泡2分钟，第二泡1分钟，第三泡2分钟。芽浮起时30秒后轻轻拨动。",
+        origin: "福建政和、福鼎。只取春季第一批芽，萎凋后晒干。银白绒毛是否保留是分级标准。",
+        flavor: "铃兰、丁香般的香气，极浅的杏色汤，没有涩味，甜味悠长。",
+        pairing: "坚果、红枣、栗子、清淡的鱼。与浓重的肉类不合。",
+        keep: "常温、湿度50~60%，避直射光。避免冰箱的结露与异味。",
+        brewTip: "芽会浮起：先注水再放芽，30秒后轻轻压一下。"
+      },
+      "zh-TW": {
+        name: "白毫銀針",
+        oneLine: "芽上保留著銀白絨毛，白茶裡最安靜的一種。",
+        oxidation: "5%",
+        ratioNote: "200毫升配3公克",
+        rounds: "4~5泡",
+        steepBasis: "85度泡2分鐘，第二泡1分鐘，第三泡2分鐘。芽浮起時30秒後輕輕撥動。",
+        origin: "福建政和、福鼎。只取春季第一批芽，萎凋後晒乾。銀白絨毛是否保留是分級標準。",
+        flavor: "鈴蘭、丁香般的香氣，極淺的杏色湯，沒有澀味，甜味悠長。",
+        pairing: "堅果、紅棗、栗子、清淡的魚。與濃重的肉類不合。",
+        keep: "常溫、濕度50~60%，避直射光。避免冰箱的結露與異味。",
+        brewTip: "芽會浮起：先注水再放芽，30秒後輕輕壓一下。"
+      }
+    },
+    {
+      id: "white-peony",
+      group: "white",
+      kind: "tea",
+      hanja: "牡",
+      sub: "White Peony",
+      hz: "白牡丹",
+      hs: "白牡丹",
+      rom: "Baimudan",
+      x: {
+        ko: [
+          "위조 → 건조. 싹 하나와 잎 두 장을 함께 말립니다.",
+          "잎과 싹이 함께 펴진 모양이 활짝 핀 모란을 닮아 백모단이라는 이름이 붙었다고 전합니다."
+        ],
+        en: [
+          "Withering → drying. One bud and two leaves dried together.",
+          "The open bud and leaves are said to resemble a peony in full bloom, which gave the tea its name."
+        ],
+        "zh-CN": [
+          "萎凋 → 干燥。一芽两叶一起萎凋晒干。",
+          "芽与叶一起舒展的样子像盛开的牡丹，因此得名。"
+        ],
+        "zh-TW": [
+          "萎凋 → 乾燥。一芽兩葉一起萎凋晒乾。",
+          "芽與葉一起舒展的樣子像盛開的牡丹，因此得名。"
+        ]
+      },
+      temp: 85,
+      tempRange: "80~90℃",
+      leaf: "4g",
+      water: "200ml",
+      steeps: [90, 60, 90],
+      maxSteep: 3,
+      oxidationValue: 8,
+      ko: {
+        name: "백모단",
+        oneLine: "싹 하나에 잎 두 장 — 은침보다 향이 풍부하고 값은 부드럽습니다.",
+        oxidation: "8%",
+        ratioNote: "200ml에 4g",
+        rounds: "4~5회",
+        steepBasis: "85도에서 1분 30초, 2포 1분, 3포 1분 30초.",
+        origin: "푸젠성. 싹 하나와 잎 두 장을 함께 말립니다. 잎이 넓어 향과 단맛의 폭이 넓습니다.",
+        flavor: "흰 꽃과 건초, 옅은 대추 단맛. 은침보다 바디가 있습니다.",
+        pairing: "닭고기, 담백한 생선, 샌드위치, 마들렌.",
+        keep: "상온 밀봉. 1~2년 두면 대추와 꿀이 더해집니다.",
+        brewTip: "90도까지 올려도 떫지 않습니다. 잎이 펴지도록 첫 물을 넉넉히."
+      },
+      en: {
+        name: "White Peony",
+        oneLine: "One bud and two leaves — more aroma than Silver Needle, at a gentler price.",
+        oxidation: "8%",
+        ratioNote: "4 g to 200 ml",
+        rounds: "4–5 infusions",
+        steepBasis: "85 °C: 1½ minutes, then 1 minute, then 1½.",
+        origin: "Fujian. A bud with two leaves is dried together. The broader leaf gives a wider spread of aroma and sweetness.",
+        flavor: "White flowers and hay, a light date sweetness, more body than Silver Needle.",
+        pairing: "Chicken, light fish, sandwiches, madeleines.",
+        keep: "Sealed at room temperature. A year or two adds dates and honey.",
+        brewTip: "It takes 90 °C without turning bitter. Give the first pour room for the leaf to open."
+      },
+      "zh-CN": {
+        name: "白牡丹",
+        oneLine: "一芽两叶——比银针香更丰富，价格也更温和。",
+        oxidation: "8%",
+        ratioNote: "200毫升配4克",
+        rounds: "4~5泡",
+        steepBasis: "85度泡1分30秒，第二泡1分钟，第三泡1分30秒。",
+        origin: "福建。一芽两叶一起萎凋晒干。叶片较宽，香气与甜味的层次也更宽。",
+        flavor: "白花与干草，淡淡的红枣甜，比银针更有厚度。",
+        pairing: "鸡肉、清淡的鱼、三明治、玛德莲。",
+        keep: "常温密封。放一两年会多出枣香与蜜香。",
+        brewTip: "到90度也不涩。第一泡给足水让叶子展开。"
+      },
+      "zh-TW": {
+        name: "白牡丹",
+        oneLine: "一芽兩葉——比銀針香更豐富，價格也更溫和。",
+        oxidation: "8%",
+        ratioNote: "200毫升配4公克",
+        rounds: "4~5泡",
+        steepBasis: "85度泡1分30秒，第二泡1分鐘，第三泡1分30秒。",
+        origin: "福建。一芽兩葉一起萎凋晒乾。葉片較寬，香氣與甜味的層次也更寬。",
+        flavor: "白花與乾草，淡淡的紅棗甜，比銀針更有厚度。",
+        pairing: "雞肉、清淡的魚、三明治、瑪德蓮。",
+        keep: "常溫密封。放一兩年會多出棗香與蜜香。",
+        brewTip: "到90度也不澀。第一泡給足水讓葉子展開。"
+      }
+    },
+    {
+      id: "white-shoumei",
+      group: "white",
+      kind: "tea",
+      hanja: "壽",
+      sub: "Shou Mei",
+      hz: "壽眉",
+      hs: "寿眉",
+      rom: "Shou Mei",
+      x: {
+        ko: [
+          "위조 → 건조. 싹 없이 잎만으로 만듭니다.",
+          "마른 잎의 모양이 늙은 사람의 눈썹을 닮아 수미라 불렸다고 전합니다. 오래 두고 마시는 ‘구차(舊茶)’로 많이 썼습니다."
+        ],
+        en: [
+          "Withering → drying. Made from leaf without buds.",
+          "The dried leaf is said to look like an old man's eyebrows, hence Shou Mei; it was long kept as an aged “old tea.”"
+        ],
+        "zh-CN": [
+          "萎凋 → 干燥。不带芽，只用叶。",
+          "干叶的形状像老人的眉毛，因此得名“寿眉”，过去多作久放的“旧茶”。"
+        ],
+        "zh-TW": [
+          "萎凋 → 乾燥。不帶芽，只用葉。",
+          "乾葉的形狀像老人的眉毛，因此得名「壽眉」，過去多作久放的「舊茶」。"
+        ]
+      },
+      temp: 90,
+      tempRange: "85~95℃",
+      leaf: "4g",
+      water: "200ml",
+      steeps: [120, 60, 120],
+      maxSteep: 3,
+      oxidationValue: 10,
+      ko: {
+        name: "수미",
+        oneLine: "잎 위주의 백차. 오래 두고 끓여 마시는 데 가장 알맞습니다.",
+        oxidation: "10%",
+        ratioNote: "200ml에 4g, 끓여 마실 때는 5g에 500ml",
+        rounds: "4~5회",
+        steepBasis: "90도에서 2분, 2포 1분, 3포 2분. 끓여 마시면 5분.",
+        origin: "푸젠성. 싹 없이 잎만으로 만든 등급으로, 잎이 두껍고 단맛이 강합니다.",
+        flavor: "건초와 대추, 살짝 익은 과일 향. 물색은 짙은 살구빛입니다.",
+        pairing: "전, 튀김, 고기 요리, 찜. 기름진 음식과 잘 맞습니다.",
+        keep: "상온 밀봉. 3년 이상 두면 약재 향이 나고 5~7년이면 호박색이 됩니다.",
+        brewTip: "잎이 두꺼워 90도 이상에서도 쉽게 떫어지지 않습니다. 주전자에 끓여도 좋습니다."
+      },
+      en: {
+        name: "Shou Mei",
+        oneLine: "The leaf-forward white tea — the best one for long, slow simmering.",
+        oxidation: "10%",
+        ratioNote: "4 g to 200 ml; 5 g to 500 ml when simmering",
+        rounds: "4–5 infusions",
+        steepBasis: "90 °C: 2 minutes, then 1 minute, then 2. Simmer for 5 if you boil it.",
+        origin: "Fujian. Made from leaf without buds: thicker leaf, stronger sweetness.",
+        flavor: "Hay and dates with a hint of ripe fruit. The liquor is a deeper apricot.",
+        pairing: "Pancakes, fritters, meat dishes, steamed food. It stands up to richness.",
+        keep: "Sealed at room temperature. Three years brings a medicinal note; five to seven, amber.",
+        brewTip: "The thick leaf resists bitterness even above 90 °C. Simmering it in a pot works well."
+      },
+      "zh-CN": {
+        name: "寿眉",
+        oneLine: "以叶为主的白茶。最适合久放后煮着喝。",
+        oxidation: "10%",
+        ratioNote: "200毫升配4克，煮饮则5克配500毫升",
+        rounds: "4~5泡",
+        steepBasis: "90度泡2分钟，第二泡1分钟，第三泡2分钟。煮饮5分钟。",
+        origin: "福建。不带芽、只用叶的等级，叶片厚、甜味强。",
+        flavor: "干草与红枣，带一点熟果香。汤色是较深的杏色。",
+        pairing: "煎饼、油炸、肉类料理、蒸菜。与油腻的食物很合。",
+        keep: "常温密封。放三年以上有药香，五到七年转为琥珀色。",
+        brewTip: "叶厚，90度以上也不易涩。用壶煮也很好。"
+      },
+      "zh-TW": {
+        name: "壽眉",
+        oneLine: "以葉為主白茶。最適合久放後煮著喝。",
+        oxidation: "10%",
+        ratioNote: "200毫升配4公克，煮飲則5公克配500毫升",
+        rounds: "4~5泡",
+        steepBasis: "90度泡2分鐘，第二泡1分鐘，第三泡2分鐘。煮飲5分鐘。",
+        origin: "福建。不帶芽、只用葉的等級，葉片厚、甜味強。",
+        flavor: "乾草與紅棗，帶一點熟果香。湯色是較深的杏色。",
+        pairing: "煎餅、油炸、肉類料理、蒸菜。與油膩的食物很合。",
+        keep: "常溫密封。放三年以上有藥香，五到七年轉為琥珀色。",
+        brewTip: "葉厚，90度以上也不易澀。用壺煮也很好。"
+      }
+    },
+    {
+      id: "white-aged",
+      group: "white",
+      kind: "tea",
+      hanja: "老",
+      sub: "Aged White",
+      hz: "老白茶",
+      hs: "老白茶",
+      rom: "Aged White",
+      x: {
+        ko: [
+          "백차를 상온에서 3년 이상 숙성. 저장 중에도 느린 산화와 미생물 작용이 이어집니다.",
+          "푸젠의 ‘1년 차, 3년 약, 7년 보배(一年茶 三年藥 七年寶)’라는 말이 노백차의 출발입니다."
+        ],
+        en: [
+          "White tea aged at room temperature for three years or more; slow oxidation and microbial action continue in storage.",
+          "Fujian's saying — “one year a tea, three years a medicine, seven a treasure” — is where aged white tea begins."
+        ],
+        "zh-CN": [
+          "白茶在常温下陈化三年以上，储存中仍有缓慢的氧化与微生物作用。",
+          "福建“一年茶、三年药、七年宝”的说法，就是老白茶的由来。"
+        ],
+        "zh-TW": [
+          "白茶在常溫下陳化三年以上，儲存中仍有緩慢的氧化與微生物作用。",
+          "福建「一年茶、三年藥、七年寶」的說法，就是老白茶的由來。"
+        ]
+      },
+      temp: 95,
+      tempRange: "90~100℃",
+      leaf: "5g",
+      water: "200ml",
+      steeps: [180, 120, 180],
+      maxSteep: 3,
+      oxidationValue: 15,
+      ko: {
+        name: "노백차",
+        oneLine: "3년이 약, 7년이 보배 — 시간이 만든 백차.",
+        oxidation: "15%",
+        ratioNote: "200ml에 5g, 끓여 마시면 5g에 500ml",
+        rounds: "5회 이상",
+        steepBasis: "95도에서 3분, 2포 2분, 3포 3분. 대추·진피를 넣고 약한 불로 끓여도 좋습니다.",
+        origin: "푸젠성. 백차를 3년 이상 상온 숙성한 것. ‘일 년 차, 삼 년 약, 칠 년 보배’라는 말이 있습니다.",
+        flavor: "대추·약재·말린 과일 향, 부드러운 단맛과 깊은 여운. 물색은 짙은 호박색.",
+        pairing: "한과, 대추, 밤, 겨울 국물 요리. 식후 소화를 돕는 차로 마십니다.",
+        keep: "상온 20~25도, 습도 60% 이하, 냄새 없는 곳. 밀봉해 두면 계속 익습니다.",
+        brewTip: "끓는 물로. 잎이 두꺼워 3분 이상 우려도 좋습니다. 주전자에 넣고 10분 끓이면 진한 약차가 됩니다."
+      },
+      en: {
+        name: "Aged White",
+        oneLine: "Three years a medicine, seven a treasure — white tea made by time.",
+        oxidation: "15%",
+        ratioNote: "5 g to 200 ml; 5 g to 500 ml when simmering",
+        rounds: "5 or more infusions",
+        steepBasis: "95 °C: 3 minutes, then 2, then 3. Simmer with dates and dried peel if you like.",
+        origin: "Fujian. White tea aged at room temperature for three years or more — “one year a tea, three years a medicine, seven a treasure.”",
+        flavor: "Dates, medicinal herbs and dried fruit, a soft sweetness and a long finish. Deep amber liquor.",
+        pairing: "Korean sweets, dates, chestnuts, winter broths. Drunk after meals as a digestif.",
+        keep: "20–25 °C, below 60% humidity, no odours. Sealed, it keeps maturing.",
+        brewTip: "Boiling water. The thick leaf takes three minutes or more; ten minutes in a pot makes a strong medicinal brew."
+      },
+      "zh-CN": {
+        name: "老白茶",
+        oneLine: "三年是药，七年是宝——时间做成的白茶。",
+        oxidation: "15%",
+        ratioNote: "200毫升配5克，煮饮则5克配500毫升",
+        rounds: "5泡以上",
+        steepBasis: "95度泡3分钟，第二泡2分钟，第三泡3分钟。加红枣、陈皮小火煮也很好。",
+        origin: "福建。白茶在常温下陈化三年以上。“一年茶、三年药、七年宝”说的就是它。",
+        flavor: "红枣、药材、干果香，柔和的甜与深长的余韵。汤色深琥珀。",
+        pairing: "韩式点心、红枣、栗子、冬天的汤菜。饭后作为助消化的茶。",
+        keep: "常温20~25度、湿度60%以下、无异味处。密封会继续陈化。",
+        brewTip: "用沸水。叶厚，泡3分钟以上也好；放壶里煮10分钟就是浓药茶。"
+      },
+      "zh-TW": {
+        name: "老白茶",
+        oneLine: "三年是藥，七年是寶——時間做成的白茶。",
+        oxidation: "15%",
+        ratioNote: "200毫升配5公克，煮飲則5公克配500毫升",
+        rounds: "5泡以上",
+        steepBasis: "95度泡3分鐘，第二泡2分鐘，第三泡3分鐘。加紅棗、陳皮小火煮也很好。",
+        origin: "福建。白茶在常溫下陳化三年以上。「一年茶、三年藥、七年寶」說的就是它。",
+        flavor: "紅棗、藥材、乾果香，柔和的甜與深長的餘韻。湯色深琥珀。",
+        pairing: "韓式點心、紅棗、栗子、冬天的湯菜。飯後作為助消化的茶。",
+        keep: "常溫20~25度、濕度60%以下、無異味處。密封會繼續陳化。",
+        brewTip: "用沸水。葉厚，泡3分鐘以上也好；放壺裡煮10分鐘就是濃藥茶。"
+      }
+    },
+    /* @@MORE@@ */
+  ];
+
+  /* ---------------- 홈: 기분·상황별 추천 ---------------- */
+  var MOODS = [
     {
       id: "morning",
-      label: "아침 집중",
       icon: "sun",
-      teaId: "earlgrey",
-      headline: "베르가못 향으로 하루를 연다",
-      reason:
-        "홍차의 카페인은 커피보다 천천히 흡수되어 각성이 오래갑니다. 베르가못 향은 뜨거운 물에서 열리고, 우유를 넣어도 향이 무너지지 않습니다.",
-      tip: "우유를 넣을 거라면 5g·150ml로 조금 더 진하게.",
-      alt: "black"
+      teaId: "scent-earlgrey",
+      alt: "black-assam",
+      ko: {
+        label: "아침 집중",
+        headline: "베르가못 향으로 하루를 연다",
+        reason:
+          "홍차의 카페인은 커피보다 천천히 흡수되어 각성이 오래갑니다. 베르가못 향은 뜨거운 물에서 열리고, 우유를 넣어도 향이 무너지지 않습니다.",
+        tip: "우유를 넣을 거라면 5g·150ml로 조금 더 진하게."
+      },
+      en: {
+        label: "Morning focus",
+        headline: "Open the day with bergamot",
+        reason:
+          "The caffeine in black tea is absorbed more slowly than coffee's, so the lift lasts longer. Bergamot opens in hot water and doesn't collapse when you add milk.",
+        tip: "If you take milk, use 5 g to 150 ml for a stronger cup."
+      },
+      "zh-CN": {
+        label: "晨间专注",
+        headline: "以佛手柑的香气开启一天",
+        reason:
+          "红茶的咖啡因比咖啡吸收得慢，所以清醒更持久。佛手柑香在热水中释放，加了牛奶也不会散。",
+        tip: "要加奶的话用5克·150毫升，泡浓一点。"
+      },
+      "zh-TW": {
+        label: "晨間專注",
+        headline: "以佛手柑的香氣開啟一天",
+        reason:
+          "紅茶的咖啡因比咖啡吸收得慢，所以清醒更持久。佛手柑香在熱水中釋放，加了牛奶也不會散。",
+        tip: "要加奶的話用5公克·150毫升，泡濃一點。"
+      }
     },
     {
       id: "aftermeal",
-      label: "식후 개운",
       icon: "bowl",
-      teaId: "dark",
-      headline: "기름진 입안을 정리하는 한 잔",
-      reason:
-        "진하고 따뜻한 흑차가 입안을 헹구고 기름진 맛을 정리합니다. 테아브라운과 다당류가 장내 환경에 관여한다는 연구도 보고되었습니다. 차는 약이 아니라 식후의 습관입니다.",
-      tip: "공복은 피하고 식후 30분 뒤에. 첫 우리는 15~20초.",
-      alt: "green"
+      teaId: "dark-shou",
+      alt: "green-longjing",
+      ko: {
+        label: "식후 개운",
+        headline: "기름진 입안을 정리하는 한 잔",
+        reason:
+          "진하고 따뜻한 흑차가 입안을 헹구고 기름진 맛을 정리합니다. 테아브라운과 다당류가 장내 환경에 관여한다는 연구도 보고되었습니다. 차는 약이 아니라 식후의 습관입니다.",
+        tip: "공복은 피하고 식후 30분 뒤에. 첫 우리는 15~20초."
+      },
+      en: {
+        label: "After a meal",
+        headline: "A cup to clear a rich mouthful",
+        reason:
+          "A strong, warm dark tea rinses the mouth and settles greasy flavours. Studies have also reported that theabrownin and polysaccharides play a part in gut environment. Tea is a habit after eating, not medicine.",
+        tip: "Avoid an empty stomach; 30 minutes after eating. First infusion 15–20 seconds."
+      },
+      "zh-CN": {
+        label: "饭后清爽",
+        headline: "整理油腻口感的这一杯",
+        reason:
+          "浓而温热的黑茶能漱净口腔、化开油味。也有研究指出茶褐素与多糖参与肠道环境。茶不是药，而是饭后的习惯。",
+        tip: "避免空腹，饭后30分钟。第一泡15~20秒。"
+      },
+      "zh-TW": {
+        label: "飯後清爽",
+        headline: "整理油膩口感的這一杯",
+        reason:
+          "濃而溫熱的黑茶能漱淨口腔、化開油味。也有研究指出茶褐素與多醣參與腸道環境。茶不是藥，而是飯後的習慣。",
+        tip: "避免空腹，飯後30分鐘。第一泡15~20秒。"
+      }
     },
     {
       id: "afternoon",
-      label: "오후 나른",
       icon: "cup",
-      teaId: "oolong",
-      headline: "짧게 여러 번, 오후를 깨우는 향",
-      reason:
-        "우롱차는 산화도가 중간이라 녹차보다 바디가 있고 홍차보다 가볍습니다. 30초씩 짧게 여러 번 우리면 한 잔으로 오래, 잔마다 다른 층이 열립니다.",
-      tip: "개완이 없으면 작은 주전자에 우리고 바로 다른 컵에 따라두세요.",
-      alt: "black"
+      teaId: "oolong-tieguanyin",
+      alt: "black-keemun",
+      ko: {
+        label: "오후 나른",
+        headline: "짧게 여러 번, 오후를 깨우는 향",
+        reason:
+          "우롱차는 산화도가 중간이라 녹차보다 바디가 있고 홍차보다 가볍습니다. 30초씩 짧게 여러 번 우리면 한 잔으로 오래, 잔마다 다른 층이 열립니다.",
+        tip: "개완이 없으면 작은 주전자에 우리고 바로 다른 컵에 따라두세요."
+      },
+      en: {
+        label: "Afternoon dip",
+        headline: "Short and often — an aroma that wakes the afternoon",
+        reason:
+          "Oolong sits mid-way in oxidation: more body than green tea, less weight than black. Thirty seconds at a time, many times, and each pour opens a different layer.",
+        tip: "No gaiwan? Brew in a small pot and pour it straight into another cup."
+      },
+      "zh-CN": {
+        label: "午后困倦",
+        headline: "短泡多次，唤醒午后的香",
+        reason:
+          "乌龙茶发酵度居中，比绿茶有厚度，比红茶轻。每次30秒、多泡几次，一杯可以喝很久，每一泡都打开不同的层次。",
+        tip: "没有盖碗就用小壶泡，泡好马上倒到另一个杯子里。"
+      },
+      "zh-TW": {
+        label: "午後睏倦",
+        headline: "短泡多次，喚醒午後的香",
+        reason:
+          "烏龍茶發酵度居中，比綠茶有厚度，比紅茶輕。每次30秒、多泡幾次，一杯可以喝很久，每一泡都打開不同的層次。",
+        tip: "沒有蓋碗就用小壺泡，泡好馬上倒到另一個杯子裡。"
+      }
     },
     {
       id: "night",
-      label: "밤 릴랙스",
       icon: "moon",
-      teaId: "white",
-      headline: "가장 조용한 차 한 잔",
-      reason:
-        "백차는 카페인의 쓴맛이 부드럽게 감싸지고 떫은맛이 거의 없습니다. 잠들기 전에는 디카페인 녹차나 백차, 보리차 같은 대용차가 좋습니다.",
-      tip: "노백차에 대추를 넣어 약한 불로 끓이면 몸이 데워집니다.",
-      alt: "green"
+      teaId: "herb-chamomile",
+      alt: "white-silverneedle",
+      ko: {
+        label: "밤 릴랙스",
+        headline: "가장 조용한 차 한 잔",
+        reason:
+          "캐모마일은 카페인이 없고 사과·꿀 같은 향이 긴장을 풉니다. 백차는 카페인의 쓴맛이 부드럽게 감싸지고 떫은맛이 거의 없습니다.",
+        tip: "캐모마일은 95도에서 5분, 뚜껑을 덮어 향을 잡습니다."
+      },
+      en: {
+        label: "Night calm",
+        headline: "The quietest cup of the day",
+        reason:
+          "Chamomile has no caffeine and its apple-and-honey aroma loosens the shoulders. In white tea the bitterness of caffeine is wrapped softly, with almost no astringency.",
+        tip: "Chamomile at 95 °C for 5 minutes, lid on to keep the aroma."
+      },
+      "zh-CN": {
+        label: "夜间放松",
+        headline: "最安静的一杯茶",
+        reason:
+          "洋甘菊没有咖啡因，苹果与蜂蜜般的香气能放松紧绷。白茶的咖啡因苦味被柔和地包住，几乎没有涩味。",
+        tip: "洋甘菊95度泡5分钟，盖住盖子留住香气。"
+      },
+      "zh-TW": {
+        label: "夜間放鬆",
+        headline: "最安靜的一杯茶",
+        reason:
+          "洋甘菊沒有咖啡因，蘋果與蜂蜜般的香氣能放鬆緊繃。白茶的咖啡因苦味被柔和地包住，幾乎沒有澀味。",
+        tip: "洋甘菊95度泡5分鐘，蓋住蓋子留住香氣。"
+      }
     }
   ];
 
@@ -265,10 +1840,201 @@ window.TEAFaiData = (function () {
     blog: "https://blog.naver.com/hongkongtea_kr"
   };
 
-  function byId(id) {
-    for (var i = 0; i < teas.length; i++) if (teas[i].id === id) return teas[i];
-    return teas[0];
+  /* ---------------- 언어별 데이터 조립 ---------------- */
+  /* 품종 데이터는 짧은 배열로도 적을 수 있습니다.
+     0 name, 1 oneLine, 2 oxidation, 3 ratioNote, 4 rounds, 5 steepBasis,
+     6 origin, 7 process, 8 story, 9 flavor, 10 pairing, 11 brewTip, 12 keep, 13 keywords */
+  var FIELDS = [
+    "name",
+    "oneLine",
+    "oxidation",
+    "ratioNote",
+    "rounds",
+    "steepBasis",
+    "origin",
+    "process",
+    "story",
+    "flavor",
+    "pairing",
+    "brewTip",
+    "keep",
+    "keywords"
+  ];
+
+  function isArray(v) {
+    return Object.prototype.toString.call(v) === "[object Array]";
   }
 
-  return { teas: teas, moods: moods, links: links, byId: byId };
+  function normText(raw) {
+    if (!raw) return {};
+    if (isArray(raw)) {
+      var o = {};
+      for (var i = 0; i < raw.length && i < FIELDS.length; i++) if (raw[i] != null) o[FIELDS[i]] = raw[i];
+      return o;
+    }
+    return raw;
+  }
+
+  function groupPost(g, lang) {
+    var text = normText(g[lang] || g.ko);
+    var o = {};
+    var k;
+    for (k in g) {
+      if (k === "ko" || k === "en" || k === "zh-CN" || k === "zh-TW") continue;
+      o[k] = g[k];
+    }
+    for (k in text) o[k] = text[k];
+    o.kind = "group";
+    o.group = g.id;
+    o.count = 0;
+    return o;
+  }
+
+  function teaPost(entry, group, lang) {
+    var text = normText(entry[lang] || entry.ko);
+    var extra = normText(entry.x && entry.x[lang]);
+    var o = {
+      id: entry.id,
+      group: entry.group,
+      kind: "tea",
+      hanja: entry.h || group.hanja,
+      hz: entry.hz || "",
+      hs: entry.hs || "",
+      rom: entry.rom || "",
+      sub: entry.sub || group.sub,
+      temp: entry.t != null ? entry.t : group.temp,
+      tempRange: entry.tr || group.tempRange,
+      leaf: entry.l || group.leaf,
+      water: entry.w || group.water,
+      steeps: entry.s || group.steeps,
+      maxSteep: entry.m != null ? entry.m : group.maxSteep,
+      oxidationValue: entry.ox != null ? entry.ox : group.oxidationValue,
+      accent: group.accent,
+      accentSoft: group.accentSoft,
+      groupName: group.name
+    };
+    var k;
+    for (k in text) o[k] = text[k];
+    for (k in extra) o[k] = extra[k];
+    return o;
+  }
+
+  var groupIndex = {};
+  var i;
+  for (i = 0; i < GROUPS.length; i++) groupIndex[GROUPS[i].id] = GROUPS[i];
+
+  var cache = {};
+  var api = {
+    LANGS: LANGS,
+    GROUPS: GROUPS,
+    TEAS: TEAS,
+    MOODS: MOODS,
+    links: links,
+    lang: "ko",
+    groups: [],
+    teas: [],
+    items: [],
+    moods: [],
+    use: use,
+    byId: byId,
+    groupOf: groupOf,
+    teasOf: teasOf,
+    searchText: searchText,
+    nativeOf: nativeOf
+  };
+
+  function build(lang) {
+    var groups = GROUPS.map(function (g) {
+      return groupPost(g, lang);
+    });
+    var gi = {};
+    groups.forEach(function (g) {
+      gi[g.id] = g;
+    });
+
+    var teas = [];
+    TEAS.forEach(function (t) {
+      var g = gi[t.group] || groups[0];
+      teas.push(teaPost(t, g, lang));
+      g.count += 1;
+    });
+
+    var items = [];
+    groups.forEach(function (g) {
+      items.push(g);
+      for (var n = 0; n < teas.length; n++) if (teas[n].group === g.id) items.push(teas[n]);
+    });
+
+    return { groups: groups, teas: teas, items: items };
+  }
+
+  function use(lang) {
+    var key = LANGS.indexOf(lang) >= 0 ? lang : "ko";
+    if (!cache[key]) cache[key] = build(key);
+    var b = cache[key];
+    api.lang = key;
+    api.groups = b.groups;
+    api.teas = b.teas;
+    api.items = b.items;
+    api.moods = MOODS.map(function (m) {
+      var text = normText(m[key] || m.ko);
+      var o = { id: m.id, icon: m.icon, teaId: m.teaId, alt: m.alt };
+      for (var k in text) o[k] = text[k];
+      return o;
+    });
+    return api;
+  }
+
+  function byId(id) {
+    var list = api.items;
+    for (var n = 0; n < list.length; n++) if (list[n].id === id) return list[n];
+    return list[0];
+  }
+
+  function groupOf(id) {
+    var t = byId(id);
+    return groupIndex[t.group] || groupIndex.green;
+  }
+
+  function teasOf(groupId) {
+    var out = [];
+    for (var n = 0; n < api.teas.length; n++) if (api.teas[n].group === groupId) out.push(api.teas[n]);
+    return out;
+  }
+
+  /* 중국어는 간체를, 그 밖의 언어는 정체(원어) 표기를 씁니다 */
+  function nativeOf(tea, lang) {
+    if (!tea) return "";
+    if (lang === "zh-CN") return tea.hs || tea.hz || tea.rom || "";
+    return tea.hz || tea.hs || tea.rom || "";
+  }
+
+  /* 언어와 상관없이 이름·향·산지를 모두 담아 검색이 넓게 걸리도록 */
+  function searchText(id) {
+    var parts = [];
+    var push = function (entry) {
+      if (!entry) return;
+      if (isArray(entry)) entry = normText(entry);
+      parts.push(entry.name || "");
+      parts.push(entry.sub || "");
+      parts.push(entry.oneLine || "");
+      parts.push(entry.origin || entry.process || "");
+      parts.push(entry.process || "");
+      parts.push(entry.story || "");
+      parts.push(entry.flavor || "");
+      parts.push(entry.pairing || "");
+      parts.push(entry.keywords || "");
+      if (entry.varieties) parts.push(entry.varieties.join(" "));
+    };
+    var all = GROUPS.concat(TEAS);
+    for (var n = 0; n < all.length; n++) {
+      if (all[n].id !== id) continue;
+      parts.push(all[n].hz || "", all[n].hs || "", all[n].rom || "", all[n].sub || "");
+      for (var l = 0; l < LANGS.length; l++) push(all[n][LANGS[l]]);
+    }
+    return parts.join(" ").toLowerCase();
+  }
+
+  api.use("ko");
+  return api;
 })();

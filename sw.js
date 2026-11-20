@@ -1,9 +1,10 @@
 /* 티파이 서비스 워커 — 앱 껍데기를 캐시해 오프라인에서도 열립니다 */
-var CACHE = "teafai-v1";
+var CACHE = "teafai-v2";
 var ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
+  "./i18n.js",
   "./app.js",
   "./data.js",
   "./manifest.webmanifest",

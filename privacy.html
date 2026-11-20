@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>개인정보처리방침 — 티파이(Tea Fai)</title>
-    <meta name="description" content="티파이(Tea Fai) 앱의 개인정보처리방침. 본 앱은 회원가입이 없고, 시음 노트와 타이머 설정을 사용자 기기 브라우저의 로컬 저장소에만 보관하며 개인정보를 수집·전송하지 않습니다." />
+    <title>개인정보처리방침 — 티키피디아(Teakipedia)</title>
+    <meta name="description" content="티키피디아(Teakipedia) 앱의 개인정보처리방침. 본 앱은 회원가입이 없고, 시음 노트와 타이머 설정을 사용자 기기 브라우저의 로컬 저장소에만 보관하며 개인정보를 수집·전송하지 않습니다." />
     <meta name="theme-color" content="#F7F3EB" />
     <meta name="color-scheme" content="light" />
     <link rel="icon" type="image/png" href="icons/icon-192.png" />
@@ -83,6 +83,39 @@
         font-family: var(--serif);
         font-size: 15px;
         font-weight: 600;
+      }
+
+      .top-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 3px;
+        border-radius: 999px;
+        background: rgba(36, 62, 50, 0.06);
+        border: 1px solid var(--line);
+      }
+
+      .lang-switch .lang-btn {
+        padding: 4px 7px;
+        border-radius: 999px;
+        font-size: 10.5px;
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .lang-switch .lang-btn[aria-pressed="true"] {
+        background: var(--ink);
+        color: var(--paper-2);
       }
 
       .brand-name em {
@@ -274,151 +307,182 @@
       }
     </style>
   </head>
-  <body>
+    <body>
     <div class="wrap">
       <div class="top">
         <div class="brand">
           <span class="brand-mark">茶</span>
-          <span class="brand-name">티파이<em>Tea Fai</em></span>
+          <span class="brand-name"><span data-i18n="brand.name">티키피디아</span><em data-i18n="brand.sub">Teakipedia</em></span>
         </div>
-        <a class="back" href="index.html">앱으로 돌아가기</a>
+        <div class="top-right">
+          <div class="lang-switch" id="langSwitch" role="group" aria-label="언어" data-i18n-aria="a11y.lang"></div>
+          <a class="back" href="index.html" data-i18n="pv.back">앱으로 돌아가기</a>
+        </div>
       </div>
 
       <div class="doc-head">
-        <p class="eyebrow">Privacy Policy</p>
-        <h1>티파이 개인정보처리방침</h1>
-        <p class="lead">
-          티파이(Tea Fai)는 차 백과와 우림 타이머, 시음 노트를 담은 앱입니다. 이 앱은
+        <p class="eyebrow" data-i18n="pv.kicker">Privacy Policy</p>
+        <h1 data-i18n="pv.h1">티키피디아 개인정보처리방침</h1>
+        <p class="lead" data-i18n-html="pv.lead">
+          티키피디아(Teakipedia)는 차 백과와 우림 타이머, 시음 노트를 담은 앱입니다. 이 앱은
           <span class="key">회원가입이 없고, 이용자의 개인정보를 수집하거나 서버로 전송하지 않습니다.</span>
-          시음 노트와 타이머 설정은 이용자 기기의 브라우저 저장소에만 남습니다.
+          시음 노트와 타이머 설정, 선택한 언어는 이용자 기기의 브라우저 저장소에만 남습니다.
         </p>
         <ul class="meta">
-          <li>시행일 2026년 11월 20일</li>
-          <li>버전 1.0</li>
-          <li>문의 rotroka@gmail.com</li>
+          <li data-i18n="pv.metaDate">시행일 2026년 11월 20일</li>
+          <li data-i18n="pv.metaVersion">버전 1.0</li>
+          <li data-i18n="pv.metaContact">문의 rotroka@gmail.com</li>
         </ul>
       </div>
 
       <section>
-        <h2><span class="num">01</span> 수집하는 개인정보</h2>
-        <p>
-          티파이는 이름, 전화번호, 이메일, 주소, 위치, 사진, 연락처, 기기 식별자 등
+        <h2><span class="num">01</span> <span data-i18n="pv.s1.title">수집하는 개인정보</span></h2>
+        <p data-i18n-html="pv.s1.body">
+          티키피디아는 이름, 전화번호, 이메일, 주소, 위치, 사진, 연락처, 기기 식별자 등
           <span class="key">어떤 개인정보도 수집하지 않습니다.</span> 회원가입과 로그인 절차가 없으며,
           앱이 이용자의 정보를 자체 서버나 외부로 보내는 기능도 없습니다.
         </p>
         <div class="card">
-          <p><span class="key">계정</span> — 만들지 않습니다. 앱을 설치하면 바로 사용합니다.</p>
-          <p><span class="key">서버</span> — 티파이는 이용자 데이터를 받아 두는 서버를 운영하지 않습니다.</p>
-          <p><span class="key">광고·분석</span> — 광고 SDK, 접속 통계, 이용 행태 분석 도구를 넣지 않았습니다.</p>
+          <p data-i18n-html="pv.account"><span class="key">계정</span> — 만들지 않습니다. 앱을 설치하면 바로 사용합니다.</p>
+          <p data-i18n-html="pv.server"><span class="key">서버</span> — 티키피디아는 이용자 데이터를 받아 두는 서버를 운영하지 않습니다.</p>
+          <p data-i18n-html="pv.ads"><span class="key">광고·분석</span> — 광고 SDK, 접속 통계, 이용 행태 분석 도구를 넣지 않았습니다.</p>
         </div>
       </section>
 
       <section>
-        <h2><span class="num">02</span> 기기에 저장되는 정보</h2>
-        <p>
+        <h2><span class="num">02</span> <span data-i18n="pv.s2.title">기기에 저장되는 정보</span></h2>
+        <p data-i18n-html="pv.s2.body">
           앱은 이용 편의를 위해 아래 정보를 <span class="key">이용자 기기의 브라우저 로컬 저장소(localStorage)</span>에만
           저장합니다. 이 값들은 서버로 전송되지 않고, 이용자 기기 밖에서는 확인할 수 없습니다.
         </p>
         <table>
           <thead>
             <tr>
-              <th>저장 항목</th>
-              <th>내용</th>
+              <th data-i18n="pv.thItem">저장 항목</th>
+              <th data-i18n="pv.thWhat">내용</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>시음 노트<br /><code>teafai.notes.v1</code></td>
-              <td>이용자가 직접 적은 차 이름, 별점, 한 줄 감상, 날짜</td>
+              <td><span data-i18n="pv.kNotes">시음 노트</span><br /><code>teafai.notes.v1</code></td>
+              <td data-i18n="pv.vNotes">이용자가 직접 적은 차 이름, 별점, 한 줄 감상, 날짜</td>
             </tr>
             <tr>
-              <td>알림음 설정<br /><code>teafai.muted.v1</code></td>
-              <td>타이머 완료 알림음을 켜 둘지 여부</td>
+              <td><span data-i18n="pv.kMuted">알림음 설정</span><br /><code>teafai.muted.v1</code></td>
+              <td data-i18n="pv.vMuted">타이머 완료 알림음을 켜 둘지 여부</td>
             </tr>
             <tr>
-              <td>최근 선택한 차<br /><code>teafai.lastTea.v1</code></td>
-              <td>마지막으로 고른 차 종류</td>
+              <td><span data-i18n="pv.kLastTea">최근 선택한 차</span><br /><code>teafai.lastTea.v1</code></td>
+              <td data-i18n="pv.vLastTea">마지막으로 고른 차 종류</td>
+            </tr>
+            <tr>
+              <td><span data-i18n="pv.kLang">언어 설정</span><br /><code>teafai.lang.v1</code></td>
+              <td data-i18n="pv.vLang">언어 전환(한국어 · EN · 简中 · 繁中)으로 고른 언어 — 다음에 열 때 그 언어로 시작합니다</td>
             </tr>
           </tbody>
         </table>
-        <p class="note">
+        <p class="note" data-i18n="pv.s2.note">
           저장된 값은 앱 안에서 언제든지 확인·삭제할 수 있고, 앱을 삭제하거나 브라우저의 사이트 데이터를 지우면
-          함께 삭제됩니다. 티파이는 이 값들의 사본을 갖지 않으므로, 삭제된 기록을 되살릴 수 없습니다.
+          함께 삭제됩니다. 티키피디아는 이 값들의 사본을 갖지 않으므로, 삭제된 기록을 되살릴 수 없습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">03</span> 오프라인 사용을 위한 임시 저장</h2>
-        <p>
-          티파이는 인터넷이 없어도 열리도록 앱의 화면 파일(HTML·CSS·JS·아이콘)을 기기의 브라우저 캐시에
+        <h2><span class="num">03</span> <span data-i18n="pv.s3.title">오프라인 사용을 위한 임시 저장</span></h2>
+        <p data-i18n="pv.s3.body">
+          티키피디아는 인터넷이 없어도 열리도록 앱의 화면 파일(HTML·CSS·JS·아이콘)을 기기의 브라우저 캐시에
           임시로 저장합니다(서비스 워커). 이는 앱 자체 파일의 사본일 뿐이며, 이용자의 개인정보나 기록이
           아닙니다. 앱을 새로 고치면 최신 파일로 자동 갱신됩니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">04</span> 기기 권한</h2>
-        <p>
-          티파이는 카메라, 마이크, 위치, 연락처, 사진, 알림, 저장 공간 등
+        <h2><span class="num">04</span> <span data-i18n="pv.s4.title">기기 권한</span></h2>
+        <p data-i18n-html="pv.s4.body">
+          티키피디아는 카메라, 마이크, 위치, 연락처, 사진, 알림, 저장 공간 등
           <span class="key">어떤 기기 권한도 요청하지 않습니다.</span> 타이머 종료는 앱 화면 안의 표시와
           알림음으로 알려 드리며, 푸시 알림이나 백그라운드 알림을 보내지 않습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">05</span> 외부 링크</h2>
-        <p>
-          앱 안에는 유튜브 채널, 네이버 블로그, 유페이퍼 전자책 서점으로 가는 링크가 있습니다. 링크를 누르면
-          이용자의 브라우저가 해당 사이트를 엽니다. 그때부터는 그 사이트의 개인정보처리방침이 적용되며,
-          티파이는 해당 사이트에 이용자 정보를 넘기지 않습니다.
+        <h2><span class="num">05</span> <span data-i18n="pv.s5.title">외부 링크</span></h2>
+        <p data-i18n="pv.s5.body">
+          앱 안에는 티파이(Tea Fai)의 유튜브 채널, 네이버 블로그, 유페이퍼 전자책 서점으로 가는 링크가 있습니다.
+          링크를 누르면 이용자의 브라우저가 해당 사이트를 엽니다. 그때부터는 그 사이트의 개인정보처리방침이
+          적용되며, 티키피디아는 해당 사이트에 이용자 정보를 넘기지 않습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">06</span> 제3자 제공 및 처리 위탁</h2>
-        <p>
+        <h2><span class="num">06</span> <span data-i18n="pv.s6.title">제3자 제공 및 처리 위탁</span></h2>
+        <p data-i18n="pv.s6.body">
           수집하는 개인정보가 없으므로 제3자에게 제공하거나 처리를 위탁하는 정보도 없습니다. 이용자의 기록을
           판매·공유·열람하는 일은 없습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">07</span> 아동의 개인정보</h2>
-        <p>
-          티파이는 만 14세 미만 아동을 포함한 어떤 이용자의 개인정보도 수집하지 않습니다. 앱은 모든
+        <h2><span class="num">07</span> <span data-i18n="pv.s7.title">아동의 개인정보</span></h2>
+        <p data-i18n="pv.s7.body">
+          티키피디아는 만 14세 미만 아동을 포함한 어떤 이용자의 개인정보도 수집하지 않습니다. 앱은 모든
           연령이 안전하게 사용할 수 있으며, 개인정보를 입력하는 칸 자체가 없습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">08</span> 이용자의 권리</h2>
-        <p>
+        <h2><span class="num">08</span> <span data-i18n="pv.s8.title">이용자의 권리</span></h2>
+        <p data-i18n-html="pv.s8.body">
           이용자는 언제든지 앱의 <span class="key">시음 노트</span> 화면에서 자신이 적은 기록을 확인하고
           하나씩 삭제할 수 있습니다. 모든 기록을 한 번에 지우려면 기기 브라우저에서 이 사이트의 데이터를
-          삭제하거나 앱을 삭제하면 됩니다. 티파이는 기기 밖에 사본을 두지 않으므로 별도의 삭제 요청 절차가
-          필요하지 않습니다.
+          삭제하거나 앱을 삭제하면 됩니다. 언어 설정도 함께 지워집니다. 티키피디아는 기기 밖에 사본을 두지
+          않으므로 별도의 삭제 요청 절차가 필요하지 않습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">09</span> 처리방침의 변경</h2>
-        <p>
+        <h2><span class="num">09</span> <span data-i18n="pv.s9.title">처리방침의 변경</span></h2>
+        <p data-i18n="pv.s9.body">
           앱 기능이 바뀌어 이 방침의 내용을 고칠 때에는 새 방침과 시행일을 이 페이지에 먼저 올립니다.
           개인정보 수집이 새로 생기는 변경이라면 앱 안에서도 알려 드립니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">10</span> 문의</h2>
-        <p>개인정보처리방침에 대해 궁금한 점이나 요청이 있으면 아래로 알려 주세요.</p>
-        <p class="contact">티파이(Tea Fai) · <a href="mailto:rotroka@gmail.com">rotroka@gmail.com</a></p>
+        <h2><span class="num">10</span> <span data-i18n="pv.s10.title">문의</span></h2>
+        <p data-i18n="pv.s10.body">개인정보처리방침에 대해 궁금한 점이나 요청이 있으면 아래로 알려 주세요.</p>
+        <p class="contact"><span data-i18n="brand.name">티키피디아</span> (Teakipedia) · <a href="mailto:rotroka@gmail.com">rotroka@gmail.com</a></p>
       </section>
 
       <footer>
-        티파이 — 차 백과 &amp; 우림 타이머 · 《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》을
-        바탕으로 만든 앱입니다.<br />
-        <a href="index.html">앱 열기</a>
+        <span data-i18n="pv.footer">티키피디아 — 차 백과 &amp; 우림 타이머 · 《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》을 바탕으로 만든 앱입니다.</span><br />
+        <a href="index.html" data-i18n="pv.openApp">앱 열기</a>
       </footer>
     </div>
+
+    <script src="i18n.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var L = window.TEAFaiI18N;
+        var lang = L.detect();
+        function render(next) {
+          lang = next;
+          L.applyStatic(lang);
+          L.setDocumentLang(lang);
+          L.mountSwitcher(document.getElementById("langSwitch"), lang, pick);
+          document.title = L.t(lang, "pv.title");
+          var desc = document.querySelector('meta[name="description"]');
+          if (desc) desc.setAttribute("content", L.t(lang, "pv.desc"));
+        }
+        function pick(next) {
+          var chosen = L.normalize(next);
+          if (!chosen || chosen === lang) return;
+          L.save(chosen);
+          render(chosen);
+        }
+        render(lang);
+      })();
+    </script>
   </body>
 </html>
