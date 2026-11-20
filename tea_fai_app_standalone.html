@@ -3616,6 +3616,14 @@ body.modal-open {
   font-variant-numeric: tabular-nums;
 }
 
+/* 스폰서(프리미엄) 매장 배지 */
+.sc-badge.top,
+.cf-cat.top {
+  background: var(--amber);
+  color: #fff8ee;
+  border-color: var(--amber);
+}
+
 </style>
   </head>
   <body>
@@ -5777,6 +5785,7 @@ window.TEAFaiI18N = (function () {
       "cafe.regionAll": "전체 지역",
       "cafe.tagAll": "전체 취향",
       "cafe.tagLabel": "취향 태그",
+      "cafe.top": "추천 매장",
       "cafe.partner": "파트너 매장",
       "cafe.partnerSub": "{n}곳 · 먼저 만나 보세요",
       "cafe.directory": "티룸 디렉터리",
@@ -5929,6 +5938,7 @@ window.TEAFaiI18N = (function () {
       "cafe.regionAll": "All areas",
       "cafe.tagAll": "All tastes",
       "cafe.tagLabel": "Taste",
+      "cafe.top": "Featured",
       "cafe.partner": "Partner tea rooms",
       "cafe.partnerSub": "{n} places · meet them first",
       "cafe.directory": "Tea room directory",
@@ -6081,6 +6091,7 @@ window.TEAFaiI18N = (function () {
       "cafe.regionAll": "全部地区",
       "cafe.tagAll": "全部口味",
       "cafe.tagLabel": "口味",
+      "cafe.top": "推荐门店",
       "cafe.partner": "合作茶室",
       "cafe.partnerSub": "{n} 家 · 先来认识",
       "cafe.directory": "茶室目录",
@@ -6233,6 +6244,7 @@ window.TEAFaiI18N = (function () {
       "cafe.regionAll": "全部地區",
       "cafe.tagAll": "全部口味",
       "cafe.tagLabel": "口味",
+      "cafe.top": "推薦門店",
       "cafe.partner": "合作茶室",
       "cafe.partnerSub": "{n} 家 · 先來認識",
       "cafe.directory": "茶室目錄",
@@ -16588,9 +16600,9 @@ window.TEAFaiData = (function () {
       esc(shop.slug) +
       '">' +
       '<div class="sc-top">' +
-      '<span class="sc-badge">' +
-      esc(t("shop.partner")) +
-      "</span>" +
+      (shop.sponsor
+        ? '<span class="sc-badge top">' + esc(t("cafe.top")) + "</span>"
+        : '<span class="sc-badge">' + esc(t("shop.partner")) + "</span>") +
       (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
       "</div>" +
       '<b class="sc-name">' +
@@ -17401,7 +17413,9 @@ window.TEAFaiData = (function () {
     var head = $("#partnerHead");
     var count = $("#partnerCount");
     if (!row) return;
-    var shops = (PARTNER.shops || []).filter(partnerMatches);
+    var shops = (PARTNER.shops || []).filter(partnerMatches).sort(function (a, b) {
+      return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0) || (b.tier || 0) - (a.tier || 0);
+    });
     if (!shops.length) {
       row.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
       if (head) head.hidden = false;
@@ -17466,8 +17480,10 @@ window.TEAFaiData = (function () {
       '" data-cafe="' +
       esc(cafe.slug) +
       '">' +
-      '<div class="cf-top"><span class="cf-cat">' +
-      esc(l10n(cafe.categoryName)) +
+      '<div class="cf-top"><span class="cf-cat' +
+      (cafe.sponsor ? " top" : "") +
+      '">' +
+      esc(cafe.sponsor ? t("cafe.top") : l10n(cafe.categoryName)) +
       "</span>" +
       (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
       "</div>" +
@@ -17527,7 +17543,11 @@ window.TEAFaiData = (function () {
   function renderCafeList() {
     var list = $("#cafeList");
     if (!list) return;
-    var cafes = FEATURE.cafes ? (FEATURE.cafes.cafes || []).filter(cafeMatches) : [];
+    var cafes = FEATURE.cafes
+      ? (FEATURE.cafes.cafes || []).filter(cafeMatches).sort(function (a, b) {
+          return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0);
+        })
+      : [];
     var count = $("#cafeCount");
     if (count) count.textContent = t("cafe.count", { n: cafes.length });
     var note = $("#cafeNote");

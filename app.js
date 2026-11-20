@@ -1823,9 +1823,9 @@
       esc(shop.slug) +
       '">' +
       '<div class="sc-top">' +
-      '<span class="sc-badge">' +
-      esc(t("shop.partner")) +
-      "</span>" +
+      (shop.sponsor
+        ? '<span class="sc-badge top">' + esc(t("cafe.top")) + "</span>"
+        : '<span class="sc-badge">' + esc(t("shop.partner")) + "</span>") +
       (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
       "</div>" +
       '<b class="sc-name">' +
@@ -2636,7 +2636,9 @@
     var head = $("#partnerHead");
     var count = $("#partnerCount");
     if (!row) return;
-    var shops = (PARTNER.shops || []).filter(partnerMatches);
+    var shops = (PARTNER.shops || []).filter(partnerMatches).sort(function (a, b) {
+      return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0) || (b.tier || 0) - (a.tier || 0);
+    });
     if (!shops.length) {
       row.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
       if (head) head.hidden = false;
@@ -2701,8 +2703,10 @@
       '" data-cafe="' +
       esc(cafe.slug) +
       '">' +
-      '<div class="cf-top"><span class="cf-cat">' +
-      esc(l10n(cafe.categoryName)) +
+      '<div class="cf-top"><span class="cf-cat' +
+      (cafe.sponsor ? " top" : "") +
+      '">' +
+      esc(cafe.sponsor ? t("cafe.top") : l10n(cafe.categoryName)) +
       "</span>" +
       (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
       "</div>" +
@@ -2762,7 +2766,11 @@
   function renderCafeList() {
     var list = $("#cafeList");
     if (!list) return;
-    var cafes = FEATURE.cafes ? (FEATURE.cafes.cafes || []).filter(cafeMatches) : [];
+    var cafes = FEATURE.cafes
+      ? (FEATURE.cafes.cafes || []).filter(cafeMatches).sort(function (a, b) {
+          return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0);
+        })
+      : [];
     var count = $("#cafeCount");
     if (count) count.textContent = t("cafe.count", { n: cafes.length });
     var note = $("#cafeNote");

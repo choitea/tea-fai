@@ -3585,3 +3585,11 @@ body.modal-open {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* 스폰서(프리미엄) 매장 배지 */
+.sc-badge.top,
+.cf-cat.top {
+  background: var(--amber);
+  color: #fff8ee;
+  border-color: var(--amber);
+}
