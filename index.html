@@ -107,6 +107,16 @@
           <p data-i18n="home.lead">기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
         </div>
 
+        <button class="quiz-banner" type="button" id="quizBanner">
+          <span class="qb-spark" aria-hidden="true">✦</span>
+          <span class="qb-text">
+            <span class="qb-kicker" data-i18n="quiz.cardKicker">취향 테스트</span>
+            <b data-i18n="quiz.cardTitle">나에게 맞는 차 찾기</b>
+            <span class="qb-sub" data-i18n="quiz.cardSub">10문항 · 1분이면 93종 중 내 잔을 찾습니다</span>
+          </span>
+          <span class="qb-cta"><span data-i18n="quiz.cardCta">시작</span><svg width="14" height="14"><use href="#ic-arrow" /></svg></span>
+        </button>
+
         <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택" data-i18n-aria="a11y.mood"></div>
         <div id="recoArea" style="margin-top: 14px"></div>
 
@@ -165,6 +175,20 @@
         <div id="recentNote"></div>
 
         <p class="legal-link"><a href="privacy.html" data-i18n="home.privacy">개인정보처리방침</a></p>
+      </section>
+
+      <!-- ───────── 나에게 맞는 차 찾기 ───────── -->
+      <section class="view" id="view-quiz" aria-label="나에게 맞는 차 찾기" data-i18n-aria="quiz.title">
+        <div class="quiz-top">
+          <button class="quiz-back" type="button" id="quizBack" aria-label="이전 문항" data-i18n-aria="quiz.backAria">
+            <svg width="17" height="17"><use href="#ic-arrow" /></svg>
+          </button>
+          <div class="quiz-progress" role="group" aria-label="진행 상황" data-i18n-aria="quiz.a11yProgress">
+            <div class="qp-bar"><span id="quizBar"></span></div>
+            <span class="qp-count" id="quizCount">1 / 10</span>
+          </div>
+        </div>
+        <div id="quizBody"></div>
       </section>
 
       <!-- ───────── 우림 타이머 ───────── -->

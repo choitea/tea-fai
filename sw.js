@@ -1,6 +1,6 @@
 /* 티키피디아 서비스 워커 — 앱 껍데기를 캐시해 오프라인에서도 열립니다
    (온라인일 때는 네트워크를 먼저 보고, 새 파일이 오면 캐시를 갱신합니다) */
-var CACHE = "teafai-v4";
+var CACHE = "teafai-v5";
 var ASSETS = [
   "./",
   "./index.html",

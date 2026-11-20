@@ -1612,6 +1612,417 @@ html[lang="zh-Hant"] {
   overflow-wrap: anywhere;
 }
 
+/* ============================================================
+   나에게 맞는 차 찾기 — 10문항 취향 테스트
+   ============================================================ */
+
+/* ---------- 홈 진입 카드 ---------- */
+.quiz-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 2px 0 14px;
+  padding: 14px 15px;
+  border-radius: 20px;
+  text-align: left;
+  color: #f6efe3;
+  background: linear-gradient(135deg, #243e32 0%, #2f4d3b 52%, #4c3b26 100%);
+  box-shadow: 0 10px 26px -20px rgba(36, 62, 50, 0.8);
+  transition: transform 0.15s ease;
+}
+
+.quiz-banner:active {
+  transform: scale(0.986);
+}
+
+.qb-spark {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  color: var(--amber-light);
+  background: rgba(217, 166, 106, 0.18);
+  border: 1px solid rgba(217, 166, 106, 0.34);
+}
+
+.qb-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qb-kicker {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 239, 227, 0.6);
+}
+
+.qb-text b {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.qb-sub {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: rgba(246, 239, 227, 0.74);
+}
+
+.qb-cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--amber);
+  color: #fff8ee;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- 진행 표시 ---------- */
+.quiz-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2px 0 20px;
+}
+
+.quiz-back {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink-soft);
+}
+
+.quiz-back:active {
+  background: var(--paper-3);
+}
+
+.quiz-back svg {
+  transform: rotate(180deg);
+}
+
+.quiz-progress {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qp-bar {
+  flex: 1;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--paper-3);
+  overflow: hidden;
+}
+
+.qp-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--amber-light), var(--amber));
+  transition: width 0.34s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.qp-count {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- 문항 ---------- */
+.quiz-step .eyebrow {
+  display: block;
+}
+
+.quiz-q {
+  margin: 6px 0 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.36;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.quiz-lead {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 14px 15px;
+  border-radius: 15px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  transition: border-color 0.18s, background 0.18s, color 0.18s, transform 0.14s;
+}
+
+.quiz-opt:active {
+  transform: scale(0.986);
+}
+
+.quiz-opt.pressed {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.qo-mark {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(36, 62, 50, 0.26);
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+
+.quiz-opt.pressed .qo-mark {
+  border-color: var(--amber-light);
+  background: var(--amber-light);
+  box-shadow: inset 0 0 0 3.5px var(--ink);
+}
+
+/* ---------- 결과 ---------- */
+.quiz-result .eyebrow {
+  display: block;
+}
+
+.qr-card {
+  position: relative;
+  margin-bottom: 12px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  box-shadow: var(--shadow);
+}
+
+.qr-card.best {
+  margin-top: 6px;
+  padding-top: 22px;
+  border-color: rgba(185, 122, 61, 0.34);
+  background: linear-gradient(180deg, #fffdf8 0%, #f8f1e3 100%);
+}
+
+.qr-badge {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--amber);
+  color: #fff8ee;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  box-shadow: 0 6px 14px -10px rgba(185, 122, 61, 0.9);
+}
+
+.qr-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.qr-glyph {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1;
+}
+
+.qr-id {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.qr-id b {
+  font-family: var(--serif);
+  font-size: 18.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.qr-native {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.qr-group {
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.qr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.qr-chip {
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(229, 221, 203, 0.95);
+  background: rgba(36, 62, 50, 0.055);
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.qr-reason {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.qr-flavor {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.qr-origin {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.qr-origin b {
+  margin-right: 4px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.qr-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.qr-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 9px 10px;
+  background: var(--paper-2);
+}
+
+.qr-stat b {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.qr-stat span {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.qr-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.qr-actions .btn {
+  height: 44px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.quiz-restart {
+  height: 48px;
+  margin-top: 10px;
+}
+
+.quiz-banner:focus-visible,
+.quiz-back:focus-visible,
+.quiz-opt:focus-visible,
+.qr-actions .btn:focus-visible,
+.quiz-restart:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (max-width: 359px) {
+  .qb-spark {
+    display: none;
+  }
+  .qr-actions {
+    grid-template-columns: 1fr;
+  }
+  .quiz-q {
+    font-size: 20px;
+  }
+}
+
 </style>
   </head>
   <body>
@@ -1701,6 +2112,16 @@ html[lang="zh-Hant"] {
           <p data-i18n="home.lead">기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
         </div>
 
+        <button class="quiz-banner" type="button" id="quizBanner">
+          <span class="qb-spark" aria-hidden="true">✦</span>
+          <span class="qb-text">
+            <span class="qb-kicker" data-i18n="quiz.cardKicker">취향 테스트</span>
+            <b data-i18n="quiz.cardTitle">나에게 맞는 차 찾기</b>
+            <span class="qb-sub" data-i18n="quiz.cardSub">10문항 · 1분이면 93종 중 내 잔을 찾습니다</span>
+          </span>
+          <span class="qb-cta"><span data-i18n="quiz.cardCta">시작</span><svg width="14" height="14"><use href="#ic-arrow" /></svg></span>
+        </button>
+
         <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택" data-i18n-aria="a11y.mood"></div>
         <div id="recoArea" style="margin-top: 14px"></div>
 
@@ -1759,6 +2180,20 @@ html[lang="zh-Hant"] {
         <div id="recentNote"></div>
 
         <p class="legal-link"><a href="privacy.html" data-i18n="home.privacy">개인정보처리방침</a></p>
+      </section>
+
+      <!-- ───────── 나에게 맞는 차 찾기 ───────── -->
+      <section class="view" id="view-quiz" aria-label="나에게 맞는 차 찾기" data-i18n-aria="quiz.title">
+        <div class="quiz-top">
+          <button class="quiz-back" type="button" id="quizBack" aria-label="이전 문항" data-i18n-aria="quiz.backAria">
+            <svg width="17" height="17"><use href="#ic-arrow" /></svg>
+          </button>
+          <div class="quiz-progress" role="group" aria-label="진행 상황" data-i18n-aria="quiz.a11yProgress">
+            <div class="qp-bar"><span id="quizBar"></span></div>
+            <span class="qp-count" id="quizCount">1 / 10</span>
+          </div>
+        </div>
+        <div id="quizBody"></div>
       </section>
 
       <!-- ───────── 우림 타이머 ───────── -->
@@ -2750,6 +3185,294 @@ window.TEAFaiI18N = (function () {
     }
   };
 
+  /* 나에게 맞는 차 찾기 — 10문항 취향 테스트 */
+  var QUIZ = {
+    ko: {
+      "title.quiz": "나에게 맞는 차 찾기 — 티키피디아",
+      "quiz.cardKicker": "취향 테스트",
+      "quiz.cardTitle": "나에게 맞는 차 찾기",
+      "quiz.cardSub": "10문항 · 1분이면 93종 중 내 잔을 찾습니다",
+      "quiz.cardCta": "시작",
+      "quiz.kicker": "Find your cup",
+      "quiz.title": "나에게 맞는 차 찾기",
+      "quiz.lead":
+        "10문항에 답하면 6대 다류부터 대용차·허브차·블렌딩차·과일차까지 93종에서 골라 드립니다.",
+      "quiz.progress": "{n} / {total}",
+      "quiz.backAria": "이전 문항",
+      "quiz.a11yProgress": "진행 상황",
+      "quiz.resultKicker": "Best match",
+      "quiz.resultTitle": "당신의 잔을 찾았습니다",
+      "quiz.resultLead": "10문항의 답에서 가장 가까운 차를 골랐습니다.",
+      "quiz.best": "가장 잘 맞는 차",
+      "quiz.altTitle": "함께 권하는 두 잔",
+      "quiz.whyOne": "고르신 «{a}» 취향에 맞춰, 이 향미가 가장 가까운 차입니다.",
+      "quiz.whyTwo": "고르신 «{a}», «{b}» 취향에 맞춰, 이 향미가 가장 가까운 차입니다.",
+      "quiz.brew": "바로 우리기",
+      "quiz.guide": "백과에서 보기",
+      "quiz.restart": "다시 테스트하기",
+      "quiz.origin": "산지",
+      "quiz.firstSteep": "첫 우리",
+      "quiz.q1": "주로 언제, 왜 차를 마시나요?",
+      "quiz.q1a": "아침에 눈을 뜨우고 집중할 때",
+      "quiz.q1b": "식후에 개운하게",
+      "quiz.q1c": "오후에 잠깐 쉬어 갈 때",
+      "quiz.q1d": "밤에, 카페인 걱정 없이",
+      "quiz.q2": "끌리는 향은 어느 쪽인가요?",
+      "quiz.q2a": "구수하고 고소한 볶음향",
+      "quiz.q2b": "화사한 꽃향",
+      "quiz.q2c": "달콤하고 잘 익은 과일향",
+      "quiz.q2d": "풀내음·청량함",
+      "quiz.q2e": "묵직하고 달큰한 몰트·숙성향",
+      "quiz.q2f": "상큼한 시트러스·허브",
+      "quiz.q3": "바디감과 목넘김은?",
+      "quiz.q3a": "물처럼 가볍고 맑게",
+      "quiz.q3b": "부드럽고 균형 있게",
+      "quiz.q3c": "진하고 묵직하게",
+      "quiz.q4": "어떻게 마시는 걸 좋아하나요?",
+      "quiz.q4a": "따뜻하게, 스트레이트로",
+      "quiz.q4b": "시원하게, 아이스·냉침으로",
+      "quiz.q4c": "우유를 넣어 밀크티·라떼로",
+      "quiz.q5": "카페인은 어느 정도가 좋나요?",
+      "quiz.q5a": "카페인 OK, 각성되는 게 좋아요",
+      "quiz.q5b": "적당히, 오후까지면 충분해요",
+      "quiz.q5c": "디카페인·카페인 프리로",
+      "quiz.q6": "어떤 맛이 끌리나요?",
+      "quiz.q6a": "단맛·감칠맛, 둥근 여운",
+      "quiz.q6b": "깔끔하고 씁쓸한 수렴미",
+      "quiz.q6c": "향이 화려한 블렌딩·가향차",
+      "quiz.q6d": "곡물·한방의 익숙한 맛",
+      "quiz.q7": "훈연향·로스팅(배전)은?",
+      "quiz.q7a": "진한 훈연·로스팅을 좋아해요",
+      "quiz.q7b": "은은하게만",
+      "quiz.q7c": "없이 깨끗한 편이 좋아요",
+      "quiz.q8": "차와 함께 무엇을 하나요?",
+      "quiz.q8a": "식사와 함께",
+      "quiz.q8b": "디저트·간식과 함께",
+      "quiz.q8c": "혼자 천천히, 공복에도",
+      "quiz.q9": "우리는 방식은?",
+      "quiz.q9a": "간편하게 한 번, 큰 컵이나 티백",
+      "quiz.q9b": "여러 번 나눠 공푸차·다도로",
+      "quiz.q10": "오늘의 기분과 계절은?",
+      "quiz.q10a": "차분히 정리하고 싶어요",
+      "quiz.q10b": "활력과 집중이 필요해요",
+      "quiz.q10c": "포근하게 위로받고 싶어요",
+      "quiz.q10d": "상쾌하게 환기하고 싶어요"
+    },
+    en: {
+      "title.quiz": "What tea suits me? — Teakipedia",
+      "quiz.cardKicker": "Taste test",
+      "quiz.cardTitle": "What tea suits me?",
+      "quiz.cardSub": "10 questions · one minute · 93 teas",
+      "quiz.cardCta": "Start",
+      "quiz.kicker": "Find your cup",
+      "quiz.title": "What tea suits me?",
+      "quiz.lead":
+        "Answer ten questions and we pick from 93 teas — the six tea families, everyday teas, herbs, blends and fruit teas.",
+      "quiz.progress": "{n} / {total}",
+      "quiz.backAria": "Previous question",
+      "quiz.a11yProgress": "Progress",
+      "quiz.resultKicker": "Best match",
+      "quiz.resultTitle": "We found your cup",
+      "quiz.resultLead": "Chosen from your ten answers — the closest match in the encyclopedia.",
+      "quiz.best": "Best match",
+      "quiz.altTitle": "Two more to try",
+      "quiz.whyOne": "Matching your “{a}” answer, this is the closest cup.",
+      "quiz.whyTwo": "Matching your “{a}” and “{b}” answers, this is the closest cup.",
+      "quiz.brew": "Brew this now",
+      "quiz.guide": "Open in encyclopedia",
+      "quiz.restart": "Take the test again",
+      "quiz.origin": "Origin",
+      "quiz.firstSteep": "First infusion",
+      "quiz.q1": "When do you usually drink tea, and why?",
+      "quiz.q1a": "Morning — to wake up and focus",
+      "quiz.q1b": "After a meal, to freshen up",
+      "quiz.q1c": "Afternoon — a short pause",
+      "quiz.q1d": "At night, without worrying about caffeine",
+      "quiz.q2": "Which aroma pulls you in?",
+      "quiz.q2a": "Toasted, nutty roast",
+      "quiz.q2b": "Bright floral",
+      "quiz.q2c": "Ripe, sweet fruit",
+      "quiz.q2d": "Green grass and freshness",
+      "quiz.q2e": "Deep malt and aged sweetness",
+      "quiz.q2f": "Zesty citrus and herbs",
+      "quiz.q3": "Body and mouthfeel?",
+      "quiz.q3a": "Light and clear, like water",
+      "quiz.q3b": "Soft and balanced",
+      "quiz.q3c": "Rich and full",
+      "quiz.q4": "How do you like to drink it?",
+      "quiz.q4a": "Hot, straight",
+      "quiz.q4b": "Iced or cold-brewed",
+      "quiz.q4c": "With milk — milk tea or a latte",
+      "quiz.q5": "How much caffeine suits you?",
+      "quiz.q5a": "Caffeine is fine — I like the lift",
+      "quiz.q5b": "Moderate — enough until the afternoon",
+      "quiz.q5c": "Decaf or caffeine-free, please",
+      "quiz.q6": "Which taste appeals?",
+      "quiz.q6a": "Sweet, savoury umami with a round finish",
+      "quiz.q6b": "Crisp, lightly bitter, astringent",
+      "quiz.q6c": "A showy blended or scented tea",
+      "quiz.q6d": "Familiar grain and herbal notes",
+      "quiz.q7": "Smoke and roast?",
+      "quiz.q7a": "I love a strong smoky, roasted note",
+      "quiz.q7b": "Only a whisper of it",
+      "quiz.q7c": "Keep it clean, without either",
+      "quiz.q8": "What is the cup alongside?",
+      "quiz.q8a": "A meal",
+      "quiz.q8b": "Dessert or a snack",
+      "quiz.q8c": "Just me, slowly — even on an empty stomach",
+      "quiz.q9": "How do you brew?",
+      "quiz.q9a": "One easy steep in a big cup or a tea bag",
+      "quiz.q9b": "Several short infusions, gongfu or a tea ceremony",
+      "quiz.q10": "Today's mood and season?",
+      "quiz.q10a": "I want to settle and clear my head",
+      "quiz.q10b": "I need energy and focus",
+      "quiz.q10c": "I want something cosy and comforting",
+      "quiz.q10d": "I want something bright and refreshing"
+    },
+    "zh-CN": {
+      "title.quiz": "找到适合我的茶 — 茶基百科",
+      "quiz.cardKicker": "口味测试",
+      "quiz.cardTitle": "找到适合我的茶",
+      "quiz.cardSub": "10题 · 1分钟，从93款中找出你的那一杯",
+      "quiz.cardCta": "开始",
+      "quiz.kicker": "Find your cup",
+      "quiz.title": "找到适合我的茶",
+      "quiz.lead":
+        "答完10题，就从六大茶类到代用茶、花草茶、拼配茶、水果茶共93款中为你挑选。",
+      "quiz.progress": "{n} / {total}",
+      "quiz.backAria": "上一题",
+      "quiz.a11yProgress": "进度",
+      "quiz.resultKicker": "Best match",
+      "quiz.resultTitle": "找到属于你的一杯",
+      "quiz.resultLead": "根据十个回答，从百科中选出了最贴近的一杯。",
+      "quiz.best": "最合适的一杯",
+      "quiz.altTitle": "再推荐两杯",
+      "quiz.whyOne": "按你选择的「{a}」，这款茶的香气最贴近。",
+      "quiz.whyTwo": "按你选择的「{a}」「{b}」，这款茶的香气最贴近。",
+      "quiz.brew": "马上冲泡",
+      "quiz.guide": "在百科中查看",
+      "quiz.restart": "重新测试",
+      "quiz.origin": "产地",
+      "quiz.firstSteep": "第一泡",
+      "quiz.q1": "你通常在什么时候、为什么喝茶？",
+      "quiz.q1a": "早上，唤醒自己、集中精神",
+      "quiz.q1b": "饭后，清爽一下",
+      "quiz.q1c": "下午，短暂歇一口气",
+      "quiz.q1d": "夜里，不用担心咖啡因",
+      "quiz.q2": "哪种香气最吸引你？",
+      "quiz.q2a": "烘焙般的坚果香",
+      "quiz.q2b": "明亮的花香",
+      "quiz.q2c": "熟透的甜果香",
+      "quiz.q2d": "青草与清凉感",
+      "quiz.q2e": "厚重的麦芽与陈香",
+      "quiz.q2f": "清爽的柑橘与草本",
+      "quiz.q3": "口感与入喉感？",
+      "quiz.q3a": "像水一样轻而清",
+      "quiz.q3b": "柔和而平衡",
+      "quiz.q3c": "浓厚而有分量",
+      "quiz.q4": "你喜欢怎么喝？",
+      "quiz.q4a": "热饮，纯饮",
+      "quiz.q4b": "冰饮或冷泡",
+      "quiz.q4c": "加牛奶，做奶茶或拿铁",
+      "quiz.q5": "咖啡因能接受到什么程度？",
+      "quiz.q5a": "可以，喜欢有提神感",
+      "quiz.q5b": "适量，到下午为止",
+      "quiz.q5c": "低因或无咖啡因",
+      "quiz.q6": "哪种味道更吸引你？",
+      "quiz.q6a": "甜味、鲜味，圆润的回味",
+      "quiz.q6b": "干净、微苦、收涩",
+      "quiz.q6c": "香气华丽的拼配或加香茶",
+      "quiz.q6d": "谷物、汉方熟悉的味道",
+      "quiz.q7": "烟熏与焙火？",
+      "quiz.q7a": "喜欢浓的烟熏与焙火",
+      "quiz.q7b": "只要淡淡一点",
+      "quiz.q7c": "不要，干净清爽更好",
+      "quiz.q8": "这杯茶配什么？",
+      "quiz.q8a": "配正餐",
+      "quiz.q8b": "配甜点或点心",
+      "quiz.q8c": "一个人慢慢喝，空腹也可以",
+      "quiz.q9": "冲泡方式？",
+      "quiz.q9a": "简单一次，大杯或茶包",
+      "quiz.q9b": "多次短泡，功夫茶或茶道",
+      "quiz.q10": "今天的心情与季节？",
+      "quiz.q10a": "想安静整理思绪",
+      "quiz.q10b": "需要活力与专注",
+      "quiz.q10c": "想被温暖地安慰",
+      "quiz.q10d": "想清爽地换口气"
+    },
+    "zh-TW": {
+      "title.quiz": "找到適合我的茶 — 茶基百科",
+      "quiz.cardKicker": "口味測試",
+      "quiz.cardTitle": "找到適合我的茶",
+      "quiz.cardSub": "10題 · 1分鐘，從93款中找出你的那一杯",
+      "quiz.cardCta": "開始",
+      "quiz.kicker": "Find your cup",
+      "quiz.title": "找到適合我的茶",
+      "quiz.lead":
+        "答完10題，就從六大茶類到代用茶、花草茶、拼配茶、水果茶共93款中為你挑選。",
+      "quiz.progress": "{n} / {total}",
+      "quiz.backAria": "上一題",
+      "quiz.a11yProgress": "進度",
+      "quiz.resultKicker": "Best match",
+      "quiz.resultTitle": "找到屬於你的一杯",
+      "quiz.resultLead": "根據十個回答，從百科中選出了最貼近的一杯。",
+      "quiz.best": "最合適的一杯",
+      "quiz.altTitle": "再推薦兩杯",
+      "quiz.whyOne": "按你選擇的「{a}」，這款茶的香氣最貼近。",
+      "quiz.whyTwo": "按你選擇的「{a}」「{b}」，這款茶的香氣最貼近。",
+      "quiz.brew": "馬上沖泡",
+      "quiz.guide": "在百科中查看",
+      "quiz.restart": "重新測試",
+      "quiz.origin": "產地",
+      "quiz.firstSteep": "第一泡",
+      "quiz.q1": "你通常在什麼時候、為什麼喝茶？",
+      "quiz.q1a": "早上，喚醒自己、集中精神",
+      "quiz.q1b": "飯後，清爽一下",
+      "quiz.q1c": "下午，短暫歇一口氣",
+      "quiz.q1d": "夜裡，不用擔心咖啡因",
+      "quiz.q2": "哪種香氣最吸引你？",
+      "quiz.q2a": "烘焙般的堅果香",
+      "quiz.q2b": "明亮的花香",
+      "quiz.q2c": "熟透的甜果香",
+      "quiz.q2d": "青草與清涼感",
+      "quiz.q2e": "厚重的麥芽與陳香",
+      "quiz.q2f": "清爽的柑橘與草本",
+      "quiz.q3": "口感與入喉感？",
+      "quiz.q3a": "像水一樣輕而清",
+      "quiz.q3b": "柔和而平衡",
+      "quiz.q3c": "濃厚而有分量",
+      "quiz.q4": "你喜歡怎麼喝？",
+      "quiz.q4a": "熱飲，純飲",
+      "quiz.q4b": "冰飲或冷泡",
+      "quiz.q4c": "加牛奶，做奶茶或拿鐵",
+      "quiz.q5": "咖啡因能接受到什麼程度？",
+      "quiz.q5a": "可以，喜歡有提神感",
+      "quiz.q5b": "適量，到下午為止",
+      "quiz.q5c": "低因或無咖啡因",
+      "quiz.q6": "哪種味道更吸引你？",
+      "quiz.q6a": "甜味、鮮味，圓潤的回味",
+      "quiz.q6b": "乾淨、微苦、收澀",
+      "quiz.q6c": "香氣華麗的拼配或加香茶",
+      "quiz.q6d": "穀物、漢方熟悉的味道",
+      "quiz.q7": "煙燻與焙火？",
+      "quiz.q7a": "喜歡濃的煙燻與焙火",
+      "quiz.q7b": "只要淡淡一點",
+      "quiz.q7c": "不要，乾淨清爽更好",
+      "quiz.q8": "這杯茶配什麼？",
+      "quiz.q8a": "配正餐",
+      "quiz.q8b": "配甜點或點心",
+      "quiz.q8c": "一個人慢慢喝，空腹也可以",
+      "quiz.q9": "沖泡方式？",
+      "quiz.q9a": "簡單一次，大杯或茶包",
+      "quiz.q9b": "多次短泡，功夫茶或茶道",
+      "quiz.q10": "今天的心情與季節？",
+      "quiz.q10a": "想安靜整理思緒",
+      "quiz.q10b": "需要活力與專注",
+      "quiz.q10c": "想被溫暖地安慰",
+      "quiz.q10d": "想清爽地換口氣"
+    }
+  };
+
   /* 새 화면에서 쓰는 문구 */
   var EXTRA = {
     ko: {
@@ -2784,11 +3507,13 @@ window.TEAFaiI18N = (function () {
     if (dictFor[lang]) return dictFor[lang];
     var base = UI[lang] || {};
     var privacy = PRIVACY[lang] || {};
+    var quiz = QUIZ[lang] || {};
     var extras = EXTRA[lang] || {};
     var merged = {};
     var k;
     for (k in base) merged[k] = base[k];
     for (k in privacy) merged[k] = privacy[k];
+    for (k in quiz) merged[k] = quiz[k];
     for (k in extras) merged[k] = extras[k];
     dictFor[lang] = merged;
     return merged;
@@ -3559,10 +4284,10 @@ window.TEAFaiData = (function () {
       }
     },
     {
-      id: "scented",
+      id: "blended",
       kind: "group",
       hanja: "香",
-      sub: "Scented & Blended",
+      sub: "Blended & Scented",
       accent: "#6F6486",
       accentSoft: "#ECE8F1",
       temp: 96,
@@ -3573,76 +4298,76 @@ window.TEAFaiData = (function () {
       maxSteep: 2,
       oxidationValue: 90,
       ko: {
-        name: "가향차 · 블렌딩",
-        oneLine: "향을 입히고 차를 섞어 만드는 차 — 홍콩 티하우스의 한 잔까지.",
+        name: "블렌딩차 · 가향차",
+        oneLine: "여러 차를 섞고 향을 입혀 만드는 차 — 아침의 잉글리시 브렉퍼스트부터 홍콩 티하우스의 한 잔까지.",
         oxidation: "베이스에 따름",
         ratioNote: "3g에 200ml, 밀크티 블렌드는 8g에 200ml",
         rounds: "1~2회",
         steepBasis: "향을 입힌 차는 3분 안쪽이 향의 정점입니다.",
         process:
           "가향은 분무·껍질 첨가·꽃잎 첨가·인향 네 갈래로 이루어집니다. 자스민은 밤에 핀 꽃을 여러 번 겹쳐 향을 옮기고, 홍콩 밀크티는 여러 홍차를 섞어 진하게 우립니다.",
-        varieties: ["얼그레이·레이디 그레이", "잉글리시 브렉퍼스트·애프터눈 티", "자스민(모리화차)", "홍콩식 밀크티"],
+        varieties: ["얼그레이·레이디 그레이", "잉글리시 브렉퍼스트·애프터눈 티", "자스민(모리화차)·마살라 차이", "홍콩식 밀크티"],
         flavor:
           "베르가못은 시트러스와 꽃, 자스민은 달콤한 흰 꽃, 홍콩 밀크티는 진한 몰트와 연유의 단맛입니다.",
         pairing: "가향 홍차는 스콘·마들렌·약과, 자스민은 중식과 디저트, 밀크티는 파인애플 번과 달걀 타르트.",
         keep: "가향차는 개봉 후 3개월이 향의 정점입니다. 불투명 밀봉 용기에 담아 열·빛·습기를 피합니다.",
         brewTip:
           "티백은 90~95도에 2분 30초~3분. 밀크티 블렌드는 5분 진하게 우려야 얼음과 우유에 향이 지지 않습니다.",
-        keywords: "얼그레이 레이디그레이 잉글리시브렉퍼스트 애프터눈 자스민 모리화 홍콩 밀크티 블렌딩"
+        keywords: "블렌딩 가향 얼그레이 레이디그레이 잉글리시브렉퍼스트 애프터눈 자스민 모리화 홍콩 밀크티 마살라 차이"
       },
       en: {
-        name: "Scented & Blended",
-        oneLine: "Teas that are scented, layered and blended — down to a Hong Kong tea-house cup.",
+        name: "Blended & scented",
+        oneLine: "Teas built by layering and blending — from morning English Breakfast to a Hong Kong tea-house cup.",
         oxidation: "Follows the base",
         ratioNote: "3 g to 200 ml; 8 g to 200 ml for a milk-tea blend",
         rounds: "1–2 infusions",
         steepBasis: "A scented tea peaks within three minutes.",
         process:
           "Scenting has four routes: spraying, adding peel, adding petals, and absorption. Jasmine is layered with night flowers again and again; Hong Kong milk tea blends several black teas and brews them strong.",
-        varieties: ["Earl Grey · Lady Grey", "English Breakfast · Afternoon Tea", "Jasmine", "Hong Kong milk tea"],
+        varieties: ["Earl Grey · Lady Grey", "English Breakfast · Afternoon Tea", "Jasmine · masala chai", "Hong Kong milk tea"],
         flavor:
           "Bergamot is citrus and flower, jasmine a sweet white blossom, Hong Kong milk tea strong malt with the sweetness of evaporated milk.",
         pairing: "Scented black tea with scones, madeleines and yakgwa; jasmine with Chinese food and desserts; milk tea with a pineapple bun and an egg tart.",
         keep: "A scented tea peaks within three months of opening; keep it opaque and sealed, away from heat, light and damp.",
         brewTip: "A tea bag at 90–95 °C for 2½–3 minutes; a milk-tea blend needs five strong minutes so ice and milk don't flatten it.",
-        keywords: "earl grey lady grey english breakfast afternoon jasmine hong kong milk tea blend"
+        keywords: "blend blended scented earl grey lady grey english breakfast afternoon jasmine hong kong milk tea masala chai"
       },
       "zh-CN": {
-        name: "加香茶 · 拼配茶",
-        oneLine: "加香、调和出来的茶——一直到港式茶餐厅的一杯。",
+        name: "拼配茶 · 加香茶",
+        oneLine: "把几种茶拼配、加香做成的茶——从早晨的英式早餐到港式茶餐厅的一杯。",
         oxidation: "随基底而变",
         ratioNote: "3克配200毫升，奶茶拼配8克配200毫升",
         rounds: "1~2泡",
         steepBasis: "加香茶在3分钟以内香气最好。",
         process: "加香有喷雾、加果皮、加花瓣、窨香四种。茉莉用夜里开的花反复窨制，港式奶茶把几种红茶拼配浓泡。",
-        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶", "港式奶茶"],
+        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶·马萨拉茶", "港式奶茶"],
         flavor: "佛手柑是柑橘与花香，茉莉是甜润的白花，港式奶茶是浓麦芽与淡奶的甜。",
         pairing: "加香红茶配司康、玛德莲、药果；茉莉配中餐与甜点；奶茶配菠萝包与蛋挞。",
         keep: "加香茶开封后3个月是香气顶点，放在不透光密封罐，避开热、光与湿气。",
         brewTip: "茶包90~95度泡2分30秒~3分钟；奶茶拼配要泡足5分钟。",
-        keywords: "伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 拼配"
+        keywords: "拼配 加香 伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 马萨拉"
       },
       "zh-TW": {
-        name: "加香茶 · 拼配茶",
-        oneLine: "加香、調和出來的茶——一直到港式茶餐廳的一杯。",
+        name: "拼配茶 · 加香茶",
+        oneLine: "把幾種茶拼配、加香做成的茶——從早晨的英式早餐到港式茶餐廳的一杯。",
         oxidation: "隨基底而變",
         ratioNote: "3公克配200毫升，奶茶拼配8公克配200毫升",
         rounds: "1~2泡",
         steepBasis: "加香茶在3分鐘以內香氣最好。",
         process: "加香有噴霧、加果皮、加花瓣、窨香四種。茉莉用夜裡開的花反覆窨製，港式奶茶把幾種紅茶拼配濃泡。",
-        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶", "港式奶茶"],
+        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶·馬薩拉茶", "港式奶茶"],
         flavor: "佛手柑是柑橘與花香，茉莉是甜潤的白花，港式奶茶是濃麥芽與淡奶的甜。",
         pairing: "加香紅茶配司康、瑪德蓮、藥果；茉莉配中餐與甜點；奶茶配菠蘿包與蛋撻。",
         keep: "加香茶開封後3個月是香氣頂點，放在不透光密封罐，避開熱、光與濕氣。",
         brewTip: "茶包90~95度泡2分30秒~3分鐘；奶茶拼配要泡足5分鐘。",
-        keywords: "伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 拼配"
+        keywords: "拼配 加香 伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 馬薩拉"
       }
     },
     {
       id: "herbal",
       kind: "group",
-      hanja: "草",
-      sub: "Herbs & Korean Tea",
+      hanja: "代",
+      sub: "Everyday Tea",
       accent: "#6E7F52",
       accentSoft: "#E9EDDD",
       temp: 95,
@@ -3653,72 +4378,239 @@ window.TEAFaiData = (function () {
       maxSteep: 3,
       oxidationValue: 0,
       ko: {
-        name: "허브차 · 한국 전통차",
-        oneLine: "차나무 잎이 아닌 잎과 뿌리, 열매, 꽃으로 우린 잔 — 카페인 없이 하루의 끝에.",
-        oxidation: "무산화 · 카페인 없음",
+        name: "대용차 · 전통차",
+        oneLine: "차나무 대신 곡물·뿌리·열매로 우린 잔 — 카페인 없이 하루 곁에.",
+        oxidation: "무산화 · 대부분 카페인 없이",
         ratioNote: "200ml에 3g, 뿌리·열매는 5g",
-        rounds: "2~3회",
-        steepBasis: "책과 관행 기준 95도에서 5분, 2포 6분. 뿌리·열매는 10분까지 우려도 됩니다.",
+        rounds: "1~3회",
+        steepBasis: "95도에서 5분, 두 번째 6분. 뿌리·열매는 10분까지 우려도 됩니다.",
         process:
-          "말리기 → (볶음·덖음) → 우림. 대추·유자·오미자는 설탕에 절여 청으로, 뿌리류는 말려 볶아 우립니다. 떡차는 찐 잎을 눌러 말리며 미생물 발효가 더해집니다.",
-        varieties: ["대추·생강·유자·오미자", "쌍화·둥굴레·도라지", "보리·현미·메밀", "감잎·뽕잎·연잎·쑥", "캐모마일·페퍼민트·히비스커스", "루이보스·마테·라벤더·레몬그라스"],
-        flavor:
-          "곡물의 고소함, 뿌리의 단맛, 꽃의 향 — 각각 다르지만 공통으로 떫음이 적고 몸을 데웁니다.",
-        pairing:
-          "식후, 밤, 감기 기운이 있을 때. 대추·생강·쌍화는 겨울, 유자·오미자는 여름에 어울립니다.",
-        keep: "말린 잎·꽃은 밀봉해 서늘한 곳에 6~12개월. 청(대추·유자·오미자)은 냉장 1년입니다.",
-        brewTip:
-          "뿌리와 열매는 끓는 물에 5~10분 우려야 맛이 납니다. 꽃과 잎은 5분이면 충분합니다.",
-        keywords: "허브 대용차 한방차 대추 생강 유자 오미자 쌍화 둥굴레 보리 현미 감잎 뽕잎 연잎 쑥 떡차 캐모마일 페퍼민트 히비스커스 루이보스 마테 라벤더 레몬그라스"
+          "말리기 → (볶음·덖음) → 우림. 보리·현미·메밀은 볶아 향을 내고, 뿌리는 말려서 끓입니다. 떡차는 찐 잎을 눌러 말리며 미생물 발효가 더해집니다.",
+        varieties: ["쌍화·둥굴레·도라지·생강", "보리·현미·메밀", "감잎·뽕잎·연잎·쑥", "루이보스·마테·떡차"],
+        flavor: "곡물의 고소함, 뿌리의 단맛, 열매의 익은 향 — 떫음이 적고 몸을 데웁니다.",
+        pairing: "식후, 밤, 감기 기운이 있을 때. 쌍화·생강은 겨울, 보리·현미는 사계절.",
+        keep: "말린 잎·뿌리는 밀봉해 서늘한 곳에 6~12개월. 볶은 곡물은 향이 빨리 날아가 소분해 둡니다.",
+        brewTip: "뿌리와 열매는 끓는 물에 5~10분, 곡물은 5분이면 충분합니다. 루이보스는 우유와도 잘 맞습니다.",
+        keywords: "대용차 전통차 한방차 쌍화 둥굴레 도라지 생강 보리 현미 메밀 감잎 뽕잎 연잎 쑥 떡차 루이보스 마테"
       },
       en: {
-        name: "Herbal & Korean tea",
-        oneLine: "Cups brewed from leaf, root, fruit and flower rather than the tea bush — caffeine-free, for the end of the day.",
-        oxidation: "None · caffeine-free",
+        name: "Everyday & traditional tea",
+        oneLine: "Brewed from grain, root and fruit instead of the tea bush — caffeine-free, always at hand.",
+        oxidation: "None · mostly caffeine-free",
         ratioNote: "3 g to 200 ml; 5 g for roots and fruit",
-        rounds: "2–3 infusions",
-        steepBasis: "95 °C for 5 minutes, then 6. Roots and fruit take up to 10.",
+        rounds: "1–3 infusions",
+        steepBasis: "95 °C for 5 minutes, 6 for the second. Roots and fruit take up to 10.",
         process:
-          "Dried → (roasted or pan-fired) → steeped. Dates, citron and schisandra are preserved in sugar as cheong; roots are dried and roasted. Tteokcha is steamed leaf pressed and dried, with microbial fermentation added.",
-        varieties: ["Date · ginger · citron · schisandra", "Ssanghwa · Solomon's seal · balloon flower", "Barley · brown rice · buckwheat", "Persimmon · mulberry · lotus · mugwort", "Chamomile · peppermint · hibiscus", "Rooibos · mate · lavender · lemongrass"],
+          "Dried → (roasted or pan-fired) → steeped. Barley, brown rice and buckwheat are roasted for aroma; roots are dried and boiled. Tteokcha is steamed leaf pressed and dried, with microbial fermentation added.",
+        varieties: [
+          "Ssanghwa · Solomon's seal · balloon flower · ginger",
+          "Barley · brown rice · buckwheat",
+          "Persimmon · mulberry · lotus · mugwort",
+          "Rooibos · mate · tteokcha"
+        ],
         flavor:
-          "Roasted grain, the sweetness of roots, the perfume of flowers — each different, all low in astringency and warming.",
-        pairing: "After meals, at night, or when a cold is coming. Dates, ginger and ssanghwa for winter; citron and schisandra for summer.",
-        keep: "Dried leaf and flowers keep sealed and cool for 6–12 months. Fruit cheong keeps a year in the fridge.",
-        brewTip: "Roots and fruit need 5–10 minutes in boiling water. Flowers and leaf are done in 5.",
-        keywords: "herbal korean tea date ginger citron schisandra ssanghwa barley brown rice persimmon mulberry lotus mugwort tteokcha chamomile peppermint hibiscus rooibos mate lavender lemongrass caffeine free"
+          "Roasted grain, the sweetness of roots, the ripe aroma of fruit — low in astringency and warming.",
+        pairing:
+          "After meals, at night, or when a cold is coming. Ssanghwa and ginger for winter; barley and brown rice all year.",
+        keep: "Dried leaf and root keep sealed and cool for 6–12 months; roasted grain loses its aroma fast, so store it in small amounts.",
+        brewTip:
+          "Roots and fruit need 5–10 minutes in boiling water; grain is done in 5. Rooibos takes milk well.",
+        keywords:
+          "everyday tea korean tea ssanghwa solomon's seal balloon flower ginger barley brown rice buckwheat persimmon mulberry lotus mugwort tteokcha rooibos mate caffeine free"
       },
       "zh-CN": {
-        name: "花草茶 · 韩国传统茶",
-        oneLine: "用叶、根、果实与花泡出的一杯——无咖啡因，适合一天的收尾。",
-        oxidation: "不发酵 · 无咖啡因",
+        name: "代用茶 · 传统茶",
+        oneLine: "不用茶树，而用谷物、根与果实泡出的一杯——无咖啡因，随时在手边。",
+        oxidation: "不发酵 · 大多无咖啡因",
         ratioNote: "200毫升配3克，根与果实5克",
-        rounds: "2~3泡",
-        steepBasis: "按书与惯例：95度泡5分钟，第二泡6分钟。根与果实可到10分钟。",
+        rounds: "1~3泡",
+        steepBasis: "95도泡5分钟，第二泡6分钟。根与果实可到10分钟。",
         process:
-          "干燥 → （烘烤·炒）→ 冲泡。红枣、柚子、五味子用糖腌成“청”（蜜渍），根类干燥后烘烤再冲泡。떡차（饼茶）是蒸过的叶子压紧晒干，另有微生物发酵。",
-        varieties: ["红枣·生姜·柚子·五味子", "双和·玉竹·桔梗", "大麦·玄米·荞麦", "柿叶·桑叶·荷叶·艾草", "洋甘菊·薄荷·洛神花", "路易波士·马黛·薰衣草·香茅"],
-        flavor: "谷物的焙香、根的甜、花的香——各不相同，但都涩味低、能让身体暖起来。",
-        pairing: "饭后、夜里、感觉要感冒时。红枣、生姜、双和适合冬天；柚子、五味子适合夏天。",
-        keep: "干燥的叶与花密封放在阴凉处可存6~12个月。蜜渍（红枣·柚子·五味子）冷藏一年。",
-        brewTip: "根与果实要用沸水泡5~10分钟才出味。花与叶5分钟就够。",
-        keywords: "花草茶 韩国传统茶 红枣 生姜 柚子 五味子 双和 玉竹 大麦 玄米 柿叶 桑叶 荷叶 艾草 饼茶 洋甘菊 薄荷 洛神花 路易波士 马黛 薰衣草 香茅 无咖啡因"
+          "干燥 → （烘烤·炒）→ 冲泡。大麦、玄米、荞麦炒出香气，根类干燥后煮。饼茶是蒸过的叶子压紧晒干，另有微生物发酵。",
+        varieties: ["双和·玉竹·桔梗·生姜", "大麦·玄米·荞麦", "柿叶·桑叶·荷叶·艾草", "路易波士·马黛·饼茶"],
+        flavor: "谷物的焙香、根的甜、果实熟成的香——涩味低，能让身体暖起来。",
+        pairing: "饭后、夜里、感觉要感冒时。双和、生姜适合冬天；大麦、玄米四季皆宜。",
+        keep: "干燥的叶与根密封放在阴凉处可存6~12个月。炒过的谷物香气散得快，宜少量分装。",
+        brewTip: "根与果实要用沸水泡5~10分钟，谷物5分钟就够。路易波士加牛奶也很好喝。",
+        keywords: "代用茶 传统茶 韩方茶 双和 玉竹 桔梗 生姜 大麦 玄米 荞麦 柿叶 桑叶 荷叶 艾草 饼茶 路易波士 马黛"
       },
       "zh-TW": {
-        name: "花草茶 · 韓國傳統茶",
-        oneLine: "用葉、根、果實與花泡出的一杯——無咖啡因，適合一天的收尾。",
-        oxidation: "不發酵 · 無咖啡因",
+        name: "代用茶 · 傳統茶",
+        oneLine: "不用茶樹，而用穀物、根與果實泡出的一杯——無咖啡因，隨時在手邊。",
+        oxidation: "不發酵 · 大多無咖啡因",
         ratioNote: "200毫升配3公克，根與果實5公克",
-        rounds: "2~3泡",
-        steepBasis: "依書與慣例：95度泡5分鐘，第二泡6分鐘。根與果實可到10分鐘。",
+        rounds: "1~3泡",
+        steepBasis: "95도泡5分鐘，第二泡6分鐘。根與果實可到10分鐘。",
         process:
-          "乾燥 → （烘烤·炒）→ 沖泡。紅棗、柚子、五味子用糖醃成「청」（蜜漬），根類乾燥後烘烤再沖泡。떡차（餅茶）是蒸過的葉子壓緊晒乾，另有微生物發酵。",
-        varieties: ["紅棗·生薑·柚子·五味子", "雙和·玉竹·桔梗", "大麥·玄米·蕎麥", "柿葉·桑葉·荷葉·艾草", "洋甘菊·薄荷·洛神花", "路易波士·馬黛·薰衣草·香茅"],
-        flavor: "穀物的焙香、根的甜、花的香——各不相同，但都澀味低、能讓身體暖起來。",
-        pairing: "飯後、夜裡、感覺要感冒時。紅棗、生薑、雙和適合冬天；柚子、五味子適合夏天。",
-        keep: "乾燥的葉與花密封放在陰涼處可存6~12個月。蜜漬（紅棗·柚子·五味子）冷藏一年。",
-        brewTip: "根與果實要用沸水泡5~10分鐘才出味。花與葉5分鐘就夠。",
-        keywords: "花草茶 韓國傳統茶 紅棗 生薑 柚子 五味子 雙和 玉竹 大麥 玄米 柿葉 桑葉 荷葉 艾草 餅茶 洋甘菊 薄荷 洛神花 路易波士 馬黛 薰衣草 香茅 無咖啡因"
+          "乾燥 → （烘烤·炒）→ 沖泡。大麥、玄米、蕎麥炒出香氣，根類乾燥後煮。餅茶是蒸過的葉子壓緊晒乾，另有微生物發酵。",
+        varieties: ["雙和·玉竹·桔梗·生薑", "大麥·玄米·蕎麥", "柿葉·桑葉·荷葉·艾草", "路易波士·馬黛·餅茶"],
+        flavor: "穀物的焙香、根的甜、果實熟成的香——澀味低，能讓身體暖起來。",
+        pairing: "飯後、夜裡、感覺要感冒時。雙和、生薑適合冬天；大麥、玄米四季皆宜。",
+        keep: "乾燥的葉與根密封放在陰涼處可存6~12個月。炒過的穀物香氣散得快，宜少量分裝。",
+        brewTip: "根與果實要用沸水泡5~10分鐘，穀物5分鐘就夠。路易波士加牛奶也很好喝。",
+        keywords: "代用茶 傳統茶 韓方茶 雙和 玉竹 桔梗 生薑 大麥 玄米 蕎麥 柿葉 桑葉 荷葉 艾草 餅茶 路易波士 馬黛"
+      }
+    },
+    {
+      id: "herb",
+      kind: "group",
+      hanja: "花",
+      sub: "Herbal Tea",
+      accent: "#8A6E86",
+      accentSoft: "#F0E7EF",
+      temp: 95,
+      tempRange: "90~100℃",
+      leaf: "2~3g",
+      water: "200ml",
+      steeps: [300, 360],
+      maxSteep: 2,
+      oxidationValue: 0,
+      ko: {
+        name: "허브차",
+        oneLine: "꽃과 잎을 그대로 우려 향으로 쉬어 가는 잔 — 카페인 없이.",
+        oxidation: "무산화 · 카페인 없음",
+        ratioNote: "200ml에 2~3g, 꽃만이면 1~2g",
+        rounds: "1~2회",
+        steepBasis: "95도에서 5분, 뚜껑을 덮어 향을 잡습니다. 두 번째는 6분.",
+        process:
+          "말리기 → (필요하면 볶음) → 우림. 꽃은 뚜껑을 덮어 향을 가두고, 잎은 5분을 넘기지 않습니다. 히비스커스·페퍼민트는 아이스로도 좋습니다.",
+        varieties: ["캐모마일·라벤더·국화", "페퍼민트·레몬그라스", "히비스커스"],
+        flavor: "꽃의 향, 잎의 청량함, 꽃받침의 산미 — 떫음 없이 향이 중심입니다.",
+        pairing: "디저트, 자기 전, 식후. 히비스커스·페퍼민트는 얼음과 함께.",
+        keep: "꽃과 잎은 밀봉해 서늘한 곳에 12개월. 향이 먼저 사라지므로 소분해 두세요.",
+        brewTip: "꽃은 95도에서 5분, 뚜껑을 덮어 향을 잡습니다. 너무 오래 우리면 씁니다.",
+        keywords: "허브차 캐모마일 페퍼민트 라벤더 레몬그라스 국화 히비스커스 카페인프리"
+      },
+      en: {
+        name: "Herbal tea",
+        oneLine: "Flowers and leaves steeped as they are — a pause held by aroma, without caffeine.",
+        oxidation: "None · caffeine-free",
+        ratioNote: "2–3 g to 200 ml; 1–2 g for flowers alone",
+        rounds: "1–2 infusions",
+        steepBasis: "95 °C for 5 minutes with the lid on to hold the aroma; 6 for a second cup.",
+        process:
+          "Dried → (roasted if needed) → steeped. Flowers go under a lid to trap the scent; leaves should not pass five minutes. Hibiscus and peppermint are good iced.",
+        varieties: ["Chamomile · lavender · chrysanthemum", "Peppermint · lemongrass", "Hibiscus"],
+        flavor: "Flower perfume, the coolness of leaves, the acidity of a calyx — aroma first, no astringency.",
+        pairing: "Desserts, before sleep, after a meal. Hibiscus and peppermint over ice.",
+        keep: "Keep flowers and leaves sealed and cool for 12 months; the aroma goes first, so split into small jars.",
+        brewTip: "Flowers at 95 °C for 5 minutes under a lid. Steeped too long they turn bitter.",
+        keywords: "herbal tea chamomile peppermint lavender lemongrass chrysanthemum hibiscus caffeine free"
+      },
+      "zh-CN": {
+        name: "花草茶",
+        oneLine: "把花与叶直接泡开，靠香气歇一口气的一杯——无咖啡因。",
+        oxidation: "不发酵 · 无咖啡因",
+        ratioNote: "200毫升配2~3克，只用花则1~2克",
+        rounds: "1~2泡",
+        steepBasis: "95도泡5分钟，盖上盖子留住香气；第二泡6分钟。",
+        process:
+          "干燥 → （必要时烘炒）→ 冲泡。花要盖盖子把香气留住，叶不要超过5分钟。洛神花与薄荷做成冰饮也很好。",
+        varieties: ["洋甘菊·薰衣草·菊花", "薄荷·香茅", "洛神花"],
+        flavor: "花的香、叶的清凉、花萼的酸——几乎没有涩味，以香气为主。",
+        pairing: "甜点、睡前、饭后。洛神花与薄荷加冰块更好。",
+        keep: "花与叶密封放在阴凉处可存12个月。香气先散，宜少量分装。",
+        brewTip: "花用95도泡5分钟并盖上盖子。泡太久会苦。",
+        keywords: "花草茶 洋甘菊 薄荷 薰衣草 香茅 菊花 洛神花 无咖啡因"
+      },
+      "zh-TW": {
+        name: "花草茶",
+        oneLine: "把花與葉直接泡開，靠香氣歇一口氣的一杯——無咖啡因。",
+        oxidation: "不發酵 · 無咖啡因",
+        ratioNote: "200毫升配2~3公克，只用花則1~2公克",
+        rounds: "1~2泡",
+        steepBasis: "95도泡5分鐘，蓋上蓋子留住香氣；第二泡6分鐘。",
+        process:
+          "乾燥 → （必要時烘炒）→ 沖泡。花要蓋蓋子把香氣留住，葉不要超過5分鐘。洛神花與薄荷做成冰飲也很好。",
+        varieties: ["洋甘菊·薰衣草·菊花", "薄荷·香茅", "洛神花"],
+        flavor: "花的香、葉的清涼、花萼的酸——幾乎沒有澀味，以香氣為主。",
+        pairing: "甜點、睡前、飯後。洛神花與薄荷加冰塊更好。",
+        keep: "花與葉密封放在陰涼處可存12個月。香氣先散，宜少量分裝。",
+        brewTip: "花用95도泡5分鐘並蓋上蓋子。泡太久會苦。",
+        keywords: "花草茶 洋甘菊 薄荷 薰衣草 香茅 菊花 洛神花 無咖啡因"
+      }
+    },
+    {
+      id: "fruit",
+      kind: "group",
+      hanja: "果",
+      sub: "Fruit Tea",
+      accent: "#C05A45",
+      accentSoft: "#F8E7E0",
+      temp: 90,
+      tempRange: "80~95℃",
+      leaf: "5g",
+      water: "200ml",
+      steeps: [300, 360],
+      maxSteep: 2,
+      oxidationValue: 0,
+      ko: {
+        name: "과일차",
+        oneLine: "말린 과일과 껍질, 청으로 우린 잔 — 산뜻한 산미와 달콤함, 카페인 없이.",
+        oxidation: "무산화 · 카페인 없음",
+        ratioNote: "200ml에 5g, 청(유자·오미자)은 2큰술",
+        rounds: "1~2회",
+        steepBasis: "95도에서 5분. 청은 80도 물에 풀어야 향이 살아 있습니다.",
+        process:
+          "말린 과일 → (설탕·꿀에 절임) → 우림. 한국의 유자·모과·오미자는 청으로 절여 두고 물에 풀며, 서양 과일 블렌드는 말린 사과·베리·껍질에 향과 꽃잎을 더합니다.",
+        varieties: ["유자·모과·오미자·대추", "생강레몬·애플 시나몬", "베리 히비스커스·블러드 오렌지·패션프루트"],
+        flavor: "과일의 산미와 단맛, 껍질의 향 — 카페인이 없고 아이스로도 잘 어울립니다.",
+        pairing: "디저트, 브런치, 식후. 유자·모과는 겨울, 오미자·패션프루트는 여름에.",
+        keep: "청은 냉장 1년, 말린 과일 블렌드는 밀봉해 12개월. 향이 날아가지 않게 소분합니다.",
+        brewTip: "말린 과일은 95도에 5분, 청은 80도 물에 풀어야 향이 살아 있습니다. 아이스는 두 배로 진하게.",
+        keywords: "과일차 유자 모과 오미자 대추 생강레몬 애플시나몬 피치 히비스커스베리 블러드오렌지 패션프루트 카페인프리"
+      },
+      en: {
+        name: "Fruit tea",
+        oneLine: "Dried fruit, peel and cheong steeped into a cup — bright acidity and sweetness, without caffeine.",
+        oxidation: "None · caffeine-free",
+        ratioNote: "5 g to 200 ml; 2 spoons of cheong for citron or schisandra",
+        rounds: "1–2 infusions",
+        steepBasis: "95 °C for 5 minutes. Cheong needs 80 °C water to keep its aroma.",
+        process:
+          "Dried fruit → (preserved in sugar or honey) → steeped. Korean citron, quince and schisandra are preserved as cheong and spooned into water; western fruit blends mix dried apple, berries and peel with flavour and petals.",
+        varieties: [
+          "Citron · quince · schisandra · jujube",
+          "Ginger lemon · apple cinnamon",
+          "Berry hibiscus · blood orange · passion fruit"
+        ],
+        flavor: "The acidity and sweetness of fruit, the aroma of peel — no caffeine, and good over ice.",
+        pairing: "Desserts, brunch, after a meal. Citron and quince in winter; schisandra and passion fruit in summer.",
+        keep: "Cheong keeps a year in the fridge; dried fruit blends 12 months sealed. Split into small jars so the aroma stays.",
+        brewTip: "Dried fruit at 95 °C for 5 minutes; cheong in 80 °C water. Double the amount for iced tea.",
+        keywords: "fruit tea citron quince schisandra jujube ginger lemon apple cinnamon peach berry hibiscus blood orange passion fruit caffeine free"
+      },
+      "zh-CN": {
+        name: "水果茶",
+        oneLine: "用干燥果实、果皮与蜜渍泡出的一杯——清爽的酸与甜，无咖啡因。",
+        oxidation: "不发酵 · 无咖啡因",
+        ratioNote: "200毫升配5克，柚子、五味子蜜渍2勺",
+        rounds: "1~2泡",
+        steepBasis: "95도泡5分钟。蜜渍要用80度水冲开，香气才在。",
+        process:
+          "干燥果实 → （糖·蜜腌渍）→ 冲泡。韩国的柚子、木瓜、五味子腌成蜜渍后兑水，西式水果拼配则把干燥苹果、莓果、果皮与香气、花瓣混合。",
+        varieties: ["柚子·木瓜·五味子·红枣", "生姜柠檬·苹果肉桂", "莓果洛神·血橙·百香果"],
+        flavor: "果实的酸与甜、果皮的香——没有咖啡因，做成冰饮也合适。",
+        pairing: "甜点、早午餐、饭后。柚子、木瓜适合冬天，五味子、百香果适合夏天。",
+        keep: "蜜渍冷藏可存一年，干燥果实拼配密封可存12个月。香气易散，宜少量分装。",
+        brewTip: "干燥果实95도泡5分钟，蜜渍用80度水冲开。做冰饮用两倍的量。",
+        keywords: "水果茶 柚子 木瓜 五味子 红枣 生姜柠檬 苹果肉桂 蜜桃 莓果洛神 血橙 百香果 无咖啡因"
+      },
+      "zh-TW": {
+        name: "水果茶",
+        oneLine: "用乾燥果實、果皮與蜜漬泡出的一杯——清爽的酸與甜，無咖啡因。",
+        oxidation: "不發酵 · 無咖啡因",
+        ratioNote: "200毫升配5公克，柚子、五味子蜜漬2勺",
+        rounds: "1~2泡",
+        steepBasis: "95도泡5分鐘。蜜漬要用80度水沖開，香氣才在。",
+        process:
+          "乾燥果實 → （糖·蜜醃漬）→ 沖泡。韓國的柚子、木瓜、五味子醃成蜜漬後兌水，西式水果拼配則把乾燥蘋果、莓果、果皮與香氣、花瓣混合。",
+        varieties: ["柚子·木瓜·五味子·紅棗", "生薑檸檬·蘋果肉桂", "莓果洛神·血橙·百香果"],
+        flavor: "果實的酸與甜、果皮的香——沒有咖啡因，做成冰飲也合適。",
+        pairing: "甜點、早午餐、飯後。柚子、木瓜適合冬天，五味子、百香果適合夏天。",
+        keep: "蜜漬冷藏可存一年，乾燥果實拼配密封可存12個月。香氣易散，宜少量分裝。",
+        brewTip: "乾燥果實95도泡5分鐘，蜜漬用80度水沖開。做冰飲用兩倍的量。",
+        keywords: "水果茶 柚子 木瓜 五味子 紅棗 生薑檸檬 蘋果肉桂 蜜桃 莓果洛神 血橙 百香果 無咖啡因"
       }
     }
   ];
@@ -7138,8 +8030,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "black-masala",
-      group: "black",
+      id: "blend-masala",
+      group: "blended",
       h: "香",
       hz: "馬薩拉茶",
       hs: "马萨拉茶",
@@ -7892,8 +8784,8 @@ window.TEAFaiData = (function () {
     },
     /* ── 가향 · 블렌딩 ── */
     {
-      id: "scent-earlgrey",
-      group: "scented",
+      id: "blend-earlgrey",
+      group: "blended",
       h: "伯",
       hz: "伯爵茶",
       hs: "伯爵茶",
@@ -7963,8 +8855,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "scent-ladygrey",
-      group: "scented",
+      id: "blend-ladygrey",
+      group: "blended",
       h: "淑",
       hz: "仕女伯爵",
       hs: "仕女伯爵",
@@ -8032,8 +8924,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "scent-englishbreakfast",
-      group: "scented",
+      id: "blend-englishbreakfast",
+      group: "blended",
       h: "晨",
       hz: "英式早餐茶",
       hs: "英式早餐茶",
@@ -8101,8 +8993,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "scent-afternoon",
-      group: "scented",
+      id: "blend-afternoon",
+      group: "blended",
       h: "午",
       hz: "下午茶",
       hs: "下午茶",
@@ -8171,8 +9063,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "scent-jasmine",
-      group: "scented",
+      id: "blend-jasmine",
+      group: "blended",
       h: "茉",
       hz: "茉莉花茶",
       hs: "茉莉花茶",
@@ -8241,8 +9133,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "scent-hongkong",
-      group: "scented",
+      id: "blend-hongkong",
+      group: "blended",
       h: "港",
       hz: "港式奶茶",
       hs: "港式奶茶",
@@ -8313,8 +9205,8 @@ window.TEAFaiData = (function () {
     },
     /* ── 허브 · 한국 전통차 ── */
     {
-      id: "herb-daechu",
-      group: "herbal",
+      id: "fruit-daechu",
+      group: "fruit",
       h: "棗",
       hz: "紅棗茶",
       hs: "红枣茶",
@@ -8429,8 +9321,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "herb-yuja",
-      group: "herbal",
+      id: "fruit-yuja",
+      group: "fruit",
       h: "柚",
       hz: "柚子茶",
       hs: "柚子茶",
@@ -8487,8 +9379,8 @@ window.TEAFaiData = (function () {
       ]
     },
     {
-      id: "herb-omija",
-      group: "herbal",
+      id: "fruit-omija",
+      group: "fruit",
       h: "五",
       hz: "五味子茶",
       hs: "五味子茶",
@@ -9188,7 +10080,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-chamomile",
-      group: "herbal",
+      group: "herb",
       h: "菊",
       hz: "洋甘菊",
       hs: "洋甘菊",
@@ -9246,7 +10138,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-peppermint",
-      group: "herbal",
+      group: "herb",
       h: "荷",
       hz: "薄荷",
       hs: "薄荷",
@@ -9304,7 +10196,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-hibiscus",
-      group: "herbal",
+      group: "herb",
       h: "洛",
       hz: "洛神花",
       hs: "洛神花",
@@ -9478,7 +10370,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-lavender",
-      group: "herbal",
+      group: "herb",
       h: "薰",
       hz: "薰衣草",
       hs: "薰衣草",
@@ -9536,7 +10428,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-lemongrass",
-      group: "herbal",
+      group: "herb",
       h: "茅",
       hz: "香茅",
       hs: "香茅",
@@ -9594,7 +10486,7 @@ window.TEAFaiData = (function () {
     },
     {
       id: "herb-chrysanthemum",
-      group: "herbal",
+      group: "herb",
       h: "菊",
       hz: "菊花茶",
       hs: "菊花茶",
@@ -9650,7 +10542,512 @@ window.TEAFaiData = (function () {
         "花浮起來時蓋上蓋子留住香氣。"
       ]
     },
-    /* @@MORE@@ */
+    /* ── 과일차 (블렌드 포함) ── */
+    {
+      id: "fruit-mogwa",
+      group: "fruit",
+      h: "木",
+      hz: "木瓜茶",
+      hs: "木瓜茶",
+      rom: "Mogwa-cha",
+      sub: "Quince Tea",
+      t: 85,
+      tr: "80~90℃",
+      l: "청 2큰술",
+      w: "200ml",
+      s: [300, 300],
+      m: 1,
+      ox: 0,
+      ko: [
+        "모과차",
+        "향이 강한 모과를 꿀에 절여 우린, 겨울 목을 위한 잔.",
+        "무산화 · 카페인 없음",
+        "청 2큰술에 200ml",
+        "1회",
+        "80~90도 물에 청을 풀어 마십니다. 끓이면 향이 날아갑니다.",
+        "한국. 모과는 중국 원산으로 한반도에 들어와 정원수로 심었고, 열매는 향이 강해 방에 두거나 옷장에 넣었습니다.",
+        "모과를 얇게 썰어 씨째 설탕·꿀이나 조청에 절여 숙성 → 뜨거운 물에 풀어 마심. 껍질을 살리면 향이 오래갑니다.",
+        "‘나무에 열린 향기’라 불렀습니다. 차로 마시기 전부터 방향(芳香)의 열매로 쓰였습니다.",
+        "은은한 꽃향과 단맛, 끝의 옅은 떫음.",
+        "약과, 호두과자, 겨울 디저트.",
+        "청 2큰술을 80~90도 물 200ml에 풀고, 과육을 함께 넣어야 향이 좋습니다."
+      ],
+      en: [
+        "Quince Tea",
+        "Quince preserved in honey — a winter cup for a scratchy throat.",
+        "None · caffeine-free",
+        "2 spoons of cheong to 200 ml",
+        "One brew",
+        "Stir the cheong into 80–90 °C water; boiling drives the aroma off.",
+        "Korea. Quince came from China and was planted in Korean gardens; the fruit's strong perfume went into rooms and wardrobes.",
+        "Thinly sliced quince, seeds and all, preserved in sugar, honey or jocheong → stirred into hot water. Keeping the peel keeps the aroma.",
+        "It was called “fragrance borne on a tree” and used to scent rooms long before anyone drank it.",
+        "A soft floral perfume and sweetness, with a faint astringency at the end.",
+        "Yakgwa, walnut cakes, winter desserts.",
+        "Two spoons of cheong in 200 ml of 80–90 °C water, fruit included."
+      ],
+      "zh-CN": [
+        "木瓜茶",
+        "香气浓烈的木瓜用蜜腌成的一杯，为冬天的嗓子。",
+        "不发酵 · 无咖啡因",
+        "蜜渍2勺配200毫升",
+        "1次",
+        "用80~90度水冲开蜜渍；煮沸会让香气跑掉。",
+        "韩国。木瓜原产中国，传入韩半岛后多种在庭院，果实香气浓，常放在房里或衣柜中。",
+        "木瓜切薄片（连籽）用糖、蜜或麦芽糖腌渍熟成 → 兑热水饮用。保留果皮香气更久。",
+        "古人称它“长在树上的香”；在作为茶之前，早已用来熏香房间。",
+        "柔和的花香与甜味，尾端有淡淡涩感。",
+        "药果、核桃糕、冬季甜点。",
+        "蜜渍2勺兑80~90度水200毫升，连果肉一起放。"
+      ],
+      "zh-TW": [
+        "木瓜茶",
+        "香氣濃烈的木瓜用蜜醃成的一杯，為冬天的嗓子。",
+        "不發酵 · 無咖啡因",
+        "蜜漬2勺配200毫升",
+        "1次",
+        "用80~90度水沖開蜜漬；煮沸會讓香氣跑掉。",
+        "韓國。木瓜原產中國，傳入韓半島後多種在庭院，果實香氣濃，常放在房裡或衣櫃中。",
+        "木瓜切薄片（連籽）用糖、蜜或麥芽糖醃漬熟成 → 兌熱水飲用。保留果皮香氣更久。",
+        "古人稱它「長在樹上的香」；在作為茶之前，早已用來薰香房間。",
+        "柔和的花香與甜味，尾端有淡淡澀感。",
+        "藥果、核桃糕、冬季甜點。",
+        "蜜漬2勺兌80~90度水200毫升，連果肉一起放。"
+      ]
+    },
+    {
+      id: "fruit-gingerlemon",
+      group: "fruit",
+      h: "薑",
+      hz: "生姜柠檬茶",
+      hs: "生姜柠檬茶",
+      rom: "Ginger Lemon Tea",
+      sub: "Ginger Lemon",
+      t: 85,
+      tr: "80~90℃",
+      l: "청 1큰술 + 레몬 2쪽",
+      w: "200ml",
+      s: [300],
+      m: 1,
+      ox: 0,
+      ko: [
+        "생강레몬티",
+        "생강의 따뜻함에 레몬의 산미를 더한, 몸이 서늘할 때의 한 잔.",
+        "무산화 · 카페인 없음",
+        "생강청 1큰술 + 레몬 2쪽에 200ml",
+        "1회",
+        "80~90도 물에 생강청을 풀고 레몬은 마지막에 넣습니다.",
+        "한국의 생강차에 레몬을 더한 집의 차. 레몬은 지중해 원산입니다.",
+        "생강을 얇게 썰어 꿀이나 설탕에 절여 두고, 뜨거운 물에 레몬 슬라이스를 더해 마십니다.",
+        "생강차는 예부터 몸을 데우는 겨울 아침의 차였고, 레몬은 서양에서 들어와 산미를 더했습니다.",
+        "생강의 알싸한 온기, 레몬 껍질의 시트러스, 꿀의 단맛.",
+        "감기 기운이 있을 때, 아침 공복의 따뜻한 한 잔.",
+        "생강청은 냉장 2주, 말린 생강은 밀봉해 6개월."
+      ],
+      en: [
+        "Ginger Lemon Tea",
+        "Ginger's warmth with lemon's acidity — for a day when the body feels cold.",
+        "None · caffeine-free",
+        "1 spoon of ginger cheong plus 2 lemon slices to 200 ml",
+        "One brew",
+        "Stir the ginger cheong into 80–90 °C water and add the lemon last.",
+        "A home cup: Korean ginger tea with lemon. The lemon itself comes from the Mediterranean.",
+        "Thinly sliced ginger preserved in honey or sugar; hot water and a slice of lemon go in at the end.",
+        "Ginger tea has long warmed winter mornings; lemon came from the West and added the acidity.",
+        "The pungent warmth of ginger, citrus peel, honey sweetness.",
+        "When a cold is coming; a warm cup on an empty stomach in the morning.",
+        "Ginger cheong keeps two weeks in the fridge; dried ginger six months sealed."
+      ],
+      "zh-CN": [
+        "生姜柠檬茶",
+        "生姜的温热加上柠檬的酸，身体发冷时的一杯。",
+        "不发酵 · 无咖啡因",
+        "生姜蜜渍1勺 + 柠檬2片配200毫升",
+        "1次",
+        "把生姜蜜渍化在80~90度水里，柠檬最后放。",
+        "韩国的生姜茶加柠檬，是家里常做的一杯。柠檬原产地中海。",
+        "生姜切薄片用蜜或糖腌好，冲热水时加入柠檬片。",
+        "生姜茶自古就是冬天早上暖身的茶，柠檬从西方传入后添了酸味。",
+        "生姜辛香的暖意、柠檬皮的柑橘香、蜂蜜的甜。",
+        "快感冒时，或早晨空腹的一杯。",
+        "生姜蜜渍冷藏2周，干燥生姜密封6个月。"
+      ],
+      "zh-TW": [
+        "生薑檸檬茶",
+        "生薑的溫熱加上檸檬的酸，身體發冷時的一杯。",
+        "不發酵 · 無咖啡因",
+        "生薑蜜漬1勺 + 檸檬2片配200毫升",
+        "1次",
+        "把生薑蜜漬化在80~90度水裡，檸檬最後放。",
+        "韓國的生薑茶加檸檬，是家裡常做的一杯。檸檬原產地中海。",
+        "生薑切薄片用蜜或糖醃好，沖熱水時加入檸檬片。",
+        "生薑茶自古就是冬天早上暖身的茶，檸檬從西方傳入後添了酸味。",
+        "生薑辛香的暖意、檸檬皮的柑橘香、蜂蜜的甜。",
+        "快感冒時，或早晨空腹的一杯。",
+        "生薑蜜漬冷藏2週，乾燥生薑密封6個月。"
+      ]
+    },
+    {
+      id: "fruit-applecinnamon",
+      group: "fruit",
+      h: "蘋",
+      hz: "苹果肉桂茶",
+      hs: "苹果肉桂茶",
+      rom: "Apple Cinnamon",
+      sub: "Apple Cinnamon",
+      t: 95,
+      tr: "90~100℃",
+      l: "5g",
+      w: "200ml",
+      s: [360, 420],
+      m: 2,
+      ox: 0,
+      ko: [
+        "애플 시나몬",
+        "말린 사과와 계피 — 구운 과일 향이 겹친 과일 블렌드의 기본.",
+        "무산화 · 카페인 없음",
+        "200ml에 5g",
+        "1~2회",
+        "95도에서 6분. 계피는 8분을 넘기면 써집니다.",
+        "유럽과 북미의 가정용 블렌드. 말린 사과에 계피 껍질을 섞습니다.",
+        "말린 사과 조각에 계피를 섞어 우리거나, 사과를 살짝 볶아 향을 올린 뒤 우리기도 합니다.",
+        "사과와 계피는 유럽에서 겨울 음료의 기본 조합이었고, 말린 과일이 유통되면서 차로 마시게 되었습니다.",
+        "사과의 산미와 계피의 따뜻한 향, 끝의 단맛.",
+        "애플 파이, 시나몬 롤, 겨울 디저트.",
+        "95도에서 6~8분. 아이스로 마시려면 두 배로 진하게."
+      ],
+      en: [
+        "Apple Cinnamon",
+        "Dried apple and cinnamon — the baked-fruit heart of a fruit blend.",
+        "None · caffeine-free",
+        "5 g to 200 ml",
+        "1–2 infusions",
+        "6 minutes at 95 °C. Cinnamon turns bitter past eight.",
+        "A European and North American household blend: dried apple with cinnamon bark.",
+        "Dried apple pieces mixed with cinnamon, or apple lightly roasted first to lift the aroma.",
+        "Apple and cinnamon were the base of European winter drinks long before dried fruit made them a tea.",
+        "Apple acidity, the warm spice of cinnamon, sweetness at the end.",
+        "Apple pie, cinnamon rolls, winter desserts.",
+        "Six to eight minutes at 95 °C; double it for iced tea."
+      ],
+      "zh-CN": [
+        "苹果肉桂茶",
+        "干燥苹果与肉桂——烤水果般的香气，是水果拼配的基本款。",
+        "不发酵 · 无咖啡因",
+        "200毫升配5克",
+        "1~2泡",
+        "95度泡6分钟。肉桂超过8分钟会苦。",
+        "欧美家庭的常备拼配：干燥苹果加肉桂皮。",
+        "干燥苹果片与肉桂混合冲泡，或先把苹果略烘一下再泡，香气更高。",
+        "苹果与肉桂原是欧洲冬季饮品的经典组合，干燥水果流通后才成了茶。",
+        "苹果的酸、肉桂的温暖香气、尾端的甜。",
+        "苹果派、肉桂卷、冬季甜点。",
+        "95度泡6~8分钟。做冰饮用两倍的量。"
+      ],
+      "zh-TW": [
+        "蘋果肉桂茶",
+        "乾燥蘋果與肉桂——烤水果般的香氣，是水果拼配的基本款。",
+        "不發酵 · 無咖啡因",
+        "200毫升配5公克",
+        "1~2泡",
+        "95度泡6分鐘。肉桂超過8分鐘會苦。",
+        "歐美家庭的常備拼配：乾燥蘋果加肉桂皮。",
+        "乾燥蘋果片與肉桂混合沖泡，或先把蘋果略烘一下再泡，香氣更高。",
+        "蘋果與肉桂原是歐洲冬季飲品的經典組合，乾燥水果流通後才成了茶。",
+        "蘋果的酸、肉桂的溫暖香氣、尾端的甜。",
+        "蘋果派、肉桂捲、冬季甜點。",
+        "95度泡6~8分鐘。做冰飲用兩倍的量。"
+      ]
+    },
+    {
+      id: "fruit-peach",
+      group: "fruit",
+      h: "桃",
+      hz: "蜜桃花茶",
+      hs: "蜜桃花茶",
+      rom: "Peach Blossom",
+      sub: "Peach Blossom",
+      t: 90,
+      tr: "85~95℃",
+      l: "5g",
+      w: "200ml",
+      s: [300, 360],
+      m: 2,
+      ox: 0,
+      ko: [
+        "피치 블로썸",
+        "복숭아 향에 꽃잎을 얹은, 봄 같은 한 잔.",
+        "무산화 · 카페인 없음",
+        "200ml에 5g",
+        "1~2회",
+        "90도에서 5분. 꽃잎은 마지막 2분에 넣으면 향이 살아 있습니다.",
+        "유럽식 과일 블렌드. 복숭아 향을 입힌 사과·히비스커스에 꽃잎을 더합니다.",
+        "말린 사과와 히비스커스에 복숭아 향을 입히고 꽃잎을 섞습니다.",
+        "복숭아는 유럽에서 여름 과일의 대표였고, 향을 입힌 과일 블렌드는 20세기 티살롱에서 자리 잡았습니다.",
+        "잘 익은 복숭아의 향, 부드러운 산미, 꽃잎의 향.",
+        "과일 타르트, 브런치, 아이스티.",
+        "90도에서 5분. 아이스로 마실 때는 얼음을 고려해 두 배로 진하게."
+      ],
+      en: [
+        "Peach Blossom",
+        "Peach aroma with petals on top — a cup that tastes like spring.",
+        "None · caffeine-free",
+        "5 g to 200 ml",
+        "1–2 infusions",
+        "Five minutes at 90 °C. Add the petals in the last two minutes to keep their scent.",
+        "A European fruit blend: dried apple and hibiscus scented with peach, plus petals.",
+        "Dried apple and hibiscus scented with peach, then mixed with flower petals.",
+        "Peach was Europe's summer fruit, and scented fruit blends settled into tea salons in the twentieth century.",
+        "Ripe peach aroma, a soft acidity, the scent of petals.",
+        "Fruit tarts, brunch, iced tea.",
+        "Five minutes at 90 °C; double it when pouring over ice."
+      ],
+      "zh-CN": [
+        "蜜桃花茶",
+        "蜜桃香里加上花瓣，像春天的一杯。",
+        "不发酵 · 无咖啡因",
+        "200毫升配5克",
+        "1~2泡",
+        "90度泡5分钟。花瓣在最后2分钟放，香气更好。",
+        "欧式水果拼配：加了蜜桃香的苹果、洛神花，再混入花瓣。",
+        "干燥苹果与洛神花加蜜桃香，再拌入花瓣。",
+        "蜜桃是欧洲夏天的代表水果，加香水果拼配在20世纪的茶沙龙里定下了样子。",
+        "熟透蜜桃的香、柔和的酸、花瓣的香。",
+        "水果塔、早午餐、冰茶。",
+        "90度泡5分钟。做冰饮时考虑到冰块，用两倍的量。"
+      ],
+      "zh-TW": [
+        "蜜桃花茶",
+        "蜜桃香裡加上花瓣，像春天的一杯。",
+        "不發酵 · 無咖啡因",
+        "200毫升配5公克",
+        "1~2泡",
+        "90度泡5分鐘。花瓣在最後2分鐘放，香氣更好。",
+        "歐式水果拼配：加了蜜桃香的蘋果、洛神花，再混入花瓣。",
+        "乾燥蘋果與洛神花加蜜桃香，再拌入花瓣。",
+        "蜜桃是歐洲夏天的代表水果，加香水果拼配在20世紀的茶沙龍裡定下了樣子。",
+        "熟透蜜桃的香、柔和的酸、花瓣的香。",
+        "水果塔、早午餐、冰茶。",
+        "90度泡5分鐘。做冰飲時考慮到冰塊，用兩倍的量。"
+      ]
+    },
+    {
+      id: "fruit-berryhibiscus",
+      group: "fruit",
+      h: "莓",
+      hz: "莓果洛神花茶",
+      hs: "莓果洛神花茶",
+      rom: "Berry Hibiscus",
+      sub: "Berry Hibiscus",
+      t: 95,
+      tr: "90~100℃",
+      l: "5g",
+      w: "200ml",
+      s: [300, 360],
+      m: 2,
+      ox: 0,
+      ko: [
+        "히비스커스 베리",
+        "히비스커스의 산미에 베리와 로즈힙을 더한, 붉고 상큼한 잔.",
+        "무산화 · 카페인 없음",
+        "200ml에 5g",
+        "1~2회",
+        "95도에서 5~7분. 꿀이나 설탕을 조금 더하면 산미가 둥글어집니다.",
+        "유럽·북미의 과일 블렌드. 히비스커스는 북아프리카 원산으로, 로즈힙·엘더베리와 자주 섞입니다.",
+        "히비스커스 꽃받침에 로즈힙·엘더베리·딸기 조각을 섞어 우립니다.",
+        "히비스커스는 이집트·수단에서 오래 마시던 꽃차로, 유럽에서는 과일 블렌드의 산미를 맡습니다.",
+        "크랜베리 같은 강한 산미, 베리의 단맛, 붉은 물색.",
+        "치즈케이크, 상큼한 디저트, 아이스티.",
+        "95도에서 5~7분. 아이스로 마시면 산미가 더 또렷합니다."
+      ],
+      en: [
+        "Berry Hibiscus",
+        "Hibiscus acidity with berries and rosehip — a red, bracing cup.",
+        "None · caffeine-free",
+        "5 g to 200 ml",
+        "1–2 infusions",
+        "Five to seven minutes at 95 °C. A little honey rounds the acidity.",
+        "A European and North American fruit blend. Hibiscus comes from North Africa and is often mixed with rosehip and elderberry.",
+        "Hibiscus calyces mixed with rosehip, elderberry and strawberry pieces.",
+        "Hibiscus has long been drunk in Egypt and Sudan; in Europe it carries the acidity of a fruit blend.",
+        "A cranberry-like acidity, berry sweetness, a red liquor.",
+        "Cheesecake, sharp desserts, iced tea.",
+        "Five to seven minutes at 95 °C; iced, the acidity is even clearer."
+      ],
+      "zh-CN": [
+        "莓果洛神花茶",
+        "洛神花的酸加上莓果与玫瑰果，红而清爽的一杯。",
+        "不发酵 · 无咖啡因",
+        "200毫升配5克",
+        "1~2泡",
+        "95度泡5~7分钟。加一点蜂蜜或糖，酸会圆润。",
+        "欧美水果拼配。洛神花原产北非，常与玫瑰果、接骨木莓混合。",
+        "洛神花萼加玫瑰果、接骨木莓、草莓果干一起冲泡。",
+        "洛神花在埃及、苏丹喝了很久，在欧洲则负责水果拼配里的酸。",
+        "像蔓越莓般的强酸、莓果的甜、红色的茶汤。",
+        "芝士蛋糕、清爽的甜点、冰茶。",
+        "95度泡5~7分钟。做成冰饮酸味更清楚。"
+      ],
+      "zh-TW": [
+        "莓果洛神花茶",
+        "洛神花的酸加上莓果與玫瑰果，紅而清爽的一杯。",
+        "不發酵 · 無咖啡因",
+        "200毫升配5公克",
+        "1~2泡",
+        "95度泡5~7分鐘。加一點蜂蜜或糖，酸會圓潤。",
+        "歐美水果拼配。洛神花原產北非，常與玫瑰果、接骨木莓混合。",
+        "洛神花萼加玫瑰果、接骨木莓、草莓果乾一起沖泡。",
+        "洛神花在埃及、蘇丹喝了很久，在歐洲則負責水果拼配裡的酸。",
+        "像蔓越莓般的強酸、莓果的甜、紅色的茶湯。",
+        "起司蛋糕、清爽的甜點、冰茶。",
+        "95度泡5~7分鐘。做成冰飲酸味更清楚。"
+      ]
+    },
+    {
+      id: "fruit-bloodorange",
+      group: "fruit",
+      h: "橙",
+      hz: "血橙茶",
+      hs: "血橙茶",
+      rom: "Blood Orange",
+      sub: "Blood Orange",
+      t: 90,
+      tr: "85~95℃",
+      l: "5g",
+      w: "200ml",
+      s: [300, 360],
+      m: 2,
+      ox: 0,
+      ko: [
+        "블러드 오렌지",
+        "블러드 오렌지 껍질과 과육의 향을 입힌, 산뜻한 시트러스 과일차.",
+        "무산화 · 카페인 없음",
+        "200ml에 5g",
+        "1~2회",
+        "90도에서 5분. 껍질이 많으면 7분을 넘기지 않습니다.",
+        "지중해 시칠리아가 대표 산지인 블러드 오렌지를 쓰는 과일 블렌드.",
+        "말린 오렌지 껍질과 사과·히비스커스에 블러드 오렌지 향을 더합니다.",
+        "시칠리아의 블러드 오렌지는 겨울의 차가운 밤이 붉은 색을 만든다고 알려져 있습니다.",
+        "오렌지 껍질의 쌉싸름한 향, 산미, 옅은 단맛.",
+        "브런치, 팬케이크, 아이스로.",
+        "90도에서 5분. 껍질의 쌉싸름함이 좋다면 7분까지."
+      ],
+      en: [
+        "Blood Orange",
+        "Blood orange peel and flesh in a bright citrus fruit tea.",
+        "None · caffeine-free",
+        "5 g to 200 ml",
+        "1–2 infusions",
+        "Five minutes at 90 °C; with plenty of peel, stop by seven.",
+        "A fruit blend built on blood orange, whose best-known home is Sicily.",
+        "Dried orange peel and apple with hibiscus, scented with blood orange.",
+        "Sicilian blood oranges are said to take their red from cold winter nights.",
+        "The bittersweet aroma of orange peel, acidity, a light sweetness.",
+        "Brunch, pancakes, served iced.",
+        "Five minutes at 90 °C; up to seven if you like the peel's bitterness."
+      ],
+      "zh-CN": [
+        "血橙茶",
+        "加入血橙果皮与果肉香气，清爽的柑橘水果茶。",
+        "不发酵 · 无咖啡因",
+        "200毫升配5克",
+        "1~2泡",
+        "90度泡5分钟。果皮多时不要超过7分钟。",
+        "以地中海西西里为代表产地的血橙做成的果茶拼配。",
+        "干燥橙皮、苹果、洛神花加上血橙香。",
+        "据说西西里血橙的红色来自冬天寒冷的夜晚。",
+        "橙皮的微苦香、酸味、淡淡的甜。",
+        "早午餐、松饼，做冰饮也好。",
+        "90度泡5分钟。喜欢果皮的微苦可以泡到7分钟。"
+      ],
+      "zh-TW": [
+        "血橙茶",
+        "加入血橙果皮與果肉香氣，清爽的柑橘水果茶。",
+        "不發酵 · 無咖啡因",
+        "200毫升配5公克",
+        "1~2泡",
+        "90度泡5分鐘。果皮多時不要超過7分鐘。",
+        "以地中海西西里為代表產地的血橙做成的果茶拼配。",
+        "乾燥橙皮、蘋果、洛神花加上血橙香。",
+        "據說西西里血橙的紅色來自冬天寒冷的夜晚。",
+        "橙皮的微苦香、酸味、淡淡的甜。",
+        "早午餐、鬆餅，做冰飲也好。",
+        "90度泡5分鐘。喜歡果皮的微苦可以泡到7分鐘。"
+      ]
+    },
+    {
+      id: "fruit-passionfruit",
+      group: "fruit",
+      h: "百",
+      hz: "百香果茶",
+      hs: "百香果茶",
+      rom: "Passion Fruit",
+      sub: "Passion Fruit",
+      t: 90,
+      tr: "85~95℃",
+      l: "5g",
+      w: "200ml",
+      s: [300],
+      m: 1,
+      ox: 0,
+      ko: [
+        "패션프루트",
+        "열대 과일의 강한 향과 산미로 여름에 어울리는 잔.",
+        "무산화 · 카페인 없음",
+        "200ml에 5g",
+        "1회",
+        "90도에서 5분 후 얼음 위에. 차갑게 마시려면 두 배로 진하게.",
+        "남미 원산 패션프루트를 쓰는 열대 과일 블렌드.",
+        "말린 망고·파인애플에 패션프루트 향과 꽃잎을 더합니다.",
+        "패션프루트는 브라질·파라과이 원산으로, 20세기에 유럽과 아시아의 여름 음료로 퍼졌습니다.",
+        "패션프루트의 새콤한 향, 열대 과일의 단맛.",
+        "아이스티, 요거트, 여름 디저트.",
+        "90도에서 5분. 얼음을 넣으면 산미가 살아납니다."
+      ],
+      en: [
+        "Passion Fruit",
+        "Tropical aroma and sharp acidity — a cup for summer.",
+        "None · caffeine-free",
+        "5 g to 200 ml",
+        "One brew",
+        "Five minutes at 90 °C, then over ice. Double it to drink cold.",
+        "A tropical fruit blend built on passion fruit, native to South America.",
+        "Dried mango and pineapple with passion fruit flavour and petals.",
+        "Passion fruit comes from Brazil and Paraguay and spread into summer drinks in Europe and Asia in the twentieth century.",
+        "The sharp scent of passion fruit, tropical sweetness.",
+        "Iced tea, yoghurt, summer desserts.",
+        "Five minutes at 90 °C; over ice the acidity comes forward."
+      ],
+      "zh-CN": [
+        "百香果茶",
+        "热带水果强烈的香气与酸味，适合夏天的一杯。",
+        "不发酵 · 无咖啡因",
+        "200毫升配5克",
+        "1次",
+        "90度泡5分钟后加冰块。要喝冷的就用两倍的量。",
+        "以南美原产百香果做成的热带水果拼配。",
+        "干燥芒果、菠萝加上百香果香与花瓣。",
+        "百香果原产巴西、巴拉圭，20世纪传开成为欧洲与亚洲的夏日饮品。",
+        "百香果的酸香、热带水果的甜。",
+        "冰茶、酸奶、夏季甜点。",
+        "90度泡5分钟。加冰块酸味更明显。"
+      ],
+      "zh-TW": [
+        "百香果茶",
+        "熱帶水果強烈的香氣與酸味，適合夏天的一杯。",
+        "不發酵 · 無咖啡因",
+        "200毫升配5公克",
+        "1次",
+        "90度泡5分鐘後加冰塊。要喝冷的就用兩倍的量。",
+        "以南美原產百香果做成的熱帶水果拼配。",
+        "乾燥芒果、鳳梨加上百香果香與花瓣。",
+        "百香果原產巴西、巴拉圭，20世紀傳開成為歐洲與亞洲的夏日飲品。",
+        "百香果的酸香、熱帶水果的甜。",
+        "冰茶、優格、夏季甜點。",
+        "90度泡5分鐘。加冰塊酸味更明顯。"
+      ]
+    },
+
   ];
 
   /* ---------------- 홈: 기분·상황별 추천 ---------------- */
@@ -9658,7 +11055,7 @@ window.TEAFaiData = (function () {
     {
       id: "morning",
       icon: "sun",
-      teaId: "scent-earlgrey",
+      teaId: "blend-earlgrey",
       alt: "black-assam",
       ko: {
         label: "아침 집중",
@@ -9793,6 +11190,116 @@ window.TEAFaiData = (function () {
     }
   ];
 
+  /* ---------------- 취향 태그 (10문항 테스트용) ----------------
+     각 차의 성격을 태그로 적어 두고, 퀴즈 답변의 태그 점수와 맞춥니다.
+     시간 t- / 향 a- / 바디 b- / 방식 s- / 카페인 c- / 맛 k- / 배전 r- /
+     페어링 p- / 우림 w- / 기분 m-  */
+  var TRAITS = {
+    /* 녹차 */
+    "green-longjing": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot w-quick w-gongfu p-meal c-mid m-refresh",
+    "green-biluochun": "t-morning t-afternoon a-floral a-fruit a-grass b-light k-sweet r-clean s-hot s-iced w-quick p-dessert c-mid m-refresh",
+    "green-maofeng": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "green-sencha": "t-morning t-afternoon a-grass b-light k-sweet k-crisp r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "green-gyokuro": "t-afternoon t-night a-grass b-medium k-sweet r-clean s-hot w-gongfu p-solo c-mid m-calm",
+    "green-matcha": "t-morning a-grass b-full k-crisp r-clean s-hot s-milk w-quick p-dessert c-mid m-energy",
+    "green-jeju": "t-morning t-afternoon a-roast a-grass b-light k-sweet r-clean s-hot w-quick p-meal c-mid",
+    "green-luanguapian": "t-afternoon a-roast b-full k-sweet r-clean s-hot w-gongfu p-meal c-mid m-cozy",
+    "green-houkui": "t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick p-solo c-mid",
+    "green-maojian": "t-morning a-grass a-roast b-light k-crisp r-smoke s-hot w-quick p-solo c-mid",
+    "green-lushan": "t-afternoon a-grass b-light k-sweet r-clean s-hot w-quick p-solo c-mid m-calm",
+    "green-hojicha": "t-afternoon t-night a-roast b-light k-sweet r-smoke s-hot s-milk w-quick p-dessert c-low m-cozy m-calm",
+    "green-genmaicha": "t-morning t-afternoon a-roast b-light k-sweet r-smoke s-hot w-quick p-meal c-low m-cozy",
+    "green-hadong": "t-morning t-afternoon a-grass a-roast b-light k-sweet r-clean s-hot w-quick p-meal c-mid",
+    "green-sejak": "t-morning t-afternoon a-grass a-roast b-light k-crisp r-clean s-hot w-quick c-mid",
+    "green-jungjak": "t-afternoon a-roast b-medium k-crisp r-clean s-hot w-quick p-meal c-mid",
+    "green-daejak": "t-afternoon a-roast b-full k-crisp r-clean s-hot w-quick p-meal c-mid",
+    "green-jukro": "t-afternoon a-floral a-grass b-medium k-sweet r-clean s-hot w-gongfu p-solo c-mid m-calm",
+    /* 백차 */
+    "white-silverneedle": "t-night t-afternoon a-floral b-light k-sweet r-clean s-hot s-iced w-gongfu p-solo p-dessert c-low m-calm",
+    "white-peony": "t-afternoon t-night a-floral a-fruit b-medium k-sweet r-clean s-hot w-gongfu p-dessert c-low m-calm",
+    "white-shoumei": "t-afternoon a-floral a-roast b-medium k-sweet r-clean s-hot w-gongfu p-solo c-low m-cozy",
+    "white-aged": "t-night t-afternoon a-roast a-malt b-full k-sweet r-clean s-hot w-gongfu p-solo c-low m-cozy m-calm",
+    /* 황차 */
+    "yellow-junshan": "t-afternoon t-night a-floral b-light k-sweet r-clean s-hot w-gongfu p-dessert c-low m-calm",
+    "yellow-mengding": "t-afternoon a-floral a-roast b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-calm",
+    "yellow-huoshan": "t-afternoon a-roast b-light k-sweet r-clean s-hot w-quick p-meal c-low",
+    /* 청차·우롱 */
+    "oolong-tieguanyin": "t-afternoon a-floral b-medium k-sweet k-crisp r-clean s-hot w-gongfu p-meal c-mid m-calm",
+    "oolong-dahongpao": "t-afternoon t-night a-roast r-smoke b-full k-sweet s-hot w-gongfu p-meal c-mid m-cozy",
+    "oolong-dancong": "t-afternoon a-floral a-fruit b-medium k-sweet s-hot w-gongfu p-solo c-mid m-calm",
+    "oolong-dongding": "t-afternoon a-roast a-floral b-medium k-sweet r-clean s-hot w-gongfu p-meal c-mid m-cozy",
+    "oolong-alishan": "t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot s-iced w-gongfu p-solo c-mid m-refresh",
+    "oolong-beauty": "t-afternoon a-floral a-fruit a-malt b-medium k-sweet s-hot s-iced w-gongfu p-dessert c-mid m-calm",
+    /* 홍차 */
+    "black-darjeeling-first": "t-morning t-afternoon a-floral b-light k-crisp r-clean s-hot s-iced w-quick p-dessert c-high m-refresh",
+    "black-darjeeling-second": "t-afternoon a-floral a-malt a-fruit b-medium k-sweet s-hot w-quick p-dessert c-high",
+    "black-assam": "t-morning a-malt b-full k-sweet s-milk s-hot w-quick p-meal p-dessert c-high m-energy",
+    "black-nilgiri": "t-morning t-afternoon a-herb a-malt b-light k-crisp r-clean s-hot s-iced w-quick c-high m-refresh",
+    "black-nuwaraeliya": "t-morning a-floral a-herb b-light k-crisp r-clean s-hot s-iced w-quick c-high m-refresh",
+    "black-udapussellawa": "t-afternoon a-floral b-medium k-crisp s-hot w-quick c-high m-calm",
+    "black-uva": "t-morning a-herb b-medium k-crisp s-hot w-quick c-high m-refresh",
+    "black-dimbula": "t-afternoon a-floral a-malt b-medium k-sweet s-hot s-milk w-quick c-high",
+    "black-sabaragamuwa": "t-afternoon a-malt a-fruit b-medium k-sweet s-milk w-quick p-dessert c-high m-cozy",
+    "black-kandy": "t-morning a-malt a-floral b-light k-sweet s-hot w-quick c-high",
+    "black-ruhuna": "t-morning a-malt b-full k-crisp s-milk w-quick p-meal c-high m-energy",
+    "black-keemun": "t-afternoon a-floral a-malt b-medium k-sweet s-hot w-quick p-dessert c-high m-calm",
+    "black-lapsang": "t-afternoon t-night a-roast r-smoke b-full k-crisp s-hot w-quick p-meal c-high m-cozy",
+    "black-jinjunmei": "t-afternoon a-floral a-malt a-fruit b-medium k-sweet s-hot w-quick p-dessert c-high",
+    "black-dianhong": "t-morning t-afternoon a-malt a-fruit b-full k-sweet s-milk s-hot w-quick p-dessert c-high m-cozy",
+    "black-sikkim": "t-afternoon a-floral b-medium k-sweet s-hot w-quick c-high",
+    "black-nepal": "t-morning a-floral a-fruit b-light k-crisp s-hot s-iced w-quick c-high m-refresh",
+    "black-kenya": "t-morning a-malt b-full k-crisp s-milk w-quick p-meal c-high m-energy",
+    "black-jaksal": "t-afternoon a-malt a-roast b-medium k-sweet s-hot w-quick c-high",
+    "black-ruby18": "t-afternoon a-herb a-malt a-fruit b-full k-sweet s-hot s-milk w-quick p-dessert c-high m-cozy",
+    /* 흑차 */
+    "dark-sheng": "t-afternoon a-roast b-medium k-crisp s-hot w-gongfu p-meal c-mid m-calm",
+    "dark-shou": "t-night a-roast b-full k-sweet s-hot s-milk w-gongfu p-meal c-mid m-cozy m-calm",
+    "dark-anhua": "t-night a-roast r-smoke b-full k-sweet s-hot s-milk w-gongfu p-meal c-mid m-cozy",
+    "dark-liubao": "t-afternoon a-roast b-full k-sweet s-hot w-gongfu p-meal c-mid m-cozy",
+    "dark-cheongtaejeon": "t-night a-roast b-medium k-sweet s-hot w-gongfu c-mid m-cozy m-calm",
+    /* 블렌딩차 */
+    "blend-earlgrey": "t-morning t-afternoon a-herb a-floral b-medium k-crisp k-blend r-clean s-hot s-iced s-milk w-quick p-dessert c-high m-refresh",
+    "blend-ladygrey": "t-afternoon a-herb a-floral a-fruit b-light k-sweet k-blend s-hot w-quick p-dessert c-high m-calm",
+    "blend-englishbreakfast": "t-morning a-malt b-full k-crisp k-blend s-milk s-hot w-quick p-meal c-high m-energy",
+    "blend-afternoon": "t-afternoon a-floral a-herb b-light k-crisp k-blend s-hot s-iced w-quick p-dessert c-high m-calm",
+    "blend-jasmine": "t-afternoon a-floral b-light k-sweet k-blend s-hot w-quick p-dessert c-mid m-calm",
+    "blend-hongkong": "t-morning t-afternoon a-malt b-full k-sweet k-blend s-milk w-quick p-dessert c-high m-cozy",
+    "blend-masala": "t-morning a-malt a-herb b-full k-sweet k-blend s-milk w-quick p-dessert c-high m-cozy m-energy",
+    /* 대용차 */
+    "herb-ginger": "t-morning t-night a-herb b-medium k-crisp k-grain s-hot w-quick p-meal c-none m-cozy m-energy",
+    "herb-ssanghwa": "t-night a-roast a-herb b-full k-sweet k-grain s-hot w-quick c-none m-cozy m-calm",
+    "herb-dunggulle": "t-night a-roast b-medium k-sweet k-grain s-hot w-quick c-none m-calm m-cozy",
+    "herb-buckwheat": "t-afternoon t-night a-roast b-light k-sweet k-grain s-hot w-quick p-meal c-none m-calm",
+    "herb-barley": "t-afternoon a-roast b-light k-sweet k-grain s-hot s-iced w-quick p-meal c-none m-refresh",
+    "herb-brownrice": "t-afternoon a-roast b-light k-sweet k-grain s-hot w-quick p-meal c-none m-cozy",
+    "herb-persimmon": "t-afternoon a-herb b-light k-crisp k-grain s-hot s-iced w-quick c-none",
+    "herb-mulberry": "t-afternoon a-herb a-roast b-light k-crisp k-grain s-hot w-quick c-none",
+    "herb-lotus": "t-afternoon a-herb b-light k-crisp k-grain s-hot s-iced w-quick c-none m-refresh",
+    "herb-balloonflower": "t-night a-herb b-medium k-crisp k-grain s-hot w-quick c-none m-cozy",
+    "herb-mugwort": "t-afternoon a-herb a-roast b-medium k-crisp k-grain s-hot w-quick c-none",
+    "herb-tteokcha": "t-afternoon a-roast b-full k-sweet k-grain s-hot w-gongfu c-mid m-cozy m-calm",
+    "herb-rooibos": "t-night a-roast a-malt b-medium k-sweet k-grain s-hot s-milk w-quick p-dessert c-none m-cozy m-calm",
+    "herb-mate": "t-morning a-roast a-herb b-medium k-crisp k-grain s-hot w-gongfu c-high m-energy",
+    /* 허브차 */
+    "herb-chamomile": "t-night a-floral a-herb b-light k-sweet s-hot w-quick p-dessert c-none m-calm m-cozy",
+    "herb-peppermint": "t-afternoon t-night a-herb b-light k-crisp s-hot s-iced w-quick p-solo c-none m-refresh",
+    "herb-hibiscus": "t-afternoon a-herb a-fruit b-light k-crisp s-iced w-quick p-dessert c-none m-refresh",
+    "herb-lavender": "t-night a-floral a-herb b-light k-sweet s-hot w-quick c-none m-calm",
+    "herb-lemongrass": "t-afternoon a-herb a-fruit b-light k-crisp s-hot s-iced w-quick p-meal c-none m-refresh",
+    "herb-chrysanthemum": "t-afternoon a-floral a-herb b-light k-sweet s-hot s-iced w-quick c-none m-calm m-refresh",
+    /* 과일차 */
+    "fruit-yuja": "t-afternoon a-fruit a-herb b-light k-sweet s-hot s-iced w-quick p-dessert c-none m-refresh",
+    "fruit-mogwa": "t-afternoon t-night a-fruit a-floral b-light k-sweet s-hot w-quick p-dessert c-none m-cozy",
+    "fruit-omija": "t-afternoon a-fruit a-herb b-light k-crisp s-iced w-quick p-solo c-none m-refresh",
+    "fruit-daechu": "t-night a-roast a-fruit b-medium k-sweet s-hot w-quick p-dessert c-none m-cozy m-calm",
+    "fruit-gingerlemon": "t-morning t-afternoon a-herb a-fruit b-medium k-crisp s-hot w-quick p-meal c-none m-energy",
+    "fruit-applecinnamon": "t-afternoon t-night a-fruit a-roast b-medium k-sweet k-blend s-hot w-quick p-dessert c-none m-cozy",
+    "fruit-peach": "t-afternoon a-fruit a-floral b-light k-sweet k-blend s-hot s-iced w-quick p-dessert c-none m-calm",
+    "fruit-berryhibiscus": "t-afternoon a-fruit a-herb b-light k-crisp k-blend s-iced w-quick p-dessert c-none m-refresh",
+    "fruit-bloodorange": "t-morning t-afternoon a-fruit a-herb b-light k-crisp k-blend s-hot s-iced w-quick p-meal c-none m-energy",
+    "fruit-passionfruit": "t-afternoon a-fruit a-herb b-light k-crisp k-blend s-iced w-quick p-dessert c-none m-refresh"
+  };
+
   var links = {
     channel: "https://www.youtube.com/@TeaFai",
     playlist: "https://youtu.be/5fkX0dfnHmE",
@@ -9805,6 +11312,20 @@ window.TEAFaiData = (function () {
   /* 품종 데이터는 짧은 배열로도 적을 수 있습니다.
      0 name, 1 oneLine, 2 oxidation, 3 ratioNote, 4 rounds, 5 steepBasis,
      6 origin, 7 process, 8 story, 9 flavor, 10 pairing, 11 brewTip, 12 keep, 13 keywords */
+  /* 짧은 배열(10칸)로 적은 대용차·허브차·과일차용 필드 순서 */
+  var SHORT_FIELDS = [
+    "name",
+    "oneLine",
+    "oxidation",
+    "ratioNote",
+    "rounds",
+    "steepBasis",
+    "origin",
+    "flavor",
+    "pairing",
+    "brewTip"
+  ];
+
   var FIELDS = [
     "name",
     "oneLine",
@@ -9829,8 +11350,10 @@ window.TEAFaiData = (function () {
   function normText(raw) {
     if (!raw) return {};
     if (isArray(raw)) {
+      /* 짧은 배열은 [이름, 한 줄, 산화, 비율, 회차, 우림 기준, 산지, 향미, 페어링, 우림 팁] 순서입니다 */
+      var keys = raw.length <= SHORT_FIELDS.length ? SHORT_FIELDS : FIELDS;
       var o = {};
-      for (var i = 0; i < raw.length && i < FIELDS.length; i++) if (raw[i] != null) o[FIELDS[i]] = raw[i];
+      for (var i = 0; i < raw.length && i < keys.length; i++) if (raw[i] != null) o[keys[i]] = raw[i];
       return o;
     }
     return raw;
@@ -9919,7 +11442,8 @@ window.TEAFaiData = (function () {
     groupOf: groupOf,
     teasOf: teasOf,
     searchText: searchText,
-    nativeOf: nativeOf
+    nativeOf: nativeOf,
+    traits: TRAITS
   };
 
   function build(lang) {
@@ -10106,7 +11630,7 @@ window.TEAFaiData = (function () {
 
   /* ---------------- 화면 전환 ---------------- */
   var currentView = "home";
-  var VIEWS = ["home", "timer", "guide", "notes"];
+  var VIEWS = ["home", "quiz", "timer", "guide", "notes"];
 
   function titleFor(view) {
     return t("title." + view);
@@ -10910,6 +12434,22 @@ window.TEAFaiData = (function () {
     });
   }
 
+  /* 백과의 해당 카드를 펼쳐 보여 줍니다 (퀴즈 결과 연결) */
+  function openTeaInGuide(id) {
+    guideState.q = "";
+    guideState.filter = "all";
+    guideState.open = id;
+    var input = $("#searchInput");
+    if (input) input.value = "";
+    renderFilterChips();
+    renderTeaList();
+    go("guide");
+    window.setTimeout(function () {
+      var card = $('#teaList [data-tea="' + id + '"]');
+      if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 200);
+  }
+
   /* ============================================================
      4. 시음 노트
      ============================================================ */
@@ -11083,6 +12623,439 @@ window.TEAFaiData = (function () {
   }
 
   /* ============================================================
+     5. 나에게 맞는 차 찾기 (10문항 취향 테스트)
+     ============================================================ */
+  /* 문항과 선택지의 태그 점수 — data.js의 TRAITS 태그와 맞춥니다 */
+  var QUIZ = [
+    {
+      key: "quiz.q1",
+      opts: [
+        { key: "quiz.q1a", tags: { "t-morning": 6, "m-energy": 4 } },
+        { key: "quiz.q1b", tags: { "t-aftermeal": 6, "k-crisp": 3 } },
+        { key: "quiz.q1c", tags: { "t-afternoon": 6, "m-calm": 3 } },
+        { key: "quiz.q1d", tags: { "t-night": 7, "c-none": 5, "c-low": 3, "c-high": -4, "c-mid": -1 } }
+      ]
+    },
+    {
+      key: "quiz.q2",
+      opts: [
+        { key: "quiz.q2a", tags: { "a-roast": 7, "r-smoke": 2 } },
+        { key: "quiz.q2b", tags: { "a-floral": 7, "m-calm": 2 } },
+        { key: "quiz.q2c", tags: { "a-fruit": 7, "k-sweet": 2 } },
+        { key: "quiz.q2d", tags: { "a-grass": 7, "m-refresh": 3 } },
+        { key: "quiz.q2e", tags: { "a-malt": 7, "b-full": 2, "k-sweet": 2 } },
+        { key: "quiz.q2f", tags: { "a-herb": 7, "m-refresh": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q3",
+      opts: [
+        { key: "quiz.q3a", tags: { "b-light": 7, "m-refresh": 2 } },
+        { key: "quiz.q3b", tags: { "b-medium": 7, "k-sweet": 2 } },
+        { key: "quiz.q3c", tags: { "b-full": 7, "k-crisp": 1 } }
+      ]
+    },
+    {
+      key: "quiz.q4",
+      opts: [
+        { key: "quiz.q4a", tags: { "s-hot": 6 } },
+        { key: "quiz.q4b", tags: { "s-iced": 6, "m-refresh": 3 } },
+        { key: "quiz.q4c", tags: { "s-milk": 7, "b-full": 2, "k-sweet": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q5",
+      opts: [
+        { key: "quiz.q5a", tags: { "c-high": 7, "c-mid": 4, "c-low": 1 } },
+        { key: "quiz.q5b", tags: { "c-mid": 7, "c-low": 4, "c-high": 1 } },
+        {
+          key: "quiz.q5c",
+          tags: { "c-none": 8, "c-low": 3, "c-mid": -2, "c-high": -9 },
+          caffeineFree: true
+        }
+      ]
+    },
+    {
+      key: "quiz.q6",
+      opts: [
+        { key: "quiz.q6a", tags: { "k-sweet": 7, "b-medium": 1 } },
+        { key: "quiz.q6b", tags: { "k-crisp": 7, "r-clean": 1 } },
+        { key: "quiz.q6c", tags: { "k-blend": 8, "a-fruit": 2, "a-floral": 2 } },
+        { key: "quiz.q6d", tags: { "k-grain": 8, "a-roast": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q7",
+      opts: [
+        { key: "quiz.q7a", tags: { "r-smoke": 7, "a-roast": 3 } },
+        { key: "quiz.q7b", tags: { "r-smoke": 3, "r-clean": 3 } },
+        { key: "quiz.q7c", tags: { "r-clean": 7 } }
+      ]
+    },
+    {
+      key: "quiz.q8",
+      opts: [
+        { key: "quiz.q8a", tags: { "p-meal": 7 } },
+        { key: "quiz.q8b", tags: { "p-dessert": 7, "k-sweet": 2 } },
+        { key: "quiz.q8c", tags: { "p-solo": 7, "m-calm": 3 } }
+      ]
+    },
+    {
+      key: "quiz.q9",
+      opts: [
+        { key: "quiz.q9a", tags: { "w-quick": 7 } },
+        { key: "quiz.q9b", tags: { "w-gongfu": 7, "m-calm": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q10",
+      opts: [
+        { key: "quiz.q10a", tags: { "m-calm": 7 } },
+        { key: "quiz.q10b", tags: { "m-energy": 7, "c-high": 1 } },
+        { key: "quiz.q10c", tags: { "m-cozy": 7 } },
+        { key: "quiz.q10d", tags: { "m-refresh": 7 } }
+      ]
+    }
+  ];
+
+  var quizState = { step: 0, answers: [], result: null, timer: null };
+
+  function traitList(teaId) {
+    var raw = (D.traits && D.traits[teaId]) || "";
+    return raw ? raw.split(" ") : [];
+  }
+  function hasTrait(teaId, tag) {
+    return traitList(teaId).indexOf(tag) >= 0;
+  }
+
+  function openQuiz() {
+    quizState = { step: 0, answers: [], result: null, timer: null };
+    go("quiz");
+    renderQuiz();
+  }
+
+  function quizAnswered(i) {
+    return quizState.answers[i] != null;
+  }
+
+  function quizOptionPressed(i, o) {
+    return quizState.answers[i] === o;
+  }
+
+  function chooseQuizOption(i, o) {
+    quizState.answers[i] = o;
+    var nodes = $$(".quiz-opt", $("#quizBody"));
+    nodes.forEach(function (btn) {
+      var on = Number(btn.getAttribute("data-opt")) === o;
+      btn.classList.toggle("pressed", on);
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    window.clearTimeout(quizState.timer);
+    quizState.timer = window.setTimeout(function () {
+      quizState.step = Math.min(quizState.step + 1, QUIZ.length);
+      renderQuiz();
+    }, 170);
+  }
+
+  function quizBack() {
+    window.clearTimeout(quizState.timer);
+    if (quizState.step === 0) {
+      go("home");
+      return;
+    }
+    quizState.step -= 1;
+    quizState.answers = quizState.answers.slice(0, quizState.step);
+    renderQuiz();
+  }
+
+  function quizRanking() {
+    var freeOnly = quizAnswered(4) && QUIZ[4].opts[quizState.answers[4]].caffeineFree;
+    var rows = D.teas.map(function (tea, order) {
+      var tags = traitList(tea.id);
+      var score = 0;
+      var parts = [];
+      QUIZ.forEach(function (q, i) {
+        if (!quizAnswered(i)) return;
+        var map = q.opts[quizState.answers[i]].tags;
+        var add = 0;
+        for (var k in map) if (tags.indexOf(k) >= 0) add += map[k];
+        score += add;
+        parts.push({ i: i, add: add });
+      });
+      return { tea: tea, score: score, parts: parts, order: order };
+    });
+    rows = rows.filter(function (r) {
+      return !freeOnly || hasTrait(r.tea.id, "c-none");
+    });
+    rows.sort(function (a, b) {
+      return b.score - a.score || a.order - b.order;
+    });
+    return rows;
+  }
+
+  function quizPick(rows) {
+    if (!rows.length) return null;
+    var best = rows[0];
+    var used = {};
+    used[best.tea.group] = true;
+    var alts = [];
+    var i;
+    for (i = 1; i < rows.length && alts.length < 2; i++) {
+      if (used[rows[i].tea.group]) continue;
+      used[rows[i].tea.group] = true;
+      alts.push(rows[i]);
+    }
+    for (i = 1; i < rows.length && alts.length < 2; i++) {
+      if (rows[i] === best || alts.indexOf(rows[i]) >= 0) continue;
+      alts.push(rows[i]);
+    }
+    return { best: best, alts: alts };
+  }
+
+  /* 가장 크게 기여한 답변 두 개를 골라 추천 이유에 씁니다 */
+  function quizReasonChips(best) {
+    var sorted = best.parts
+      .filter(function (p) {
+        return p.add > 0;
+      })
+      .sort(function (a, b) {
+        return b.add - a.add;
+      });
+    var out = [];
+    for (var i = 0; i < sorted.length && out.length < 2; i++) {
+      out.push(QUIZ[sorted[i].i].opts[quizState.answers[sorted[i].i]].key);
+    }
+    return out;
+  }
+
+  function shortText(text, max) {
+    var s = String(text || "").trim();
+    if (s.length <= max) return s;
+    var cut = s.slice(0, max);
+    var stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("。"), cut.lastIndexOf("다. "));
+    if (stop > max * 0.45) return cut.slice(0, stop + 1).trim();
+    return cut.replace(/[,、·\s]+$/, "") + "…";
+  }
+
+  function quizCardHtml(tea, opt) {
+    var native = D.nativeOf(tea, lang);
+    var sub = tea.sub && tea.sub.toLowerCase() !== native.toLowerCase() ? tea.sub : "";
+    var meta = [tea.groupName, tea.tempRange].filter(Boolean).join(" · ");
+    var chips = opt.chips || [];
+    var chipHtml = chips.length
+      ? '<div class="qr-chips">' +
+        chips
+          .map(function (k) {
+            return '<span class="qr-chip">' + esc(t(k)) + "</span>";
+          })
+          .join("") +
+        "</div>"
+      : "";
+    var origin = tea.origin || "";
+    if (!opt.best) origin = shortText(origin, 90);
+    return (
+      '<article class="qr-card' +
+      (opt.best ? " best" : "") +
+      '">' +
+      (opt.best ? '<span class="qr-badge">' + esc(t("quiz.best")) + "</span>" : "") +
+      '<div class="qr-head">' +
+      '<span class="qr-glyph" style="background:' +
+      tea.accent +
+      "1f;color:" +
+      tea.accent +
+      ";border-color:" +
+      tea.accent +
+      '55">' +
+      esc(tea.hanja) +
+      "</span>" +
+      '<span class="qr-id"><b>' +
+      esc(tea.name) +
+      '</b><span class="qr-native">' +
+      esc(native) +
+      (sub ? " · " + esc(sub) : "") +
+      '</span><span class="qr-group">' +
+      esc(meta) +
+      "</span></span></div>" +
+      chipHtml +
+      (opt.reason ? '<p class="qr-reason">' + esc(opt.reason) + "</p>" : "") +
+      '<p class="qr-flavor">' +
+      esc(tea.flavor || tea.oneLine || "") +
+      "</p>" +
+      (origin
+        ? '<p class="qr-origin"><b>' +
+          esc(t("quiz.origin")) +
+          "</b> " +
+          esc(origin) +
+          "</p>"
+        : "") +
+      '<div class="qr-stats">' +
+      '<div class="qr-stat"><b>' +
+      esc(tea.temp) +
+      "℃</b><span>" +
+      esc(tea.tempRange) +
+      "</span></div>" +
+      '<div class="qr-stat"><b>' +
+      esc(tea.leaf) +
+      "</b><span>" +
+      esc(tea.water) +
+      "</span></div>" +
+      '<div class="qr-stat"><b>' +
+      esc(fmtDur(tea.steeps[0])) +
+      "</b><span>" +
+      esc(t("quiz.firstSteep")) +
+      "</span></div>" +
+      "</div>" +
+      '<div class="qr-actions">' +
+      '<button class="btn btn-primary" type="button" data-brew="' +
+      tea.id +
+      '">' +
+      esc(t("quiz.brew")) +
+      "</button>" +
+      '<button class="btn btn-outline" type="button" data-guide="' +
+      tea.id +
+      '">' +
+      esc(t("quiz.guide")) +
+      "</button>" +
+      "</div></article>"
+    );
+  }
+
+  function bindQuizActions(root) {
+    $$("[data-brew]", root).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-brew");
+        setTimerTea(id, 1);
+        go("timer");
+        var tea = D.byId(id);
+        toast(t("toast.toTimer", { name: tea.name }));
+      });
+    });
+    $$("[data-guide]", root).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        openTeaInGuide(btn.getAttribute("data-guide"));
+      });
+    });
+    var again = $("#quizRestart", root);
+    if (again) {
+      again.addEventListener("click", function () {
+        openQuiz();
+      });
+    }
+  }
+
+  function renderQuizQuestion(body) {
+    var total = QUIZ.length;
+    var step = quizState.step;
+    var q = QUIZ[step];
+    var opts = q.opts
+      .map(function (o, idx) {
+        var on = quizOptionPressed(step, idx);
+        return (
+          '<button class="quiz-opt' +
+          (on ? " pressed" : "") +
+          '" type="button" data-opt="' +
+          idx +
+          '" aria-pressed="' +
+          on +
+          '"><span class="qo-mark" aria-hidden="true"></span><span>' +
+          esc(t(o.key)) +
+          "</span></button>"
+        );
+      })
+      .join("");
+
+    body.innerHTML =
+      '<div class="quiz-step">' +
+      '<p class="eyebrow">' +
+      esc(t("quiz.kicker")) +
+      "</p>" +
+      '<h1 class="quiz-q">' +
+      esc(t(q.key)) +
+      "</h1>" +
+      (step === 0 ? '<p class="quiz-lead">' + esc(t("quiz.lead")) + "</p>" : "") +
+      '<div class="quiz-opts" role="group" aria-label="' +
+      esc(t(q.key)) +
+      '">' +
+      opts +
+      "</div>" +
+      "</div>";
+
+    $$(".quiz-opt", body).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        chooseQuizOption(step, Number(btn.getAttribute("data-opt")));
+      });
+    });
+  }
+
+  function renderQuizResult(body) {
+    var rows = quizRanking();
+    var pick = quizPick(rows);
+    if (!pick) {
+      body.innerHTML = '<div class="empty">' + esc(t("quiz.resultLead")) + "</div>";
+      return;
+    }
+    quizState.result = pick;
+    var best = pick.best.tea;
+    var chips = quizReasonChips(pick.best);
+    var why = "";
+    if (chips.length === 2) why = t("quiz.whyTwo", { a: t(chips[0]), b: t(chips[1]) });
+    else if (chips.length === 1) why = t("quiz.whyOne", { a: t(chips[0]) });
+
+    body.innerHTML =
+      '<div class="quiz-result">' +
+      '<p class="eyebrow">' +
+      esc(t("quiz.resultKicker")) +
+      "</p>" +
+      '<h1 class="quiz-q">' +
+      esc(t("quiz.resultTitle")) +
+      "</h1>" +
+      '<p class="quiz-lead">' +
+      esc(t("quiz.resultLead")) +
+      "</p>" +
+      quizCardHtml(best, { best: true, reason: why, chips: chips }) +
+      '<div class="section-head"><h2>' +
+      esc(t("quiz.altTitle")) +
+      "</h2><span>" +
+      esc(t("quiz.resultKicker")) +
+      "</span></div>" +
+      pick.alts
+        .map(function (row) {
+          return quizCardHtml(row.tea, { best: false });
+        })
+        .join("") +
+      '<button class="btn btn-dark btn-block quiz-restart" type="button" id="quizRestart">' +
+      esc(t("quiz.restart")) +
+      "</button>" +
+      "</div>";
+
+    bindQuizActions(body);
+    window.scrollTo(0, 0);
+  }
+
+  function renderQuiz() {
+    var body = $("#quizBody");
+    if (!body) return;
+    var total = QUIZ.length;
+    var step = Math.min(quizState.step, total);
+    var bar = $("#quizBar");
+    var count = $("#quizCount");
+    if (bar) bar.style.width = Math.round((step / total) * 100) + "%";
+    if (count) count.textContent = t("quiz.progress", { n: Math.min(step + 1, total), total: total });
+    if (step >= total) {
+      renderQuizResult(body);
+      return;
+    }
+    renderQuizQuestion(body);
+  }
+
+  function bindQuiz() {
+    var banner = $("#quizBanner");
+    if (banner) banner.addEventListener("click", openQuiz);
+    var back = $("#quizBack");
+    if (back) back.addEventListener("click", quizBack);
+  }
+
+  /* ============================================================
      언어 전환 · 시작
      ============================================================ */
   function rerender() {
@@ -11101,6 +13074,7 @@ window.TEAFaiData = (function () {
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    if (currentView === "quiz") renderQuiz();
     document.title = titleFor(currentView);
   }
 
@@ -11153,15 +13127,18 @@ window.TEAFaiData = (function () {
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
 
     document.title = titleFor(currentView);
 
     var hash = (location.hash || "").replace("#", "");
-    if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
+    if (hash === "quiz") openQuiz();
+    else if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
     window.addEventListener("hashchange", function () {
       var h = (location.hash || "").replace("#", "");
-      if (VIEWS.indexOf(h) >= 0) go(h);
+      if (h === "quiz") openQuiz();
+      else if (VIEWS.indexOf(h) >= 0) go(h);
     });
 
     if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {

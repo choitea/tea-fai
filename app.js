@@ -84,7 +84,7 @@
 
   /* ---------------- 화면 전환 ---------------- */
   var currentView = "home";
-  var VIEWS = ["home", "timer", "guide", "notes"];
+  var VIEWS = ["home", "quiz", "timer", "guide", "notes"];
 
   function titleFor(view) {
     return t("title." + view);
@@ -888,6 +888,22 @@
     });
   }
 
+  /* 백과의 해당 카드를 펼쳐 보여 줍니다 (퀴즈 결과 연결) */
+  function openTeaInGuide(id) {
+    guideState.q = "";
+    guideState.filter = "all";
+    guideState.open = id;
+    var input = $("#searchInput");
+    if (input) input.value = "";
+    renderFilterChips();
+    renderTeaList();
+    go("guide");
+    window.setTimeout(function () {
+      var card = $('#teaList [data-tea="' + id + '"]');
+      if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 200);
+  }
+
   /* ============================================================
      4. 시음 노트
      ============================================================ */
@@ -1061,6 +1077,439 @@
   }
 
   /* ============================================================
+     5. 나에게 맞는 차 찾기 (10문항 취향 테스트)
+     ============================================================ */
+  /* 문항과 선택지의 태그 점수 — data.js의 TRAITS 태그와 맞춥니다 */
+  var QUIZ = [
+    {
+      key: "quiz.q1",
+      opts: [
+        { key: "quiz.q1a", tags: { "t-morning": 6, "m-energy": 4 } },
+        { key: "quiz.q1b", tags: { "t-aftermeal": 6, "k-crisp": 3 } },
+        { key: "quiz.q1c", tags: { "t-afternoon": 6, "m-calm": 3 } },
+        { key: "quiz.q1d", tags: { "t-night": 7, "c-none": 5, "c-low": 3, "c-high": -4, "c-mid": -1 } }
+      ]
+    },
+    {
+      key: "quiz.q2",
+      opts: [
+        { key: "quiz.q2a", tags: { "a-roast": 7, "r-smoke": 2 } },
+        { key: "quiz.q2b", tags: { "a-floral": 7, "m-calm": 2 } },
+        { key: "quiz.q2c", tags: { "a-fruit": 7, "k-sweet": 2 } },
+        { key: "quiz.q2d", tags: { "a-grass": 7, "m-refresh": 3 } },
+        { key: "quiz.q2e", tags: { "a-malt": 7, "b-full": 2, "k-sweet": 2 } },
+        { key: "quiz.q2f", tags: { "a-herb": 7, "m-refresh": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q3",
+      opts: [
+        { key: "quiz.q3a", tags: { "b-light": 7, "m-refresh": 2 } },
+        { key: "quiz.q3b", tags: { "b-medium": 7, "k-sweet": 2 } },
+        { key: "quiz.q3c", tags: { "b-full": 7, "k-crisp": 1 } }
+      ]
+    },
+    {
+      key: "quiz.q4",
+      opts: [
+        { key: "quiz.q4a", tags: { "s-hot": 6 } },
+        { key: "quiz.q4b", tags: { "s-iced": 6, "m-refresh": 3 } },
+        { key: "quiz.q4c", tags: { "s-milk": 7, "b-full": 2, "k-sweet": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q5",
+      opts: [
+        { key: "quiz.q5a", tags: { "c-high": 7, "c-mid": 4, "c-low": 1 } },
+        { key: "quiz.q5b", tags: { "c-mid": 7, "c-low": 4, "c-high": 1 } },
+        {
+          key: "quiz.q5c",
+          tags: { "c-none": 8, "c-low": 3, "c-mid": -2, "c-high": -9 },
+          caffeineFree: true
+        }
+      ]
+    },
+    {
+      key: "quiz.q6",
+      opts: [
+        { key: "quiz.q6a", tags: { "k-sweet": 7, "b-medium": 1 } },
+        { key: "quiz.q6b", tags: { "k-crisp": 7, "r-clean": 1 } },
+        { key: "quiz.q6c", tags: { "k-blend": 8, "a-fruit": 2, "a-floral": 2 } },
+        { key: "quiz.q6d", tags: { "k-grain": 8, "a-roast": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q7",
+      opts: [
+        { key: "quiz.q7a", tags: { "r-smoke": 7, "a-roast": 3 } },
+        { key: "quiz.q7b", tags: { "r-smoke": 3, "r-clean": 3 } },
+        { key: "quiz.q7c", tags: { "r-clean": 7 } }
+      ]
+    },
+    {
+      key: "quiz.q8",
+      opts: [
+        { key: "quiz.q8a", tags: { "p-meal": 7 } },
+        { key: "quiz.q8b", tags: { "p-dessert": 7, "k-sweet": 2 } },
+        { key: "quiz.q8c", tags: { "p-solo": 7, "m-calm": 3 } }
+      ]
+    },
+    {
+      key: "quiz.q9",
+      opts: [
+        { key: "quiz.q9a", tags: { "w-quick": 7 } },
+        { key: "quiz.q9b", tags: { "w-gongfu": 7, "m-calm": 2 } }
+      ]
+    },
+    {
+      key: "quiz.q10",
+      opts: [
+        { key: "quiz.q10a", tags: { "m-calm": 7 } },
+        { key: "quiz.q10b", tags: { "m-energy": 7, "c-high": 1 } },
+        { key: "quiz.q10c", tags: { "m-cozy": 7 } },
+        { key: "quiz.q10d", tags: { "m-refresh": 7 } }
+      ]
+    }
+  ];
+
+  var quizState = { step: 0, answers: [], result: null, timer: null };
+
+  function traitList(teaId) {
+    var raw = (D.traits && D.traits[teaId]) || "";
+    return raw ? raw.split(" ") : [];
+  }
+  function hasTrait(teaId, tag) {
+    return traitList(teaId).indexOf(tag) >= 0;
+  }
+
+  function openQuiz() {
+    quizState = { step: 0, answers: [], result: null, timer: null };
+    go("quiz");
+    renderQuiz();
+  }
+
+  function quizAnswered(i) {
+    return quizState.answers[i] != null;
+  }
+
+  function quizOptionPressed(i, o) {
+    return quizState.answers[i] === o;
+  }
+
+  function chooseQuizOption(i, o) {
+    quizState.answers[i] = o;
+    var nodes = $$(".quiz-opt", $("#quizBody"));
+    nodes.forEach(function (btn) {
+      var on = Number(btn.getAttribute("data-opt")) === o;
+      btn.classList.toggle("pressed", on);
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    window.clearTimeout(quizState.timer);
+    quizState.timer = window.setTimeout(function () {
+      quizState.step = Math.min(quizState.step + 1, QUIZ.length);
+      renderQuiz();
+    }, 170);
+  }
+
+  function quizBack() {
+    window.clearTimeout(quizState.timer);
+    if (quizState.step === 0) {
+      go("home");
+      return;
+    }
+    quizState.step -= 1;
+    quizState.answers = quizState.answers.slice(0, quizState.step);
+    renderQuiz();
+  }
+
+  function quizRanking() {
+    var freeOnly = quizAnswered(4) && QUIZ[4].opts[quizState.answers[4]].caffeineFree;
+    var rows = D.teas.map(function (tea, order) {
+      var tags = traitList(tea.id);
+      var score = 0;
+      var parts = [];
+      QUIZ.forEach(function (q, i) {
+        if (!quizAnswered(i)) return;
+        var map = q.opts[quizState.answers[i]].tags;
+        var add = 0;
+        for (var k in map) if (tags.indexOf(k) >= 0) add += map[k];
+        score += add;
+        parts.push({ i: i, add: add });
+      });
+      return { tea: tea, score: score, parts: parts, order: order };
+    });
+    rows = rows.filter(function (r) {
+      return !freeOnly || hasTrait(r.tea.id, "c-none");
+    });
+    rows.sort(function (a, b) {
+      return b.score - a.score || a.order - b.order;
+    });
+    return rows;
+  }
+
+  function quizPick(rows) {
+    if (!rows.length) return null;
+    var best = rows[0];
+    var used = {};
+    used[best.tea.group] = true;
+    var alts = [];
+    var i;
+    for (i = 1; i < rows.length && alts.length < 2; i++) {
+      if (used[rows[i].tea.group]) continue;
+      used[rows[i].tea.group] = true;
+      alts.push(rows[i]);
+    }
+    for (i = 1; i < rows.length && alts.length < 2; i++) {
+      if (rows[i] === best || alts.indexOf(rows[i]) >= 0) continue;
+      alts.push(rows[i]);
+    }
+    return { best: best, alts: alts };
+  }
+
+  /* 가장 크게 기여한 답변 두 개를 골라 추천 이유에 씁니다 */
+  function quizReasonChips(best) {
+    var sorted = best.parts
+      .filter(function (p) {
+        return p.add > 0;
+      })
+      .sort(function (a, b) {
+        return b.add - a.add;
+      });
+    var out = [];
+    for (var i = 0; i < sorted.length && out.length < 2; i++) {
+      out.push(QUIZ[sorted[i].i].opts[quizState.answers[sorted[i].i]].key);
+    }
+    return out;
+  }
+
+  function shortText(text, max) {
+    var s = String(text || "").trim();
+    if (s.length <= max) return s;
+    var cut = s.slice(0, max);
+    var stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("。"), cut.lastIndexOf("다. "));
+    if (stop > max * 0.45) return cut.slice(0, stop + 1).trim();
+    return cut.replace(/[,、·\s]+$/, "") + "…";
+  }
+
+  function quizCardHtml(tea, opt) {
+    var native = D.nativeOf(tea, lang);
+    var sub = tea.sub && tea.sub.toLowerCase() !== native.toLowerCase() ? tea.sub : "";
+    var meta = [tea.groupName, tea.tempRange].filter(Boolean).join(" · ");
+    var chips = opt.chips || [];
+    var chipHtml = chips.length
+      ? '<div class="qr-chips">' +
+        chips
+          .map(function (k) {
+            return '<span class="qr-chip">' + esc(t(k)) + "</span>";
+          })
+          .join("") +
+        "</div>"
+      : "";
+    var origin = tea.origin || "";
+    if (!opt.best) origin = shortText(origin, 90);
+    return (
+      '<article class="qr-card' +
+      (opt.best ? " best" : "") +
+      '">' +
+      (opt.best ? '<span class="qr-badge">' + esc(t("quiz.best")) + "</span>" : "") +
+      '<div class="qr-head">' +
+      '<span class="qr-glyph" style="background:' +
+      tea.accent +
+      "1f;color:" +
+      tea.accent +
+      ";border-color:" +
+      tea.accent +
+      '55">' +
+      esc(tea.hanja) +
+      "</span>" +
+      '<span class="qr-id"><b>' +
+      esc(tea.name) +
+      '</b><span class="qr-native">' +
+      esc(native) +
+      (sub ? " · " + esc(sub) : "") +
+      '</span><span class="qr-group">' +
+      esc(meta) +
+      "</span></span></div>" +
+      chipHtml +
+      (opt.reason ? '<p class="qr-reason">' + esc(opt.reason) + "</p>" : "") +
+      '<p class="qr-flavor">' +
+      esc(tea.flavor || tea.oneLine || "") +
+      "</p>" +
+      (origin
+        ? '<p class="qr-origin"><b>' +
+          esc(t("quiz.origin")) +
+          "</b> " +
+          esc(origin) +
+          "</p>"
+        : "") +
+      '<div class="qr-stats">' +
+      '<div class="qr-stat"><b>' +
+      esc(tea.temp) +
+      "℃</b><span>" +
+      esc(tea.tempRange) +
+      "</span></div>" +
+      '<div class="qr-stat"><b>' +
+      esc(tea.leaf) +
+      "</b><span>" +
+      esc(tea.water) +
+      "</span></div>" +
+      '<div class="qr-stat"><b>' +
+      esc(fmtDur(tea.steeps[0])) +
+      "</b><span>" +
+      esc(t("quiz.firstSteep")) +
+      "</span></div>" +
+      "</div>" +
+      '<div class="qr-actions">' +
+      '<button class="btn btn-primary" type="button" data-brew="' +
+      tea.id +
+      '">' +
+      esc(t("quiz.brew")) +
+      "</button>" +
+      '<button class="btn btn-outline" type="button" data-guide="' +
+      tea.id +
+      '">' +
+      esc(t("quiz.guide")) +
+      "</button>" +
+      "</div></article>"
+    );
+  }
+
+  function bindQuizActions(root) {
+    $$("[data-brew]", root).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-brew");
+        setTimerTea(id, 1);
+        go("timer");
+        var tea = D.byId(id);
+        toast(t("toast.toTimer", { name: tea.name }));
+      });
+    });
+    $$("[data-guide]", root).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        openTeaInGuide(btn.getAttribute("data-guide"));
+      });
+    });
+    var again = $("#quizRestart", root);
+    if (again) {
+      again.addEventListener("click", function () {
+        openQuiz();
+      });
+    }
+  }
+
+  function renderQuizQuestion(body) {
+    var total = QUIZ.length;
+    var step = quizState.step;
+    var q = QUIZ[step];
+    var opts = q.opts
+      .map(function (o, idx) {
+        var on = quizOptionPressed(step, idx);
+        return (
+          '<button class="quiz-opt' +
+          (on ? " pressed" : "") +
+          '" type="button" data-opt="' +
+          idx +
+          '" aria-pressed="' +
+          on +
+          '"><span class="qo-mark" aria-hidden="true"></span><span>' +
+          esc(t(o.key)) +
+          "</span></button>"
+        );
+      })
+      .join("");
+
+    body.innerHTML =
+      '<div class="quiz-step">' +
+      '<p class="eyebrow">' +
+      esc(t("quiz.kicker")) +
+      "</p>" +
+      '<h1 class="quiz-q">' +
+      esc(t(q.key)) +
+      "</h1>" +
+      (step === 0 ? '<p class="quiz-lead">' + esc(t("quiz.lead")) + "</p>" : "") +
+      '<div class="quiz-opts" role="group" aria-label="' +
+      esc(t(q.key)) +
+      '">' +
+      opts +
+      "</div>" +
+      "</div>";
+
+    $$(".quiz-opt", body).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        chooseQuizOption(step, Number(btn.getAttribute("data-opt")));
+      });
+    });
+  }
+
+  function renderQuizResult(body) {
+    var rows = quizRanking();
+    var pick = quizPick(rows);
+    if (!pick) {
+      body.innerHTML = '<div class="empty">' + esc(t("quiz.resultLead")) + "</div>";
+      return;
+    }
+    quizState.result = pick;
+    var best = pick.best.tea;
+    var chips = quizReasonChips(pick.best);
+    var why = "";
+    if (chips.length === 2) why = t("quiz.whyTwo", { a: t(chips[0]), b: t(chips[1]) });
+    else if (chips.length === 1) why = t("quiz.whyOne", { a: t(chips[0]) });
+
+    body.innerHTML =
+      '<div class="quiz-result">' +
+      '<p class="eyebrow">' +
+      esc(t("quiz.resultKicker")) +
+      "</p>" +
+      '<h1 class="quiz-q">' +
+      esc(t("quiz.resultTitle")) +
+      "</h1>" +
+      '<p class="quiz-lead">' +
+      esc(t("quiz.resultLead")) +
+      "</p>" +
+      quizCardHtml(best, { best: true, reason: why, chips: chips }) +
+      '<div class="section-head"><h2>' +
+      esc(t("quiz.altTitle")) +
+      "</h2><span>" +
+      esc(t("quiz.resultKicker")) +
+      "</span></div>" +
+      pick.alts
+        .map(function (row) {
+          return quizCardHtml(row.tea, { best: false });
+        })
+        .join("") +
+      '<button class="btn btn-dark btn-block quiz-restart" type="button" id="quizRestart">' +
+      esc(t("quiz.restart")) +
+      "</button>" +
+      "</div>";
+
+    bindQuizActions(body);
+    window.scrollTo(0, 0);
+  }
+
+  function renderQuiz() {
+    var body = $("#quizBody");
+    if (!body) return;
+    var total = QUIZ.length;
+    var step = Math.min(quizState.step, total);
+    var bar = $("#quizBar");
+    var count = $("#quizCount");
+    if (bar) bar.style.width = Math.round((step / total) * 100) + "%";
+    if (count) count.textContent = t("quiz.progress", { n: Math.min(step + 1, total), total: total });
+    if (step >= total) {
+      renderQuizResult(body);
+      return;
+    }
+    renderQuizQuestion(body);
+  }
+
+  function bindQuiz() {
+    var banner = $("#quizBanner");
+    if (banner) banner.addEventListener("click", openQuiz);
+    var back = $("#quizBack");
+    if (back) back.addEventListener("click", quizBack);
+  }
+
+  /* ============================================================
      언어 전환 · 시작
      ============================================================ */
   function rerender() {
@@ -1079,6 +1528,7 @@
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    if (currentView === "quiz") renderQuiz();
     document.title = titleFor(currentView);
   }
 
@@ -1131,15 +1581,18 @@
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
 
     document.title = titleFor(currentView);
 
     var hash = (location.hash || "").replace("#", "");
-    if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
+    if (hash === "quiz") openQuiz();
+    else if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
     window.addEventListener("hashchange", function () {
       var h = (location.hash || "").replace("#", "");
-      if (VIEWS.indexOf(h) >= 0) go(h);
+      if (h === "quiz") openQuiz();
+      else if (VIEWS.indexOf(h) >= 0) go(h);
     });
 
     if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
