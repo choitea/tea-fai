@@ -812,7 +812,7 @@
       "</button>" +
       '<div class="tea-more"><div><div class="tea-more-inner">' +
       detailHtml +
-      (isGroup ? "" : buyBlockHtml(item)) +
+      (isGroup ? "" : teaShopBlockHtml(item.id) + buyBlockHtml(item)) +
       '<button class="btn btn-dark btn-block" type="button" data-timer="' +
       item.id +
       '">' +
