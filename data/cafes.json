@@ -1,0 +1,1252 @@
+{
+ "version": 1,
+ "updated": "2026-11-21",
+ "note": "서울 주요 찻집 14곳. 매장의 공식 안내(오설록), 서울관광재단 visitseoul 소개, 지도·다이닝코드 공개정보로 2026-11-21에 확인한 내용만 적었습니다. 가격과 예약 가능 여부는 확인되지 않아 넣지 않았고, 영업시간은 바뀔 수 있어 카드의 지도 링크로 최신 정보를 확인하도록 안내합니다. 파트너 매장 2곳(홍콩티 불광점·풍성한뷔페 신당점)은 data/shops.json에 있으며 이 화면 상단에 따로 강조합니다.",
+ "regions": [
+  {
+   "id": "jongno",
+   "name": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   }
+  },
+  {
+   "id": "seongsu",
+   "name": {
+    "ko": "성수·서울숲",
+    "en": "Seongsu · Seoul Forest",
+    "zh-CN": "圣水·首尔林",
+    "zh-TW": "聖水·首爾林"
+   }
+  },
+  {
+   "id": "yongsan",
+   "name": {
+    "ko": "용산",
+    "en": "Yongsan",
+    "zh-CN": "龙山",
+    "zh-TW": "龍山"
+   }
+  },
+  {
+   "id": "mapo",
+   "name": {
+    "ko": "마포·연남",
+    "en": "Mapo · Yeonnam",
+    "zh-CN": "麻浦·延南",
+    "zh-TW": "麻浦·延南"
+   }
+  },
+  {
+   "id": "gangnam",
+   "name": {
+    "ko": "강남·논현",
+    "en": "Gangnam · Nonhyeon",
+    "zh-CN": "江南·论岘",
+    "zh-TW": "江南·論峴"
+   }
+  },
+  {
+   "id": "eunpyeong",
+   "name": {
+    "ko": "은평·불광",
+    "en": "Eunpyeong · Bulgwang",
+    "zh-CN": "恩平·佛光",
+    "zh-TW": "恩平·佛光"
+   }
+  },
+  {
+   "id": "jung",
+   "name": {
+    "ko": "중구·신당",
+    "en": "Jung-gu · Sindang",
+    "zh-CN": "中区·新堂",
+    "zh-TW": "中區·新堂"
+   }
+  }
+ ],
+ "categories": [
+  {
+   "id": "partner",
+   "name": {
+    "ko": "파트너 티룸",
+    "en": "Partner tea room",
+    "zh-CN": "合作茶室",
+    "zh-TW": "合作茶室"
+   }
+  },
+  {
+   "id": "traditional",
+   "name": {
+    "ko": "전통찻집",
+    "en": "Traditional teahouse",
+    "zh-CN": "传统茶馆",
+    "zh-TW": "傳統茶館"
+   }
+  },
+  {
+   "id": "teahouse",
+   "name": {
+    "ko": "티하우스",
+    "en": "Tea house",
+    "zh-CN": "茶屋",
+    "zh-TW": "茶屋"
+   }
+  },
+  {
+   "id": "brand",
+   "name": {
+    "ko": "브랜드 티살롱",
+    "en": "Brand tea salon",
+    "zh-CN": "品牌茶沙龙",
+    "zh-TW": "品牌茶沙龍"
+   }
+  },
+  {
+   "id": "matcha",
+   "name": {
+    "ko": "말차·녹차 전문",
+    "en": "Matcha & green tea",
+    "zh-CN": "抹茶·绿茶专门",
+    "zh-TW": "抹茶·綠茶專門"
+   }
+  },
+  {
+   "id": "chinese",
+   "name": {
+    "ko": "중국차·보이차",
+    "en": "Chinese & pu-erh tea",
+    "zh-CN": "中国茶·普洱",
+    "zh-TW": "中國茶·普洱"
+   }
+  }
+ ],
+ "cafes": [
+  {
+   "slug": "jidaebang",
+   "name": {
+    "ko": "지대방",
+    "en": "Jidaebang",
+    "zh-CN": "智垈房 (Jidaebang)",
+    "zh-TW": "智垈房 (Jidaebang)"
+   },
+   "category": "traditional",
+   "categoryName": {
+    "ko": "전통찻집",
+    "en": "Traditional teahouse",
+    "zh-CN": "传统茶馆",
+    "zh-TW": "傳統茶館"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "종로3가역 5번 출구 351m",
+    "en": "351 m from Jongno 3-ga Stn. exit 5",
+    "zh-CN": "钟路三街站5号出口351米",
+    "zh-TW": "鐘路三街站5號出口351米"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동길 33 2층",
+    "en": "2F, 33 Insadong-gil, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区仁寺洞街33号2层",
+    "zh-TW": "首爾鐘路區仁寺洞街33號2層"
+   },
+   "coord": null,
+   "hours": {
+    "mon": "10:30-22:30",
+    "tue": "10:30-22:30",
+    "wed": "10:30-22:30",
+    "thu": "10:30-22:30",
+    "fri": "10:30-22:30",
+    "sat": "10:30-22:30",
+    "sun": "11:00-22:00"
+   },
+   "hoursNote": {
+    "ko": "월~토 10:30~22:30 · 일 11:00~22:00 · 연중무휴",
+    "en": "Mon–Sat 10:30–22:30 · Sun 11:00–22:00 · open daily",
+    "zh-CN": "周一至周六 10:30~22:30 · 周日 11:00~22:00 · 全年无休",
+    "zh-TW": "週一至週六 10:30~22:30 · 週日 11:00~22:00 · 全年無休"
+   },
+   "signature": {
+    "ko": "우전차 · 대추차 · 쌍화탕 · 오미자차",
+    "en": "Ujeon green tea · jujube tea · ssanghwa · omija",
+    "zh-CN": "雨前茶 · 大枣茶 · 双和汤 · 五味子茶",
+    "zh-TW": "雨前茶 · 大棗茶 · 雙和湯 · 五味子茶"
+   },
+   "desc": {
+    "ko": "전통차 60여 종을 다기와 보온병에 내어 직접 우려 마시는 인사동 찻집. 40년 넘게 같은 자리를 지켰습니다.",
+    "en": "An Insadong teahouse with more than 60 traditional teas, served with a teapot and thermos so you brew your own. In place for over 40 years.",
+    "zh-CN": "仁寺洞茶馆，供应六十余种传统茶，配茶具与保温瓶自行冲泡，四十余年守在同一处。",
+    "zh-TW": "仁寺洞茶館，供應六十餘種傳統茶，配茶具與保溫瓶自行沖泡，四十餘年守在同一處。"
+   },
+   "tasteTags": [
+    "a-roast",
+    "a-floral",
+    "k-sweet",
+    "s-hot",
+    "c-low",
+    "m-calm",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%A7%80%EB%8C%80%EB%B0%A9%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EC%A7%80%EB%8C%80%EB%B0%A9",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%A7%80%EB%8C%80%EB%B0%A9"
+   },
+   "source": "서울관광재단 visitseoul (KOP013751)",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "gyeongin-dawon",
+   "name": {
+    "ko": "경인미술관 전통다원",
+    "en": "Gyeongin Art Gallery Dawon",
+    "zh-CN": "耕仁美术馆传统茶园",
+    "zh-TW": "耕仁美術館傳統茶園"
+   },
+   "category": "traditional",
+   "categoryName": {
+    "ko": "전통찻집",
+    "en": "Traditional teahouse",
+    "zh-CN": "传统茶馆",
+    "zh-TW": "傳統茶館"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "안국역 6번 출구 320m",
+    "en": "320 m from Anguk Stn. exit 6",
+    "zh-CN": "安国站6号出口320米",
+    "zh-TW": "安國站6號出口320米"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동10길 11-4 (경인미술관 안)",
+    "en": "11-4 Insadong 10-gil, Jongno-gu, Seoul (inside Gyeongin Art Gallery)",
+    "zh-CN": "首尔钟路区仁寺洞10街11-4（耕仁美术馆内）",
+    "zh-TW": "首爾鐘路區仁寺洞10街11-4（耕仁美術館內）"
+   },
+   "coord": [
+    37.57438,
+    126.98543
+   ],
+   "hours": {
+    "mon": "10:30-21:20",
+    "tue": "10:30-21:20",
+    "wed": "10:30-21:20",
+    "thu": "10:30-21:20",
+    "fri": "10:30-21:20",
+    "sat": "10:30-21:20",
+    "sun": "10:30-21:20"
+   },
+   "hoursNote": {
+    "ko": "매일 10:30~21:20 · 설·추석 당일 휴무",
+    "en": "Daily 10:30–21:20 · closed Lunar New Year and Chuseok",
+    "zh-CN": "每天 10:30~21:20 · 春节、中秋当天休息",
+    "zh-TW": "每天 10:30~21:20 · 春節、中秋當天休息"
+   },
+   "signature": {
+    "ko": "대추차 · 전통차 15종 · 모둠떡",
+    "en": "Jujube tea · 15 traditional teas · rice-cake plate",
+    "zh-CN": "大枣茶 · 十五种传统茶 · 年糕拼盘",
+    "zh-TW": "大棗茶 · 十五種傳統茶 · 年糕拼盤"
+   },
+   "desc": {
+    "ko": "개화기 저택을 지킨 미술관 마당의 한옥 찻집. 나무가 우거진 정원을 보며 전통차와 한과를 즐깁니다.",
+    "en": "A hanok teahouse in the garden of an art gallery that preserves a late-19th-century house; traditional tea and sweets under old trees.",
+    "zh-CN": "美术馆庭院中的韩屋茶馆，保留开化期宅邸，可在古树下喝传统茶、吃韩果。",
+    "zh-TW": "美術館庭院中的韓屋茶館，保留開化期宅邸，可在古樹下喝傳統茶、吃韓果。"
+   },
+   "tasteTags": [
+    "a-roast",
+    "a-floral",
+    "k-sweet",
+    "s-hot",
+    "c-low",
+    "m-calm"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EA%B2%BD%EC%9D%B8%EB%AF%B8%EC%88%A0%EA%B4%80%20%EC%A0%84%ED%86%B5%EB%8B%A4%EC%9B%90%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EA%B2%BD%EC%9D%B8%EB%AF%B8%EC%88%A0%EA%B4%80%20%EC%A0%84%ED%86%B5%EB%8B%A4%EC%9B%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EA%B2%BD%EC%9D%B8%EB%AF%B8%EC%88%A0%EA%B4%80%20%EC%A0%84%ED%86%B5%EB%8B%A4%EC%9B%90"
+   },
+   "source": "서울관광재단 소개 · 지도 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "teastory",
+   "name": {
+    "ko": "아름다운 차 박물관",
+    "en": "TEASTORY · Beautiful Tea Museum",
+    "zh-CN": "美丽的茶博物馆",
+    "zh-TW": "美麗的茶博物館"
+   },
+   "category": "teahouse",
+   "categoryName": {
+    "ko": "티하우스",
+    "en": "Tea house",
+    "zh-CN": "茶屋",
+    "zh-TW": "茶屋"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "안국역 6번 출구 300m",
+    "en": "300 m from Anguk Stn. exit 6",
+    "zh-CN": "安国站6号出口300米",
+    "zh-TW": "安國站6號出口300米"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동길 19-11",
+    "en": "19-11 Insadong-gil, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区仁寺洞街19-11",
+    "zh-TW": "首爾鐘路區仁寺洞街19-11"
+   },
+   "coord": [
+    37.57237,
+    126.98588
+   ],
+   "hours": {
+    "mon": "11:30-20:00",
+    "tue": "11:30-20:00",
+    "wed": "11:30-20:00",
+    "thu": "11:30-20:00",
+    "fri": "11:30-20:00",
+    "sat": "11:30-20:00",
+    "sun": "11:30-20:00"
+   },
+   "hoursNote": {
+    "ko": "매일 11:30~20:00 · 신정·추석 당일 휴무",
+    "en": "Daily 11:30–20:00 · closed New Year's Day and Chuseok",
+    "zh-CN": "每天 11:30~20:00 · 元旦、中秋当天休息",
+    "zh-TW": "每天 11:30~20:00 · 元旦、中秋當天休息"
+   },
+   "signature": {
+    "ko": "세계 100여 종의 차 · 다기 갤러리 · 기문홍차",
+    "en": "Around 100 teas from around the world · teaware gallery · Keemun black",
+    "zh-CN": "世界百余种茶 · 茶具画廊 · 祁门红茶",
+    "zh-TW": "世界百餘種茶 · 茶具畫廊 · 祁門紅茶"
+   },
+   "desc": {
+    "ko": "1998년부터 인사동 한옥에서 차와 다기를 함께 소개해 온 공간. 차마다 어울리는 다기에 내어 주고, 안쪽은 작은 전시실입니다.",
+    "en": "In an Insadong hanok since 1998, pairing tea with teaware; each tea comes in a matching pot and the inner rooms hold a small gallery.",
+    "zh-CN": "自1998年起在仁寺洞韩屋中介绍茶与茶器，每款茶配相称茶壶，里间是小展室。",
+    "zh-TW": "自1998年起在仁寺洞韓屋中介紹茶與茶器，每款茶配相稱茶壺，裡間是小展室。"
+   },
+   "tasteTags": [
+    "a-floral",
+    "a-roast",
+    "k-crisp",
+    "s-hot",
+    "c-mid",
+    "m-calm",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4%20%EC%B0%A8%20%EB%B0%95%EB%AC%BC%EA%B4%80%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4%20%EC%B0%A8%20%EB%B0%95%EB%AC%BC%EA%B4%80",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4%20%EC%B0%A8%20%EB%B0%95%EB%AC%BC%EA%B4%80"
+   },
+   "source": "지도·다이닝코드 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "gwicheon",
+   "name": {
+    "ko": "귀천",
+    "en": "Gwicheon",
+    "zh-CN": "归天",
+    "zh-TW": "歸天"
+   },
+   "category": "traditional",
+   "categoryName": {
+    "ko": "전통찻집",
+    "en": "Traditional teahouse",
+    "zh-CN": "传统茶馆",
+    "zh-TW": "傳統茶館"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "종로3가역 4번 출구 250m",
+    "en": "250 m from Jongno 3-ga Stn. exit 4",
+    "zh-CN": "钟路三街站4号出口250米",
+    "zh-TW": "鐘路三街站4號出口250米"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동14길 14",
+    "en": "14 Insadong 14-gil, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区仁寺洞14街14",
+    "zh-TW": "首爾鐘路區仁寺洞14街14"
+   },
+   "coord": null,
+   "hours": {
+    "mon": "11:00-21:00",
+    "tue": "11:00-21:00",
+    "wed": "11:00-21:00",
+    "thu": "11:00-21:00",
+    "fri": "11:00-21:00",
+    "sat": "11:00-21:00",
+    "sun": "11:00-17:00"
+   },
+   "hoursNote": {
+    "ko": "월~토 11:00~21:00 · 일 11:00~17:00",
+    "en": "Mon–Sat 11:00–21:00 · Sun 11:00–17:00",
+    "zh-CN": "周一至周六 11:00~21:00 · 周日 11:00~17:00",
+    "zh-TW": "週一至週六 11:00~21:00 · 週日 11:00~17:00"
+   },
+   "signature": {
+    "ko": "모과차 · 쌍화차 · 한과",
+    "en": "Quince tea · ssanghwa · hangwa",
+    "zh-CN": "木瓜茶 · 双和茶 · 韩果",
+    "zh-TW": "木瓜茶 · 雙和茶 · 韓果"
+   },
+   "desc": {
+    "ko": "1985년 문을 연 찻집으로, 시인 천상병과 인연이 깊어 서울미래유산으로 지정됐습니다. 직접 담근 모과차가 대표 메뉴입니다.",
+    "en": "Open since 1985 and tied to the poet Cheon Sang-byeong, a Seoul Future Heritage site; its home-made quince tea is the signature.",
+    "zh-CN": "1985年开业的茶馆，与诗人千祥炳渊源深厚，被列为首尔未来遗产；自制木瓜茶为代表。",
+    "zh-TW": "1985年開業的茶館，與詩人千祥炳淵源深厚，被列為首爾未來遺產；自製木瓜茶為代表。"
+   },
+   "tasteTags": [
+    "a-fruit",
+    "a-floral",
+    "k-sweet",
+    "s-hot",
+    "c-low",
+    "m-cozy"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EA%B7%80%EC%B2%9C%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EA%B7%80%EC%B2%9C",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EA%B7%80%EC%B2%9C"
+   },
+   "source": "서울관광재단 소개 · 지도 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "tove",
+   "name": {
+    "ko": "토오베",
+    "en": "TOVE",
+    "zh-CN": "TOVE",
+    "zh-TW": "TOVE"
+   },
+   "category": "teahouse",
+   "categoryName": {
+    "ko": "티하우스",
+    "en": "Tea house",
+    "zh-CN": "茶屋",
+    "zh-TW": "茶屋"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "안국역 6번 출구 400m, 인사동길 3층",
+    "en": "400 m from Anguk Stn. exit 6, 3F on Insadong-gil",
+    "zh-CN": "安国站6号出口400米，仁寺洞街3层",
+    "zh-TW": "安國站6號出口400米，仁寺洞街3層"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동길 62-4 3층",
+    "en": "3F, 62-4 Insadong-gil, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区仁寺洞街62-4 3层",
+    "zh-TW": "首爾鐘路區仁寺洞街62-4 3層"
+   },
+   "coord": null,
+   "hours": {
+    "mon": "12:00-21:00",
+    "tue": "12:00-21:00",
+    "wed": "12:00-21:00",
+    "thu": "12:00-21:00",
+    "fri": "12:00-21:00",
+    "sat": "12:00-21:00",
+    "sun": "12:00-21:00"
+   },
+   "hoursNote": {
+    "ko": "매일 12:00~21:00 · 예약은 캐치테이블",
+    "en": "Daily 12:00–21:00 · reserve via Catchtable",
+    "zh-CN": "每天 12:00~21:00 · 可通过 Catchtable 预约",
+    "zh-TW": "每天 12:00~21:00 · 可透過 Catchtable 預約"
+   },
+   "signature": {
+    "ko": "백차 · 우롱차 · 홍차 · 레몬젤리",
+    "en": "White, oolong and black tea · lemon jelly",
+    "zh-CN": "白茶 · 乌龙茶 · 红茶 · 柠檬果冻",
+    "zh-TW": "白茶 · 烏龍茶 · 紅茶 · 檸檬果凍"
+   },
+   "desc": {
+    "ko": "차 노트를 읽고 고르는 현대적 티카페. 백차·우롱·홍차를 다기째 내고, 좁은 공간이라 예약이 편합니다.",
+    "en": "A modern tea café where you choose from tasting notes; white, oolong and black teas come by the pot. Small, so a reservation helps.",
+    "zh-CN": "现代风格茶咖啡馆，可读风味笔记选茶，白茶、乌龙、红茶整壶上桌；空间小，建议预约。",
+    "zh-TW": "現代風格茶咖啡館，可讀風味筆記選茶，白茶、烏龍、紅茶整壺上桌；空間小，建議預約。"
+   },
+   "tasteTags": [
+    "a-floral",
+    "a-fruit",
+    "k-sweet",
+    "s-hot",
+    "c-mid",
+    "p-dessert",
+    "m-calm"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%ED%86%A0%EC%98%A4%EB%B2%A0%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%ED%86%A0%EC%98%A4%EB%B2%A0",
+    "google": "https://www.google.com/maps/search/?api=1&query=%ED%86%A0%EC%98%A4%EB%B2%A0"
+   },
+   "source": "다이닝코드·지도 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "jiyu-myeongcha",
+   "name": {
+    "ko": "지유명차 인사점",
+    "en": "Jiyu Myeongcha Insadong",
+    "zh-CN": "智有茗茶 仁寺店",
+    "zh-TW": "智有茗茶 仁寺店"
+   },
+   "category": "chinese",
+   "categoryName": {
+    "ko": "중국차·보이차",
+    "en": "Chinese & pu-erh tea",
+    "zh-CN": "中国茶·普洱",
+    "zh-TW": "中國茶·普洱"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "종로3가역 5번 출구 200m",
+    "en": "200 m from Jongno 3-ga Stn. exit 5",
+    "zh-CN": "钟路三街站5号出口200米",
+    "zh-TW": "鐘路三街站5號出口200米"
+   },
+   "address": {
+    "ko": "서울 종로구 인사동길 43 대일빌딩 105호",
+    "en": "105 Daeil Bldg., 43 Insadong-gil, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区仁寺洞街43 大一大厦105号",
+    "zh-TW": "首爾鐘路區仁寺洞街43 大一大廈105號"
+   },
+   "coord": [
+    37.57191,
+    126.98717
+   ],
+   "hours": {
+    "mon": null,
+    "tue": "11:00-19:00",
+    "wed": "11:00-19:00",
+    "thu": "11:00-19:00",
+    "fri": "11:00-19:00",
+    "sat": "11:00-19:00",
+    "sun": "16:00-19:00"
+   },
+   "hoursNote": {
+    "ko": "화~토 11:00~19:00 · 일 16:00~19:00 · 월 휴무",
+    "en": "Tue–Sat 11:00–19:00 · Sun 16:00–19:00 · closed Mon",
+    "zh-CN": "周二至周六 11:00~19:00 · 周日 16:00~19:00 · 周一休息",
+    "zh-TW": "週二至週六 11:00~19:00 · 週日 16:00~19:00 · 週一休息"
+   },
+   "signature": {
+    "ko": "보이차 · 중국차 · 자사호",
+    "en": "Pu-erh · Chinese tea · Yixing pots",
+    "zh-CN": "普洱 · 中国茶 · 紫砂壶",
+    "zh-TW": "普洱 · 中國茶 · 紫砂壺"
+   },
+   "desc": {
+    "ko": "보이차와 자사호를 중심으로 중국차를 다루는 작은 찻집. 차를 마시며 다기도 함께 볼 수 있습니다.",
+    "en": "A small shop for Chinese tea centred on pu-erh and Yixing teapots, where you can drink and look at teaware together.",
+    "zh-CN": "以普洱与紫砂壶为中心的小型中国茶馆，可边喝茶边看茶器。",
+    "zh-TW": "以普洱與紫砂壺為中心的小型中國茶館，可邊喝茶邊看茶器。"
+   },
+   "tasteTags": [
+    "a-roast",
+    "a-malt",
+    "b-full",
+    "s-hot",
+    "c-mid",
+    "m-cozy"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%A7%80%EC%9C%A0%EB%AA%85%EC%B0%A8%20%EC%9D%B8%EC%82%AC%EC%A0%90%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EC%A7%80%EC%9C%A0%EB%AA%85%EC%B0%A8%20%EC%9D%B8%EC%82%AC%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%A7%80%EC%9C%A0%EB%AA%85%EC%B0%A8%20%EC%9D%B8%EC%82%AC%EC%A0%90"
+   },
+   "source": "지도 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "osulloc-bukchon",
+   "name": {
+    "ko": "오설록 티하우스 북촌점",
+    "en": "Osulloc Tea House Bukchon",
+    "zh-CN": "Osulloc 茶屋 北村店",
+    "zh-TW": "Osulloc 茶屋 北村店"
+   },
+   "category": "brand",
+   "categoryName": {
+    "ko": "브랜드 티살롱",
+    "en": "Brand tea salon",
+    "zh-CN": "品牌茶沙龙",
+    "zh-TW": "品牌茶沙龍"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "안국역 2번 출구 500m",
+    "en": "500 m from Anguk Stn. exit 2",
+    "zh-CN": "安国站2号出口500米",
+    "zh-TW": "安國站2號出口500米"
+   },
+   "address": {
+    "ko": "서울 종로구 북촌로 45",
+    "en": "45 Bukchon-ro, Jongno-gu, Seoul",
+    "zh-CN": "首尔钟路区北村路45",
+    "zh-TW": "首爾鐘路區北村路45"
+   },
+   "coord": [
+    37.58104,
+    126.98465
+   ],
+   "hours": {
+    "mon": "11:00-20:00",
+    "tue": "11:00-20:00",
+    "wed": "11:00-20:00",
+    "thu": "11:00-20:00",
+    "fri": "11:00-21:00",
+    "sat": "11:00-21:00",
+    "sun": "11:00-21:00"
+   },
+   "hoursNote": {
+    "ko": "월~목 11:00~20:00 · 금~일 11:00~21:00",
+    "en": "Mon–Thu 11:00–20:00 · Fri–Sun 11:00–21:00",
+    "zh-CN": "周一至周四 11:00~20:00 · 周五至周日 11:00~21:00",
+    "zh-TW": "週一至週四 11:00~20:00 · 週五至週日 11:00~21:00"
+   },
+   "signature": {
+    "ko": "제주 녹차 · 티 마스터 블렌드 · 3층 티 칵테일",
+    "en": "Jeju green tea · tea-master blends · tea cocktails on 3F",
+    "zh-CN": "济州绿茶 · 茶师拼配 · 三层茶鸡尾酒",
+    "zh-TW": "濟州綠茶 · 茶師拼配 · 三層茶雞尾酒"
+   },
+   "desc": {
+    "ko": "1960년대 양옥을 고쳐 만든 오설록의 북촌 티하우스. 1층은 잎차와 시그니처 티, 3층은 무알코올 티 칵테일 바입니다.",
+    "en": "Osulloc's Bukchon house, reworked from a 1960s villa: loose leaf and signature teas downstairs, a non-alcoholic tea cocktail bar on the third floor.",
+    "zh-CN": "由1960年代洋房改造的 Osulloc 北村茶屋：一层卖原叶茶与招牌茶，三层是无酒精茶鸡尾酒吧。",
+    "zh-TW": "由1960年代洋房改造的 Osulloc 北村茶屋：一層賣原葉茶與招牌茶，三層是無酒精茶雞尾酒吧。"
+   },
+   "tasteTags": [
+    "a-grass",
+    "a-floral",
+    "k-sweet",
+    "s-hot",
+    "c-mid",
+    "m-calm",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%B6%81%EC%B4%8C%EC%A0%90%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%B6%81%EC%B4%8C%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%B6%81%EC%B4%8C%EC%A0%90"
+   },
+   "source": "오설록 공식 매장 안내 (store-introduction/312)",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "osulloc-mmca",
+   "name": {
+    "ko": "오설록 티하우스 MMCA점",
+    "en": "Osulloc Tea House MMCA",
+    "zh-CN": "Osulloc 茶屋 MMCA店",
+    "zh-TW": "Osulloc 茶屋 MMCA店"
+   },
+   "category": "brand",
+   "categoryName": {
+    "ko": "브랜드 티살롱",
+    "en": "Brand tea salon",
+    "zh-CN": "品牌茶沙龙",
+    "zh-TW": "品牌茶沙龍"
+   },
+   "region": "jongno",
+   "regionName": {
+    "ko": "종로·인사동·북촌",
+    "en": "Jongno · Insadong · Bukchon",
+    "zh-CN": "钟路·仁寺洞·北村",
+    "zh-TW": "鐘路·仁寺洞·北村"
+   },
+   "near": {
+    "ko": "안국역 1번 출구 400m, 국립현대미술관 서울관",
+    "en": "400 m from Anguk Stn. exit 1, inside MMCA Seoul",
+    "zh-CN": "安国站1号出口400米，国立现代美术馆首尔馆",
+    "zh-TW": "安國站1號出口400米，國立現代美術館首爾館"
+   },
+   "address": {
+    "ko": "서울 종로구 삼청로 30 (국립현대미술관 서울)",
+    "en": "30 Samcheong-ro, Jongno-gu, Seoul (MMCA Seoul)",
+    "zh-CN": "首尔钟路区三清路30（国立现代美术馆首尔馆）",
+    "zh-TW": "首爾鐘路區三清路30（國立現代美術館首爾館）"
+   },
+   "coord": [
+    37.57975,
+    126.98081
+   ],
+   "hours": {
+    "mon": "10:00-20:00",
+    "tue": "10:00-20:00",
+    "wed": "10:00-21:00",
+    "thu": "10:00-20:00",
+    "fri": "10:00-20:00",
+    "sat": "10:00-21:00",
+    "sun": "10:00-20:00"
+   },
+   "hoursNote": {
+    "ko": "월·화·목·금·일 10:00~20:00 · 수·토 10:00~21:00",
+    "en": "Mon–Tue, Thu–Fri, Sun 10:00–20:00 · Wed & Sat 10:00–21:00",
+    "zh-CN": "周一、二、四、五、日 10:00~20:00 · 周三、六 10:00~21:00",
+    "zh-TW": "週一、二、四、五、日 10:00~20:00 · 週三、六 10:00~21:00"
+   },
+   "signature": {
+    "ko": "제주 녹차 디저트 · 미술관 관람과 함께",
+    "en": "Jeju green tea desserts · with a museum visit",
+    "zh-CN": "济州绿茶甜点 · 可与看展同游",
+    "zh-TW": "濟州綠茶甜點 · 可與看展同遊"
+   },
+   "desc": {
+    "ko": "국립현대미술관 서울관 안의 오설록. 전시를 본 뒤 차로 쉬어 가기 좋고, 미술관 운영시간을 함께 확인하세요.",
+    "en": "The Osulloc inside MMCA Seoul — a good pause after an exhibition; check the museum's own hours too.",
+    "zh-CN": "位于国立现代美术馆首尔馆内的 Osulloc，看完展览后适合喝茶休息，也请确认美术馆开放时间。",
+    "zh-TW": "位於國立現代美術館首爾館內的 Osulloc，看完展覽後適合喝茶休息，也請確認美術館開放時間。"
+   },
+   "tasteTags": [
+    "a-grass",
+    "a-roast",
+    "k-sweet",
+    "s-hot",
+    "c-mid",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20MMCA%EC%A0%90%20%EC%A2%85%EB%A1%9C",
+    "kakao": "https://map.kakao.com/link/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20MMCA%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20MMCA%EC%A0%90"
+   },
+   "source": "지도·오설록 매장 목록",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "osulloc-yongsan",
+   "name": {
+    "ko": "오설록 티하우스 용산파크점",
+    "en": "Osulloc Tea House Yongsan Park",
+    "zh-CN": "Osulloc 茶屋 龙山公园店",
+    "zh-TW": "Osulloc 茶屋 龍山公園店"
+   },
+   "category": "brand",
+   "categoryName": {
+    "ko": "브랜드 티살롱",
+    "en": "Brand tea salon",
+    "zh-CN": "品牌茶沙龙",
+    "zh-TW": "品牌茶沙龍"
+   },
+   "region": "yongsan",
+   "regionName": {
+    "ko": "용산",
+    "en": "Yongsan",
+    "zh-CN": "龙山",
+    "zh-TW": "龍山"
+   },
+   "near": {
+    "ko": "신용산역 1번 출구 400m, 아모레퍼시픽 1층",
+    "en": "400 m from Sinyongsan Stn. exit 1, Amorepacific 1F",
+    "zh-CN": "新龙山站1号出口400米，爱茉莉太平洋1层",
+    "zh-TW": "新龍山站1號出口400米，愛茉莉太平洋1層"
+   },
+   "address": {
+    "ko": "서울 용산구 한강대로 100 아모레퍼시픽 1F",
+    "en": "1F Amorepacific, 100 Hangang-daero, Yongsan-gu, Seoul",
+    "zh-CN": "首尔龙山区汉江大路100 爱茉莉太平洋1层",
+    "zh-TW": "首爾龍山區漢江大路100 愛茉莉太平洋1層"
+   },
+   "coord": null,
+   "hours": {
+    "mon": "09:00-19:00",
+    "tue": "09:00-19:00",
+    "wed": "09:00-19:00",
+    "thu": "09:00-19:00",
+    "fri": "09:00-19:00",
+    "sat": "10:00-20:00",
+    "sun": "10:00-20:00"
+   },
+   "hoursNote": {
+    "ko": "월~금 09:00~19:00 (LO 18:30) · 토·일 10:00~20:00 (LO 19:30)",
+    "en": "Mon–Fri 09:00–19:00 (LO 18:30) · Sat–Sun 10:00–20:00 (LO 19:30)",
+    "zh-CN": "周一至周五 09:00~19:00（最后点单18:30）· 周六日 10:00~20:00（最后点单19:30）",
+    "zh-TW": "週一至週五 09:00~19:00（最後點單18:30）· 週六日 10:00~20:00（最後點單19:30）"
+   },
+   "signature": {
+    "ko": "한정 메뉴 · 비건 디저트 · 반려동물 동반",
+    "en": "Limited menus · vegan desserts · pet-friendly",
+    "zh-CN": "限定菜单 · 纯素甜点 · 可携宠物",
+    "zh-TW": "限定菜單 · 純素甜點 · 可攜寵物"
+   },
+   "desc": {
+    "ko": "아모레퍼시픽 본사 1층의 넓은 티하우스. 시즌 한정 메뉴와 비건 디저트가 있고 반려동물과 함께 앉을 수 있습니다.",
+    "en": "A spacious tea house on the ground floor of Amorepacific HQ, with seasonal menus, vegan desserts and pet-friendly seating.",
+    "zh-CN": "爱茉莉太平洋总部一层的宽敞茶屋，有季节限定与纯素甜点，可与宠物同坐。",
+    "zh-TW": "愛茉莉太平洋總部一層的寬敞茶屋，有季節限定與純素甜點，可與寵物同坐。"
+   },
+   "tasteTags": [
+    "a-grass",
+    "a-floral",
+    "k-sweet",
+    "s-hot",
+    "c-mid",
+    "m-calm"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%9A%A9%EC%82%B0%ED%8C%8C%ED%81%AC%EC%A0%90%20%EC%9A%A9%EC%82%B0",
+    "kakao": "https://map.kakao.com/link/search/%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%9A%A9%EC%82%B0%ED%8C%8C%ED%81%AC%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EC%84%A4%EB%A1%9D%20%ED%8B%B0%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%9A%A9%EC%82%B0%ED%8C%8C%ED%81%AC%EC%A0%90"
+   },
+   "source": "오설록 공식 매장 안내 (yongsan)",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "podritual-seongsu",
+   "name": {
+    "ko": "팟 리추얼 성수",
+    "en": "POD RITUAL Seongsu",
+    "zh-CN": "POD RITUAL 圣水",
+    "zh-TW": "POD RITUAL 聖水"
+   },
+   "category": "matcha",
+   "categoryName": {
+    "ko": "말차·녹차 전문",
+    "en": "Matcha & green tea",
+    "zh-CN": "抹茶·绿茶专门",
+    "zh-TW": "抹茶·綠茶專門"
+   },
+   "region": "seongsu",
+   "regionName": {
+    "ko": "성수·서울숲",
+    "en": "Seongsu · Seoul Forest",
+    "zh-CN": "圣水·首尔林",
+    "zh-TW": "聖水·首爾林"
+   },
+   "near": {
+    "ko": "성수역 3번 출구 300m",
+    "en": "300 m from Seongsu Stn. exit 3",
+    "zh-CN": "圣水站3号出口300米",
+    "zh-TW": "聖水站3號出口300米"
+   },
+   "address": {
+    "ko": "서울 성동구 연무장9길 14 1층",
+    "en": "1F, 14 Yeonmujang 9-gil, Seongdong-gu, Seoul",
+    "zh-CN": "首尔城东区练武场9街14 1层",
+    "zh-TW": "首爾城東區練武場9街14 1層"
+   },
+   "coord": null,
+   "hours": {
+    "mon": "11:00-21:00",
+    "tue": "11:00-21:00",
+    "wed": "11:00-21:00",
+    "thu": "11:00-21:00",
+    "fri": "11:00-21:00",
+    "sat": "11:00-21:00",
+    "sun": "11:00-21:00"
+   },
+   "hoursNote": {
+    "ko": "매일 11:00~21:00",
+    "en": "Daily 11:00–21:00",
+    "zh-CN": "每天 11:00~21:00",
+    "zh-TW": "每天 11:00~21:00"
+   },
+   "signature": {
+    "ko": "말차 · 호지차 · 한국차 · 말차 치즈케이크",
+    "en": "Matcha · hojicha · Korean tea · matcha cheesecake",
+    "zh-CN": "抹茶 · 焙茶 · 韩国茶 · 抹茶芝士蛋糕",
+    "zh-TW": "抹茶 · 焙茶 · 韓國茶 · 抹茶起司蛋糕"
+   },
+   "desc": {
+    "ko": "바 좌석에서 말차를 직접 격불해 내는 성수 티하우스. 차와 다도용품을 함께 팔고 디저트도 진합니다.",
+    "en": "A Seongsu tea house where matcha is whisked to order at the bar; tea wares are for sale and the desserts are serious.",
+    "zh-CN": "圣水茶屋，吧台现打抹茶，兼售茶与茶道具，甜点也认真。",
+    "zh-TW": "聖水茶屋，吧檯現打抹茶，兼售茶與茶道具，甜點也認真。"
+   },
+   "tasteTags": [
+    "a-grass",
+    "a-roast",
+    "b-full",
+    "s-hot",
+    "s-milk",
+    "c-mid",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%ED%8C%9F%20%EB%A6%AC%EC%B6%94%EC%96%BC%20%EC%84%B1%EC%88%98%20%EC%84%B1%EC%88%98",
+    "kakao": "https://map.kakao.com/link/search/%ED%8C%9F%20%EB%A6%AC%EC%B6%94%EC%96%BC%20%EC%84%B1%EC%88%98",
+    "google": "https://www.google.com/maps/search/?api=1&query=%ED%8C%9F%20%EB%A6%AC%EC%B6%94%EC%96%BC%20%EC%84%B1%EC%88%98"
+   },
+   "source": "지도·방문 후기 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "omot",
+   "name": {
+    "ko": "오므오트",
+    "en": "OMOT",
+    "zh-CN": "OMOT",
+    "zh-TW": "OMOT"
+   },
+   "category": "teahouse",
+   "categoryName": {
+    "ko": "티하우스",
+    "en": "Tea house",
+    "zh-CN": "茶屋",
+    "zh-TW": "茶屋"
+   },
+   "region": "seongsu",
+   "regionName": {
+    "ko": "성수·서울숲",
+    "en": "Seongsu · Seoul Forest",
+    "zh-CN": "圣水·首尔林",
+    "zh-TW": "聖水·首爾林"
+   },
+   "near": {
+    "ko": "뚝섬역 8번 출구 617m, 서울숲2길 지하1층",
+    "en": "617 m from Ttukseom Stn. exit 8, B1 on Seoul Forest 2-gil",
+    "zh-CN": "纛岛站8号出口617米，首尔林2街地下一层",
+    "zh-TW": "纛島站8號出口617米，首爾林2街地下一層"
+   },
+   "address": {
+    "ko": "서울 성동구 서울숲2길 12 지하1층",
+    "en": "B1, 12 Seoul Forest 2-gil, Seongdong-gu, Seoul",
+    "zh-CN": "首尔城东区首尔林2街12 地下一层",
+    "zh-TW": "首爾城東區首爾林2街12 地下一層"
+   },
+   "coord": null,
+   "hours": {
+    "mon": null,
+    "tue": null,
+    "wed": "12:00-19:00",
+    "thu": "12:00-19:00",
+    "fri": "13:00-19:00",
+    "sat": "13:00-19:00",
+    "sun": "13:00-19:00"
+   },
+   "hoursNote": {
+    "ko": "수·목 12:00~19:00 · 금~일 13:00~19:00 · 월·화 휴무 · 티코스는 예약제",
+    "en": "Wed–Thu 12:00–19:00 · Fri–Sun 13:00–19:00 · closed Mon–Tue · tea courses by reservation",
+    "zh-CN": "周三、四 12:00~19:00 · 周五至周日 13:00~19:00 · 周一、二休息 · 茶套餐需预约",
+    "zh-TW": "週三、四 12:00~19:00 · 週五至週日 13:00~19:00 · 週一、二休息 · 茶套餐需預約"
+   },
+   "signature": {
+    "ko": "한국차 싱글 오리진 · 스토리텔링 티코스",
+    "en": "Single-origin Korean tea · storytelling tea course",
+    "zh-CN": "韩国茶单一产地 · 叙事式茶套餐",
+    "zh-TW": "韓國茶單一產地 · 敘事式茶套餐"
+   },
+   "desc": {
+    "ko": "서울숲 근처의 한국차 전문 티하우스. 티코스는 예약제이고 단품은 워크인으로 마실 수 있습니다.",
+    "en": "A Korean-tea house near Seoul Forest; tea courses are booked ahead, single teas are walk-in.",
+    "zh-CN": "首尔林附近的韩国茶专门茶屋，茶套餐需预约，单点可现场入座。",
+    "zh-TW": "首爾林附近的韓國茶專門茶屋，茶套餐需預約，單點可現場入座。"
+   },
+   "tasteTags": [
+    "a-grass",
+    "a-floral",
+    "a-roast",
+    "k-sweet",
+    "s-hot",
+    "c-mid",
+    "m-calm"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EC%98%A4%EB%AF%80%EC%98%A4%ED%8A%B8%20%EC%84%B1%EC%88%98",
+    "kakao": "https://map.kakao.com/link/search/%EC%98%A4%EB%AF%80%EC%98%A4%ED%8A%B8",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EB%AF%80%EC%98%A4%ED%8A%B8"
+   },
+   "source": "서울관광재단 visitseoul (KOPanhrla)",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "tnomad",
+   "name": {
+    "ko": "T.Nomad Laboratory",
+    "en": "T.Nomad Laboratory",
+    "zh-CN": "T.Nomad Laboratory",
+    "zh-TW": "T.Nomad Laboratory"
+   },
+   "category": "teahouse",
+   "categoryName": {
+    "ko": "티하우스",
+    "en": "Tea house",
+    "zh-CN": "茶屋",
+    "zh-TW": "茶屋"
+   },
+   "region": "mapo",
+   "regionName": {
+    "ko": "마포·연남",
+    "en": "Mapo · Yeonnam",
+    "zh-CN": "麻浦·延南",
+    "zh-TW": "麻浦·延南"
+   },
+   "near": {
+    "ko": "마포구 포은로 112 2층, 망원·성산 사이",
+    "en": "2F, 112 Poeun-ro, Mapo-gu, Seoul",
+    "zh-CN": "麻浦区浦隐路112 2层",
+    "zh-TW": "麻浦區浦隱路112 2層"
+   },
+   "address": {
+    "ko": "서울 마포구 포은로 112 2층",
+    "en": "2F, 112 Poeun-ro, Mapo-gu, Seoul",
+    "zh-CN": "首尔麻浦区浦隐路112 2层",
+    "zh-TW": "首爾麻浦區浦隱路112 2層"
+   },
+   "coord": [
+    37.55693,
+    126.90467
+   ],
+   "hours": {
+    "mon": "13:00-20:30",
+    "tue": null,
+    "wed": "13:00-20:30",
+    "thu": null,
+    "fri": "13:00-20:30",
+    "sat": "13:00-20:30",
+    "sun": "13:00-20:30"
+   },
+   "hoursNote": {
+    "ko": "월·수·금~일 13:00~20:30 · 화·목 휴무 · 캐치테이블 예약",
+    "en": "Mon, Wed, Fri–Sun 13:00–20:30 · closed Tue & Thu · Catchtable booking",
+    "zh-CN": "周一、三、五至日 13:00~20:30 · 周二、四休息 · Catchtable 预约",
+    "zh-TW": "週一、三、五至日 13:00~20:30 · 週二、四休息 · Catchtable 預約"
+   },
+   "signature": {
+    "ko": "싱글 오리진 푸어오버 · 차 중심 티룸",
+    "en": "Single-origin pour-over · tea-focused room",
+    "zh-CN": "单一产地手冲 · 以茶为主的茶室",
+    "zh-TW": "單一產地手沖 · 以茶為主的茶室"
+   },
+   "desc": {
+    "ko": "차를 커피처럼 다루는 마포의 티룸. 싱글 오리진 잎차를 푸어오버로 내고, 공간이 작아 예약이 편합니다.",
+    "en": "A Mapo tea room that treats tea like coffee: single-origin leaf poured over, in a small room best booked ahead.",
+    "zh-CN": "麻浦茶室，像做咖啡一样做茶：单一产地原叶手冲；空间小，建议预约。",
+    "zh-TW": "麻浦茶室，像做咖啡一樣做茶：單一產地原葉手沖；空間小，建議預約。"
+   },
+   "tasteTags": [
+    "a-floral",
+    "a-fruit",
+    "a-roast",
+    "k-crisp",
+    "s-hot",
+    "c-mid",
+    "m-calm"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/T.Nomad%20Laboratory%20%EB%A7%88%ED%8F%AC",
+    "kakao": "https://map.kakao.com/link/search/T.Nomad%20Laboratory",
+    "google": "https://www.google.com/maps/search/?api=1&query=T.Nomad%20Laboratory"
+   },
+   "source": "지도 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "twg-seongsu",
+   "name": {
+    "ko": "TWG Tea 성수낙낙점",
+    "en": "TWG Tea Seongsu Naknak",
+    "zh-CN": "TWG Tea 圣水Naknak店",
+    "zh-TW": "TWG Tea 聖水Naknak店"
+   },
+   "category": "brand",
+   "categoryName": {
+    "ko": "브랜드 티살롱",
+    "en": "Brand tea salon",
+    "zh-CN": "品牌茶沙龙",
+    "zh-TW": "品牌茶沙龍"
+   },
+   "region": "seongsu",
+   "regionName": {
+    "ko": "성수·서울숲",
+    "en": "Seongsu · Seoul Forest",
+    "zh-CN": "圣水·首尔林",
+    "zh-TW": "聖水·首爾林"
+   },
+   "near": {
+    "ko": "성수역 2번 출구 350m, SK V1 CENTER1 1층",
+    "en": "350 m from Seongsu Stn. exit 2, 1F SK V1 Center1",
+    "zh-CN": "圣水站2号出口350米，SK V1 CENTER1 1层",
+    "zh-TW": "聖水站2號出口350米，SK V1 CENTER1 1層"
+   },
+   "address": {
+    "ko": "서울 성동구 아차산로17길 48 SK V1 CENTER1 1층",
+    "en": "1F SK V1 Center1, 48 Achasan-ro 17-gil, Seongdong-gu, Seoul",
+    "zh-CN": "首尔城东区峨嵯山路17街48 SK V1 CENTER1 1层",
+    "zh-TW": "首爾城東區峨嵯山路17街48 SK V1 CENTER1 1層"
+   },
+   "coord": [
+    37.54639,
+    127.06592
+   ],
+   "hours": {
+    "mon": "10:00-20:30",
+    "tue": "10:00-20:30",
+    "wed": "10:00-20:30",
+    "thu": "10:00-20:30",
+    "fri": "10:00-20:30",
+    "sat": "10:00-20:30",
+    "sun": null
+   },
+   "hoursNote": {
+    "ko": "월~토 10:00~20:30 · 일 휴무",
+    "en": "Mon–Sat 10:00–20:30 · closed Sun",
+    "zh-CN": "周一至周六 10:00~20:30 · 周日休息",
+    "zh-TW": "週一至週六 10:00~20:30 · 週日休息"
+   },
+   "signature": {
+    "ko": "1837 블랙티 · 모로칸 민트 · 티 살롱",
+    "en": "1837 Black Tea · Moroccan Mint · tea salon",
+    "zh-CN": "1837 红茶 · 摩洛哥薄荷 · 茶沙龙",
+    "zh-TW": "1837 紅茶 · 摩洛哥薄荷 · 茶沙龍"
+   },
+   "desc": {
+    "ko": "싱가포르 TWG의 성수 티살롱. 브랜드 티백과 다기를 함께 보고, 차 한 잔으로 쉬어 갈 수 있습니다.",
+    "en": "Singapore's TWG in Seongsu: brand teas and teaware to browse, with a pot to sit over.",
+    "zh-CN": "新加坡 TWG 的圣水茶沙龙，可看品牌茶与茶器，也能坐下喝一壶。",
+    "zh-TW": "新加坡 TWG 的聖水茶沙龍，可看品牌茶與茶器，也能坐下喝一壺。"
+   },
+   "tasteTags": [
+    "a-floral",
+    "a-fruit",
+    "k-sweet",
+    "s-hot",
+    "c-high",
+    "p-dessert"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/TWG%20Tea%20%EC%84%B1%EC%88%98%EB%82%99%EB%82%99%EC%A0%90%20%EC%84%B1%EC%88%98",
+    "kakao": "https://map.kakao.com/link/search/TWG%20Tea%20%EC%84%B1%EC%88%98%EB%82%99%EB%82%99%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=TWG%20Tea%20%EC%84%B1%EC%88%98%EB%82%99%EB%82%99%EC%A0%90"
+   },
+   "source": "지도·TWG 코리아 공개정보",
+   "checkedAt": "2026-11-21"
+  },
+  {
+   "slug": "laoshanghai-nonhyeon",
+   "name": {
+    "ko": "라오상하이 찻집 논현점",
+    "en": "Lao Shanghai Teahouse Nonhyeon",
+    "zh-CN": "老上海茶馆 论岘店",
+    "zh-TW": "老上海茶館 論峴店"
+   },
+   "category": "chinese",
+   "categoryName": {
+    "ko": "중국차·보이차",
+    "en": "Chinese & pu-erh tea",
+    "zh-CN": "中国茶·普洱",
+    "zh-TW": "中國茶·普洱"
+   },
+   "region": "gangnam",
+   "regionName": {
+    "ko": "강남·논현",
+    "en": "Gangnam · Nonhyeon",
+    "zh-CN": "江南·论岘",
+    "zh-TW": "江南·論峴"
+   },
+   "near": {
+    "ko": "학동역 4번 출구 300m",
+    "en": "300 m from Hakdong Stn. exit 4",
+    "zh-CN": "鹤洞站4号出口300米",
+    "zh-TW": "鶴洞站4號出口300米"
+   },
+   "address": {
+    "ko": "서울 강남구 학동로38길 6 1층",
+    "en": "1F, 6 Hakdong-ro 38-gil, Gangnam-gu, Seoul",
+    "zh-CN": "首尔江南区鹤洞路38街6 1层",
+    "zh-TW": "首爾江南區鶴洞路38街6 1層"
+   },
+   "coord": [
+    37.51451,
+    127.03437
+   ],
+   "hours": {
+    "mon": "10:00-22:00",
+    "tue": "10:00-22:00",
+    "wed": "10:00-22:00",
+    "thu": "10:00-22:00",
+    "fri": "10:00-22:00",
+    "sat": "12:00-22:00",
+    "sun": "12:00-22:00"
+   },
+   "hoursNote": {
+    "ko": "월~금 10:00~22:00 · 토·일 12:00~22:00",
+    "en": "Mon–Fri 10:00–22:00 · Sat–Sun 12:00–22:00",
+    "zh-CN": "周一至周五 10:00~22:00 · 周六日 12:00~22:00",
+    "zh-TW": "週一至週五 10:00~22:00 · 週六日 12:00~22:00"
+   },
+   "signature": {
+    "ko": "중국차 · 딤섬 · 보이차",
+    "en": "Chinese tea · dim sum · pu-erh",
+    "zh-CN": "中国茶 · 点心 · 普洱",
+    "zh-TW": "中國茶 · 點心 · 普洱"
+   },
+   "desc": {
+    "ko": "딤섬과 함께 중국차를 마시는 논현동 찻집. 저녁 늦게까지 열어 식사 대용으로도 좋습니다.",
+    "en": "A Nonhyeon teahouse for Chinese tea with dim sum, open late enough for a light meal.",
+    "zh-CN": "论岘洞茶馆，配点心喝中国茶，营业到较晚，可当轻食。",
+    "zh-TW": "論峴洞茶館，配點心喝中國茶，營業到較晚，可當輕食。"
+   },
+   "tasteTags": [
+    "a-roast",
+    "a-malt",
+    "b-full",
+    "s-hot",
+    "c-mid",
+    "p-meal",
+    "m-cozy"
+   ],
+   "links": {
+    "naver": "https://map.naver.com/p/search/%EB%9D%BC%EC%98%A4%EC%83%81%ED%95%98%EC%9D%B4%20%EC%B0%BB%EC%A7%91%20%EB%85%BC%ED%98%84%EC%A0%90%20%EA%B0%95%EB%82%A8",
+    "kakao": "https://map.kakao.com/link/search/%EB%9D%BC%EC%98%A4%EC%83%81%ED%95%98%EC%9D%B4%20%EC%B0%BB%EC%A7%91%20%EB%85%BC%ED%98%84%EC%A0%90",
+    "google": "https://www.google.com/maps/search/?api=1&query=%EB%9D%BC%EC%98%A4%EC%83%81%ED%95%98%EC%9D%B4%20%EC%B0%BB%EC%A7%91%20%EB%85%BC%ED%98%84%EC%A0%90"
+   },
+   "source": "지도 공개정보",
+   "checkedAt": "2026-11-21"
+  }
+ ]
+}

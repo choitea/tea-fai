@@ -16,6 +16,7 @@ css = (BASE / "styles.css").read_text(encoding="utf-8")
 data_js = (BASE / "data.js").read_text(encoding="utf-8")
 i18n_js = (BASE / "i18n.js").read_text(encoding="utf-8")
 app_js = (BASE / "app.js").read_text(encoding="utf-8")
+supabase_js = (BASE / "supabase-adapter.js").read_text(encoding="utf-8")
 
 # PWA 전용 태그는 단일 파일에서 뺍니다
 html = re.sub(r'\s*<link rel="manifest"[^>]*>', "", html)
@@ -27,8 +28,10 @@ html = html.replace(
     "<style>\n" + css + "\n</style>",
 )
 html = html.replace(
-    '<script src="i18n.js"></script>\n    <script src="data.js"></script>\n    <script src="app.js"></script>',
+    '<script src="supabase-adapter.js"></script>\n    <script src="i18n.js"></script>\n    <script src="data.js"></script>\n    <script src="app.js"></script>',
     "<script>\n"
+    + supabase_js
+    + "\n</script>\n    <script>\n"
     + i18n_js
     + "\n</script>\n    <script>\n"
     + data_js
@@ -49,8 +52,17 @@ html = html.replace('src="icons/logo_tea_mark.svg"', f'src="{svg_uri}"')
 # 내장 데이터 사본
 shops = json.loads((BASE / "data" / "shops.json").read_text(encoding="utf-8"))
 affiliate = json.loads((BASE / "data" / "affiliate.json").read_text(encoding="utf-8"))
+teabags = json.loads((BASE / "data" / "teabags.json").read_text(encoding="utf-8"))
+cafes = json.loads((BASE / "data" / "cafes.json").read_text(encoding="utf-8"))
+plans = json.loads((BASE / "data" / "onboarding_plans.json").read_text(encoding="utf-8"))
 seed = json.dumps(
-    {"shops": shops.get("shops", []), "affiliate": affiliate},
+    {
+        "shops": shops.get("shops", []),
+        "affiliate": affiliate,
+        "teabags": teabags,
+        "cafes": cafes,
+        "plans": plans,
+    },
     ensure_ascii=False,
     separators=(",", ":"),
 )

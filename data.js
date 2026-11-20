@@ -1848,6 +1848,92 @@ window.TEAFaiData = (function () {
         brewTip: "用沸水。葉厚，泡3分鐘以上也好；放壺裡煮10分鐘就是濃藥茶。"
       }
     },
+    {
+      id: "white-gongmei",
+      group: "white",
+      h: "貢",
+      hz: "貢眉",
+      hs: "贡眉",
+      rom: "Gong Mei",
+      sub: "Gong Mei",
+      temp: 90,
+      tempRange: "85~95℃",
+      leaf: "4g",
+      water: "200ml",
+      steeps: [120, 60, 120],
+      maxSteep: 3,
+      oxidationValue: 10,
+      x: {
+        ko: [
+          "위조 → 건조. 백차 가운데 잎 비중이 높은 등급입니다.",
+          "중국 백차에서 백모단 다음, 수미보다 위로 보는 차입니다. 같은 밭에서 나도 등급에 따라 이름이 달라집니다."
+        ],
+        en: [
+          "Withering → drying. A white tea grade with a high proportion of leaf.",
+          "In Chinese white tea it ranks below Bai Mudan and above Shou Mei; tea from the same field takes a different name by grade."
+        ],
+        "zh-CN": [
+          "萎凋 → 干燥。白茶中叶片比例较高的等级。",
+          "在中国白茶中排在白牡丹之后、寿眉之前；同一片茶园也会因等级不同而改名。"
+        ],
+        "zh-TW": [
+          "萎凋 → 乾燥。白茶中葉片比例較高的等級。",
+          "在中國白茶中排在白牡丹之後、壽眉之前；同一片茶園也會因等級不同而改名。"
+        ]
+      },
+      ko: {
+        name: "공미",
+        oneLine: "백모단보다 잎이 많고 수미보다 싹이 많은, 그 사이의 백차.",
+        oxidation: "10%",
+        ratioNote: "200ml에 4g",
+        rounds: "4~5회",
+        steepBasis: "90도에서 2분, 두 번째 1분, 세 번째 2분.",
+        origin: "푸젠성 푸딩·정허·젠양. 채차(菜茶) 품종의 잎과 싹을 함께 씁니다.",
+        flavor: "건초, 은은한 꽃향, 대추 같은 단맛. 수미보다 향이 또렷합니다.",
+        pairing: "한과, 찐 고구마, 담백한 떡.",
+        keep: "상온 밀봉. 오래 두면 약재 향이 나고 맛이 둥글어집니다.",
+        brewTip: "90도에서 2분. 잎이 두꺼워 두 번째 우리도 쉽게 우러납니다."
+      },
+      en: {
+        name: "Gong Mei",
+        oneLine: "A white tea between Bai Mudan and Shou Mei: more leaf than the first, more bud than the second.",
+        oxidation: "10%",
+        ratioNote: "4 g to 200 ml",
+        rounds: "4–5 infusions",
+        steepBasis: "Two minutes at 90 °C, then one and two minutes.",
+        origin: "Fuding, Zhenghe and Jianyang in Fujian, from the leaves and buds of the cai cha group cultivar.",
+        flavor: "Hay, quiet florals, a date-like sweetness — more defined than Shou Mei.",
+        pairing: "Hangwa sweets, steamed sweet potato, plain rice cakes.",
+        keep: "Seal at room temperature; with age it gains a medicinal note and rounds out.",
+        brewTip: "Two minutes at 90 °C. The leaf is thick enough for an easy second infusion."
+      },
+      "zh-CN": {
+        name: "贡眉",
+        oneLine: "叶片比白牡丹多、芽比寿眉多的白茶，介于两者之间。",
+        oxidation: "10%",
+        ratioNote: "200毫升配4克",
+        rounds: "4~5泡",
+        steepBasis: "90度泡2分钟，第二泡1分钟，第三泡2分钟。",
+        origin: "福建福鼎、政和、建阳，用菜茶品种的叶与芽。",
+        flavor: "干草、幽微花香、枣般的甜味，比寿眉更有层次。",
+        pairing: "韩果、蒸红薯、清淡年糕。",
+        keep: "常温密封；久放会出药香，口感更圆润。",
+        brewTip: "90度两分钟，叶片厚，第二泡也容易出味。"
+      },
+      "zh-TW": {
+        name: "貢眉",
+        oneLine: "葉片比白牡丹多、芽比壽眉多的白茶，介於兩者之間。",
+        oxidation: "10%",
+        ratioNote: "200毫升配4公克",
+        rounds: "4~5泡",
+        steepBasis: "90度泡2分鐘，第二泡1分鐘，第三泡2分鐘。",
+        origin: "福建福鼎、政和、建陽，用菜茶品種的葉與芽。",
+        flavor: "乾草、幽微花香、棗般的甜味，比壽眉更有層次。",
+        pairing: "韓果、蒸地瓜、清淡年糕。",
+        keep: "常溫密封；久放會出藥香，口感更圓潤。",
+        brewTip: "90度兩分鐘，葉片厚，第二泡也容易出味。"
+      }
+    },
     /* ── 녹차 (이어서) ── */
     {
       id: "green-luanguapian",
@@ -3260,6 +3346,264 @@ window.TEAFaiData = (function () {
         "水果塔、起司、煙燻鮭魚、甜點。",
         "90度1分鐘。被咬過的葉在熱水中香氣更開。"
       ]
+    },
+    {
+      id: "oolong-si-ji-chun",
+      group: "oolong",
+      h: "四",
+      hz: "四季春",
+      hs: "四季春",
+      rom: "Si Ji Chun",
+      sub: "Four Seasons Spring",
+      temp: 90,
+      tempRange: "85~95℃",
+      leaf: "4g",
+      water: "150ml",
+      steeps: [45, 25, 40],
+      maxSteep: 3,
+      oxidationValue: 18,
+      x: {
+        ko: [
+          "위조 → 살청 → 유념(구형으로 말기) → 건조. 산화는 15~20%에서 멈춥니다.",
+          "1980년대 타이베이 무자(木柵)에서 우연히 발견된 나무가 사계절 내내 싹을 올려 이런 이름을 얻었다고 전합니다. 향이 좋아 재스민 차의 베이스로도 많이 씁니다."
+        ],
+        en: [
+          "Withering → firing → rolling into ball shape → drying. Oxidation stops at 15–20 per cent.",
+          "A tree found by chance in Muzha, Taipei, in the 1980s that kept flushing through all four seasons is said to have given the tea its name. Its fragrance makes it a common base for jasmine tea."
+        ],
+        "zh-CN": [
+          "萎凋 → 杀青 → 揉捻成球 → 干燥。发酵停在15~20%。",
+          "相传1980年代在台北木栅偶然发现的一株茶树四季都发新芽，因而得名。香气好，也常作茉莉花茶的茶底。"
+        ],
+        "zh-TW": [
+          "萎凋 → 殺青 → 揉捻成球 → 乾燥。發酵停在15~20%。",
+          "相傳1980年代在台北木柵偶然發現的一株茶樹四季都發新芽，因而得名。香氣好，也常作茉莉花茶的茶底。"
+        ]
+      },
+      ko: {
+        name: "사계춘",
+        oneLine: "한 해에 네 번, 봄처럼 싹이 나 다시 사계춘. 대만에서 가장 흔히 만나는 가벼운 우롱.",
+        oxidation: "15~20%",
+        ratioNote: "150ml에 4g",
+        rounds: "3~4회",
+        steepBasis: "90도에서 45초, 두 번째 25초, 세 번째 40초.",
+        origin: "타이베이 무자(木柵)에서 발견된 품종. 지금은 난터우 밍젠 일대에서 많이 재배합니다.",
+        flavor: "치자·재스민 같은 꽃향, 가벼운 단맛, 떫음이 적습니다.",
+        pairing: "가벼운 디저트, 과일, 샌드위치. 향이 은은해 단맛이 강한 음식과는 거리를 둡니다.",
+        keep: "개봉 후 밀봉해 냉장. 향이 날아가기 쉬워 3개월 안에 마시는 편이 좋습니다.",
+        brewTip: "85~90도로 낮추면 꽃향이 살고, 끓는 물이면 단맛이 앞섭니다. 잎을 오래 두지 마세요."
+      },
+      en: {
+        name: "Si Ji Chun",
+        oneLine: "Four harvests a year, each spring-like: the light oolong you meet most often in Taiwan.",
+        oxidation: "15–20%",
+        ratioNote: "4 g to 150 ml",
+        rounds: "3–4 infusions",
+        steepBasis: "45 seconds at 90 °C, then 25 and 40 seconds.",
+        origin: "A cultivar found in Muzha, Taipei; now widely grown around Mingjian in Nantou.",
+        flavor: "Gardenia and jasmine florals, light sweetness, little astringency.",
+        pairing: "Light desserts, fruit, sandwiches. The scent is gentle, so keep it away from very sweet food.",
+        keep: "Seal and refrigerate after opening; the aroma fades, so finish within about three months.",
+        brewTip: "85–90 °C keeps the florals; boiling water pushes the sweetness forward. Don't leave the leaf in."
+      },
+      "zh-CN": {
+        name: "四季春",
+        oneLine: "一年四季都像春天发芽，台湾最常见的清爽型乌龙。",
+        oxidation: "15~20%",
+        ratioNote: "150毫升配4克",
+        rounds: "3~4泡",
+        steepBasis: "90度泡45秒，第二泡25秒，第三泡40秒。",
+        origin: "在台北木栅发现的品种，如今南投名间一带大量种植。",
+        flavor: "栀子、茉莉般的花香，甜味轻，涩感少。",
+        pairing: "清淡甜点、水果、三明治。香气细致，不宜配过甜的食物。",
+        keep: "开封后密封冷藏；香气易散，最好三个月内喝完。",
+        brewTip: "85~90度能留住花香，沸水会让甜味更突出。不要久泡。"
+      },
+      "zh-TW": {
+        name: "四季春",
+        oneLine: "一年四季都像春天發芽，台灣最常見的清爽型烏龍。",
+        oxidation: "15~20%",
+        ratioNote: "150毫升配4公克",
+        rounds: "3~4泡",
+        steepBasis: "90度泡45秒，第二泡25秒，第三泡40秒。",
+        origin: "在台北木柵發現的品種，如今南投名間一帶大量種植。",
+        flavor: "梔子、茉莉般的花香，甜味輕，澀感少。",
+        pairing: "清淡甜點、水果、三明治。香氣細緻，不宜配過甜的食物。",
+        keep: "開封後密封冷藏；香氣易散，最好三個月內喝完。",
+        brewTip: "85~90度能留住花香，沸水會讓甜味更突出。不要久泡。"
+      }
+    },
+    {
+      id: "oolong-jin-xuan",
+      group: "oolong",
+      h: "萱",
+      hz: "金萱",
+      hs: "金萱",
+      rom: "Jin Xuan",
+      sub: "Jin Xuan (TTES No.12)",
+      temp: 90,
+      tempRange: "85~95℃",
+      leaf: "4g",
+      water: "150ml",
+      steeps: [50, 30, 45],
+      maxSteep: 3,
+      oxidationValue: 18,
+      x: {
+        ko: [
+          "위조 → 살청 → 유념 → 건조. 산화 15~20%의 경발효 우롱으로 만듭니다.",
+          "대만 차업개량장이 1981년에 12호로 등록한 품종입니다. 우유 같은 향이 잎에서 자연스럽게 나 밀크티 베이스로도 인기입니다."
+        ],
+        en: [
+          "Withering → firing → rolling → drying, as a lightly oxidised oolong of 15–20 per cent.",
+          "Registered by Taiwan's Tea Research and Extension Station as No. 12 in 1981. Its milky scent comes from the leaf itself, which also makes it a popular milk-tea base."
+        ],
+        "zh-CN": [
+          "萎凋 → 杀青 → 揉捻 → 干燥，做成发酵15~20%的轻发酵乌龙。",
+          "台湾茶业改良场于1981年登记的第12号品种。叶片自带奶香，也常作奶茶茶底。"
+        ],
+        "zh-TW": [
+          "萎凋 → 殺青 → 揉捻 → 乾燥，做成發酵15~20%的輕發酵烏龍。",
+          "台灣茶業改良場於1981年登記的第12號品種。葉片自帶奶香，也常作奶茶茶底。"
+        ]
+      },
+      ko: {
+        name: "금훤",
+        oneLine: "우유 같은 크림 향으로 알려진 대만 12호. 부드럽고 둥근 우롱.",
+        oxidation: "15~20%",
+        ratioNote: "150ml에 4g",
+        rounds: "3~4회",
+        steepBasis: "90도에서 50초, 두 번째 30초, 세 번째 45초.",
+        origin: "대만 차업개량장이 개발한 품종으로 타이완 12호(台茶12號)라 부릅니다. 자이·난터우 고산지에서 재배합니다.",
+        flavor: "우유·크림 같은 향, 재스민, 둥근 단맛. 떫음이 적습니다.",
+        pairing: "스콘, 크림 디저트, 견과류. 우유를 넣어 마셔도 향이 남습니다.",
+        keep: "밀봉 냉장. 향이 섬세해 개봉 후 3개월 안이 좋습니다.",
+        brewTip: "90도 전후에서 1분을 넘기지 않으면 크림 향이 살아 있습니다."
+      },
+      en: {
+        name: "Jin Xuan",
+        oneLine: "Taiwan's No. 12 cultivar, known for a creamy, milky scent. A soft, round oolong.",
+        oxidation: "15–20%",
+        ratioNote: "4 g to 150 ml",
+        rounds: "3–4 infusions",
+        steepBasis: "50 seconds at 90 °C, then 30 and 45 seconds.",
+        origin: "A cultivar from Taiwan's Tea Research and Extension Station, called TTES No. 12; grown in the highlands of Chiayi and Nantou.",
+        flavor: "Milk and cream, jasmine, rounded sweetness, little astringency.",
+        pairing: "Scones, cream desserts, nuts. The scent survives a splash of milk.",
+        keep: "Seal and refrigerate; the aroma is delicate, so finish within about three months.",
+        brewTip: "Stay near 90 °C and under a minute to keep the creamy note."
+      },
+      "zh-CN": {
+        name: "金萱",
+        oneLine: "以奶香闻名的台茶十二号，柔顺圆润的乌龙。",
+        oxidation: "15~20%",
+        ratioNote: "150毫升配4克",
+        rounds: "3~4泡",
+        steepBasis: "90度泡50秒，第二泡30秒，第三泡45秒。",
+        origin: "台湾茶业改良场育成的品种，称台茶12号；多种于嘉义、南投高山。",
+        flavor: "牛奶与奶油香、茉莉、圆润的甜味，涩感少。",
+        pairing: "司康、奶油甜点、坚果。加一点牛奶香气仍在。",
+        keep: "密封冷藏；香气细致，最好三个月内喝完。",
+        brewTip: "90度左右、一分钟以内，奶香最明显。"
+      },
+      "zh-TW": {
+        name: "金萱",
+        oneLine: "以奶香聞名的台茶十二號，柔順圓潤的烏龍。",
+        oxidation: "15~20%",
+        ratioNote: "150毫升配4公克",
+        rounds: "3~4泡",
+        steepBasis: "90度泡50秒，第二泡30秒，第三泡45秒。",
+        origin: "台灣茶業改良場育成的品種，稱台茶12號；多種於嘉義、南投高山。",
+        flavor: "牛奶與奶油香、茉莉、圓潤的甜味，澀感少。",
+        pairing: "司康、奶油甜點、堅果。加一點牛奶香氣仍在。",
+        keep: "密封冷藏；香氣細緻，最好三個月內喝完。",
+        brewTip: "90度左右、一分鐘以內，奶香最明顯。"
+      }
+    },
+    {
+      id: "oolong-pouchong",
+      group: "oolong",
+      h: "包",
+      hz: "包種茶",
+      hs: "包种茶",
+      rom: "Wen Shan Pouchong",
+      sub: "Wen Shan Pouchong",
+      temp: 85,
+      tempRange: "80~90℃",
+      leaf: "3g",
+      water: "150ml",
+      steeps: [60, 30, 50],
+      maxSteep: 3,
+      oxidationValue: 10,
+      x: {
+        ko: [
+          "위조 → 살청 → 유념(條索 모양) → 건조. 산화 8~12%로 녹차에 가깝습니다.",
+          "차를 종이에 싸서 향을 보관한 데서 '포종(包種)'이라 불렸다는 이야기가 전합니다. 향을 입힌 화향포종과 달리 원산 포종은 잎 자체의 꽃향을 봅니다."
+        ],
+        en: [
+          "Withering → firing → rolling into strips → drying. At 8–12 per cent oxidation it sits close to green tea.",
+          "The name is said to come from wrapping the tea in paper to hold its scent. Unlike scented pouchong, origin pouchong is judged on the leaf's own florals."
+        ],
+        "zh-CN": [
+          "萎凋 → 杀青 → 揉捻成条 → 干燥。发酵8~12%，接近绿茶。",
+          "相传因把茶包在纸里保存香气而得名“包种”。与窨花的花香包种不同，原产包种看的是茶叶本身的花香。"
+        ],
+        "zh-TW": [
+          "萎凋 → 殺青 → 揉捻成條 → 乾燥。發酵8~12%，接近綠茶。",
+          "相傳因把茶包在紙裡保存香氣而得名「包種」。與窨花的花香包種不同，原產包種看的是茶葉本身的花香。"
+        ]
+      },
+      ko: {
+        name: "포종차",
+        oneLine: "향을 종이로 감싸 두던 데서 이름이 온, 타이완 북부의 가벼운 우롱.",
+        oxidation: "8~12%",
+        ratioNote: "150ml에 3g",
+        rounds: "3회",
+        steepBasis: "85도에서 1분, 두 번째 30초, 세 번째 50초.",
+        origin: "신베이 핑린(坪林) 일대가 중심인 문산(文山) 포종. 잎을 말아 향을 살립니다.",
+        flavor: "난초·치자 같은 꽃향, 풋풋한 여운, 가볍고 맑습니다.",
+        pairing: "흰살생선, 채소 요리, 가벼운 과자.",
+        keep: "밀봉 냉장. 향이 가벼워 오래 두면 향이 먼저 사라집니다.",
+        brewTip: "80~85도에서 짧게. 끓는 물을 쓰면 꽃향보다 떫은맛이 앞섭니다."
+      },
+      en: {
+        name: "Wen Shan Pouchong",
+        oneLine: "A light northern Taiwanese oolong named for the paper its scent was once wrapped in.",
+        oxidation: "8–12%",
+        ratioNote: "3 g to 150 ml",
+        rounds: "3 infusions",
+        steepBasis: "One minute at 85 °C, then 30 and 50 seconds.",
+        origin: "Wen Shan pouchong, centred on Pinglin in New Taipei; the leaf is rolled to hold its aroma.",
+        flavor: "Orchid and gardenia, a green finish, light and clear.",
+        pairing: "White fish, vegetable dishes, light pastries.",
+        keep: "Seal and refrigerate; the scent is light, so it goes first.",
+        brewTip: "80–85 °C and short. Boiling water brings out astringency before the florals."
+      },
+      "zh-CN": {
+        name: "包种茶",
+        oneLine: "因用纸包住香气而得名的台湾北部轻发酵乌龙。",
+        oxidation: "8~12%",
+        ratioNote: "150毫升配3克",
+        rounds: "3泡",
+        steepBasis: "85度泡1分钟，第二泡30秒，第三泡50秒。",
+        origin: "以新北坪林一带为中心的文山包种，揉成条索以留住香气。",
+        flavor: "兰花、栀子般的花香，清绿的尾韵，轻盈明亮。",
+        pairing: "白肉鱼、蔬菜料理、清淡糕点。",
+        keep: "密封冷藏；香气轻，放久了先散香。",
+        brewTip: "80~85度短泡。沸水会让涩味先于花香出现。"
+      },
+      "zh-TW": {
+        name: "包種茶",
+        oneLine: "因用紙包住香氣而得名的台灣北部輕發酵烏龍。",
+        oxidation: "8~12%",
+        ratioNote: "150毫升配3公克",
+        rounds: "3泡",
+        steepBasis: "85度泡1分鐘，第二泡30秒，第三泡50秒。",
+        origin: "以新北坪林一帶為中心的文山包種，揉成條索以留住香氣。",
+        flavor: "蘭花、梔子般的花香，清綠的尾韻，輕盈明亮。",
+        pairing: "白肉魚、蔬菜料理、清淡糕點。",
+        keep: "密封冷藏；香氣輕，放久了先散香。",
+        brewTip: "80~85度短泡。沸水會讓澀味先於花香出現。"
+      }
     },
     /* ── 홍차 ── */
     {
@@ -7522,6 +7866,10 @@ window.TEAFaiData = (function () {
     "oolong-dongding": "t-afternoon a-roast a-floral b-medium k-sweet r-clean s-hot w-gongfu p-meal c-mid m-cozy",
     "oolong-alishan": "t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot s-iced w-gongfu p-solo c-mid m-refresh",
     "oolong-beauty": "t-afternoon a-floral a-fruit a-malt b-medium k-sweet s-hot s-iced w-gongfu p-dessert c-mid m-calm",
+    "oolong-si-ji-chun": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot s-iced w-quick w-gongfu p-solo c-mid m-refresh",
+    "oolong-jin-xuan": "t-afternoon a-floral b-medium k-sweet s-hot s-milk w-quick c-mid m-calm",
+    "oolong-pouchong": "t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick c-mid m-calm",
+    "white-gongmei": "t-afternoon t-night a-floral a-roast b-medium k-sweet r-clean s-hot w-gongfu p-meal c-low m-cozy",
     /* 홍차 */
     "black-darjeeling-first": "t-morning t-afternoon a-floral b-light k-crisp r-clean s-hot s-iced w-quick p-dessert c-high m-refresh",
     "black-darjeeling-second": "t-afternoon a-floral a-malt a-fruit b-medium k-sweet s-hot w-quick p-dessert c-high",

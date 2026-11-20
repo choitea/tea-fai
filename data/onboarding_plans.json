@@ -1,0 +1,226 @@
+{
+ "version": 1,
+ "updated": "2026-11-21",
+ "currency": "KRW",
+ "billing": "monthly",
+ "_editGuide": {
+  "ko": "입점비·혜택 문구는 이 파일만 고치면 앱에 바로 반영됩니다. plans[].price 에 월 금액(원)을, features 에 혜택 문구를 넣으세요. 프로모션을 열려면 promotion.active 를 true 로 바꾸고 text 를 채우면 신청 화면 상단에 표시됩니다. 계좌번호·개인 전화번호는 이 파일에 넣지 않습니다.",
+  "en": "Edit only this file to change prices and benefits. Set plans[].price in KRW per month and write benefits in features. To show a promotion, set promotion.active to true and fill text. Never put bank account numbers or personal phone numbers in this file."
+ },
+ "title": {
+  "ko": "티룸 입점 플랜",
+  "en": "Tea room listing plans",
+  "zh-CN": "茶室入驻方案",
+  "zh-TW": "茶室入駐方案"
+ },
+ "lead": {
+  "ko": "월정액 입점비로 티키피디아 티룸 디렉터리에 매장을 올립니다. 신청은 무료이고, 검수 승인 뒤에 결제를 안내합니다.",
+  "en": "A monthly listing fee puts your shop in the Teakipedia tea room directory. Applying is free; payment is arranged after review.",
+  "zh-CN": "以月付入驻费将门店列入 Teakipedia 茶室目录。申请免费，审核通过后再安排付款。",
+  "zh-TW": "以月付入駐費將門店列入 Teakipedia 茶室目錄。申請免費，審核通過後再安排付款。"
+ },
+ "vatNote": {
+  "ko": "표시 금액은 부가세 별도입니다. 세금계산서 발행이 가능합니다.",
+  "en": "Prices exclude VAT. Tax invoices are available.",
+  "zh-CN": "所示金额不含增值税，可开具税务发票。",
+  "zh-TW": "所示金額不含營業稅，可開立稅務發票。"
+ },
+ "plans": [
+  {
+   "id": "standard",
+   "name": {
+    "ko": "스탠다드 월정액",
+    "en": "Standard monthly",
+    "zh-CN": "标准月付",
+    "zh-TW": "標準月付"
+   },
+   "price": 19000,
+   "period": {
+    "ko": "월",
+    "en": "per month",
+    "zh-CN": "每月",
+    "zh-TW": "每月"
+   },
+   "summary": {
+    "ko": "티룸 디렉터리 등록 · 지도·메뉴·영업시간 노출 · 취향 매칭 추천",
+    "en": "Directory listing · map, menu and hours · taste-match recommendation",
+    "zh-CN": "目录刊登 · 地图、菜单、营业时间 · 口味匹配推荐",
+    "zh-TW": "目錄刊登 · 地圖、菜單、營業時間 · 口味匹配推薦"
+   },
+   "features": [
+    {
+     "ko": "티키피디아 티룸 디렉터리에 매장 등록",
+     "en": "Listing in the Teakipedia tea room directory",
+     "zh-CN": "列入 Teakipedia 茶室目录",
+     "zh-TW": "列入 Teakipedia 茶室目錄"
+    },
+    {
+     "ko": "지도·메뉴·영업시간·연락처 노출",
+     "en": "Map, menu, hours and contact shown",
+     "zh-CN": "显示地图、菜单、营业时间与联系方式",
+     "zh-TW": "顯示地圖、菜單、營業時間與聯絡方式"
+    },
+    {
+     "ko": "취향 태그로 차 추천과 연결",
+     "en": "Linked to tea recommendations by taste tags",
+     "zh-CN": "通过口味标签与茶推荐相连",
+     "zh-TW": "透過口味標籤與茶推薦相連"
+    }
+   ]
+  },
+  {
+   "id": "premium",
+   "name": {
+    "ko": "프리미엄 스폰서 월정액",
+    "en": "Premium sponsor monthly",
+    "zh-CN": "高级赞助月付",
+    "zh-TW": "高級贊助月付"
+   },
+   "price": 39000,
+   "period": {
+    "ko": "월",
+    "en": "per month",
+    "zh-CN": "每月",
+    "zh-TW": "每月"
+   },
+   "summary": {
+    "ko": "스탠다드 전체 + 지역·검색 상단 추천 배지 + 전용 쿠폰·이벤트 배너",
+    "en": "Everything in Standard + top placement badge in region and search + coupon and event banner",
+    "zh-CN": "含标准全部 + 地区与搜索顶部推荐徽章 + 专属优惠券与活动横幅",
+    "zh-TW": "含標準全部 + 地區與搜尋頂部推薦徽章 + 專屬優惠券與活動橫幅"
+   },
+   "features": [
+    {
+     "ko": "스탠다드의 모든 혜택",
+     "en": "Everything in Standard",
+     "zh-CN": "包含标准方案全部权益",
+     "zh-TW": "包含標準方案全部權益"
+    },
+    {
+     "ko": "지역·검색 결과 상단 추천 배지 노출",
+     "en": "Recommended badge at the top of region and search results",
+     "zh-CN": "地区与搜索结果顶部显示推荐徽章",
+     "zh-TW": "地區與搜尋結果頂部顯示推薦徽章"
+    },
+    {
+     "ko": "전용 쿠폰·이벤트 배너 노출",
+     "en": "Dedicated coupon and event banner",
+     "zh-CN": "专属优惠券与活动横幅展示",
+     "zh-TW": "專屬優惠券與活動橫幅展示"
+    }
+   ]
+  }
+ ],
+ "promotion": {
+  "active": false,
+  "text": {
+   "ko": "",
+   "en": "",
+   "zh-CN": "",
+   "zh-TW": ""
+  }
+ },
+ "steps": [
+  {
+   "id": "apply",
+   "no": "1",
+   "title": {
+    "ko": "신청 접수",
+    "en": "Application received",
+    "zh-CN": "提交申请",
+    "zh-TW": "提交申請"
+   },
+   "desc": {
+    "ko": "아래 신청서를 보내 주시면 접수 내용을 확인합니다.",
+    "en": "Send the form below and we will confirm what we received.",
+    "zh-CN": "发送下方申请表，我们会确认接收内容。",
+    "zh-TW": "發送下方申請表，我們會確認接收內容。"
+   }
+  },
+  {
+   "id": "review",
+   "no": "2",
+   "title": {
+    "ko": "검수 승인",
+    "en": "Review and approval",
+    "zh-CN": "审核通过",
+    "zh-TW": "審核通過"
+   },
+   "desc": {
+    "ko": "매장 정보와 지도 링크를 확인하고 입점 가능 여부를 회신합니다.",
+    "en": "We check the shop details and map link, then reply on whether it can be listed.",
+    "zh-CN": "确认门店信息与地图链接后，回复是否可入驻。",
+    "zh-TW": "確認門店資訊與地圖連結後，回覆是否可入駐。"
+   }
+  },
+  {
+   "id": "billing",
+   "no": "3",
+   "title": {
+    "ko": "월정액 결제 안내",
+    "en": "Monthly payment arranged",
+    "zh-CN": "月付付款安排",
+    "zh-TW": "月付付款安排"
+   },
+   "desc": {
+    "ko": "승인 뒤 선택한 플랜의 월정액을 안내합니다. 계좌이체 또는 외부 결제 링크로 결제하고, 요청 시 세금계산서를 발행합니다.",
+    "en": "After approval we send the monthly fee for the plan you chose. Pay by bank transfer or an external payment link; a tax invoice is issued on request.",
+    "zh-CN": "通过后告知所选方案的月费，可通过银行转账或外部付款链接支付，需要时开具税务发票。",
+    "zh-TW": "通過後告知所選方案的月費，可透過銀行轉帳或外部付款連結支付，需要時開立稅務發票。"
+   }
+  },
+  {
+   "id": "publish",
+   "no": "4",
+   "title": {
+    "ko": "입금 확인 후 게시",
+    "en": "Published after payment is confirmed",
+    "zh-CN": "确认付款后上线",
+    "zh-TW": "確認付款後上線"
+   },
+   "desc": {
+    "ko": "입금이 확인되면 앱 티룸 디렉터리에 매장을 게시합니다. 이후 매월 같은 날짜에 갱신됩니다.",
+    "en": "Once payment is confirmed the shop goes live in the directory, renewing on the same date each month.",
+    "zh-CN": "确认收款后在应用茶室目录上线，此后每月同日续期。",
+    "zh-TW": "確認收款後在應用茶室目錄上線，此後每月同日續期。"
+   }
+  }
+ ],
+ "paymentNote": {
+  "ko": "결제 수단과 계좌는 검수 승인 뒤 신청서에 적어 주신 연락처로 개별 안내합니다. 앱에는 계좌번호를 표시하지 않습니다.",
+  "en": "Payment details and the account are sent to the contact you give us after approval; no account number is shown in the app.",
+  "zh-CN": "付款方式与账户将在审核通过后发送至您填写的联系方式；应用内不显示账户号码。",
+  "zh-TW": "付款方式與帳戶將在審核通過後發送至您填寫的聯絡方式；應用內不顯示帳戶號碼。"
+ },
+ "contactEmail": "rotroka@naver.com",
+ "faq": [
+  {
+   "q": {
+    "ko": "매월 자동 결제인가요?",
+    "en": "Is it charged automatically every month?",
+    "zh-CN": "每月自动扣款吗？",
+    "zh-TW": "每月自動扣款嗎？"
+   },
+   "a": {
+    "ko": "아직 자동 결제를 연결하지 않았습니다. 매월 갱신 전에 안내드리고, 계좌이체나 결제 링크로 받습니다.",
+    "en": "Automatic billing is not connected yet. We remind you before each renewal and take payment by transfer or payment link.",
+    "zh-CN": "尚未接入自动扣款。每次续期前会提醒，通过转账或付款链接支付。",
+    "zh-TW": "尚未接入自動扣款。每次續期前會提醒，透過轉帳或付款連結支付。"
+   }
+  },
+  {
+   "q": {
+    "ko": "중간에 플랜을 바꿀 수 있나요?",
+    "en": "Can I change plans later?",
+    "zh-CN": "之后可以更换方案吗？",
+    "zh-TW": "之後可以更換方案嗎？"
+   },
+   "a": {
+    "ko": "다음 갱신일부터 바꿀 수 있습니다. 신청서 메모나 회신으로 알려 주세요.",
+    "en": "From the next renewal date. Tell us in the application note or in a reply.",
+    "zh-CN": "可从下一个续期日开始更改，请在申请表备注或回信中告知。",
+    "zh-TW": "可從下一個續期日開始更改，請在申請表備註或回信中告知。"
+   }
+  }
+ ]
+}

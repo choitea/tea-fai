@@ -84,7 +84,7 @@
 
   /* ---------------- 화면 전환 ---------------- */
   var currentView = "home";
-  var VIEWS = ["home", "quiz", "timer", "guide", "notes"];
+  var VIEWS = ["home", "quiz", "timer", "guide", "shops", "community", "notes"];
 
   function titleFor(view) {
     return t("title." + view);
@@ -106,6 +106,15 @@
     document.title = titleFor(view);
     window.scrollTo(0, 0);
     if (view === "home") renderRecentNote();
+    if (view === "shops") {
+      renderPartnerShops();
+      renderCafeList();
+    }
+    if (view === "community") renderPostList();
+    if (view === "guide") {
+      renderTeaList();
+      renderBagList();
+    }
   }
 
   $$(".tab").forEach(function (tab) {
@@ -300,18 +309,44 @@
     interval: null,
     muted: storeGet(MUTE_KEY, false),
     wakeLock: null,
-    audio: null
+    audio: null,
+    /* 티백 제품을 골랐을 때만 채워집니다(제품별 온도·시간으로 우리기) */
+    custom: null
   };
 
   function timerTea() {
     return D.byId(timer.teaId || "green-longjing");
   }
+
+  /* 타이머 화면이 쓰는 값 — 잎차면 그 차, 티백이면 제품의 우리기 기준 */
+  function timerView() {
+    var tea = timerTea();
+    var c = timer.custom;
+    if (!c) return tea;
+    return {
+      name: c.name,
+      accent: c.accent || tea.accent,
+      tempRange: c.temp + "℃",
+      temp: c.temp,
+      leaf: c.bag || "1",
+      water: "200ml",
+      ratioNote: "",
+      rounds: c.rounds || "1",
+      steeps: [c.seconds],
+      maxSteep: 1,
+      steepBasis: c.note || "",
+      brewTip: c.note || "",
+      group: c.group || tea.group,
+      isBag: true,
+      brand: c.brand || ""
+    };
+  }
   function maxSteep() {
-    return Math.min(3, timerTea().maxSteep || 3);
+    return Math.min(3, timerView().maxSteep || 3);
   }
   function baseSeconds() {
-    var tea = timerTea();
-    return tea.steeps[clamp(timer.steep, 1, tea.steeps.length) - 1];
+    var view = timerView();
+    return view.steeps[clamp(timer.steep, 1, view.steeps.length) - 1];
   }
 
   function renderGroupChips() {
@@ -360,8 +395,19 @@
   function renderSteepRow() {
     var wrap = $("#steepRow");
     if (!wrap) return;
-    var tea = timerTea();
+    var view = timerView();
     wrap.innerHTML = "";
+    if (view.isBag) {
+      var one = document.createElement("button");
+      one.type = "button";
+      one.className = "steep-btn bag";
+      one.setAttribute("aria-pressed", "true");
+      one.innerHTML = "<b>" + esc(t("bag.tabBag")) + "</b><span>" + esc(fmtDur(baseSeconds())) + "</span>";
+      one.addEventListener("click", function () {});
+      wrap.appendChild(one);
+      wrap.className = "steep-row one";
+      return;
+    }
     var count = maxSteep();
     for (var i = 1; i <= count; i++) {
       (function (idx) {
@@ -373,7 +419,7 @@
           "<b>" +
           esc(t("timer.steep", { n: idx })) +
           "</b><span>" +
-          esc(fmtDur(tea.steeps[idx - 1])) +
+          esc(fmtDur(view.steeps[idx - 1])) +
           "</span>";
         btn.addEventListener("click", function () {
           if (timer.steep === idx && !timer.done) return;
@@ -386,9 +432,9 @@
   }
 
   function renderTimerText() {
-    var tea = timerTea();
+    var view = timerView();
     $("#ringTime").textContent = fmtClock(timer.remaining);
-    $("#ringTea").textContent = t("timer.ring", { name: tea.name, n: timer.steep });
+    $("#ringTea").textContent = t("timer.ring", { name: view.name, n: timer.steep });
     var stateNode = $("#ringState");
     var ring = $("#ring");
     ring.classList.toggle("running", timer.running);
@@ -402,7 +448,7 @@
     var circle = $("#ringProgress");
     circle.style.strokeDasharray = String(RING_C);
     circle.style.strokeDashoffset = timer.done ? "0" : String(-RING_C * clamp(progress, 0, 1));
-    circle.style.stroke = timer.done ? "#B97A3D" : tea.accent;
+    circle.style.stroke = timer.done ? "#B97A3D" : view.accent;
 
     var startBtn = $("#startBtn");
     if (timer.done) startBtn.textContent = timer.steep < maxSteep() ? t("btn.next") : t("btn.again");
@@ -419,25 +465,36 @@
     $("#minus10").disabled = timer.total <= 10;
     $("#plus10").disabled = timer.total >= 1200;
 
-    var note = tea.steepBasis || "";
-    if (timer.steep > maxSteep() && tea.steepBasis) {
-      note = t("timer.thirdNote", { basis: tea.steepBasis });
+    var note = view.isBag ? t("bag.timerNote") : view.steepBasis || "";
+    if (!view.isBag && timer.steep > maxSteep() && view.steepBasis) {
+      note = t("timer.thirdNote", { basis: view.steepBasis });
     }
     $("#steepNote").textContent = note;
   }
 
   function renderBrewInfo() {
-    var tea = timerTea();
-    $("#panelTemp").textContent = tea.tempRange;
-    var rows = [
-      [t("info.temp"), t("info.tempValue", { range: tea.tempRange, temp: tea.temp })],
-      [t("info.leaf"), t("info.leafValue", { leaf: tea.leaf, water: tea.water, ratio: tea.ratioNote || "" })],
-      [t("info.rounds"), tea.rounds || ""],
-      [t("info.this"), t("info.thisValue", { dur: fmtDur(baseSeconds()), base: fmtDur(tea.steeps[0]) })],
-      [t("info.tip"), tea.brewTip || ""]
-    ];
-    if (tea.group === "dark") rows.splice(3, 0, [t("info.rinse"), t("rinse.dark")]);
-    if (tea.group === "oolong") rows.splice(3, 0, [t("info.rinse"), t("rinse.oolong")]);
+    var view = timerView();
+    $("#panelTemp").textContent = view.tempRange;
+    var rows;
+    if (view.isBag) {
+      rows = [
+        [t("info.temp"), t("info.tempValue", { range: view.tempRange, temp: view.temp })],
+        [t("bag.size"), view.brand ? view.brand + " · " + view.leaf : view.leaf],
+        [t("info.rounds"), view.rounds],
+        [t("info.this"), fmtDur(baseSeconds())],
+        [t("info.tip"), view.brewTip]
+      ];
+    } else {
+      rows = [
+        [t("info.temp"), t("info.tempValue", { range: view.tempRange, temp: view.temp })],
+        [t("info.leaf"), t("info.leafValue", { leaf: view.leaf, water: view.water, ratio: view.ratioNote || "" })],
+        [t("info.rounds"), view.rounds || ""],
+        [t("info.this"), t("info.thisValue", { dur: fmtDur(baseSeconds()), base: fmtDur(view.steeps[0]) })],
+        [t("info.tip"), view.brewTip || ""]
+      ];
+      if (view.group === "dark") rows.splice(3, 0, [t("info.rinse"), t("rinse.dark")]);
+      if (view.group === "oolong") rows.splice(3, 0, [t("info.rinse"), t("rinse.oolong")]);
+    }
     $("#brewInfo").innerHTML = rows
       .map(function (r) {
         return '<div class="kv"><dt>' + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
@@ -467,11 +524,13 @@
 
   function setTimerTea(id, steep) {
     var tea = D.byId(id);
+    timer.custom = null;
     timer.teaId = tea.id;
     timer.groupId = tea.group;
     timer.steep = steep || 1;
     timer.adjust = 0;
     storeSet(LAST_TEA_KEY, tea.id);
+    renderBagMode();
     renderGroupChips();
     renderTeaChips();
     renderSteepRow();
@@ -553,7 +612,7 @@
         navigator.vibrate([90, 70, 90]);
       } catch (e) {}
     }
-    toast(t("toast.done", { name: timerTea().name, n: timer.steep }));
+    toast(t("toast.done", { name: timerView().name, n: timer.steep }));
     renderDoneExtra();
   }
 
@@ -902,8 +961,7 @@
     var input = $("#searchInput");
     if (input) input.value = "";
     renderFilterChips();
-    renderTeaList();
-    go("guide");
+    openGuideTab("leaf");
     window.setTimeout(function () {
       var card = $('#teaList [data-tea="' + id + '"]');
       if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1593,7 +1651,8 @@
     PARTNER.affiliate = cachedAff || seed.affiliate || null;
     renderPartnerSections();
 
-    if (!("fetch" in window)) return;
+    /* 단일 파일(file://)에서는 fetch 가 막히므로 내장 사본만 씁니다 */
+    if (!("fetch" in window) || location.protocol === "file:") return;
     Promise.all([
       readJson("data/shops.json", SHOPS_KEY).catch(function () {
         return null;
@@ -2059,6 +2118,28 @@
       box.innerHTML = "";
       return;
     }
+    var view = timerView();
+    if (view.isBag) {
+      box.hidden = false;
+      box.innerHTML =
+        '<button class="de-link" type="button" data-open-bags><svg width="13" height="13"><use href="#ic-bag"/></svg>' +
+        esc(t("bag.tabBag")) +
+        "</button>" +
+        '<button class="de-link" type="button" data-open-guide><svg width="13" height="13"><use href="#ic-book"/></svg>' +
+        esc(t("bag.toGuide")) +
+        "</button>";
+      $$("[data-open-bags]", box).forEach(function (b) {
+        b.addEventListener("click", function () {
+          openGuideTab("bag");
+        });
+      });
+      $$("[data-open-guide]", box).forEach(function (b) {
+        b.addEventListener("click", function () {
+          openTeaInGuide(view.group ? D.teasOf(view.group)[0].id : timer.teaId);
+        });
+      });
+      return;
+    }
     var tea = timerTea();
     var aff = PARTNER.affiliate;
     var links = [];
@@ -2090,6 +2171,1437 @@
   }
 
   /* ============================================================
+     5. 티백 검색 — 브랜드·차종·향미로 찾고 그대로 우리기
+     ============================================================ */
+  var BAGS_KEY = "teafai.bags.v1";
+  var CAFES_KEY = "teafai.cafes.v1";
+  var PLANS_KEY = "teafai.plans.v1";
+  var POSTS_KEY = "teafai.posts.v1";
+  var APPS_KEY = "teafai.applications.v1";
+  var REACT_KEY = "teafai.reactions.v1";
+
+  var FEATURE = { bags: null, cafes: null, plans: null };
+  var bagState = { q: "", brand: "all", type: "all", tag: "all", caffeine: "all", open: null };
+  var cafeState = { q: "", region: "all", tag: "all", open: null };
+  var commState = { filter: "all", type: "review", rating: 0 };
+  var applyState = { plan: null, tags: [], result: null };
+
+  /* 취향 태그 가운데 화면에 보여 줄 8개 (TRAITS 어휘와 같습니다) */
+  var TAG_KEYS = ["a-floral", "a-fruit", "a-roast", "a-grass", "a-malt", "a-herb", "k-sweet", "k-crisp"];
+
+  /* 파트너 매장은 shops.json 의 지역 표기가 달라 슬러그로 지역을 맞춥니다 */
+  var PARTNER_REGION = {
+    "hongkongtea-bulgwang": "eunpyeong",
+    "pungsungh-buffet-sindang": "jung"
+  };
+
+  function anyText(obj) {
+    if (obj == null) return "";
+    if (typeof obj === "string") return obj;
+    return [obj.ko, obj.en, obj["zh-CN"], obj["zh-TW"]].filter(Boolean).join(" ");
+  }
+
+  function cacheOrSeed(key, seedVal) {
+    var cached = storeGet(key, null);
+    if (!cached) return seedVal || null;
+    if (seedVal && String(cached.updated || "") < String(seedVal.updated || "")) return seedVal;
+    return cached;
+  }
+
+  function loadFeatureData() {
+    var seed = seedJson() || {};
+    FEATURE.bags = cacheOrSeed(BAGS_KEY, seed.teabags);
+    FEATURE.cafes = cacheOrSeed(CAFES_KEY, seed.cafes);
+    FEATURE.plans = cacheOrSeed(PLANS_KEY, seed.plans);
+    renderFeatureSections();
+
+    if (!("fetch" in window) || location.protocol === "file:") return;
+    Promise.all([
+      readJson("data/teabags.json", BAGS_KEY).catch(function () {
+        return null;
+      }),
+      readJson("data/cafes.json", CAFES_KEY).catch(function () {
+        return null;
+      }),
+      readJson("data/onboarding_plans.json", PLANS_KEY).catch(function () {
+        return null;
+      })
+    ]).then(function (res) {
+      var changed = false;
+      if (res[0] && res[0].bags) {
+        FEATURE.bags = res[0];
+        changed = true;
+      }
+      if (res[1] && res[1].cafes) {
+        FEATURE.cafes = res[1];
+        changed = true;
+      }
+      if (res[2] && res[2].plans) {
+        FEATURE.plans = res[2];
+        changed = true;
+      }
+      if (changed) renderFeatureSections();
+    });
+  }
+
+  function renderFeatureSections() {
+    renderBagFilters();
+    renderBagList();
+    renderRegionChips();
+    renderCafeTagChips();
+    renderPartnerShops();
+    renderCafeList();
+    renderApplyMeta();
+    renderPostForm();
+    renderPostList();
+    renderBagMode();
+  }
+
+  /* ---------------- 티백 ---------------- */
+  function bagBrandLabel(bag) {
+    var b = FEATURE.bags && FEATURE.bags.brands ? FEATURE.bags.brands[bag.brand] : null;
+    if (!b) return bag.brand || "";
+    if (lang === "ko") return b.ko || b.name;
+    var local = b[lang];
+    return local && local !== b.name ? local + " · " + b.name : b.name;
+  }
+
+  function bagBrandName(bag) {
+    return bagBrandLabel(bag);
+  }
+
+  function groupNameOf(id) {
+    for (var i = 0; i < D.groups.length; i++) if (D.groups[i].id === id) return D.groups[i].name;
+    return id;
+  }
+
+  function bagHaystack(bag) {
+    return [
+      anyText(bag.name),
+      bagBrandLabel(bag),
+      anyText(bag.note),
+      groupNameOf(bag.type),
+      (bag.tags || []).join(" "),
+      bag.bag
+    ]
+      .join(" ")
+      .toLowerCase();
+  }
+
+  function bagsOfState() {
+    var bags = (FEATURE.bags && FEATURE.bags.bags) || [];
+    var q = bagState.q.trim().toLowerCase();
+    return bags.filter(function (bag) {
+      if (bagState.brand !== "all" && bag.brand !== bagState.brand) return false;
+      if (bagState.type !== "all" && bag.type !== bagState.type) return false;
+      if (bagState.tag !== "all" && (bag.tags || []).indexOf(bagState.tag) < 0) return false;
+      if (bagState.caffeine === "yes" && !bag.caffeine) return false;
+      if (bagState.caffeine === "no" && bag.caffeine) return false;
+      if (q && bagHaystack(bag).indexOf(q) < 0) return false;
+      return true;
+    });
+  }
+
+  function renderBagFilters() {
+    var sel = $("#bagBrand");
+    var wrap = $("#bagTypeChips");
+    if (!sel || !wrap) return;
+    var brands = (FEATURE.bags && FEATURE.bags.brands) || {};
+    var keys = Object.keys(brands);
+    var prev = bagState.brand;
+    sel.innerHTML =
+      '<option value="all">' +
+      esc(t("bag.brandAll")) +
+      "</option>" +
+      keys
+        .map(function (k) {
+          var b = brands[k];
+          var label = lang === "ko" ? b.ko || b.name : (b[lang] || b.name) + (b.name && b[lang] && b[lang] !== b.name ? " · " + b.name : "");
+          return '<option value="' + esc(k) + '">' + esc(label) + "</option>";
+        })
+        .join("");
+    sel.value = keys.indexOf(prev) >= 0 || prev === "all" ? prev : "all";
+    bagState.brand = sel.value;
+
+    var types = [];
+    ((FEATURE.bags && FEATURE.bags.bags) || []).forEach(function (bag) {
+      if (types.indexOf(bag.type) < 0) types.push(bag.type);
+    });
+    wrap.innerHTML = "";
+    [{ id: "all", name: t("bag.typeAll") }]
+      .concat(
+        types.map(function (id) {
+          return { id: id, name: groupNameOf(id) };
+        })
+      )
+      .forEach(function (item) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip small";
+        btn.setAttribute("aria-pressed", String(bagState.type === item.id));
+        btn.textContent = item.name;
+        btn.addEventListener("click", function () {
+          bagState.type = item.id;
+          renderBagFilters();
+          renderBagList();
+        });
+        wrap.appendChild(btn);
+      });
+
+    var tagSel = $("#bagTag");
+    if (tagSel) {
+      var prevTag = bagState.tag;
+      tagSel.innerHTML =
+        '<option value="all">' +
+        esc(t("cafe.tagAll")) +
+        "</option>" +
+        TAG_KEYS.map(function (tag) {
+          return '<option value="' + esc(tag) + '">' + esc(t("tag." + tag)) + "</option>";
+        }).join("");
+      tagSel.value = prevTag;
+      bagState.tag = tagSel.value;
+    }
+
+    var caffWrap = $("#bagCaffChips");
+    if (caffWrap) {
+      caffWrap.innerHTML = "";
+      [
+        { id: "all", name: t("bag.caffAll") },
+        { id: "yes", name: t("bag.caffeine") },
+        { id: "no", name: t("bag.noCaffeine") }
+      ].forEach(function (item) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip small";
+        btn.setAttribute("aria-pressed", String(bagState.caffeine === item.id));
+        btn.textContent = item.name;
+        btn.addEventListener("click", function () {
+          bagState.caffeine = item.id;
+          renderBagFilters();
+          renderBagList();
+        });
+        caffWrap.appendChild(btn);
+      });
+    }
+
+    var segBag = $("#segBagCount");
+    if (segBag) segBag.textContent = String(((FEATURE.bags && FEATURE.bags.bags) || []).length);
+    var segLeaf = $("#segLeafCount");
+    if (segLeaf) segLeaf.textContent = String(D.teas.length);
+  }
+
+  function bagCardHtml(bag) {
+    var open = bagState.open === bag.id;
+    var accent = "#B2762B";
+    var g = null;
+    for (var i = 0; i < D.groups.length; i++) if (D.groups[i].id === bag.type) g = D.groups[i];
+    if (g) accent = g.accent;
+    var tags = (bag.tags || [])
+      .filter(function (tag) {
+        return TAG_KEYS.indexOf(tag) >= 0;
+      })
+      .slice(0, 4)
+      .map(function (tag) {
+        return '<span class="tag">' + esc(t("tag." + tag)) + "</span>";
+      })
+      .join("");
+    return (
+      '<article class="bag-card' +
+      (open ? " open" : "") +
+      '" data-bag="' +
+      esc(bag.id) +
+      '">' +
+      '<button class="bag-main" type="button" data-bag-toggle="' +
+      esc(bag.id) +
+      '" aria-expanded="' +
+      open +
+      '">' +
+      '<span class="bag-top"><span class="bag-brand">' +
+      esc(bagBrandLabel(bag)) +
+      '</span><span class="bag-caff' +
+      (bag.caffeine ? " on" : "") +
+      '">' +
+      esc(bag.caffeine ? t("bag.caffeine") : t("bag.noCaffeine")) +
+      "</span></span>" +
+      '<span class="bag-line"><b>' +
+      esc(l10n(bag.name)) +
+      "</b><span>" +
+      esc(groupNameOf(bag.type)) +
+      " · " +
+      esc(bag.bag || "") +
+      "</span></span>" +
+      '<p class="bag-note">' +
+      esc(l10n(bag.note)) +
+      "</p>" +
+      '<span class="bag-brew"><span>' +
+      esc(t("bag.brew", { temp: bag.temp, dur: fmtDur(bag.seconds) })) +
+      "</span><span class=\"bag-caret\"><svg width=\"15\" height=\"15\"><use href=\"#ic-caret\"/></svg></span></span>" +
+      "</button>" +
+      '<div class="bag-more"><div><div class="bag-more-inner">' +
+      '<div class="detail"><h4>' +
+      esc(t("bag.brewTitle")) +
+      "</h4><p>" +
+      esc(t("bag.brewLine", { temp: bag.temp, dur: fmtDur(bag.seconds) })) +
+      '<em class="bag-src">' +
+      esc(bag.brewSource === "brand" ? t("bag.sourceBrand") : t("bag.sourceCategory")) +
+      "</em></p></div>" +
+      (tags ? '<div class="detail"><h4>' + esc(t("bag.tagsTitle")) + "</h4><div class=\"tags\">" + tags + "</div></div>" : "") +
+      '<div class="bag-actions">' +
+      '<button class="btn btn-dark btn-block" type="button" data-bag-timer="' +
+      esc(bag.id) +
+      '"><svg width="15" height="15" style="vertical-align:-2px;margin-right:5px"><use href="#ic-timer"/></svg>' +
+      esc(t("bag.toTimer")) +
+      "</button>" +
+      '<button class="btn btn-ghost btn-block" type="button" data-bag-guide="' +
+      esc(bag.type) +
+      '">' +
+      esc(t("bag.toGuide")) +
+      "</button>" +
+      "</div></div></div></div>" +
+      "</article>"
+    );
+  }
+
+  function renderBagList() {
+    var list = $("#bagList");
+    if (!list) return;
+    var bags = bagsOfState();
+    var count = $("#bagCount");
+    if (count) count.textContent = t("bag.count", { n: bags.length });
+    if (!bags.length) {
+      list.innerHTML = '<div class="empty">' + esc(t("bag.empty")) + "</div>";
+      return;
+    }
+    list.innerHTML = bags.map(bagCardHtml).join("");
+
+    $$("[data-bag-toggle]", list).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-bag-toggle");
+        var card = list.querySelector('[data-bag="' + id + '"]');
+        var wasOpen = card && card.classList.contains("open");
+        bagState.open = wasOpen ? null : id;
+        renderBagList();
+      });
+    });
+    $$("[data-bag-timer]", list).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-bag-timer");
+        var bag = null;
+        ((FEATURE.bags && FEATURE.bags.bags) || []).forEach(function (b) {
+          if (b.id === id) bag = b;
+        });
+        if (bag) setTimerBag(bag);
+      });
+    });
+    $$("[data-bag-guide]", list).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var group = btn.getAttribute("data-bag-guide");
+        var list2 = D.teasOf(group);
+        if (list2.length) openTeaInGuide(list2[0].id);
+      });
+    });
+  }
+
+  function setTimerBag(bag) {
+    var group = null;
+    for (var i = 0; i < D.groups.length; i++) if (D.groups[i].id === bag.type) group = D.groups[i];
+    timer.custom = {
+      name: l10n(bag.name),
+      brand: bagBrandName(bag),
+      temp: bag.temp,
+      seconds: bag.seconds,
+      bag: bag.bag || "",
+      group: bag.type,
+      accent: group ? group.accent : "#B2762B",
+      note: l10n(bag.note),
+      rounds: t("bag.tabBag")
+    };
+    timer.steep = 1;
+    timer.adjust = 0;
+    renderBagMode();
+    renderGroupChips();
+    renderTeaChips();
+    renderSteepRow();
+    renderBrewInfo();
+    resetTimer();
+    go("timer");
+    toast(t("toast.bagTimer", { name: timer.custom.name }));
+  }
+
+  function renderBagMode() {
+    var bar = $("#bagModeBar");
+    if (!bar) return;
+    bar.hidden = !timer.custom;
+    var text = $("#bagModeText");
+    if (text && timer.custom) text.textContent = t("bag.timerOn", { name: timer.custom.name });
+    var exit = $("#bagModeExit");
+    if (exit && !exit.__bound) {
+      exit.__bound = true;
+      exit.addEventListener("click", function () {
+        setTimerTea(timer.teaId || D.teas[0].id, 1);
+        toast(t("bag.timerOff"));
+      });
+    }
+  }
+
+  /* ============================================================
+     6. 찻집 찾기 — 파트너 우선 + 지역·취향 디렉터리
+     ============================================================ */
+  function cafeQuery() {
+    return cafeState.q.trim().toLowerCase();
+  }
+
+  function cafeMatches(cafe) {
+    var q = cafeQuery();
+    if (cafeState.region !== "all" && cafe.region !== cafeState.region) return false;
+    if (cafeState.tag !== "all" && (cafe.tasteTags || []).indexOf(cafeState.tag) < 0) return false;
+    if (!q) return true;
+    return (
+      [anyText(cafe.name), anyText(cafe.regionName || {}), anyText(cafe.near), anyText(cafe.address), anyText(cafe.signature), anyText(cafe.desc)]
+        .join(" ")
+        .toLowerCase()
+        .indexOf(q) >= 0
+    );
+  }
+
+  function partnerMatches(shop) {
+    var q = cafeQuery();
+    if (cafeState.tag !== "all" && (shop.tasteTags || []).indexOf(cafeState.tag) < 0) return false;
+    if (cafeState.region !== "all") {
+      var reg = PARTNER_REGION[shop.slug];
+      if (reg && reg !== cafeState.region) return false;
+    }
+    if (!q) return true;
+    var hay = [anyText(shop.name), anyText(shop.region), anyText(shop.near), anyText(shop.address), anyText(shop.desc)]
+      .concat(
+        (shop.menus || []).map(function (m) {
+          return anyText(m.name);
+        })
+      )
+      .join(" ")
+      .toLowerCase();
+    return hay.indexOf(q) >= 0;
+  }
+
+  function renderRegionChips() {
+    var wrap = $("#regionChips");
+    if (!wrap || !FEATURE.cafes) return;
+    wrap.innerHTML = "";
+    [{ id: "all", name: t("cafe.regionAll") }]
+      .concat(FEATURE.cafes.regions || [])
+      .forEach(function (r) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip small";
+        btn.setAttribute("aria-pressed", String(cafeState.region === r.id));
+        btn.textContent = l10n(r.name);
+        btn.addEventListener("click", function () {
+          cafeState.region = r.id;
+          renderRegionChips();
+          renderPartnerShops();
+          renderCafeList();
+        });
+        wrap.appendChild(btn);
+      });
+  }
+
+  function renderCafeTagChips() {
+    var wrap = $("#cafeTagChips");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    [{ id: "all", name: t("cafe.tagAll") }]
+      .concat(
+        TAG_KEYS.map(function (tag) {
+          return { id: tag, name: t("tag." + tag) };
+        })
+      )
+      .forEach(function (item) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip small tag-chip";
+        btn.setAttribute("aria-pressed", String(cafeState.tag === item.id));
+        btn.textContent = item.name;
+        btn.addEventListener("click", function () {
+          cafeState.tag = item.id;
+          renderCafeTagChips();
+          renderPartnerShops();
+          renderCafeList();
+        });
+        wrap.appendChild(btn);
+      });
+  }
+
+  function renderPartnerShops() {
+    var row = $("#partnerShops");
+    var head = $("#partnerHead");
+    var count = $("#partnerCount");
+    if (!row) return;
+    var shops = (PARTNER.shops || []).filter(partnerMatches);
+    if (!shops.length) {
+      row.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
+      if (head) head.hidden = false;
+      if (count) count.textContent = t("cafe.count", { n: 0 });
+      return;
+    }
+    if (head) head.hidden = false;
+    if (count) count.textContent = t("cafe.partnerSub", { n: shops.length });
+    row.innerHTML = shops.map(shopCardHtml).join("");
+    bindShop(row);
+  }
+
+  function cafeCardHtml(cafe) {
+    var open = cafeState.open === cafe.slug;
+    var st = shopStatus(cafe);
+    var stateText = st.key ? t("shop." + st.key, st.time ? { time: st.time } : null) : "";
+    var stateCls = st.key === "open" ? " is-open" : "";
+    var tags = (cafe.tasteTags || [])
+      .filter(function (tag) {
+        return TAG_KEYS.indexOf(tag) >= 0;
+      })
+      .slice(0, 3)
+      .map(function (tag) {
+        return '<span class="tag">' + esc(t("tag." + tag)) + "</span>";
+      })
+      .join("");
+    var hoursRows = WEEK_ORDER.map(function (day) {
+      var span = (cafe.hours || {})[day];
+      var today = DAY_KEYS[seoulClock().day] === day;
+      return (
+        '<li' +
+        (today ? ' class="today"' : "") +
+        "><span>" +
+        esc(t("weekday." + day)) +
+        "</span><b>" +
+        esc(span || t("shop.closedToday")) +
+        "</b></li>"
+      );
+    }).join("");
+    var links = cafe.links || {};
+    var mapLinks = [
+      ["naver", "NAVER"],
+      ["kakao", "Kakao"],
+      ["google", "Google"]
+    ]
+      .filter(function (m) {
+        return links[m[0]];
+      })
+      .map(function (m) {
+        return (
+          '<a class="sc-maplink" href="' +
+          esc(links[m[0]]) +
+          '" target="_blank" rel="noopener">' +
+          esc(m[1]) +
+          "</a>"
+        );
+      })
+      .join("");
+    return (
+      '<article class="cafe-card' +
+      (open ? " open" : "") +
+      '" data-cafe="' +
+      esc(cafe.slug) +
+      '">' +
+      '<div class="cf-top"><span class="cf-cat">' +
+      esc(l10n(cafe.categoryName)) +
+      "</span>" +
+      (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
+      "</div>" +
+      '<b class="cf-name">' +
+      esc(l10n(cafe.name)) +
+      "</b>" +
+      '<span class="cf-region">' +
+      esc(l10n(cafe.regionName)) +
+      " · " +
+      esc(l10n(cafe.near)) +
+      "</span>" +
+      '<p class="cf-sign"><span>' +
+      esc(t("cafe.signature")) +
+      "</span>" +
+      esc(l10n(cafe.signature)) +
+      "</p>" +
+      '<p class="cf-desc">' +
+      esc(l10n(cafe.desc)) +
+      "</p>" +
+      (tags ? '<div class="cf-tags">' + tags + "</div>" : "") +
+      '<div class="sc-actions">' +
+      '<a class="sc-btn primary" href="' +
+      esc(links.naver || links.google || "#") +
+      '" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#ic-pin"/></svg>' +
+      esc(t("cafe.map")) +
+      "</a>" +
+      '<button class="sc-btn ghost" type="button" data-cafe-more="' +
+      esc(cafe.slug) +
+      '" aria-expanded="' +
+      open +
+      '">' +
+      esc(open ? t("cafe.collapse") : t("cafe.detail")) +
+      "</button>" +
+      "</div>" +
+      '<div class="sc-more" data-cafe-panel="' +
+      esc(cafe.slug) +
+      '"' +
+      (open ? "" : " hidden") +
+      ">" +
+      "<h4>" +
+      esc(t("cafe.hours")) +
+      "</h4><ul class=\"sc-hours\">" +
+      hoursRows +
+      "</ul>" +
+      (cafe.hoursNote ? '<p class="sc-note">' + esc(l10n(cafe.hoursNote)) + "</p>" : "") +
+      "<h4>" +
+      esc(t("cafe.address")) +
+      "</h4><p class=\"sc-addr\">" +
+      esc(l10n(cafe.address)) +
+      "</p>" +
+      (mapLinks ? '<div class="sc-maps">' + mapLinks + "</div>" : "") +
+      (cafe.source ? '<p class="sc-note">' + esc(t("cafe.source")) + " · " + esc(cafe.source) + "</p>" : "") +
+      "</div></article>"
+    );
+  }
+
+  function renderCafeList() {
+    var list = $("#cafeList");
+    if (!list) return;
+    var cafes = FEATURE.cafes ? (FEATURE.cafes.cafes || []).filter(cafeMatches) : [];
+    var count = $("#cafeCount");
+    if (count) count.textContent = t("cafe.count", { n: cafes.length });
+    var note = $("#cafeNote");
+    if (note) note.textContent = FEATURE.cafes ? t("cafe.note") : "";
+    if (!cafes.length) {
+      list.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
+      return;
+    }
+    list.innerHTML = cafes.map(cafeCardHtml).join("");
+    $$("[data-cafe-more]", list).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var slug = btn.getAttribute("data-cafe-more");
+        cafeState.open = cafeState.open === slug ? null : slug;
+        renderCafeList();
+      });
+    });
+  }
+
+  /* ============================================================
+     7. 커뮤니티 — 로컬 저장 + Supabase 어댑터
+     ============================================================ */
+  var SEED_POSTS = [
+    {
+      id: "seed-1",
+      seed: true,
+      type: "review",
+      rating: 5,
+      teaId: "blend-earlgrey",
+      teaName: "얼그레이",
+      nickname: "베르가못",
+      body: "96도에서 3분. 우유를 넣기 전에 한 모금 마셔 보니 베르가못이 확 올라옵니다. 두 번째 우리는 4분이 딱이었어요.",
+      likes: 14,
+      helpful: 9,
+      createdAt: Date.parse("2026-11-20T21:10:00+09:00"),
+      lang: "ko"
+    },
+    {
+      id: "seed-2",
+      seed: true,
+      type: "bag",
+      rating: 4,
+      bagId: "twinings-earl-grey",
+      teaName: "트와이닝스 얼그레이",
+      nickname: "주전자",
+      body: "회사 탕비실에서 늘 마시는 티백. 95도 정수기 물에 3분 두면 향이 충분합니다. 우유를 넣으면 조금 눅눅해져서 저는 맨잔으로 마십니다.",
+      likes: 8,
+      helpful: 6,
+      createdAt: Date.parse("2026-11-19T09:35:00+09:00"),
+      lang: "ko"
+    },
+    {
+      id: "seed-3",
+      seed: true,
+      type: "question",
+      rating: 0,
+      teaId: null,
+      teaName: "",
+      nickname: "첫잔",
+      body: "녹차를 70도에서 우리라고 하는데 온도계가 없습니다. 끓인 물을 다른 컵에 한 번 옮기면 대략 몇 도쯤 될까요?",
+      likes: 5,
+      helpful: 11,
+      createdAt: Date.parse("2026-11-18T18:20:00+09:00"),
+      lang: "ko"
+    },
+    {
+      id: "seed-4",
+      seed: true,
+      type: "bag",
+      rating: 5,
+      bagId: "osulloc-sejak",
+      teaName: "오설록 세작 20입",
+      nickname: "제주바람",
+      body: "70도 1분 30초, 정확히 지켰더니 떫지 않고 견과 같은 단맛이 남습니다. 티백인데도 잎차 같은 결이 있어요.",
+      likes: 21,
+      helpful: 13,
+      createdAt: Date.parse("2026-11-17T14:05:00+09:00"),
+      lang: "ko"
+    },
+    {
+      id: "seed-5",
+      seed: true,
+      type: "review",
+      rating: 4,
+      teaId: "green-hojicha",
+      teaName: "호지차",
+      nickname: "저녁차",
+      body: "90도에서 1분 30초. 카페인이 낮아 밤에 마셔도 잠이 잘 옵니다. 우유를 조금 넣으면 고소함이 더 살아나요.",
+      likes: 6,
+      helpful: 4,
+      createdAt: Date.parse("2026-11-15T22:40:00+09:00"),
+      lang: "ko"
+    }
+  ];
+
+  function loadPosts() {
+    var raw = storeGet(POSTS_KEY, []);
+    return Array.isArray(raw) ? raw : [];
+  }
+  function savePosts(list) {
+    storeSet(POSTS_KEY, list);
+  }
+  function loadReactions() {
+    var raw = storeGet(REACT_KEY, {});
+    return raw && typeof raw === "object" ? raw : {};
+  }
+  function saveReactions(map) {
+    storeSet(REACT_KEY, map);
+  }
+
+  function allPosts() {
+    return SEED_POSTS.concat(loadPosts()).sort(function (a, b) {
+      return (b.createdAt || 0) - (a.createdAt || 0);
+    });
+  }
+
+  function postTypeLabel(type) {
+    if (type === "bag") return t("comm.typeBag");
+    if (type === "question") return t("comm.typeQ");
+    return t("comm.typeReview");
+  }
+
+  function postHtml(p) {
+    var react = loadReactions()[p.id] || {};
+    var likeN = (p.likes || 0) + (react.like ? 1 : 0);
+    var helpN = (p.helpful || 0) + (react.help ? 1 : 0);
+    var subject = p.teaName || "";
+    return (
+      '<article class="post" data-post="' +
+      esc(p.id) +
+      '">' +
+      '<div class="post-top"><span class="post-type ' +
+      esc(p.type) +
+      '">' +
+      esc(postTypeLabel(p.type)) +
+      "</span>" +
+      (p.rating ? '<span class="post-stars">' + esc(starsMark(p.rating)) + "</span>" : "") +
+      (p.seed ? '<span class="post-badge">' + esc(t("comm.sample")) + "</span>" : '<span class="post-badge mine">' + esc(t("comm.mine")) + "</span>") +
+      "</div>" +
+      (subject ? '<b class="post-subject">' + esc(subject) + "</b>" : "") +
+      '<p class="post-body">' +
+      esc(p.body).replace(/\n/g, "<br />") +
+      "</p>" +
+      '<div class="post-foot"><span class="post-nick">' +
+      esc(p.nickname) +
+      "</span><span class=\"post-date\">" +
+      esc(p.createdAt ? L.fmtDateTime(lang, p.createdAt) : "") +
+      '</span></div><div class="post-actions">' +
+      '<button class="re-btn' +
+      (react.like ? " on" : "") +
+      '" type="button" data-react="like" data-id="' +
+      esc(p.id) +
+      '" aria-pressed="' +
+      (!!react.like) +
+      '"><svg width="14" height="14"><use href="#ic-heart"/></svg><span>' +
+      esc(t("comm.like")) +
+      " " +
+      likeN +
+      "</span></button>" +
+      '<button class="re-btn' +
+      (react.help ? " on" : "") +
+      '" type="button" data-react="help" data-id="' +
+      esc(p.id) +
+      '" aria-pressed="' +
+      (!!react.help) +
+      '"><svg width="14" height="14"><use href="#ic-thumb"/></svg><span>' +
+      esc(t("comm.helpful")) +
+      " " +
+      helpN +
+      "</span></button>" +
+      (!p.seed
+        ? '<button class="re-btn del" type="button" data-post-del="' + esc(p.id) + '">' + esc(t("comm.delete")) + "</button>"
+        : "") +
+      "</div></article>"
+    );
+  }
+
+  function renderCommFilters() {
+    var wrap = $("#commFilterChips");
+    if (!wrap) return;
+    var items = [
+      { id: "all", name: t("comm.filterAll") },
+      { id: "review", name: t("comm.filterReview") },
+      { id: "bag", name: t("comm.filterBag") },
+      { id: "question", name: t("comm.filterQ") }
+    ];
+    wrap.innerHTML = "";
+    items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip small";
+      btn.setAttribute("aria-pressed", String(commState.filter === item.id));
+      btn.textContent = item.name;
+      btn.addEventListener("click", function () {
+        commState.filter = item.id;
+        renderCommFilters();
+        renderPostList();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderPostList() {
+    var list = $("#postList");
+    if (!list) return;
+    var posts = allPosts().filter(function (p) {
+      return commState.filter === "all" || p.type === commState.filter;
+    });
+    var note = $("#commDemoNote");
+    if (note) {
+      var server = window.TeaFaiSupabase && window.TeaFaiSupabase.isConfigured && window.TeaFaiSupabase.isConfigured();
+      note.innerHTML =
+        "<b>" +
+        esc(t("comm.demoTitle")) +
+        "</b><span>" +
+        esc(t("comm.demoBody")) +
+        "</span><em>" +
+        esc(server ? t("comm.server") : t("comm.local")) +
+        "</em>";
+    }
+    if (!posts.length) {
+      list.innerHTML = '<div class="empty">' + esc(t("comm.empty")) + "</div>";
+      return;
+    }
+    list.innerHTML = posts.map(postHtml).join("");
+  }
+
+  function renderPostForm() {
+    var typeWrap = $("#postTypeChips");
+    if (!typeWrap) return;
+    var items = [
+      { id: "review", name: t("comm.typeReview") },
+      { id: "bag", name: t("comm.typeBag") },
+      { id: "question", name: t("comm.typeQ") }
+    ];
+    typeWrap.innerHTML = "";
+    items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip small";
+      btn.setAttribute("aria-pressed", String(commState.type === item.id));
+      btn.textContent = item.name;
+      btn.addEventListener("click", function () {
+        commState.type = item.id;
+        renderPostForm();
+      });
+      typeWrap.appendChild(btn);
+    });
+
+    var ratingField = $("#postRatingField");
+    if (ratingField) ratingField.hidden = commState.type === "question";
+
+    var row = $("#postStarRow");
+    if (row) {
+      row.innerHTML = "";
+      for (var i = 1; i <= 5; i++) {
+        (function (v) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "star" + (v <= commState.rating ? " on" : "");
+          b.textContent = "★";
+          b.setAttribute("aria-label", t("a11y.star", { n: v }));
+          b.setAttribute("aria-pressed", String(v <= commState.rating));
+          b.addEventListener("click", function () {
+            commState.rating = v;
+            renderPostForm();
+          });
+          row.appendChild(b);
+        })(i);
+      }
+      var label = document.createElement("span");
+      label.className = "stars-num";
+      label.textContent = commState.rating ? commState.rating + ".0" : t("notes.starNone");
+      row.appendChild(label);
+    }
+
+    var sel = $("#postSubject");
+    if (sel) {
+      var prev = sel.value;
+      var html = '<option value="">' + esc(t("comm.subjectNone")) + "</option>";
+      D.groups.forEach(function (g) {
+        html += '<optgroup label="' + esc(g.name) + '">';
+        D.teasOf(g.id).forEach(function (tea) {
+          html += '<option value="tea:' + esc(tea.id) + '">' + esc(tea.name) + "</option>";
+        });
+        html += "</optgroup>";
+      });
+      html += '<optgroup label="' + esc(t("comm.subjectBag")) + '">';
+      ((FEATURE.bags && FEATURE.bags.bags) || []).forEach(function (bag) {
+        html += '<option value="bag:' + esc(bag.id) + '">' + esc(bagBrandName(bag) + " · " + l10n(bag.name)) + "</option>";
+      });
+      html += "</optgroup>";
+      sel.innerHTML = html;
+      sel.value = prev || "";
+    }
+  }
+
+  function bindCommunity() {
+    var writeBtn = $("#commWriteBtn");
+    var form = $("#postForm");
+    var cancel = $("#postCancel");
+    if (writeBtn && form) {
+      writeBtn.addEventListener("click", function () {
+        form.hidden = !form.hidden;
+        renderPostForm();
+        if (!form.hidden) {
+          form.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          var nick = $("#postNick");
+          if (nick) nick.focus();
+        }
+      });
+    }
+    if (cancel && form) {
+      cancel.addEventListener("click", function () {
+        form.hidden = true;
+      });
+    }
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nick = ($("#postNick").value || "").trim();
+        var body = ($("#postBody").value || "").trim();
+        if (!nick || !body) {
+          toast(t("comm.required"));
+          return;
+        }
+        var isQ = commState.type === "question";
+        if (!isQ && !commState.rating) {
+          toast(t("comm.required"));
+          return;
+        }
+        var subj = $("#postSubject").value || "";
+        var teaId = null;
+        var bagId = null;
+        var teaName = "";
+        if (subj.indexOf("tea:") === 0) {
+          teaId = subj.slice(4);
+          teaName = D.byId(teaId).name;
+        } else if (subj.indexOf("bag:") === 0) {
+          bagId = subj.slice(4);
+          ((FEATURE.bags && FEATURE.bags.bags) || []).forEach(function (b) {
+            if (b.id === bagId) teaName = bagBrandName(b) + " · " + l10n(b.name);
+          });
+        }
+        if (!isQ && !teaId && !bagId) {
+          toast(t("comm.pick"));
+          return;
+        }
+        var post = {
+          id: "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+          type: commState.type,
+          rating: isQ ? 0 : commState.rating,
+          teaId: teaId,
+          bagId: bagId,
+          teaName: teaName,
+          nickname: nick.slice(0, 20),
+          body: body.slice(0, 300),
+          likes: 0,
+          helpful: 0,
+          createdAt: Date.now(),
+          lang: lang
+        };
+        var list = loadPosts();
+        list.push(post);
+        savePosts(list);
+        if (window.TeaFaiSupabase && window.TeaFaiSupabase.isConfigured && window.TeaFaiSupabase.isConfigured()) {
+          window.TeaFaiSupabase.submitPost(post).then(function (res) {
+            if (res && res.ok) renderPostList();
+          });
+        }
+        $("#postBody").value = "";
+        $("#postSubject").value = "";
+        commState.rating = 0;
+        form.hidden = true;
+        renderPostForm();
+        renderPostList();
+        toast(t("comm.posted"));
+      });
+    }
+
+    var list = $("#postList");
+    if (list) {
+      list.addEventListener("click", function (e) {
+        var reactBtn = e.target.closest ? e.target.closest("[data-react]") : null;
+        if (reactBtn) {
+          var id = reactBtn.getAttribute("data-id");
+          var kind = reactBtn.getAttribute("data-react");
+          var map = loadReactions();
+          if (!map[id]) map[id] = {};
+          if (kind === "like") map[id].like = !map[id].like;
+          else map[id].help = !map[id].help;
+          saveReactions(map);
+          renderPostList();
+          return;
+        }
+        var delBtn = e.target.closest ? e.target.closest("[data-post-del]") : null;
+        if (delBtn) {
+          var pid = delBtn.getAttribute("data-post-del");
+          savePosts(
+            loadPosts().filter(function (p) {
+              return p.id !== pid;
+            })
+          );
+          var map2 = loadReactions();
+          delete map2[pid];
+          saveReactions(map2);
+          renderPostList();
+          toast(t("comm.deleted"));
+        }
+      });
+    }
+  }
+
+  /* ============================================================
+     8. 업체 입점 신청 — 월정액 플랜 + 로컬 저장/메일 전달
+     ============================================================ */
+  function planById(id) {
+    var plans = (FEATURE.plans && FEATURE.plans.plans) || [];
+    for (var i = 0; i < plans.length; i++) if (plans[i].id === id) return plans[i];
+    return plans[0] || null;
+  }
+
+  function wonPlain(n) {
+    return Number(n || 0).toLocaleString("en-US");
+  }
+
+  function renderApplyMeta() {
+    var plans = (FEATURE.plans && FEATURE.plans.plans) || [];
+    if (!applyState.plan && plans.length) applyState.plan = plans[0].id;
+
+    var sub = $("#applyBarSub");
+    if (sub && plans.length) sub.textContent = t("cafe.applySub", { price: wonPlain(plans[0].price) });
+
+    var box = $("#applyPlans");
+    if (box) {
+      box.innerHTML = plans
+        .map(function (plan) {
+          var on = applyState.plan === plan.id;
+          return (
+            '<label class="plan-card' +
+            (on ? " on" : "") +
+            '"><input type="radio" name="applyPlan" value="' +
+            esc(plan.id) +
+            '"' +
+            (on ? " checked" : "") +
+            " />" +
+            '<span class="plan-head"><b>' +
+            esc(l10n(plan.name)) +
+            "</b><em>" +
+            esc(t("apply.planMonthly", { price: wonPlain(plan.price) })) +
+            "</em></span>" +
+            '<span class="plan-sum">' +
+            esc(l10n(plan.summary)) +
+            "</span><ul>" +
+            (plan.features || [])
+              .map(function (f) {
+                return "<li>" + esc(l10n(f)) + "</li>";
+              })
+              .join("") +
+            "</ul>" +
+            (on ? '<span class="plan-on">' + esc(t("apply.selected")) + "</span>" : "") +
+            "</label>"
+          );
+        })
+        .join("");
+      $$("input[name=applyPlan]", box).forEach(function (input) {
+        input.addEventListener("change", function () {
+          applyState.plan = input.value;
+          renderApplyMeta();
+        });
+      });
+    }
+
+    var vat = $("#applyVatNote");
+    if (vat) vat.textContent = FEATURE.plans ? l10n(FEATURE.plans.vatNote) : "";
+
+    var steps = $("#applySteps");
+    if (steps) {
+      steps.innerHTML = ((FEATURE.plans && FEATURE.plans.steps) || [])
+        .map(function (s) {
+          return (
+            '<li><span class="step-no">' +
+            esc(s.no || "") +
+            "</span><div><b>" +
+            esc(l10n(s.title)) +
+            "</b><p>" +
+            esc(l10n(s.desc)) +
+            "</p></div></li>"
+          );
+        })
+        .join("");
+    }
+
+    var promo = $("#applyPromo");
+    if (promo) {
+      var p = FEATURE.plans && FEATURE.plans.promotion;
+      var on = p && p.active && l10n(p.text);
+      promo.hidden = !on;
+      promo.textContent = on ? l10n(p.text) : "";
+    }
+
+    renderMyApps();
+
+    var tagWrap = $("#applyTags");
+    if (tagWrap) {
+      tagWrap.innerHTML = "";
+      TAG_KEYS.forEach(function (tag) {
+        var on = applyState.tags.indexOf(tag) >= 0;
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip small";
+        btn.setAttribute("aria-pressed", String(on));
+        btn.textContent = t("tag." + tag);
+        btn.addEventListener("click", function () {
+          var at = applyState.tags.indexOf(tag);
+          if (at >= 0) applyState.tags.splice(at, 1);
+          else applyState.tags.push(tag);
+          renderApplyMeta();
+        });
+        tagWrap.appendChild(btn);
+      });
+    }
+  }
+
+  function renderMyApps() {
+    var box = $("#myApps");
+    if (!box) return;
+    var list = storeGet(APPS_KEY, []);
+    if (!Array.isArray(list) || !list.length) {
+      box.hidden = true;
+      box.innerHTML = "";
+      return;
+    }
+    box.hidden = false;
+    box.innerHTML =
+      '<b class="my-apps-title">' +
+      esc(t("apply.myApps")) +
+      "</b>" +
+      list
+        .slice(-3)
+        .reverse()
+        .map(function (a) {
+          return (
+            '<div class="my-app"><span class="ma-name">' +
+            esc(a.shopName || "") +
+            "</span><span class='ma-plan'>" +
+            esc(a.planName || "") +
+            "</span><span class='ma-date'>" +
+            esc(a.createdAt ? L.fmtDateTime(lang, a.createdAt) : "") +
+            "</span></div>"
+          );
+        })
+        .join("");
+  }
+
+  function openApply(planId) {
+    var modal = $("#applyModal");
+    if (!modal) return;
+    if (planId && planById(planId)) applyState.plan = planId;
+    applyState.result = null;
+    var result = $("#applyResult");
+    if (result) {
+      result.hidden = true;
+      result.innerHTML = "";
+    }
+    renderApplyMeta();
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    var body = $("#applyBody");
+    if (body) body.scrollTop = 0;
+    var sheet = $(".sheet", modal);
+    if (sheet) {
+      sheet.setAttribute("tabindex", "-1");
+      sheet.focus({ preventScroll: true });
+    }
+  }
+
+  function closeApply() {
+    var modal = $("#applyModal");
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+  }
+
+  function applyFormState() {
+    var plan = planById(applyState.plan);
+    return {
+      planId: plan ? plan.id : "",
+      planName: plan ? l10n(plan.name) : "",
+      planPrice: plan ? plan.price : "",
+      shopName: ($("#applyShopName") || {}).value || "",
+      ownerName: ($("#applyOwner") || {}).value || "",
+      region: ($("#applyRegion") || {}).value || "",
+      address: ($("#applyAddress") || {}).value || "",
+      menu: ($("#applyMenu") || {}).value || "",
+      tags: applyState.tags.slice(),
+      hours: ($("#applyHours") || {}).value || "",
+      contact: ($("#applyContact") || {}).value || "",
+      links: ($("#applyLinks") || {}).value || "",
+      memo: ($("#applyMemo") || {}).value || ""
+    };
+  }
+
+  function applySummaryText(app) {
+    var L1 = [];
+    L1.push("[" + t("apply.title") + "]");
+    L1.push(
+      t("apply.planLabel") +
+        ": " +
+        app.planName +
+        " (" +
+        t("apply.planMonthly", { price: wonPlain(app.planPrice) }) +
+        ", " +
+        l10n(FEATURE.plans && FEATURE.plans.vatNote) +
+        ")"
+    );
+    L1.push(t("apply.shopName") + ": " + app.shopName);
+    L1.push(t("apply.owner") + ": " + app.ownerName);
+    L1.push(t("apply.region") + ": " + app.region);
+    L1.push(t("apply.address") + ": " + app.address);
+    L1.push(t("apply.menu") + ": " + app.menu);
+    L1.push(t("apply.hours") + ": " + app.hours);
+    L1.push(
+      t("apply.tags") +
+        ": " +
+        app.tags
+          .map(function (tag) {
+            return t("tag." + tag);
+          })
+          .join(", ")
+    );
+    L1.push(t("apply.contact") + ": " + app.contact);
+    L1.push(t("apply.links") + ": " + app.links);
+    L1.push(t("apply.memo") + ": " + app.memo);
+    return L1.join("\n");
+  }
+
+  function copyText(text) {
+    var done = function (ok) {
+      toast(ok ? t("apply.copied") : t("apply.error"));
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(text)
+        .then(function () {
+          done(true);
+        })
+        .catch(function () {
+          fallbackCopy(text, done);
+        });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, done) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      done(ok);
+    } catch (e) {
+      done(false);
+    }
+  }
+
+  function showApplyResult(app, mode) {
+    var box = $("#applyResult");
+    if (!box) return;
+    var text = applySummaryText(app);
+    applyState.result = { app: app, mode: mode, text: text };
+    var mail = "mailto:" + ((FEATURE.plans && FEATURE.plans.contactEmail) || "rotroka@naver.com");
+    mail += "?subject=" + encodeURIComponent("[" + t("apply.title") + "] " + app.shopName);
+    mail += "&body=" + encodeURIComponent(text);
+    box.hidden = false;
+    box.innerHTML =
+      '<div class="ar-head"><span class="ar-check"><svg width="16" height="16"><use href="#ic-check"/></svg></span><b>' +
+      esc(t("apply.ok")) +
+      "</b></div><p>" +
+      esc(mode === "server" ? t("apply.serverOk") : t("apply.localOk")) +
+      "</p><h4>" +
+      esc(t("apply.summary")) +
+      '</h4><pre class="ar-summary">' +
+      esc(text) +
+      '</pre><div class="ar-actions">' +
+      '<button class="btn btn-dark" type="button" id="applyCopy">' +
+      esc(t("apply.copy")) +
+      "</button>" +
+      '<a class="btn btn-outline" href="' +
+      esc(mail) +
+      '">' +
+      esc(t("apply.mail")) +
+      "</a>" +
+      '<button class="btn btn-ghost" type="button" id="applyEdit">' +
+      esc(t("apply.again")) +
+      "</button></div>";
+    var copyBtn = $("#applyCopy");
+    if (copyBtn)
+      copyBtn.addEventListener("click", function () {
+        copyText(text);
+      });
+    var edit = $("#applyEdit");
+    if (edit)
+      edit.addEventListener("click", function () {
+        box.hidden = true;
+      });
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function bindApply() {
+    $$("[data-apply-open]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        openApply();
+      });
+    });
+    $$("[data-apply-close]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        closeApply();
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var modal = $("#applyModal");
+        if (modal && !modal.hidden) closeApply();
+      }
+    });
+
+    var form = $("#applyForm");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var app = applyFormState();
+      if (
+        !app.shopName.trim() ||
+        !app.ownerName.trim() ||
+        !app.contact.trim() ||
+        app.contact.trim().length < 5 ||
+        !app.address.trim()
+      ) {
+        toast(t("apply.error"));
+        return;
+      }
+      app.shopName = app.shopName.trim().slice(0, 80);
+      app.ownerName = app.ownerName.trim().slice(0, 40);
+      app.address = app.address.trim().slice(0, 200);
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      var finishLocal = function () {
+        var list = storeGet(APPS_KEY, []);
+        if (!Array.isArray(list)) list = [];
+        app.id = "a" + Date.now().toString(36);
+        app.createdAt = Date.now();
+        app.status = "pending";
+        list.push(app);
+        storeSet(APPS_KEY, list);
+        renderMyApps();
+        showApplyResult(app, "local");
+        toast(t("apply.ok"));
+        if (submitBtn) submitBtn.disabled = false;
+      };
+
+      if (window.TeaFaiSupabase && window.TeaFaiSupabase.isConfigured && window.TeaFaiSupabase.isConfigured()) {
+        window.TeaFaiSupabase.submitApplication(app).then(function (res) {
+          if (res && res.ok) {
+            showApplyResult(app, "server");
+            toast(t("apply.ok"));
+            if (submitBtn) submitBtn.disabled = false;
+          } else {
+            finishLocal();
+          }
+        });
+      } else {
+        finishLocal();
+      }
+    });
+  }
+
+  function initGuideTabs() {
+    $$("[data-guide-tab]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        openGuideTab(btn.getAttribute("data-guide-tab"));
+      });
+    });
+    var bagInput = $("#bagSearchInput");
+    if (bagInput) {
+      bagInput.addEventListener("input", function () {
+        bagState.q = bagInput.value;
+        renderBagList();
+      });
+    }
+    var brandSel = $("#bagBrand");
+    if (brandSel) {
+      brandSel.addEventListener("change", function () {
+        bagState.brand = brandSel.value;
+        renderBagList();
+      });
+    }
+    var tagSel = $("#bagTag");
+    if (tagSel) {
+      tagSel.addEventListener("change", function () {
+        bagState.tag = tagSel.value;
+        renderBagList();
+      });
+    }
+    var cafeInput = $("#cafeSearchInput");
+    if (cafeInput) {
+      cafeInput.addEventListener("input", function () {
+        cafeState.q = cafeInput.value;
+        renderPartnerShops();
+        renderCafeList();
+      });
+    }
+    openGuideTab(guideState.tab || "leaf", false);
+  }
+
+  function openGuideTab(tab, navigate) {
+    guideState.tab = tab === "bag" ? "bag" : "leaf";
+    var leafPanel = $("#leafPanel");
+    var bagPanel = $("#bagPanel");
+    if (leafPanel) leafPanel.hidden = guideState.tab !== "leaf";
+    if (bagPanel) bagPanel.hidden = guideState.tab !== "bag";
+    $$("[data-guide-tab]").forEach(function (btn) {
+      var on = btn.getAttribute("data-guide-tab") === guideState.tab;
+      btn.classList.toggle("active", on);
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    if (guideState.tab === "bag") renderBagList();
+    else renderTeaList();
+    if (navigate !== false && currentView !== "guide") go("guide");
+  }
+
+  /* ============================================================
      언어 전환 · 시작
      ============================================================ */
   function rerender() {
@@ -2110,6 +3622,17 @@
     renderNotes();
     renderHomeShops();
     renderDoneExtra();
+    renderBagFilters();
+    renderBagList();
+    renderRegionChips();
+    renderCafeTagChips();
+    renderPartnerShops();
+    renderCafeList();
+    renderCommFilters();
+    renderPostForm();
+    renderPostList();
+    renderApplyMeta();
+    renderBagMode();
     if (currentView === "quiz") renderQuiz();
     document.title = titleFor(currentView);
   }
@@ -2163,9 +3686,14 @@
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    renderCommFilters();
+    initGuideTabs();
+    bindCommunity();
+    bindApply();
     bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
     loadPartnerData();
+    loadFeatureData();
 
     document.title = titleFor(currentView);
 
