@@ -11,7 +11,7 @@ window.TEAFaiI18N = (function () {
   var STORE_KEY = "teafai.lang.v1";
   var LANGS = ["ko", "en", "zh-CN", "zh-TW", "ja", "yue"];
   /* 버튼에는 국기와 짧은 이름을 함께 보여 줍니다(헤더 폭이 좁아 6글자까지) */
-  var LABEL = { ko: "KO", en: "EN", "zh-CN": "简", "zh-TW": "繁", ja: "JA", yue: "粵" };
+  var LABEL = { ko: "KO", en: "EN", "zh-CN": "简", "zh-TW": "繁", ja: "日", yue: "粵" };
   var FULL_LABEL = {
     ko: "한국어",
     en: "English",
