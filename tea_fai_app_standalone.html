@@ -5884,8 +5884,18 @@ window.TEAFaiI18N = (function () {
     return null;
   }
 
+  /* ?lang=ja 처럼 주소에 언어를 붙여 보내면 그 언어로 열립니다(공유 링크용) */
+  function fromQuery() {
+    try {
+      var q = new URLSearchParams(location.search).get("lang");
+      return q ? normalize(q) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function detect() {
-    return stored() || fromBrowser() || "ko";
+    return fromQuery() || stored() || fromBrowser() || "ko";
   }
 
   /* ---------------- 문구 사전 ---------------- */
