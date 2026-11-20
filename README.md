@@ -44,6 +44,8 @@
 | `icons/logo_tea_mark.svg`, `icons/logo_tea_mark.png` | 헤더 `티키피디아` 앞 茶 마크(정사각 배지). `index.html`·`privacy.html`의 `.brand-mark`가 이 SVG를 씁니다 |
 | `tea_fai_app_standalone.html` | CSS/JS를 모두 인라인한 단일 파일 (파일로 바로 열기) |
 | `preview_home.png` · `preview_timer.png` · `preview_guide.png` · `preview_notes.png` | 390×844 화면 캡처 |
+| `preview/teakipedia-mobile-390.png` · `-ja.png` | 2026-11 개편 후 390×844 화면(한국어·일본어) |
+| `preview/teakipedia-desktop-1280.png` · `-partner-1280.png` · `-store-1280.png` | PC 1280×800 화면(백과·파트너 회원 3등급·스토어) |
 | `build_standalone.py` | `index.html` + CSS + JS → 단일 파일 재생성 |
 | `make_icons.py` | `tea_fai_brand/`의 茶 아이콘에서 PWA 아이콘 다시 만들기 |
 | `tools/build_brand.py` | 단정한 고딕 茶로 아이콘·헤더 배지 다시 만들기 |
