@@ -4804,10 +4804,9 @@ body.modal-open {
   .brand-name {
     font-size: 15.5px;
   }
+  /* 좁은 화면에서는 부제(Teakipedia)를 접어 브랜드 이름이 잘리지 않게 합니다 */
   .brand-name em {
-    margin-left: 4px;
-    font-size: 8.5px;
-    letter-spacing: 0.1em;
+    display: none;
   }
   .brand-mark {
     width: 24px;
@@ -4816,8 +4815,8 @@ body.modal-open {
 }
 
 @media (max-width: 374px) {
-  .brand-name em {
-    display: none;
+  .brand-name {
+    font-size: 15px;
   }
 }
 
