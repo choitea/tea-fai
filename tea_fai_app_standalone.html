@@ -3205,6 +3205,7 @@ window.TEAFaiI18N = (function () {
       "quiz.resultLead": "10문항의 답에서 가장 가까운 차를 골랐습니다.",
       "quiz.best": "가장 잘 맞는 차",
       "quiz.altTitle": "함께 권하는 두 잔",
+      "quiz.altCount": "2잔",
       "quiz.whyOne": "고르신 «{a}» 취향에 맞춰, 이 향미가 가장 가까운 차입니다.",
       "quiz.whyTwo": "고르신 «{a}», «{b}» 취향에 맞춰, 이 향미가 가장 가까운 차입니다.",
       "quiz.brew": "바로 우리기",
@@ -3276,6 +3277,7 @@ window.TEAFaiI18N = (function () {
       "quiz.resultLead": "Chosen from your ten answers — the closest match in the encyclopedia.",
       "quiz.best": "Best match",
       "quiz.altTitle": "Two more to try",
+      "quiz.altCount": "2 cups",
       "quiz.whyOne": "Matching your “{a}” answer, this is the closest cup.",
       "quiz.whyTwo": "Matching your “{a}” and “{b}” answers, this is the closest cup.",
       "quiz.brew": "Brew this now",
@@ -3347,6 +3349,7 @@ window.TEAFaiI18N = (function () {
       "quiz.resultLead": "根据十个回答，从百科中选出了最贴近的一杯。",
       "quiz.best": "最合适的一杯",
       "quiz.altTitle": "再推荐两杯",
+      "quiz.altCount": "2杯",
       "quiz.whyOne": "按你选择的「{a}」，这款茶的香气最贴近。",
       "quiz.whyTwo": "按你选择的「{a}」「{b}」，这款茶的香气最贴近。",
       "quiz.brew": "马上冲泡",
@@ -3418,6 +3421,7 @@ window.TEAFaiI18N = (function () {
       "quiz.resultLead": "根據十個回答，從百科中選出了最貼近的一杯。",
       "quiz.best": "最合適的一杯",
       "quiz.altTitle": "再推薦兩杯",
+      "quiz.altCount": "2杯",
       "quiz.whyOne": "按你選擇的「{a}」，這款茶的香氣最貼近。",
       "quiz.whyTwo": "按你選擇的「{a}」「{b}」，這款茶的香氣最貼近。",
       "quiz.brew": "馬上沖泡",
@@ -13062,7 +13066,7 @@ window.TEAFaiData = (function () {
       '<div class="section-head"><h2>' +
       esc(t("quiz.altTitle")) +
       "</h2><span>" +
-      esc(t("quiz.resultKicker")) +
+      esc(t("quiz.altCount")) +
       "</span></div>" +
       pick.alts
         .map(function (row) {
@@ -13085,7 +13089,9 @@ window.TEAFaiData = (function () {
     var step = Math.min(quizState.step, total);
     var bar = $("#quizBar");
     var count = $("#quizCount");
-    if (bar) bar.style.width = Math.round((step / total) * 100) + "%";
+    /* 막대는 지금 보고 있는 문항 번호에 맞춥니다 (3 / 10 → 30%) */
+    var pct = step >= total ? 100 : Math.round(((step + 1) / total) * 100);
+    if (bar) bar.style.width = pct + "%";
     if (count) count.textContent = t("quiz.progress", { n: Math.min(step + 1, total), total: total });
     if (step >= total) {
       renderQuizResult(body);

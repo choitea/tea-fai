@@ -1498,7 +1498,7 @@
       '<div class="section-head"><h2>' +
       esc(t("quiz.altTitle")) +
       "</h2><span>" +
-      esc(t("quiz.resultKicker")) +
+      esc(t("quiz.altCount")) +
       "</span></div>" +
       pick.alts
         .map(function (row) {
@@ -1521,7 +1521,9 @@
     var step = Math.min(quizState.step, total);
     var bar = $("#quizBar");
     var count = $("#quizCount");
-    if (bar) bar.style.width = Math.round((step / total) * 100) + "%";
+    /* 막대는 지금 보고 있는 문항 번호에 맞춥니다 (3 / 10 → 30%) */
+    var pct = step >= total ? 100 : Math.round(((step + 1) / total) * 100);
+    if (bar) bar.style.width = pct + "%";
     if (count) count.textContent = t("quiz.progress", { n: Math.min(step + 1, total), total: total });
     if (step >= total) {
       renderQuizResult(body);
