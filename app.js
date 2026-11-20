@@ -720,7 +720,9 @@
     var native = D.nativeOf(item, lang);
     var nativeLine = [];
     if (native) nativeLine.push(esc(native));
-    if (item.sub && item.sub !== native) nativeLine.push(esc(item.sub));
+    var subLow = (item.sub || "").toLowerCase();
+    var nameLow = (item.name || "").toLowerCase();
+    if (item.sub && subLow !== native.toLowerCase() && subLow !== nameLow) nativeLine.push(esc(item.sub));
 
     var facts = [
       [t("fact.temp"), item.tempRange],
