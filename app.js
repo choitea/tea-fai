@@ -1134,8 +1134,8 @@
       opts: [
         { key: "quiz.q6a", tags: { "k-sweet": 7, "b-medium": 1 } },
         { key: "quiz.q6b", tags: { "k-crisp": 7, "r-clean": 1 } },
-        { key: "quiz.q6c", tags: { "k-blend": 8, "a-fruit": 2, "a-floral": 2 } },
-        { key: "quiz.q6d", tags: { "k-grain": 8, "a-roast": 2 } }
+        { key: "quiz.q6c", tags: { "k-blend": 10, "a-fruit": 2, "a-floral": 2 }, groups: ["blended"] },
+        { key: "quiz.q6d", tags: { "k-grain": 10, "a-roast": 2 }, groups: ["herbal", "herb"] }
       ]
     },
     {
@@ -1224,6 +1224,13 @@
 
   function quizRanking() {
     var freeOnly = quizAnswered(4) && QUIZ[4].opts[quizState.answers[4]].caffeineFree;
+    /* 블렌딩차·곡물차처럼 계열을 콕 집은 답은 그 계열 안에서 고릅니다 */
+    var onlyGroups = null;
+    QUIZ.forEach(function (q, i) {
+      if (!quizAnswered(i)) return;
+      var g = q.opts[quizState.answers[i]].groups;
+      if (g) onlyGroups = onlyGroups ? onlyGroups.filter(function (x) { return g.indexOf(x) >= 0; }) : g.slice();
+    });
     var rows = D.teas.map(function (tea, order) {
       var tags = traitList(tea.id);
       var score = 0;
@@ -1238,26 +1245,46 @@
       });
       return { tea: tea, score: score, parts: parts, order: order };
     });
-    rows = rows.filter(function (r) {
+    function keep(r, useGroups) {
+      if (useGroups && onlyGroups && onlyGroups.length && onlyGroups.indexOf(r.tea.group) < 0) return false;
       return !freeOnly || hasTrait(r.tea.id, "c-none");
+    }
+    var picked = rows.filter(function (r) {
+      return keep(r, true);
     });
-    rows.sort(function (a, b) {
+    /* 계열과 카페인 조건이 서로 맞지 않으면 카페인 조건을 먼저 지킵니다 */
+    if (!picked.length) {
+      picked = rows.filter(function (r) {
+        return keep(r, false);
+      });
+    }
+    if (!picked.length) picked = rows;
+    picked.sort(function (a, b) {
       return b.score - a.score || a.order - b.order;
     });
-    return rows;
+    return picked;
   }
 
   function quizPick(rows) {
     if (!rows.length) return null;
     var best = rows[0];
+    /* 1·2순위는 계열을 달리해 고르되, 점수가 너무 낮은 차는 넣지 않습니다 */
+    var floor = best.score * 0.55;
+    var near = rows.filter(function (r) {
+      return r.score >= floor;
+    });
     var used = {};
     used[best.tea.group] = true;
     var alts = [];
     var i;
-    for (i = 1; i < rows.length && alts.length < 2; i++) {
-      if (used[rows[i].tea.group]) continue;
-      used[rows[i].tea.group] = true;
-      alts.push(rows[i]);
+    for (i = 1; i < near.length && alts.length < 2; i++) {
+      if (used[near[i].tea.group]) continue;
+      used[near[i].tea.group] = true;
+      alts.push(near[i]);
+    }
+    for (i = 1; i < near.length && alts.length < 2; i++) {
+      if (near[i] === best || alts.indexOf(near[i]) >= 0) continue;
+      alts.push(near[i]);
     }
     for (i = 1; i < rows.length && alts.length < 2; i++) {
       if (rows[i] === best || alts.indexOf(rows[i]) >= 0) continue;
