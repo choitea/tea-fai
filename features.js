@@ -519,25 +519,45 @@
     renderLens();
   }
 
-  /* ---------------- 파트너 회원 (일반 3,900 / 사업자 13,900) ---------------- */
+  /* ---------------- 회원 등급 3단계 ----------------
+     개인(3,900) ⊂ 찻집(13,900) ⊂ 제조사(23,900) — 위 등급은 아래 등급의 기능을 모두 포함합니다.
+     결제는 Google Play 인앱 정기구독 상품으로 엽니다. */
   var MEMBER_KEY = "teafai.member.v1";
-  var SKU = { member: "teakipedia_member_monthly", partner: "teakipedia_partner_monthly" };
-  var PRICE = { member: 3900, partner: 13900 };
+  var SKU = {
+    personal: "teakipedia_personal_monthly",
+    teahouse: "teakipedia_teahouse_monthly",
+    maker: "teakipedia_maker_monthly"
+  };
+  var PLAN_ORDER = ["personal", "teahouse", "maker"];
+  var RANK = { none: 0, personal: 1, teahouse: 2, maker: 3 };
+  var LEGACY = { member: "personal", partner: "teahouse" };
 
   function memberState() {
     var s = storeGet(MEMBER_KEY, null);
-    if (!s || (s.plan !== "member" && s.plan !== "partner")) return { plan: "none" };
+    if (!s) return { plan: "none", rank: 0 };
+    var plan = LEGACY[s.plan] || s.plan;
+    if (RANK[plan] == null) return { plan: "none", rank: 0 };
+    s.plan = plan;
+    s.rank = RANK[plan];
     return s;
   }
-  function unlocked() {
-    return memberState().plan !== "none";
+  function rank() {
+    return memberState().rank || 0;
   }
-  function isBusiness() {
-    return memberState().plan === "partner";
+  /* 개인 회원 이상 — 파트너 목록·지도 열람 */
+  function unlocked() {
+    return rank() >= 1;
+  }
+  /* 찻집 회원 이상 — 매장 정보·메뉴 업로드 */
+  function canUploadShop() {
+    return rank() >= 2;
+  }
+  /* 제조사 회원 — 자사 제품 업로드 */
+  function canUploadProduct() {
+    return rank() >= 3;
   }
 
-  /* Google Play 디지털 상품 서비스 어댑터 — 안드로이드 앱(TWA)에서만 열립니다.
-     웹 브라우저에서는 안내 문구로 대신합니다. */
+  /* Google Play 디지털 상품 서비스 어댑터 — 안드로이드 앱(TWA)에서만 열립니다. */
   function playService() {
     if (!("getDigitalGoodsService" in window)) return Promise.resolve(null);
     try {
@@ -549,6 +569,10 @@
     }
   }
 
+  function savePlan(plan, sku, source) {
+    storeSet(MEMBER_KEY, { plan: plan, sku: sku, since: Date.now(), source: source });
+  }
+
   function checkPurchases() {
     return playService().then(function (service) {
       if (!service) return { ok: false, reason: "no_service" };
@@ -556,16 +580,18 @@
         .listPurchases()
         .then(function (purchases) {
           var list = purchases || [];
+          var best = null;
           for (var i = 0; i < list.length; i++) {
             var sku = list[i].itemId || list[i].sku || "";
-            if (sku === SKU.partner) {
-              storeSet(MEMBER_KEY, { plan: "partner", sku: sku, since: Date.now(), source: "play" });
-              return { ok: true, plan: "partner" };
+            for (var k = 0; k < PLAN_ORDER.length; k++) {
+              if (sku === SKU[PLAN_ORDER[k]]) {
+                if (!best || RANK[PLAN_ORDER[k]] > RANK[best]) best = PLAN_ORDER[k];
+              }
             }
-            if (sku === SKU.member) {
-              storeSet(MEMBER_KEY, { plan: "member", sku: sku, since: Date.now(), source: "play" });
-              return { ok: true, plan: "member" };
-            }
+          }
+          if (best) {
+            savePlan(best, SKU[best], "play");
+            return { ok: true, plan: best };
           }
           return { ok: false, reason: "none" };
         })
@@ -576,7 +602,6 @@
   }
 
   function startSubscribe(plan) {
-    var sku = SKU[plan];
     toast(t("member.checking"));
     checkPurchases().then(function (res) {
       if (res.ok) {
@@ -590,32 +615,40 @@
           toast(t("member.playMissing"));
           return;
         }
+        /* 웹에서는 Play 결제 창이 열리지 않습니다 — 앱 안내로 대신합니다 */
         toast(t("member.webNote"));
         if (service && typeof service.listDetails === "function") {
-          service.listDetails([sku]).catch(function () {});
+          service.listDetails([SKU[plan] || SKU.personal]).catch(function () {});
         }
       });
     });
   }
 
-  function planBoxHtml(id) {
-    var biz = id === "partner";
-    var feats = ["member.generalF1", "member.generalF2", "member.generalF3"];
-    if (biz) feats = ["member.businessF1", "member.businessF2", "member.businessF3"];
+  function planBoxHtml(plan) {
+    var feats = [
+      "member." + plan + "F1",
+      "member." + plan + "F2",
+      "member." + plan + "F3"
+    ];
     return (
       '<div class="plan-box' +
-      (biz ? " biz" : "") +
+      (plan === "maker" ? " biz" : "") +
       '"><div class="pb-top"><b>' +
-      esc(t(biz ? "member.business" : "member.general")) +
+      esc(t("member." + plan)) +
       '</b><span class="pb-price">' +
-      esc(t(biz ? "member.businessPrice" : "member.generalPrice")) +
+      esc(t("member." + plan + "Price")) +
       "</span></div><ul>" +
       feats
         .map(function (f) {
           return "<li>" + esc(t(f)) + "</li>";
         })
         .join("") +
-      "</ul></div>"
+      "</ul>" +
+      '<button class="btn btn-outline btn-block" type="button" data-subscribe="' +
+      escape(plan) +
+      '" style="margin-top:9px">' +
+      esc(t("member.subscribe")) +
+      "</button></div>"
     );
   }
 
@@ -627,10 +660,15 @@
     if (state.plan !== "none") {
       box.innerHTML =
         '<span class="member-state"><svg width="13" height="13"><use href="#ic-check"/></svg>' +
-        esc(t("member.active", { plan: t(state.plan === "partner" ? "member.business" : "member.general") })) +
-        "</span>";
+        esc(t("member.current")) +
+        " · " +
+        esc(t("member." + state.plan)) +
+        "</span>" +
+        '<p class="member-note">' +
+        esc(t("member.upgrade")) +
+        "</p>";
       if (main) main.hidden = false;
-      renderBiz();
+      renderUploads();
       return;
     }
     if (main) main.hidden = true;
@@ -642,15 +680,11 @@
       "</h3><p>" +
       esc(t("member.lockBody")) +
       "</p>" +
-      '<div class="plan-grid">' +
-      planBoxHtml("member") +
-      planBoxHtml("partner") +
+      '<div class="plan-grid three">' +
+      PLAN_ORDER.map(planBoxHtml).join("") +
       "</div>" +
       '<div class="member-actions">' +
-      '<button class="btn btn-dark" type="button" data-subscribe="member">' +
-      esc(t("member.subscribe")) +
-      "</button>" +
-      '<button class="btn btn-outline" type="button" data-subscribe="partner">' +
+      '<button class="btn btn-outline" type="button" data-restore>' +
       esc(t("member.restore")) +
       "</button>" +
       "</div>" +
@@ -658,65 +692,151 @@
       esc(t("member.webNote")) +
       "</p></div>";
 
-    var subBtn = $("[data-subscribe=member]", box);
-    if (subBtn)
-      subBtn.addEventListener("click", function () {
-        startSubscribe("member");
+    var restore = $("[data-restore]", box);
+    if (restore)
+      restore.addEventListener("click", function () {
+        startSubscribe("personal");
       });
-    var bizBtn = $("[data-subscribe=partner]", box);
-    if (bizBtn)
-      bizBtn.addEventListener("click", function () {
-        startSubscribe("partner");
-      });
+    PLAN_ORDER.forEach(function (plan) {
+      var b = $("[data-subscribe=" + plan + "]", box);
+      if (b)
+        b.addEventListener("click", function () {
+          startSubscribe(plan);
+        });
+    });
   }
 
-  /* ---------------- 사업자: 자사 찻잎·차 상품 등록 ---------------- */
-  function renderBiz() {
+  /* ---------------- 찻집 회원 · 제조사 회원 업로드 ---------------- */
+  function renderUploads() {
     var mount = $("#bizMount");
     if (!mount) return;
     if (!unlocked()) {
       mount.innerHTML = "";
       return;
     }
-    if (mount.getAttribute("data-ready") === "1") return;
-    mount.setAttribute("data-ready", "1");
+    var shop = canUploadShop();
+    var prod = canUploadProduct();
     mount.innerHTML =
-      '<div class="section-head"><h2>' +
-      esc(t("partner.bizTitle")) +
-      "</h2></div>" +
-      '<p class="member-note" style="margin-top:-6px">' +
-      esc(t("partner.bizLead")) +
-      "</p>" +
-      '<form class="form-card biz-form" id="bizForm" autocomplete="off">' +
-      '<div class="field"><label for="bizName">' +
-      esc(t("partner.bizName")) +
-      '</label><input id="bizName" type="text" maxlength="80" required /></div>' +
-      '<div class="form-grid">' +
-      '<div class="field"><label for="bizPrice">' +
-      esc(t("partner.bizPrice")) +
-      '</label><input id="bizPrice" type="number" min="0" inputmode="numeric" /></div>' +
-      '<div class="field"><label for="bizWeight">' +
-      esc(t("partner.bizWeight")) +
-      '</label><input id="bizWeight" type="text" maxlength="30" placeholder="100g" /></div>' +
-      "</div>" +
-      '<div class="field"><label for="bizOrigin">' +
-      esc(t("partner.bizOrigin")) +
-      '</label><input id="bizOrigin" type="text" maxlength="80" /></div>' +
-      '<div class="field"><label for="bizNote">' +
-      esc(t("partner.bizNote")) +
-      '</label><textarea id="bizNote" maxlength="300"></textarea></div>' +
-      '<button class="btn btn-dark btn-block" type="submit">' +
-      esc(t("partner.bizSubmit")) +
-      "</button></form>";
+      (shop
+        ? '<div class="section-head"><h2>' +
+          esc(t("upload.shopTitle")) +
+          "</h2></div>" +
+          '<p class="member-note" style="margin-top:-6px">' +
+          esc(t("upload.shopLead")) +
+          "</p>" +
+          '<form class="form-card biz-form" id="shopForm" autocomplete="off">' +
+          '<div class="field"><label for="upShopName">' +
+          esc(t("upload.shopName")) +
+          '</label><input id="upShopName" type="text" maxlength="80" required /></div>' +
+          '<div class="field"><label for="upShopAddress">' +
+          esc(t("upload.shopAddress")) +
+          '</label><input id="upShopAddress" type="text" maxlength="200" required /></div>' +
+          '<div class="field"><label for="upShopPlace">' +
+          esc(t("upload.shopPlace")) +
+          '</label><input id="upShopPlace" type="text" maxlength="200" /></div>' +
+          '<div class="field"><label for="upShopHours">' +
+          esc(t("upload.shopHours")) +
+          '</label><input id="upShopHours" type="text" maxlength="120" placeholder="11:00-21:00" /></div>' +
+          '<div class="field"><label for="upShopMenu">' +
+          esc(t("upload.shopMenu")) +
+          '</label><textarea id="upShopMenu" maxlength="600"></textarea></div>' +
+          '<div class="field"><label for="upShopContact">' +
+          esc(t("upload.shopContact")) +
+          '</label><input id="upShopContact" type="text" maxlength="80" /></div>' +
+          '<button class="btn btn-dark btn-block" type="submit">' +
+          esc(t("upload.shopSubmit")) +
+          "</button></form>"
+        : '<p class="member-note">' + esc(t("member.gateShop")) + "</p>") +
+      (prod
+        ? '<div class="section-head"><h2>' +
+          esc(t("upload.prodTitle")) +
+          "</h2></div>" +
+          '<p class="member-note" style="margin-top:-6px">' +
+          esc(t("upload.prodLead")) +
+          "</p>" +
+          '<form class="form-card biz-form" id="bizForm" autocomplete="off">' +
+          '<div class="field"><label for="bizName">' +
+          esc(t("upload.prodName")) +
+          '</label><input id="bizName" type="text" maxlength="80" required /></div>' +
+          '<div class="form-grid">' +
+          '<div class="field"><label for="bizKind">' +
+          esc(t("upload.kind")) +
+          '</label><select id="bizKind"><option value="leaf">' +
+          esc(t("upload.kindLeaf")) +
+          '</option><option value="bag">' +
+          esc(t("upload.kindBag")) +
+          '</option><option value="teaware">' +
+          esc(t("upload.kindTeaware")) +
+          "</option></select></div>" +
+          '<div class="field"><label for="bizPrice">' +
+          esc(t("upload.prodPrice")) +
+          '</label><input id="bizPrice" type="number" min="0" inputmode="numeric" /></div>' +
+          "</div>" +
+          '<div class="form-grid">' +
+          '<div class="field"><label for="bizWeight">' +
+          esc(t("upload.prodWeight")) +
+          '</label><input id="bizWeight" type="text" maxlength="30" placeholder="100g" /></div>' +
+          '<div class="field"><label for="bizOrigin">' +
+          esc(t("upload.prodOrigin")) +
+          '</label><input id="bizOrigin" type="text" maxlength="80" /></div>' +
+          "</div>" +
+          '<div class="field"><label for="bizNote">' +
+          esc(t("upload.prodNote")) +
+          '</label><textarea id="bizNote" maxlength="300"></textarea></div>' +
+          '<button class="btn btn-dark btn-block" type="submit">' +
+          esc(t("upload.prodSubmit")) +
+          "</button></form>"
+        : '<p class="member-note">' + esc(t("member.gateProduct")) + "</p>");
 
-    var form = $("#bizForm");
-    if (form) form.addEventListener("submit", submitBizProduct);
+    var shopForm = $("#shopForm");
+    if (shopForm) shopForm.addEventListener("submit", submitShopProfile);
+    var prodForm = $("#bizForm");
+    if (prodForm) prodForm.addEventListener("submit", submitProduct);
   }
 
-  function submitBizProduct(e) {
+  function submitShopProfile(e) {
     e.preventDefault();
-    if (!isBusiness()) {
-      toast(t("member.gateBiz"));
+    if (!canUploadShop()) {
+      toast(t("member.gateShop"));
+      return;
+    }
+    var nameEl = $("#upShopName");
+    var name = nameEl ? nameEl.value.trim() : "";
+    if (!name) {
+      if (nameEl) nameEl.focus();
+      return;
+    }
+    var entry = {
+      id: "sh" + Date.now().toString(36),
+      shopName: name.slice(0, 80),
+      address: ($("#upShopAddress") ? $("#upShopAddress").value.trim() : "").slice(0, 200),
+      place: ($("#upShopPlace") ? $("#upShopPlace").value.trim() : "").slice(0, 200),
+      hours: ($("#upShopHours") ? $("#upShopHours").value.trim() : "").slice(0, 120),
+      menu: ($("#upShopMenu") ? $("#upShopMenu").value.trim() : "").slice(0, 600),
+      contact: ($("#upShopContact") ? $("#upShopContact").value.trim() : "").slice(0, 80),
+      plan: memberState().plan,
+      createdAt: Date.now(),
+      lang: lang()
+    };
+    var list = storeGet("teafai.shop_uploads.v1", []);
+    if (!Array.isArray(list)) list = [];
+    list.push(entry);
+    storeSet("teafai.shop_uploads.v1", list);
+
+    if (window.TeaFaiSupabase && window.TeaFaiSupabase.isConfigured && window.TeaFaiSupabase.isConfigured()) {
+      window.TeaFaiSupabase.submitShopUpload(entry).then(function (res) {
+        toast(res && res.ok ? t("upload.shopOk") : t("upload.shopFail"));
+      });
+    } else {
+      toast(t("upload.shopOk"));
+    }
+    e.target.reset();
+  }
+
+  function submitProduct(e) {
+    e.preventDefault();
+    if (!canUploadProduct()) {
+      toast(t("member.gateProduct"));
       return;
     }
     var nameEl = $("#bizName");
@@ -726,8 +846,9 @@
       return;
     }
     var entry = {
-      id: "bz" + Date.now().toString(36),
+      id: "pz" + Date.now().toString(36),
       name: name.slice(0, 80),
+      kind: $("#bizKind") ? $("#bizKind").value : "leaf",
       price: $("#bizPrice") ? Number($("#bizPrice").value || 0) : 0,
       weight: $("#bizWeight") ? $("#bizWeight").value.trim().slice(0, 30) : "",
       origin: $("#bizOrigin") ? $("#bizOrigin").value.trim().slice(0, 80) : "",
@@ -735,19 +856,19 @@
       createdAt: Date.now(),
       lang: lang()
     };
-    var list = storeGet("teafai.shop_teas.v1", []);
+    var list = storeGet("teafai.maker_products.v1", []);
     if (!Array.isArray(list)) list = [];
     list.push(entry);
-    storeSet("teafai.shop_teas.v1", list);
+    storeSet("teafai.maker_products.v1", list);
 
     if (window.TeaFaiSupabase && window.TeaFaiSupabase.isConfigured && window.TeaFaiSupabase.isConfigured()) {
-      window.TeaFaiSupabase.submitShopTea(entry).then(function (res) {
-        toast(res && res.ok ? t("partner.bizOk") : t("partner.bizFail"));
+      window.TeaFaiSupabase.submitMakerProduct(entry).then(function (res) {
+        toast(res && res.ok ? t("upload.prodOk") : t("upload.prodFail"));
       });
     } else {
-      toast(t("partner.bizOk"));
+      toast(t("upload.prodOk"));
     }
-    $("#bizForm").reset();
+    e.target.reset();
   }
 
   /* ---------------- 시작 ---------------- */
@@ -772,8 +893,10 @@
     renderMemberPanel: renderMemberPanel,
     openStoreFor: openStoreFor,
     unlocked: unlocked,
-    isBusiness: isBusiness,
+    canUploadShop: canUploadShop,
+    canUploadProduct: canUploadProduct,
     memberState: memberState,
+    rank: rank,
     checkPurchases: checkPurchases
   };
 

@@ -7,7 +7,8 @@
        커뮤니티 글  → public.community_posts   (§15)
        입점 신청    → public.shop_applications (§6)
        새 티백 등록 → public.community_posts (post_type=bag, 제목에 [새 티백])
-       사업자 상품  → public.community_posts (post_type=bag, 제목에 [사업자 상품])
+       찻집 회원 업로드 → public.shop_applications (message 첫 줄에 [찻집 회원 업로드])
+       제조사 제품  → public.community_posts (post_type=bag, 제목에 [제조사 제품])
      두 등록은 새 표를 만들지 않고 이미 RLS 가 열린 community_posts 에 쌓습니다
      (앱 안의 백과·스토어 반영은 운영자가 검수한 뒤 합니다).
    · anon 키는 공개되어도 되는 키지만, 쓰기 권한은 RLS 정책으로만
@@ -224,10 +225,33 @@ window.TeaFaiSupabase = (function () {
     return request("POST", cfg().tables.posts, row, null, "return=minimal");
   }
 
-  /* ---------- 사업자 회원의 자사 찻잎·차 상품 등록 ---------- */
-  function submitShopTea(entry) {
+  /* ---------- 찻집 회원: 매장 위치·정보·메뉴 업로드 ----------
+     tea_shops 는 로그인한 사장님만 쓸 수 있어(RLS), 회원 업로드는 검수용
+     shop_applications 에 [찻집 회원 업로드] 표식과 함께 쌓습니다. */
+  function submitShopUpload(entry) {
     var e = entry || {};
-    var lines = ["[사업자 상품] 찻잎·차 등록"];
+    var lines = ["[찻집 회원 업로드]", "등급: " + (e.plan || "")];
+    if (e.place) lines.push("위치·지도: " + e.place);
+    if (e.hours) lines.push("영업시간: " + e.hours);
+    if (e.menu) lines.push("메뉴: " + e.menu);
+    var row = {
+      shop_name: String(e.shopName || "").slice(0, 80) || "이름 없음",
+      owner_name: "찻집 회원".slice(0, 40),
+      phone: String(e.contact || "000-0000-0000").slice(0, 20),
+      email: null,
+      region: null,
+      address: String(e.address || "").slice(0, 200) || "주소 미입력",
+      business_no: null,
+      message: lines.join("\n").slice(0, 1000),
+      status: "pending"
+    };
+    return request("POST", cfg().tables.applications, row, null, "return=minimal");
+  }
+
+  /* ---------- 제조사 회원: 자사 제품(찻잎·티백·다구) 등록 ---------- */
+  function submitMakerProduct(entry) {
+    var e = entry || {};
+    var lines = ["[제조사 제품] " + (e.kind || "leaf")];
     if (e.price) lines.push("가격: " + e.price + "원");
     if (e.weight) lines.push("용량: " + e.weight);
     if (e.origin) lines.push("산지: " + e.origin);
@@ -238,7 +262,7 @@ window.TeaFaiSupabase = (function () {
       rating: null,
       teabag_id: null,
       tea_name: String(e.name || "").slice(0, 120),
-      nickname: String(e.owner || "사업자 등록").slice(0, 20),
+      nickname: String(e.owner || "제조사 등록").slice(0, 20),
       body: lines.join("\n").slice(0, 1000),
       lang: e.lang === "yue" ? "zh-TW" : e.lang || "ko",
       status: "published"
@@ -258,7 +282,8 @@ window.TeaFaiSupabase = (function () {
     fetchPosts: fetchPosts,
     submitApplication: submitApplication,
     submitTeaBag: submitTeaBag,
-    submitShopTea: submitShopTea,
+    submitShopUpload: submitShopUpload,
+    submitMakerProduct: submitMakerProduct,
     postRow: postRow,
     applicationRow: applicationRow
   };

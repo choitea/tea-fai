@@ -4789,3 +4789,28 @@ body.modal-open {
     font-size: 15px;
   }
 }
+
+/* ---------- 회원 등급 3단계 카드 ---------- */
+.plan-box .btn {
+  font-size: 12px;
+  padding: 8px 10px;
+}
+
+.plan-grid.three {
+  gap: 8px;
+}
+
+@media (min-width: 900px) {
+  .plan-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .lock-card {
+    max-width: 860px;
+  }
+}
+
+@media (max-width: 430px) {
+  .plan-box ul {
+    font-size: 11px;
+  }
+}
