@@ -1,119 +1,61 @@
 #!/usr/bin/env python3
-"""티파이 PWA 아이콘 생성 — 한 줄기에서 뻗은 찻잎 두 장(크림 + 앰버)."""
-import math
+"""티키피디아 PWA 아이콘 — `tea_fai_brand/`의 茶 대표 이미지에서 다시 만듭니다.
+
+    tea_fai_brand/icon-512-rounded.png  → icons/icon-192.png, icon-512.png, favicon-32.png
+    tea_fai_brand/icon-1024.png         → icons/apple-touch-icon.png (iOS가 모서리를 직접 깎습니다)
+    src_brand/brand.py                  → icons/icon-maskable-512.png (안전영역에 맞춘 84% 크기 茶)
+
+마스커블 아이콘만 `../src_brand/brand.py`(numpy·fontTools·Pillow 필요)를 씁니다.
+그 폴더가 없는 곳에서 돌리면 마스커블은 건드리지 않고 나머지만 갱신합니다.
+"""
+import importlib.util
 import os
-from PIL import Image, ImageDraw
+from pathlib import Path
 
-OUT = "tea_fai_app/icons"
-BG = (36, 62, 50)
-BG_DARK = (27, 46, 37)
-CREAM = (243, 237, 225)
-AMBER = (185, 122, 61)
+from PIL import Image
 
-SS = 4  # supersample
-
-
-def leaf_layer(size, length, width, color, vein_color):
-    """가로로 누운 잎 하나. 줄기 끝은 (cx - length/2, cy)."""
-    layer = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    d = ImageDraw.Draw(layer)
-    steps = 260
-    cx, cy = size / 2, size / 2
-    top, bottom = [], []
-    for i in range(steps + 1):
-        t = i / steps
-        x = (t - 0.5) * length
-        w = math.sin(math.pi * t) ** 0.8 * width
-        top.append((cx + x, cy - w))
-        bottom.append((cx + x, cy + w))
-    d.polygon(top + bottom[::-1], fill=color)
-    # 중앙 잎맥 (줄기에서 끝으로 가늘게)
-    d.line(
-        [(cx - length / 2 + length * 0.04, cy), (cx + length / 2 - length * 0.03, cy)],
-        fill=vein_color,
-        width=max(2, int(width * 0.10)),
-    )
-    # 잔맥 세 개만, 짧게
-    for k in range(3):
-        t = 0.34 + k * 0.19
-        x = cx + (t - 0.5) * length
-        curl = math.sin(math.pi * t) ** 0.8 * width
-        d.line(
-            [(x, cy), (x + curl * 0.55, cy - curl * 0.5)],
-            fill=vein_color,
-            width=max(1, int(width * 0.05)),
-        )
-        d.line(
-            [(x, cy), (x + curl * 0.55, cy + curl * 0.5)],
-            fill=vein_color,
-            width=max(1, int(width * 0.05)),
-        )
-    return layer
+HERE = Path(__file__).resolve().parent
+BRAND = HERE.parent / "tea_fai_brand"
+BRAND_SRC = HERE.parent / "src_brand" / "brand.py"
+OUT = HERE / "icons"
+MASKABLE_INK = 0.46   # 512 캔버스에서 茶가 80% 안전원 안에 들어오는 크기
 
 
-def sprig(size, scale):
-    """줄기 한 점에서 두 잎이 뻗은 그림을 투명 배경에 그립니다."""
-    canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    anchor = (size * 0.31, size * 0.79)
-
-    specs = [
-        # (길이 비율, 폭 비율, 색, 잎맥색, 각도, 순서)
-        (0.92, 0.185, AMBER + (255,), BG + (140,), -14),
-        (1.00, 0.200, CREAM + (255,), BG + (120,), -56),
-    ]
-    for length_r, width_r, color, vein, angle in specs:
-        L = size * scale * length_r
-        W = size * scale * width_r
-        layer = leaf_layer(size, L, W, color, vein)
-        stem = (size / 2 - L / 2, size / 2)
-        rotated = layer.rotate(angle, resample=Image.BICUBIC, center=stem)
-        shifted = rotated.transform(
-            rotated.size,
-            Image.AFFINE,
-            (1, 0, anchor[0] - stem[0], 0, 1, anchor[1] - stem[1]),
-            resample=Image.BICUBIC,
-        )
-        canvas.alpha_composite(shifted)
-    return canvas
+def load_brand_builder():
+    if not BRAND_SRC.exists():
+        return None
+    spec = importlib.util.spec_from_file_location("BR", BRAND_SRC)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
 
 
-def make_icon(px, maskable=False):
-    size = px * SS
-    bg = Image.new("RGB", (size, size), BG)
-    grad = Image.new("L", (1, size))
-    for y in range(size):
-        grad.putpixel((0, y), int(255 * (y / size) ** 1.5))
-    bg = Image.composite(Image.new("RGB", (size, size), BG_DARK), bg, grad.resize((size, size)))
+def main():
+    OUT.mkdir(exist_ok=True)
+    rounded = Image.open(BRAND / "icon-512-rounded.png").convert("RGBA")
+    full = Image.open(BRAND / "icon-1024.png").convert("RGBA")
 
-    if maskable:
-        tile = bg.convert("RGBA")
-        scale = 0.50
+    rounded.resize((192, 192), Image.LANCZOS).save(OUT / "icon-192.png", optimize=True)
+    rounded.save(OUT / "icon-512.png", optimize=True)
+    rounded.resize((32, 32), Image.LANCZOS).save(OUT / "favicon-32.png", optimize=True)
+    full.resize((180, 180), Image.LANCZOS).save(OUT / "apple-touch-icon.png", optimize=True)
+
+    for name in ("logo_tea_mark.png", "logo_tea_mark.svg"):
+        (OUT / name).write_bytes((BRAND / name).read_bytes())
+
+    BR = load_brand_builder()
+    if BR is None:
+        print("src_brand/brand.py 가 없어 마스커블 아이콘은 그대로 둡니다")
     else:
-        mask = Image.new("L", (size, size), 0)
-        ImageDraw.Draw(mask).rounded_rectangle(
-            [0, 0, size - 1, size - 1], radius=int(size * 0.225), fill=255
-        )
-        tile = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-        tile.paste(bg, (0, 0), mask)
-        scale = 0.62
-
-    tile.alpha_composite(sprig(size, scale))
-    return tile.resize((px, px), Image.LANCZOS)
+        # brand.py 는 저장소 뿌리 기준 상대 경로로 폰트를 엽니다
+        cwd = os.getcwd()
+        os.chdir(HERE.parent)
+        try:
+            BR.icon(512, ink=MASKABLE_INK).save(OUT / "icon-maskable-512.png", optimize=True)
+        finally:
+            os.chdir(cwd)
+    print("icons done:", sorted(os.listdir(OUT)))
 
 
 if __name__ == "__main__":
-    os.makedirs(OUT, exist_ok=True)
-    make_icon(192).save(f"{OUT}/icon-192.png")
-    make_icon(512).save(f"{OUT}/icon-512.png")
-    make_icon(512, maskable=True).save(f"{OUT}/icon-maskable-512.png")
-
-    sheet = Image.new("RGB", (880, 340), (247, 243, 235))
-    for img, box in [
-        (make_icon(280), (30, 30)),
-        (make_icon(96), (350, 30)),
-        (make_icon(200, maskable=True), (480, 30)),
-        (make_icon(120), (710, 30)),
-    ]:
-        sheet.paste(img, box, img)
-    sheet.save(f"{OUT}/_contact_sheet.png")
-    print("icons done")
+    main()

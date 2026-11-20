@@ -5,6 +5,7 @@
 보이도록 <script id="teafai-seed" type="application/json"> 안에 함께 넣습니다.
 온라인으로 열면 앱이 data/*.json을 먼저 읽고, 실패하면 이 내장 사본을 씁니다.
 """
+import base64
 import json
 import re
 from pathlib import Path
@@ -39,6 +40,11 @@ html = html.replace(
     "<title>티키피디아 — 차 백과 &amp; 우림 타이머</title>",
     "<title>티키피디아 — 차 백과 &amp; 우림 타이머 (단일 파일)</title>",
 )
+
+# 헤더의 茶 마크(SVG)는 단일 파일 혼자서도 보이도록 data URI로 품습니다
+svg = (BASE / "icons" / "logo_tea_mark.svg").read_text(encoding="utf-8")
+svg_uri = "data:image/svg+xml;base64," + base64.b64encode(svg.encode("utf-8")).decode("ascii")
+html = html.replace('src="icons/logo_tea_mark.svg"', f'src="{svg_uri}"')
 
 # 내장 데이터 사본
 shops = json.loads((BASE / "data" / "shops.json").read_text(encoding="utf-8"))

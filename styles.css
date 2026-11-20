@@ -92,14 +92,8 @@ a {
   width: 27px;
   height: 27px;
   border-radius: 9px;
-  background: var(--ink);
-  color: var(--paper);
-  display: grid;
-  place-items: center;
-  font-family: var(--serif);
-  font-size: 14px;
-  line-height: 1;
-  padding-bottom: 1px;
+  display: block;
+  flex: none;
 }
 
 .brand-name {

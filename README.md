@@ -17,13 +17,16 @@
 | `data/shops.json` | 1호 파트너 티룸 2곳(홍콩티 불광점 · 풍성한뷔페 신당점) — 4개 언어 이름·소개, 영업시간, 메뉴와 가격, 지도 3종 |
 | `data/affiliate.json` | 추천 찻잎·다구 둘러보기, 전자책, 유튜브 채널 연결 (쿠팡파트너스 숏링크 발급 전에는 검색 링크로 안내) |
 | `manifest.webmanifest` | PWA 설치 정보 (이름·아이콘·테마 색) |
-| `sw.js` | 오프라인 캐시 — 앱 껍데기는 네트워크 우선, `data/`는 stale-while-revalidate (캐시 `teafai-v6`) |
+| `sw.js` | 오프라인 캐시 — 앱 껍데기는 네트워크 우선, `data/`는 stale-while-revalidate (캐시 `teafai-v8`) |
 | `privacy.html` | 개인정보처리방침 (회원가입·서버 전송 없음, 기기 저장소에만 보관) |
-| `icons/icon-192.png`, `icons/icon-512.png`, `icons/icon-maskable-512.png` | 홈 화면 아이콘 |
+| `icons/icon-192.png`, `icons/icon-512.png` | 홈 화면 아이콘 (茶 배지, 모서리 라운딩) |
+| `icons/icon-maskable-512.png` | 마스커블 아이콘 (안전영역에 맞춰 茶를 84% 크기로) |
+| `icons/apple-touch-icon.png`, `icons/favicon-32.png` | iOS 홈 화면 아이콘 · 파비콘 |
+| `icons/logo_tea_mark.svg`, `icons/logo_tea_mark.png` | 헤더 `티키피디아` 앞 茶 마크(정사각 배지). `index.html`·`privacy.html`의 `.brand-mark`가 이 SVG를 씁니다 |
 | `tea_fai_app_standalone.html` | CSS/JS를 모두 인라인한 단일 파일 (파일로 바로 열기) |
 | `preview_home.png` · `preview_timer.png` · `preview_guide.png` · `preview_notes.png` | 390×844 화면 캡처 |
 | `build_standalone.py` | `index.html` + CSS + JS → 단일 파일 재생성 |
-| `make_icons.py` | 아이콘 재생성 |
+| `make_icons.py` | `tea_fai_brand/`의 茶 아이콘에서 PWA 아이콘 다시 만들기 |
 
 ## 바로 열기
 
@@ -33,7 +36,7 @@
 - **단일 파일**: `tea_fai_app_standalone.html`을 브라우저로 열면 끝 (인터넷 없이도 동작).
 - **앱처럼 설치**: 아래처럼 로컬 서버를 띄운 뒤 `http://<PC IP>:8000/index.html`을 폰 크롬에서 연다.
   주소창 메뉴 → **홈 화면에 추가**를 누르면 주소창 없는 앱으로 실행되고 오프라인에서도 열립니다.
-- **APK 바로 설치**: <https://choitea.github.io/tea-fai/teakipedia-release.apk> (안드로이드, 1.45MB)
+- **APK 바로 설치**: <https://choitea.github.io/tea-fai/teakipedia-release.apk> (안드로이드, 1.40MB)
   폰 브라우저에서 내려받아 열면 "출처를 알 수 없는 앱 설치" 확인을 한 번 거쳐 설치됩니다.
 
   ```bash

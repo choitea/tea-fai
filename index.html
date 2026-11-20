@@ -16,8 +16,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="티키피디아" />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="icons/icon-192.png" />
-    <link rel="icon" type="image/png" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
 
     <!-- 폰트: Pretendard 동적 서브셋(필요한 글리프만 내려받음, font-display: swap).
          화면을 막지 않도록 preload 로 받아 준비되면 적용하고, 그 전에는 시스템 폰트로 먼저 그립니다. -->
@@ -104,7 +105,7 @@
 
     <header class="app-header">
       <div class="brand">
-        <span class="brand-mark">茶</span>
+        <img class="brand-mark" src="icons/logo_tea_mark.svg" alt="" width="27" height="27" />
         <span class="brand-name"><span data-i18n="brand.name">티키피디아</span><em data-i18n="brand.sub">Teakipedia</em></span>
       </div>
       <div class="lang-switch" id="langSwitch" role="group" aria-label="언어" data-i18n-aria="a11y.lang"></div>
