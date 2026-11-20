@@ -711,6 +711,7 @@
       item.brewTip,
       item.rounds,
       item.groupName,
+      (item.alias || []).join(" "),
       (item.varieties || []).join(" "),
       D.searchText(item.id)
     ]
@@ -1616,6 +1617,7 @@
 
   function renderPartnerSections() {
     renderHomeShops();
+    renderTeaList();
     renderDoneExtra();
     if (currentView === "quiz") renderQuiz();
   }

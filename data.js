@@ -36,7 +36,7 @@ window.TEAFaiData = (function () {
         steepBasis: "책 기준 윤차 1분~1분 30초, 두 번째 30초, 세 번째 1분. 우린 잎은 바로 건집니다.",
         process:
           "위조 → 살청(덖음 또는 증청) → 유념 → 건조. 산화 단계가 없습니다. 솥에 덖으면 구수한 고소함이, 수증기로 찌면 해조류 같은 향과 감칠맛이 남습니다.",
-        varieties: ["서호용정(용정차)", "센차·마차·교쿠로", "하동·보성·제주 녹차"],
+        varieties: ["용정차(서호)", "센차·마차·교쿠로", "하동·보성·제주 녹차"],
         flavor:
           "아미노산의 감칠맛, 카테킨의 옅은 떫은맛, 클로로필의 풋풋함이 균형을 이룰 때 “봄이 입안에 있다”고 말합니다. 덖음차는 구운 콩·볶은 곡물 쪽, 증청차는 해조류·풀잎 쪽으로 향이 갑니다.",
         pairing:
@@ -894,6 +894,7 @@ window.TEAFaiData = (function () {
       kind: "tea",
       hanja: "龍",
       sub: "Xihu Longjing",
+      alias: ["서호용정", "서호 용정", "용정"],
       hz: "西湖龍井",
       hs: "西湖龙井",
       rom: "Xihu Longjing",
@@ -923,7 +924,7 @@ window.TEAFaiData = (function () {
       maxSteep: 3,
       oxidationValue: 0,
       ko: {
-        name: "서호용정",
+        name: "용정차 (서호)",
         oneLine: "볶은 콩 같은 고소함과 납작하게 누른 잎 — 덖음 녹차의 기준.",
         oxidation: "0%",
         ratioNote: "150ml에 3g, 유리잔이면 물을 먼저",
@@ -1329,6 +1330,7 @@ window.TEAFaiData = (function () {
       kind: "tea",
       hanja: "抹",
       sub: "Matcha",
+      alias: ["말차"],
       hz: "抹茶",
       hs: "抹茶",
       rom: "Matcha",
@@ -1358,7 +1360,7 @@ window.TEAFaiData = (function () {
       maxSteep: 1,
       oxidationValue: 0,
       ko: {
-        name: "말차",
+        name: "마차 (말차)",
         oneLine: "잎을 갈아 물에 그대로 마시는 차 — 향이 아니라 몸 전체로 마시는 녹차.",
         oxidation: "0%",
         ratioNote: "우스차 2g에 60ml, 고이차는 4g에 60ml",
@@ -1366,7 +1368,7 @@ window.TEAFaiData = (function () {
         steepBasis: "70~80도 60ml에 2g, 30초간 차선으로 W자로 휘저어 거품을 냅니다.",
         origin: "일본 우지·니시오. 차광한 잎을 증청·건조해 잎맥을 걷어내고 맷돌로 갈아냅니다.",
         flavor: "짙은 감칠맛과 크림 같은 거품, 끝의 쌉싸름함. 물색은 선명한 녹색입니다.",
-        pairing: "화과자, 양갱, 말차 라테, 바닐라 아이스크림.",
+        pairing: "화과자, 양갱, 마차 라테, 바닐라 아이스크림.",
         keep: "산화가 매우 빨라 개봉 후 2~3주. 밀봉 냉동하고 상온에서 개봉하지 마세요.",
         brewTip: "물은 80도 이하. 끓는 물을 부으면 쓴맛만 남습니다. 체에 한 번 걸러 덩어리를 풀어 주세요."
       },
@@ -2843,13 +2845,14 @@ window.TEAFaiData = (function () {
       hs: "安溪铁观音",
       rom: "Anxi Tieguanyin",
       sub: "Anxi Tieguanyin",
+      alias: ["안계 철관음", "안계철관음", "철관음"],
       t: 95,
       l: "7g",
       w: "110ml",
       s: [45, 20, 30],
       ox: 30,
       ko: [
-        "안계 철관음",
+        "철관음 (안계)",
         "난초 향과 관음운(觀音韻) — 반구형으로 뭉친 우롱차의 대표.",
         "30%",
         "개완 110ml에 7g",
@@ -2913,6 +2916,7 @@ window.TEAFaiData = (function () {
       hs: "武夷大红袍",
       rom: "Wuyi Da Hong Pao",
       sub: "Wuyi Da Hong Pao",
+      alias: ["무이 대홍포", "대홍포", "무이 암차"],
       t: 98,
       tr: "95~100℃",
       l: "7g",
@@ -2920,7 +2924,7 @@ window.TEAFaiData = (function () {
       s: [30, 20, 25],
       ox: 55,
       ko: [
-        "무이 대홍포",
+        "무이암차 (대홍포)",
         "바위 틈에서 자란 잎을 강하게 배화한, 암운(岩韻)의 차.",
         "55%",
         "개완 110ml에 7g",
@@ -7692,6 +7696,7 @@ window.TEAFaiData = (function () {
       hs: entry.hs || "",
       rom: entry.rom || "",
       sub: entry.sub || group.sub,
+      alias: entry.alias || [],
       temp: num(entry.t, entry.temp, group.temp),
       tempRange: entry.tr || entry.tempRange || group.tempRange,
       leaf: entry.l || entry.leaf || group.leaf,
@@ -7815,6 +7820,7 @@ window.TEAFaiData = (function () {
       parts.push(entry.flavor || "");
       parts.push(entry.pairing || "");
       parts.push(entry.keywords || "");
+      if (entry.alias) parts.push(entry.alias.join(" "));
       if (entry.varieties) parts.push(entry.varieties.join(" "));
     };
     var all = GROUPS.concat(TEAS);
