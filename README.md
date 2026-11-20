@@ -19,10 +19,10 @@
 | `data/teabags.json` | 티백 33종·13개 브랜드 — 차종·카페인·향미 태그·우림 온도/시간·포장, 브랜드 4개 언어 표기 |
 | `data/cafes.json` | 서울 찻집 14곳 — 지역·분류·대표 차·취향 태그·영업시간·지도 검색 링크(2026-11-21 확인) |
 | `data/onboarding_plans.json` | 입점 플랜(스탠다드 월 19,000원 / 프리미엄 스폰서 월 39,000원)·진행 절차·결제 안내 문구 — 이 파일만 고치면 화면에 반영 |
-| `supabase-adapter.js` | `SUPABASE_CONFIG` 설정 객체와 커뮤니티 글(`community_posts`)·입점 신청(`shop_applications`) 전송 어댑터. 설정이 비면 로컬 모드 |
+| `supabase-adapter.js` | `SUPABASE_CONFIG` 설정 객체와 커뮤니티 글(`community_posts`)·입점 신청(`shop_applications`) 전송 어댑터. 지금은 Supabase `teakipedia`(`zbjvwvaluywjxzvnohcv`, 서울) 프로젝트에 연결되어 서버 모드로 동작. 공개용 publishable 키만 넣고, 쓰기는 RLS 정책으로만 열립니다 |
 | `data/affiliate.json` | 추천 찻잎·다구 둘러보기, 전자책, 유튜브 채널 연결 (쿠팡파트너스 숏링크 발급 전에는 검색 링크로 안내) |
 | `manifest.webmanifest` | PWA 설치 정보 (이름·아이콘·테마 색) |
-| `sw.js` | 오프라인 캐시 — 앱 껍데기는 네트워크 우선, `data/`는 stale-while-revalidate (캐시 `teafai-v9`) |
+| `sw.js` | 오프라인 캐시 — 앱 껍데기는 네트워크 우선, `data/`는 stale-while-revalidate (캐시 `teafai-v11`) |
 | `privacy.html` | 개인정보처리방침 (회원가입·서버 전송 없음, 기기 저장소에만 보관) |
 | `icons/icon-192.png`, `icons/icon-512.png` | 홈 화면 아이콘 (茶 배지, 모서리 라운딩) |
 | `icons/icon-maskable-512.png` | 마스커블 아이콘 (안전영역에 맞춰 茶를 84% 크기로) |
