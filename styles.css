@@ -4748,8 +4748,10 @@ body.modal-open {
   text-overflow: ellipsis;
 }
 
-.app-header {
-  gap: 6px;
+@media (max-width: 899px) {
+  .app-header {
+    gap: 6px;
+  }
 }
 
 @media (max-width: 430px) {
