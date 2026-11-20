@@ -462,6 +462,7 @@
     timer.total = clamp(baseSeconds() + timer.adjust, 10, 1200);
     timer.remaining = timer.total;
     renderTimerText();
+    renderDoneExtra();
   }
 
   function setTimerTea(id, steep) {
@@ -517,6 +518,7 @@
       timer.adjust = 0;
       renderSteepRow();
       renderBrewInfo();
+      renderDoneExtra();
       timer.total = clamp(baseSeconds(), 10, 1200);
       timer.remaining = timer.total;
     }
@@ -552,6 +554,7 @@
       } catch (e) {}
     }
     toast(t("toast.done", { name: timerTea().name, n: timer.steep }));
+    renderDoneExtra();
   }
 
   function adjustTimer(delta) {
@@ -809,6 +812,7 @@
       "</button>" +
       '<div class="tea-more"><div><div class="tea-more-inner">' +
       detailHtml +
+      (isGroup ? "" : buyBlockHtml(item)) +
       '<button class="btn btn-dark btn-block" type="button" data-timer="' +
       item.id +
       '">' +
@@ -1398,7 +1402,9 @@
       '">' +
       esc(t("quiz.guide")) +
       "</button>" +
-      "</div></article>"
+      "</div>" +
+      (opt.best ? teaShopBlockHtml(tea.id) + buyBlockHtml(tea) : "") +
+      "</article>"
     );
   }
 
@@ -1540,6 +1546,533 @@
   }
 
   /* ============================================================
+     6. 파트너 티룸 · 전자책·커머스 연결
+     ============================================================ */
+  var SHOPS_KEY = "teafai.shops.v1";
+  var AFF_KEY = "teafai.affiliate.v1";
+  var PARTNER = { shops: [], affiliate: null };
+  var DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  var WEEK_ORDER = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+  /* 데이터 파일은 4개 언어 문구를 함께 갖습니다 */
+  function l10n(obj) {
+    if (obj == null) return "";
+    if (typeof obj === "string") return obj;
+    return obj[lang] || obj.en || obj.ko || "";
+  }
+
+  function seedJson() {
+    var node = document.getElementById("teafai-seed");
+    if (!node) return null;
+    try {
+      return JSON.parse(node.textContent || "");
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function readJson(url, storeKey) {
+    return window
+      .fetch(url, { credentials: "same-origin" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("http " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        storeSet(storeKey, data);
+        return data;
+      });
+  }
+
+  function loadPartnerData() {
+    var seed = seedJson() || {};
+    var cachedShops = storeGet(SHOPS_KEY, null);
+    var cachedAff = storeGet(AFF_KEY, null);
+    PARTNER.shops = (cachedShops && cachedShops.shops) || seed.shops || [];
+    PARTNER.affiliate = cachedAff || seed.affiliate || null;
+    renderPartnerSections();
+
+    if (!("fetch" in window)) return;
+    Promise.all([
+      readJson("data/shops.json", SHOPS_KEY).catch(function () {
+        return null;
+      }),
+      readJson("data/affiliate.json", AFF_KEY).catch(function () {
+        return null;
+      })
+    ]).then(function (res) {
+      var changed = false;
+      if (res[0] && res[0].shops) {
+        PARTNER.shops = res[0].shops;
+        changed = true;
+      }
+      if (res[1]) {
+        PARTNER.affiliate = res[1];
+        changed = true;
+      }
+      if (changed) renderPartnerSections();
+    });
+  }
+
+  function renderPartnerSections() {
+    renderHomeShops();
+    renderDoneExtra();
+    if (currentView === "quiz") renderQuiz();
+  }
+
+  /* 서울 시간 기준 영업 상태 (해외에서도 매장 시간대로 판단) */
+  function seoulClock() {
+    var d = new Date();
+    try {
+      var parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Seoul",
+        weekday: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).formatToParts(d);
+      var out = {};
+      for (var i = 0; i < parts.length; i++) out[parts[i].type] = parts[i].value;
+      var wd = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(out.weekday);
+      var hh = parseInt(out.hour, 10) % 24;
+      var mm = parseInt(out.minute, 10);
+      if (wd >= 0 && !isNaN(hh) && !isNaN(mm)) return { day: wd, minutes: hh * 60 + mm };
+    } catch (e) {
+      /* Intl 을 못 쓰면 기기 시간대로 */
+    }
+    return { day: d.getDay(), minutes: d.getHours() * 60 + d.getMinutes() };
+  }
+
+  function shopStatus(shop) {
+    var clock = seoulClock();
+    var span = (shop.hours || {})[DAY_KEYS[clock.day]];
+    if (!span) return { key: "closedToday" };
+    var m = /^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/.exec(String(span));
+    if (!m) return { key: "" };
+    var open = Number(m[1]) * 60 + Number(m[2]);
+    var close = Number(m[3]) * 60 + Number(m[4]);
+    if (clock.minutes < open) return { key: "before", time: m[1] + ":" + m[2] };
+    if (clock.minutes >= close) return { key: "closed" };
+    return { key: "open" };
+  }
+
+  function won(n) {
+    if (n == null || n === "") return "";
+    var num = Number(n).toLocaleString("en-US");
+    return lang === "ko" ? num + "원" : "₩" + num;
+  }
+
+  function koNameOf(id) {
+    var list = D.TEAS || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) return (list[i].ko && list[i].ko.name) || list[i].sub || "";
+    }
+    return "";
+  }
+
+  /* 취향 태그가 겹치는 수 — 퀴즈 결과가 있으면 그 차, 없으면 오늘의 차 기준 */
+  function tasteMatch(shop) {
+    var refId = quizState.result ? quizState.result.best.tea.id : moodById(homeState.mood).teaId;
+    var mine = traitList(refId);
+    var n = 0;
+    (shop.tasteTags || []).forEach(function (tag) {
+      if (mine.indexOf(tag) >= 0) n += 1;
+    });
+    return n;
+  }
+
+  function mapHref(shop) {
+    return (shop.maps && (shop.maps.naver || shop.maps.kakao || shop.maps.google)) || shop.placeUrl || "";
+  }
+
+  function shopCardHtml(shop) {
+    var st = shopStatus(shop);
+    var stateText = st.key ? t("shop." + st.key, st.time ? { time: st.time } : null) : "";
+    var stateCls = st.key === "open" ? " is-open" : "";
+    var name = l10n(shop.name);
+    var menu = (shop.menus || [])
+      .filter(function (m) {
+        return m.signature;
+      })
+      .slice(0, 2);
+    var match = tasteMatch(shop);
+    var phone = shop.phone || null;
+    var secondBtn = phone
+      ? '<a class="sc-btn" href="tel:' +
+        esc(phone.tel) +
+        '" aria-label="' +
+        esc(l10n(shop.phoneNote) || t("shop.call")) +
+        '"><svg width="14" height="14"><use href="#ic-sound"/></svg>' +
+        esc(t("shop.call")) +
+        "</a>"
+      : '<a class="sc-btn" href="' +
+        esc(shop.placeUrl || mapHref(shop)) +
+        '" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#ic-globe"/></svg>' +
+        esc(t("shop.place")) +
+        "</a>";
+
+    var hoursRows = WEEK_ORDER.map(function (day) {
+      var span = (shop.hours || {})[day];
+      var today = DAY_KEYS[seoulClock().day] === day;
+      return (
+        '<li' +
+        (today ? ' class="today"' : "") +
+        "><span>" +
+        esc(t("weekday." + day)) +
+        "</span><b>" +
+        esc(span || t("shop.closedToday")) +
+        "</b></li>"
+      );
+    }).join("");
+
+    var menuRows = (shop.menus || [])
+      .map(function (m) {
+        return (
+          '<li><span>' +
+          esc(l10n(m.name)) +
+          "</span><b>" +
+          esc(m.price == null ? t("shop.priceUnknown") : won(m.price)) +
+          "</b></li>"
+        );
+      })
+      .join("");
+
+    var maps = shop.maps || {};
+    var mapLinks = [
+      ["naver", "NAVER"],
+      ["kakao", "Kakao"],
+      ["google", "Google"]
+    ]
+      .filter(function (m) {
+        return maps[m[0]];
+      })
+      .map(function (m) {
+        return (
+          '<a class="sc-maplink" href="' +
+          esc(maps[m[0]]) +
+          '" target="_blank" rel="noopener">' +
+          esc(m[1]) +
+          "</a>"
+        );
+      })
+      .join("");
+
+    return (
+      '<article class="shop-card" data-slug="' +
+      esc(shop.slug) +
+      '">' +
+      '<div class="sc-top">' +
+      '<span class="sc-badge">' +
+      esc(t("shop.partner")) +
+      "</span>" +
+      (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
+      "</div>" +
+      '<b class="sc-name">' +
+      esc(name) +
+      "</b>" +
+      '<span class="sc-region">' +
+      esc(l10n(shop.region)) +
+      " · " +
+      esc(l10n(shop.near)) +
+      "</span>" +
+      '<p class="sc-desc">' +
+      esc(l10n(shop.desc)) +
+      "</p>" +
+      '<div class="sc-signature">' +
+      menu
+        .map(function (m) {
+          return (
+            '<span class="sc-menu-item"><span>' +
+            esc(l10n(m.name)) +
+            "</span><b>" +
+            esc(m.price == null ? t("shop.priceUnknown") : won(m.price)) +
+            "</b></span>"
+          );
+        })
+        .join("") +
+      "</div>" +
+      (match ? '<span class="sc-match">' + esc(t("shop.match", { n: match })) + "</span>" : "") +
+      '<div class="sc-actions">' +
+      '<a class="sc-btn primary" href="' +
+      esc(mapHref(shop)) +
+      '" target="_blank" rel="noopener" aria-label="' +
+      esc(t("shop.mapAria", { name: name })) +
+      '"><svg width="14" height="14"><use href="#ic-globe"/></svg>' +
+      esc(t("shop.map")) +
+      "</a>" +
+      secondBtn +
+      '<button class="sc-btn ghost" type="button" data-shop-more="' +
+      esc(shop.slug) +
+      '" aria-expanded="false">' +
+      esc(t("shop.detail")) +
+      "</button>" +
+      "</div>" +
+      '<div class="sc-more" data-more="' +
+      esc(shop.slug) +
+      '" hidden>' +
+      "<h4>" +
+      esc(t("shop.hours")) +
+      "</h4><ul class=\"sc-hours\">" +
+      hoursRows +
+      "</ul>" +
+      (shop.hoursNote ? '<p class="sc-note">' + esc(l10n(shop.hoursNote)) + "</p>" : "") +
+      "<h4>" +
+      esc(t("shop.menu")) +
+      "</h4><ul class=\"sc-hours\">" +
+      menuRows +
+      "</ul>" +
+      "<h4>" +
+      esc(t("shop.address")) +
+      "</h4><p class=\"sc-addr\">" +
+      esc(l10n(shop.address)) +
+      "<br />" +
+      esc(l10n(shop.near)) +
+      "</p>" +
+      (mapLinks ? '<div class="sc-maps">' + mapLinks + "</div>" : "") +
+      (phone ? '<p class="sc-note">' + esc(phone.display) + "</p>" : "") +
+      "</div>" +
+      "</article>"
+    );
+  }
+
+  function bindShop(root) {
+    $$("[data-shop-more]", root).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var slug = btn.getAttribute("data-shop-more");
+        var panel = root.querySelector('[data-more="' + slug + '"]');
+        if (!panel) return;
+        var wasOpen = !panel.hidden;
+        $$("[data-more]", root).forEach(function (p) {
+          p.hidden = true;
+        });
+        $$("[data-shop-more]", root).forEach(function (b) {
+          b.textContent = t("shop.detail");
+          b.setAttribute("aria-expanded", "false");
+        });
+        if (!wasOpen) {
+          panel.hidden = false;
+          btn.textContent = t("shop.collapse");
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+  }
+
+  function renderHomeShops() {
+    var head = $("#shopHead");
+    var row = $("#shopHome");
+    var sub = $("#shopSub");
+    if (!head || !row) return;
+    var shops = PARTNER.shops || [];
+    if (!shops.length) {
+      head.hidden = true;
+      row.hidden = true;
+      row.innerHTML = "";
+      return;
+    }
+    head.hidden = false;
+    row.hidden = false;
+    if (sub) sub.textContent = t("shop.sub", { n: shops.length });
+    row.innerHTML = shops.map(shopCardHtml).join("");
+    bindShop(row);
+  }
+
+  /* 이 차를 메뉴에 두는 파트너 티룸 */
+  function shopsForTea(teaId) {
+    return (PARTNER.shops || []).filter(function (shop) {
+      return (shop.menus || []).some(function (m) {
+        return m.teaId === teaId;
+      });
+    });
+  }
+
+  function teaShopBlockHtml(teaId) {
+    var list = shopsForTea(teaId);
+    if (!list.length) return "";
+    return (
+      '<div class="qr-shops">' +
+      '<div class="qrs-head">' +
+      esc(t("shop.atTea")) +
+      '<span>' +
+      esc(t("shop.atTeaSub")) +
+      "</span></div>" +
+      list
+        .map(function (shop) {
+          return (
+            '<a class="qrs-item" href="' +
+            esc(mapHref(shop)) +
+            '" target="_blank" rel="noopener"><b>' +
+            esc(l10n(shop.name)) +
+            "</b><span>" +
+            esc(l10n(shop.region)) +
+            " · " +
+            esc(t("shop.map")) +
+            "</span></a>"
+          );
+        })
+        .join("") +
+      "</div>"
+    );
+  }
+
+  /* 추천 찻잎·다구 — 실제 제휴 링크가 오면 items 로, 그 전에는 둘러보기(검색) 링크 */
+  function buyPack(tea) {
+    var aff = PARTNER.affiliate;
+    if (!aff) return null;
+    var leaf = null;
+    var teaware = null;
+    (aff.items || [])
+      .filter(function (it) {
+        if (it.active === false || it.is_active === false) return false;
+        if (it.tea_id && it.tea_id !== tea.id) return false;
+        if (it.group_id && it.group_id !== tea.group) return false;
+        return true;
+      })
+      .sort(function (a, b) {
+        return (b.priority || 0) - (a.priority || 0);
+      })
+      .forEach(function (it) {
+        if (it.kind === "leaf" && !leaf) leaf = it;
+        else if (it.kind === "teaware" && !teaware) teaware = it;
+      });
+
+    var koName = koNameOf(tea.id);
+    (aff.browse || []).forEach(function (b) {
+      if (b.kind !== "leaf" && b.kind !== "teaware") return;
+      if (b.kind === "leaf" && leaf) return;
+      if (b.kind === "teaware" && teaware) return;
+      var query = String(b.query || "").replace("{koName}", koName);
+      var entry = {
+        kind: b.kind,
+        url: String(b.url || "").replace("{q}", encodeURIComponent(query)),
+        paid: !!b.paid,
+        badge: l10n(b.badge),
+        label: l10n(b.label),
+        title: b.kind === "leaf" ? tea.name : l10n(b.title) || l10n(b.label),
+        price_krw: null
+      };
+      if (b.kind === "leaf") leaf = entry;
+      else teaware = entry;
+    });
+
+    var items = [leaf, teaware].filter(Boolean);
+    if (!items.length && !aff.books && !aff.video) return null;
+    return {
+      items: items,
+      book: (aff.books || [])[0] || null,
+      video: aff.video || null,
+      disclosure: aff.disclosure
+    };
+  }
+
+  function buyBlockHtml(tea) {
+    var pack = buyPack(tea);
+    if (!pack) return "";
+    var paid = pack.items.some(function (it) {
+      return it.paid;
+    });
+    var html =
+      '<div class="buy-block">' +
+      '<div class="bb-head"><span class="bb-kicker">' +
+      esc(t("buy.sub")) +
+      "</span><b>" +
+      esc(t("buy.title")) +
+      "</b></div>";
+    if (pack.items.length) {
+      html +=
+        '<div class="bb-items">' +
+        pack.items
+          .map(function (it) {
+            return (
+              '<a class="bb-item" href="' +
+              esc(it.url) +
+              '" target="_blank" rel="' +
+              (it.paid ? "sponsored noopener" : "noopener") +
+              '"><span class="bb-badge">' +
+              esc(it.badge || "") +
+              '</span><span class="bb-name">' +
+              esc(it.title || it.label || "") +
+              (it.price_krw
+                ? '<em>' + esc(t("buy.priceNote")) + " " + esc(won(it.price_krw)) + "</em>"
+                : "") +
+              '</span><span class="bb-cta">' +
+              esc(it.label || "") +
+              '</span></a>'
+            );
+          })
+          .join("") +
+        "</div>";
+      if (paid) {
+        html += '<p class="bb-note">' + esc(l10n(pack.disclosure)) + "</p>";
+      }
+    }
+    var links = [];
+    if (pack.book) {
+      links.push(
+        '<a class="bb-link" href="' +
+          esc(pack.book.url) +
+          '" target="_blank" rel="noopener" title="' +
+          esc(l10n(pack.book.title)) +
+          '"><svg width="14" height="14"><use href="#ic-book"/></svg>' +
+          esc(l10n(pack.book.label)) +
+          "</a>"
+      );
+    }
+    if (pack.video) {
+      links.push(
+        '<a class="bb-link" href="' +
+          esc(pack.video.url) +
+          '" target="_blank" rel="noopener" title="' +
+          esc(l10n(pack.video.title)) +
+          '"><svg width="12" height="12"><use href="#ic-youtube"/></svg>' +
+          esc(l10n(pack.video.label)) +
+          "</a>"
+      );
+    }
+    if (links.length) html += '<div class="bb-links">' + links.join("") + "</div>";
+    return html + "</div>";
+  }
+
+  /* 타이머가 끝나면 이 차 이야기와 이 차를 내는 찻집으로 이어 줍니다 */
+  function renderDoneExtra() {
+    var box = $("#doneExtra");
+    if (!box) return;
+    if (!timer.done) {
+      box.hidden = true;
+      box.innerHTML = "";
+      return;
+    }
+    var tea = timerTea();
+    var aff = PARTNER.affiliate;
+    var links = [];
+    if (aff && aff.video) {
+      links.push(
+        '<a class="de-link" href="' +
+          esc(aff.video.url) +
+          '" target="_blank" rel="noopener"><svg width="13" height="13"><use href="#ic-youtube"/></svg>' +
+          esc(t("buy.video")) +
+          "</a>"
+      );
+    }
+    shopsForTea(tea.id).forEach(function (shop) {
+      links.push(
+        '<a class="de-link" href="' +
+          esc(mapHref(shop)) +
+          '" target="_blank" rel="noopener"><svg width="13" height="13"><use href="#ic-globe"/></svg>' +
+          esc(l10n(shop.name)) +
+          "</a>"
+      );
+    });
+    if (!links.length) {
+      box.hidden = true;
+      box.innerHTML = "";
+      return;
+    }
+    box.hidden = false;
+    box.innerHTML = links.join("");
+  }
+
+  /* ============================================================
      언어 전환 · 시작
      ============================================================ */
   function rerender() {
@@ -1558,6 +2091,8 @@
     renderNoteSelect();
     renderStarRow();
     renderNotes();
+    renderHomeShops();
+    renderDoneExtra();
     if (currentView === "quiz") renderQuiz();
     document.title = titleFor(currentView);
   }
@@ -1613,6 +2148,7 @@
     renderNotes();
     bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
+    loadPartnerData();
 
     document.title = titleFor(currentView);
 

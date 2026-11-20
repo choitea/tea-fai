@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "updated": "2026-11-20",
+  "note": "1호 파트너 티룸 2곳. 좌표는 카카오맵 주소 지오코딩 결과(2026-11-20), 가격·영업시간은 네이버 스마트플레이스 공개 정보 기준. 확인되지 않은 값은 null 로 둡니다. 이 파일은 앱 껍데기 프리캐시에 넣지 않고 stale-while-revalidate 로 갱신합니다.",
+  "shops": [
+    {
+      "slug": "hongkongtea-bulgwang",
+      "name": {
+        "ko": "홍콩티 (불광점)",
+        "en": "Hong Kong Tea (Bulgwang)",
+        "zh-CN": "香港茶（佛光店）",
+        "zh-TW": "香港茶（佛光店）"
+      },
+      "partner": true,
+      "tier": 1,
+      "region": {
+        "ko": "서울 은평구",
+        "en": "Eunpyeong-gu, Seoul",
+        "zh-CN": "首尔 恩平区",
+        "zh-TW": "首爾 恩平區"
+      },
+      "address": {
+        "ko": "서울 은평구 불광로 20, NC백화점 불광점 B1 푸드코트",
+        "en": "B1 Food Court, NC Department Store Bulgwang, 20 Bulgwang-ro, Eunpyeong-gu, Seoul",
+        "zh-CN": "首尔恩平区佛光路20号 NC百货佛光店地下一层美食广场",
+        "zh-TW": "首爾恩平區佛光路20號 NC百貨佛光店地下一樓美食廣場"
+      },
+      "near": {
+        "ko": "불광역(3·6호선) 6번 출구 121m",
+        "en": "121 m from Bulgwang Stn. (lines 3, 6) exit 6",
+        "zh-CN": "佛光站（3·6号线）6号出口121米",
+        "zh-TW": "佛光站（3·6號線）6號出口121公尺"
+      },
+      "lat": 37.6097358,
+      "lng": 126.9289385,
+      "hours": {
+        "mon": "11:00-21:00",
+        "tue": "11:00-21:00",
+        "wed": "11:00-21:00",
+        "thu": "11:00-21:00",
+        "fri": "11:00-21:00",
+        "sat": "11:00-21:00",
+        "sun": "11:00-21:00"
+      },
+      "lastOrder": "20:30",
+      "closedDays": [],
+      "hoursNote": {
+        "ko": "매일 11:00~21:00 · 라스트오더 20:30",
+        "en": "Daily 11:00–21:00 · last order 20:30",
+        "zh-CN": "每天 11:00~21:00 · 最后点单 20:30",
+        "zh-TW": "每天 11:00~21:00 · 最後點單 20:30"
+      },
+      "phone": null,
+      "phoneNote": {
+        "ko": "전화 대신 네이버 플레이스에서 확인하세요",
+        "en": "See the NAVER Place page instead of calling",
+        "zh-CN": "请在 NAVER 地图页面查看，而非来电",
+        "zh-TW": "請在 NAVER 地圖頁面查看，而非來電"
+      },
+      "placeUrl": "https://map.naver.com/p/search/%ED%99%8D%EC%BD%A9%ED%8B%B0%20%EB%B6%88%EA%B4%91",
+      "maps": {
+        "naver": "https://map.naver.com/p/search/%ED%99%8D%EC%BD%A9%ED%8B%B0%20%EB%B6%88%EA%B4%91",
+        "kakao": "https://map.kakao.com/link/to/%ED%99%8D%EC%BD%A9%ED%8B%B0%20%EB%B6%88%EA%B4%91%EC%A0%90,37.6097358,126.9289385",
+        "google": "https://www.google.com/maps/search/?api=1&query=37.6097358,126.9289385"
+      },
+      "tasteTags": ["b-full", "s-milk", "k-sweet", "m-cozy", "a-fruit", "s-iced", "p-meal", "c-high"],
+      "desc": {
+        "ko": "3·6호선 불광역과 연결된 NC백화점 불광점 지하 1층 푸드코트의 홍콩식 차찬텡. 홍콩 밀크티와 망고 포멜로 사고, 딤섬을 냅니다.",
+        "en": "A Hong Kong cha chaan teng in the B1 food court of NC Department Store Bulgwang, connected to Bulgwang Station. Hong Kong milk tea, mango pomelo sago and dim sum.",
+        "zh-CN": "位于佛光站直连的 NC百货佛光店地下一层美食广场的港式茶餐厅，供应港式奶茶、杨枝甘露与点心。",
+        "zh-TW": "位於佛光站直連的 NC百貨佛光店地下一樓美食廣場的港式茶餐廳，供應港式奶茶、楊枝甘露與點心。"
+      },
+      "menus": [
+        {
+          "name": {
+            "ko": "홍콩 밀크티",
+            "en": "Hong Kong milk tea",
+            "zh-CN": "港式奶茶",
+            "zh-TW": "港式奶茶"
+          },
+          "price": 4000,
+          "signature": true,
+          "teaId": "blend-hongkong"
+        },
+        {
+          "name": {
+            "ko": "망고 포멜로 사고",
+            "en": "Mango pomelo sago",
+            "zh-CN": "杨枝甘露",
+            "zh-TW": "楊枝甘露"
+          },
+          "price": 6000,
+          "signature": true,
+          "teaId": null
+        },
+        {
+          "name": {
+            "ko": "딤섬",
+            "en": "Dim sum",
+            "zh-CN": "点心",
+            "zh-TW": "點心"
+          },
+          "price": null,
+          "signature": false,
+          "teaId": null
+        },
+        {
+          "name": {
+            "ko": "완탕면",
+            "en": "Wonton noodles",
+            "zh-CN": "云吞面",
+            "zh-TW": "雲吞麵"
+          },
+          "price": null,
+          "signature": false,
+          "teaId": null
+        }
+      ]
+    },
+    {
+      "slug": "pungsungh-buffet-sindang",
+      "name": {
+        "ko": "풍성한뷔페 (신당점)",
+        "en": "Pungsungh Buffet (Sindang)",
+        "zh-CN": "丰盛自助餐（新堂店）",
+        "zh-TW": "豐盛自助餐（新堂店）"
+      },
+      "partner": true,
+      "tier": 1,
+      "region": {
+        "ko": "서울 중구",
+        "en": "Jung-gu, Seoul",
+        "zh-CN": "首尔 中区",
+        "zh-TW": "首爾 中區"
+      },
+      "address": {
+        "ko": "서울 중구 퇴계로87길 15-16 1층",
+        "en": "1F, 15-16 Toegye-ro 87-gil, Jung-gu, Seoul",
+        "zh-CN": "首尔中区退溪路87街15-16 一层",
+        "zh-TW": "首爾中區退溪路87街15-16 一樓"
+      },
+      "near": {
+        "ko": "신당역 2번 출구 87m, 기업은행 뒤편 골목",
+        "en": "87 m from Sindang Stn. exit 2, alley behind IBK Bank",
+        "zh-CN": "新堂站2号出口87米，企业银行后方小巷",
+        "zh-TW": "新堂站2號出口87公尺，企業銀行後方巷子"
+      },
+      "lat": 37.5663286,
+      "lng": 127.0205106,
+      "hours": {
+        "mon": "11:00-22:00",
+        "tue": "11:00-22:00",
+        "wed": "11:00-22:00",
+        "thu": "11:00-22:00",
+        "fri": "11:00-22:00",
+        "sat": "11:00-22:00",
+        "sun": null
+      },
+      "lastOrder": null,
+      "closedDays": ["sun"],
+      "hoursNote": {
+        "ko": "월~토 11:00~22:00 · 일요일 휴무",
+        "en": "Mon–Sat 11:00–22:00 · closed Sunday",
+        "zh-CN": "周一至周六 11:00~22:00 · 周日休息",
+        "zh-TW": "週一至週六 11:00~22:00 · 週日休息"
+      },
+      "phone": {
+        "display": "010-5563-8272",
+        "tel": "+821055638272"
+      },
+      "phoneNote": {
+        "ko": "가게 전화",
+        "en": "Shop phone",
+        "zh-CN": "店铺电话",
+        "zh-TW": "店鋪電話"
+      },
+      "placeUrl": "https://map.naver.com/p/search/%ED%92%8D%EC%84%B1%ED%95%9C%EB%B7%94%ED%8E%90",
+      "maps": {
+        "naver": "https://map.naver.com/p/search/%ED%92%8D%EC%84%B1%ED%95%9C%EB%B7%94%ED%8E%90",
+        "kakao": "https://map.kakao.com/link/to/%ED%92%8D%EC%84%B1%ED%95%9C%EB%B7%94%ED%8E%90%20%EC%8B%A0%EB%8B%B9%EC%A0%90,37.5663286,127.0205106",
+        "google": "https://www.google.com/maps/search/?api=1&query=37.5663286,127.0205106"
+      },
+      "tasteTags": ["p-meal", "b-full", "s-milk", "k-sweet", "m-cozy", "c-high", "s-hot"],
+      "desc": {
+        "ko": "낮에는 8,000원 집밥 한식뷔페, 저녁에는 홍콩 밀크티·잎차와 짐빔 하이볼·벨기에 병맥주를 내는 신당역 골목 가게. 차 한 잔으로 하루를 닫기 좋습니다.",
+        "en": "An 8,000-won home-style Korean buffet by day; Hong Kong milk tea, loose-leaf tea, highballs and Belgian beer by night, in a Sindang alley.",
+        "zh-CN": "白天是8,000韩元的家常韩式自助，晚上供应港式奶茶、原叶茶与海波、比利时瓶啤，位于新堂站巷内。",
+        "zh-TW": "白天是8,000韓元的家常韓式自助，晚上供應港式奶茶、原葉茶與海波、比利時瓶啤，位於新堂站巷內。"
+      },
+      "menus": [
+        {
+          "name": {
+            "ko": "한식뷔페 (점심)",
+            "en": "Korean buffet (lunch)",
+            "zh-CN": "韩式自助（午餐）",
+            "zh-TW": "韓式自助（午餐）"
+          },
+          "price": 8000,
+          "signature": true,
+          "teaId": null
+        },
+        {
+          "name": {
+            "ko": "홍콩 밀크티 (저녁)",
+            "en": "Hong Kong milk tea (evening)",
+            "zh-CN": "港式奶茶（晚间）",
+            "zh-TW": "港式奶茶（晚間）"
+          },
+          "price": null,
+          "signature": true,
+          "teaId": "blend-hongkong"
+        },
+        {
+          "name": {
+            "ko": "식권 10+1",
+            "en": "Meal ticket 10+1",
+            "zh-CN": "餐券 10+1",
+            "zh-TW": "餐券 10+1"
+          },
+          "price": 80000,
+          "signature": false,
+          "teaId": null
+        }
+      ]
+    }
+  ]
+}

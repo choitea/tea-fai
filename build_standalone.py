@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""index.html + CSS + JS를 하나로 합쳐 단일 HTML 파일을 만듭니다."""
+"""index.html + CSS + JS를 하나로 합쳐 단일 HTML 파일을 만듭니다.
+
+파트너·추천 데이터(data/shops.json, data/affiliate.json)는 단일 파일에서도
+보이도록 <script id="teafai-seed" type="application/json"> 안에 함께 넣습니다.
+온라인으로 열면 앱이 data/*.json을 먼저 읽고, 실패하면 이 내장 사본을 씁니다.
+"""
+import json
 import re
 from pathlib import Path
 
@@ -32,6 +38,23 @@ html = html.replace(
 html = html.replace(
     "<title>티키피디아 — 차 백과 &amp; 우림 타이머</title>",
     "<title>티키피디아 — 차 백과 &amp; 우림 타이머 (단일 파일)</title>",
+)
+
+# 내장 데이터 사본
+shops = json.loads((BASE / "data" / "shops.json").read_text(encoding="utf-8"))
+affiliate = json.loads((BASE / "data" / "affiliate.json").read_text(encoding="utf-8"))
+seed = json.dumps(
+    {"shops": shops.get("shops", []), "affiliate": affiliate},
+    ensure_ascii=False,
+    separators=(",", ":"),
+)
+seed = seed.replace("</", "<\\/")
+html = re.sub(
+    r'(<script id="teafai-seed" type="application/json">).*?(</script>)',
+    lambda m: m.group(1) + seed + m.group(2),
+    html,
+    count=1,
+    flags=re.S,
 )
 
 out = BASE / "tea_fai_app_standalone.html"

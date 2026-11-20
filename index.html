@@ -18,6 +18,18 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
     <link rel="icon" type="image/png" href="icons/icon-192.png" />
+
+    <!-- 폰트: Pretendard 동적 서브셋(필요한 글리프만 내려받음, font-display: swap).
+         화면을 막지 않도록 preload 로 받아 준비되면 적용하고, 그 전에는 시스템 폰트로 먼저 그립니다. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -119,6 +131,12 @@
 
         <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택" data-i18n-aria="a11y.mood"></div>
         <div id="recoArea" style="margin-top: 14px"></div>
+
+        <div class="section-head" id="shopHead" hidden>
+          <h2 data-i18n="shop.title">티룸에서 마시기</h2>
+          <span id="shopSub"></span>
+        </div>
+        <div class="shop-row" id="shopHome" hidden></div>
 
         <div class="section-head">
           <h2 data-i18n="home.channel">티파이 채널</h2>
@@ -229,6 +247,8 @@
           <button class="btn btn-outline" id="resetBtn" type="button" data-i18n="btn.reset">초기화</button>
         </div>
 
+        <div class="done-extra" id="doneExtra" hidden></div>
+
         <p class="steep-note" id="steepNote"></p>
 
         <div class="panel">
@@ -250,7 +270,7 @@
       <!-- ───────── 차 백과 ───────── -->
       <section class="view" id="view-guide" aria-labelledby="guideTitle">
         <div class="view-head" style="margin-bottom: 12px">
-          <p class="eyebrow" data-i18n="guide.kicker">Tea encyclopedia</p>
+          <p class="eyebrow" data-i18n="guide.kicker">Teakipedia</p>
           <h1 id="guideTitle" data-i18n="guide.title">차 백과</h1>
           <p data-i18n="guide.lead">산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책과 중국차대백과사전의 계보를 따라 정리했습니다.</p>
         </div>
@@ -341,6 +361,8 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <!-- 파트너·추천 데이터의 내장 사본(단일 파일 빌드에서 채웁니다). 온라인에서는 data/*.json 을 먼저 씁니다. -->
+    <script id="teafai-seed" type="application/json">{"shops":[],"affiliate":null}</script>
     <script src="i18n.js"></script>
     <script src="data.js"></script>
     <script src="app.js"></script>

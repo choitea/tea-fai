@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "updated": "2026-11-20",
+  "disclosure": {
+    "ko": "이 링크로 구매하면 일부 금액을 수수료로 받습니다.",
+    "en": "If you buy through this link, we receive a small commission.",
+    "zh-CN": "通过此链接购买，我们会获得少量佣金。",
+    "zh-TW": "透過此連結購買，我們會獲得少量佣金。"
+  },
+  "note": "쿠팡파트너스 숏링크가 발급되면 items 에 상품을 넣고 active=true 로 바꿉니다. 그 전에는 browse 의 검색 링크로만 '둘러보기'를 안내하며, 검색 링크에는 수수료가 붙지 않으므로 대가성 문구를 표시하지 않습니다(paid=false).",
+  "items": [],
+  "browse": [
+    {
+      "kind": "leaf",
+      "vendor": "coupang",
+      "url": "https://www.coupang.com/np/search?q={q}",
+      "query": "{koName} 찻잎",
+      "paid": false,
+      "badge": {
+        "ko": "찻잎",
+        "en": "Loose leaf",
+        "zh-CN": "茶叶",
+        "zh-TW": "茶葉"
+      },
+      "label": {
+        "ko": "둘러보기",
+        "en": "Browse",
+        "zh-CN": "浏览",
+        "zh-TW": "瀏覽"
+      }
+    },
+    {
+      "kind": "teaware",
+      "vendor": "coupang",
+      "url": "https://www.coupang.com/np/search?q={q}",
+      "query": "다구 티팟",
+      "paid": false,
+      "badge": {
+        "ko": "다구",
+        "en": "Teaware",
+        "zh-CN": "茶具",
+        "zh-TW": "茶具"
+      },
+      "label": {
+        "ko": "둘러보기",
+        "en": "Browse",
+        "zh-CN": "浏览",
+        "zh-TW": "瀏覽"
+      },
+      "title": {
+        "ko": "티팟·다구",
+        "en": "Teapot & cups",
+        "zh-CN": "茶壶茶具",
+        "zh-TW": "茶壺茶具"
+      }
+    }
+  ],
+  "books": [
+    {
+      "vendor": "upaper",
+      "url": "https://rotroka.upaper.kr",
+      "title": {
+        "ko": "《찻잎의 시간, 오늘의 한 잔》",
+        "en": "《The Time of Tea Leaves, Today's Cup》",
+        "zh-CN": "《茶叶的时间，今天的一杯》",
+        "zh-TW": "《茶葉的時間，今天的一杯》"
+      },
+      "label": {
+        "ko": "책 보기",
+        "en": "See the book",
+        "zh-CN": "查看书籍",
+        "zh-TW": "查看書籍"
+      }
+    }
+  ],
+  "video": {
+    "vendor": "youtube",
+    "url": "https://www.youtube.com/@TeaFai",
+    "title": {
+      "ko": "티파이 채널 @TeaFai",
+      "en": "Tea Fai channel @TeaFai",
+      "zh-CN": "Tea Fai 频道 @TeaFai",
+      "zh-TW": "Tea Fai 頻道 @TeaFai"
+    },
+    "label": {
+      "ko": "영상 보기",
+      "en": "Watch the videos",
+      "zh-CN": "观看视频",
+      "zh-TW": "觀看影片"
+    }
+  }
+}

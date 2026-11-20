@@ -16,9 +16,9 @@
   --amber-light: #d9a66a;
   --amber-soft: #f3e6d6;
   --shadow: 0 1px 2px rgba(36, 62, 50, 0.04), 0 8px 24px -18px rgba(36, 62, 50, 0.25);
-  --serif: "Noto Serif KR", "Noto Serif CJK KR", "Nanum Myeongjo", "Apple SD Gothic Neo", serif;
-  --sans: "Pretendard", "Noto Sans KR", "Noto Sans CJK KR", -apple-system, "Apple SD Gothic Neo",
-    system-ui, sans-serif;
+  --serif: "Nanum Myeongjo", "Noto Serif KR", "Noto Serif CJK KR", "Apple SD Gothic Neo", serif;
+  --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -1047,6 +1047,14 @@ a {
 .tea-more > div {
   overflow: hidden;
   min-height: 0;
+  /* 접힌 카드의 링크·버튼이 탭 이동에 걸리지 않게 감춥니다 */
+  visibility: hidden;
+  transition: visibility 0s linear 0.32s;
+}
+
+.tea-card.open .tea-more > div {
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .tea-more-inner {
@@ -1457,17 +1465,62 @@ a {
    다국어 · 새 카드 구조 (티키피디아)
    ============================================================ */
 
-/* 언어별 글꼴 — 한글·중국어·라틴 문자를 각각 자연스럽게 */
+/* 언어별 글꼴 — 라틴은 Pretendard(동적 서브셋), 한글·중국어는 시스템 글꼴로 받쳐 줍니다.
+   lang 속성이 글리프 선택을 정합니다(간체·번체·한국어 한자 이체자 혼선 방지). */
 html[lang="en"] {
   --serif: "Noto Serif", Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --sans: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
-html[lang="zh-Hans"],
-html[lang="zh-Hant"] {
-  --serif: "Noto Serif SC", "Noto Serif TC", "Songti SC", "SimSun", serif;
-  --sans: "Noto Sans SC", "Noto Sans TC", "PingFang SC", "PingFang TC", "Microsoft YaHei",
-    "Hiragino Sans GB", system-ui, sans-serif;
+html[lang="zh-CN"] {
+  --serif: "Noto Serif SC", "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
+  --sans: "Pretendard Variable", Pretendard, -apple-system, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif;
+}
+
+html[lang="zh-TW"] {
+  --serif: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif CJK TC", serif;
+  --sans: "Pretendard Variable", Pretendard, -apple-system, "PingFang TC", "Microsoft JhengHei",
+    "Noto Sans TC", "Noto Sans CJK TC", system-ui, sans-serif;
+}
+
+/* 중국어는 자간을 좁히지 않고(한자 획이 붙어 보임) 줄간격을 조금 넓힙니다 */
+html[lang="zh-CN"] body,
+html[lang="zh-TW"] body {
+  letter-spacing: 0;
+  line-height: 1.72;
+}
+
+html[lang="zh-CN"] .view-head h1,
+html[lang="zh-TW"] .view-head h1,
+html[lang="zh-CN"] .quiz-q,
+html[lang="zh-TW"] .quiz-q {
+  letter-spacing: 0;
+  line-height: 1.42;
+}
+
+/* 한자·원어명 글리프 배지: 세로 정렬과 광학 크기 보정 */
+.tea-glyph,
+.qr-glyph,
+.reco-glyph {
+  line-height: 1;
+  padding-bottom: 1px;
+  text-align: center;
+  font-synthesis: none;
+}
+
+/* 숫자는 고정폭으로 — 카운트다운·가격이 흔들리지 않게 */
+.ring-time,
+.steep-btn span,
+.adjust-label,
+.qp-count,
+.stars-num,
+.note-date,
+.sc-menu-item b,
+.bb-price {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
 }
 
 /* 헤더 언어 전환 */
@@ -2002,5 +2055,484 @@ html[lang="zh-Hant"] {
   }
   .quiz-q {
     font-size: 20px;
+  }
+}
+
+/* ============================================================
+   파트너 티룸 · 추천 찻잎·다구 · 타이머 완료 연결
+   ============================================================ */
+
+/* ---------- 홈: 티룸에서 마시기 ---------- */
+.shop-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -18px;
+  padding: 2px 18px 6px;
+  scroll-snap-type: x proximity;
+  align-items: flex-start;
+}
+
+.shop-row::-webkit-scrollbar {
+  display: none;
+}
+
+.shop-card {
+  flex: 0 0 85%;
+  max-width: 330px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px 15px 13px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  box-shadow: var(--shadow);
+}
+
+.sc-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 17px;
+}
+
+.sc-badge {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sc-state {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.sc-state.is-open {
+  color: #3f7a4f;
+}
+
+.sc-state.is-open::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: 1px;
+}
+
+.sc-name {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.sc-region {
+  font-size: 10.8px;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.sc-desc {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sc-signature {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+
+.sc-menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.sc-menu-item b {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sc-match {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(36, 62, 50, 0.06);
+  color: var(--ink-soft);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+}
+
+.sc-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.sc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.sc-btn svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+}
+
+.sc-btn.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.sc-btn.primary svg {
+  color: var(--amber-light);
+  opacity: 1;
+}
+
+.sc-btn.ghost {
+  background: transparent;
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+.sc-btn:active {
+  transform: scale(0.98);
+}
+
+.sc-more {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+}
+
+.sc-more h4 {
+  margin: 10px 0 3px;
+  font-size: 9.8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  text-transform: uppercase;
+}
+
+.sc-more h4:first-child {
+  margin-top: 0;
+}
+
+.sc-hours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sc-hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+  font-size: 11.8px;
+  color: var(--ink-soft);
+  border-bottom: 1px solid rgba(229, 221, 203, 0.6);
+}
+
+.sc-hours li:last-child {
+  border-bottom: 0;
+}
+
+.sc-hours li.today {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.sc-hours li b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sc-note {
+  margin: 6px 0 0;
+  font-size: 10.8px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.sc-addr {
+  margin: 0;
+  font-size: 11.8px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.sc-maps {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.sc-maplink {
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 10.8px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* ---------- 퀴즈 결과: 이 차를 내는 찻집 ---------- */
+.qr-shops {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.qrs-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  text-transform: uppercase;
+}
+
+.qrs-head span {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: none;
+}
+
+.qrs-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 7px;
+  padding: 9px 11px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.9);
+}
+
+.qrs-item b {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.qrs-item span {
+  flex: 0 0 auto;
+  font-size: 10.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ---------- 추천 찻잎·다구 + 책·영상 ---------- */
+.buy-block {
+  margin-top: 14px;
+  padding: 12px 13px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #fbf7ee;
+}
+
+.bb-head .bb-kicker {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.bb-head b {
+  display: block;
+  margin-top: 1px;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.bb-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.bb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fffdf8;
+}
+
+.bb-item:active {
+  background: var(--paper-3);
+}
+
+.bb-badge {
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--amber-soft);
+  color: #8f5a25;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.bb-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.3px;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.bb-name em {
+  display: block;
+  font-style: normal;
+  font-size: 10.3px;
+  color: var(--muted);
+}
+
+.bb-cta {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.bb-note {
+  margin: 8px 0 0;
+  font-size: 10.3px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.bb-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 10px;
+}
+
+.bb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.3px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+}
+
+.bb-link svg {
+  width: 13px;
+  height: 13px;
+  color: var(--amber);
+}
+
+.bb-link:active {
+  color: var(--amber);
+}
+
+/* 백과 카드 안에서는 한 단계 작게 */
+.tea-more-inner .buy-block {
+  margin: 12px 0 4px;
+  padding: 11px 12px;
+}
+
+/* ---------- 타이머 완료 후 연결 ---------- */
+.done-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.de-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  font-size: 11.8px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.de-link svg {
+  color: var(--amber);
+}
+
+@media (max-width: 359px) {
+  .shop-card {
+    flex: 0 0 92%;
+  }
+  .sc-btn {
+    font-size: 11px;
+    padding: 0 8px;
   }
 }

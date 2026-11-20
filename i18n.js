@@ -11,7 +11,7 @@ window.TEAFaiI18N = (function () {
   var STORE_KEY = "teafai.lang.v1";
   var LANGS = ["ko", "en", "zh-CN", "zh-TW"];
   var LABEL = { ko: "한국어", en: "EN", "zh-CN": "简中", "zh-TW": "繁中" };
-  var HTML_LANG = { ko: "ko", en: "en", "zh-CN": "zh-Hans", "zh-TW": "zh-Hant" };
+  var HTML_LANG = { ko: "ko", en: "en", "zh-CN": "zh-CN", "zh-TW": "zh-TW" };
   var LOCALE = { ko: "ko-KR", en: "en-US", "zh-CN": "zh-CN", "zh-TW": "zh-TW" };
 
   /* ---------------- 언어 감지 · 저장 ---------------- */
@@ -124,7 +124,7 @@ window.TEAFaiI18N = (function () {
       "reco.pick": "추천 한 잔",
       "reco.temp": "물 온도",
       "reco.leaf": "{water} 물",
-      "reco.first": "첫 우리",
+      "reco.first": "윤차",
       "reco.brew": "바로 우리기",
       "reco.alt": "{name} 보기",
       "reco.ox": "산화 {value}",
@@ -170,7 +170,7 @@ window.TEAFaiI18N = (function () {
       "rinse.oolong": "첫 물은 버려 잎을 데웁니다",
       "timer.thirdNote":
         "이 차는 1~2회가 적정입니다. 세 번째 포는 향이 줄고 떫은맛이 앞서니 짧게 즐기세요. ({basis})",
-      "guide.kicker": "Tea encyclopedia",
+      "guide.kicker": "Teakipedia",
       "guide.title": "차 백과",
       "guide.lead": "산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책에서 정리했습니다.",
       "guide.search": "차 이름, 향, 산지로 찾기",
@@ -182,7 +182,7 @@ window.TEAFaiI18N = (function () {
       "guide.ox": "산화도",
       "fact.temp": "물 온도",
       "fact.leaf": "잎 · 물",
-      "fact.first": "첫 우리",
+      "fact.first": "윤차",
       "detail.process": "제다 핵심",
       "detail.varieties": "대표 품종",
       "detail.flavor": "향미 노트",
@@ -226,7 +226,7 @@ window.TEAFaiI18N = (function () {
 
     en: {
       "meta.desc":
-        "Steeping temperatures and times for green, white, oolong, black and dark tea and Earl Grey, with a tea encyclopedia and tasting notes — a Teakipedia app built from the books Time of Tea Leaves, Today's Cup and Everything About Earl Grey.",
+        "Steeping temperatures and times for green, white, oolong, black and dark tea and Earl Grey, with a tea guide and tasting notes — Teakipedia, built from the books Time of Tea Leaves, Today's Cup and Everything About Earl Grey.",
       "a11y.lang": "Language",
       "brand.name": "Teakipedia",
       "brand.sub": "",
@@ -235,9 +235,9 @@ window.TEAFaiI18N = (function () {
       "tab.guide": "Tea guide",
       "tab.notes": "Notes",
       "a11y.tabbar": "Main screens",
-      "title.home": "Teakipedia — Tea Encyclopedia & Steeping Timer",
+      "title.home": "Teakipedia — Tea Guide & Steeping Timer",
       "title.timer": "Steeping Timer — Teakipedia",
-      "title.guide": "Tea Encyclopedia — Teakipedia",
+      "title.guide": "Tea Guide — Teakipedia",
       "title.notes": "Tasting Notes — Teakipedia",
       "home.title": "What kind of cup<br />do you need today?",
       "home.lead": "Pick a mood and we'll choose a tea and the way to steep it.",
@@ -311,12 +311,12 @@ window.TEAFaiI18N = (function () {
       "rinse.oolong": "Discard the first pour to warm the leaf",
       "timer.thirdNote":
         "One or two infusions suit this tea. A third loses aroma and leads with astringency, so keep it short. ({basis})",
-      "guide.kicker": "Tea library",
-      "guide.title": "Tea encyclopedia",
+      "guide.kicker": "Teakipedia",
+      "guide.title": "Tea guide",
       "guide.lead":
         "Oxidation, processing, flavour, pairing, storage — gathered from two books.",
       "guide.search": "Search by name, aroma or origin",
-      "a11y.search": "Search the tea encyclopedia",
+      "a11y.search": "Search the tea guide",
       "a11y.filter": "Filter by tea type",
       "guide.all": "All",
       "guide.empty":
@@ -452,7 +452,7 @@ window.TEAFaiI18N = (function () {
       "rinse.dark": "用沸水10~20秒，一两次",
       "rinse.oolong": "第一次注水倒掉，温热茶叶",
       "timer.thirdNote": "这款茶适合1~2泡。第三泡香气减弱、涩味突前，请短泡享用。（{basis}）",
-      "guide.kicker": "茶叶",
+      "guide.kicker": "Teakipedia",
       "guide.title": "茶百科",
       "guide.lead": "从发酵度、制茶、香气、搭配到保存——整理自两本书。",
       "guide.search": "按茶名、香气、产地搜索",
@@ -591,7 +591,7 @@ window.TEAFaiI18N = (function () {
       "rinse.dark": "用沸水10~20秒，一兩次",
       "rinse.oolong": "第一次注水倒掉，溫熱茶葉",
       "timer.thirdNote": "這款茶適合1~2泡。第三泡香氣減弱、澀味突前，請短泡享用。（{basis}）",
-      "guide.kicker": "茶葉",
+      "guide.kicker": "Teakipedia",
       "guide.title": "茶百科",
       "guide.lead": "從發酵度、製茶、香氣、搭配到保存——整理自兩本書。",
       "guide.search": "按茶名、香氣、產地搜尋",
@@ -661,7 +661,7 @@ window.TEAFaiI18N = (function () {
       "pv.kicker": "Privacy Policy",
       "pv.h1": "Teakipedia Privacy Policy",
       "pv.lead":
-        'Teakipedia is an app with a tea encyclopedia, a steeping timer and tasting notes. It has <span class="key">no sign-up and collects no personal data, sending nothing to a server.</span> Your tasting notes, timer settings and chosen language stay only in your device\'s browser storage.',
+        'Teakipedia is an app with a tea guide, a steeping timer and tasting notes. It has <span class="key">no sign-up and collects no personal data, sending nothing to a server.</span> Your tasting notes, timer settings and chosen language stay only in your device\'s browser storage.',
       "pv.metaDate": "Effective 20 November 2026",
       "pv.metaVersion": "Version 1.0",
       "pv.metaContact": "Contact rotroka@gmail.com",
@@ -711,7 +711,7 @@ window.TEAFaiI18N = (function () {
       "pv.s10.title": "Contact",
       "pv.s10.body": "If you have a question or a request about this policy, write to us.",
       "pv.footer":
-        "Teakipedia — Tea encyclopedia & steeping timer · made from Time of Tea Leaves, Today's Cup and The First Scented Black Tea — Everything About Earl Grey.",
+        "Teakipedia — Tea guide & steeping timer · made from Time of Tea Leaves, Today's Cup and The First Scented Black Tea — Everything About Earl Grey.",
       "pv.openApp": "Open the app"
     },
     "zh-CN": {
@@ -863,7 +863,7 @@ window.TEAFaiI18N = (function () {
       "quiz.guide": "백과에서 보기",
       "quiz.restart": "다시 테스트하기",
       "quiz.origin": "산지",
-      "quiz.firstSteep": "첫 우리",
+      "quiz.firstSteep": "윤차",
       "quiz.q1": "주로 언제, 왜 차를 마시나요?",
       "quiz.q1a": "아침에 눈을 뜨우고 집중할 때",
       "quiz.q1b": "식후에 개운하게",
@@ -925,14 +925,14 @@ window.TEAFaiI18N = (function () {
       "quiz.a11yProgress": "Progress",
       "quiz.resultKicker": "Best match",
       "quiz.resultTitle": "We found your cup",
-      "quiz.resultLead": "Chosen from your ten answers — the closest match in the encyclopedia.",
+      "quiz.resultLead": "Chosen from your ten answers — the closest match in the tea guide.",
       "quiz.best": "Best match",
       "quiz.altTitle": "Two more to try",
       "quiz.altCount": "2 cups",
       "quiz.whyOne": "Matching your “{a}” answer, this is the closest cup.",
       "quiz.whyTwo": "Matching your “{a}” and “{b}” answers, this is the closest cup.",
       "quiz.brew": "Brew this now",
-      "quiz.guide": "Open in encyclopedia",
+      "quiz.guide": "Open in tea guide",
       "quiz.restart": "Take the test again",
       "quiz.origin": "Origin",
       "quiz.firstSteep": "First infusion",
@@ -1156,6 +1156,146 @@ window.TEAFaiI18N = (function () {
     }
   };
 
+  /* 파트너 티룸 · 콘텐츠 연결 */
+  var SHOPS = {
+    ko: {
+      "weekday.mon": "월",
+      "weekday.tue": "화",
+      "weekday.wed": "수",
+      "weekday.thu": "목",
+      "weekday.fri": "금",
+      "weekday.sat": "토",
+      "weekday.sun": "일",
+      "shop.title": "티룸에서 마시기",
+      "shop.sub": "1호 파트너 {n}곳",
+      "shop.partner": "파트너",
+      "shop.open": "영업 중",
+      "shop.closed": "영업 종료",
+      "shop.closedToday": "오늘 휴무",
+      "shop.before": "{time} 오픈",
+      "shop.hours": "영업시간",
+      "shop.lastOrder": "라스트오더 {time}",
+      "shop.menu": "대표 메뉴",
+      "shop.address": "오시는 길",
+      "shop.map": "지도",
+      "shop.place": "플레이스",
+      "shop.call": "전화",
+      "shop.detail": "자세히",
+      "shop.collapse": "접기",
+      "shop.mapAria": "{name} 지도를 엽니다",
+      "shop.priceUnknown": "가격 미확인",
+      "shop.match": "내 취향 {n}개 일치",
+      "shop.atTea": "이 차를 내는 찻집",
+      "shop.atTeaSub": "파트너 티룸",
+      "buy.title": "이 차, 집에서 마시려면",
+      "buy.sub": "추천 찻잎·다구",
+      "buy.priceNote": "판매처 기준가",
+      "buy.video": "이 차 이야기 보기"
+    },
+    en: {
+      "weekday.mon": "Mon",
+      "weekday.tue": "Tue",
+      "weekday.wed": "Wed",
+      "weekday.thu": "Thu",
+      "weekday.fri": "Fri",
+      "weekday.sat": "Sat",
+      "weekday.sun": "Sun",
+      "shop.title": "Have it in a tea room",
+      "shop.sub": "{n} first partner shops",
+      "shop.partner": "Partner",
+      "shop.open": "Open now",
+      "shop.closed": "Closed for today",
+      "shop.closedToday": "Closed today",
+      "shop.before": "Opens {time}",
+      "shop.hours": "Hours",
+      "shop.lastOrder": "Last order {time}",
+      "shop.menu": "Signature menu",
+      "shop.address": "Getting there",
+      "shop.map": "Map",
+      "shop.place": "Place page",
+      "shop.call": "Call",
+      "shop.detail": "Details",
+      "shop.collapse": "Close",
+      "shop.mapAria": "Open the map for {name}",
+      "shop.priceUnknown": "Price not listed",
+      "shop.match": "{n} of your taste tags",
+      "shop.atTea": "Tea rooms serving this tea",
+      "shop.atTeaSub": "Partner tea rooms",
+      "buy.title": "To brew this at home",
+      "buy.sub": "Leaves & teaware",
+      "buy.priceNote": "Seller's listed price",
+      "buy.video": "Watch the story of this tea"
+    },
+    "zh-CN": {
+      "weekday.mon": "周一",
+      "weekday.tue": "周二",
+      "weekday.wed": "周三",
+      "weekday.thu": "周四",
+      "weekday.fri": "周五",
+      "weekday.sat": "周六",
+      "weekday.sun": "周日",
+      "shop.title": "到茶室喝一杯",
+      "shop.sub": "首批合作茶室 {n} 家",
+      "shop.partner": "合作伙伴",
+      "shop.open": "营业中",
+      "shop.closed": "今日已打烊",
+      "shop.closedToday": "今日休息",
+      "shop.before": "{time} 开门",
+      "shop.hours": "营业时间",
+      "shop.lastOrder": "最后点单 {time}",
+      "shop.menu": "招牌菜单",
+      "shop.address": "如何前往",
+      "shop.map": "地图",
+      "shop.place": "主页",
+      "shop.call": "电话",
+      "shop.detail": "详情",
+      "shop.collapse": "收起",
+      "shop.mapAria": "打开{name}地图",
+      "shop.priceUnknown": "价格未确认",
+      "shop.match": "契合你的 {n} 个口味标签",
+      "shop.atTea": "供应这款茶的茶室",
+      "shop.atTeaSub": "合作茶室",
+      "buy.title": "想在家泡这一杯",
+      "buy.sub": "推荐茶叶与茶具",
+      "buy.priceNote": "卖家标价",
+      "buy.video": "看这款茶的故事"
+    },
+    "zh-TW": {
+      "weekday.mon": "週一",
+      "weekday.tue": "週二",
+      "weekday.wed": "週三",
+      "weekday.thu": "週四",
+      "weekday.fri": "週五",
+      "weekday.sat": "週六",
+      "weekday.sun": "週日",
+      "shop.title": "到茶室喝一杯",
+      "shop.sub": "首批合作茶室 {n} 家",
+      "shop.partner": "合作夥伴",
+      "shop.open": "營業中",
+      "shop.closed": "今日已打烊",
+      "shop.closedToday": "今日休息",
+      "shop.before": "{time} 開門",
+      "shop.hours": "營業時間",
+      "shop.lastOrder": "最後點單 {time}",
+      "shop.menu": "招牌菜單",
+      "shop.address": "如何前往",
+      "shop.map": "地圖",
+      "shop.place": "主頁",
+      "shop.call": "電話",
+      "shop.detail": "詳情",
+      "shop.collapse": "收合",
+      "shop.mapAria": "開啟{name}地圖",
+      "shop.priceUnknown": "價格未確認",
+      "shop.match": "契合你的 {n} 個口味標籤",
+      "shop.atTea": "供應這款茶的茶室",
+      "shop.atTeaSub": "合作茶室",
+      "buy.title": "想在家泡這一杯",
+      "buy.sub": "推薦茶葉與茶具",
+      "buy.priceNote": "賣家標價",
+      "buy.video": "看這款茶的故事"
+    }
+  };
+
   var dictFor = {};
 
   function dict(lang) {
@@ -1164,12 +1304,14 @@ window.TEAFaiI18N = (function () {
     var privacy = PRIVACY[lang] || {};
     var quiz = QUIZ[lang] || {};
     var extras = EXTRA[lang] || {};
+    var shops = SHOPS[lang] || {};
     var merged = {};
     var k;
     for (k in base) merged[k] = base[k];
     for (k in privacy) merged[k] = privacy[k];
     for (k in quiz) merged[k] = quiz[k];
     for (k in extras) merged[k] = extras[k];
+    for (k in shops) merged[k] = shops[k];
     dictFor[lang] = merged;
     return merged;
   }
