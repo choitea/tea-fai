@@ -2813,48 +2813,68 @@ window.TEAFaiI18N = (function () {
     var d = dict(lang);
     var isKo = lang === "ko";
 
-    function setText(el) {
-      var key = el.getAttribute("data-i18n");
-      var next = isKo ? null : d[key];
-      el.textContent = next == null ? koOf(el, "text", function () { return el.textContent; }) : next;
-    }
-    function setHtml(el) {
-      var key = el.getAttribute("data-i18n-html");
-      var next = isKo ? null : d[key];
-      el.innerHTML = next == null ? koOf(el, "html", function () { return el.innerHTML; }) : next;
-    }
-    function setPh(el) {
-      var key = el.getAttribute("data-i18n-ph");
-      var next = isKo ? null : d[key];
-      el.placeholder = next == null ? koOf(el, "ph", function () { return el.placeholder; }) : next;
-    }
-    function setAria(el) {
-      var key = el.getAttribute("data-i18n-aria");
-      var next = isKo ? null : d[key];
-      el.setAttribute(
-        "aria-label",
-        next == null ? koOf(el, "aria", function () { return el.getAttribute("aria-label") || ""; }) : next
-      );
-    }
-    function setContent(el) {
-      var key = el.getAttribute("data-i18n-content");
-      var next = isKo ? null : d[key];
-      el.setAttribute(
-        "content",
-        next == null ? koOf(el, "content", function () { return el.getAttribute("content") || ""; }) : next
-      );
+    function pickValue(el, kind, key, current) {
+      // HTML에 적힌 한국어 원문을 처음 한 번만 기억해 둡니다
+      var original = koOf(el, kind, function () {
+        return current;
+      });
+      if (isKo) return original;
+      var next = d[key];
+      return next == null ? original : next;
     }
 
-    var nodes = root.querySelectorAll("[data-i18n]");
-    for (var i = 0; i < nodes.length; i++) setText(nodes[i]);
+    var nodes, i;
+    nodes = root.querySelectorAll("[data-i18n]");
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].textContent = pickValue(
+        nodes[i],
+        "text",
+        nodes[i].getAttribute("data-i18n"),
+        nodes[i].textContent
+      );
+    }
     nodes = root.querySelectorAll("[data-i18n-html]");
-    for (i = 0; i < nodes.length; i++) setHtml(nodes[i]);
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].innerHTML = pickValue(
+        nodes[i],
+        "html",
+        nodes[i].getAttribute("data-i18n-html"),
+        nodes[i].innerHTML
+      );
+    }
     nodes = root.querySelectorAll("[data-i18n-ph]");
-    for (i = 0; i < nodes.length; i++) setPh(nodes[i]);
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].placeholder = pickValue(
+        nodes[i],
+        "ph",
+        nodes[i].getAttribute("data-i18n-ph"),
+        nodes[i].placeholder
+      );
+    }
     nodes = root.querySelectorAll("[data-i18n-aria]");
-    for (i = 0; i < nodes.length; i++) setAria(nodes[i]);
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute(
+        "aria-label",
+        pickValue(
+          nodes[i],
+          "aria",
+          nodes[i].getAttribute("data-i18n-aria"),
+          nodes[i].getAttribute("aria-label") || ""
+        )
+      );
+    }
     nodes = root.querySelectorAll("[data-i18n-content]");
-    for (i = 0; i < nodes.length; i++) setContent(nodes[i]);
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute(
+        "content",
+        pickValue(
+          nodes[i],
+          "content",
+          nodes[i].getAttribute("data-i18n-content"),
+          nodes[i].getAttribute("content") || ""
+        )
+      );
+    }
   }
 
   function setDocumentLang(lang) {
@@ -7810,7 +7830,7 @@ window.TEAFaiData = (function () {
     {
       id: "scent-earlgrey",
       group: "scented",
-      h: "伯爵",
+      h: "伯",
       hz: "伯爵茶",
       hs: "伯爵茶",
       rom: "Earl Grey",

@@ -4830,7 +4830,7 @@ window.TEAFaiData = (function () {
     {
       id: "scent-earlgrey",
       group: "scented",
-      h: "伯爵",
+      h: "伯",
       hz: "伯爵茶",
       hs: "伯爵茶",
       rom: "Earl Grey",
