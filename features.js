@@ -115,7 +115,8 @@
   function normTitle(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    return obj[lang()] || obj.en || obj.ko || "";
+    var key = lang() === "yue" ? "zh-TW" : lang();
+    return obj[key] || obj.en || obj.ko || "";
   }
 
   function storeItems() {
@@ -130,7 +131,7 @@
         paid: it.paid !== false,
         badge: normTitle(it.badge) || (it.kind === "teaware" ? t("store.catTeaware") : t("store.catLeaf")),
         title: normTitle(it.title) || normTitle(it.name),
-        sub: normTitle(it.badge),
+        sub: "",
         price: it.price_krw || null,
         url: String(it.url)
       });
@@ -252,6 +253,8 @@
     }
     var input = $("#storeSearchInput");
     if (input && input.value !== storeState.q) input.value = storeState.q;
+    /* 스토어를 다시 그릴 때 스마트렌즈의 문구도 현재 언어로 맞춥니다 */
+    renderLens();
   }
 
   /* 백과의 "이 차 사기" → 스토어에서 그 차 이름으로 찾습니다 */

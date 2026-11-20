@@ -1536,7 +1536,9 @@
   function l10n(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    return obj[lang] || obj.en || obj.ko || "";
+    /* 광동어는 따로 적어 둔 문구가 없으므로 번체 중국어 문구를 씁니다 */
+    var key = lang === "yue" ? "zh-TW" : lang;
+    return obj[key] || obj.en || obj.ko || "";
   }
 
   function seedJson() {
