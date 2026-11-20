@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.choitea.teafai",
+    "sha256_cert_fingerprints": [
+      "25:5F:E7:66:B4:63:2E:30:7E:1A:6A:DD:A6:0F:E1:77:48:77:F3:F4:33:5B:64:10:F5:C9:89:B6:E2:9E:4C:B9"
+    ]
+  }
+}]
