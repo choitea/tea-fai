@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>티파이 — 차 백과 &amp; 우림 타이머 (단일 파일)</title>
+    <meta name="description" content="녹차·백차·우롱차·홍차·흑차·얼그레이의 우림 온도와 시간, 차 백과, 시음 노트를 한 곳에. 《찻잎의 시간, 오늘의 한 잔》과 《얼그레이의 모든 것》을 바탕으로 만든 티파이 앱." />
+    <meta name="theme-color" content="#F7F3EB" />
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="티파이" />
+    <style>
+/* ============================================================
+   티파이(Tea Fai) — 찻집 에디토리얼 스타일
+   모바일 390px 기준. 배경 #F7F3EB / 찻잎 그린 #243E32 / 앰버 #B97A3D
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  --paper: #f7f3eb;
+  --paper-2: #fffdf8;
+  --paper-3: #f1ebdd;
+  --ink: #243e32;
+  --ink-soft: #42584c;
+  --muted: #8b8371;
+  --line: #e5ddcb;
+  --amber: #b97a3d;
+  --amber-light: #d9a66a;
+  --amber-soft: #f3e6d6;
+  --shadow: 0 1px 2px rgba(36, 62, 50, 0.04), 0 8px 24px -18px rgba(36, 62, 50, 0.25);
+  --serif: "Noto Serif KR", "Noto Serif CJK KR", "Nanum Myeongjo", "Apple SD Gothic Neo", serif;
+  --sans: "Pretendard", "Noto Sans KR", "Noto Sans CJK KR", -apple-system, "Apple SD Gothic Neo",
+    system-ui, sans-serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- 브랜드 헤더 ---------- */
+.app-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 40;
+  height: calc(54px + var(--safe-top));
+  padding: var(--safe-top) 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(247, 243, 235, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(229, 221, 203, 0.85);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  width: 27px;
+  height: 27px;
+  border-radius: 9px;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1;
+  padding-bottom: 1px;
+}
+
+.brand-name {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.brand-name em {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-left: 6px;
+}
+
+.header-note {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ---------- 뷰 ---------- */
+.viewport {
+  padding-top: calc(54px + var(--safe-top));
+  padding-bottom: calc(82px + var(--safe-bottom));
+}
+
+.view {
+  display: none;
+  padding: 16px 18px 10px;
+}
+
+.view.active {
+  display: block;
+  animation: view-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.view-head {
+  margin: 4px 0 16px;
+}
+
+.view-head h1 {
+  margin: 6px 0 0;
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1.32;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.view-head p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 26px 0 12px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-head span {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ---------- 칩 ---------- */
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -18px;
+  padding: 2px 18px 4px;
+  scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 93%, rgba(0, 0, 0, 0.35) 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 93%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.chip svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.75;
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.chip[aria-pressed="true"] svg {
+  opacity: 1;
+  color: var(--amber-light);
+}
+
+.chip.small {
+  padding: 7px 12px;
+  font-size: 12.5px;
+}
+
+/* ---------- 오늘의 차 카드 ---------- */
+.reco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 20px;
+  background: var(--ink);
+  color: #f3ede1;
+  box-shadow: 0 14px 32px -24px rgba(36, 62, 50, 0.8);
+}
+
+.reco::after {
+  content: attr(data-glyph);
+  position: absolute;
+  right: -6px;
+  bottom: -58px;
+  font-family: var(--serif);
+  font-size: 168px;
+  line-height: 1;
+  color: rgba(247, 243, 235, 0.06);
+  pointer-events: none;
+}
+
+.reco-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--amber-light);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.reco-tea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.reco-glyph {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 20px;
+  background: rgba(247, 243, 235, 0.1);
+  border: 1px solid rgba(247, 243, 235, 0.16);
+  color: #f7f3eb;
+}
+
+.reco-name {
+  display: block;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.reco-sub {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(243, 237, 225, 0.55);
+  margin-top: 2px;
+}
+
+.reco-headline {
+  margin: 14px 0 8px;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fbf7ef;
+}
+
+.reco-reason {
+  margin: 0;
+  font-size: 12.8px;
+  line-height: 1.68;
+  color: rgba(243, 237, 225, 0.78);
+  position: relative;
+  z-index: 1;
+}
+
+.reco-stats {
+  display: flex;
+  margin: 16px 0 18px;
+  border-top: 1px solid rgba(247, 243, 235, 0.14);
+  border-bottom: 1px solid rgba(247, 243, 235, 0.14);
+  padding: 11px 0;
+}
+
+.reco-stat {
+  flex: 1;
+  text-align: center;
+  border-left: 1px solid rgba(247, 243, 235, 0.12);
+}
+
+.reco-stat:first-child {
+  border-left: 0;
+}
+
+.reco-stat b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: #fbf7ef;
+}
+
+.reco-stat span {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(243, 237, 225, 0.5);
+}
+
+.reco-actions {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.14s ease, background 0.2s, opacity 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #fff8ee;
+}
+
+.btn-primary:active {
+  background: #a96c33;
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(247, 243, 235, 0.24);
+  color: #f3ede1;
+}
+
+.btn-outline {
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.reco .btn-ghost {
+  color: rgba(247, 243, 235, 0.85);
+}
+
+/* ---------- 링크 카드 ---------- */
+.banner-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.banner {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  padding: 14px 14px 13px;
+  min-height: 104px;
+  background: linear-gradient(150deg, #2f4d3f 0%, #1d3228 100%);
+  color: #f3ede1;
+  overflow: hidden;
+  border: 1px solid rgba(36, 62, 50, 0.2);
+}
+
+.banner.sleep {
+  background: linear-gradient(150deg, #3a3550 0%, #241f33 100%);
+}
+
+.banner-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(243, 237, 225, 0.55);
+}
+
+.banner-title {
+  font-family: var(--serif);
+  font-size: 14.5px;
+  line-height: 1.42;
+  margin-top: 6px;
+  display: block;
+  padding-right: 34px;
+}
+
+.banner-play {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(247, 243, 235, 0.14);
+  border: 1px solid rgba(247, 243, 235, 0.22);
+}
+
+.banner-play svg {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+}
+
+.link-list {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.link-row .lr-ico {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--paper-3);
+  color: var(--ink-soft);
+  flex: 0 0 auto;
+}
+
+.link-row .lr-ico svg {
+  width: 16px;
+  height: 16px;
+}
+
+.link-row .lr-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-row b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.link-row span {
+  font-size: 11.5px;
+  color: var(--muted);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-row .lr-arrow {
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+/* ---------- 인용 ---------- */
+.quote {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+
+.quote p {
+  margin: 1px 0 0;
+  font-family: var(--serif);
+  font-size: 14.5px;
+  line-height: 1.78;
+  color: var(--ink-soft);
+}
+
+.quote cite {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* ---------- 타이머 ---------- */
+.timer-stage {
+  display: grid;
+  place-items: center;
+  margin: 8px 0 4px;
+}
+
+.ring {
+  position: relative;
+  width: 258px;
+  height: 258px;
+}
+
+.ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: #e8e0ce;
+  stroke-width: 9;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s linear, stroke 0.3s;
+}
+
+.ring-inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.ring-time {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.ring-tea {
+  margin-top: 6px;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.ring-state {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--amber);
+  height: 18px;
+}
+
+.ring.running .ring-progress {
+  stroke: var(--ink);
+}
+
+.ring.done .ring-progress {
+  stroke: var(--amber);
+}
+
+.ring.done .ring-time {
+  color: var(--amber);
+}
+
+.steep-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 18px 0 0;
+}
+
+.steep-btn {
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  border-radius: 14px;
+  padding: 10px 4px 9px;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.steep-btn b {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.steep-btn span {
+  display: block;
+  font-family: var(--serif);
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.steep-btn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.steep-btn[aria-pressed="true"] b {
+  color: var(--paper);
+}
+
+.steep-btn[aria-pressed="true"] span {
+  color: var(--amber-light);
+}
+
+.adjust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+
+.adjust-btn {
+  width: 46px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.adjust-btn:active,
+.adjust-btn:disabled {
+  background: var(--paper-3);
+  opacity: 0.6;
+}
+
+.adjust-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  min-width: 62px;
+  text-align: center;
+}
+
+.timer-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.timer-actions .btn-primary,
+.timer-actions .btn-dark {
+  flex: 1;
+  height: 52px;
+  font-size: 15px;
+  border-radius: 16px;
+}
+
+.timer-actions .btn-outline {
+  width: 92px;
+  height: 52px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.steep-note {
+  margin: 12px 2px 0;
+  font-size: 11.8px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.panel {
+  margin-top: 14px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 4px 16px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 4px;
+}
+
+.panel-head h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.kv {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.kv:first-of-type {
+  border-top: 0;
+}
+
+.kv dt {
+  flex: 0 0 74px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  padding-top: 1px;
+}
+
+.kv dd {
+  margin: 0;
+  flex: 1;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.mute-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.mute-row p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.mute-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 11.5px;
+}
+
+.switch {
+  position: relative;
+  width: 46px;
+  height: 27px;
+  border-radius: 999px;
+  background: #ded6c4;
+  transition: background 0.22s;
+  flex: 0 0 auto;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: #fffdf8;
+  box-shadow: 0 1px 3px rgba(36, 62, 50, 0.25);
+  transition: transform 0.22s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+.switch[aria-checked="true"] {
+  background: var(--ink);
+}
+
+.switch[aria-checked="true"]::after {
+  transform: translateX(19px);
+}
+
+/* ---------- 차 백과 ---------- */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.search-box svg {
+  width: 17px;
+  height: 17px;
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+.search-box input {
+  flex: 1;
+  border: 0;
+  background: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #a9a294;
+}
+
+.tea-card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.tea-card + .tea-card {
+  margin-top: 11px;
+}
+
+.tea-main {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 15px 16px 14px;
+}
+
+.tea-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tea-glyph {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 19px;
+  flex: 0 0 auto;
+}
+
+.tea-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.tea-title b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tea-title span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.tea-caret {
+  color: var(--muted);
+  transition: transform 0.25s;
+  flex: 0 0 auto;
+}
+
+.tea-card.open .tea-caret {
+  transform: rotate(180deg);
+}
+
+.tea-oneline {
+  margin: 10px 0 0;
+  font-size: 12.8px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.ox {
+  margin-top: 12px;
+}
+
+.ox-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.ox-top b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.ox-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #ece5d5;
+  overflow: hidden;
+}
+
+.ox-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* 수치가 아닌 산화 표기(후발효·착향)는 줄무늬로 구분합니다 */
+.ox-fill.qual {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.5) 0 3px,
+    rgba(255, 255, 255, 0) 3px 6px
+  );
+}
+
+.tea-facts {
+  display: flex;
+  gap: 14px;
+  margin-top: 11px;
+}
+
+.tea-fact {
+  flex: 1;
+  min-width: 0;
+}
+
+.tea-fact span {
+  display: block;
+  font-size: 9.8px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.tea-fact b {
+  display: block;
+  font-size: 12.8px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tea-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.25, 0.7, 0.35, 1);
+}
+
+.tea-card.open .tea-more {
+  grid-template-rows: 1fr;
+}
+
+.tea-more > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.tea-more-inner {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--line);
+  margin-top: 0;
+  padding-top: 4px;
+}
+
+.detail {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail:last-of-type {
+  border-bottom: 0;
+}
+
+.detail h4 {
+  margin: 0 0 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+}
+
+.detail p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.68;
+  color: var(--ink-soft);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.tag {
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--paper-3);
+  color: var(--ink-soft);
+}
+
+.tea-more .btn {
+  margin-top: 12px;
+  height: 44px;
+}
+
+.empty {
+  padding: 32px 18px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ---------- 시음 노트 ---------- */
+.note-stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.note-stat {
+  flex: 1;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.note-stat span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.note-stat b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.note-stat b small {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.form-card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.field + .field {
+  margin-top: 13px;
+}
+
+.field > label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.field input[type="text"],
+.field textarea,
+.field select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field select {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b8371' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 15px;
+  padding-right: 34px;
+}
+
+.field textarea {
+  min-height: 66px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.star {
+  font-size: 25px;
+  line-height: 1;
+  color: #ded6c4;
+  padding: 2px 1px;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star.on {
+  color: var(--amber);
+}
+
+.star:active {
+  transform: scale(0.9);
+}
+
+.stars-num {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.form-card .btn-dark {
+  margin-top: 16px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+/* ---------- 노트 목록 ---------- */
+.note-item {
+  position: relative;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 44px 14px 15px;
+}
+
+.note-item + .note-item {
+  margin-top: 10px;
+}
+
+.note-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.note-tea {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.note-stars {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+}
+
+.note-date {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.note-name {
+  margin: 7px 0 0;
+  font-family: var(--serif);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.note-text {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-del {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+.note-del:active {
+  background: var(--paper-3);
+}
+
+/* ---------- 탭바 ---------- */
+.tabbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(255, 253, 248, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+  padding-bottom: var(--safe-bottom);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 0 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.01em;
+  color: #a29b8b;
+  transition: color 0.2s;
+}
+
+.tab svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tab.active {
+  color: var(--ink);
+}
+
+.tab.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 2.5px;
+  border-radius: 0 0 3px 3px;
+  background: var(--amber);
+}
+
+.tab.active svg {
+  color: var(--amber);
+}
+
+/* ---------- 토스트 ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(96px + var(--safe-bottom));
+  transform: translate(-50%, 12px);
+  background: var(--ink);
+  color: #f7f3eb;
+  font-size: 12.5px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px -12px rgba(36, 62, 50, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s, transform 0.22s;
+  z-index: 60;
+  white-space: nowrap;
+  max-width: calc(100vw - 40px);
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app-footer {
+  margin: 30px 0 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.app-footer b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+@media (min-width: 420px) {
+  .view {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+  .app-header {
+    padding-inline: max(18px, calc((100vw - 430px) / 2 + 18px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <!-- 아이콘 스프라이트 -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1h-4.5v-6h-6v6H4.5a1 1 0 0 1-1-1z" />
+        </symbol>
+        <symbol id="ic-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="13.5" r="7.5" />
+          <path d="M12 10v3.8l2.4 1.7M9.5 2.5h5" />
+        </symbol>
+        <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6.3C10.4 4.9 8.3 4.3 5.5 4.3v13.4c2.8 0 4.9.6 6.5 2 1.6-1.4 3.7-2 6.5-2V4.3c-2.8 0-4.9.6-6.5 2z" />
+          <path d="M12 6.3v13.4" />
+        </symbol>
+        <symbol id="ic-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 4.5h9.5L19 9v10.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1z" />
+          <path d="M14 4.5V9h4.5M7.5 13h7M7.5 16.5h4.5" />
+        </symbol>
+        <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" />
+        </symbol>
+        <symbol id="ic-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9.5 6 6 6-6" />
+        </symbol>
+        <symbol id="ic-play" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 4.8c0-.8.9-1.3 1.6-.9l10 7.1c.6.4.6 1.4 0 1.8l-10 7.1c-.7.4-1.6-.1-1.6-.9z" />
+        </symbol>
+        <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4" />
+        </symbol>
+        <symbol id="ic-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z" />
+          <path d="M9 7.5c0-1 1-1.4 1-2.4M13 7.5c0-1 1-1.4 1-2.4" />
+          <path d="M8 20.5h8" />
+        </symbol>
+        <symbol id="ic-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 7.5h11v5.5a5.5 5.5 0 0 1-11 0z" />
+          <path d="M15.5 9h1.8a2.6 2.6 0 0 1 0 5.2h-1.8" />
+          <path d="M4 21h12" />
+        </symbol>
+        <symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" />
+        </symbol>
+        <symbol id="ic-youtube" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.3 7.2a2.6 2.6 0 0 0-1.8-1.8C17.8 5 12 5 12 5s-5.8 0-7.5.4A2.6 2.6 0 0 0 2.7 7.2C2.3 8.9 2.3 12 2.3 12s0 3.1.4 4.8a2.6 2.6 0 0 0 1.8 1.8C6.2 19 12 19 12 19s5.8 0 7.5-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8zM10 15.2V8.8L15.2 12z" />
+        </symbol>
+        <symbol id="ic-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5z" />
+        </symbol>
+        <symbol id="ic-bookstore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v16H5.5A1.5 1.5 0 0 1 4 18.5z" />
+          <path d="M13.6 4.6l3.9 1a1.5 1.5 0 0 1 1.1 1.8l-3.1 11.6a1.5 1.5 0 0 1-1.8 1.1l-3.9-1" />
+        </symbol>
+        <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 5.5 6.5 6.5L9 18.5" />
+        </symbol>
+        <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 6.5h15M9.5 6.5V4h5v2.5M6.5 6.5 7.4 20h9.2l.9-13.5" />
+        </symbol>
+        <symbol id="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5 6.5 8.8H3.5v6.4h3L11 19z" />
+          <path d="M15 9.2a4 4 0 0 1 0 5.6M17.8 6.5a7.6 7.6 0 0 1 0 11" />
+        </symbol>
+        <symbol id="ic-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5 6.5 8.8H3.5v6.4h3L11 19z" />
+          <path d="m15.5 10 4 4M19.5 10l-4 4" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">茶</span>
+        <span class="brand-name">티파이<em>Tea Fai</em></span>
+      </div>
+      <span class="header-note">차 백과 · 우리기</span>
+    </header>
+
+    <main class="viewport">
+      <!-- ───────── 오늘의 차 ───────── -->
+      <section class="view active" id="view-home" aria-labelledby="homeTitle">
+        <div class="view-head">
+          <p class="eyebrow" id="homeDate">오늘</p>
+          <h1 id="homeTitle">오늘은 어떤<br />한 잔이 필요하세요?</h1>
+          <p>기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
+        </div>
+
+        <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택"></div>
+        <div id="recoArea" style="margin-top: 14px"></div>
+
+        <div class="section-head">
+          <h2>티파이 채널</h2>
+          <span>차 한 잔과 함께</span>
+        </div>
+        <div class="banner-row">
+          <a class="banner" href="https://youtu.be/5fkX0dfnHmE" target="_blank" rel="noopener">
+            <span class="banner-label">Lo-fi playlist</span>
+            <span class="banner-title">우리기 좋은<br />로파이</span>
+            <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
+          </a>
+          <a class="banner sleep" href="https://youtu.be/sRJH76ZkajY" target="_blank" rel="noopener">
+            <span class="banner-label">Sleep sound</span>
+            <span class="banner-title">잠들기 전<br />수면 사운드</span>
+            <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
+          </a>
+        </div>
+
+        <div class="link-list">
+          <a class="link-row" href="https://rotroka.upaper.kr" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-book" /></svg></span>
+            <span class="lr-text">
+              <b>전자책 《찻잎의 시간, 오늘의 한 잔》</b>
+              <span>유페이퍼 서점 · 얼그레이 편도 함께</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+          <a class="link-row" href="https://blog.naver.com/hongkongtea_kr" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-globe" /></svg></span>
+            <span class="lr-text">
+              <b>네이버 블로그</b>
+              <span>blog.naver.com/hongkongtea_kr</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+          <a class="link-row" href="https://www.youtube.com/@TeaFai" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-youtube" /></svg></span>
+            <span class="lr-text">
+              <b>유튜브 채널 @TeaFai</b>
+              <span>차 이야기와 우리기 영상</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+        </div>
+
+        <div class="quote">
+          <span class="eyebrow">책에서 한 줄</span>
+          <p>녹차는 1분을 기다리고, 우롱차는 30초를 기다리고, 흑차는 20년을 기다린다. 같은 잎이 어떤 시간을 통과했는지 알면, 우리가 컵 앞에서 보내는 3분도 그 시간의 일부가 된다.</p>
+          <cite>《찻잎의 시간, 오늘의 한 잔》 에필로그</cite>
+        </div>
+
+        <div id="recentNote"></div>
+      </section>
+
+      <!-- ───────── 우림 타이머 ───────── -->
+      <section class="view" id="view-timer" aria-labelledby="timerTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Steeping timer</p>
+          <h1 id="timerTitle">우림 타이머</h1>
+          <p>차를 고르고 몇 번째 포인지 고르면 책의 기준 시간으로 맞춰 드립니다.</p>
+        </div>
+
+        <div class="chip-row" id="teaChips" role="group" aria-label="차 종류 선택"></div>
+
+        <div class="timer-stage">
+          <div class="ring" id="ring">
+            <svg viewBox="0 0 260 260" aria-hidden="true">
+              <circle class="ring-track" cx="130" cy="130" r="116" />
+              <circle class="ring-progress" id="ringProgress" cx="130" cy="130" r="116" />
+            </svg>
+            <div class="ring-inner">
+              <div class="ring-time" id="ringTime" role="timer" aria-live="off">01:30</div>
+              <div class="ring-tea" id="ringTea">녹차 · 1포</div>
+              <div class="ring-state" id="ringState">준비</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="steep-row" id="steepRow" role="group" aria-label="포 수 선택"></div>
+
+        <div class="adjust-row">
+          <button class="adjust-btn" id="minus10" type="button" aria-label="10초 줄이기">−10</button>
+          <span class="adjust-label" id="adjustLabel">±10초</span>
+          <button class="adjust-btn" id="plus10" type="button" aria-label="10초 늘리기">+10</button>
+        </div>
+
+        <div class="timer-actions">
+          <button class="btn btn-primary" id="startBtn" type="button">우리기 시작</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">초기화</button>
+        </div>
+
+        <p class="steep-note" id="steepNote"></p>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>이 차의 우리기</h3>
+            <span class="eyebrow" id="panelTemp">75℃</span>
+          </div>
+          <dl id="brewInfo"></dl>
+          <div class="mute-row">
+            <p>
+              <svg id="muteIcon" width="15" height="15" style="vertical-align:-3px;margin-right:5px;color:#8b8371"><use href="#ic-sound" /></svg>알림음
+              <small id="muteDesc">은은한 종소리로 알려 드립니다</small>
+            </p>
+            <button class="switch" id="muteToggle" type="button" role="switch" aria-checked="false" aria-label="알림음 음소거"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 차 백과 ───────── -->
+      <section class="view" id="view-guide" aria-labelledby="guideTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Tea encyclopedia</p>
+          <h1 id="guideTitle">차 백과</h1>
+          <p>산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책에서 정리했습니다.</p>
+        </div>
+
+        <div class="search-box">
+          <svg><use href="#ic-search" /></svg>
+          <input type="search" id="searchInput" placeholder="차 이름, 향, 산지로 찾기" autocomplete="off" aria-label="차 백과 검색" />
+        </div>
+        <div class="chip-row" id="filterChips" role="group" aria-label="차류 필터"></div>
+        <div id="teaList" style="margin-top: 14px"></div>
+
+        <div class="app-footer">
+          <b>출처</b> — 《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》(최티).<br />
+          수치는 책의 부록 표와 각 장의 서술을 그대로 옮겼습니다. 입맛에 맞춰 ±10초로 조율해 보세요.
+        </div>
+      </section>
+
+      <!-- ───────── 시음 노트 ───────── -->
+      <section class="view" id="view-notes" aria-labelledby="notesTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Tasting notes</p>
+          <h1 id="notesTitle">시음 노트</h1>
+          <p>오늘 우린 차를 한 줄로 남겨 두면, 다음 잔이 조금 더 정확해집니다.</p>
+        </div>
+
+        <div class="note-stats">
+          <div class="note-stat">
+            <span>기록한 잔</span>
+            <b id="statCount">0<small>잔</small></b>
+          </div>
+          <div class="note-stat">
+            <span>평균 별점</span>
+            <b id="statAvg">—</b>
+          </div>
+        </div>
+
+        <form class="form-card" id="noteForm" autocomplete="off">
+          <div class="field">
+            <label for="noteTea">차 종류</label>
+            <select id="noteTea"></select>
+          </div>
+          <div class="field">
+            <label for="noteName">이름 · 산지</label>
+            <input type="text" id="noteName" placeholder="예: 하동 우전, 2026 봄" maxlength="60" />
+          </div>
+          <div class="field">
+            <label id="starLabel">별점</label>
+            <div class="stars" id="starRow" role="group" aria-labelledby="starLabel"></div>
+          </div>
+          <div class="field">
+            <label for="noteText">한 줄 감상</label>
+            <textarea id="noteText" placeholder="예: 75도에서 1분, 떫음 없이 단맛이 오래 남았다." maxlength="200"></textarea>
+          </div>
+          <button class="btn btn-dark btn-block" type="submit">노트 저장</button>
+        </form>
+
+        <div class="section-head">
+          <h2>기록</h2>
+          <span id="noteCountLabel">0잔</span>
+        </div>
+        <div id="noteList"></div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="주요 화면">
+      <button class="tab active" type="button" data-view="home" aria-current="page">
+        <svg><use href="#ic-home" /></svg><span>오늘의 차</span>
+      </button>
+      <button class="tab" type="button" data-view="timer">
+        <svg><use href="#ic-timer" /></svg><span>우림 타이머</span>
+      </button>
+      <button class="tab" type="button" data-view="guide">
+        <svg><use href="#ic-book" /></svg><span>차 백과</span>
+      </button>
+      <button class="tab" type="button" data-view="notes">
+        <svg><use href="#ic-note" /></svg><span>시음 노트</span>
+      </button>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+/* ============================================================
+   티파이(Tea Fai) — 차 백과 & 우림 타이머
+   수록 데이터 출처
+   · 《찻잎의 시간, 오늘의 한 잔》 (최티) — 1~6장, 부록 1·2
+   · 《최초의 가향 홍차 — 얼그레이의 모든 것》 (최티) — 1~6장, 부록 1·2
+   책에 적힌 수치와 서술만 옮겨 정리했습니다. 없는 값은 만들지 않았습니다.
+   ============================================================ */
+window.TEAFaiData = (function () {
+  "use strict";
+
+  var teas = [
+    {
+      id: "green",
+      name: "녹차",
+      sub: "Green Tea",
+      hanja: "綠",
+      accent: "#4F7A4A",
+      accentSoft: "#E7EEDF",
+      oneLine: "딴 뒤 24시간 안에 모든 것이 결정되는, 시간과의 싸움.",
+      oxidation: "0%",
+      oxidationValue: 0,
+      oxidationLabel: "산화 없음 · 살청으로 효소를 멈춤",
+      temp: 75,
+      tempRange: "70~80℃",
+      leaf: "2~3g",
+      water: "200ml",
+      ratioNote: "150ml에 2~3g — 티스푼 한 스푼 남짓",
+      steeps: [90, 30, 60],
+      rounds: "3~4회",
+      steepBasis:
+        "책 기준 첫 우리 1분~1분 30초, 두 번째 30초, 세 번째 1분. 우린 잎은 바로 건집니다.",
+      process:
+        "위조 → 살청(덖음 또는 증청) → 유념 → 건조. 산화 단계가 없습니다. 솥에 덖으면 구수한 고소함이, 수증기로 찌면 해조류 같은 향과 감칠맛이 남습니다.",
+      varieties: ["서호용정(용정차)", "센차·마차·교쿠로", "하동·보성·제주 녹차"],
+      flavor:
+        "아미노산의 감칠맛, 카테킨의 옅은 떫은맛, 클로로필의 풋풋함이 균형을 이룰 때 “봄이 입안에 있다”고 말합니다. 덖음차는 구운 콩·볶은 곡물 쪽, 증청차는 해조류·풀잎 쪽으로 향이 갑니다.",
+      pairing:
+        "회, 초밥, 흰살생선 구이, 나물, 두부 요리. 기름진 고기나 크림 많은 디저트와는 부딪힙니다. 곁들일 것이 필요하면 견과류·약과처럼 기름기 적은 단맛이 좋습니다.",
+      keep:
+        "유통기한보다 제조일을 봅니다. 제조 후 6개월 안, 개봉 후 한 달 안이 이상적입니다. 빛을 막는 질소 충전 알루미늄 파우치를 고르고, 개봉 후에는 작은 밀폐 용기에 담아 냄새 없는 냉장고 채소칸에 둡니다. 100g에 1만~3만원대가 일상적으로 좋은 차를 마시는 구간입니다.",
+      brewTip:
+        "끓인 물을 다른 컵에 한 번 옮겨 부으면 대략 80도. 잎을 넣고 자리를 떠나지 말고, 시간이 되면 바로 건져야 떫어지지 않습니다.",
+      keywords: "용정 센차 마차 하동 보성 제주 우전 세작 덖음 증청 아가리 냉침 감칠맛"
+    },
+    {
+      id: "white",
+      name: "백차",
+      sub: "White Tea",
+      hanja: "白",
+      accent: "#8B7B4F",
+      accentSoft: "#EFE8D5",
+      oneLine: "위조하고 말린다. 그게 전부라서 잎의 품질이 그대로 드러난다.",
+      oxidation: "5~10%",
+      oxidationValue: 8,
+      oxidationLabel: "미세한 자연 산화 · 살청 없음",
+      temp: 85,
+      tempRange: "80~90℃",
+      leaf: "3~4g",
+      water: "200ml",
+      ratioNote: "은침은 3g, 수미처럼 잎이 두꺼우면 4g",
+      steeps: [120, 60, 120],
+      rounds: "4~5회",
+      steepBasis:
+        "책 기준 첫 우리 1분 30초~2분, 두 번째 1분, 세 번째 2분. 오래 두어도 쉽게 떫어지지 않습니다.",
+      process:
+        "위조 → 건조. 유념도 살청도 인위적 산화도 없습니다. 24~48시간 자연 위조 후 40~50도의 낮은 열로 천천히 말리며, 저장 중에도 아주 느린 산화가 이어집니다.",
+      varieties: ["백호은침(싹만)", "백모단(싹 하나에 잎 두 장)", "수미·공미(잎 위주)", "운남 월광백"],
+      flavor:
+        "국물은 아주 연한 살구빛, 향은 은방울꽃·라일락에 가깝습니다. 떫은맛이 거의 없고 단맛이 길게 남습니다. 1~2년이면 대추와 꿀이 더해지고, 3년부터 약재 향, 5~7년이면 짙은 호박색이 됩니다.",
+      pairing:
+        "은침은 견과·대추·밤, 백모단은 담백한 생선과 닭고기, 수미는 전·튀김·고기 요리와 맞습니다. 노백차에 대추와 진피를 넣어 약한 불로 끓이면 겨울을 데우는 차가 됩니다.",
+      keep:
+        "상온에서 직사광선을 피하고 습도 50~60%를 지킵니다. 냉장고는 습기와 냄새, 꺼낼 때의 결로 때문에 피합니다. 초보자는 밀봉해 두는 편이 안전합니다. 이름보다 잎의 상태(은백색 털이 남고 색이 고른지)를 봅니다.",
+      brewTip:
+        "잎이 물 위에 뜨므로 물을 먼저 붓고 잎을 넣거나, 30초 뒤 찻숟가락으로 가볍게 저어 줍니다. 은침은 80~85도, 수미는 90도가 좋습니다.",
+      keywords: "백호은침 백모단 수미 공미 노백차 월광백 복정 정화 대추 약재 숙성"
+    },
+    {
+      id: "oolong",
+      name: "우롱차",
+      sub: "Oolong Tea",
+      hanja: "烏",
+      accent: "#B97A3D",
+      accentSoft: "#F6E7D7",
+      oneLine: "원하는 지점에서 정확히 멈추는 반발효의 예술.",
+      oxidation: "15~70%",
+      oxidationValue: 45,
+      oxidationLabel: "요청으로 가장자리만 붉게 — 녹엽홍양변",
+      temp: 95,
+      tempRange: "90~95℃",
+      leaf: "5~7g",
+      water: "200ml",
+      ratioNote: "개완 5~7g에 110ml, 서양식 찻잔 5g에 300ml",
+      steeps: [45, 20, 30],
+      rounds: "7~10회",
+      steepBasis:
+        "책 기준 첫 물 30초~1분, 이어서 20초·30초·45초로 늘려 갑니다. 짧게 여러 번이 원칙입니다.",
+      process:
+        "위조 → 요청(4~8회 이상) → 살청 → 유념 → 건조 → 배화. 잎끼리 부딪혀 가장자리만 산화되는 ‘녹엽홍양변’이 우롱차의 핵심입니다.",
+      varieties: ["동방미인", "대만 고산차(아리산·산린시·리산)", "무이암차(대홍포·수선·육계)", "안시 철관음"],
+      flavor:
+        "동방미인은 꿀과 잘 익은 복숭아, 고산차는 난초·크림 같은 청량함, 무이암차는 구운 곡물·코코아에 미네랄감(암운), 철관음은 난초 향과 끝의 옅은 떫은맛입니다.",
+      pairing:
+        "구운 고기, 치즈, 과일과 잘 맞습니다. 우롱 밀크티는 철관음 8g을 95도 200ml에 4분 진하게 우리고 우유 150ml를 더합니다. 우롱 하이볼은 우롱 60ml에 위스키 45ml, 탄산수 90ml.",
+      keep:
+        "청향 스타일(고산차·문산포종)은 개봉 후 밀봉해 냉장·냉동에, 배화를 강하게 한 무이암차와 전통 철관음은 상온에서도 잘 버팁니다. 우린 잎의 재우림은 하루 안에.",
+      brewTip:
+        "첫 물은 세차로 버리면 먼지를 씻고 잎을 데웁니다. 구형으로 뭉친 차는 첫 우리에 충분히 열려야 하므로 30초~1분을 기다립니다.",
+      keywords: "동방미인 고산차 아리산 산린시 리산 다위링 무이암차 대홍포 수선 육계 철관음 요청 배화 암운"
+    },
+    {
+      id: "black",
+      name: "홍차",
+      sub: "Black Tea",
+      hanja: "紅",
+      accent: "#8C3B2E",
+      accentSoft: "#F3E1DC",
+      oneLine: "완전 산화. 붉은색과 우유를 견디는 힘이 여기서 나온다.",
+      oxidation: "80~95%",
+      oxidationValue: 90,
+      oxidationLabel: "완전 산화 · 테아플라빈과 테아루비긴",
+      temp: 98,
+      tempRange: "95~100℃",
+      leaf: "3~5g",
+      water: "200ml",
+      ratioNote: "우유를 넣을 차는 5g에 200ml로 더 진하게",
+      steeps: [180, 240, 240],
+      rounds: "1~2회",
+      steepBasis:
+        "책 기준 3~5분, 1~2회. 두 번째 우리는 같은 잎에 1분을 더합니다. 세 번째부터는 향보다 떫은맛이 앞섭니다.",
+      process:
+        "위조 → 유념 → 산화(22~26도, 습도 90%에서 2~4시간) → 건조(100도 이상 열풍, 수분 3%). 유념으로 세포를 터뜨려 카테킨이 산소를 만나게 하는 것이 전부입니다.",
+      varieties: ["다즐링(머스캣)", "아삼(몰트·CTC)", "우바(청량감)", "기문(기문향)", "정산소종(훈연)"],
+      flavor:
+        "다즐링은 포도·꽃·살구, 아삼은 몰트와 묵직한 바디, 우바는 멘톨 같은 청량감, 기문은 장미·난초·다크초콜릿, 정산소종은 소나무 훈연 향입니다.",
+      pairing:
+        "다즐링은 스콘·마들렌·과일 타르트, 아삼은 크림치즈 베이글·버터 토스트·초콜릿 케이크, 기문은 다크초콜릿과 잘 맞습니다.",
+      keep:
+        "제조일을 확인하고 1년을 기준으로 봅니다. 빛과 산소, 냄새를 막는 불투명 밀봉 용기에 두고, 향신료나 커피 옆은 피합니다.",
+      brewTip:
+        "물은 반드시 새로 끓인 것을. 5분을 넘기면 떫은맛이 급격히 강해지므로 시간이 되면 잎을 바로 건집니다. 티백은 넣은 뒤 젓지 않습니다.",
+      keywords: "다즐링 아삼 우바 기문 정산소종 금준미 CTC 정통엽 밀크티 스콘 훈연"
+    },
+    {
+      id: "dark",
+      name: "흑차 · 보이차",
+      sub: "Dark Tea",
+      hanja: "黑",
+      accent: "#5B4636",
+      accentSoft: "#EBE3D8",
+      oneLine: "시간이 보관 기간이 아니라 재료가 되는 차.",
+      oxidation: "후발효",
+      oxidationValue: 100,
+      oxidationLabel: "미생물 후발효 · 생차와 숙차",
+      temp: 100,
+      tempRange: "100℃",
+      leaf: "5g",
+      water: "100ml",
+      ratioNote: "개완·자사호 5g에 100ml, 세차 1~2회",
+      steeps: [20, 25, 30],
+      rounds: "8회 이상",
+      steepBasis:
+        "책 기준 첫 우리 15~20초, 이후 5초씩 늘려 8~10회. 세차는 끓는 물로 10~20초씩 한두 번.",
+      process:
+        "생차는 위조 → 살청 → 유념 → 건조 → 압착 뒤 자연 후발효. 숙차는 여기에 악퇴를 더합니다. 수분 30~40%로 불린 잎을 1미터 더미로 쌓아 50~65도에서 40~70일 삭힙니다.",
+      varieties: ["보이차 생차·숙차", "멍하이·이무·징마이", "육보차", "천량차"],
+      flavor:
+        "테아브라운이 만드는 흙내음 뒤에 대추 같은 단맛과 부드러운 질감이 있습니다. 생차는 5년에 말린 과일·꿀, 10년에 대추·약재, 20년이면 한약방과 오래된 나무 서랍 같은 향이 납니다.",
+      pairing:
+        "기름진 식사, 중식, 육류 뒤에 좋습니다. 공복은 피하고 식후 30분 뒤가 무난합니다. 진하게 우린 숙차에 우유와 연유를 더하면 보이차 밀크티가 됩니다.",
+      keep:
+        "20~25도, 습도 60~70%, 통풍이 되면서 냄새가 배지 않는 곳. 냉장고는 금지입니다. 생차는 약간 통기되게, 숙차는 밀봉해도 됩니다.",
+      brewTip:
+        "잎이 단단하게 압착되어 있어 100도의 끓는 물로 여러 번 우려야 합니다. 병차는 칼로 긁지 말고 차침으로 결을 따라 떼어냅니다.",
+      keywords: "보이차 생차 숙차 악퇴 테아브라운 멍하이 이무 징마이 육보차 자사호 세차 식후차"
+    },
+    {
+      id: "earlgrey",
+      name: "얼그레이",
+      sub: "Earl Grey",
+      hanja: "香",
+      accent: "#6F6486",
+      accentSoft: "#ECE8F1",
+      oneLine: "베르가못 향을 입힌 홍차. 이름은 상표가 아니라 200년의 산업사.",
+      oxidation: "완전 산화 + 착향",
+      oxidationValue: 95,
+      oxidationLabel: "홍차 베이스 · 베르가못 오일 0.5~2%",
+      temp: 96,
+      tempRange: "95~98℃",
+      leaf: "3g",
+      water: "200ml",
+      ratioNote: "잎 1에 물 60 — 3g에 200ml. 밀크티는 5g에 150ml",
+      steeps: [180, 240, 240],
+      rounds: "1~2회",
+      steepBasis:
+        "책 기준 잎차 3~3분 30초, 두 번째는 +1분. 1분은 향, 3분은 균형, 5분은 떫은맛의 정점입니다.",
+      process:
+        "기문 40~50% · 아삼 20~30% · 실론 20~30%로 바탕을 만들고, 베르가못 오일을 잎 무게의 0.5~2%로 얹습니다. 향을 입히는 방식은 분무·껍질 첨가·꽃잎 첨가·인향 네 가지입니다.",
+      varieties: ["클래식(기문 베이스)", "레이디 그레이", "러시안 얼그레이", "크림·프렌치 얼그레이", "얼그레이 그린·화이트·로이보스"],
+      flavor:
+        "리모넨·리날롤·리날릴 아세테이트가 만드는 시트러스와 꽃. 3분에 향과 맛이 균형을 이루고, 5분이면 떫은맛이 지배합니다. 한 잔 카페인은 40~70mg.",
+      pairing:
+        "스콘과 클로티드 크림, 다크초콜릿, 레몬 타르트, 약과, 훈제 연어. 매운 찌개나 떡볶이와는 향이 부딪힙니다.",
+      keep:
+        "개봉 후 3개월이 향의 정점, 6개월이면 눈에 띄게 약해집니다. 불투명한 밀봉 용기에 두고 냉장고는 피합니다. 100g은 하루 두 잔 기준 30~40일분입니다.",
+      brewTip:
+        "티백은 90~95도에 2분 30초~3분, 흔들지 않습니다. 밀크티는 95~100도에 4~5분 진하게. 런던 포그는 5분 우리고 스팀 밀크와 바닐라를 더합니다.",
+      keywords: "베르가못 착향 레이디그레이 러시안 크림 프렌치 밀크티 런던포그 하이볼 기문 아삼 실론 티백"
+    }
+  ];
+
+  // 홈: 기분·상황별 추천 (책의 서술에서 근거를 가져옴)
+  var moods = [
+    {
+      id: "morning",
+      label: "아침 집중",
+      icon: "sun",
+      teaId: "earlgrey",
+      headline: "베르가못 향으로 하루를 연다",
+      reason:
+        "홍차의 카페인은 커피보다 천천히 흡수되어 각성이 오래갑니다. 베르가못 향은 뜨거운 물에서 열리고, 우유를 넣어도 향이 무너지지 않습니다.",
+      tip: "우유를 넣을 거라면 5g·150ml로 조금 더 진하게.",
+      alt: "black"
+    },
+    {
+      id: "aftermeal",
+      label: "식후 개운",
+      icon: "bowl",
+      teaId: "dark",
+      headline: "기름진 입안을 정리하는 한 잔",
+      reason:
+        "진하고 따뜻한 흑차가 입안을 헹구고 기름진 맛을 정리합니다. 테아브라운과 다당류가 장내 환경에 관여한다는 연구도 보고되었습니다. 차는 약이 아니라 식후의 습관입니다.",
+      tip: "공복은 피하고 식후 30분 뒤에. 첫 우리는 15~20초.",
+      alt: "green"
+    },
+    {
+      id: "afternoon",
+      label: "오후 나른",
+      icon: "cup",
+      teaId: "oolong",
+      headline: "짧게 여러 번, 오후를 깨우는 향",
+      reason:
+        "우롱차는 산화도가 중간이라 녹차보다 바디가 있고 홍차보다 가볍습니다. 30초씩 짧게 여러 번 우리면 한 잔으로 오래, 잔마다 다른 층이 열립니다.",
+      tip: "개완이 없으면 작은 주전자에 우리고 바로 다른 컵에 따라두세요.",
+      alt: "black"
+    },
+    {
+      id: "night",
+      label: "밤 릴랙스",
+      icon: "moon",
+      teaId: "white",
+      headline: "가장 조용한 차 한 잔",
+      reason:
+        "백차는 카페인의 쓴맛이 부드럽게 감싸지고 떫은맛이 거의 없습니다. 잠들기 전에는 디카페인 녹차나 백차, 보리차 같은 대용차가 좋습니다.",
+      tip: "노백차에 대추를 넣어 약한 불로 끓이면 몸이 데워집니다.",
+      alt: "green"
+    }
+  ];
+
+  var links = {
+    channel: "https://www.youtube.com/@TeaFai",
+    playlist: "https://youtu.be/5fkX0dfnHmE",
+    sleep: "https://youtu.be/sRJH76ZkajY",
+    bookstore: "https://rotroka.upaper.kr",
+    blog: "https://blog.naver.com/hongkongtea_kr"
+  };
+
+  function byId(id) {
+    for (var i = 0; i < teas.length; i++) if (teas[i].id === id) return teas[i];
+    return teas[0];
+  }
+
+  return { teas: teas, moods: moods, links: links, byId: byId };
+})();
+
+</script>
+    <script>
+/* ============================================================
+   티파이(Tea Fai) — 화면 로직
+   · 오늘의 차 / 우림 타이머 / 차 백과 / 시음 노트
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var D = window.TEAFaiData;
+  var teas = D.teas;
+
+  var NOTES_KEY = "teafai.notes.v1";
+  var MUTE_KEY = "teafai.muted.v1";
+  var LAST_TEA_KEY = "teafai.lastTea.v1";
+
+  var RING_R = 116;
+  var RING_C = 2 * Math.PI * RING_R;
+
+  /* ---------------- 공용 유틸 ---------------- */
+  function $(sel, root) {
+    return (root || document).querySelector(sel);
+  }
+  function pad2(n) {
+    return (n < 10 ? "0" : "") + n;
+  }
+  function fmtClock(sec) {
+    sec = Math.max(0, Math.round(sec));
+    return pad2(Math.floor(sec / 60)) + ":" + pad2(sec % 60);
+  }
+  function fmtKo(sec) {
+    sec = Math.max(0, Math.round(sec));
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    if (m && s) return m + "분 " + s + "초";
+    if (m) return m + "분";
+    return s + "초";
+  }
+  function clamp(v, lo, hi) {
+    return Math.min(hi, Math.max(lo, v));
+  }
+  function esc(str) {
+    return String(str == null ? "" : str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+  function storeGet(key, fallback) {
+    try {
+      var raw = window.localStorage.getItem(key);
+      return raw === null ? fallback : JSON.parse(raw);
+    } catch (e) {
+      return fallback;
+    }
+  }
+  function storeSet(key, value) {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      /* 저장 공간이 없으면 조용히 넘어갑니다 */
+    }
+  }
+
+  var toastTimer = null;
+  function toast(msg) {
+    var node = $("#toast");
+    if (!node) return;
+    node.textContent = msg;
+    node.classList.add("show");
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () {
+      node.classList.remove("show");
+    }, 2400);
+  }
+
+  function starsMark(n) {
+    var out = "";
+    for (var i = 1; i <= 5; i++) out += i <= n ? "★" : "☆";
+    return out;
+  }
+
+  /* ---------------- 화면 전환 ---------------- */
+  var currentView = "home";
+  var viewTitles = {
+    home: "티파이 — 차 백과 & 우림 타이머",
+    timer: "우림 타이머 — 티파이",
+    guide: "차 백과 — 티파이",
+    notes: "시음 노트 — 티파이"
+  };
+
+  function go(view) {
+    if (!viewTitles[view]) return;
+    currentView = view;
+    var sections = document.querySelectorAll(".view");
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].classList.toggle("active", sections[i].id === "view-" + view);
+    }
+    var tabs = document.querySelectorAll(".tab");
+    for (var j = 0; j < tabs.length; j++) {
+      var on = tabs[j].getAttribute("data-view") === view;
+      tabs[j].classList.toggle("active", on);
+      if (on) tabs[j].setAttribute("aria-current", "page");
+      else tabs[j].removeAttribute("aria-current");
+    }
+    document.title = viewTitles[view];
+    window.scrollTo(0, 0);
+    if (view === "home") renderRecentNote();
+  }
+
+  document.querySelectorAll(".tab").forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      go(tab.getAttribute("data-view"));
+    });
+  });
+
+  /* ============================================================
+     1. 오늘의 차
+     ============================================================ */
+  var homeState = { mood: null };
+
+  function moodById(id) {
+    for (var i = 0; i < D.moods.length; i++) if (D.moods[i].id === id) return D.moods[i];
+    return D.moods[0];
+  }
+  function defaultMoodId() {
+    var h = new Date().getHours();
+    if (h >= 5 && h < 11) return "morning";
+    if (h >= 11 && h < 15) return "aftermeal";
+    if (h >= 15 && h < 19) return "afternoon";
+    return "night";
+  }
+
+  function renderHomeDate() {
+    var node = $("#homeDate");
+    if (!node) return;
+    var now = new Date();
+    var days = ["일", "월", "화", "수", "목", "금", "토"];
+    node.textContent =
+      now.getFullYear() +
+      "년 " +
+      (now.getMonth() + 1) +
+      "월 " +
+      now.getDate() +
+      "일 " +
+      days[now.getDay()] +
+      "요일";
+  }
+
+  function renderMoodChips() {
+    var wrap = $("#moodChips");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    D.moods.forEach(function (m) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip";
+      btn.setAttribute("aria-pressed", String(m.id === homeState.mood));
+      btn.innerHTML = '<svg><use href="#ic-' + m.icon + '"/></svg><span>' + esc(m.label) + "</span>";
+      btn.addEventListener("click", function () {
+        homeState.mood = m.id;
+        renderMoodChips();
+        renderReco();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderReco() {
+    var area = $("#recoArea");
+    if (!area) return;
+    var mood = moodById(homeState.mood);
+    var tea = D.byId(mood.teaId);
+    var alt = D.byId(mood.alt);
+    var oxText = /^\d/.test(tea.oxidation) ? "산화 " + tea.oxidation : tea.oxidation;
+
+    area.innerHTML =
+      '<article class="reco" data-glyph="' +
+      tea.hanja +
+      '">' +
+      '<div class="reco-top">' +
+      "<span>" +
+      esc(mood.label) +
+      "</span><span>·</span><span>추천 한 잔</span>" +
+      "</div>" +
+      '<div class="reco-tea">' +
+      '<span class="reco-glyph" style="background:' +
+      tea.accent +
+      '33;border-color:' +
+      tea.accent +
+      '66">' +
+      tea.hanja +
+      "</span>" +
+      '<span><span class="reco-name">' +
+      esc(tea.name) +
+      '</span><span class="reco-sub">' +
+      esc(tea.sub) +
+      " · " +
+      esc(oxText) +
+      "</span></span>" +
+      "</div>" +
+      '<p class="reco-headline">' +
+      esc(mood.headline) +
+      "</p>" +
+      '<p class="reco-reason">' +
+      esc(mood.reason) +
+      "</p>" +
+      '<div class="reco-stats">' +
+      '<div class="reco-stat"><b>' +
+      esc(tea.temp) +
+      "℃</b><span>물 온도</span></div>" +
+      '<div class="reco-stat"><b>' +
+      esc(tea.leaf) +
+      "</b><span>" +
+      esc(tea.water + " 물") +
+      "</span></div>" +
+      '<div class="reco-stat"><b>' +
+      fmtKo(tea.steeps[0]) +
+      "</b><span>첫 우리</span></div>" +
+      "</div>" +
+      '<p class="reco-reason" style="font-size:12px;opacity:.7;margin-bottom:14px">' +
+      esc(mood.tip) +
+      "</p>" +
+      '<div class="reco-actions">' +
+      '<button class="btn btn-primary" type="button" id="recoBrew">바로 우리기</button>' +
+      '<button class="btn btn-ghost" type="button" id="recoAlt">' +
+      esc(alt.name) +
+      "로 보기</button>" +
+      "</div>" +
+      "</article>";
+
+    $("#recoBrew").addEventListener("click", function () {
+      setTimerTea(tea.id, 1);
+      go("timer");
+      toast(tea.name + " " + fmtKo(tea.steeps[0]) + "로 맞춰 두었습니다");
+    });
+    $("#recoAlt").addEventListener("click", function () {
+      setTimerTea(alt.id, 1);
+      go("timer");
+      toast(alt.name + " 타이머로 이동했습니다");
+    });
+  }
+
+  function renderRecentNote() {
+    var wrap = $("#recentNote");
+    if (!wrap) return;
+    var notes = loadNotes();
+    if (!notes.length) {
+      wrap.innerHTML = "";
+      return;
+    }
+    var n = notes[0];
+    var tea = D.byId(n.teaId);
+    wrap.innerHTML =
+      '<div class="section-head"><h2>최근 시음</h2><span>시음 노트</span></div>' +
+      '<button class="note-item" type="button" id="recentNoteBtn" style="display:block;width:100%;text-align:left;padding-right:15px">' +
+      '<span class="note-top" style="display:flex"><span class="note-tea" style="background:' +
+      tea.accentSoft +
+      ";color:" +
+      tea.accent +
+      '">' +
+      esc(tea.name) +
+      "</span><span class=\"note-stars\">" +
+      starsMark(n.rating) +
+      "</span>" +
+      '<span class="note-date">' +
+      esc(n.dateLabel) +
+      "</span></span>" +
+      '<span class="note-name" style="display:block;font-size:14.5px">' +
+      esc(n.name) +
+      "</span>" +
+      '<span class="note-text" style="display:block">' +
+      esc(n.note || "감상은 비워 두었습니다.") +
+      "</span>" +
+      "</button>";
+    $("#recentNoteBtn").addEventListener("click", function () {
+      go("notes");
+    });
+  }
+
+  /* ============================================================
+     2. 우림 타이머
+     ============================================================ */
+  var timer = {
+    teaId: null,
+    steep: 1,
+    adjust: 0,
+    total: 90,
+    remaining: 90,
+    running: false,
+    done: false,
+    endAt: 0,
+    interval: null,
+    muted: storeGet(MUTE_KEY, false),
+    wakeLock: null,
+    audio: null
+  };
+
+  function timerTea() {
+    return D.byId(timer.teaId || "green");
+  }
+
+  function baseSeconds() {
+    var tea = timerTea();
+    return tea.steeps[clamp(timer.steep, 1, 3) - 1];
+  }
+
+  function renderTeaChips() {
+    var wrap = $("#teaChips");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    teas.forEach(function (t) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip small";
+      btn.setAttribute("aria-pressed", String(t.id === timer.teaId));
+      btn.innerHTML = "<span>" + esc(t.name) + "</span><span style='opacity:.55;font-size:11px'>" + esc(t.temp) + "℃</span>";
+      btn.addEventListener("click", function () {
+        setTimerTea(t.id, 1);
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderSteepRow() {
+    var wrap = $("#steepRow");
+    if (!wrap) return;
+    var tea = timerTea();
+    wrap.innerHTML = "";
+    for (var i = 1; i <= 3; i++) {
+      (function (idx) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "steep-btn";
+        btn.setAttribute("aria-pressed", String(idx === timer.steep));
+        btn.innerHTML = "<b>" + idx + "포</b><span>" + fmtKo(tea.steeps[idx - 1]) + "</span>";
+        btn.addEventListener("click", function () {
+          if (timer.steep === idx && !timer.done) return;
+          setTimerSteep(idx);
+        });
+        wrap.appendChild(btn);
+      })(i);
+    }
+  }
+
+  function renderTimerText() {
+    var tea = timerTea();
+    $("#ringTime").textContent = fmtClock(timer.remaining);
+    $("#ringTea").textContent = tea.name + " · " + timer.steep + "포";
+    var stateNode = $("#ringState");
+    var ring = $("#ring");
+    ring.classList.toggle("running", timer.running);
+    ring.classList.toggle("done", timer.done);
+    if (timer.done) stateNode.textContent = "다 우렸습니다";
+    else if (timer.running) stateNode.textContent = "우리는 중";
+    else if (timer.remaining < timer.total) stateNode.textContent = "잠깐 멈춤";
+    else stateNode.textContent = "준비";
+
+    var progress = timer.total > 0 ? 1 - timer.remaining / timer.total : 0;
+    var circle = $("#ringProgress");
+    circle.style.strokeDasharray = String(RING_C);
+    // 남은 시간만큼만 보이는 시계방향 카운트다운 링 (완료되면 앰버 한 바퀴)
+    circle.style.strokeDashoffset = timer.done ? "0" : String(-RING_C * clamp(progress, 0, 1));
+    circle.style.stroke = timer.done ? "#B97A3D" : tea.accent;
+
+    var startBtn = $("#startBtn");
+    if (timer.done) startBtn.textContent = timer.steep < 3 ? "다음 포 우리기" : "다시 우리기";
+    else if (timer.running) startBtn.textContent = "일시정지";
+    else if (timer.remaining < timer.total) startBtn.textContent = "계속하기";
+    else startBtn.textContent = "우리기 시작";
+
+    $("#adjustLabel").textContent = timer.adjust === 0 ? "±10초" : (timer.adjust > 0 ? "+" : "") + timer.adjust + "초";
+    $("#minus10").disabled = timer.total <= 10;
+    $("#plus10").disabled = timer.total >= 1200;
+
+    var note = tea.steepBasis;
+    if (timer.steep === 3 && (tea.id === "black" || tea.id === "earlgrey")) {
+      note = "이 차는 1~2회가 적정입니다. 세 번째 포는 향이 줄고 떫은맛이 앞서니 짧게 즐기세요. (" + tea.steepBasis + ")";
+    }
+    $("#steepNote").textContent = note;
+  }
+
+  function renderBrewInfo() {
+    var tea = timerTea();
+    $("#panelTemp").textContent = tea.tempRange;
+    var rows = [
+      ["물 온도", tea.tempRange + " · 계량은 " + tea.temp + "℃ 기준"],
+      ["잎의 양", tea.leaf + " / " + tea.water + " — " + tea.ratioNote],
+      ["우리는 횟수", tea.rounds],
+      ["이번 포", fmtKo(baseSeconds()) + " (1포 기준 " + fmtKo(tea.steeps[0]) + ")"],
+      ["포인트", tea.brewTip]
+    ];
+    if (tea.id === "dark") rows.splice(3, 0, ["세차", "끓는 물로 10~20초, 한두 번"]);
+    if (tea.id === "oolong") rows.splice(3, 0, ["세차", "첫 물은 버려 잎을 데웁니다"]);
+    $("#brewInfo").innerHTML = rows
+      .map(function (r) {
+        return '<div class="kv"><dt>' + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
+      })
+      .join("");
+  }
+
+  function renderMute() {
+    var sw = $("#muteToggle");
+    sw.setAttribute("aria-checked", String(timer.muted));
+    $("#muteDesc").textContent = timer.muted ? "소리 없이 화면으로만 알려 드립니다" : "은은한 종소리로 알려 드립니다";
+    var ico = $("#muteIcon");
+    if (ico) ico.innerHTML = '<use href="#ic-' + (timer.muted ? "mute" : "sound") + '"/>';
+  }
+
+  function resetTimer(keepAdjust) {
+    stopTick();
+    timer.running = false;
+    timer.done = false;
+    if (!keepAdjust) timer.adjust = 0;
+    timer.total = clamp(baseSeconds() + timer.adjust, 10, 1200);
+    timer.remaining = timer.total;
+    renderTimerText();
+  }
+
+  function setTimerTea(id, steep) {
+    timer.teaId = id;
+    timer.steep = steep || 1;
+    timer.adjust = 0;
+    storeSet(LAST_TEA_KEY, id);
+    renderTeaChips();
+    renderSteepRow();
+    renderBrewInfo();
+    resetTimer();
+  }
+
+  function setTimerSteep(idx) {
+    timer.steep = idx;
+    timer.adjust = 0;
+    renderSteepRow();
+    renderBrewInfo();
+    resetTimer();
+  }
+
+  function stopTick() {
+    if (timer.interval) {
+      window.clearInterval(timer.interval);
+      timer.interval = null;
+    }
+  }
+
+  function startTick() {
+    stopTick();
+    timer.interval = window.setInterval(tick, 200);
+  }
+
+  function tick() {
+    if (!timer.running) return;
+    var left = (timer.endAt - Date.now()) / 1000;
+    if (left <= 0) {
+      finishTimer();
+      return;
+    }
+    timer.remaining = left;
+    renderTimerText();
+  }
+
+  function startTimer() {
+    if (timer.running) return;
+    if (timer.done) {
+      timer.done = false;
+      if (timer.steep < 3) timer.steep += 1;
+      timer.adjust = 0;
+      renderSteepRow();
+      renderBrewInfo();
+      timer.total = clamp(baseSeconds(), 10, 1200);
+      timer.remaining = timer.total;
+    }
+    if (timer.remaining <= 0) timer.remaining = timer.total;
+    timer.endAt = Date.now() + timer.remaining * 1000;
+    timer.running = true;
+    startTick();
+    renderTimerText();
+    unlockAudio();
+    requestWakeLock();
+  }
+
+  function pauseTimer() {
+    if (!timer.running) return;
+    timer.remaining = Math.max(0, (timer.endAt - Date.now()) / 1000);
+    timer.running = false;
+    stopTick();
+    releaseWakeLock();
+    renderTimerText();
+  }
+
+  function finishTimer() {
+    timer.remaining = 0;
+    timer.running = false;
+    timer.done = true;
+    stopTick();
+    releaseWakeLock();
+    renderTimerText();
+    playChime();
+    if (navigator.vibrate) {
+      try {
+        navigator.vibrate([90, 70, 90]);
+      } catch (e) {}
+    }
+    toast(timerTea().name + " " + timer.steep + "포, 다 우렸습니다. 잎을 건져 주세요");
+  }
+
+  function adjustTimer(delta) {
+    var proposed = clamp(timer.total + delta, 10, 1200);
+    var applied = proposed - timer.total;
+    if (!applied) return;
+    timer.total = proposed;
+    timer.adjust += applied;
+    if (timer.remaining + applied < 1) {
+      timer.remaining = 1;
+    } else {
+      timer.remaining += applied;
+    }
+    if (timer.running) {
+      timer.endAt += applied * 1000;
+    }
+    if (timer.done) {
+      timer.done = false;
+      timer.remaining = timer.total;
+    }
+    renderTimerText();
+  }
+
+  /* ---- Web Audio: 은은한 종소리 ---- */
+  function unlockAudio() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!timer.audio) timer.audio = new AC();
+      if (timer.audio.state === "suspended") timer.audio.resume();
+    } catch (e) {
+      /* 오디오를 못 쓰는 환경이면 조용히 넘어갑니다 */
+    }
+  }
+
+  function playChime() {
+    if (timer.muted) return;
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!timer.audio) timer.audio = new AC();
+      var ctx = timer.audio;
+      if (ctx.state === "suspended") ctx.resume();
+      var now = ctx.currentTime + 0.03;
+
+      function bell(freq, start, peak, dur) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(peak, start + 0.09);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + dur + 0.05);
+      }
+
+      // 낮게 깔리는 몸통음
+      bell(261.63, now, 0.05, 4.2);
+      // 차분한 3도 겹침
+      bell(523.25, now + 0.02, 0.07, 3.4);
+      bell(659.25, now + 0.22, 0.05, 3.2);
+      bell(783.99, now + 0.42, 0.035, 2.8);
+    } catch (e) {
+      /* 무음 처리 */
+    }
+  }
+
+  function requestWakeLock() {
+    try {
+      if (!("wakeLock" in navigator) || timer.wakeLock) return;
+      navigator.wakeLock
+        .request("screen")
+        .then(function (lock) {
+          timer.wakeLock = lock;
+          lock.addEventListener("release", function () {
+            timer.wakeLock = null;
+          });
+        })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  function releaseWakeLock() {
+    try {
+      if (timer.wakeLock) {
+        timer.wakeLock.release();
+        timer.wakeLock = null;
+      }
+    } catch (e) {}
+  }
+
+  function bindTimer() {
+    $("#startBtn").addEventListener("click", function () {
+      if (timer.done) {
+        startTimer();
+        return;
+      }
+      if (timer.running) pauseTimer();
+      else startTimer();
+    });
+    $("#resetBtn").addEventListener("click", function () {
+      resetTimer();
+      toast("타이머를 초기화했습니다");
+    });
+    $("#minus10").addEventListener("click", function () {
+      adjustTimer(-10);
+    });
+    $("#plus10").addEventListener("click", function () {
+      adjustTimer(10);
+    });
+    $("#muteToggle").addEventListener("click", function () {
+      timer.muted = !timer.muted;
+      storeSet(MUTE_KEY, timer.muted);
+      renderMute();
+      if (!timer.muted) playChime();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden && timer.running) tick();
+    });
+  }
+
+  /* ============================================================
+     3. 차 백과
+     ============================================================ */
+  var guideState = { q: "", filter: "all", open: null };
+
+  function renderFilterChips() {
+    var wrap = $("#filterChips");
+    if (!wrap) return;
+    var items = [{ id: "all", name: "전체" }].concat(
+      teas.map(function (t) {
+        return { id: t.id, name: t.name };
+      })
+    );
+    wrap.innerHTML = "";
+    items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip small";
+      btn.setAttribute("aria-pressed", String(guideState.filter === item.id));
+      btn.textContent = item.name;
+      btn.addEventListener("click", function () {
+        guideState.filter = item.id;
+        renderFilterChips();
+        renderTeaList();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function teaHaystack(tea) {
+    return [
+      tea.name,
+      tea.sub,
+      tea.oneLine,
+      tea.process,
+      tea.flavor,
+      tea.pairing,
+      tea.keep,
+      tea.brewTip,
+      tea.rounds,
+      tea.keywords,
+      tea.varieties.join(" ")
+    ]
+      .join(" ")
+      .toLowerCase();
+  }
+
+  function renderTeaList() {
+    var list = $("#teaList");
+    if (!list) return;
+    var q = guideState.q.trim().toLowerCase();
+    var shown = teas.filter(function (t) {
+      if (guideState.filter !== "all" && t.id !== guideState.filter) return false;
+      if (!q) return true;
+      return teaHaystack(t).indexOf(q) >= 0;
+    });
+
+    if (!shown.length) {
+      list.innerHTML =
+        '<div class="empty">‘' +
+        esc(guideState.q) +
+        "’에 해당하는 차를 찾지 못했습니다.<br />산지(하동, 아삼), 향(머스캣, 꿀), 상황(식후)으로 다시 찾아보세요.</div>";
+      return;
+    }
+
+    list.innerHTML = shown
+      .map(function (t) {
+        var open = guideState.open === t.id;
+        var facts = [
+          ["물 온도", t.tempRange],
+          ["잎 · 물", t.leaf + " / " + t.water],
+          ["첫 우리", fmtKo(t.steeps[0])]
+        ];
+        return (
+          '<article class="tea-card' +
+          (open ? " open" : "") +
+          '" data-tea="' +
+          t.id +
+          '">' +
+          '<button class="tea-main" type="button" data-toggle="' +
+          t.id +
+          '" aria-expanded="' +
+          open +
+          '">' +
+          '<div class="tea-head">' +
+          '<span class="tea-glyph" style="background:' +
+          t.accentSoft +
+          ";color:" +
+          t.accent +
+          '">' +
+          t.hanja +
+          "</span>" +
+          '<span class="tea-title"><b>' +
+          esc(t.name) +
+          "</b><span>" +
+          esc(t.sub) +
+          " · " +
+          esc(t.rounds) +
+          "</span></span>" +
+          '<span class="tea-caret"><svg width="17" height="17"><use href="#ic-caret"/></svg></span>' +
+          "</div>" +
+          '<p class="tea-oneline">' +
+          esc(t.oneLine) +
+          "</p>" +
+          '<div class="ox"><div class="ox-top"><span>산화도</span><b>' +
+          esc(t.oxidation) +
+          '</b></div><div class="ox-track"><div class="ox-fill' +
+          (/^\d/.test(t.oxidation) ? "" : " qual") +
+          '" style="width:' +
+          t.oxidationValue +
+          "%;background:" +
+          t.accent +
+          '"></div></div></div>' +
+          '<div class="tea-facts">' +
+          facts
+            .map(function (f) {
+              return '<div class="tea-fact"><span>' + f[0] + "</span><b>" + esc(f[1]) + "</b></div>";
+            })
+            .join("") +
+          "</div>" +
+          "</button>" +
+          '<div class="tea-more"><div><div class="tea-more-inner">' +
+          '<div class="detail"><h4>제다 핵심</h4><p>' +
+          esc(t.process) +
+          "</p></div>" +
+          '<div class="detail"><h4>대표 품종</h4><div class="tags">' +
+          t.varieties
+            .map(function (v) {
+              return '<span class="tag">' + esc(v) + "</span>";
+            })
+            .join("") +
+          "</div></div>" +
+          '<div class="detail"><h4>향미 노트</h4><p>' +
+          esc(t.flavor) +
+          "</p></div>" +
+          '<div class="detail"><h4>음식 페어링</h4><p>' +
+          esc(t.pairing) +
+          "</p></div>" +
+          '<div class="detail"><h4>보관 · 구매</h4><p>' +
+          esc(t.keep) +
+          "</p></div>" +
+          '<div class="detail"><h4>우리기 포인트</h4><p>' +
+          esc(t.brewTip) +
+          "</p></div>" +
+          '<button class="btn btn-dark btn-block" type="button" data-timer="' +
+          t.id +
+          '">이 차로 타이머 맞추기</button>' +
+          "</div></div></div>" +
+          "</article>"
+        );
+      })
+      .join("");
+
+    list.querySelectorAll("[data-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-toggle");
+        var card = list.querySelector('[data-tea="' + id + '"]');
+        var wasOpen = card && card.classList.contains("open");
+        list.querySelectorAll(".tea-card.open").forEach(function (c) {
+          c.classList.remove("open");
+          var b = c.querySelector("[data-toggle]");
+          if (b) b.setAttribute("aria-expanded", "false");
+        });
+        if (wasOpen) {
+          guideState.open = null;
+          return;
+        }
+        guideState.open = id;
+        card.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+        window.setTimeout(function () {
+          card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 160);
+      });
+    });
+    list.querySelectorAll("[data-timer]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-timer");
+        setTimerTea(id, 1);
+        go("timer");
+        toast(D.byId(id).name + " 타이머로 이동했습니다");
+      });
+    });
+  }
+
+  /* ============================================================
+     4. 시음 노트
+     ============================================================ */
+  var noteState = { rating: 0 };
+
+  function loadNotes() {
+    var raw = storeGet(NOTES_KEY, []);
+    if (!Array.isArray(raw)) return [];
+    return raw
+      .filter(function (n) {
+        return n && n.id && D.byId(n.teaId);
+      })
+      .sort(function (a, b) {
+        return b.createdAt - a.createdAt;
+      });
+  }
+  function saveNotes(list) {
+    storeSet(NOTES_KEY, list);
+  }
+
+  function dateLabel(ts) {
+    var d = new Date(ts);
+    return d.getFullYear() + "." + pad2(d.getMonth() + 1) + "." + pad2(d.getDate()) + " " + pad2(d.getHours()) + ":" + pad2(d.getMinutes());
+  }
+
+  function renderNoteSelect() {
+    var sel = $("#noteTea");
+    if (!sel) return;
+    sel.innerHTML = teas
+      .map(function (t) {
+        return '<option value="' + t.id + '">' + esc(t.name) + "</option>";
+      })
+      .join("");
+    var last = storeGet(LAST_TEA_KEY, null);
+    if (last && D.byId(last).id === last) sel.value = last;
+  }
+
+  function renderStarRow() {
+    var row = $("#starRow");
+    if (!row) return;
+    row.innerHTML = "";
+    for (var i = 1; i <= 5; i++) {
+      (function (v) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "star" + (v <= noteState.rating ? " on" : "");
+        b.textContent = "★";
+        b.setAttribute("aria-label", v + "점");
+        b.setAttribute("aria-pressed", String(v <= noteState.rating));
+        b.addEventListener("click", function () {
+          noteState.rating = v;
+          renderStarRow();
+        });
+        row.appendChild(b);
+      })(i);
+    }
+    var label = document.createElement("span");
+    label.className = "stars-num";
+    label.textContent = noteState.rating ? noteState.rating + ".0" : "선택";
+    row.appendChild(label);
+  }
+
+  function renderNotes() {
+    var notes = loadNotes();
+    var list = $("#noteList");
+    var count = notes.length;
+    $("#statCount").innerHTML = count + "<small>잔</small>";
+    $("#noteCountLabel").textContent = count + "잔";
+
+    if (count) {
+      var sum = notes.reduce(function (acc, n) {
+        return acc + (Number(n.rating) || 0);
+      }, 0);
+      $("#statAvg").innerHTML = (sum / count).toFixed(1) + "<small>점</small>";
+    } else {
+      $("#statAvg").textContent = "—";
+    }
+
+    if (!count) {
+      list.innerHTML =
+        '<div class="empty">아직 기록이 없습니다.<br />오늘 우린 차 한 잔을 남겨 보세요. 차 종류와 별점만 있으면 됩니다.</div>';
+      return;
+    }
+
+    list.innerHTML = notes
+      .map(function (n) {
+        var tea = D.byId(n.teaId);
+        return (
+          '<article class="note-item">' +
+          '<div class="note-top">' +
+          '<span class="note-tea" style="background:' +
+          tea.accentSoft +
+          ";color:" +
+          tea.accent +
+          '">' +
+          esc(tea.name) +
+          "</span>" +
+          '<span class="note-stars">' +
+          starsMark(Number(n.rating)) +
+          "</span>" +
+          '<span class="note-date">' +
+          esc(n.dateLabel) +
+          "</span>" +
+          "</div>" +
+          '<h3 class="note-name">' +
+          esc(n.name) +
+          "</h3>" +
+          (n.note ? '<p class="note-text">' + esc(n.note) + "</p>" : "") +
+          '<button class="note-del" type="button" data-del="' +
+          n.id +
+          '" aria-label="' +
+          esc(n.name) +
+          ' 기록 삭제"><svg width="16" height="16"><use href="#ic-trash"/></svg></button>' +
+          "</article>"
+        );
+      })
+      .join("");
+
+    list.querySelectorAll("[data-del]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-del");
+        var next = loadNotes().filter(function (n) {
+          return n.id !== id;
+        });
+        saveNotes(next);
+        renderNotes();
+        renderRecentNote();
+        toast("기록을 삭제했습니다");
+      });
+    });
+  }
+
+  function submitNote(e) {
+    e.preventDefault();
+    var teaId = $("#noteTea").value;
+    var name = $("#noteName").value.trim();
+    var text = $("#noteText").value.trim();
+    if (!name) {
+      toast("차 이름을 적어 주세요 (예: 하동 우전)");
+      $("#noteName").focus();
+      return;
+    }
+    if (!noteState.rating) {
+      toast("별점을 골라 주세요");
+      return;
+    }
+    var notes = loadNotes();
+    var now = Date.now();
+    notes.push({
+      id: "n" + now + Math.random().toString(36).slice(2, 6),
+      teaId: teaId,
+      name: name,
+      rating: noteState.rating,
+      note: text,
+      createdAt: now,
+      dateLabel: dateLabel(now)
+    });
+    saveNotes(notes);
+    $("#noteName").value = "";
+    $("#noteText").value = "";
+    noteState.rating = 0;
+    renderStarRow();
+    renderNotes();
+    renderRecentNote();
+    toast("시음 노트에 남겼습니다");
+  }
+
+  /* ============================================================
+     시작
+     ============================================================ */
+  function init() {
+    renderHomeDate();
+    homeState.mood = defaultMoodId();
+    renderMoodChips();
+    renderReco();
+    renderRecentNote();
+
+    var lastTea = storeGet(LAST_TEA_KEY, null);
+    timer.teaId = lastTea && D.byId(lastTea).id === lastTea ? lastTea : "green";
+    renderTeaChips();
+    renderSteepRow();
+    renderBrewInfo();
+    renderMute();
+    resetTimer();
+    bindTimer();
+
+    renderFilterChips();
+    var input = $("#searchInput");
+    input.addEventListener("input", function () {
+      guideState.q = input.value;
+      renderTeaList();
+    });
+    renderTeaList();
+
+    renderNoteSelect();
+    renderStarRow();
+    renderNotes();
+    $("#noteForm").addEventListener("submit", submitNote);
+
+    // 매니페스트 바로가기(#timer, #notes)로 들어오면 해당 화면을 엽니다
+    var hash = (location.hash || "").replace("#", "");
+    if (viewTitles[hash] && hash !== "home") go(hash);
+    window.addEventListener("hashchange", function () {
+      var h = (location.hash || "").replace("#", "");
+      if (viewTitles[h]) go(h);
+    });
+
+    // 서비스 워커는 http(s)에서만 등록합니다 (파일로 열 때는 조용히 건너뜀)
+    if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+  </body>
+</html>

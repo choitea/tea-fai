@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>티파이 — 차 백과 &amp; 우림 타이머</title>
+    <meta name="description" content="녹차·백차·우롱차·홍차·흑차·얼그레이의 우림 온도와 시간, 차 백과, 시음 노트를 한 곳에. 《찻잎의 시간, 오늘의 한 잔》과 《얼그레이의 모든 것》을 바탕으로 만든 티파이 앱." />
+    <meta name="theme-color" content="#F7F3EB" />
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="티파이" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="icon" type="image/png" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- 아이콘 스프라이트 -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1h-4.5v-6h-6v6H4.5a1 1 0 0 1-1-1z" />
+        </symbol>
+        <symbol id="ic-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="13.5" r="7.5" />
+          <path d="M12 10v3.8l2.4 1.7M9.5 2.5h5" />
+        </symbol>
+        <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6.3C10.4 4.9 8.3 4.3 5.5 4.3v13.4c2.8 0 4.9.6 6.5 2 1.6-1.4 3.7-2 6.5-2V4.3c-2.8 0-4.9.6-6.5 2z" />
+          <path d="M12 6.3v13.4" />
+        </symbol>
+        <symbol id="ic-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 4.5h9.5L19 9v10.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1z" />
+          <path d="M14 4.5V9h4.5M7.5 13h7M7.5 16.5h4.5" />
+        </symbol>
+        <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" />
+        </symbol>
+        <symbol id="ic-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9.5 6 6 6-6" />
+        </symbol>
+        <symbol id="ic-play" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 4.8c0-.8.9-1.3 1.6-.9l10 7.1c.6.4.6 1.4 0 1.8l-10 7.1c-.7.4-1.6-.1-1.6-.9z" />
+        </symbol>
+        <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4" />
+        </symbol>
+        <symbol id="ic-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z" />
+          <path d="M9 7.5c0-1 1-1.4 1-2.4M13 7.5c0-1 1-1.4 1-2.4" />
+          <path d="M8 20.5h8" />
+        </symbol>
+        <symbol id="ic-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 7.5h11v5.5a5.5 5.5 0 0 1-11 0z" />
+          <path d="M15.5 9h1.8a2.6 2.6 0 0 1 0 5.2h-1.8" />
+          <path d="M4 21h12" />
+        </symbol>
+        <symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" />
+        </symbol>
+        <symbol id="ic-youtube" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.3 7.2a2.6 2.6 0 0 0-1.8-1.8C17.8 5 12 5 12 5s-5.8 0-7.5.4A2.6 2.6 0 0 0 2.7 7.2C2.3 8.9 2.3 12 2.3 12s0 3.1.4 4.8a2.6 2.6 0 0 0 1.8 1.8C6.2 19 12 19 12 19s5.8 0 7.5-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8zM10 15.2V8.8L15.2 12z" />
+        </symbol>
+        <symbol id="ic-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5z" />
+        </symbol>
+        <symbol id="ic-bookstore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v16H5.5A1.5 1.5 0 0 1 4 18.5z" />
+          <path d="M13.6 4.6l3.9 1a1.5 1.5 0 0 1 1.1 1.8l-3.1 11.6a1.5 1.5 0 0 1-1.8 1.1l-3.9-1" />
+        </symbol>
+        <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 5.5 6.5 6.5L9 18.5" />
+        </symbol>
+        <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 6.5h15M9.5 6.5V4h5v2.5M6.5 6.5 7.4 20h9.2l.9-13.5" />
+        </symbol>
+        <symbol id="ic-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5 6.5 8.8H3.5v6.4h3L11 19z" />
+          <path d="M15 9.2a4 4 0 0 1 0 5.6M17.8 6.5a7.6 7.6 0 0 1 0 11" />
+        </symbol>
+        <symbol id="ic-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5 6.5 8.8H3.5v6.4h3L11 19z" />
+          <path d="m15.5 10 4 4M19.5 10l-4 4" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">茶</span>
+        <span class="brand-name">티파이<em>Tea Fai</em></span>
+      </div>
+      <span class="header-note">차 백과 · 우리기</span>
+    </header>
+
+    <main class="viewport">
+      <!-- ───────── 오늘의 차 ───────── -->
+      <section class="view active" id="view-home" aria-labelledby="homeTitle">
+        <div class="view-head">
+          <p class="eyebrow" id="homeDate">오늘</p>
+          <h1 id="homeTitle">오늘은 어떤<br />한 잔이 필요하세요?</h1>
+          <p>기분을 고르면 어울리는 차와 우리는 법을 골라 드립니다.</p>
+        </div>
+
+        <div class="chip-row" id="moodChips" role="group" aria-label="기분·상황 선택"></div>
+        <div id="recoArea" style="margin-top: 14px"></div>
+
+        <div class="section-head">
+          <h2>티파이 채널</h2>
+          <span>차 한 잔과 함께</span>
+        </div>
+        <div class="banner-row">
+          <a class="banner" href="https://youtu.be/5fkX0dfnHmE" target="_blank" rel="noopener">
+            <span class="banner-label">Lo-fi playlist</span>
+            <span class="banner-title">우리기 좋은<br />로파이</span>
+            <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
+          </a>
+          <a class="banner sleep" href="https://youtu.be/sRJH76ZkajY" target="_blank" rel="noopener">
+            <span class="banner-label">Sleep sound</span>
+            <span class="banner-title">잠들기 전<br />수면 사운드</span>
+            <span class="banner-play"><svg><use href="#ic-play" /></svg></span>
+          </a>
+        </div>
+
+        <div class="link-list">
+          <a class="link-row" href="https://rotroka.upaper.kr" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-book" /></svg></span>
+            <span class="lr-text">
+              <b>전자책 《찻잎의 시간, 오늘의 한 잔》</b>
+              <span>유페이퍼 서점 · 얼그레이 편도 함께</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+          <a class="link-row" href="https://blog.naver.com/hongkongtea_kr" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-globe" /></svg></span>
+            <span class="lr-text">
+              <b>네이버 블로그</b>
+              <span>blog.naver.com/hongkongtea_kr</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+          <a class="link-row" href="https://www.youtube.com/@TeaFai" target="_blank" rel="noopener">
+            <span class="lr-ico"><svg><use href="#ic-youtube" /></svg></span>
+            <span class="lr-text">
+              <b>유튜브 채널 @TeaFai</b>
+              <span>차 이야기와 우리기 영상</span>
+            </span>
+            <span class="lr-arrow"><svg width="16" height="16"><use href="#ic-arrow" /></svg></span>
+          </a>
+        </div>
+
+        <div class="quote">
+          <span class="eyebrow">책에서 한 줄</span>
+          <p>녹차는 1분을 기다리고, 우롱차는 30초를 기다리고, 흑차는 20년을 기다린다. 같은 잎이 어떤 시간을 통과했는지 알면, 우리가 컵 앞에서 보내는 3분도 그 시간의 일부가 된다.</p>
+          <cite>《찻잎의 시간, 오늘의 한 잔》 에필로그</cite>
+        </div>
+
+        <div id="recentNote"></div>
+
+        <p class="legal-link"><a href="privacy.html">개인정보처리방침</a></p>
+      </section>
+
+      <!-- ───────── 우림 타이머 ───────── -->
+      <section class="view" id="view-timer" aria-labelledby="timerTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Steeping timer</p>
+          <h1 id="timerTitle">우림 타이머</h1>
+          <p>차를 고르고 몇 번째 포인지 고르면 책의 기준 시간으로 맞춰 드립니다.</p>
+        </div>
+
+        <div class="chip-row" id="teaChips" role="group" aria-label="차 종류 선택"></div>
+
+        <div class="timer-stage">
+          <div class="ring" id="ring">
+            <svg viewBox="0 0 260 260" aria-hidden="true">
+              <circle class="ring-track" cx="130" cy="130" r="116" />
+              <circle class="ring-progress" id="ringProgress" cx="130" cy="130" r="116" />
+            </svg>
+            <div class="ring-inner">
+              <div class="ring-time" id="ringTime" role="timer" aria-live="off">01:30</div>
+              <div class="ring-tea" id="ringTea">녹차 · 1포</div>
+              <div class="ring-state" id="ringState">준비</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="steep-row" id="steepRow" role="group" aria-label="포 수 선택"></div>
+
+        <div class="adjust-row">
+          <button class="adjust-btn" id="minus10" type="button" aria-label="10초 줄이기">−10</button>
+          <span class="adjust-label" id="adjustLabel">±10초</span>
+          <button class="adjust-btn" id="plus10" type="button" aria-label="10초 늘리기">+10</button>
+        </div>
+
+        <div class="timer-actions">
+          <button class="btn btn-primary" id="startBtn" type="button">우리기 시작</button>
+          <button class="btn btn-outline" id="resetBtn" type="button">초기화</button>
+        </div>
+
+        <p class="steep-note" id="steepNote"></p>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>이 차의 우리기</h3>
+            <span class="eyebrow" id="panelTemp">75℃</span>
+          </div>
+          <dl id="brewInfo"></dl>
+          <div class="mute-row">
+            <p>
+              <svg id="muteIcon" width="15" height="15" style="vertical-align:-3px;margin-right:5px;color:#8b8371"><use href="#ic-sound" /></svg>알림음
+              <small id="muteDesc">은은한 종소리로 알려 드립니다</small>
+            </p>
+            <button class="switch" id="muteToggle" type="button" role="switch" aria-checked="false" aria-label="알림음 음소거"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───────── 차 백과 ───────── -->
+      <section class="view" id="view-guide" aria-labelledby="guideTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Tea encyclopedia</p>
+          <h1 id="guideTitle">차 백과</h1>
+          <p>산화도, 제다, 향미, 페어링, 보관까지 — 두 권의 책에서 정리했습니다.</p>
+        </div>
+
+        <div class="search-box">
+          <svg><use href="#ic-search" /></svg>
+          <input type="search" id="searchInput" placeholder="차 이름, 향, 산지로 찾기" autocomplete="off" aria-label="차 백과 검색" />
+        </div>
+        <div class="chip-row" id="filterChips" role="group" aria-label="차류 필터"></div>
+        <div id="teaList" style="margin-top: 14px"></div>
+
+        <div class="app-footer">
+          <b>출처</b> — 《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》(최티).<br />
+          수치는 책의 부록 표와 각 장의 서술을 그대로 옮겼습니다. 입맛에 맞춰 ±10초로 조율해 보세요.<br />
+          <a href="privacy.html">개인정보처리방침</a>
+        </div>
+      </section>
+
+      <!-- ───────── 시음 노트 ───────── -->
+      <section class="view" id="view-notes" aria-labelledby="notesTitle">
+        <div class="view-head" style="margin-bottom: 12px">
+          <p class="eyebrow">Tasting notes</p>
+          <h1 id="notesTitle">시음 노트</h1>
+          <p>오늘 우린 차를 한 줄로 남겨 두면, 다음 잔이 조금 더 정확해집니다.</p>
+        </div>
+
+        <div class="note-stats">
+          <div class="note-stat">
+            <span>기록한 잔</span>
+            <b id="statCount">0<small>잔</small></b>
+          </div>
+          <div class="note-stat">
+            <span>평균 별점</span>
+            <b id="statAvg">—</b>
+          </div>
+        </div>
+
+        <form class="form-card" id="noteForm" autocomplete="off">
+          <div class="field">
+            <label for="noteTea">차 종류</label>
+            <select id="noteTea"></select>
+          </div>
+          <div class="field">
+            <label for="noteName">이름 · 산지</label>
+            <input type="text" id="noteName" placeholder="예: 하동 우전, 2026 봄" maxlength="60" />
+          </div>
+          <div class="field">
+            <label id="starLabel">별점</label>
+            <div class="stars" id="starRow" role="group" aria-labelledby="starLabel"></div>
+          </div>
+          <div class="field">
+            <label for="noteText">한 줄 감상</label>
+            <textarea id="noteText" placeholder="예: 75도에서 1분, 떫음 없이 단맛이 오래 남았다." maxlength="200"></textarea>
+          </div>
+          <button class="btn btn-dark btn-block" type="submit">노트 저장</button>
+        </form>
+
+        <div class="section-head">
+          <h2>기록</h2>
+          <span id="noteCountLabel">0잔</span>
+        </div>
+        <div id="noteList"></div>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="주요 화면">
+      <button class="tab active" type="button" data-view="home" aria-current="page">
+        <svg><use href="#ic-home" /></svg><span>오늘의 차</span>
+      </button>
+      <button class="tab" type="button" data-view="timer">
+        <svg><use href="#ic-timer" /></svg><span>우림 타이머</span>
+      </button>
+      <button class="tab" type="button" data-view="guide">
+        <svg><use href="#ic-book" /></svg><span>차 백과</span>
+      </button>
+      <button class="tab" type="button" data-view="notes">
+        <svg><use href="#ic-note" /></svg><span>시음 노트</span>
+      </button>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
