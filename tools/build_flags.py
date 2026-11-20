@@ -187,10 +187,11 @@ def main():
     wrap("ko", taegeukgi(), "태극기 (한국어)")
     wrap(
         "en",
-        '<clipPath id="uk"><polygon points="0,0 30,0 0,20"/></clipPath>'
-        '<clipPath id="us"><polygon points="30,0 30,20 0,20"/></clipPath>'
+        # 미국 별밭이 왼쪽 위에 오도록 좌우를 뒤집었습니다(성조기 왼쪽 · 유니언잭 오른쪽).
+        '<clipPath id="uk"><polygon points="30,0 30,20 0,20"/></clipPath>'
+        '<clipPath id="us"><polygon points="0,0 30,0 0,20"/></clipPath>'
         f'<g clip-path="url(#uk)">{union_jack(W, H)}</g>'
-        f'<g clip-path="url(#us)"><g transform="translate(30,0) scale(-1,1)">{usa(W, H)}</g></g>',
+        f'<g clip-path="url(#us)">{usa(W, H)}</g>',
         "미국·영국 (English)",
     )
     wrap("zh-CN", china(), "五星红旗 (简体中文)")

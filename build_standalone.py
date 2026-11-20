@@ -28,9 +28,18 @@ html = html.replace(
     '<link rel="stylesheet" href="styles.css" />',
     "<style>\n" + css + "\n</style>",
 )
+
+# 국기 SVG 는 i18n.js 의 mountSwitcher 가 <img> 로 그리므로 data URI 로 함께 품습니다
+flags = {}
+for code, fname in (("ko", "ko"), ("en", "en"), ("zh-CN", "zh-CN"), ("zh-TW", "zh-TW"), ("ja", "ja"), ("yue", "yue")):
+    raw = (BASE / "icons" / "flags" / (fname + ".svg")).read_bytes()
+    flags[code] = "data:image/svg+xml;base64," + base64.b64encode(raw).decode("ascii")
+flag_js = "<script>window.TEAFaiFlags = " + json.dumps(flags) + ";</script>\n    "
+
 html = html.replace(
     '<script src="supabase-adapter.js"></script>\n    <script src="i18n.js"></script>\n    <script src="data.js"></script>\n    <script src="app.js"></script>\n    <script src="features.js"></script>',
-    "<script>\n"
+    flag_js
+    + "<script>\n"
     + supabase_js
     + "\n</script>\n    <script>\n"
     + i18n_js
@@ -51,14 +60,6 @@ html = html.replace(
 svg = (BASE / "icons" / "logo_tea_mark.svg").read_text(encoding="utf-8")
 svg_uri = "data:image/svg+xml;base64," + base64.b64encode(svg.encode("utf-8")).decode("ascii")
 html = html.replace('src="icons/logo_tea_mark.svg"', f'src="{svg_uri}"')
-
-# 국기 SVG 는 i18n.js 의 mountSwitcher 가 <img> 로 그리므로 data URI 로 함께 품습니다
-flags = {}
-for code, fname in (("ko", "ko"), ("en", "en"), ("zh-CN", "zh-CN"), ("zh-TW", "zh-TW"), ("ja", "ja"), ("yue", "yue")):
-    raw = (BASE / "icons" / "flags" / (fname + ".svg")).read_bytes()
-    flags[code] = "data:image/svg+xml;base64," + base64.b64encode(raw).decode("ascii")
-flag_js = "<script>window.TeaFaiFlags = " + json.dumps(flags) + ";</script>\n    "
-html = html.replace('<script src="i18n.js"></script>', flag_js + '<script src="i18n.js"></script>', 1)
 
 # 내장 데이터 사본
 shops = json.loads((BASE / "data" / "shops.json").read_text(encoding="utf-8"))
