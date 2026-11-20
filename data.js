@@ -6774,6 +6774,12 @@ window.TEAFaiData = (function () {
     return raw;
   }
 
+  function num(a, b, fallback) {
+    if (a != null) return a;
+    if (b != null) return b;
+    return fallback;
+  }
+
   function groupPost(g, lang) {
     var text = normText(g[lang] || g.ko);
     var o = {};
@@ -6801,13 +6807,13 @@ window.TEAFaiData = (function () {
       hs: entry.hs || "",
       rom: entry.rom || "",
       sub: entry.sub || group.sub,
-      temp: entry.t != null ? entry.t : group.temp,
-      tempRange: entry.tr || group.tempRange,
-      leaf: entry.l || group.leaf,
-      water: entry.w || group.water,
-      steeps: entry.s || group.steeps,
-      maxSteep: entry.m != null ? entry.m : group.maxSteep,
-      oxidationValue: entry.ox != null ? entry.ox : group.oxidationValue,
+      temp: num(entry.t, entry.temp, group.temp),
+      tempRange: entry.tr || entry.tempRange || group.tempRange,
+      leaf: entry.l || entry.leaf || group.leaf,
+      water: entry.w || entry.water || group.water,
+      steeps: entry.s || entry.steeps || group.steeps,
+      maxSteep: num(entry.m, entry.maxSteep, group.maxSteep),
+      oxidationValue: num(entry.ox, entry.oxidationValue, group.oxidationValue),
       accent: group.accent,
       accentSoft: group.accentSoft,
       groupName: group.name

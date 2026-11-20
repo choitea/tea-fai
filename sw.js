@@ -1,6 +1,6 @@
 /* 티키피디아 서비스 워커 — 앱 껍데기를 캐시해 오프라인에서도 열립니다
    (온라인일 때는 네트워크를 먼저 보고, 새 파일이 오면 캐시를 갱신합니다) */
-var CACHE = "teafai-v3";
+var CACHE = "teafai-v4";
 var ASSETS = [
   "./",
   "./index.html",
@@ -64,7 +64,7 @@ self.addEventListener("fetch", function (event) {
 
   // 화면 이동과 앱 파일은 네트워크 먼저, 실패하면 캐시
   event.respondWith(
-    fetch(req)
+    fetch(req, { cache: "no-cache" })
       .then(function (res) {
         if (res && res.status === 200 && res.type === "basic") {
           var copy = res.clone();
