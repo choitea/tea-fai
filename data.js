@@ -9,7 +9,17 @@
 window.TEAFaiData = (function () {
   "use strict";
 
-  var LANGS = ["ko", "en", "zh-CN", "zh-TW"];
+  var LANGS = ["ko", "en", "zh-CN", "zh-TW", "yue"];
+
+  /* 광동어(yue)는 아직 차별 문구를 따로 쓰지 않았습니다. 번체 중국어 문구를 그대로 쓰고,
+     없는 항목은 영어까지 내려갑니다(화면이 비지 않게). */
+  var LANG_CHAIN = {
+    ko: ["ko", "en"],
+    en: ["en", "ko"],
+    "zh-CN": ["zh-CN", "zh-TW", "en"],
+    "zh-TW": ["zh-TW", "zh-CN", "en"],
+    yue: ["yue", "zh-TW", "zh-CN", "en"]
+  };
 
   /* ---------------- 계열 (6) ---------------- */
   var GROUPS = [
@@ -7826,6 +7836,7 @@ window.TEAFaiData = (function () {
     }
   ];
 
+
   /* ---------------- 취향 태그 (10문항 테스트용) ----------------
      각 차의 성격을 태그로 적어 두고, 퀴즈 답변의 태그 점수와 맞춥니다.
      시간 t- / 향 a- / 바디 b- / 방식 s- / 카페인 c- / 맛 k- / 배전 r- /
@@ -7940,6 +7951,10143 @@ window.TEAFaiData = (function () {
     "fruit-passionfruit": "t-afternoon a-fruit a-herb b-light k-crisp k-blend s-iced w-quick p-dessert c-none m-refresh"
   };
 
+  /* ── BEGIN generated: research ── */
+  /* ── 신규 65종 (tea_fai_research/extra_teas.json) ── */
+  var EXTRA_TEAS = [
+  {
+    "id": "green-zhuyeqing",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "竹",
+    "sub": "Zhu Ye Qing",
+    "alias": [
+      "죽엽청",
+      "아미산 죽엽청"
+    ],
+    "hz": "竹葉青",
+    "hs": "竹叶青",
+    "rom": "Zhu Ye Qing",
+    "temp": 80,
+    "tempRange": "75~80℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      60,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "살청(솥 덖음) → 유념 → 건조. 솥에서 덖어 잎을 대나무 잎처럼 곧고 납작하게 만듭니다.",
+        "1964년 어메이산에서 만들어지기 시작한 것으로 전해지며, 이름은 잎 모양에서 왔습니다."
+      ],
+      "en": [
+        "Pan-fired in a wok, rolled, dried. The firing keeps the blade straight and flat, like a bamboo leaf.",
+        "It is said to have begun on Mount Emei in 1964; the name simply describes the shape of the leaf."
+      ],
+      "zh-CN": [
+        "锅里炒青 → 揉捻 → 干燥。炒制把芽叶压成竹叶般的扁平直条。",
+        "相传1964年创制于峨眉山，名字就来自叶形。"
+      ],
+      "zh-TW": [
+        "鍋裡炒青 → 揉捻 → 乾燥。炒制把芽葉壓成竹葉般的扁平直條。",
+        "相傳1964年創製於峨眉山，名字就來自葉形。"
+      ]
+    },
+    "ko": {
+      "name": "죽엽청 (아미산)",
+      "oneLine": "대나무 잎처럼 곧게 편 잎 — 쓰촨의 봄을 일찍 담는 차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분, 2포 30초, 3포 45초.",
+      "origin": "쓰촨성 어메이산 일대, 해발 800~1,200m. 청명 전에 딴 어린 싹을 씁니다.",
+      "process": "살청 → 유념 → 건조. 솥에서 덖어 잎을 곧고 납작하게 만듭니다.",
+      "story": "1964년 어메이산에서 처음 만들었다고 전합니다. 이름은 대나무 잎을 닮은 모양에서 왔습니다.",
+      "flavor": "옅은 풀 향과 단맛, 끝에 아주 가벼운 떫음. 물색은 연한 청록입니다.",
+      "pairing": "담백한 생선찜, 두부, 죽. 기름진 요리와는 어울리지 않습니다.",
+      "brewTip": "유리잔이면 물을 먼저 붓고 잎을 얹으세요. 잎이 서서히 가라앉으며 향이 열립니다.",
+      "keep": "개봉 후 한 달 안. 밀봉해 냉장 보관합니다.",
+      "keywords": "죽엽청 아미산 쓰촨 덖음 녹차 명전"
+    },
+    "en": {
+      "name": "Zhu Ye Qing (Emei)",
+      "oneLine": "Flat blades like bamboo leaves — Sichuan's early spring in a cup.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1 minute, then 30 seconds, then 45.",
+      "origin": "The Emei Mountain area of Sichuan, 800–1,200 m, picked before Qingming.",
+      "process": "Firing, rolling, drying. The wok keeps the blade straight and flat.",
+      "story": "Said to have begun on Mount Emei in 1964; the name comes from the shape of the leaf.",
+      "flavor": "Light green-grass aroma, sweetness, a faint astringency at the end. Pale blue-green liquor.",
+      "pairing": "Steamed white fish, tofu, congee. Oily dishes fight it.",
+      "brewTip": "In a glass, pour the water first and drop the leaf in; it sinks slowly and opens as it goes.",
+      "keep": "Within a month of opening, sealed in the fridge.",
+      "keywords": "Zhu Ye Qing Emei Sichuan pan-fired green tea pre-Qingming"
+    },
+    "zh-CN": {
+      "name": "竹叶青",
+      "oneLine": "形如竹叶的扁平芽叶——把四川的早春装进杯里。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分钟，第二泡30秒，第三泡45秒。",
+      "origin": "四川峨眉山一带，海拔800~1200米，清明前采嫩芽。",
+      "process": "炒青 → 揉捻 → 干燥，锅里炒成扁平直条。",
+      "story": "相传1964年创制于峨眉山，名字来自叶形。",
+      "flavor": "清草香与回甘，尾端极轻的涩，汤色浅青绿。",
+      "pairing": "清蒸鱼、豆腐、粥。油腻菜会压住香气。",
+      "brewTip": "玻璃杯先注水再投茶，芽叶缓缓下沉，香气随之打开。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "竹叶青 峨眉 四川 炒青绿茶 明前"
+    },
+    "zh-TW": {
+      "name": "竹葉青",
+      "oneLine": "形如竹葉的扁平芽葉——把四川的早春裝進杯裡。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分鐘，第二泡30秒，第三泡45秒。",
+      "origin": "四川峨眉山一帶，海拔800~1200米，清明前採嫩芽。",
+      "process": "炒青 → 揉捻 → 乾燥，鍋裡炒成扁平直條。",
+      "story": "相傳1964年創製於峨眉山，名字來自葉形。",
+      "flavor": "清草香與回甘，尾端極輕的澀，湯色淺青綠。",
+      "pairing": "清蒸魚、豆腐、粥。油膩菜會壓住香氣。",
+      "brewTip": "玻璃杯先注水再投茶，芽葉緩緩下沉，香氣隨之打開。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "竹葉青 峨眉 四川 炒青綠茶 明前"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-enshi-yulu",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "玉",
+    "sub": "Enshi Yulu",
+    "alias": [
+      "은시옥로",
+      "옥로"
+    ],
+    "hz": "恩施玉露",
+    "hs": "恩施玉露",
+    "rom": "Enshi Yulu",
+    "temp": 75,
+    "tempRange": "70~80℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-herb b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "증청(수증기로 찌기) → 유념 → 건조. 일본식 증청을 지키는 중국 녹차로는 드문 차입니다.",
+        "후베이성 언스의 바둥(巴東) 지역에서 청대부터 만들었고, 1960년대에 지금의 증청 방식이 정리되었습니다."
+      ],
+      "en": [
+        "Steamed → rolled → dried. Steam fixing is rare among Chinese greens, kept from Japanese practice.",
+        "Made in Enshi, Hubei since the Qing era; the present steamed process was consolidated in the 1960s."
+      ],
+      "zh-CN": [
+        "蒸汽杀青 → 揉捻 → 干燥。中国绿茶里少见的蒸青工艺。",
+        "清代已在湖北恩施一带制作，1960年代定型为现在的蒸青做法。"
+      ],
+      "zh-TW": [
+        "蒸汽殺青 → 揉捻 → 乾燥。中國綠茶裡少見的蒸青工藝。",
+        "清代已在湖北恩施一帶製作，1960年代定型為現在的蒸青做法。"
+      ]
+    },
+    "ko": {
+      "name": "은시옥로",
+      "oneLine": "수증기로 찌고 바늘처럼 비튼, 중국에서 드문 증청 녹차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "75도에서 1분 15초, 2포 30초, 3포 45초. 물이 뜨거우면 해조류 같은 향이 강해집니다.",
+      "origin": "후베이성 언스시, 해발 400~800m의 산지.",
+      "process": "증청 → 유념 → 건조. 찐 잎을 비벼 가는 바늘 모양으로 만듭니다.",
+      "story": "청대부터 언스에서 만들었고, 1960년대에 지금의 증청 방식이 정리되었습니다.",
+      "flavor": "찐 잎의 감칠맛과 해조류 같은 향, 부드러운 단맛. 물색은 맑은 연둣빛입니다.",
+      "pairing": "회, 초밥, 나물. 기름진 고기와는 부딪힙니다.",
+      "brewTip": "70~75도. 끓인 물을 다른 컵에 한 번 옮겨 쓰면 대략 그 온도가 됩니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장. 증청차는 산화가 빨라 더 서늘하게 둡니다.",
+      "keywords": "은시옥로 증청 녹차 후베이 바늘잎"
+    },
+    "en": {
+      "name": "Enshi Yulu",
+      "oneLine": "Steamed and twisted into needles — a rare steamed green in China.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "75 °C: 1¼ minutes, then 30 seconds, then 45. Hotter water brings out a seaweed note.",
+      "origin": "Enshi, Hubei, 400–800 m.",
+      "process": "Steaming, rolling, drying; the steamed leaf is rolled into fine needles.",
+      "story": "Made in Enshi since the Qing era; today's steamed method was settled in the 1960s.",
+      "flavor": "Savory steamed-leaf umami, a seaweed edge, soft sweetness. Clear pale-green liquor.",
+      "pairing": "Sashimi, sushi, namul. Oily meat clashes.",
+      "brewTip": "70–75 °C. Pour boiling water into another cup once to land near that.",
+      "keep": "Within a month of opening, sealed and cold — steamed leaf fades faster.",
+      "keywords": "Enshi Yulu steamed green tea Hubei needle"
+    },
+    "zh-CN": {
+      "name": "恩施玉露",
+      "oneLine": "蒸汽杀青、揉成针形，中国少见的蒸青绿茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "75度泡1分15秒，第二泡30秒，第三泡45秒。水太烫会突出海藻气。",
+      "origin": "湖北恩施，海拔400~800米。",
+      "process": "蒸青 → 揉捻 → 干燥，揉成细针状。",
+      "story": "清代已在恩施制作，1960年代定型为现在的蒸青工艺。",
+      "flavor": "蒸青的鲜味与海藻香，回甘柔和，汤色浅绿清亮。",
+      "pairing": "生鱼片、寿司、凉拌菜。油腻肉类相冲。",
+      "brewTip": "70~75度，沸水先倒到另一个杯子再冲。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "恩施玉露 蒸青绿茶 湖北 针形"
+    },
+    "zh-TW": {
+      "name": "恩施玉露",
+      "oneLine": "蒸汽殺青、揉成針形，中國少見的蒸青綠茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "75度泡1分15秒，第二泡30秒，第三泡45秒。水太燙會突出海藻氣。",
+      "origin": "湖北恩施，海拔400~800米。",
+      "process": "蒸青 → 揉捻 → 乾燥，揉成細針狀。",
+      "story": "清代已在恩施製作，1960年代定型為現在的蒸青工藝。",
+      "flavor": "蒸青的鮮味與海藻香，回甘柔和，湯色淺綠清亮。",
+      "pairing": "生魚片、壽司、涼拌菜。油膩肉類相衝。",
+      "brewTip": "70~75度，沸水先倒到另一個杯子再衝。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "恩施玉露 蒸青綠茶 湖北 針形"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-anji-baipian",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "白",
+    "sub": "Anji Bai Cha",
+    "alias": [
+      "안길백차",
+      "안지백차"
+    ],
+    "hz": "安吉白茶",
+    "hs": "安吉白茶",
+    "rom": "Anji Bai Cha",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "이름은 ‘백차’지만 백차가 아니라 녹차입니다. 봄에 잎이 연두빛 흰색을 띠는 백엽1호 품종으로 만듭니다.",
+        "살청 → 유념 → 건조. 잎이 여려 낮은 온도에서 짧게 덖습니다."
+      ],
+      "en": [
+        "Despite the name it is a green tea, not a white tea: the cultivar 'Baiye 1' turns pale in spring.",
+        "Fired, rolled, dried — gently and briefly, because the leaf is thin."
+      ],
+      "zh-CN": [
+        "虽名为“白茶”，实际是绿茶，用的是春季叶色偏白的“白叶一号”品种。",
+        "炒青 → 揉捻 → 干燥，叶薄，低温短炒。"
+      ],
+      "zh-TW": [
+        "雖名為「白茶」，實際是綠茶，用的是春季葉色偏白的「白葉一號」品種。",
+        "炒青 → 揉捻 → 乾燥，葉薄，低溫短炒。"
+      ]
+    },
+    "ko": {
+      "name": "안길백편 (안지백차)",
+      "oneLine": "봄에 잎이 희게 뜨는 품종으로 만든, 이름은 백차지만 녹차인 차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "저장성 안지현, 해발 300~800m. 봄에 잎이 연한 흰빛을 띠는 시기에 딴 잎을 씁니다.",
+      "process": "살청 → 유념 → 건조. 잎이 얇아 낮은 온도로 짧게 덖습니다.",
+      "story": "1980년대 안지의 한 그루 야생 차나무에서 시작해 널리 퍼진 품종 이야기가 전합니다.",
+      "flavor": "아미노산이 많아 감칠맛이 두드러지고 떫음이 거의 없습니다. 물색은 아주 연합니다.",
+      "pairing": "흰살생선, 두부, 달지 않은 과자.",
+      "brewTip": "잎이 여리므로 75~80도. 시간이 길면 감칠맛보다 풀 향이 앞섭니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "안길백차 안지백편 백엽1호 저장 감칠맛"
+    },
+    "en": {
+      "name": "Anji Bai Cha",
+      "oneLine": "A green tea from a spring-pale cultivar, named white tea.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Anji, Zhejiang, 300–800 m; picked while the spring flush is still pale.",
+      "process": "Fired, rolled, dried — briefly at low heat for a thin leaf.",
+      "story": "Traced to a single wild bush found in Anji in the 1980s and propagated since.",
+      "flavor": "High amino acids give strong umami and almost no astringency; very pale liquor.",
+      "pairing": "White fish, tofu, unsweetened pastry.",
+      "brewTip": "75–80 °C. Too long and grass outweighs the savor.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Anji Bai Cha Baiye 1 Zhejiang umami green tea"
+    },
+    "zh-CN": {
+      "name": "安吉白茶",
+      "oneLine": "用春季叶色发白的品种做成，名字叫白茶，其实是绿茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "浙江安吉，海拔300~800米，春季叶色发白时采摘。",
+      "process": "炒青 → 揉捻 → 干燥，叶薄，低温短炒。",
+      "story": "1980年代在安吉发现一株野生茶树，其后繁殖推广。",
+      "flavor": "氨基酸高，鲜味突出，几乎不涩，汤色极浅。",
+      "pairing": "白肉鱼、豆腐、不甜的糕点。",
+      "brewTip": "75~80度，久泡则草气盖过鲜味。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "安吉白茶 白叶一号 浙江 鲜爽"
+    },
+    "zh-TW": {
+      "name": "安吉白茶",
+      "oneLine": "用春季葉色發白的品種做成，名字叫白茶，其實是綠茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "浙江安吉，海拔300~800米，春季葉色發白時採摘。",
+      "process": "炒青 → 揉捻 → 乾燥，葉薄，低溫短炒。",
+      "story": "1980年代在安吉發現一株野生茶樹，其後繁殖推廣。",
+      "flavor": "胺基酸高，鮮味突出，幾乎不澀，湯色極淺。",
+      "pairing": "白肉魚、豆腐、不甜的糕點。",
+      "brewTip": "75~80度，久泡則草氣蓋過鮮味。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "安吉白茶 白葉一號 浙江 鮮爽"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-gougunao",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "狗",
+    "sub": "Gougunao",
+    "alias": [
+      "구고뇌",
+      "구구뇌"
+    ],
+    "hz": "狗牯腦",
+    "hs": "狗牯脑",
+    "rom": "Gougunao",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "1915년 파나마 만국박람회에서 금상을 받았다는 기록이 전합니다.",
+        "살청 → 유념 → 건조. 개울가 안개가 많은 골짜기의 잎을 씁니다."
+      ],
+      "en": [
+        "Records say it took a gold medal at the 1915 Panama-Pacific exposition.",
+        "Fired, rolled, dried; the leaf comes from a misty valley site."
+      ],
+      "zh-CN": [
+        "据记载1915年巴拿马万国博览会获金奖。",
+        "炒青 → 揉捻 → 干燥，鲜叶出自溪谷多雾的茶山。"
+      ],
+      "zh-TW": [
+        "據記載1915年巴拿馬萬國博覽會獲金獎。",
+        "炒青 → 揉捻 → 乾燥，鮮葉出自溪谷多霧的茶山。"
+      ]
+    },
+    "ko": {
+      "name": "구고뇌",
+      "oneLine": "장시 오지의 안개 골짜기에서 나는, 난초 향의 가는 잎 녹차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "장시성 쑤이촨현 탕후진 일대, 해발 600~1,000m.",
+      "process": "살청 → 유념 → 건조. 잎을 가늘게 비벼 말립니다.",
+      "story": "1915년 파나마 만국박람회 금상 기록이 전합니다.",
+      "flavor": "난초에 가까운 꽃 향과 부드러운 단맛, 떫음이 적습니다.",
+      "pairing": "담백한 찜 요리, 죽, 견과.",
+      "brewTip": "잎이 가늘어 80도면 충분합니다. 2포부터 향이 가장 좋습니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "구고뇌 쑤이촨 장시 난초향 녹차"
+    },
+    "en": {
+      "name": "Gougunao",
+      "oneLine": "Fine-leaf green tea with an orchid scent from a misty Jiangxi valley.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Tanghu, Suichuan county, Jiangxi, 600–1,000 m.",
+      "process": "Fired, rolled into fine strands, dried.",
+      "story": "Records credit it with a gold medal at the 1915 Panama-Pacific exposition.",
+      "flavor": "Orchid-leaning florals, gentle sweetness, little astringency.",
+      "pairing": "Light steamed dishes, congee, nuts.",
+      "brewTip": "80 °C is enough for this thin leaf; the second infusion is the best.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Gougunao Suichuan Jiangxi orchid green tea"
+    },
+    "zh-CN": {
+      "name": "狗牯脑",
+      "oneLine": "江西深谷雾山里细条形的兰花香绿茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "江西遂川县汤湖一带，海拔600~1000米。",
+      "process": "炒青 → 揉捻 → 干燥，揉成细条。",
+      "story": "据记载1915年获巴拿马万国博览会金奖。",
+      "flavor": "近似兰花的香气，回甘柔和，涩味轻。",
+      "pairing": "清蒸菜、粥、坚果。",
+      "brewTip": "叶细，80度即可；第二泡香气最好。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "狗牯脑 遂川 江西 兰香 绿茶"
+    },
+    "zh-TW": {
+      "name": "狗牯腦",
+      "oneLine": "江西深谷霧山裡細條形的蘭花香綠茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "江西遂川縣湯湖一帶，海拔600~1000米。",
+      "process": "炒青 → 揉捻 → 乾燥，揉成細條。",
+      "story": "據記載1915年獲巴拿馬萬國博覽會金獎。",
+      "flavor": "近似蘭花的香氣，回甘柔和，澀味輕。",
+      "pairing": "清蒸菜、粥、堅果。",
+      "brewTip": "葉細，80度即可；第二泡香氣最好。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "狗牯腦 遂川 江西 蘭香 綠茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-wuyuan-mingmei",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "眉",
+    "sub": "Wuyuan Mingmei",
+    "alias": [
+      "무원명미",
+      "명미"
+    ],
+    "hz": "婺源茗眉",
+    "hs": "婺源茗眉",
+    "rom": "Wuyuan Mingmei",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "1958년에 만들어져 전국 명차 평가에서 이름을 얻었다고 전합니다.",
+        "눈썹 모양으로 비튼 잎 — 이름의 ‘미(眉)’가 여기서 왔습니다."
+      ],
+      "en": [
+        "Created in 1958 and later listed among China's famous teas, by the usual account.",
+        "The leaf is rolled into an eyebrow shape — hence 'mei' (eyebrow) in the name."
+      ],
+      "zh-CN": [
+        "1958年创制，后被评为全国名茶。",
+        "揉成眉状，名字里的“眉”即由此而来。"
+      ],
+      "zh-TW": [
+        "1958年創製，後被評為全國名茶。",
+        "揉成眉狀，名字裡的「眉」即由此而來。"
+      ]
+    },
+    "ko": {
+      "name": "무원명미",
+      "oneLine": "눈썹처럼 휘어진 잎, 장시 무원의 부드러운 녹차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "장시성 우위안현, 해발 300~800m. 안후이·장시 경계의 산간.",
+      "process": "살청 → 유념 → 건조. 잎을 눈썹 모양으로 비벼 말립니다.",
+      "story": "1958년 만들어졌고 이후 전국 명차로 꼽혔다고 전합니다.",
+      "flavor": "부드러운 풀 향과 밤 같은 단맛, 떫음이 적습니다.",
+      "pairing": "나물, 두부, 밥 반찬 전반.",
+      "brewTip": "80도에서 짧게. 잎이 얇아 두 번이면 충분합니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "무원명미 우위안 장시 눈썹 모양 녹차"
+    },
+    "en": {
+      "name": "Wuyuan Mingmei",
+      "oneLine": "Eyebrow-curved leaf — a gentle green from Wuyuan, Jiangxi.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Wuyuan county, Jiangxi, 300–800 m, in the hills on the Anhui border.",
+      "process": "Fired, rolled into an eyebrow shape, dried.",
+      "story": "Created in 1958 and later counted among the national famous teas.",
+      "flavor": "Soft grass, chestnut sweetness, little astringency.",
+      "pairing": "Vegetable dishes, tofu, everyday rice meals.",
+      "brewTip": "Brief at 80 °C; two infusions are plenty for this thin leaf.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Wuyuan Mingmei Jiangxi eyebrow green tea"
+    },
+    "zh-CN": {
+      "name": "婺源茗眉",
+      "oneLine": "眉形弯曲的叶片，江西婺源的柔和绿茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "江西婺源，海拔300~800米，皖赣交界的山区。",
+      "process": "炒青 → 揉捻 → 干燥，揉成眉形。",
+      "story": "1958年创制，后被评为全国名茶。",
+      "flavor": "柔和的青草香与栗子般的甘甜，涩味轻。",
+      "pairing": "家常蔬菜、豆腐、日常米饭。",
+      "brewTip": "80度快出，叶薄两泡足够。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "婺源茗眉 江西 眉形 绿茶"
+    },
+    "zh-TW": {
+      "name": "婺源茗眉",
+      "oneLine": "眉形彎曲的葉片，江西婺源的柔和綠茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "江西婺源，海拔300~800米，皖贛交界的山區。",
+      "process": "炒青 → 揉捻 → 乾燥，揉成眉形。",
+      "story": "1958年創製，後被評為全國名茶。",
+      "flavor": "柔和的青草香與慄子般的甘甜，澀味輕。",
+      "pairing": "家常蔬菜、豆腐、日常米飯。",
+      "brewTip": "80度快出，葉薄兩泡足夠。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "婺源茗眉 江西 眉形 綠茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-mengding-ganlu",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "甘",
+    "sub": "Mengding Ganlu",
+    "alias": [
+      "몽정감로",
+      "감로"
+    ],
+    "hz": "蒙頂甘露",
+    "hs": "蒙顶甘露",
+    "rom": "Mengding Ganlu",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-low m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "당대부터 몽정산 차가 공차로 올라갔다는 기록이 있어, 이름난 차 가운데서도 유서가 깊습니다.",
+        "살청 → 유념 → 삼초(三炒) → 삼유(三揉)로 잎을 곱게 비벼 말립니다."
+      ],
+      "en": [
+        "Mengding tea was already sent to the Tang court as tribute — one of the longest records in Chinese tea.",
+        "Fired, rolled, then fired and rolled twice more, which gives the fine curl."
+      ],
+      "zh-CN": [
+        "唐代蒙顶茶即为贡茶，渊源在名茶中数一数二。",
+        "炒青 → 揉捻 → 三炒三揉，揉成细卷。"
+      ],
+      "zh-TW": [
+        "唐代蒙頂茶即為貢茶，淵源在名茶中數一數二。",
+        "炒青 → 揉捻 → 三炒三揉，揉成細卷。"
+      ]
+    },
+    "ko": {
+      "name": "몽정감로",
+      "oneLine": "당대 공차의 자리에서 내려온, 곱게 꼬인 쓰촨의 명차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "쓰촨성 야안 몽정산, 해발 1,000~1,400m.",
+      "process": "살청 → 유념 → 세 번 덖고 세 번 비비는 삼초삼유로 잎을 곱게 꼬아 말립니다.",
+      "story": "당대에 이미 공차로 올라갔다고 기록되어 있습니다.",
+      "flavor": "밤과 콩의 고소함, 부드러운 단맛, 끝이 깨끗합니다.",
+      "pairing": "쌀밥, 나물, 담백한 국.",
+      "brewTip": "80도. 잎이 곱게 꼬여 있어 1분이면 충분합니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "몽정감로 야안 쓰촨 공차 삼초삼유"
+    },
+    "en": {
+      "name": "Mengding Ganlu",
+      "oneLine": "A finely curled Sichuan classic that was already tribute tea in the Tang.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Mount Mengding, Ya'an, Sichuan, 1,000–1,400 m.",
+      "process": "Fired, rolled, then fired and rolled twice more — the 'three fires, three rolls' that make the fine curl.",
+      "story": "Records already list Mengding tea as Tang-dynasty tribute.",
+      "flavor": "Chestnut and soy roastiness, soft sweetness, a clean finish.",
+      "pairing": "Rice, vegetables, light soups.",
+      "brewTip": "80 °C; the tight curl gives everything up in a minute.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Mengding Ganlu Ya'an Sichuan tribute tea"
+    },
+    "zh-CN": {
+      "name": "蒙顶甘露",
+      "oneLine": "唐代即为贡茶，四川蒙顶的细卷名茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "四川雅安蒙顶山，海拔1000~1400米。",
+      "process": "炒青 → 揉捻 → 三炒三揉，揉成细卷后干燥。",
+      "story": "唐代已列为贡茶。",
+      "flavor": "栗子与豆香，回甘柔和，收尾干净。",
+      "pairing": "米饭、蔬菜、清淡汤品。",
+      "brewTip": "80度，卷曲紧，一分钟即可。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "蒙顶甘露 雅安 四川 贡茶"
+    },
+    "zh-TW": {
+      "name": "蒙頂甘露",
+      "oneLine": "唐代即為貢茶，四川蒙頂的細卷名茶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "四川雅安蒙頂山，海拔1000~1400米。",
+      "process": "炒青 → 揉捻 → 三炒三揉，揉成細卷後乾燥。",
+      "story": "唐代已列為貢茶。",
+      "flavor": "慄子與豆香，回甘柔和，收尾乾淨。",
+      "pairing": "米飯、蔬菜、清淡湯品。",
+      "brewTip": "80度，捲曲緊，一分鐘即可。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "蒙頂甘露 雅安 四川 貢茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-hanzhong-xianhao",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "仙",
+    "sub": "Hanzhong Xianhao",
+    "alias": [
+      "한중선호",
+      "오자선호"
+    ],
+    "hz": "漢中仙毫",
+    "hs": "汉中仙毫",
+    "rom": "Hanzhong Xianhao",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "한중은 중국 차 산지 가운데 북쪽 끝에 가깝습니다. 겨울이 길어 봄 채취가 늦고 잎이 두껍습니다.",
+        "2007년 한중 지역의 여러 이름을 ‘한중선호’로 묶어 부르기 시작했습니다."
+      ],
+      "en": [
+        "Hanzhong sits near the northern edge of Chinese tea country: long winters, a late spring flush, thicker leaf.",
+        "In 2007 the area's various tea names were brought under one label, Hanzhong Xianhao."
+      ],
+      "zh-CN": [
+        "汉中接近中国茶区北缘，冬季长、春茶来得晚、叶质厚。",
+        "2007年起把汉中各地名茶统一称为“汉中仙毫”。"
+      ],
+      "zh-TW": [
+        "漢中接近中國茶區北緣，冬季長、春茶來得晚、葉質厚。",
+        "2007年起把漢中各地名茶統一稱為「漢中仙毫」。"
+      ]
+    },
+    "ko": {
+      "name": "한중선호",
+      "oneLine": "중국 차 산지의 북쪽 끝, 긴 겨울을 견딘 두꺼운 봄잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "산시성 한중, 친링산맥 남쪽 기슭 해발 600~1,200m.",
+      "process": "살청 → 유념 → 건조. 싹을 곧게 비벼 말립니다.",
+      "story": "2007년 한중 지역의 여러 차 이름을 ‘한중선호’로 묶었습니다.",
+      "flavor": "풀 향과 옅은 꽃 향, 단맛이 오래 남고 떫음이 적습니다.",
+      "pairing": "담백한 면 요리, 나물, 견과.",
+      "brewTip": "잎이 두꺼워 80도에서 1분 15초. 2포에서 단맛이 살아납니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "한중선호 산시 친링 북쪽 차밭"
+    },
+    "en": {
+      "name": "Hanzhong Xianhao",
+      "oneLine": "From the northern edge of Chinese tea country: thick spring leaf after a long winter.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Hanzhong, Shaanxi, on the south slopes of the Qinling range, 600–1,200 m.",
+      "process": "Fired, rolled straight, dried.",
+      "story": "In 2007 the area's separate tea names were unified as Hanzhong Xianhao.",
+      "flavor": "Grass and faint flowers, a lasting sweetness, low astringency.",
+      "pairing": "Plain noodles, vegetables, nuts.",
+      "brewTip": "The thick leaf wants 1¼ minutes at 80 °C; sweetness shows in the second infusion.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Hanzhong Xianhao Shaanxi Qinling northern tea"
+    },
+    "zh-CN": {
+      "name": "汉中仙毫",
+      "oneLine": "中国茶区北缘，熬过漫长冬季的厚实春叶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "陕西汉中，秦岭南麓，海拔600~1200米。",
+      "process": "炒青 → 揉捻 → 干燥，揉成直条。",
+      "story": "2007年把汉中各地茶名统一为“汉中仙毫”。",
+      "flavor": "青草与淡花香，回甘持久，涩味轻。",
+      "pairing": "清汤面、蔬菜、坚果。",
+      "brewTip": "叶厚，80度一分十五秒；第二泡出甜。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "汉中仙毫 陕西 秦岭 北缘茶区"
+    },
+    "zh-TW": {
+      "name": "漢中仙毫",
+      "oneLine": "中國茶區北緣，熬過漫長冬季的厚實春葉。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "陝西漢中，秦嶺南麓，海拔600~1200米。",
+      "process": "炒青 → 揉捻 → 乾燥，揉成直條。",
+      "story": "2007年把漢中各地茶名統一為「漢中仙毫」。",
+      "flavor": "青草與淡花香，回甘持久，澀味輕。",
+      "pairing": "清湯麵、蔬菜、堅果。",
+      "brewTip": "葉厚，80度一分十五秒；第二泡出甜。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "漢中仙毫 陝西 秦嶺 北緣茶區"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-huiming",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "惠",
+    "sub": "Huiming Tea",
+    "alias": [
+      "혜명차",
+      "경녕혜명"
+    ],
+    "hz": "惠明茶",
+    "hs": "惠明茶",
+    "rom": "Huiming Cha",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "저장성 징닝의 산사 혜명사 주변에서 시작된 차로, 절 이름이 차 이름이 되었습니다.",
+        "살청 → 유념 → 건조. 싹이 곧고 잎이 여려 낮은 온도에서 덖습니다."
+      ],
+      "en": [
+        "It grew up around Huiming temple in Jingning, Zhejiang — the temple gave the tea its name.",
+        "Fired, rolled, dried at low heat because the buds are tender."
+      ],
+      "zh-CN": [
+        "产于浙江景宁惠明寺一带，寺名成了茶名。",
+        "炒青 → 揉捻 → 干燥，芽嫩，低温轻炒。"
+      ],
+      "zh-TW": [
+        "產於浙江景寧惠明寺一帶，寺名成了茶名。",
+        "炒青 → 揉捻 → 乾燥，芽嫩，低溫輕炒。"
+      ]
+    },
+    "ko": {
+      "name": "혜명차",
+      "oneLine": "절 이름을 그대로 가진, 저장 산사의 봄잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분, 2포 30초, 3포 45초.",
+      "origin": "저장성 징닝현 츠무산 일대, 해발 600~1,000m.",
+      "process": "살청 → 유념 → 건조. 싹을 곧게 비벼 말립니다.",
+      "story": "혜명사 주변에서 재배가 시작되어 절 이름이 차 이름이 되었습니다.",
+      "flavor": "옅은 꽃 향과 풀 향, 깨끗한 단맛.",
+      "pairing": "죽, 나물, 담백한 생선.",
+      "brewTip": "80도에서 1분. 잎이 여려 오래 우리면 씁니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "혜명차 징닝 저장 산사 녹차"
+    },
+    "en": {
+      "name": "Huiming Tea",
+      "oneLine": "Spring leaf from a Zhejiang mountain temple that gave the tea its name.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1 minute, then 30 seconds, then 45.",
+      "origin": "Around Mount Chimu, Jingning county, Zhejiang, 600–1,000 m.",
+      "process": "Fired, rolled straight, dried.",
+      "story": "Cultivation began around Huiming temple, and the temple name became the tea's name.",
+      "flavor": "Faint flowers with grass, a clean sweetness.",
+      "pairing": "Congee, vegetables, light fish.",
+      "brewTip": "One minute at 80 °C; the tender leaf turns bitter if left.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Huiming tea Jingning Zhejiang temple green tea"
+    },
+    "zh-CN": {
+      "name": "惠明茶",
+      "oneLine": "以寺为名，浙江山寺边的春芽。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分钟，第二泡30秒，第三泡45秒。",
+      "origin": "浙江景宁敕木山一带，海拔600~1000米。",
+      "process": "炒青 → 揉捻 → 干燥，揉成直条。",
+      "story": "始于惠明寺周边栽培，寺名成了茶名。",
+      "flavor": "淡花香与青草气，甘净。",
+      "pairing": "粥、蔬菜、清蒸鱼。",
+      "brewTip": "80度一分钟，久泡发涩。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "惠明茶 景宁 浙江 寺茶"
+    },
+    "zh-TW": {
+      "name": "惠明茶",
+      "oneLine": "以寺為名，浙江山寺邊的春芽。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分鐘，第二泡30秒，第三泡45秒。",
+      "origin": "浙江景寧敕木山一帶，海拔600~1000米。",
+      "process": "炒青 → 揉捻 → 乾燥，揉成直條。",
+      "story": "始於惠明寺周邊栽培，寺名成了茶名。",
+      "flavor": "淡花香與青草氣，甘淨。",
+      "pairing": "粥、蔬菜、清蒸魚。",
+      "brewTip": "80度一分鐘，久泡發澀。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "惠明茶 景寧 浙江 寺茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-boseong",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "寶",
+    "sub": "Boseong Green Tea",
+    "alias": [
+      "보성 녹차",
+      "보성차"
+    ],
+    "hz": "寶城綠茶",
+    "hs": "宝城绿茶",
+    "rom": "Boseong Nokcha",
+    "temp": 75,
+    "tempRange": "70~80℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      30,
+      60
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot s-iced w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "전남 보성은 한국에서 차밭이 가장 넓게 이어지는 곳입니다. 봄부터 초여름까지 우전·세작·중작·대작을 이어 땁니다.",
+        "살청(덖음) → 유념 → 건조. 대량 생산은 기계 덖음, 소규모 농가는 손덖음을 함께 씁니다."
+      ],
+      "en": [
+        "Boseong in Jeollanam-do has the widest tea fields in Korea, picking ujeon through daejak from spring into early summer.",
+        "Pan-fired, rolled, dried — machine-fired at scale, hand-fired on small farms."
+      ],
+      "zh-CN": [
+        "全罗南道宝城是韩国茶田最连片的地方，从春到初夏依次采雨前、细雀、中雀、大雀。",
+        "炒青 → 揉捻 → 干燥，量产多用机炒，小农户仍手工炒制。"
+      ],
+      "zh-TW": [
+        "全羅南道寶城是韓國茶田最連片的地方，從春到初夏依次採雨前、細雀、中雀、大雀。",
+        "炒青 → 揉捻 → 乾燥，量產多用機炒，小農戶仍手工炒制。"
+      ]
+    },
+    "ko": {
+      "name": "보성 녹차",
+      "oneLine": "한국에서 차밭이 가장 넓게 이어지는 곳, 보성의 봄잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3~4회",
+      "steepBasis": "75도에서 1분 30초, 2포 30초, 3포 1분.",
+      "origin": "전라남도 보성군 일대, 해발 100~400m의 구릉 차밭.",
+      "process": "살청(덖음) → 유념 → 건조. 규모에 따라 기계 덖음과 손덖음이 나뉩니다.",
+      "story": "보성의 차밭은 1939년 조성된 뒤 한국 차 재배의 중심으로 자리 잡았습니다.",
+      "flavor": "구수한 덖음 향과 풀 향이 겹치고, 단맛이 뒤따릅니다. 대작으로 갈수록 떫음이 늘어납니다.",
+      "pairing": "나물, 생선구이, 김. 보리밥과도 잘 맞습니다.",
+      "brewTip": "70~75도. 대작은 85~90도에서 짧게 우려도 됩니다.",
+      "keep": "개봉 후 한 달 안. 냉장 보관하고 습기를 피합니다.",
+      "keywords": "보성 녹차 전남 대한다원 우전 세작 중작 대작"
+    },
+    "en": {
+      "name": "Boseong Green Tea",
+      "oneLine": "Korea's widest tea fields — spring leaf from Boseong.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3–4 infusions",
+      "steepBasis": "75 °C: 1½ minutes, then 30 seconds, then 1 minute.",
+      "origin": "Boseong county, Jeollanam-do, rolling fields at 100–400 m.",
+      "process": "Pan-fired, rolled, dried; machine-fired at scale, hand-fired on small farms.",
+      "story": "Boseong's fields were planted from 1939 and became the centre of Korean tea growing.",
+      "flavor": "Roasted and grassy at once, with sweetness behind; later pickings turn more astringent.",
+      "pairing": "Vegetables, grilled fish, seaweed, barley rice.",
+      "brewTip": "70–75 °C; the coarse daejak can take 85–90 °C briefly.",
+      "keep": "Within a month of opening, cold and dry.",
+      "keywords": "Boseong green tea Korea ujeon sejak jungjak daejak"
+    },
+    "zh-CN": {
+      "name": "宝城绿茶",
+      "oneLine": "韩国茶田最连片之处，宝城的春叶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3~4泡",
+      "steepBasis": "75度泡1分30秒，第二泡30秒，第三泡1分钟。",
+      "origin": "全罗南道宝城郡，海拔100~400米的丘陵茶田。",
+      "process": "炒青 → 揉捻 → 干燥，量產用机炒，小农手工炒制。",
+      "story": "宝城茶田自1939年开垦，此后成为韩国茶叶主产区。",
+      "flavor": "炒香与青草香交叠，回甘在后；越到晚采越涩。",
+      "pairing": "凉拌菜、烤鱼、紫菜、大麦饭。",
+      "brewTip": "70~75度；粗老的大雀可用85~90度短泡。",
+      "keep": "开封后一个月内，冷藏防潮。",
+      "keywords": "宝城绿茶 全罗南道 雨前 细雀 中雀 大雀"
+    },
+    "zh-TW": {
+      "name": "寶城綠茶",
+      "oneLine": "韓國茶田最連片之處，寶城的春葉。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3~4泡",
+      "steepBasis": "75度泡1分30秒，第二泡30秒，第三泡1分鐘。",
+      "origin": "全羅南道寶城郡，海拔100~400米的丘陵茶田。",
+      "process": "炒青 → 揉捻 → 乾燥，量產用機炒，小農手工炒制。",
+      "story": "寶城茶田自1939年開墾，此後成為韓國茶葉主產區。",
+      "flavor": "炒香與青草香交疊，回甘在後；越到晚採越澀。",
+      "pairing": "涼拌菜、烤魚、紫菜、大麥飯。",
+      "brewTip": "70~75度；粗老的大雀可用85~90度短泡。",
+      "keep": "開封後一個月內，冷藏防潮。",
+      "keywords": "寶城綠茶 全羅南道 雨前 細雀 中雀 大雀"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "green-sanxia-biluochun",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "峡",
+    "sub": "Sanxia Biluochun",
+    "alias": [
+      "삼협 벽라춘",
+      "대만 벽라춘"
+    ],
+    "hz": "三峽碧螺春",
+    "hs": "三峡碧螺春",
+    "rom": "Sanxia Biluochun",
+    "temp": 75,
+    "tempRange": "70~80℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-fruit b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-refresh",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "대만 신베이 삼협 지역은 1940년대 이후 중국식 녹차를 만들어 온 곳입니다. 이름은 장쑤 둥팅의 벽라춘에서 왔습니다.",
+        "살청 → 유념 → 건조. 나선형으로 곱게 꼬아 말립니다."
+      ],
+      "en": [
+        "Sanxia, in New Taipei, has made Chinese-style green tea since the 1940s; the name comes from Biluochun of Dongting, Jiangsu.",
+        "Fired, rolled into fine spirals, dried."
+      ],
+      "zh-CN": [
+        "新北三峡自1940年代起制作中国式绿茶，名字源自江苏洞庭碧螺春。",
+        "炒青 → 揉捻 → 干燥，揉成细螺状。"
+      ],
+      "zh-TW": [
+        "新北三峽自1940年代起製作中國式綠茶，名字源自江蘇洞庭碧螺春。",
+        "炒青 → 揉捻 → 乾燥，揉成細螺狀。"
+      ]
+    },
+    "ko": {
+      "name": "삼협 벽라춘",
+      "oneLine": "대만에서 이어 온 중국식 녹차 — 달콤한 나선 잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "75도에서 1분, 2포 30초, 3포 45초.",
+      "origin": "신베이시 삼협구 일대, 해발 200~600m의 구릉.",
+      "process": "살청 → 유념 → 건조. 잎을 가는 나선으로 꼬아 말립니다.",
+      "story": "1940년대 이후 삼협 지역에서 중국식 녹차 제법이 자리 잡았습니다.",
+      "flavor": "풋풀 향과 옅은 과일 단맛, 떫음이 적고 물색이 맑습니다.",
+      "pairing": "담백한 중식, 흰살생선, 가벼운 디저트.",
+      "brewTip": "75도. 잎이 곱게 꼬여 1분이면 충분합니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "삼협 벽라춘 대만 신베이 녹차 나선"
+    },
+    "en": {
+      "name": "Sanxia Biluochun",
+      "oneLine": "Taiwan's Chinese-style green tea — sweet spiral leaf.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "75 °C: 1 minute, then 30 seconds, then 45.",
+      "origin": "Sanxia district, New Taipei, hills at 200–600 m.",
+      "process": "Fired, rolled into fine spirals, dried.",
+      "story": "Chinese green-tea methods took root in Sanxia from the 1940s.",
+      "flavor": "Green-grass aroma, faint fruit sweetness, low astringency, clear liquor.",
+      "pairing": "Light Chinese dishes, white fish, simple desserts.",
+      "brewTip": "75 °C; the fine spiral gives up its flavour in a minute.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Sanxia Biluochun Taiwan New Taipei green tea spiral"
+    },
+    "zh-CN": {
+      "name": "三峡碧螺春",
+      "oneLine": "台湾延续的中国式绿茶，甜润的螺旋形叶片。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "75度泡1分钟，第二泡30秒，第三泡45秒。",
+      "origin": "新北市三峡区，海拔200~600米丘陵。",
+      "process": "炒青 → 揉捻 → 干燥，揉成细螺状。",
+      "story": "1940年代起三峡引入中国式绿茶制法。",
+      "flavor": "清草香与淡果甜，涩味轻，汤色清亮。",
+      "pairing": "清淡中餐、白肉鱼、简单甜点。",
+      "brewTip": "75度，一分钟即可。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "三峡碧螺春 台湾 新北 绿茶 螺形"
+    },
+    "zh-TW": {
+      "name": "三峽碧螺春",
+      "oneLine": "臺灣延續的中國式綠茶，甜潤的螺旋形葉片。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "75度泡1分鐘，第二泡30秒，第三泡45秒。",
+      "origin": "新北市三峽區，海拔200~600米丘陵。",
+      "process": "炒青 → 揉捻 → 乾燥，揉成細螺狀。",
+      "story": "1940年代起三峽引入中國式綠茶製法。",
+      "flavor": "清草香與淡果甜，澀味輕，湯色清亮。",
+      "pairing": "清淡中餐、白肉魚、簡單甜點。",
+      "brewTip": "75度，一分鐘即可。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "三峽碧螺春 臺灣 新北 綠茶 螺形"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "green-kabusecha",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "冠",
+    "sub": "Kabusecha",
+    "alias": [
+      "카부세차",
+      "관차"
+    ],
+    "hz": "冠茶",
+    "hs": "冠茶",
+    "rom": "Kabusecha",
+    "temp": 70,
+    "tempRange": "60~75℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      30,
+      60
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-herb b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "일본",
+      "en": "Japan",
+      "zh-CN": "日本",
+      "zh-TW": "日本"
+    },
+    "x": {
+      "ko": [
+        "수확 전 1~2주만 차광막을 덮는 방식이라, 옥로(20일 안팎)와 센차(차광 없음) 사이에 놓입니다.",
+        "증청 → 유념 → 건조. 차광으로 아미노산이 늘고 카테킨이 줄어 감칠맛이 올라갑니다."
+      ],
+      "en": [
+        "Covered for only one to two weeks before harvest — between gyokuro (about 20 days) and sencha (no cover).",
+        "Steamed, rolled, dried. Shading raises amino acids and lowers catechins, so umami goes up."
+      ],
+      "zh-CN": [
+        "采前只遮光1~2周，介于玉露（约20天）与煎茶（不遮光）之间。",
+        "蒸青 → 揉捻 → 干燥，遮光提高氨基酸、降低儿茶素。"
+      ],
+      "zh-TW": [
+        "採前只遮光1~2周，介於玉露（約20天）與煎茶（不遮光）之間。",
+        "蒸青 → 揉捻 → 乾燥，遮光提高胺基酸、降低兒茶素。"
+      ]
+    },
+    "ko": {
+      "name": "카부세차 (관차)",
+      "oneLine": "수확 전 짧게 가린 잎 — 센차와 옥로 사이의 감칠맛.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "65~70도에서 1분 30초, 2포 30초, 3포 1분.",
+      "origin": "일본 규슈·시즈오카 등. 수확 1~2주 전 차광막을 덮은 잎.",
+      "process": "차광 → 증청 → 유념 → 건조.",
+      "story": "차광 기간을 달리해 센차·카부세차·옥로의 등급을 나누는 관행이 일본에서 자리 잡았습니다.",
+      "flavor": "감칠맛이 진하고 떫음이 적습니다. 해조류와 단맛이 겹칩니다.",
+      "pairing": "회, 달걀 요리, 밥.",
+      "brewTip": "60~70도. 뜨거운 물이면 감칠맛보다 떫음이 앞섭니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "카부세차 관차 일본 차광 증청 감칠맛"
+    },
+    "en": {
+      "name": "Kabusecha",
+      "oneLine": "Briefly shaded leaf — the umami between sencha and gyokuro.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "65–70 °C: 1½ minutes, then 30 seconds, then 1 minute.",
+      "origin": "Kyushu, Shizuoka and elsewhere in Japan; leaf shaded one or two weeks before picking.",
+      "process": "Shaded, steamed, rolled, dried.",
+      "story": "Japan grades sencha, kabusecha and gyokuro partly by how long the bushes are covered.",
+      "flavor": "Deep umami, little astringency, seaweed and sweetness together.",
+      "pairing": "Sashimi, egg dishes, rice.",
+      "brewTip": "60–70 °C; hotter water turns umami into astringency.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Kabusecha Japan shaded green tea umami"
+    },
+    "zh-CN": {
+      "name": "冠茶",
+      "oneLine": "采前短期遮光，介于煎茶与玉露之间的鲜味。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "65~70度泡1分30秒，第二泡30秒，第三泡1分钟。",
+      "origin": "日本九州、静冈等地，采前1~2周遮光。",
+      "process": "遮光 → 蒸青 → 揉捻 → 干燥。",
+      "story": "日本以遮光时间区分煎茶、冠茶与玉露。",
+      "flavor": "鲜味浓、涩味轻，海藻气与甜味并存。",
+      "pairing": "生鱼片、蛋类料理、米饭。",
+      "brewTip": "60~70度，水温高则涩味盖过鲜味。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "冠茶 日本 遮光 蒸青 鲜味"
+    },
+    "zh-TW": {
+      "name": "冠茶",
+      "oneLine": "採前短期遮光，介於煎茶與玉露之間的鮮味。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "65~70度泡1分30秒，第二泡30秒，第三泡1分鐘。",
+      "origin": "日本九州、靜岡等地，採前1~2周遮光。",
+      "process": "遮光 → 蒸青 → 揉捻 → 乾燥。",
+      "story": "日本以遮光時間區分煎茶、冠茶與玉露。",
+      "flavor": "鮮味濃、澀味輕，海藻氣與甜味並存。",
+      "pairing": "生魚片、蛋類料理、米飯。",
+      "brewTip": "60~70度，水溫高則澀味蓋過鮮味。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "冠茶 日本 遮光 蒸青 鮮味"
+    },
+    "originCountryCode": "jp"
+  },
+  {
+    "id": "green-kamairicha",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "釜",
+    "sub": "Kamairicha",
+    "alias": [
+      "카마이리차",
+      "솥덖음 일본차"
+    ],
+    "hz": "釜炒茶",
+    "hs": "釜炒茶",
+    "rom": "Kamairicha",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot s-iced w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "일본",
+      "en": "Japan",
+      "zh-CN": "日本",
+      "zh-TW": "日本"
+    },
+    "x": {
+      "ko": [
+        "일본 녹차는 대부분 증청이지만, 규슈 우레시노 등에서는 솥에 덖는 중국식 제법이 남아 있습니다.",
+        "살청(솥 덖음) → 유념 → 건조. 찌지 않아 해조류 향 대신 구수한 향이 납니다."
+      ],
+      "en": [
+        "Most Japanese green tea is steamed, but wok-firing survives in Kyushu, notably Ureshino.",
+        "Pan-fired, rolled, dried: no steaming, so the cup is toasty rather than seaweed-like."
+      ],
+      "zh-CN": [
+        "日本绿茶多为蒸青，九州嬉野等地仍保留锅炒的中国式做法。",
+        "炒青 → 揉捻 → 干燥，不蒸，香气偏炒米而非海藻。"
+      ],
+      "zh-TW": [
+        "日本綠茶多為蒸青，九州嬉野等地仍保留鍋炒的中國式做法。",
+        "炒青 → 揉捻 → 乾燥，不蒸，香氣偏炒米而非海藻。"
+      ]
+    },
+    "ko": {
+      "name": "카마이리차 (솥덖음차)",
+      "oneLine": "일본에서 드물게 솥에 덖는 녹차 — 구수함이 남는 잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "규슈 사가현 우레시노 등, 솥덖음 제법이 남은 산지.",
+      "process": "살청(솥 덖음) → 유념 → 건조.",
+      "story": "에도 시대에 중국식 덖음 제법이 규슈로 들어와 지금까지 이어졌다고 전합니다.",
+      "flavor": "볶은 곡물 같은 고소함과 가벼운 단맛, 해조류 향이 적습니다.",
+      "pairing": "구운 생선, 밥, 튀김.",
+      "brewTip": "80도. 차가운 물에 오래 우리는 물출수도 잘 맞습니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "카마이리차 솥덖음 규슈 우레시노 일본 녹차"
+    },
+    "en": {
+      "name": "Kamairicha",
+      "oneLine": "Japan's rare wok-fired green tea — toasty rather than seaweedy.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Ureshino, Saga and other Kyushu sites where wok-firing survived.",
+      "process": "Pan-fired, rolled, dried.",
+      "story": "Chinese-style firing is said to have reached Kyushu in the Edo period and stayed.",
+      "flavor": "Roasted-grain sweetness, mild, with little seaweed character.",
+      "pairing": "Grilled fish, rice, fried food.",
+      "brewTip": "80 °C; it also cold-brews well.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Kamairicha pan-fired Japanese green tea Ureshino Kyushu"
+    },
+    "zh-CN": {
+      "name": "釜炒茶",
+      "oneLine": "日本少见的锅炒绿茶，偏炒香而非海藻气。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "九州佐贺嬉野等保留锅炒工艺的产地。",
+      "process": "炒青 → 揉捻 → 干燥。",
+      "story": "相传江户时代中国式炒青传入九州并延续至今。",
+      "flavor": "炒米般的香与轻甜，海藻气少。",
+      "pairing": "烤鱼、米饭、油炸物。",
+      "brewTip": "80度，也适合冷泡。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "釜炒茶 日本 九州 嬉野 炒青"
+    },
+    "zh-TW": {
+      "name": "釜炒茶",
+      "oneLine": "日本少見的鍋炒綠茶，偏炒香而非海藻氣。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "九州佐賀嬉野等保留鍋炒工藝的產地。",
+      "process": "炒青 → 揉捻 → 乾燥。",
+      "story": "相傳江戶時代中國式炒青傳入九州並延續至今。",
+      "flavor": "炒米般的香與輕甜，海藻氣少。",
+      "pairing": "烤魚、米飯、油炸物。",
+      "brewTip": "80度，也適合冷泡。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "釜炒茶 日本 九州 嬉野 炒青"
+    },
+    "originCountryCode": "jp"
+  },
+  {
+    "id": "green-dafo-longjing",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "佛",
+    "sub": "Dafo Longjing",
+    "alias": [
+      "대불용정",
+      "신창용정"
+    ],
+    "hz": "大佛龍井",
+    "hs": "大佛龙井",
+    "rom": "Dafo Longjing",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "저장성 신창현에서 만드는 용정 계열 녹차입니다. 시후 용정보다 채취가 이르고 가격이 낮은 편입니다.",
+        "살청 → 유념 → 압압 → 건조. 손바닥으로 눌러 납작하게 만듭니다."
+      ],
+      "en": [
+        "A Longjing-style green made in Xinchang, Zhejiang: picked earlier and cheaper than West Lake Longjing.",
+        "Fired, rolled, pressed flat by hand, dried."
+      ],
+      "zh-CN": [
+        "浙江新昌的龙井类绿茶，采摘比西湖龙井早，价格更亲民。",
+        "炒青 → 揉捻 → 压扁 → 干燥。"
+      ],
+      "zh-TW": [
+        "浙江新昌的龍井類綠茶，採摘比西湖龍井早，價格更親民。",
+        "炒青 → 揉捻 → 壓扁 → 乾燥。"
+      ]
+    },
+    "ko": {
+      "name": "대불용정",
+      "oneLine": "시후 용정보다 이르게 나오는, 눌러 편 저장의 녹차.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분, 2포 30초, 3포 45초.",
+      "origin": "저장성 신창현, 해발 300~700m.",
+      "process": "살청 → 유념 → 압압 → 건조. 손으로 눌러 납작하게 만듭니다.",
+      "story": "신창의 대불사 이름을 딴 차로, 1980년대 이후 생산이 크게 늘었습니다.",
+      "flavor": "볶은 콩 같은 고소함과 가벼운 단맛. 시후 용정보다 향이 조금 거칩니다.",
+      "pairing": "볶음 요리, 새우, 두부.",
+      "brewTip": "80도에서 1분. 잎이 납작해 금방 우러납니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "대불용정 신창 저장 용정 납작 녹차"
+    },
+    "en": {
+      "name": "Dafo Longjing",
+      "oneLine": "An earlier, everyday Longjing-style leaf from Zhejiang.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1 minute, then 30 seconds, then 45.",
+      "origin": "Xinchang county, Zhejiang, 300–700 m.",
+      "process": "Fired, rolled, pressed flat by hand, dried.",
+      "story": "Named for the Dafo temple in Xinchang; output grew sharply from the 1980s.",
+      "flavor": "Roasted-soy sweetness, a little rougher aromatically than West Lake Longjing.",
+      "pairing": "Stir-fries, shrimp, tofu.",
+      "brewTip": "One minute at 80 °C; the flat leaf gives up quickly.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Dafo Longjing Xinchang Zhejiang flat green tea"
+    },
+    "zh-CN": {
+      "name": "大佛龙井",
+      "oneLine": "比西湖龙井上市更早的日常龙井。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分钟，第二泡30秒，第三泡45秒。",
+      "origin": "浙江新昌，海拔300~700米。",
+      "process": "炒青 → 揉捻 → 压扁 → 干燥。",
+      "story": "因新昌大佛寺得名，1980年代后产量大增。",
+      "flavor": "炒豆香与轻甜，香气比西湖龙井略粗。",
+      "pairing": "小炒、虾仁、豆腐。",
+      "brewTip": "80度一分钟即出。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "大佛龙井 新昌 浙江 扁形绿茶"
+    },
+    "zh-TW": {
+      "name": "大佛龍井",
+      "oneLine": "比西湖龍井上市更早的日常龍井。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分鐘，第二泡30秒，第三泡45秒。",
+      "origin": "浙江新昌，海拔300~700米。",
+      "process": "炒青 → 揉捻 → 壓扁 → 乾燥。",
+      "story": "因新昌大佛寺得名，1980年代後產量大增。",
+      "flavor": "炒豆香與輕甜，香氣比西湖龍井略粗。",
+      "pairing": "小炒、蝦仁、豆腐。",
+      "brewTip": "80度一分鐘即出。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "大佛龍井 新昌 浙江 扁形綠茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "green-laoshan",
+    "group": "green",
+    "kind": "tea",
+    "hanja": "嶗",
+    "sub": "Laoshan Green Tea",
+    "alias": [
+      "노산녹차",
+      "라오산 녹차"
+    ],
+    "hz": "嶗山綠茶",
+    "hs": "崂山绿茶",
+    "rom": "Laoshan Lucha",
+    "temp": 80,
+    "tempRange": "75~85℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      75,
+      30,
+      45
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "산둥 칭다오의 라오산은 중국 차 산지 가운데 북쪽 끝입니다. 바닷바람과 화강암 토양에서 잎이 두껍게 자랍니다.",
+        "1959년 남방 차나무를 옮겨 심어 재배가 시작되었다는 기록이 있습니다."
+      ],
+      "en": [
+        "Laoshan, near Qingdao in Shandong, is about as far north as Chinese tea is grown: sea wind and granite soil give a thicker leaf.",
+        "Records date the planting of southern bushes here to 1959."
+      ],
+      "zh-CN": [
+        "山东青岛崂山是中国最北的茶区之一，海风与花岗岩土让叶质更厚。",
+        "据记载1959年从南方引种茶苗开始栽培。"
+      ],
+      "zh-TW": [
+        "山東青島嶗山是中國最北的茶區之一，海風與花崗巖土讓葉質更厚。",
+        "據記載1959年從南方引種茶苗開始栽培。"
+      ]
+    },
+    "ko": {
+      "name": "라오산 녹차",
+      "oneLine": "중국 차 산지의 북쪽 끝, 바닷바람이 만든 두꺼운 잎.",
+      "oxidation": "0%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "80도에서 1분 15초, 2포 30초, 3포 45초.",
+      "origin": "산둥성 칭다오 라오산, 해발 200~600m.",
+      "process": "살청 → 유념 → 건조. 잎이 두꺼워 덖는 시간이 조금 깁니다.",
+      "story": "1959년 남쪽에서 차나무를 옮겨 심어 재배가 시작되었다고 기록되어 있습니다.",
+      "flavor": "구수한 볶음 향과 진한 단맛, 잎이 두꺼워 우린 횟수가 깁니다.",
+      "pairing": "해산물, 만두, 볶음 요리.",
+      "brewTip": "80도에서 1분 15초. 3포까지도 향이 남습니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "라오산 녹차 칭다오 산둥 북방 차밭"
+    },
+    "en": {
+      "name": "Laoshan Green Tea",
+      "oneLine": "Northern edge of Chinese tea: thick leaf grown in sea wind.",
+      "oxidation": "0%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "80 °C: 1¼ minutes, then 30 seconds, then 45.",
+      "origin": "Laoshan, Qingdao, Shandong, 200–600 m.",
+      "process": "Fired, rolled, dried — a little longer, for a thicker leaf.",
+      "story": "Planting of southern bushes here is recorded from 1959.",
+      "flavor": "Toasty roast and solid sweetness; the thick leaf lasts several infusions.",
+      "pairing": "Seafood, dumplings, stir-fries.",
+      "brewTip": "1¼ minutes at 80 °C; aroma still there in the third infusion.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Laoshan green tea Qingdao Shandong northern tea"
+    },
+    "zh-CN": {
+      "name": "崂山绿茶",
+      "oneLine": "中国茶区北缘，海风养出的厚叶。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "山东青岛崂山，海拔200~600米。",
+      "process": "炒青 → 揉捻 → 干燥，叶厚，炒制稍久。",
+      "story": "据记载1959年由南方引种开始栽培。",
+      "flavor": "炒香与厚实的甘甜，耐泡。",
+      "pairing": "海鲜、饺子、家常小炒。",
+      "brewTip": "80度一分十五秒，第三泡仍有香。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "崂山绿茶 青岛 山东 北方茶区"
+    },
+    "zh-TW": {
+      "name": "嶗山綠茶",
+      "oneLine": "中國茶區北緣，海風養出的厚葉。",
+      "oxidation": "0%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "80度泡1分15秒，第二泡30秒，第三泡45秒。",
+      "origin": "山東青島嶗山，海拔200~600米。",
+      "process": "炒青 → 揉捻 → 乾燥，葉厚，炒制稍久。",
+      "story": "據記載1959年由南方引種開始栽培。",
+      "flavor": "炒香與厚實的甘甜，耐泡。",
+      "pairing": "海鮮、餃子、家常小炒。",
+      "brewTip": "80度一分十五秒，第三泡仍有香。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "嶗山綠茶 青島 山東 北方茶區"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "white-xingongyi",
+    "group": "white",
+    "kind": "tea",
+    "hanja": "新",
+    "sub": "New Craft White Tea",
+    "alias": [
+      "신공예 백차",
+      "신공예백차"
+    ],
+    "hz": "新工藝白茶",
+    "hs": "新工艺白茶",
+    "rom": "Xin Gongyi Bai Cha",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      120,
+      60,
+      90
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 20,
+    "traits": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-low m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "1968년 푸젠 푸딩에서 전통 백차의 위조 시간을 늘리고 가볍게 유념해 만든 방식입니다.",
+        "위조 → 약한 유념 → 건조. 유념으로 잎 가장자리가 조금 산화해 붉은 테가 생깁니다."
+      ],
+      "en": [
+        "Devised in Fuding, Fujian in 1968: a longer wither and a light roll, which takes white tea partway toward oolong.",
+        "Withered, lightly rolled, dried; the roll oxidises the leaf edges a little and leaves a red rim."
+      ],
+      "zh-CN": [
+        "1968年福建福鼎创制，延长萎凋并轻度揉捻。",
+        "萎凋 → 轻揉 → 干燥，揉捻使叶缘微氧化、带红边。"
+      ],
+      "zh-TW": [
+        "1968年福建福鼎創製，延長萎凋並輕度揉捻。",
+        "萎凋 → 輕揉 → 乾燥，揉捻使葉緣微氧化、帶紅邊。"
+      ]
+    },
+    "ko": {
+      "name": "신공예 백차",
+      "oneLine": "전통 백차에 가벼운 유념을 더해 향을 끌어올린 방식.",
+      "oxidation": "약 20%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 2분, 2포 1분, 3포 1분 30초.",
+      "origin": "푸젠성 푸딩, 해발 500~800m.",
+      "process": "위조 → 가벼운 유념 → 건조. 유념으로 잎 가장자리가 조금 산화합니다.",
+      "story": "1968년 푸딩에서 만들기 시작한 방식으로, 백차의 부드러움에 우롱의 향을 조금 더했습니다.",
+      "flavor": "백차의 부드러운 단맛에 꽃 향과 살짝 구운 향이 겹칩니다.",
+      "pairing": "말린 과일, 견과, 달지 않은 구운 과자.",
+      "brewTip": "85도. 전통 백차보다 향이 빨리 열려 2분이면 충분합니다.",
+      "keep": "서늘하고 건조하게. 오래 두면 향이 부드러워집니다.",
+      "keywords": "신공예 백차 푸딩 유념 반발효"
+    },
+    "en": {
+      "name": "New Craft White Tea",
+      "oneLine": "Traditional white with a light roll — more aroma, a little oxidation.",
+      "oxidation": "about 20%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 2 minutes, then 1 minute, then 1½ minutes.",
+      "origin": "Fuding, Fujian, 500–800 m.",
+      "process": "Withered, lightly rolled, dried; the roll oxidises the edges slightly.",
+      "story": "Introduced in Fuding in 1968, adding a little oolong-like aroma to white tea's softness.",
+      "flavor": "Gentle white-tea sweetness with flowers and a faint toast.",
+      "pairing": "Dried fruit, nuts, plain biscuits.",
+      "brewTip": "85 °C; aroma opens faster than traditional white — two minutes is enough.",
+      "keep": "Cool and dry; the aroma softens with age.",
+      "keywords": "new craft white tea Fuding light roll semi-oxidised"
+    },
+    "zh-CN": {
+      "name": "新工艺白茶",
+      "oneLine": "传统白茶加轻度揉捻，香气更外放。",
+      "oxidation": "约20%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分钟，第二泡1分钟，第三泡1分30秒。",
+      "origin": "福建福鼎，海拔500~800米。",
+      "process": "萎凋 → 轻揉 → 干燥，叶缘微氧化。",
+      "story": "1968年福鼎创制，在白茶的柔和中添一点乌龙香。",
+      "flavor": "白茶柔甜之上叠着花香与轻焙火气。",
+      "pairing": "果干、坚果、原味饼干。",
+      "brewTip": "85度，两分钟即可出香。",
+      "keep": "阴凉干燥，久存香气转柔。",
+      "keywords": "新工艺白茶 福鼎 轻揉 半发酵"
+    },
+    "zh-TW": {
+      "name": "新工藝白茶",
+      "oneLine": "傳統白茶加輕度揉捻，香氣更外放。",
+      "oxidation": "約20%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分鐘，第二泡1分鐘，第三泡1分30秒。",
+      "origin": "福建福鼎，海拔500~800米。",
+      "process": "萎凋 → 輕揉 → 乾燥，葉緣微氧化。",
+      "story": "1968年福鼎創製，在白茶的柔和中添一點烏龍香。",
+      "flavor": "白茶柔甜之上疊著花香與輕焙火氣。",
+      "pairing": "果乾、堅果、原味餅乾。",
+      "brewTip": "85度，兩分鐘即可出香。",
+      "keep": "陰涼乾燥，久存香氣轉柔。",
+      "keywords": "新工藝白茶 福鼎 輕揉 半發酵"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "white-yueguangbai",
+    "group": "white",
+    "kind": "tea",
+    "hanja": "月",
+    "sub": "Moonlight White",
+    "alias": [
+      "월광백",
+      "달빛백차"
+    ],
+    "hz": "月光白",
+    "hs": "月光白",
+    "rom": "Yueguang Bai",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "4g",
+    "water": "150ml",
+    "steeps": [
+      60,
+      30,
+      45
+    ],
+    "maxSteep": 4,
+    "oxidationValue": 15,
+    "traits": "t-afternoon t-night a-fruit a-floral b-medium k-sweet r-clean s-hot w-gongfu p-dessert c-low m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "윈난 대엽종으로 만드는 백차입니다. 잎 한 면은 희고 다른 면은 검게 마르는 모습이 달빛과 그림자 같아 이름이 붙었습니다.",
+        "실내에서 그늘져 위조합니다. 윈난의 건조한 공기와 큰 잎이 이 모양을 만듭니다."
+      ],
+      "en": [
+        "A white tea from Yunnan large-leaf bushes; one side of the leaf dries pale, the other dark, like moonlight and shadow — hence the name.",
+        "Shade-withered indoors; Yunnan's dry air and big leaf produce the two-tone look."
+      ],
+      "zh-CN": [
+        "用云南大叶种制作的白茶，叶面一黑一白如月影，故名。",
+        "室内遮阴萎凋，云南干燥空气与大叶种形成黑白两色。"
+      ],
+      "zh-TW": [
+        "用雲南大葉種製作的白茶，葉面一黑一白如月影，故名。",
+        "室內遮陰萎凋，雲南乾燥空氣與大葉種形成黑白兩色。"
+      ]
+    },
+    "ko": {
+      "name": "월광백",
+      "oneLine": "한 면은 희고 한 면은 검은 잎 — 윈난의 달빛 백차.",
+      "oxidation": "약 15%",
+      "ratioNote": "150ml에 4g",
+      "rounds": "4회",
+      "steepBasis": "85도에서 1분, 2포 30초, 3포 45초. 이후 15초씩 늘립니다.",
+      "origin": "윈난성 푸얼·시마오 일대, 해발 1,200~1,800m의 대엽종 차밭.",
+      "process": "실내 그늘 위조 → 건조. 잎을 비비지 않아 모양이 크게 남습니다.",
+      "story": "이름은 잎의 흑백이 달빛과 그림자를 닮은 데서 왔습니다.",
+      "flavor": "말린 과일과 꿀 같은 단맛, 부드러운 몸통. 물색은 연한 살구빛입니다.",
+      "pairing": "말린 살구, 대추, 견과, 밤 디저트.",
+      "brewTip": "85도에서 짧게 여러 번. 3포부터 단맛이 올라옵니다.",
+      "keep": "서늘하고 건조하게. 습기를 피하면 몇 해 두고 마실 수 있습니다.",
+      "keywords": "월광백 윈난 대엽종 백차 달빛 그늘위조"
+    },
+    "en": {
+      "name": "Moonlight White",
+      "oneLine": "One side pale, one side dark — Yunnan's moonlight white tea.",
+      "oxidation": "about 15%",
+      "ratioNote": "4 g to 150 ml",
+      "rounds": "4 infusions",
+      "steepBasis": "85 °C: 1 minute, then 30 seconds, then 45; add 15 seconds after that.",
+      "origin": "Pu'er and Simao, Yunnan, 1,200–1,800 m, large-leaf bushes.",
+      "process": "Shade-withered indoors, dried; the leaf is not rolled, so it stays whole.",
+      "story": "The name comes from the pale and dark faces of the leaf, like moonlight and shadow.",
+      "flavor": "Dried fruit and honey sweetness, soft body, pale apricot liquor.",
+      "pairing": "Dried apricot, jujube, nuts, chestnut desserts.",
+      "brewTip": "Short, repeated infusions at 85 °C; sweetness rises from the third.",
+      "keep": "Cool and dry; kept from damp it will hold for years.",
+      "keywords": "Moonlight White Yunnan large leaf white tea shade withered"
+    },
+    "zh-CN": {
+      "name": "月光白",
+      "oneLine": "一面白一面黑，云南的月光白茶。",
+      "oxidation": "约15%",
+      "ratioNote": "150毫升配4克",
+      "rounds": "4泡",
+      "steepBasis": "85度泡1分钟，第二泡30秒，第三泡45秒，其后每泡加15秒。",
+      "origin": "云南普洱、思茅一带，海拔1200~1800米大叶种。",
+      "process": "室内遮阴萎凋 → 干燥，不揉捻，叶片完整。",
+      "story": "名字来自叶面黑白相间，如同月光与影子。",
+      "flavor": "果干与蜜甜，汤体柔和，汤色浅杏黄。",
+      "pairing": "杏干、红枣、坚果、栗子甜点。",
+      "brewTip": "85度短泡多道，第三泡起甜味上来。",
+      "keep": "阴凉干燥，避潮可存放数年。",
+      "keywords": "月光白 云南 大叶种 白茶 阴干"
+    },
+    "zh-TW": {
+      "name": "月光白",
+      "oneLine": "一面白一面黑，雲南的月光白茶。",
+      "oxidation": "約15%",
+      "ratioNote": "150毫升配4克",
+      "rounds": "4泡",
+      "steepBasis": "85度泡1分鐘，第二泡30秒，第三泡45秒，其後每泡加15秒。",
+      "origin": "雲南普洱、思茅一帶，海拔1200~1800米大葉種。",
+      "process": "室內遮陰萎凋 → 乾燥，不揉捻，葉片完整。",
+      "story": "名字來自葉面黑白相間，如同月光與影子。",
+      "flavor": "果乾與蜜甜，湯體柔和，湯色淺杏黃。",
+      "pairing": "杏幹、紅棗、堅果、慄子甜點。",
+      "brewTip": "85度短泡多道，第三泡起甜味上來。",
+      "keep": "陰涼乾燥，避潮可存放數年。",
+      "keywords": "月光白 雲南 大葉種 白茶 陰乾"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "white-lingyun-baihao",
+    "group": "white",
+    "kind": "tea",
+    "hanja": "毫",
+    "sub": "Lingyun Baihao",
+    "alias": [
+      "능운백호",
+      "광서백호"
+    ],
+    "hz": "凌雲白毫",
+    "hs": "凌云白毫",
+    "rom": "Lingyun Baihao",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      45,
+      60
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 10,
+    "traits": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "광시 링윈의 산지에서 나는 백호가 많은 잎으로 만듭니다. 백차로도 녹차로도 가공합니다.",
+        "위조 → 건조의 기본을 지키되, 잎이 두꺼워 건조를 길게 잡습니다."
+      ],
+      "en": [
+        "Made in Lingyun, Guangxi from a bush whose buds carry heavy white down; the same leaf is also made into green tea.",
+        "Withered and dried, with a longer dry for a thick leaf."
+      ],
+      "zh-CN": [
+        "广西凌云的白毫茶树，可制白茶也可制绿茶。",
+        "萎凋 → 干燥，叶厚，干燥时间较长。"
+      ],
+      "zh-TW": [
+        "廣西凌雲的白毫茶樹，可制白茶也可制綠茶。",
+        "萎凋 → 乾燥，葉厚，乾燥時間較長。"
+      ]
+    },
+    "ko": {
+      "name": "능운백호",
+      "oneLine": "흰 솜털이 많은 잎으로 만든 광시의 백차.",
+      "oxidation": "약 10%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 1분 30초, 2포 45초, 3포 1분.",
+      "origin": "광시 좡족자치구 링윈현, 해발 800~1,200m.",
+      "process": "위조 → 건조. 잎이 두꺼워 건조를 길게 합니다.",
+      "story": "링윈 지역은 백호가 많은 차나무로 알려져 있습니다.",
+      "flavor": "부드러운 꽃 향과 옅은 풀 향, 가벼운 단맛.",
+      "pairing": "담백한 디저트, 견과, 과일.",
+      "brewTip": "85도에서 1분 30초. 잎이 두꺼워 3포까지 우러납니다.",
+      "keep": "서늘하고 건조하게, 밀봉 보관.",
+      "keywords": "능운백호 광시 백차 백호"
+    },
+    "en": {
+      "name": "Lingyun Baihao",
+      "oneLine": "A downy-leaf white tea from Guangxi.",
+      "oxidation": "about 10%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 1½ minutes, then 45 seconds, then 1 minute.",
+      "origin": "Lingyun county, Guangxi, 800–1,200 m.",
+      "process": "Withered, dried; a thick leaf needs a longer dry.",
+      "story": "Lingyun is known for bushes whose buds carry heavy white down.",
+      "flavor": "Soft flowers, faint grass, light sweetness.",
+      "pairing": "Plain desserts, nuts, fruit.",
+      "brewTip": "1½ minutes at 85 °C; the thick leaf lasts three infusions.",
+      "keep": "Cool, dry, sealed.",
+      "keywords": "Lingyun Baihao Guangxi white tea downy buds"
+    },
+    "zh-CN": {
+      "name": "凌云白毫",
+      "oneLine": "白毫浓密的广西白茶。",
+      "oxidation": "约10%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡45秒，第三泡1分钟。",
+      "origin": "广西凌云县，海拔800~1200米。",
+      "process": "萎凋 → 干燥，叶厚，干燥时间较长。",
+      "story": "凌云以白毫浓密的茶树闻名。",
+      "flavor": "柔和花香与淡草气，轻甜。",
+      "pairing": "清淡甜点、坚果、水果。",
+      "brewTip": "85度一分半，可泡三泡。",
+      "keep": "阴凉干燥，密封保存。",
+      "keywords": "凌云白毫 广西 白茶 白毫"
+    },
+    "zh-TW": {
+      "name": "凌雲白毫",
+      "oneLine": "白毫濃密的廣西白茶。",
+      "oxidation": "約10%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡45秒，第三泡1分鐘。",
+      "origin": "廣西凌雲縣，海拔800~1200米。",
+      "process": "萎凋 → 乾燥，葉厚，乾燥時間較長。",
+      "story": "凌雲以白毫濃密的茶樹聞名。",
+      "flavor": "柔和花香與淡草氣，輕甜。",
+      "pairing": "清淡甜點、堅果、水果。",
+      "brewTip": "85度一分半，可泡三泡。",
+      "keep": "陰涼乾燥，密封保存。",
+      "keywords": "凌雲白毫 廣西 白茶 白毫"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "yellow-beigang-maojian",
+    "group": "yellow",
+    "kind": "tea",
+    "hanja": "北",
+    "sub": "Beigang Maojian",
+    "alias": [
+      "북항모첨",
+      "악양북항"
+    ],
+    "hz": "北港毛尖",
+    "hs": "北港毛尖",
+    "rom": "Beigang Maojian",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      60,
+      90
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 12,
+    "traits": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "후난 웨양 북항 일대에서 만드는 작은 황차입니다. 둥팅호 서쪽 물가의 차밭입니다.",
+        "살청 → 민황(黃湯) → 건조. 덖은 뒤 뭉쳐 두어 스스로 노랗게 익게 합니다."
+      ],
+      "en": [
+        "A small yellow tea from Beigang near Yueyang, Hunan, west of Dongting Lake.",
+        "Fired, then 'men huang' — piled and wrapped so the leaf yellows itself — then dried."
+      ],
+      "zh-CN": [
+        "湖南岳阳北港一带的小宗黄茶，位于洞庭湖西岸。",
+        "炒青 → 闷黄 → 干燥，趁热堆闷使叶色转黄。"
+      ],
+      "zh-TW": [
+        "湖南岳陽北港一帶的小宗黃茶，位於洞庭湖西岸。",
+        "炒青 → 悶黃 → 乾燥，趁熱堆悶使葉色轉黃。"
+      ]
+    },
+    "ko": {
+      "name": "북항모첨",
+      "oneLine": "둥팅호 서쪽 물가의 작은 황차 — 뭉쳐 두어 노랗게 익힌 잎.",
+      "oxidation": "약 12%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 1분 30초, 2포 1분, 3포 1분 30초.",
+      "origin": "후난성 웨양시 북항 일대, 해발 100~300m.",
+      "process": "살청 → 민황 → 건조.",
+      "story": "명·청 시대부터 이어졌다고 전하는 후난의 소규모 황차입니다.",
+      "flavor": "부드러운 곡물 향과 단맛, 녹차보다 떫음이 적습니다.",
+      "pairing": "죽, 나물, 밥 반찬.",
+      "brewTip": "85도에서 1분 30초. 민황한 잎은 2포에서 향이 가장 좋습니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "북항모첨 후난 악양 황차 민황"
+    },
+    "en": {
+      "name": "Beigang Maojian",
+      "oneLine": "A small yellow tea from the west shore of Dongting Lake.",
+      "oxidation": "about 12%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 1½ minutes, then 1 minute, then 1½ minutes.",
+      "origin": "Beigang, Yueyang, Hunan, 100–300 m.",
+      "process": "Fired, then piled warm so the leaf yellows itself ('men huang'), then dried.",
+      "story": "A minor Hunan yellow tea said to go back to the Ming and Qing.",
+      "flavor": "Soft grain sweetness, less astringent than green tea.",
+      "pairing": "Congee, vegetables, everyday rice dishes.",
+      "brewTip": "1½ minutes at 85 °C; the piled leaf peaks in the second infusion.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Beigang Maojian Hunan Yueyang yellow tea men huang"
+    },
+    "zh-CN": {
+      "name": "北港毛尖",
+      "oneLine": "洞庭湖西岸的小宗黄茶，趁热堆闷转黄。",
+      "oxidation": "约12%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分钟，第三泡1分30秒。",
+      "origin": "湖南岳阳北港一带，海拔100~300米。",
+      "process": "炒青 → 闷黄 → 干燥。",
+      "story": "据传明清已有制作，属湖南小宗黄茶。",
+      "flavor": "柔和的谷物香与甘甜，比绿茶少涩。",
+      "pairing": "粥、蔬菜、家常饭。",
+      "brewTip": "85度一分半，第二泡香最好。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "北港毛尖 湖南 岳阳 黄茶 闷黄"
+    },
+    "zh-TW": {
+      "name": "北港毛尖",
+      "oneLine": "洞庭湖西岸的小宗黃茶，趁熱堆悶轉黃。",
+      "oxidation": "約12%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分鐘，第三泡1分30秒。",
+      "origin": "湖南岳陽北港一帶，海拔100~300米。",
+      "process": "炒青 → 悶黃 → 乾燥。",
+      "story": "據傳明清已有製作，屬湖南小宗黃茶。",
+      "flavor": "柔和的穀物香與甘甜，比綠茶少澀。",
+      "pairing": "粥、蔬菜、家常飯。",
+      "brewTip": "85度一分半，第二泡香最好。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "北港毛尖 湖南 嶽陽 黃茶 悶黃"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "yellow-weishan-maojian",
+    "group": "yellow",
+    "kind": "tea",
+    "hanja": "溈",
+    "sub": "Weishan Maojian",
+    "alias": [
+      "위산모첨",
+      "영향위산"
+    ],
+    "hz": "溈山毛尖",
+    "hs": "沩山毛尖",
+    "rom": "Weishan Maojian",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      60,
+      90
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 15,
+    "traits": "t-morning t-afternoon a-roast a-floral b-medium k-sweet r-smoke s-hot w-quick p-meal c-mid m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "후난 닝샹 위산에서 나는 황차로, 마지막 건조에 연기를 조금 쬐는 방식이 특징입니다.",
+        "살청 → 민황 → 훈연 건조. 잎에 옅은 솔 연기 향이 남습니다."
+      ],
+      "en": [
+        "A Hunan yellow tea from Weishan, Ningxiang, unusual for a light smoking at the final dry.",
+        "Fired, piled to yellow, then smoke-dried; a faint pine note stays in the leaf."
+      ],
+      "zh-CN": [
+        "湖南宁乡沩山黄茶，最后干燥略经烟熏。",
+        "炒青 → 闷黄 → 烟熏干燥，叶带淡松烟香。"
+      ],
+      "zh-TW": [
+        "湖南寧鄉溈山黃茶，最後乾燥略經煙燻。",
+        "炒青 → 悶黃 → 煙燻乾燥，葉帶淡松煙香。"
+      ]
+    },
+    "ko": {
+      "name": "위산모첨",
+      "oneLine": "마지막에 연기를 살짝 쬐어, 황차에 옅은 솔 향이 남는 차.",
+      "oxidation": "약 15%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 1분 30초, 2포 1분, 3포 1분 30초.",
+      "origin": "후난성 닝샹시 위산 일대, 해발 300~800m.",
+      "process": "살청 → 민황 → 훈연 건조.",
+      "story": "위산의 사찰 차밭에서 시작되었다는 이야기가 전합니다.",
+      "flavor": "곡물 단맛에 옅은 솔 연기, 떫음이 적습니다.",
+      "pairing": "훈제 요리, 구운 생선, 밥.",
+      "brewTip": "85도에서 1분 30초. 연기 향은 2포에서 부드러워집니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장. 연기 향이 다른 차로 옮지 않게 따로 둡니다.",
+      "keywords": "위산모첨 후난 영향 황차 훈연"
+    },
+    "en": {
+      "name": "Weishan Maojian",
+      "oneLine": "A yellow tea finished over smoke — a faint pine note in the leaf.",
+      "oxidation": "about 15%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 1½ minutes, then 1 minute, then 1½ minutes.",
+      "origin": "Weishan, Ningxiang, Hunan, 300–800 m.",
+      "process": "Fired, piled to yellow, smoke-dried.",
+      "story": "Said to have started in the temple tea plots on Weishan.",
+      "flavor": "Grain sweetness with light pine smoke, low astringency.",
+      "pairing": "Smoked food, grilled fish, rice.",
+      "brewTip": "1½ minutes at 85 °C; the smoke softens by the second infusion.",
+      "keep": "Within a month of opening, sealed and cold, away from other teas.",
+      "keywords": "Weishan Maojian Hunan yellow tea smoke dried"
+    },
+    "zh-CN": {
+      "name": "沩山毛尖",
+      "oneLine": "最后略经烟熏，叶里带一点松烟香的黄茶。",
+      "oxidation": "约15%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分钟，第三泡1分30秒。",
+      "origin": "湖南宁乡沩山一带，海拔300~800米。",
+      "process": "炒青 → 闷黄 → 烟熏干燥。",
+      "story": "相传始于沩山寺院茶山。",
+      "flavor": "谷物甜配淡松烟，涩味轻。",
+      "pairing": "熏制食物、烤鱼、米饭。",
+      "brewTip": "85度一分半，第二泡烟香转柔。",
+      "keep": "开封后一个月内，密封冷藏，避免串味。",
+      "keywords": "沩山毛尖 湖南 黄茶 烟熏"
+    },
+    "zh-TW": {
+      "name": "溈山毛尖",
+      "oneLine": "最後略經煙燻，葉裡帶一點松煙香的黃茶。",
+      "oxidation": "約15%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分鐘，第三泡1分30秒。",
+      "origin": "湖南寧鄉溈山一帶，海拔300~800米。",
+      "process": "炒青 → 悶黃 → 煙燻乾燥。",
+      "story": "相傳始於溈山寺院茶山。",
+      "flavor": "穀物甜配淡松煙，澀味輕。",
+      "pairing": "燻制食物、烤魚、米飯。",
+      "brewTip": "85度一分半，第二泡煙香轉柔。",
+      "keep": "開封後一個月內，密封冷藏，避免串味。",
+      "keywords": "溈山毛尖 湖南 黃茶 煙燻"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "yellow-wenzhou-huangtang",
+    "group": "yellow",
+    "kind": "tea",
+    "hanja": "黃",
+    "sub": "Pingyang Huangtang",
+    "alias": [
+      "평양황탕",
+      "온주황탕"
+    ],
+    "hz": "溫州黃湯",
+    "hs": "温州黄汤",
+    "rom": "Wenzhou Huangtang",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      60,
+      90
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 12,
+    "traits": "t-morning t-afternoon a-roast a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-low m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "저장 남부 핑양 일대에서 만드는 황차로, 청대에 공차로 올라갔다는 기록이 있습니다.",
+        "살청 → 민황 → 건조. 민황 시간을 짧게 잡아 녹차에 가까운 색을 냅니다."
+      ],
+      "en": [
+        "A yellow tea from Pingyang in southern Zhejiang, recorded as tribute tea in the Qing.",
+        "Fired, piled briefly to yellow, dried — the short pile keeps it close to green."
+      ],
+      "zh-CN": [
+        "浙江南部平阳一带的黄茶，清代曾为贡茶。",
+        "炒青 → 短时闷黄 → 干燥，色泽接近绿茶。"
+      ],
+      "zh-TW": [
+        "浙江南部平陽一帶的黃茶，清代曾為貢茶。",
+        "炒青 → 短時悶黃 → 乾燥，色澤接近綠茶。"
+      ]
+    },
+    "ko": {
+      "name": "평양황탕 (온주황탕)",
+      "oneLine": "민황을 짧게 잡아 색이 연한, 저장 남부의 황차.",
+      "oxidation": "약 12%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 1분 20초, 2포 1분, 3포 1분 20초.",
+      "origin": "저장성 원저우 핑양현, 해발 300~700m.",
+      "process": "살청 → 짧은 민황 → 건조.",
+      "story": "청대에 공차로 올라갔다고 전합니다.",
+      "flavor": "부드러운 곡물 향과 옅은 꽃 향, 가벼운 단맛.",
+      "pairing": "죽, 담백한 생선, 나물.",
+      "brewTip": "85도에서 1분 20초. 녹차에 가까워 짧게 우립니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "평양황탕 온주황탕 저장 황차 공차"
+    },
+    "en": {
+      "name": "Pingyang Huangtang",
+      "oneLine": "A pale southern-Zhejiang yellow tea with a short yellowing.",
+      "oxidation": "about 12%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 1 minute 20, then 1 minute, then 1 minute 20.",
+      "origin": "Pingyang, Wenzhou, Zhejiang, 300–700 m.",
+      "process": "Fired, a short warm pile to yellow, dried.",
+      "story": "Recorded as tribute tea in the Qing dynasty.",
+      "flavor": "Soft grain, faint flowers, light sweetness.",
+      "pairing": "Congee, light fish, vegetables.",
+      "brewTip": "1 minute 20 at 85 °C — close to green tea, so keep it short.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Pingyang Huangtang Wenzhou Zhejiang yellow tea tribute"
+    },
+    "zh-CN": {
+      "name": "平阳黄汤",
+      "oneLine": "闷黄时间短、色泽偏浅的浙南黄茶。",
+      "oxidation": "约12%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分20秒，第二泡1分钟，第三泡1分20秒。",
+      "origin": "浙江温州平阳，海拔300~700米。",
+      "process": "炒青 → 短闷黄 → 干燥。",
+      "story": "清代曾列为贡茶。",
+      "flavor": "柔和谷物香与淡花香，轻甜。",
+      "pairing": "粥、清蒸鱼、蔬菜。",
+      "brewTip": "85度一分二十秒，接近绿茶，宜短泡。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "平阳黄汤 温州 浙江 黄茶 贡茶"
+    },
+    "zh-TW": {
+      "name": "平陽黃湯",
+      "oneLine": "悶黃時間短、色澤偏淺的浙南黃茶。",
+      "oxidation": "約12%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分20秒，第二泡1分鐘，第三泡1分20秒。",
+      "origin": "浙江溫州平陽，海拔300~700米。",
+      "process": "炒青 → 短悶黃 → 乾燥。",
+      "story": "清代曾列為貢茶。",
+      "flavor": "柔和穀物香與淡花香，輕甜。",
+      "pairing": "粥、清蒸魚、蔬菜。",
+      "brewTip": "85度一分二十秒，接近綠茶，宜短泡。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "平陽黃湯 溫州 浙江 黃茶 貢茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "yellow-wanxi-huangdacha",
+    "group": "yellow",
+    "kind": "tea",
+    "hanja": "皖",
+    "sub": "Wanxi Huangda Tea",
+    "alias": [
+      "환서황대차",
+      "안후이황대차"
+    ],
+    "hz": "皖西黃大茶",
+    "hs": "皖西黄大茶",
+    "rom": "Wanxi Huangda Cha",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "5g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      120,
+      180
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 20,
+    "traits": "t-morning t-afternoon a-roast b-full k-grain r-clean s-hot s-milk w-quick p-meal c-mid m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "안후이 서부의 굵은 잎으로 만드는 대형 황차입니다. ‘대차(大茶)’라는 이름처럼 잎이 크고 실합니다.",
+        "살청 → 민황 → 건조. 잎이 굵어 민황을 길게 잡고, 냄비에 끓이듯 우려 마시기도 합니다."
+      ],
+      "en": [
+        "A coarse-leaf yellow tea from western Anhui; 'da cha' (big tea) says it plainly — large leaf, strong brew.",
+        "Fired, piled long to yellow, dried; often boiled in a pot rather than infused."
+      ],
+      "zh-CN": [
+        "皖西一带用较粗老叶做成的大宗黄茶，故名“大茶”。",
+        "炒青 → 长时闷黄 → 干燥，民间常煮饮。"
+      ],
+      "zh-TW": [
+        "皖西一帶用較粗老葉做成的大宗黃茶，故名「大茶」。",
+        "炒青 → 長時悶黃 → 乾燥，民間常煮飲。"
+      ]
+    },
+    "ko": {
+      "name": "환서황대차",
+      "oneLine": "잎이 크고 굵은 안후이의 대형 황차 — 끓여 마시는 차.",
+      "oxidation": "약 20%",
+      "ratioNote": "200ml에 5g",
+      "rounds": "3회",
+      "steepBasis": "95도에서 3분, 2포 2분. 주전자에 끓이면 더 구수합니다.",
+      "origin": "안후이성 루안·진자이 일대, 해발 300~800m.",
+      "process": "살청 → 긴 민황 → 건조.",
+      "story": "잎이 굵은 여름잎까지 쓰기 때문에 값이 낮고, 농가에서 주전자로 끓여 마시는 차로 자리했습니다.",
+      "flavor": "구수한 볶음 향과 진한 단맛, 우유를 넣어도 향이 남습니다.",
+      "pairing": "매운 요리, 국, 아침 식사.",
+      "brewTip": "95~100도에서 길게. 주전자에 넣고 끓여도 좋습니다.",
+      "keep": "개봉 후 두 달 안, 서늘하고 건조하게.",
+      "keywords": "환서황대차 안후이 황차 대차 끓인차"
+    },
+    "en": {
+      "name": "Wanxi Huangda Tea",
+      "oneLine": "Western Anhui's coarse-leaf yellow tea — made to be boiled.",
+      "oxidation": "about 20%",
+      "ratioNote": "5 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 2 minutes. Boiling in a pot makes it rounder.",
+      "origin": "Lu'an and Jinzhai, Anhui, 300–800 m.",
+      "process": "Fired, given a long warm pile to yellow, dried.",
+      "story": "It takes coarser summer leaf, so it has long been a cheap pot-boiled farmhouse tea.",
+      "flavor": "Toasty roast, strong sweetness, and it holds up with milk.",
+      "pairing": "Spicy food, soup, breakfast.",
+      "brewTip": "95–100 °C and give it time; it also boils well in a pot.",
+      "keep": "Within two months of opening, cool and dry.",
+      "keywords": "Wanxi Huangda Anhui yellow tea boiled coarse leaf"
+    },
+    "zh-CN": {
+      "name": "皖西黄大茶",
+      "oneLine": "皖西粗老叶做成的大宗黄茶，适合煮饮。",
+      "oxidation": "约20%",
+      "ratioNote": "200毫升配5克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分钟，第二泡2分钟，煮饮更醇。",
+      "origin": "安徽六安、金寨一带，海拔300~800米。",
+      "process": "炒青 → 长时闷黄 → 干燥。",
+      "story": "用夏秋粗叶，价廉，农家常以壶煮饮。",
+      "flavor": "炒香厚实、甘甜明显，加奶也不失香。",
+      "pairing": "辛香菜肴、汤、早餐。",
+      "brewTip": "95~100度久泡，或直接煮。",
+      "keep": "开封后两个月内，阴凉干燥。",
+      "keywords": "皖西黄大茶 安徽 黄茶 大茶 煮茶"
+    },
+    "zh-TW": {
+      "name": "皖西黃大茶",
+      "oneLine": "皖西粗老葉做成的大宗黃茶，適合煮飲。",
+      "oxidation": "約20%",
+      "ratioNote": "200毫升配5克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分鐘，第二泡2分鐘，煮飲更醇。",
+      "origin": "安徽六安、金寨一帶，海拔300~800米。",
+      "process": "炒青 → 長時悶黃 → 乾燥。",
+      "story": "用夏秋粗葉，價廉，農家常以壺煮飲。",
+      "flavor": "炒香厚實、甘甜明顯，加奶也不失香。",
+      "pairing": "辛香菜餚、湯、早餐。",
+      "brewTip": "95~100度久泡，或直接煮。",
+      "keep": "開封後兩個月內，陰涼乾燥。",
+      "keywords": "皖西黃大茶 安徽 黃茶 大茶 煮茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "yellow-yuanan-luyuan",
+    "group": "yellow",
+    "kind": "tea",
+    "hanja": "鹿",
+    "sub": "Yu'an Luyuan",
+    "alias": [
+      "원안녹원",
+      "녹원차"
+    ],
+    "hz": "遠安鹿苑茶",
+    "hs": "远安鹿苑茶",
+    "rom": "Yuan'an Luyuan Cha",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      90,
+      60,
+      90
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 15,
+    "traits": "t-morning t-afternoon a-roast a-floral b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "후베이 위안안의 루위안사 주변에서 시작된 황차로, 청대 건륭 연간 기록이 남아 있습니다.",
+        "살청 → 민황 → 건조. 잎을 가늘게 꼬아 말립니다."
+      ],
+      "en": [
+        "A Hubei yellow tea from around Luyuan temple in Yuan'an, recorded in the Qianlong era of the Qing.",
+        "Fired, piled to yellow, rolled into fine strands, dried."
+      ],
+      "zh-CN": [
+        "湖北远安鹿苑寺一带的黄茶，清代乾隆年间已有记载。",
+        "炒青 → 闷黄 → 揉成细条 → 干燥。"
+      ],
+      "zh-TW": [
+        "湖北遠安鹿苑寺一帶的黃茶，清代乾隆年間已有記載。",
+        "炒青 → 悶黃 → 揉成細條 → 乾燥。"
+      ]
+    },
+    "ko": {
+      "name": "원안녹원차",
+      "oneLine": "청대 기록이 남은 후베이 황차 — 가늘게 꼰 잎.",
+      "oxidation": "약 15%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 1분 30초, 2포 1분, 3포 1분 30초.",
+      "origin": "후베이성 위안안현 루위안사 일대, 해발 300~700m.",
+      "process": "살청 → 민황 → 유념 → 건조.",
+      "story": "청대 건륭 연간에 이름이 보이며, 사찰 차밭에서 시작되었다고 전합니다.",
+      "flavor": "부드러운 곡물 향과 꽃 향, 깨끗한 단맛.",
+      "pairing": "죽, 나물, 담백한 국.",
+      "brewTip": "85도에서 1분 30초. 잎이 가늘어 2포면 충분합니다.",
+      "keep": "개봉 후 한 달 안, 밀봉 냉장.",
+      "keywords": "원안녹원차 후베이 황차 사찰차"
+    },
+    "en": {
+      "name": "Yu'an Luyuan Tea",
+      "oneLine": "A Hubei yellow tea with Qing records and a fine rolled leaf.",
+      "oxidation": "about 15%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 1½ minutes, then 1 minute, then 1½ minutes.",
+      "origin": "Around Luyuan temple, Yuan'an county, Hubei, 300–700 m.",
+      "process": "Fired, piled to yellow, rolled into fine strands, dried.",
+      "story": "It appears in Qianlong-era records and is said to have begun in the temple's tea plots.",
+      "flavor": "Soft grain and flowers, a clean sweetness.",
+      "pairing": "Congee, vegetables, light soup.",
+      "brewTip": "1½ minutes at 85 °C; two infusions are enough for this thin leaf.",
+      "keep": "Within a month of opening, sealed and cold.",
+      "keywords": "Yu'an Luyuan Hubei yellow tea temple tea"
+    },
+    "zh-CN": {
+      "name": "远安鹿苑茶",
+      "oneLine": "清代已有记载的湖北黄茶，条索细紧。",
+      "oxidation": "约15%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分钟，第三泡1分30秒。",
+      "origin": "湖北远安鹿苑寺一带，海拔300~700米。",
+      "process": "炒青 → 闷黄 → 揉捻 → 干燥。",
+      "story": "乾隆年间已见记载，相传始于寺院茶山。",
+      "flavor": "谷物香与花香，回甘干净。",
+      "pairing": "粥、蔬菜、清汤。",
+      "brewTip": "85度一分半，两泡足够。",
+      "keep": "开封后一个月内，密封冷藏。",
+      "keywords": "远安鹿苑茶 湖北 黄茶 寺茶"
+    },
+    "zh-TW": {
+      "name": "遠安鹿苑茶",
+      "oneLine": "清代已有記載的湖北黃茶，條索細緊。",
+      "oxidation": "約15%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡1分30秒，第二泡1分鐘，第三泡1分30秒。",
+      "origin": "湖北遠安鹿苑寺一帶，海拔300~700米。",
+      "process": "炒青 → 悶黃 → 揉捻 → 乾燥。",
+      "story": "乾隆年間已見記載，相傳始於寺院茶山。",
+      "flavor": "穀物香與花香，回甘乾淨。",
+      "pairing": "粥、蔬菜、清湯。",
+      "brewTip": "85度一分半，兩泡足夠。",
+      "keep": "開封後一個月內，密封冷藏。",
+      "keywords": "遠安鹿苑茶 湖北 黃茶 寺茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-rougui",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "桂",
+    "sub": "Wuyi Rougui",
+    "alias": [
+      "육계",
+      "무이육계"
+    ],
+    "hz": "武夷肉桂",
+    "hs": "武夷肉桂",
+    "rom": "Wuyi Rougui",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 50,
+    "traits": "t-afternoon t-night a-roast a-floral b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "계피나무 껍질 향이 나서 ‘육계’라는 이름이 붙었습니다. 무이산 암차 가운데 대홍포와 함께 가장 많이 심는 품종입니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조 → 숯불 배화. 배화를 여러 번 나누어 올립니다."
+      ],
+      "en": [
+        "Named for a cinnamon-bark note; along with Da Hong Pao it is the most planted bush among the Wuyi rock teas.",
+        "Withered, shaken, fired, rolled, dried, then charcoal-baked in several rounds."
+      ],
+      "zh-CN": [
+        "因带桂皮香而得名，与大红袍同为武夷岩茶种植最多的品种。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 炭焙，焙火分多次。"
+      ],
+      "zh-TW": [
+        "因帶桂皮香而得名，與大紅袍同為武夷巖茶種植最多的品種。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 炭焙，焙火分多次。"
+      ]
+    },
+    "ko": {
+      "name": "무이육계",
+      "oneLine": "계피 껍질을 닮은 향 — 무이 암차의 또 다른 기둥.",
+      "oxidation": "약 50%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "8회 이상",
+      "steepBasis": "98도에서 30초, 2포 20초, 3포 25초. 이후 5초씩 늘립니다.",
+      "origin": "푸젠성 우이산, 해발 300~600m의 사암 협곡.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조 → 숯불 배화.",
+      "story": "청대에 이미 무이산에서 재배되었다는 기록이 있으며, 1980년대 이후 단일 품종 차로 널리 팔리기 시작했습니다.",
+      "flavor": "계피·정향 같은 향신료 향, 구운 곡물 향, 진한 단맛과 긴 여운.",
+      "pairing": "구운 고기, 훈제 오리, 진한 중식.",
+      "brewTip": "98도 이상. 첫 물은 세차로 버리고, 2포부터 마십니다.",
+      "keep": "밀봉해 서늘한 곳에. 배화한 차는 1~2년 두면 향이 둥글어집니다.",
+      "keywords": "무이육계 육계 무이암차 우롱 배화 계피향"
+    },
+    "en": {
+      "name": "Wuyi Rougui",
+      "oneLine": "Cinnamon-bark aroma — the other pillar of Wuyi rock oolong.",
+      "oxidation": "about 50%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "8+ infusions",
+      "steepBasis": "98 °C: 30 seconds, then 20, then 25; add 5 seconds after that.",
+      "origin": "Wuyi Mountains, Fujian, sandstone gorges at 300–600 m.",
+      "process": "Withered, shaken, fired, rolled, dried, charcoal-baked.",
+      "story": "Rougui was recorded on Wuyi in the Qing; single-cultivar Rougui spread widely from the 1980s.",
+      "flavor": "Cinnamon and clove spice, roast grain, deep sweetness, a long finish.",
+      "pairing": "Grilled meat, smoked duck, rich Chinese dishes.",
+      "brewTip": "98 °C or above. Rinse the first pour away and start from the second.",
+      "keep": "Sealed and cool; baked oolong rounds out over a year or two.",
+      "keywords": "Wuyi Rougui rock oolong cinnamon charcoal baked"
+    },
+    "zh-CN": {
+      "name": "武夷肉桂",
+      "oneLine": "似桂皮的辛香，武夷岩茶的另一根柱子。",
+      "oxidation": "约50%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "8泡以上",
+      "steepBasis": "98度泡30秒，第二泡20秒，第三泡25秒，其后每泡加5秒。",
+      "origin": "福建武夷山，海拔300~600米砂岩峡谷。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 炭焙。",
+      "story": "清代武夷已有栽培记载，1980年代后单品种肉桂广泛流行。",
+      "flavor": "桂皮、丁香的辛香，焙火谷香，甜厚回甘长。",
+      "pairing": "烤肉、熏鸭、味浓中餐。",
+      "brewTip": "98度以上，头汤洗茶，从第二泡喝起。",
+      "keep": "密封阴凉，焙火茶放一两年香气更圆。",
+      "keywords": "武夷肉桂 岩茶 乌龙 炭焙 桂皮香"
+    },
+    "zh-TW": {
+      "name": "武夷肉桂",
+      "oneLine": "似桂皮的辛香，武夷巖茶的另一根柱子。",
+      "oxidation": "約50%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "8泡以上",
+      "steepBasis": "98度泡30秒，第二泡20秒，第三泡25秒，其後每泡加5秒。",
+      "origin": "福建武夷山，海拔300~600米砂巖峽谷。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 炭焙。",
+      "story": "清代武夷已有栽培記載，1980年代後單品種肉桂廣泛流行。",
+      "flavor": "桂皮、丁香的辛香，焙火谷香，甜厚回甘長。",
+      "pairing": "烤肉、燻鴨、味濃中餐。",
+      "brewTip": "98度以上，頭湯洗茶，從第二泡喝起。",
+      "keep": "密封陰涼，焙火茶放一兩年香氣更圓。",
+      "keywords": "武夷肉桂 巖茶 烏龍 炭焙 桂皮香"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-shuixian",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "仙",
+    "sub": "Wuyi Shuixian",
+    "alias": [
+      "수선",
+      "무이수선",
+      "노총수선"
+    ],
+    "hz": "武夷水仙",
+    "hs": "武夷水仙",
+    "rom": "Wuyi Shuixian",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 9,
+    "oxidationValue": 50,
+    "traits": "t-afternoon t-night a-roast a-floral b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "나무 나이가 많은 ‘노총(老叢)’일수록 이끼·목질 향이 깊어져 따로 높이 칩니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조 → 배화. 잎이 커 배화를 오래 잡습니다."
+      ],
+      "en": [
+        "Old bushes ('lao cong') are prized separately for a mossy, woody depth.",
+        "Withered, shaken, fired, rolled, dried, baked; the large leaf takes a long bake."
+      ],
+      "zh-CN": [
+        "树龄越老（老丛）苔藓气与木质香越深，单独高价。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 焙火，叶大焙火时间长。"
+      ],
+      "zh-TW": [
+        "樹齡越老（老叢）苔蘚氣與木質香越深，單獨高價。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 焙火，葉大焙火時間長。"
+      ]
+    },
+    "ko": {
+      "name": "무이수선",
+      "oneLine": "큰 잎과 깊은 배화 — 나무가 늙을수록 이끼 향이 짙어지는 차.",
+      "oxidation": "약 50%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "9회 이상",
+      "steepBasis": "98도에서 30초, 2포 20초, 3포 25초. 이후 5초씩 늘립니다.",
+      "origin": "푸젠성 우이산 일대, 해발 300~700m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조 → 배화.",
+      "story": "무이산에서 오래 재배된 품종으로, 나이 든 나무의 잎을 ‘노총수선’으로 따로 칩니다.",
+      "flavor": "난초 향에 목질·이끼 향이 겹치고, 배화한 차는 단맛이 깁니다.",
+      "pairing": "구운 생선, 버섯 요리, 진한 차 자리.",
+      "brewTip": "98도. 노총은 2포부터 이끼 향이 열립니다.",
+      "keep": "밀봉해 서늘하게. 배화 향은 시간이 지나며 부드러워집니다.",
+      "keywords": "무이수선 노총수선 우롱 암차 목질향"
+    },
+    "en": {
+      "name": "Wuyi Shuixian",
+      "oneLine": "Big leaf, deep bake — and the older the bush, the mossier the cup.",
+      "oxidation": "about 50%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "9+ infusions",
+      "steepBasis": "98 °C: 30 seconds, then 20, then 25; add 5 seconds after that.",
+      "origin": "Wuyi Mountains, Fujian, 300–700 m.",
+      "process": "Withered, shaken, fired, rolled, dried, baked.",
+      "story": "Long grown on Wuyi; leaf from old bushes is sold separately as lao cong shuixian.",
+      "flavor": "Orchid over wood and moss; the baked version keeps a long sweetness.",
+      "pairing": "Grilled fish, mushroom dishes, a long tea session.",
+      "brewTip": "98 °C. The mossy side of an old bush opens from the second infusion.",
+      "keep": "Sealed and cool; the bake softens with time.",
+      "keywords": "Wuyi Shuixian lao cong old bush rock oolong"
+    },
+    "zh-CN": {
+      "name": "武夷水仙",
+      "oneLine": "叶大焙足，树越老苔藓气越深。",
+      "oxidation": "约50%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "9泡以上",
+      "steepBasis": "98度泡30秒，第二泡20秒，第三泡25秒，其后每泡加5秒。",
+      "origin": "福建武夷山一带，海拔300~700米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 焙火。",
+      "story": "武夷传统品种，老树所制单称“老丛水仙”。",
+      "flavor": "兰花香叠木质与苔藓气，焙火后回甘长。",
+      "pairing": "烤鱼、菌菇菜、长茶席。",
+      "brewTip": "98度，老丛从第二泡起出苔藓气。",
+      "keep": "密封阴凉，焙火香随年份转柔。",
+      "keywords": "武夷水仙 老丛 岩茶 乌龙"
+    },
+    "zh-TW": {
+      "name": "武夷水仙",
+      "oneLine": "葉大焙足，樹越老苔蘚氣越深。",
+      "oxidation": "約50%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "9泡以上",
+      "steepBasis": "98度泡30秒，第二泡20秒，第三泡25秒，其後每泡加5秒。",
+      "origin": "福建武夷山一帶，海拔300~700米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 焙火。",
+      "story": "武夷傳統品種，老樹所制單稱「老叢水仙」。",
+      "flavor": "蘭花香疊木質與苔蘚氣，焙火後回甘長。",
+      "pairing": "烤魚、菌菇菜、長茶席。",
+      "brewTip": "98度，老叢從第二泡起出苔蘚氣。",
+      "keep": "密封陰涼，焙火香隨年份轉柔。",
+      "keywords": "武夷水仙 老叢 巖茶 烏龍"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-dayuling",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "嶺",
+    "sub": "Dayuling Oolong",
+    "alias": [
+      "대우령",
+      "대우령 고산차"
+    ],
+    "hz": "大禹嶺",
+    "hs": "大禹岭",
+    "rom": "Dayuling",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      50,
+      25,
+      35
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 20,
+    "traits": "t-morning t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "해발 2,300m를 넘는 대만에서 가장 높은 차밭 중 하나로, 겨울에 눈이 오는 곳도 있습니다.",
+        "위조 → 요청 → 살청 → 유념(구형) → 건조. 낮은 온도로 잎이 두껍고 천천히 자랍니다."
+      ],
+      "en": [
+        "One of Taiwan's highest tea areas, above 2,300 m, where it sometimes snows.",
+        "Withered, shaken, fired, rolled into balls, dried; the cold makes thick, slow-grown leaf."
+      ],
+      "zh-CN": [
+        "海拔2300米以上，是台湾最高茶区之一，冬季偶有降雪。",
+        "萎凋 → 摇青 → 炒青 → 揉成球 → 干燥，低温使叶厚而生长慢。"
+      ],
+      "zh-TW": [
+        "海拔2300米以上，是臺灣最高茶區之一，冬季偶有降雪。",
+        "萎凋 → 搖青 → 炒青 → 揉成球 → 乾燥，低溫使葉厚而生長慢。"
+      ]
+    },
+    "ko": {
+      "name": "대우령 고산우롱",
+      "oneLine": "해발 2,300m, 대만에서 가장 높은 차밭의 늦고 두꺼운 잎.",
+      "oxidation": "약 20%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "8회",
+      "steepBasis": "95도에서 50초, 2포 25초, 3포 35초.",
+      "origin": "난터우·타이중 경계 대우령, 해발 2,300~2,600m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조.",
+      "story": "고도가 높아 생산량이 적고, 해마다 기상에 따라 품질 차이가 크게 나는 산지입니다.",
+      "flavor": "맑은 꽃 향과 청량한 단맛, 떫음이 거의 없습니다. 물색은 연한 금빛입니다.",
+      "pairing": "가벼운 디저트, 과일, 단독 음용.",
+      "brewTip": "90~95도. 잎을 많이 넣고 짧게 여러 번 우리는 방식이 향을 지킵니다.",
+      "keep": "밀봉 냉동 보관이 향을 오래 지킵니다. 개봉 후 한 달 안에.",
+      "keywords": "대우령 고산차 대만 우롱 해발 2300"
+    },
+    "en": {
+      "name": "Dayuling High Mountain Oolong",
+      "oneLine": "Above 2,300 m — Taiwan's highest tea, thick slow-grown leaf.",
+      "oxidation": "about 20%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "8 infusions",
+      "steepBasis": "95 °C: 50 seconds, then 25, then 35.",
+      "origin": "Dayuling on the Nantou–Taichung border, 2,300–2,600 m.",
+      "process": "Withered, shaken, fired, rolled into balls, dried.",
+      "story": "Altitude keeps yields small and makes quality swing with each season's weather.",
+      "flavor": "Clear flowers, cool sweetness, almost no astringency; pale gold liquor.",
+      "pairing": "Light desserts, fruit, or on its own.",
+      "brewTip": "90–95 °C, plenty of leaf, short repeated infusions.",
+      "keep": "Sealed in the freezer holds the aroma; use within a month of opening.",
+      "keywords": "Dayuling high mountain oolong Taiwan 2300 m"
+    },
+    "zh-CN": {
+      "name": "大禹岭高山乌龙",
+      "oneLine": "海拔2300米以上，台湾最高茶区的厚叶。",
+      "oxidation": "约20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "8泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "南投与台中交界大禹岭，海拔2300~2600米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。",
+      "story": "高海拔产量少，品质随当年气候起伏大。",
+      "flavor": "清扬花香与凉甜，几乎不涩，汤色浅金。",
+      "pairing": "清淡甜点、水果，或单独品饮。",
+      "brewTip": "90~95度，多投茶、短泡多道。",
+      "keep": "密封冷冻保香，开封后一个月内用完。",
+      "keywords": "大禹岭 高山乌龙 台湾 海拔2300"
+    },
+    "zh-TW": {
+      "name": "大禹嶺高山烏龍",
+      "oneLine": "海拔2300米以上，臺灣最高茶區的厚葉。",
+      "oxidation": "約20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "8泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "南投與臺中交界大禹嶺，海拔2300~2600米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。",
+      "story": "高海拔產量少，品質隨當年氣候起伏大。",
+      "flavor": "清揚花香與涼甜，幾乎不澀，湯色淺金。",
+      "pairing": "清淡甜點、水果，或單獨品飲。",
+      "brewTip": "90~95度，多投茶、短泡多道。",
+      "keep": "密封冷凍保香，開封後一個月內用完。",
+      "keywords": "大禹嶺 高山烏龍 臺灣 海拔2300"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "oolong-shanlinxi",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "杉",
+    "sub": "Shanlinxi Oolong",
+    "alias": [
+      "삼림계",
+      "산림계"
+    ],
+    "hz": "杉林溪",
+    "hs": "杉林溪",
+    "rom": "Shanlinxi",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      50,
+      25,
+      35
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 20,
+    "traits": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-calm",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "난터우 주지 일대, 해발 1,600~1,800m의 삼나무 숲 사이 차밭에서 나는 고산차입니다.",
+        "위조 → 요청 → 살청 → 구형 유념 → 건조. 숲 그늘과 안개로 향이 맑습니다."
+      ],
+      "en": [
+        "High-mountain tea from cedar-forest plots at 1,600–1,800 m in Zhushan, Nantou.",
+        "Withered, shaken, fired, ball-rolled, dried; forest shade and fog keep the aroma clean."
+      ],
+      "zh-CN": [
+        "南投竹山杉林溪一带，海拔1600~1800米柳杉林间的茶田。",
+        "萎凋 → 摇青 → 炒青 → 揉球 → 干燥，林荫与雾气使香气清扬。"
+      ],
+      "zh-TW": [
+        "南投竹山杉林溪一帶，海拔1600~1800米柳杉林間的茶田。",
+        "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥，林蔭與霧氣使香氣清揚。"
+      ]
+    },
+    "ko": {
+      "name": "삼림계 고산우롱",
+      "oneLine": "삼나무 숲 사이 차밭의 고산차 — 맑고 서늘한 향.",
+      "oxidation": "약 20%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "7회",
+      "steepBasis": "95도에서 50초, 2포 25초, 3포 35초.",
+      "origin": "난터우현 주산, 해발 1,600~1,800m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조.",
+      "story": "삼림계는 아리산 옆 고산 지대로, 숲과 안개가 많은 환경으로 알려져 있습니다.",
+      "flavor": "맑은 꽃 향과 옅은 풀 향, 깨끗한 단맛.",
+      "pairing": "과일, 가벼운 디저트.",
+      "brewTip": "90~95도에서 짧게 여러 번.",
+      "keep": "밀봉 냉장 또는 냉동.",
+      "keywords": "삼림계 산림계 대만 고산우롱 주산"
+    },
+    "en": {
+      "name": "Shanlinxi Oolong",
+      "oneLine": "High-mountain tea from cedar-forest plots — clean and cool.",
+      "oxidation": "about 20%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "7 infusions",
+      "steepBasis": "95 °C: 50 seconds, then 25, then 35.",
+      "origin": "Zhushan, Nantou, 1,600–1,800 m.",
+      "process": "Withered, shaken, fired, ball-rolled, dried.",
+      "story": "Shanlinxi sits beside Alishan; its forest and fog are the region's signature.",
+      "flavor": "Clear flowers, a little grass, clean sweetness.",
+      "pairing": "Fruit, light desserts.",
+      "brewTip": "Short infusions at 90–95 °C.",
+      "keep": "Sealed, refrigerated or frozen.",
+      "keywords": "Shanlinxi oolong Taiwan Zhushan high mountain"
+    },
+    "zh-CN": {
+      "name": "杉林溪高山乌龙",
+      "oneLine": "柳杉林间茶田的高山茶，清冷干净。",
+      "oxidation": "约20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "南投竹山，海拔1600~1800米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。",
+      "story": "杉林溪紧邻阿里山，以林荫与雾气著称。",
+      "flavor": "清扬花香带一点草气，甘净。",
+      "pairing": "水果、清淡甜点。",
+      "brewTip": "90~95度短泡多道。",
+      "keep": "密封冷藏或冷冻。",
+      "keywords": "杉林溪 高山乌龙 台湾 竹山"
+    },
+    "zh-TW": {
+      "name": "杉林溪高山烏龍",
+      "oneLine": "柳杉林間茶田的高山茶，清冷乾淨。",
+      "oxidation": "約20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "南投竹山，海拔1600~1800米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。",
+      "story": "杉林溪緊鄰阿里山，以林蔭與霧氣著稱。",
+      "flavor": "清揚花香帶一點草氣，甘淨。",
+      "pairing": "水果、清淡甜點。",
+      "brewTip": "90~95度短泡多道。",
+      "keep": "密封冷藏或冷凍。",
+      "keywords": "杉林溪 高山烏龍 臺灣 竹山"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "oolong-lishan",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "梨",
+    "sub": "Lishan Oolong",
+    "alias": [
+      "이산",
+      "이산 고산차"
+    ],
+    "hz": "梨山",
+    "hs": "梨山",
+    "rom": "Lishan",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      50,
+      25,
+      35
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 20,
+    "traits": "t-morning t-afternoon a-fruit a-floral b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "타이중 허핑 일대, 해발 2,000m 안팎의 과수원 사이에서 자라는 고산차입니다.",
+        "위조 → 요청 → 살청 → 구형 유념 → 건조. 밤낮 온도차가 커 잎이 두껍습니다."
+      ],
+      "en": [
+        "Grown among orchards near Heping, Taichung, at around 2,000 m.",
+        "Withered, shaken, fired, ball-rolled, dried; wide day-night swings thicken the leaf."
+      ],
+      "zh-CN": [
+        "台中和平一带，海拔约2000米的果园之间。",
+        "萎凋 → 摇青 → 炒青 → 揉球 → 干燥，日夜温差大，叶质厚。"
+      ],
+      "zh-TW": [
+        "臺中和平一帶，海拔約2000米的果園之間。",
+        "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥，日夜溫差大，葉質厚。"
+      ]
+    },
+    "ko": {
+      "name": "이산 고산우롱",
+      "oneLine": "과수원 사이 해발 2,000m, 과일 향이 도는 고산차.",
+      "oxidation": "약 20%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "8회",
+      "steepBasis": "95도에서 50초, 2포 25초, 3포 35초.",
+      "origin": "타이중시 허핑구 이산 일대, 해발 1,800~2,200m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조.",
+      "story": "이산은 배·사과 과수원으로도 이름난 고산 지대이며, 차밭이 그 사이에 있습니다.",
+      "flavor": "잘 익은 과일 향과 꽃 향, 부드러운 단맛.",
+      "pairing": "배, 사과, 견과, 가벼운 디저트.",
+      "brewTip": "90~95도에서 짧게. 3포부터 과일 향이 올라옵니다.",
+      "keep": "밀봉 냉장. 개봉 후 한 달 안.",
+      "keywords": "이산 고산차 대만 우롱 허핑 과수원"
+    },
+    "en": {
+      "name": "Lishan Oolong",
+      "oneLine": "Ripened-fruit high mountain tea from among the orchards at 2,000 m.",
+      "oxidation": "about 20%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "8 infusions",
+      "steepBasis": "95 °C: 50 seconds, then 25, then 35.",
+      "origin": "Lishan, Heping district, Taichung, 1,800–2,200 m.",
+      "process": "Withered, shaken, fired, ball-rolled, dried.",
+      "story": "Lishan is orchard country — pears and apples — with tea plots in between.",
+      "flavor": "Ripe fruit and flowers, soft sweetness.",
+      "pairing": "Pear, apple, nuts, light desserts.",
+      "brewTip": "Short infusions at 90–95 °C; fruit arrives in the third.",
+      "keep": "Sealed and refrigerated; use within a month of opening.",
+      "keywords": "Lishan oolong Taiwan Taichung Heping fruit"
+    },
+    "zh-CN": {
+      "name": "梨山高山乌龙",
+      "oneLine": "果园之间海拔两千米，熟果香的高山茶。",
+      "oxidation": "约20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "8泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "台中和平梨山一带，海拔1800~2200米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。",
+      "story": "梨山以梨、苹果果园闻名，茶园散布其间。",
+      "flavor": "熟果香与花香，甜柔。",
+      "pairing": "梨、苹果、坚果、清淡甜点。",
+      "brewTip": "90~95度短泡，第三泡起出果香。",
+      "keep": "密封冷藏，开封后一个月内用完。",
+      "keywords": "梨山 高山乌龙 台湾 和平 果园"
+    },
+    "zh-TW": {
+      "name": "梨山高山烏龍",
+      "oneLine": "果園之間海拔兩千米，熟果香的高山茶。",
+      "oxidation": "約20%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "8泡",
+      "steepBasis": "95度泡50秒，第二泡25秒，第三泡35秒。",
+      "origin": "臺中和平梨山一帶，海拔1800~2200米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。",
+      "story": "梨山以梨、蘋果果園聞名，茶園散布其間。",
+      "flavor": "熟果香與花香，甜柔。",
+      "pairing": "梨、蘋果、堅果、清淡甜點。",
+      "brewTip": "90~95度短泡，第三泡起出果香。",
+      "keep": "密封冷藏，開封後一個月內用完。",
+      "keywords": "梨山 高山烏龍 臺灣 和平 果園"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "oolong-huangjingui",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "桂",
+    "sub": "Huang Jin Gui",
+    "alias": [
+      "황금계",
+      "황단"
+    ],
+    "hz": "黃金桂",
+    "hs": "黄金桂",
+    "rom": "Huang Jin Gui",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 6,
+    "oxidationValue": 35,
+    "traits": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "안시의 황단(黃旦) 품종으로 만드는 차입니다. 향이 세차게 퍼져 ‘투천향(透天香)’이라는 별명이 있습니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조. 산화가 가벼워 꽃 향이 앞섭니다."
+      ],
+      "en": [
+        "Made from the Huangdan cultivar of Anxi; its aroma is so forward the tea is nicknamed 'heaven-piercing fragrance'.",
+        "Withered, shaken, fired, rolled, dried; light oxidation keeps the flowers up front."
+      ],
+      "zh-CN": [
+        "用安溪黄旦品种制成，香气高扬，俗称“透天香”。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥，氧化轻，花香突出。"
+      ],
+      "zh-TW": [
+        "用安溪黃旦品種製成，香氣高揚，俗稱「透天香」。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥，氧化輕，花香突出。"
+      ]
+    },
+    "ko": {
+      "name": "황금계 (황단)",
+      "oneLine": "향이 하늘을 뚫는다는 별명을 가진, 안시의 가벼운 우롱.",
+      "oxidation": "약 35%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "6회",
+      "steepBasis": "95도에서 30초, 2포 20초, 3포 25초.",
+      "origin": "푸젠성 안시, 해발 400~800m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조.",
+      "story": "황단 품종은 잎이 노랗고 발아가 빨라 ‘황금계’라 불리게 되었다고 전합니다.",
+      "flavor": "밀크티 같은 크림 향과 꽃 향, 가벼운 단맛. 철관음보다 산화가 가볍습니다.",
+      "pairing": "가벼운 디저트, 과일, 단독 음용.",
+      "brewTip": "95도에서 짧게. 향이 세므로 2포부터 마시면 좋습니다.",
+      "keep": "밀봉 냉장. 향이 날아가기 쉬워 개봉 후 빨리 마십니다.",
+      "keywords": "황금계 황단 안시 우롱 투천향"
+    },
+    "en": {
+      "name": "Huang Jin Gui",
+      "oneLine": "Anxi's lighter oolong, nicknamed 'heaven-piercing fragrance'.",
+      "oxidation": "about 35%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "6 infusions",
+      "steepBasis": "95 °C: 30 seconds, then 20, then 25.",
+      "origin": "Anxi, Fujian, 400–800 m.",
+      "process": "Withered, shaken, fired, rolled, dried.",
+      "story": "The Huangdan bush has yellowish leaf and buds early — hence 'golden cassia'.",
+      "flavor": "Creamy, milk-tea-like aroma with flowers and light sweetness; lighter than Tieguanyin.",
+      "pairing": "Light desserts, fruit, or alone.",
+      "brewTip": "Short at 95 °C; start from the second infusion to let the aroma settle.",
+      "keep": "Sealed and cold; the aroma fades fast once opened.",
+      "keywords": "Huang Jin Gui Huangdan Anxi oolong fragrant"
+    },
+    "zh-CN": {
+      "name": "黄金桂",
+      "oneLine": "香气高扬、号称“透天香”的安溪轻发酵乌龙。",
+      "oxidation": "约35%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "6泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建安溪，海拔400~800米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥。",
+      "story": "黄旦品种叶色偏黄、发芽早，故称黄金桂。",
+      "flavor": "奶香与花香，轻甜，比铁观音氧化更轻。",
+      "pairing": "清淡甜点、水果，或单独品饮。",
+      "brewTip": "95度短泡，从第二泡喝起。",
+      "keep": "密封冷藏，开封后尽快喝完。",
+      "keywords": "黄金桂 黄旦 安溪 乌龙 透天香"
+    },
+    "zh-TW": {
+      "name": "黃金桂",
+      "oneLine": "香氣高揚、號稱「透天香」的安溪輕發酵烏龍。",
+      "oxidation": "約35%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "6泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建安溪，海拔400~800米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥。",
+      "story": "黃旦品種葉色偏黃、發芽早，故稱黃金桂。",
+      "flavor": "奶香與花香，輕甜，比鐵觀音氧化更輕。",
+      "pairing": "清淡甜點、水果，或單獨品飲。",
+      "brewTip": "95度短泡，從第二泡喝起。",
+      "keep": "密封冷藏，開封後儘快喝完。",
+      "keywords": "黃金桂 黃旦 安溪 烏龍 透天香"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-benshan",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "本",
+    "sub": "Benshan Oolong",
+    "alias": [
+      "본산",
+      "안시본산"
+    ],
+    "hz": "本山",
+    "hs": "本山",
+    "rom": "Benshan",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 35,
+    "traits": "t-morning t-afternoon a-floral a-grass b-medium k-sweet r-clean s-hot w-gongfu p-meal c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "철관음과 같은 안시 지역에서 나지만 향이 가볍고 값이 낮아 ‘철관음의 동생’으로 불립니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조. 잎을 덜 비벼 향을 가볍게 남깁니다."
+      ],
+      "en": [
+        "From the same Anxi area as Tieguanyin but lighter and cheaper — often called Tieguanyin's younger sibling.",
+        "Withered, shaken, fired, rolled less, dried, which keeps the aroma light."
+      ],
+      "zh-CN": [
+        "与铁观音同产安溪，香气较轻、价格更低，俗称“铁观音的弟弟”。",
+        "萎凋 → 摇青 → 炒青 → 轻揉 → 干燥。"
+      ],
+      "zh-TW": [
+        "與鐵觀音同產安溪，香氣較輕、價格更低，俗稱「鐵觀音的弟弟」。",
+        "萎凋 → 搖青 → 炒青 → 輕揉 → 乾燥。"
+      ]
+    },
+    "ko": {
+      "name": "본산",
+      "oneLine": "철관음의 동생이라 불리는, 가볍고 깨끗한 안시 우롱.",
+      "oxidation": "약 35%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "7회",
+      "steepBasis": "95도에서 30초, 2포 20초, 3포 25초.",
+      "origin": "푸젠성 안시, 해발 500~900m.",
+      "process": "위조 → 요청 → 살청 → 가벼운 유념 → 건조.",
+      "story": "안시의 옛 재배 품종으로, 철관음보다 향이 얇고 값이 낮아 일상차로 많이 마십니다.",
+      "flavor": "옅은 난초 향과 풀 향, 가벼운 단맛. 철관음보다 힘이 적습니다.",
+      "pairing": "밥 반찬, 가벼운 중식.",
+      "brewTip": "95도에서 짧게. 잎이 얇아 5포를 넘기면 힘이 빠집니다.",
+      "keep": "밀봉 냉장.",
+      "keywords": "본산 안시 우롱 철관음 동생"
+    },
+    "en": {
+      "name": "Benshan Oolong",
+      "oneLine": "The lighter, cheaper Anxi oolong — Tieguanyin's younger sibling.",
+      "oxidation": "about 35%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "7 infusions",
+      "steepBasis": "95 °C: 30 seconds, then 20, then 25.",
+      "origin": "Anxi, Fujian, 500–900 m.",
+      "process": "Withered, shaken, fired, lightly rolled, dried.",
+      "story": "An old Anxi cultivar, thinner in aroma than Tieguanyin and priced for everyday drinking.",
+      "flavor": "Faint orchid and grass, light sweetness; less body than Tieguanyin.",
+      "pairing": "Rice dishes and light Chinese food.",
+      "brewTip": "Short at 95 °C; it thins out past the fifth infusion.",
+      "keep": "Sealed and cold.",
+      "keywords": "Benshan oolong Anxi lighter Tieguanyin"
+    },
+    "zh-CN": {
+      "name": "本山",
+      "oneLine": "铁观音的“弟弟”，安溪轻香型乌龙。",
+      "oxidation": "约35%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建安溪，海拔500~900米。",
+      "process": "萎凋 → 摇青 → 炒青 → 轻揉 → 干燥。",
+      "story": "安溪传统品种，香薄价低，多做日常口粮茶。",
+      "flavor": "淡兰香与草气，轻甜，力道弱于铁观音。",
+      "pairing": "家常饭菜、清淡中餐。",
+      "brewTip": "95度短泡，五泡后转淡。",
+      "keep": "密封冷藏。",
+      "keywords": "本山 安溪 乌龙 铁观音"
+    },
+    "zh-TW": {
+      "name": "本山",
+      "oneLine": "鐵觀音的「弟弟」，安溪輕香型烏龍。",
+      "oxidation": "約35%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建安溪，海拔500~900米。",
+      "process": "萎凋 → 搖青 → 炒青 → 輕揉 → 乾燥。",
+      "story": "安溪傳統品種，香薄價低，多做日常口糧茶。",
+      "flavor": "淡蘭香與草氣，輕甜，力道弱於鐵觀音。",
+      "pairing": "家常飯菜、清淡中餐。",
+      "brewTip": "95度短泡，五泡後轉淡。",
+      "keep": "密封冷藏。",
+      "keywords": "本山 安溪 烏龍 鐵觀音"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-foshou",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "佛",
+    "sub": "Yongchun Foshou",
+    "alias": [
+      "불수",
+      "영춘불수"
+    ],
+    "hz": "永春佛手",
+    "hs": "永春佛手",
+    "rom": "Yongchun Foshou",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 40,
+    "traits": "t-afternoon t-night a-fruit a-floral b-full k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "잎이 커서 부처손(佛手)을 닮았다고 해서 이름이 붙었습니다. 푸젠 융춘 지역의 차입니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조. 잎이 두꺼워 향이 진하고 7포까지 갑니다."
+      ],
+      "en": [
+        "Named for leaves as big as a Buddha's-hand citron; it comes from Yongchun, Fujian.",
+        "Withered, shaken, fired, rolled, dried; the thick leaf holds aroma through many infusions."
+      ],
+      "zh-CN": [
+        "叶片大如佛手，故名，产自福建永春。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥，叶厚耐泡。"
+      ],
+      "zh-TW": [
+        "葉片大如佛手，故名，產自福建永春。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥，葉厚耐泡。"
+      ]
+    },
+    "ko": {
+      "name": "영춘불수",
+      "oneLine": "손바닥만 한 잎에서 나오는 배 같은 향 — 푸젠 융춘의 차.",
+      "oxidation": "약 40%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "7회",
+      "steepBasis": "95도에서 30초, 2포 20초, 3포 25초.",
+      "origin": "푸젠성 융춘현, 해발 500~900m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조.",
+      "story": "잎이 부처손 열매를 닮아 이름이 붙었고, 민국 시기에 이미 이름이 알려졌습니다.",
+      "flavor": "배·감 같은 달콤한 과일 향, 부드러운 몸통, 떫음이 적습니다.",
+      "pairing": "배, 구운 과자, 견과.",
+      "brewTip": "95도. 잎이 두꺼워 2포부터 향이 열리고 7포까지 갑니다.",
+      "keep": "밀봉 냉장, 개봉 후 한 달 안.",
+      "keywords": "영춘불수 불수 우롱 푸젠 배향"
+    },
+    "en": {
+      "name": "Yongchun Foshou",
+      "oneLine": "Pear-like sweetness from leaves as broad as a hand.",
+      "oxidation": "about 40%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "7 infusions",
+      "steepBasis": "95 °C: 30 seconds, then 20, then 25.",
+      "origin": "Yongchun, Fujian, 500–900 m.",
+      "process": "Withered, shaken, fired, rolled, dried.",
+      "story": "Named for a leaf shaped like a Buddha's-hand citron; already noted in the Republican era.",
+      "flavor": "Sweet pear and persimmon fruit, soft body, little astringency.",
+      "pairing": "Pear, baked sweets, nuts.",
+      "brewTip": "95 °C; the thick leaf opens from the second infusion and lasts to the seventh.",
+      "keep": "Sealed and cold; use within a month of opening.",
+      "keywords": "Yongchun Foshou oolong Fujian pear aroma"
+    },
+    "zh-CN": {
+      "name": "永春佛手",
+      "oneLine": "叶片大如佛手，带梨子般甜香。",
+      "oxidation": "约40%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建永春，海拔500~900米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥。",
+      "story": "叶形似佛手柑而得名，民国时期已见名气。",
+      "flavor": "梨、柿般的熟果甜，汤体柔，涩轻。",
+      "pairing": "梨、烤点心、坚果。",
+      "brewTip": "95度，叶厚，第二泡起香，可到七泡。",
+      "keep": "密封冷藏，开封后一个月内用完。",
+      "keywords": "永春佛手 佛手 乌龙 福建 梨香"
+    },
+    "zh-TW": {
+      "name": "永春佛手",
+      "oneLine": "葉片大如佛手，帶梨子般甜香。",
+      "oxidation": "約40%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "福建永春，海拔500~900米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥。",
+      "story": "葉形似佛手柑而得名，民國時期已見名氣。",
+      "flavor": "梨、柿般的熟果甜，湯體柔，澀輕。",
+      "pairing": "梨、烤點心、堅果。",
+      "brewTip": "95度，葉厚，第二泡起香，可到七泡。",
+      "keep": "密封冷藏，開封後一個月內用完。",
+      "keywords": "永春佛手 佛手 烏龍 福建 梨香"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-muzha-tieguanyin",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "木",
+    "sub": "Muzha Tieguanyin",
+    "alias": [
+      "목책 철관음",
+      "타이베이 철관음"
+    ],
+    "hz": "木柵鐵觀音",
+    "hs": "木栅铁观音",
+    "rom": "Muzha Tieguanyin",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      35,
+      20,
+      25
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 45,
+    "traits": "t-afternoon t-night a-roast a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "타이베이 무자 지역에서 19세기 말부터 만들어진 철관음입니다. 오랫동안 숯불에 배화해 두는 방식이 특징입니다.",
+        "위조 → 요청 → 살청 → 유념(구형) → 건조 → 숯불 배화. 배화를 여러 번 반복합니다."
+      ],
+      "en": [
+        "Tieguanyin made in Muzha, Taipei since the late 19th century, and known for long charcoal baking.",
+        "Withered, shaken, fired, ball-rolled, dried, then baked over charcoal in repeated rounds."
+      ],
+      "zh-CN": [
+        "台北木栅自清末制作铁观音，以长时间炭焙著称。",
+        "萎凋 → 摇青 → 炒青 → 揉球 → 干燥 → 炭焙，多次复焙。"
+      ],
+      "zh-TW": [
+        "臺北木柵自清末製作鐵觀音，以長時間炭焙著稱。",
+        "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥 → 炭焙，多次復焙。"
+      ]
+    },
+    "ko": {
+      "name": "목책 철관음",
+      "oneLine": "숯불에 오래 배화한 타이베이의 철관음 — 구운 과일 향.",
+      "oxidation": "약 45%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "8회",
+      "steepBasis": "98도에서 35초, 2포 20초, 3포 25초.",
+      "origin": "타이베이시 원산·무자 일대, 해발 300~500m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조 → 숯불 배화.",
+      "story": "20세기 초 무자에 차 시험장이 들어서며 제법이 정리되었고, 지금도 소규모 농가가 숯불 배화를 이어갑니다.",
+      "flavor": "구운 과일과 캐러멜, 진한 단맛, 끝에 옅은 탄 향.",
+      "pairing": "구운 견과, 캐러멜 디저트, 진한 중식.",
+      "brewTip": "98도에서 세차 후 마십니다. 배화한 차는 2포부터 단맛이 살아납니다.",
+      "keep": "밀봉해 서늘하게. 배화 향은 몇 해 두면 더 둥글어집니다.",
+      "keywords": "목책 철관음 무자 타이베이 숯불배화"
+    },
+    "en": {
+      "name": "Muzha Tieguanyin",
+      "oneLine": "Long charcoal-baked Tieguanyin from Taipei — roasted fruit and caramel.",
+      "oxidation": "about 45%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "8 infusions",
+      "steepBasis": "98 °C: 35 seconds, then 20, then 25.",
+      "origin": "Wenshan and Muzha, Taipei, 300–500 m.",
+      "process": "Withered, shaken, fired, ball-rolled, dried, charcoal-baked.",
+      "story": "A tea research station opened in Muzha in the early 20th century and fixed the method; small farms still bake over charcoal.",
+      "flavor": "Roasted fruit, caramel, deep sweetness, a light char at the end.",
+      "pairing": "Roasted nuts, caramel desserts, rich Chinese food.",
+      "brewTip": "98 °C, rinse first; sweetness comes from the second infusion.",
+      "keep": "Sealed and cool; the bake rounds out over a few years.",
+      "keywords": "Muzha Tieguanyin Taipei charcoal baked oolong"
+    },
+    "zh-CN": {
+      "name": "木栅铁观音",
+      "oneLine": "台北木栅长时间炭焙的铁观音，带烤果与焦糖香。",
+      "oxidation": "约45%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "8泡",
+      "steepBasis": "98度泡35秒，第二泡20秒，第三泡25秒。",
+      "origin": "台北文山、木栅一带，海拔300~500米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥 → 炭焙。",
+      "story": "20世纪初木栅设茶业试验场，工艺定型；如今仍有小农以炭火慢焙。",
+      "flavor": "烤果与焦糖，甜厚，尾端微带焙火气。",
+      "pairing": "烤坚果、焦糖甜点、味浓中餐。",
+      "brewTip": "98度洗茶后饮用，第二泡起出甜。",
+      "keep": "密封阴凉，焙火香随年份转圆。",
+      "keywords": "木栅铁观音 台北 炭焙 乌龙"
+    },
+    "zh-TW": {
+      "name": "木柵鐵觀音",
+      "oneLine": "臺北木柵長時間炭焙的鐵觀音，帶烤果與焦糖香。",
+      "oxidation": "約45%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "8泡",
+      "steepBasis": "98度泡35秒，第二泡20秒，第三泡25秒。",
+      "origin": "臺北文山、木柵一帶，海拔300~500米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥 → 炭焙。",
+      "story": "20世紀初木柵設茶業試驗場，工藝定型；如今仍有小農以炭火慢焙。",
+      "flavor": "烤果與焦糖，甜厚，尾端微帶焙火氣。",
+      "pairing": "烤堅果、焦糖甜點、味濃中餐。",
+      "brewTip": "98度洗茶後飲用，第二泡起出甜。",
+      "keep": "密封陰涼，焙火香隨年份轉圓。",
+      "keywords": "木柵鐵觀音 臺北 炭焙 烏龍"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "oolong-dancong-milan",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "蘭",
+    "sub": "Mi Lan Xiang Dancong",
+    "alias": [
+      "밀란향",
+      "밀란향 단총"
+    ],
+    "hz": "蜜蘭香",
+    "hs": "蜜兰香",
+    "rom": "Mi Lan Xiang",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      25,
+      15,
+      20
+    ],
+    "maxSteep": 10,
+    "oxidationValue": 45,
+    "traits": "t-afternoon t-night a-floral a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "광둥 차오저우 봉황산의 단총 가운데 가장 널리 퍼진 향형입니다. 꿀과 난초 향이 겹칩니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조 → 가벼운 배화. 나무 한 그루에서 한 향을 냅니다."
+      ],
+      "en": [
+        "The most widely planted aroma type among the Phoenix dancong of Chaozhou, Guangdong: honey over orchid.",
+        "Withered, shaken, fired, rolled, dried, lightly baked; each old bush gives its own aroma."
+      ],
+      "zh-CN": [
+        "潮州凤凰单丛中最普及的香型，蜜香叠兰香。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 轻焙火，一树一香。"
+      ],
+      "zh-TW": [
+        "潮州鳳凰單叢中最普及的香型，蜜香疊蘭香。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 輕焙火，一樹一香。"
+      ]
+    },
+    "ko": {
+      "name": "밀란향 단총",
+      "oneLine": "꿀과 난초가 겹치는, 봉황단총의 대표 향형.",
+      "oxidation": "약 45%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "10회 이상",
+      "steepBasis": "98도에서 25초, 2포 15초, 3포 20초. 이후 5초씩 늘립니다.",
+      "origin": "광둥성 차오저우 펑황산, 해발 800~1,400m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조 → 가벼운 배화.",
+      "story": "봉황산에서는 나무마다 향이 달라 나무에 이름을 붙여 따로 만드는 관행이 이어집니다.",
+      "flavor": "꿀 같은 단맛과 난초 향, 진한 몸통, 여운이 깁니다.",
+      "pairing": "과일, 꿀 디저트, 진한 중식.",
+      "brewTip": "98도. 잎을 많이 넣고 짧게 여러 번. 4포부터 꿀 향이 짙어집니다.",
+      "keep": "밀봉해 서늘하게. 향이 날아가지 않게 소분합니다.",
+      "keywords": "밀란향 봉황단총 차오저우 우롱 꿀향"
+    },
+    "en": {
+      "name": "Mi Lan Xiang Dancong",
+      "oneLine": "Honey over orchid — the most planted Phoenix dancong aroma.",
+      "oxidation": "about 45%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "10+ infusions",
+      "steepBasis": "98 °C: 25 seconds, then 15, then 20; add 5 seconds after that.",
+      "origin": "Phoenix Mountain, Chaozhou, Guangdong, 800–1,400 m.",
+      "process": "Withered, shaken, fired, rolled, dried, lightly baked.",
+      "story": "On Phoenix Mountain each old bush has its own aroma and is picked and made separately.",
+      "flavor": "Honeyed sweetness, orchid, full body, a long finish.",
+      "pairing": "Fruit, honey desserts, rich Chinese dishes.",
+      "brewTip": "98 °C, lots of leaf, short repeated infusions; honey deepens from the fourth.",
+      "keep": "Sealed and cool; split into small lots so the aroma stays.",
+      "keywords": "Mi Lan Xiang dancong Phoenix oolong Chaozhou honey orchid"
+    },
+    "zh-CN": {
+      "name": "蜜兰香单丛",
+      "oneLine": "蜜香叠兰香，凤凰单丛最常见的香型。",
+      "oxidation": "约45%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "10泡以上",
+      "steepBasis": "98度泡25秒，第二泡15秒，第三泡20秒，其后每泡加5秒。",
+      "origin": "广东潮州凤凰山，海拔800~1400米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 轻焙。",
+      "story": "凤凰山一树一香，老丛单独采制并各取其名。",
+      "flavor": "蜜甜与兰香，汤体厚，余韵长。",
+      "pairing": "水果、蜂蜜甜点、味浓中餐。",
+      "brewTip": "98度多投茶短泡，第四泡起蜜香更浓。",
+      "keep": "密封阴凉，小包分装保香。",
+      "keywords": "蜜兰香 单丛 潮州 凤凰 乌龙"
+    },
+    "zh-TW": {
+      "name": "蜜蘭香單叢",
+      "oneLine": "蜜香疊蘭香，鳳凰單叢最常見的香型。",
+      "oxidation": "約45%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "10泡以上",
+      "steepBasis": "98度泡25秒，第二泡15秒，第三泡20秒，其後每泡加5秒。",
+      "origin": "廣東潮州鳳凰山，海拔800~1400米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 輕焙。",
+      "story": "鳳凰山一樹一香，老叢單獨採制並各取其名。",
+      "flavor": "蜜甜與蘭香，湯體厚，餘韻長。",
+      "pairing": "水果、蜂蜜甜點、味濃中餐。",
+      "brewTip": "98度多投茶短泡，第四泡起蜜香更濃。",
+      "keep": "密封陰涼，小包分裝保香。",
+      "keywords": "蜜蘭香 單叢 潮州 鳳凰 烏龍"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-dancong-yashixiang",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "香",
+    "sub": "Ya Shi Xiang Dancong",
+    "alias": [
+      "압시향",
+      "은화향"
+    ],
+    "hz": "鴨屎香",
+    "hs": "鸭屎香",
+    "rom": "Ya Shi Xiang",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "7g",
+    "water": "110ml",
+    "steeps": [
+      25,
+      15,
+      20
+    ],
+    "maxSteep": 10,
+    "oxidationValue": 45,
+    "traits": "t-afternoon t-night a-floral a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-energy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "이름은 거칠지만 향은 은은한 꽃 향이라 ‘은화향(銀花香)’으로도 부릅니다. 원래 이름은 재배지 흙 이름에서 왔다는 이야기가 전합니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조 → 가벼운 배화."
+      ],
+      "en": [
+        "The rough name hides a silvery floral aroma, so it is also sold as 'Yin Hua Xiang' (silver flower).",
+        "Withered, shaken, fired, rolled, dried, lightly baked."
+      ],
+      "zh-CN": [
+        "名字粗俗，香气却是清雅银花香，故又称“银花香”。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 轻焙。"
+      ],
+      "zh-TW": [
+        "名字粗俗，香氣卻是清雅銀花香，故又稱「銀花香」。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 輕焙。"
+      ]
+    },
+    "ko": {
+      "name": "압시향 (은화향)",
+      "oneLine": "거친 이름 뒤에 은은한 꽃 향이 있는 봉황단총.",
+      "oxidation": "약 45%",
+      "ratioNote": "개완 110ml에 7g",
+      "rounds": "10회 이상",
+      "steepBasis": "98도에서 25초, 2포 15초, 3포 20초.",
+      "origin": "광둥성 차오저우 펑황산, 해발 800~1,200m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조 → 가벼운 배화.",
+      "story": "이름이 좋지 않아 차를 팔 때 ‘은화향’으로 바꿔 부르는 일이 흔해졌습니다.",
+      "flavor": "은방울꽃 같은 청량한 꽃 향, 산뜻한 단맛, 여운이 깁니다.",
+      "pairing": "가벼운 디저트, 과일, 단독 음용.",
+      "brewTip": "98도에서 짧게. 2포에서 꽃 향이 가장 맑습니다.",
+      "keep": "밀봉해 서늘하게, 소분 보관.",
+      "keywords": "압시향 은화향 봉황단총 차오저우"
+    },
+    "en": {
+      "name": "Ya Shi Xiang (Silver Flower)",
+      "oneLine": "A rough name for a silvery, cool floral dancong.",
+      "oxidation": "about 45%",
+      "ratioNote": "7 g in a 110 ml gaiwan",
+      "rounds": "10+ infusions",
+      "steepBasis": "98 °C: 25 seconds, then 15, then 20.",
+      "origin": "Phoenix Mountain, Chaozhou, Guangdong, 800–1,200 m.",
+      "process": "Withered, shaken, fired, rolled, dried, lightly baked.",
+      "story": "Because the original name is unappetising, sellers often relabel it Yin Hua Xiang.",
+      "flavor": "Cool lily-of-the-valley florals, bright sweetness, a long finish.",
+      "pairing": "Light desserts, fruit, or alone.",
+      "brewTip": "Short at 98 °C; the clearest flowers are in the second infusion.",
+      "keep": "Sealed, cool, in small lots.",
+      "keywords": "Ya Shi Xiang duck shit aroma dancong silver flower oolong"
+    },
+    "zh-CN": {
+      "name": "鸭屎香（银花香）",
+      "oneLine": "名字粗俗，香却是清冷的银花香。",
+      "oxidation": "约45%",
+      "ratioNote": "110毫升盖碗配7克",
+      "rounds": "10泡以上",
+      "steepBasis": "98度泡25秒，第二泡15秒，第三泡20秒。",
+      "origin": "广东潮州凤凰山，海拔800~1200米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 轻焙。",
+      "story": "因原名不雅，市面多以“银花香”出售。",
+      "flavor": "铃兰般的清花香，甜爽，余韵长。",
+      "pairing": "清淡甜点、水果，或单独品饮。",
+      "brewTip": "98度短泡，第二泡花香最清。",
+      "keep": "密封阴凉，小包分装。",
+      "keywords": "鸭屎香 银花香 凤凰单丛 潮州"
+    },
+    "zh-TW": {
+      "name": "鴨屎香（銀花香）",
+      "oneLine": "名字粗俗，香卻是清冷的銀花香。",
+      "oxidation": "約45%",
+      "ratioNote": "110毫升蓋碗配7克",
+      "rounds": "10泡以上",
+      "steepBasis": "98度泡25秒，第二泡15秒，第三泡20秒。",
+      "origin": "廣東潮州鳳凰山，海拔800~1200米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 輕焙。",
+      "story": "因原名不雅，市面多以「銀花香」出售。",
+      "flavor": "鈴蘭般的清花香，甜爽，餘韻長。",
+      "pairing": "清淡甜點、水果，或單獨品飲。",
+      "brewTip": "98度短泡，第二泡花香最清。",
+      "keep": "密封陰涼，小包分裝。",
+      "keywords": "鴨屎香 銀花香 鳳凰單叢 潮州"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "oolong-hongshui",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "紅",
+    "sub": "Hong Shui Oolong",
+    "alias": [
+      "홍수우롱",
+      "전통 홍수"
+    ],
+    "hz": "紅水烏龍",
+    "hs": "红水乌龙",
+    "rom": "Hong Shui Oolong",
+    "temp": 95,
+    "tempRange": "90~98℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      40,
+      25,
+      30
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 60,
+    "traits": "t-afternoon t-night a-fruit a-roast b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "산화를 60% 안팎까지 올리고 배화한 대만의 전통식 우롱입니다. 1970년대 이후 가벼운 우롱에 밀려 줄었습니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조 → 배화. 산화가 깊어 물색이 붉습니다."
+      ],
+      "en": [
+        "Taiwan's older style, oxidised to around 60% and baked; it lost ground to light oolong from the 1970s.",
+        "Withered, shaken, fired, rolled, dried, baked; deeper oxidation gives the red liquor its name."
+      ],
+      "zh-CN": [
+        "台湾传统式乌龙，氧化约60%并焙火，1970年代后为轻发酵乌龙取代。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 焙火，氧化深，汤色偏红。"
+      ],
+      "zh-TW": [
+        "臺灣傳統式烏龍，氧化約60%並焙火，1970年代後為輕發酵烏龍取代。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 焙火，氧化深，湯色偏紅。"
+      ]
+    },
+    "ko": {
+      "name": "홍수우롱",
+      "oneLine": "산화를 깊게 올린 대만의 옛 방식 — 붉은 물색의 우롱.",
+      "oxidation": "약 60%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "7회",
+      "steepBasis": "95도에서 40초, 2포 25초, 3포 30초.",
+      "origin": "난터우·자이 일대, 해발 600~1,200m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조 → 배화.",
+      "story": "1970년대 이후 가볍게 만든 고산 우롱이 인기를 얻으면서 생산이 크게 줄었습니다.",
+      "flavor": "잘 익은 과일과 꿀, 구운 향. 홍차에 가까운 진한 물색입니다.",
+      "pairing": "구운 과자, 말린 과일, 치즈.",
+      "brewTip": "95도에서 40초. 진하게 우려도 떫음이 적습니다.",
+      "keep": "밀봉해 서늘하게. 배화한 차는 오래 둘수록 부드러워집니다.",
+      "keywords": "홍수우롱 대만 전통 우롱 배화 진산"
+    },
+    "en": {
+      "name": "Hong Shui Oolong",
+      "oneLine": "Taiwan's older deep-oxidised style — an oolong with red liquor.",
+      "oxidation": "about 60%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "7 infusions",
+      "steepBasis": "95 °C: 40 seconds, then 25, then 30.",
+      "origin": "Nantou and Chiayi, 600–1,200 m.",
+      "process": "Withered, shaken, fired, rolled, dried, baked.",
+      "story": "Production fell sharply after the 1970s as light, high-mountain oolong took over the market.",
+      "flavor": "Ripe fruit, honey, a baked note; the liquor is nearly as dark as black tea.",
+      "pairing": "Baked sweets, dried fruit, cheese.",
+      "brewTip": "40 seconds at 95 °C; it stays soft even when strong.",
+      "keep": "Sealed and cool; baked tea softens with years.",
+      "keywords": "Hong Shui oolong Taiwan traditional deep oxidation baked"
+    },
+    "zh-CN": {
+      "name": "红水乌龙",
+      "oneLine": "深氧化的台湾传统乌龙，汤色近红。",
+      "oxidation": "约60%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡40秒，第二泡25秒，第三泡30秒。",
+      "origin": "南投、嘉义一带，海拔600~1200米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥 → 焙火。",
+      "story": "1970年代后轻发酵高山乌龙兴起，产量大减。",
+      "flavor": "熟果、蜜香与焙火气，汤色接近红茶。",
+      "pairing": "烤点心、果干、奶酪。",
+      "brewTip": "95度40秒，浓泡也不涩。",
+      "keep": "密封阴凉，久存转柔。",
+      "keywords": "红水乌龙 台湾 传统乌龙 焙火"
+    },
+    "zh-TW": {
+      "name": "紅水烏龍",
+      "oneLine": "深氧化的臺灣傳統烏龍，湯色近紅。",
+      "oxidation": "約60%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "7泡",
+      "steepBasis": "95度泡40秒，第二泡25秒，第三泡30秒。",
+      "origin": "南投、嘉義一帶，海拔600~1200米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥 → 焙火。",
+      "story": "1970年代後輕發酵高山烏龍興起，產量大減。",
+      "flavor": "熟果、蜜香與焙火氣，湯色接近紅茶。",
+      "pairing": "烤點心、果乾、奶酪。",
+      "brewTip": "95度40秒，濃泡也不澀。",
+      "keep": "密封陰涼，久存轉柔。",
+      "keywords": "紅水烏龍 臺灣 傳統烏龍 焙火"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "oolong-thai-doi",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "泰",
+    "sub": "Doi Mae Salong Oolong",
+    "alias": [
+      "도이매살롱",
+      "태국 우롱"
+    ],
+    "hz": "泰北烏龍",
+    "hs": "泰北乌龙",
+    "rom": "Doi Mae Salong Oolong",
+    "temp": 95,
+    "tempRange": "90~95℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      45,
+      25,
+      30
+    ],
+    "maxSteep": 6,
+    "oxidationValue": 25,
+    "traits": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot s-iced w-gongfu p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "태국",
+      "en": "Thailand",
+      "zh-CN": "泰国",
+      "zh-TW": "泰國"
+    },
+    "x": {
+      "ko": [
+        "타이북 치앙라이 도이매살롱 일대에서 만드는 우롱입니다. 20세기 후반 대만의 제법과 묘목이 들어와 자리 잡았습니다.",
+        "위조 → 요청 → 살청 → 구형 유념 → 건조. 태국 북부의 서늘한 고도에서 자랍니다."
+      ],
+      "en": [
+        "Oolong from Doi Mae Salong in Chiang Rai, northern Thailand, where Taiwanese methods and seedlings arrived in the late 20th century.",
+        "Withered, shaken, fired, ball-rolled, dried, at cool northern Thai altitudes."
+      ],
+      "zh-CN": [
+        "泰国北部清莱美斯乐一带的乌龙，20世纪后期引入台湾工艺与茶苗。",
+        "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。"
+      ],
+      "zh-TW": [
+        "泰國北部清萊美斯樂一帶的烏龍，20世紀後期引入臺灣工藝與茶苗。",
+        "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。"
+      ]
+    },
+    "ko": {
+      "name": "도이매살롱 우롱",
+      "oneLine": "대만 제법이 건너가 자리 잡은 태국 북부의 우롱.",
+      "oxidation": "약 25%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "6회",
+      "steepBasis": "95도에서 45초, 2포 25초, 3포 30초.",
+      "origin": "태국 치앙라이 도이매살롱, 해발 1,000~1,400m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조.",
+      "story": "20세기 후반 대만에서 묘목과 제법이 들어와 북부 산지에 우롱 재배가 자리 잡았습니다.",
+      "flavor": "가벼운 꽃 향과 단맛, 대만 고산차보다 힘이 부드럽습니다.",
+      "pairing": "태국 요리, 과일, 아이스티.",
+      "brewTip": "90~95도에서 짧게. 차갑게 우려도 향이 살아 있습니다.",
+      "keep": "밀봉 냉장.",
+      "keywords": "도이매살롱 태국 우롱 치앙라이"
+    },
+    "en": {
+      "name": "Doi Mae Salong Oolong",
+      "oneLine": "Thai highland oolong grown from Taiwanese methods and seedlings.",
+      "oxidation": "about 25%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "6 infusions",
+      "steepBasis": "95 °C: 45 seconds, then 25, then 30.",
+      "origin": "Doi Mae Salong, Chiang Rai, Thailand, 1,000–1,400 m.",
+      "process": "Withered, shaken, fired, ball-rolled, dried.",
+      "story": "Seedlings and methods came from Taiwan in the late 20th century and took root in the north.",
+      "flavor": "Light flowers and sweetness, softer in body than Taiwan high-mountain oolong.",
+      "pairing": "Thai food, fruit, iced tea.",
+      "brewTip": "Short at 90–95 °C; it also keeps its aroma cold-brewed.",
+      "keep": "Sealed and refrigerated.",
+      "keywords": "Doi Mae Salong Thai oolong Chiang Rai highland"
+    },
+    "zh-CN": {
+      "name": "美斯乐乌龙",
+      "oneLine": "台湾工艺与茶苗在泰北落地生根的乌龙。",
+      "oxidation": "约25%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "6泡",
+      "steepBasis": "95度泡45秒，第二泡25秒，第三泡30秒。",
+      "origin": "泰国清莱美斯乐，海拔1000~1400米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。",
+      "story": "20世纪后期台湾茶苗与工艺传入，泰北山区发展出乌龙茶产业。",
+      "flavor": "轻花香与甜，茶体比台湾高山茶柔。",
+      "pairing": "泰式料理、水果、冰茶。",
+      "brewTip": "90~95度短泡，冷泡也香。",
+      "keep": "密封冷藏。",
+      "keywords": "美斯乐 泰国 乌龙 清莱 高山"
+    },
+    "zh-TW": {
+      "name": "美斯樂烏龍",
+      "oneLine": "臺灣工藝與茶苗在泰北落地生根的烏龍。",
+      "oxidation": "約25%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "6泡",
+      "steepBasis": "95度泡45秒，第二泡25秒，第三泡30秒。",
+      "origin": "泰國清萊美斯樂，海拔1000~1400米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。",
+      "story": "20世紀後期臺灣茶苗與工藝傳入，泰北山區發展出烏龍茶產業。",
+      "flavor": "輕花香與甜，茶體比臺灣高山茶柔。",
+      "pairing": "泰式料理、水果、冰茶。",
+      "brewTip": "90~95度短泡，冷泡也香。",
+      "keep": "密封冷藏。",
+      "keywords": "美斯樂 泰國 烏龍 清萊 高山"
+    },
+    "originCountryCode": "th"
+  },
+  {
+    "id": "oolong-vietnam-mocchau",
+    "group": "oolong",
+    "kind": "tea",
+    "hanja": "越",
+    "sub": "Moc Chau Oolong",
+    "alias": [
+      "목쩌우",
+      "베트남 우롱"
+    ],
+    "hz": "木州烏龍",
+    "hs": "木州乌龙",
+    "rom": "Moc Chau Oolong",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      45,
+      25,
+      30
+    ],
+    "maxSteep": 5,
+    "oxidationValue": 30,
+    "traits": "t-morning t-afternoon a-grass a-floral b-medium k-sweet r-clean s-hot s-iced w-gongfu p-meal c-mid m-refresh",
+    "originCountry": {
+      "ko": "베트남",
+      "en": "Vietnam",
+      "zh-CN": "越南",
+      "zh-TW": "越南"
+    },
+    "x": {
+      "ko": [
+        "베트남 선라성 목쩌우 고원의 차입니다. 20세기 초 프랑스가 차 재배를 들여왔고, 이후 대만식 우롱 제법도 들어왔습니다.",
+        "위조 → 요청 → 살청 → 유념 → 건조. 해발 1,000m 안팎의 서늘한 고원에서 자랍니다."
+      ],
+      "en": [
+        "Tea from the Moc Chau plateau in Son La, Vietnam. The French introduced tea growing in the early 20th century; Taiwanese oolong methods came later.",
+        "Withered, shaken, fired, rolled, dried at around 1,000 m."
+      ],
+      "zh-CN": [
+        "越南山罗省木州高原的茶。20世纪初法国引入茶树栽培，后来也引进台湾乌龙工艺。",
+        "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥，海拔约1000米。"
+      ],
+      "zh-TW": [
+        "越南山羅省木州高原的茶。20世紀初法國引入茶樹栽培，後來也引進臺灣烏龍工藝。",
+        "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥，海拔約1000米。"
+      ]
+    },
+    "ko": {
+      "name": "목쩌우 우롱",
+      "oneLine": "프랑스가 차를 들여온 베트남 고원의 우롱.",
+      "oxidation": "약 30%",
+      "ratioNote": "150ml에 6g",
+      "rounds": "5회",
+      "steepBasis": "90도에서 45초, 2포 25초, 3포 30초.",
+      "origin": "베트남 선라성 목쩌우 고원, 해발 900~1,200m.",
+      "process": "위조 → 요청 → 살청 → 유념 → 건조.",
+      "story": "20세기 초 프랑스가 차 재배를 들여왔고, 이후 대만식 우롱 제법이 더해졌습니다.",
+      "flavor": "풀 향과 가벼운 꽃 향, 깨끗한 단맛. 대만 우롱보다 산뜻합니다.",
+      "pairing": "베트남 요리, 쌀국수, 아이스티.",
+      "brewTip": "90도에서 짧게. 진하게 우리면 떫음이 빨리 나옵니다.",
+      "keep": "밀봉 냉장.",
+      "keywords": "목쩌우 베트남 우롱 선라 고원"
+    },
+    "en": {
+      "name": "Moc Chau Oolong",
+      "oneLine": "Vietnamese highland oolong from a plateau the French first planted.",
+      "oxidation": "about 30%",
+      "ratioNote": "6 g to 150 ml",
+      "rounds": "5 infusions",
+      "steepBasis": "90 °C: 45 seconds, then 25, then 30.",
+      "origin": "Moc Chau plateau, Son La, Vietnam, 900–1,200 m.",
+      "process": "Withered, shaken, fired, rolled, dried.",
+      "story": "The French brought tea growing in the early 20th century; Taiwanese oolong methods followed.",
+      "flavor": "Grass and light flowers, clean sweetness — fresher than Taiwan oolong.",
+      "pairing": "Vietnamese food, pho, iced tea.",
+      "brewTip": "Short at 90 °C; brewed strong it turns astringent quickly.",
+      "keep": "Sealed and refrigerated.",
+      "keywords": "Moc Chau oolong Vietnam Son La highland"
+    },
+    "zh-CN": {
+      "name": "木州乌龙",
+      "oneLine": "法国人最早引种、越南高原上的乌龙茶。",
+      "oxidation": "约30%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "5泡",
+      "steepBasis": "90度泡45秒，第二泡25秒，第三泡30秒。",
+      "origin": "越南山罗省木州高原，海拔900~1200米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉捻 → 干燥。",
+      "story": "20世纪初法国引入茶树，其后又引入台湾乌龙工艺。",
+      "flavor": "青草与淡花香，甘净，比台湾乌龙更清爽。",
+      "pairing": "越南菜、河粉、冰茶。",
+      "brewTip": "90度短泡，久泡易涩。",
+      "keep": "密封冷藏。",
+      "keywords": "木州乌龙 越南 山罗 高原"
+    },
+    "zh-TW": {
+      "name": "木州烏龍",
+      "oneLine": "法國人最早引種、越南高原上的烏龍茶。",
+      "oxidation": "約30%",
+      "ratioNote": "150毫升配6克",
+      "rounds": "5泡",
+      "steepBasis": "90度泡45秒，第二泡25秒，第三泡30秒。",
+      "origin": "越南山羅省木州高原，海拔900~1200米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉捻 → 乾燥。",
+      "story": "20世紀初法國引入茶樹，其後又引入臺灣烏龍工藝。",
+      "flavor": "青草與淡花香，甘淨，比臺灣烏龍更清爽。",
+      "pairing": "越南菜、河粉、冰茶。",
+      "brewTip": "90度短泡，久泡易澀。",
+      "keep": "密封冷藏。",
+      "keywords": "木州烏龍 越南 山羅 高原"
+    },
+    "originCountryCode": "vn"
+  },
+  {
+    "id": "black-lapsang-unsmoked",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "山",
+    "sub": "Zhengshan Xiaozhong (unsmoked)",
+    "alias": [
+      "정산소종 무연",
+      "무연 정산소종"
+    ],
+    "hz": "正山小種",
+    "hs": "正山小种",
+    "rom": "Zhengshan Xiaozhong",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      150,
+      120,
+      150
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 90,
+    "traits": "t-morning t-afternoon a-fruit a-malt b-medium k-sweet r-clean s-hot s-milk p-dessert c-mid m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "정산소종 가운데 소나무 연기로 건조하지 않은 쪽입니다. 잎과 물색이 연기 없이 깨끗합니다.",
+        "위조 → 유념 → 산화 → 건조. 마지막 건조를 숯불에만 해 연기를 쐬지 않습니다."
+      ],
+      "en": [
+        "The branch of Zhengshan Xiaozhong that is not smoke-dried: leaf and liquor are clean, without pine smoke.",
+        "Withered, rolled, oxidised, dried over charcoal only — no smoking."
+      ],
+      "zh-CN": [
+        "正山小种中不经松烟熏焙的一路，叶与汤都不带烟味。",
+        "萎凋 → 揉捻 → 发酵 → 炭焙，不熏烟。"
+      ],
+      "zh-TW": [
+        "正山小種中不經松煙燻焙的一路，葉與湯都不帶煙味。",
+        "萎凋 → 揉捻 → 發酵 → 炭焙，不燻煙。"
+      ]
+    },
+    "ko": {
+      "name": "정산소종 (무연)",
+      "oneLine": "연기 없이 만든 정산소종 — 꽃과 말린 과일이 그대로.",
+      "oxidation": "약 90%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "90도에서 2분 30초, 2포 2분, 3포 2분 30초.",
+      "origin": "푸젠성 우이산 퉁무관 일대, 해발 800~1,500m.",
+      "process": "위조 → 유념 → 산화 → 숯불 건조. 연기를 쐬지 않습니다.",
+      "story": "정산소종은 세계에서 가장 오래된 홍차로 꼽히며, 17세기 유럽에 ‘랍상 소총’으로 수출되었습니다. 무연 제품은 20세기 후반 소비 취향에 맞춰 따로 만들어집니다.",
+      "flavor": "말린 과일·꿀·꽃 향, 부드러운 몸통. 연기 향이 없어 홍차의 본래 향이 잘 드러납니다.",
+      "pairing": "과일 타르트, 훈제하지 않은 구운 고기, 디저트.",
+      "brewTip": "90도에서 2분 30초. 우유를 넣어도 향이 남습니다.",
+      "keep": "밀봉해 서늘하고 건조하게.",
+      "keywords": "정산소종 무연 랍상소총 우이산 홍차"
+    },
+    "en": {
+      "name": "Zhengshan Xiaozhong (unsmoked)",
+      "oneLine": "The smoke-free branch — flowers and dried fruit left in plain view.",
+      "oxidation": "about 90%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "90 °C: 2½ minutes, then 2, then 2½.",
+      "origin": "Tongmuguan, Wuyi Mountains, Fujian, 800–1,500 m.",
+      "process": "Withered, rolled, oxidised, charcoal-dried without smoking.",
+      "story": "Zhengshan Xiaozhong is often called the oldest black tea and reached Europe as Lapsang Souchong in the 17th century; unsmoked versions were developed for modern taste.",
+      "flavor": "Dried fruit, honey, flowers, soft body — the base tea without smoke.",
+      "pairing": "Fruit tarts, un-smoked roast meat, desserts.",
+      "brewTip": "2½ minutes at 90 °C; it also holds up with milk.",
+      "keep": "Sealed, cool and dry.",
+      "keywords": "Zhengshan Xiaozhong unsmoked Lapsang Wuyi black tea"
+    },
+    "zh-CN": {
+      "name": "正山小种（无烟）",
+      "oneLine": "不熏烟的正山小种，花果香原样呈现。",
+      "oxidation": "约90%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡2分钟，第三泡2分30秒。",
+      "origin": "福建武夷山桐木关一带，海拔800~1500米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 炭焙，不熏烟。",
+      "story": "正山小种被视为最早的红茶，17世纪以“Lapsang Souchong”之名进入欧洲；无烟型为适应现代口味而制。",
+      "flavor": "果干、蜂蜜与花香，汤体柔，无烟味。",
+      "pairing": "水果挞、非熏制烤肉、甜点。",
+      "brewTip": "90度两分半，加奶亦香。",
+      "keep": "密封阴凉干燥。",
+      "keywords": "正山小种 无烟 武夷山 红茶"
+    },
+    "zh-TW": {
+      "name": "正山小種（無煙）",
+      "oneLine": "不燻煙的正山小種，花果香原樣呈現。",
+      "oxidation": "約90%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡2分鐘，第三泡2分30秒。",
+      "origin": "福建武夷山桐木關一帶，海拔800~1500米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 炭焙，不燻煙。",
+      "story": "正山小種被視為最早的紅茶，17世紀以「Lapsang Souchong」之名進入歐洲；無煙型為適應現代口味而制。",
+      "flavor": "果乾、蜂蜜與花香，湯體柔，無煙味。",
+      "pairing": "水果撻、非燻制烤肉、甜點。",
+      "brewTip": "90度兩分半，加奶亦香。",
+      "keep": "密封陰涼乾燥。",
+      "keywords": "正山小種 無煙 武夷山 紅茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "black-yingde",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "英",
+    "sub": "Yingde Black Tea",
+    "alias": [
+      "영덕홍차(광둥)",
+      "잉더홍차"
+    ],
+    "hz": "英德紅茶",
+    "hs": "英德红茶",
+    "rom": "Yingde Hongcha",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      180,
+      240
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt a-fruit b-full k-sweet r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "광둥 잉더의 대엽종으로 만드는 홍차입니다. 진하고 밝은 물색으로 밀크티 베이스로도 씁니다.",
+        "위조 → 유념 → 산화 → 건조. 잎이 커 산화가 오래 걸립니다."
+      ],
+      "en": [
+        "A Guangdong black tea from large-leaf bushes at Yingde; strong and bright, and used as a milk-tea base.",
+        "Withered, rolled, oxidised, dried — the big leaf needs a long oxidation."
+      ],
+      "zh-CN": [
+        "广东英德大叶种红茶，浓强明亮，常作奶茶基底。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，叶大发酵时间长。"
+      ],
+      "zh-TW": [
+        "廣東英德大葉種紅茶，濃強明亮，常作奶茶基底。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，葉大發酵時間長。"
+      ]
+    },
+    "ko": {
+      "name": "잉더 홍차",
+      "oneLine": "광둥 대엽종의 힘 — 진하고 밝은 홍차.",
+      "oxidation": "약 95%",
+      "ratioNote": "200ml에 3g, 밀크티는 150ml에 5g",
+      "rounds": "3회",
+      "steepBasis": "95도에서 3분, 2포 3분, 3포 4분.",
+      "origin": "광둥성 잉더시 일대, 해발 200~800m.",
+      "process": "위조 → 유념 → 산화 → 건조.",
+      "story": "1959년에 만들어지기 시작해 중국 남부의 대표 홍차로 자리 잡았습니다.",
+      "flavor": "몰트와 꿀, 붉은 과일 향. 진한 물색에 우유를 넣어도 향이 남습니다.",
+      "pairing": "아침 식사, 밀크티, 구운 고기.",
+      "brewTip": "95도에서 3분. 밀크티로 마시려면 잎을 두 배로.",
+      "keep": "밀봉해 서늘하고 건조하게.",
+      "keywords": "잉더 홍차 광둥 대엽종 밀크티"
+    },
+    "en": {
+      "name": "Yingde Black Tea",
+      "oneLine": "Guangdong large-leaf strength — dark and bright.",
+      "oxidation": "about 95%",
+      "ratioNote": "3 g to 200 ml; 5 g to 150 ml for milk tea",
+      "rounds": "3 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 3, then 4.",
+      "origin": "Yingde, Guangdong, 200–800 m.",
+      "process": "Withered, rolled, oxidised, dried.",
+      "story": "Production began in 1959 and it became southern China's standard black tea.",
+      "flavor": "Malt, honey, red fruit; dark liquor that keeps its aroma with milk.",
+      "pairing": "Breakfast, milk tea, roast meat.",
+      "brewTip": "3 minutes at 95 °C; double the leaf for milk tea.",
+      "keep": "Sealed, cool and dry.",
+      "keywords": "Yingde black tea Guangdong large leaf milk tea"
+    },
+    "zh-CN": {
+      "name": "英德红茶",
+      "oneLine": "广东大叶种的力度，浓强明亮。",
+      "oxidation": "约95%",
+      "ratioNote": "200毫升配3克，奶茶用150毫升配5克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分钟，第二泡3分钟，第三泡4分钟。",
+      "origin": "广东英德一带，海拔200~800米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥。",
+      "story": "1959年开始生产，成为华南代表红茶。",
+      "flavor": "麦芽、蜂蜜与红果香，汤浓，加奶仍香。",
+      "pairing": "早餐、奶茶、烤肉。",
+      "brewTip": "95度三分钟；做奶茶投茶加倍。",
+      "keep": "密封阴凉干燥。",
+      "keywords": "英德红茶 广东 大叶种 奶茶"
+    },
+    "zh-TW": {
+      "name": "英德紅茶",
+      "oneLine": "廣東大葉種的力度，濃強明亮。",
+      "oxidation": "約95%",
+      "ratioNote": "200毫升配3克，奶茶用150毫升配5克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分鐘，第二泡3分鐘，第三泡4分鐘。",
+      "origin": "廣東英德一帶，海拔200~800米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥。",
+      "story": "1959年開始生產，成為華南代表紅茶。",
+      "flavor": "麥芽、蜂蜜與紅果香，湯濃，加奶仍香。",
+      "pairing": "早餐、奶茶、烤肉。",
+      "brewTip": "95度三分鐘；做奶茶投茶加倍。",
+      "keep": "密封陰涼乾燥。",
+      "keywords": "英德紅茶 廣東 大葉種 奶茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "black-rize",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "茶",
+    "sub": "Rize Cay",
+    "alias": [
+      "리제 차",
+      "터키 홍차"
+    ],
+    "hz": "里澤紅茶",
+    "hs": "里泽红茶",
+    "rom": "Rize Cay",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "4g",
+    "water": "150ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "튀르키예",
+      "en": "Türkiye",
+      "zh-CN": "土耳其",
+      "zh-TW": "土耳其"
+    },
+    "x": {
+      "ko": [
+        "흑해 연안 리제는 튀르키예 차 생산의 중심입니다. 작은 유리잔(차이 바르다)에 진하게 우려 마십니다.",
+        "위조 → 유념 → 산화 → 건조. 대부분 CTC에 가까운 잘게 부순 잎으로 만듭니다."
+      ],
+      "en": [
+        "Rize on the Black Sea coast is the centre of Turkish tea; it is brewed strong and served in small tulip glasses.",
+        "Withered, rolled, oxidised, dried; mostly finely broken leaf, close to CTC."
+      ],
+      "zh-CN": [
+        "黑海沿岸里泽是土耳其茶叶主产区，浓泡后用小郁金香杯饮用。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，多为细碎叶。"
+      ],
+      "zh-TW": [
+        "黑海沿岸裡澤是土耳其茶葉主產區，濃泡後用小鬱金香杯飲用。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，多為細碎葉。"
+      ]
+    },
+    "ko": {
+      "name": "리제 차 (튀르키예)",
+      "oneLine": "작은 유리잔에 진하게 — 흑해 연안의 매일 차.",
+      "oxidation": "약 95%",
+      "ratioNote": "150ml에 4g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 5분 진하게. 두 번 우리는 차(çaydanlık) 방식이 일반적입니다.",
+      "origin": "튀르키예 리제주 흑해 연안, 해발 200~1,000m.",
+      "process": "위조 → 유념 → 산화 → 건조. 잘게 부순 잎이 많습니다.",
+      "story": "1924년 이후 흑해 연안에서 차 재배가 국가 사업으로 시작되어 지금은 국민 음료가 되었습니다.",
+      "flavor": "몰트와 구운 빵, 진한 붉은 물색. 각설탕을 곁들이는 방식이 흔합니다.",
+      "pairing": "아침 식사, 빵, 단 과자.",
+      "brewTip": "5분 진하게. 두 겹 찻주전자(차이단륵)로 우려 농도를 맞춥니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "리제 차 튀르키예 흑해 홍차 차이"
+    },
+    "en": {
+      "name": "Rize Cay",
+      "oneLine": "Strong tea in a small tulip glass — the Black Sea everyday cup.",
+      "oxidation": "about 95%",
+      "ratioNote": "4 g to 150 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C for 5 minutes, brewed strong; the double-pot çaydanlık is standard.",
+      "origin": "Rize province on the Black Sea, 200–1,000 m.",
+      "process": "Withered, rolled, oxidised, dried; mostly finely broken leaf.",
+      "story": "Tea growing along the Black Sea began as a state programme after 1924 and became the national drink.",
+      "flavor": "Malt and baked bread, deep red liquor; usually served with sugar cubes.",
+      "pairing": "Breakfast, bread, sweet pastries.",
+      "brewTip": "A strong five-minute brew; the double pot lets you dilute to taste.",
+      "keep": "Sealed and dry.",
+      "keywords": "Rize cay Turkish tea Black Sea"
+    },
+    "zh-CN": {
+      "name": "里泽红茶",
+      "oneLine": "小郁金香杯里的浓红茶，黑海沿岸的日常。",
+      "oxidation": "约95%",
+      "ratioNote": "150毫升配4克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分钟，常用双层茶壶浓泡后兑水。",
+      "origin": "土耳其里泽省黑海沿岸，海拔200~1000米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥，多为细碎叶。",
+      "story": "1924年后黑海沿岸茶叶种植成为国家项目，如今是国民饮料。",
+      "flavor": "麦芽与烤面包香，汤色深红，常配方糖。",
+      "pairing": "早餐、面包、甜点。",
+      "brewTip": "浓泡五分钟，双层壶调节浓淡。",
+      "keep": "密封干燥。",
+      "keywords": "里泽红茶 土耳其 黑海 红茶"
+    },
+    "zh-TW": {
+      "name": "裡澤紅茶",
+      "oneLine": "小鬱金香杯裡的濃紅茶，黑海沿岸的日常。",
+      "oxidation": "約95%",
+      "ratioNote": "150毫升配4克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分鐘，常用雙層茶壺濃泡後兌水。",
+      "origin": "土耳其裡澤省黑海沿岸，海拔200~1000米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥，多為細碎葉。",
+      "story": "1924年後黑海沿岸茶葉種植成為國家項目，如今是國民飲料。",
+      "flavor": "麥芽與烤麵包香，湯色深紅，常配方糖。",
+      "pairing": "早餐、麵包、甜點。",
+      "brewTip": "濃泡五分鐘，雙層壺調節濃淡。",
+      "keep": "密封乾燥。",
+      "keywords": "裡澤紅茶 土耳其 黑海 紅茶"
+    },
+    "originCountryCode": "tr"
+  },
+  {
+    "id": "black-cameron",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "金",
+    "sub": "Cameron Highlands Black",
+    "alias": [
+      "캐머런 하이랜드",
+      "말레이시아 홍차"
+    ],
+    "hz": "金馬倫高原紅茶",
+    "hs": "金马伦高原红茶",
+    "rom": "Cameron Highlands Black",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      180
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt a-roast b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "말레이시아",
+      "en": "Malaysia",
+      "zh-CN": "马来西亚",
+      "zh-TW": "馬來西亞"
+    },
+    "x": {
+      "ko": [
+        "말레이시아 캐머런 하이랜드의 해발 1,500m 고원 차밭에서 나는 홍차입니다. 1929년부터 이어진 농장이 유명합니다.",
+        "위조 → 유념 → 산화 → 건조. 대부분 CTC 방식으로 잘게 부숴 만듭니다."
+      ],
+      "en": [
+        "Black tea from the Cameron Highlands in Malaysia, at around 1,500 m; one estate has been growing tea since 1929.",
+        "Withered, rolled, oxidised, dried; mostly CTC, finely broken."
+      ],
+      "zh-CN": [
+        "马来西亚金马伦高原海拔约1500米的红茶，有1929年开园的茶园。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，多为CTC碎叶。"
+      ],
+      "zh-TW": [
+        "馬來西亞金馬倫高原海拔約1500米的紅茶，有1929年開園的茶園。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，多為CTC碎葉。"
+      ]
+    },
+    "ko": {
+      "name": "캐머런 하이랜드 홍차",
+      "oneLine": "적도 고원의 차밭에서 나는 진하고 둥근 홍차.",
+      "oxidation": "약 95%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 3분, 2포 3분.",
+      "origin": "말레이시아 파항주 캐머런 하이랜드, 해발 1,400~1,600m.",
+      "process": "위조 → 유념 → 산화 → 건조 (CTC).",
+      "story": "1929년 영국인이 차밭을 열어 지금까지 이어지는 농장이 이 지역의 상징입니다.",
+      "flavor": "몰트와 구운 향, 진한 물색. 우유와 잘 어울립니다.",
+      "pairing": "아침 식사, 밀크티, 스콘.",
+      "brewTip": "95도에서 3분. 진하게 우려 우유를 더하는 방식이 현지식입니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "캐머런 하이랜드 말레이시아 홍차 고원"
+    },
+    "en": {
+      "name": "Cameron Highlands Black Tea",
+      "oneLine": "Strong, round tea from an equatorial highland estate.",
+      "oxidation": "about 95%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 3.",
+      "origin": "Cameron Highlands, Pahang, Malaysia, 1,400–1,600 m.",
+      "process": "Withered, rolled, oxidised, dried (CTC).",
+      "story": "An estate planted in 1929 is still the region's landmark.",
+      "flavor": "Malt and toast, a dark liquor that takes milk well.",
+      "pairing": "Breakfast, milk tea, scones.",
+      "brewTip": "Three minutes at 95 °C; brew strong and add milk, as locally done.",
+      "keep": "Sealed and dry.",
+      "keywords": "Cameron Highlands Malaysia black tea highland estate"
+    },
+    "zh-CN": {
+      "name": "金马伦高原红茶",
+      "oneLine": "赤道高原茶园的浓圆红茶。",
+      "oxidation": "约95%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分钟，第二泡3分钟。",
+      "origin": "马来西亚彭亨州金马伦高原，海拔1400~1600米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥（CTC）。",
+      "story": "1929年开园的茶园至今仍是当地地标。",
+      "flavor": "麦芽与烤香，汤浓，宜加奶。",
+      "pairing": "早餐、奶茶、司康。",
+      "brewTip": "95度三分钟，浓泡加奶。",
+      "keep": "密封干燥。",
+      "keywords": "金马伦高原 马来西亚 红茶 高山"
+    },
+    "zh-TW": {
+      "name": "金馬倫高原紅茶",
+      "oneLine": "赤道高原茶園的濃圓紅茶。",
+      "oxidation": "約95%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分鐘，第二泡3分鐘。",
+      "origin": "馬來西亞彭亨州金馬倫高原，海拔1400~1600米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥（CTC）。",
+      "story": "1929年開園的茶園至今仍是當地地標。",
+      "flavor": "麥芽與烤香，湯濃，宜加奶。",
+      "pairing": "早餐、奶茶、司康。",
+      "brewTip": "95度三分鐘，濃泡加奶。",
+      "keep": "密封乾燥。",
+      "keywords": "金馬倫高原 馬來西亞 紅茶 高山"
+    },
+    "originCountryCode": "my"
+  },
+  {
+    "id": "black-rwanda",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "盧",
+    "sub": "Rwanda Black Tea",
+    "alias": [
+      "르완다 홍차",
+      "루케리"
+    ],
+    "hz": "盧旺達紅茶",
+    "hs": "卢旺达红茶",
+    "rom": "Rwanda Black",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      180
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "르완다",
+      "en": "Rwanda",
+      "zh-CN": "卢旺达",
+      "zh-TW": "盧安達"
+    },
+    "x": {
+      "ko": [
+        "르완다는 아프리카 동부의 고지대 차 생산국입니다. 해발 1,600~2,000m의 안개 낀 산지에서 잎이 천천히 자랍니다.",
+        "위조 → 유념 → 산화 → 건조. 대부분 CTC로 가공됩니다."
+      ],
+      "en": [
+        "Rwanda is an East African highland producer; leaf grows slowly in misty hills at 1,600–2,000 m.",
+        "Withered, rolled, oxidised, dried; mostly CTC."
+      ],
+      "zh-CN": [
+        "卢旺达是东非高地茶产国，海拔1600~2000米雾山，叶生长慢。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，多为CTC。"
+      ],
+      "zh-TW": [
+        "盧安達是東非高地茶產國，海拔1600~2000米霧山，葉生長慢。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，多為CTC。"
+      ]
+    },
+    "ko": {
+      "name": "르완다 홍차",
+      "oneLine": "동아프리카 고지대의 맑고 밝은 홍차.",
+      "oxidation": "약 95%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 3분, 2포 3분.",
+      "origin": "르완다 서부·북부 고지대, 해발 1,600~2,000m.",
+      "process": "위조 → 유념 → 산화 → 건조 (CTC).",
+      "story": "1950년대 이후 차 재배가 국가 산업으로 자리 잡았고, 지금은 주요 수출품입니다.",
+      "flavor": "몰트에 밝은 산미, 진한 붉은 물색. 케냐 차보다 부드럽습니다.",
+      "pairing": "아침 식사, 밀크티, 빵.",
+      "brewTip": "95도에서 3분. 우유를 넣으면 산미가 둥글어집니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "르완다 홍차 동아프리카 고지대 CTC"
+    },
+    "en": {
+      "name": "Rwanda Black Tea",
+      "oneLine": "Bright, clean black tea from East African highlands.",
+      "oxidation": "about 95%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 3.",
+      "origin": "Western and northern highlands of Rwanda, 1,600–2,000 m.",
+      "process": "Withered, rolled, oxidised, dried (CTC).",
+      "story": "Tea became a national industry after the 1950s and is now a major export.",
+      "flavor": "Malt with a bright edge, deep red liquor, softer than Kenyan tea.",
+      "pairing": "Breakfast, milk tea, bread.",
+      "brewTip": "Three minutes at 95 °C; milk rounds off the brightness.",
+      "keep": "Sealed and dry.",
+      "keywords": "Rwanda black tea East Africa highland CTC"
+    },
+    "zh-CN": {
+      "name": "卢旺达红茶",
+      "oneLine": "东非高地明亮干净的红茶。",
+      "oxidation": "约95%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分钟，第二泡3分钟。",
+      "origin": "卢旺达西部与北部高地，海拔1600~2000米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥（CTC）。",
+      "story": "1950年代后茶业成为国家产业，现为主要出口品。",
+      "flavor": "麦芽带明亮酸度，汤色深红，比肯尼亚茶更柔。",
+      "pairing": "早餐、奶茶、面包。",
+      "brewTip": "95度三分钟，加奶更圆润。",
+      "keep": "密封干燥。",
+      "keywords": "卢旺达红茶 东非 高地 CTC"
+    },
+    "zh-TW": {
+      "name": "盧安達紅茶",
+      "oneLine": "東非高地明亮乾淨的紅茶。",
+      "oxidation": "約95%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分鐘，第二泡3分鐘。",
+      "origin": "盧安達西部與北部高地，海拔1600~2000米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥（CTC）。",
+      "story": "1950年代後茶業成為國家產業，現為主要出口品。",
+      "flavor": "麥芽帶明亮酸度，湯色深紅，比肯亞茶更柔。",
+      "pairing": "早餐、奶茶、麵包。",
+      "brewTip": "95度三分鐘，加奶更圓潤。",
+      "keep": "密封乾燥。",
+      "keywords": "盧安達紅茶 東非 高地 CTC"
+    },
+    "originCountryCode": "rw"
+  },
+  {
+    "id": "black-dooars",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "杜",
+    "sub": "Dooars Tea",
+    "alias": [
+      "두아르",
+      "두아르 홍차"
+    ],
+    "hz": "杜阿爾斯紅茶",
+    "hs": "杜阿尔斯红茶",
+    "rom": "Dooars Tea",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      180
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 92,
+    "traits": "t-morning t-afternoon a-malt a-roast b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "인도",
+      "en": "India",
+      "zh-CN": "印度",
+      "zh-TW": "印度"
+    },
+    "x": {
+      "ko": [
+        "인도 서벵골 북부, 다즐링 남쪽의 평원 지대입니다. 아삼과 다즐링 사이에 놓인 산지로 알려져 있습니다.",
+        "위조 → 유념 → 산화 → 건조. 평원의 진한 잎이라 아침 블렌드에 자주 들어갑니다."
+      ],
+      "en": [
+        "The plains of northern West Bengal, south of Darjeeling and east of Assam — the belt between the two famous regions.",
+        "Withered, rolled, oxidised, dried; a strong plain-grown leaf often used in breakfast blends."
+      ],
+      "zh-CN": [
+        "印度西孟加拉北部平原，位于大吉岭以南、阿萨姆以东。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，浓强，常用于早餐拼配。"
+      ],
+      "zh-TW": [
+        "印度西孟加拉北部平原，位於大吉嶺以南、阿薩姆以東。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，濃強，常用於早餐拼配。"
+      ]
+    },
+    "ko": {
+      "name": "두아르 홍차",
+      "oneLine": "다즐링과 아삼 사이 평원의 진한 홍차.",
+      "oxidation": "약 92%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 3분, 2포 3분.",
+      "origin": "인도 서벵골 두아르 지대, 해발 100~300m.",
+      "process": "위조 → 유념 → 산화 → 건조.",
+      "story": "다즐링과 아삼 사이에 있어 두 산지의 성격을 나눠 갖는다고 설명됩니다.",
+      "flavor": "몰트와 구운 향, 진하고 떫음이 적당해 우유와 잘 맞습니다.",
+      "pairing": "아침 식사, 밀크티.",
+      "brewTip": "95도에서 3분. 아침 블렌드에 섞어도 좋습니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "두아르 인도 서벵골 홍차 아침"
+    },
+    "en": {
+      "name": "Dooars Tea",
+      "oneLine": "The strong plain-grown tea between Darjeeling and Assam.",
+      "oxidation": "about 92%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 3.",
+      "origin": "The Dooars, northern West Bengal, India, 100–300 m.",
+      "process": "Withered, rolled, oxidised, dried.",
+      "story": "Sitting between Darjeeling and Assam, it is often described as sharing something of both.",
+      "flavor": "Malt and toast, strong with a fair grip — good with milk.",
+      "pairing": "Breakfast, milk tea.",
+      "brewTip": "Three minutes at 95 °C; it blends well into breakfast mixtures.",
+      "keep": "Sealed and dry.",
+      "keywords": "Dooars tea India West Bengal breakfast"
+    },
+    "zh-CN": {
+      "name": "杜阿尔斯红茶",
+      "oneLine": "大吉岭与阿萨姆之间平原的浓强红茶。",
+      "oxidation": "约92%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分钟，第二泡3分钟。",
+      "origin": "印度西孟加拉杜阿尔斯地区，海拔100~300米。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥。",
+      "story": "地处大吉岭与阿萨姆之间，常被说兼具两地性格。",
+      "flavor": "麦芽与烤香，浓强微涩，宜加奶。",
+      "pairing": "早餐、奶茶。",
+      "brewTip": "95度三分钟，适合早晨拼配。",
+      "keep": "密封干燥。",
+      "keywords": "杜阿尔斯 印度 西孟加拉 红茶"
+    },
+    "zh-TW": {
+      "name": "杜阿爾斯紅茶",
+      "oneLine": "大吉嶺與阿薩姆之間平原的濃強紅茶。",
+      "oxidation": "約92%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分鐘，第二泡3分鐘。",
+      "origin": "印度西孟加拉杜阿爾斯地區，海拔100~300米。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥。",
+      "story": "地處大吉嶺與阿薩姆之間，常被說兼具兩地性格。",
+      "flavor": "麥芽與烤香，濃強微澀，宜加奶。",
+      "pairing": "早餐、奶茶。",
+      "brewTip": "95度三分鐘，適合早晨拼配。",
+      "keep": "密封乾燥。",
+      "keywords": "杜阿爾斯 印度 西孟加拉 紅茶"
+    },
+    "originCountryCode": "in"
+  },
+  {
+    "id": "black-darjeeling-autumn",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "秋",
+    "sub": "Darjeeling Autumnal",
+    "alias": [
+      "다즐링 오텀널",
+      "가을 다즐링"
+    ],
+    "hz": "大吉嶺秋摘",
+    "hs": "大吉岭秋摘",
+    "rom": "Darjeeling Autumnal",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      180,
+      180
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 90,
+    "traits": "t-morning t-afternoon a-fruit a-malt b-medium k-sweet r-clean s-hot s-milk p-meal c-mid m-cozy",
+    "originCountry": {
+      "ko": "인도",
+      "en": "India",
+      "zh-CN": "印度",
+      "zh-TW": "印度"
+    },
+    "x": {
+      "ko": [
+        "다즐링은 봄(퍼스트), 여름(세컨드), 가을(오텀널) 세 시즌 차를 나눠 칩니다. 가을 차는 잎이 크고 짙으며 둥근 단맛이 특징입니다.",
+        "위조 → 유념 → 산화 → 건조. 세컨드 플러시보다 산화가 조금 더 진행됩니다."
+      ],
+      "en": [
+        "Darjeeling is picked in three seasons — first flush, second flush and autumnal. The autumn leaf is larger, darker and rounder in sweetness.",
+        "Withered, rolled, oxidised, dried; slightly more oxidation than the second flush."
+      ],
+      "zh-CN": [
+        "大吉岭分春摘、夏摘、秋摘三季；秋摘叶大色深、甜味圆润。",
+        "萎凋 → 揉捻 → 发酵 → 干燥，发酵略重于夏摘。"
+      ],
+      "zh-TW": [
+        "大吉嶺分春摘、夏摘、秋摘三季；秋摘葉大色深、甜味圓潤。",
+        "萎凋 → 揉捻 → 發酵 → 乾燥，發酵略重於夏摘。"
+      ]
+    },
+    "ko": {
+      "name": "다즐링 오텀널",
+      "oneLine": "큰 잎과 둥근 단맛 — 다즐링의 가을.",
+      "oxidation": "약 90%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 3분, 2포 3분.",
+      "origin": "인도 서벵골 다즐링, 10~11월 채취.",
+      "process": "위조 → 유념 → 산화 → 건조.",
+      "story": "다즐링은 시즌별로 차를 나눠 칩니다. 가을 차는 겨울을 앞두고 잎이 두꺼워지며 향이 안정됩니다.",
+      "flavor": "말린 과일과 꿀, 부드러운 몰트. 봄·여름 차보다 향이 차분합니다.",
+      "pairing": "오후의 차, 구운 과자, 가벼운 디저트.",
+      "brewTip": "95도에서 3분. 우유보다는 그대로 마시는 편이 좋습니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "다즐링 오텀널 가을차 인도 홍차"
+    },
+    "en": {
+      "name": "Darjeeling Autumnal",
+      "oneLine": "Large leaf and round sweetness — Darjeeling in autumn.",
+      "oxidation": "about 90%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C: 3 minutes, then 3.",
+      "origin": "Darjeeling, West Bengal, India; picked October–November.",
+      "process": "Withered, rolled, oxidised, dried.",
+      "story": "Darjeeling is graded by season; autumn leaf thickens before winter and the aroma settles.",
+      "flavor": "Dried fruit, honey, soft malt — calmer than the spring and summer flushes.",
+      "pairing": "Afternoon tea, baked biscuits, light desserts.",
+      "brewTip": "Three minutes at 95 °C; better without milk.",
+      "keep": "Sealed and dry.",
+      "keywords": "Darjeeling autumnal autumn flush India black tea"
+    },
+    "zh-CN": {
+      "name": "大吉岭秋摘",
+      "oneLine": "大叶与圆润甜味，大吉岭的秋天。",
+      "oxidation": "约90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分钟，第二泡3分钟。",
+      "origin": "印度西孟加拉大吉岭，10~11月采摘。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥。",
+      "story": "大吉岭按季节分级，秋叶在入冬前变厚，香气沉稳。",
+      "flavor": "果干、蜂蜜与柔和麦芽，比春夏茶平静。",
+      "pairing": "下午茶、烤饼干、清淡甜点。",
+      "brewTip": "95度三分钟，建议不加奶。",
+      "keep": "密封干燥。",
+      "keywords": "大吉岭 秋摘 印度 红茶"
+    },
+    "zh-TW": {
+      "name": "大吉嶺秋摘",
+      "oneLine": "大葉與圓潤甜味，大吉嶺的秋天。",
+      "oxidation": "約90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡3分鐘，第二泡3分鐘。",
+      "origin": "印度西孟加拉大吉嶺，10~11月採摘。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥。",
+      "story": "大吉嶺按季節分級，秋葉在入冬前變厚，香氣沉穩。",
+      "flavor": "果乾、蜂蜜與柔和麥芽，比春夏茶平靜。",
+      "pairing": "下午茶、烤餅乾、清淡甜點。",
+      "brewTip": "95度三分鐘，建議不加奶。",
+      "keep": "密封乾燥。",
+      "keywords": "大吉嶺 秋摘 印度 紅茶"
+    },
+    "originCountryCode": "in"
+  },
+  {
+    "id": "black-yeongdeok",
+    "group": "black",
+    "kind": "tea",
+    "hanja": "盈",
+    "sub": "Yeongdeok Black Tea",
+    "alias": [
+      "영덕 홍차",
+      "동해안 홍차"
+    ],
+    "hz": "盈德紅茶",
+    "hs": "盈德红茶",
+    "rom": "Yeongdeok Hongcha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "3g",
+    "water": "150ml",
+    "steeps": [
+      180,
+      120,
+      150
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 90,
+    "traits": "t-morning t-afternoon a-malt a-floral b-medium k-sweet r-clean s-hot s-milk p-dessert c-mid m-cozy",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "경북 영덕은 동해 바람이 부는 곳으로, 소규모 농가가 재배한 잎으로 홍차를 만듭니다. 생산량이 적어 지역 안에서 주로 소비됩니다.",
+        "위조 → 유념 → 산화 → 건조. 여름잎을 완전 산화시켜 만듭니다."
+      ],
+      "en": [
+        "Yeongdeok, on Korea's east coast, has small farms making black tea from locally grown leaf; volumes are small and mostly sold locally.",
+        "Withered, rolled, fully oxidised, dried — summer leaf."
+      ],
+      "zh-CN": [
+        "韩国庆北盈德受东海海风影响，小农以本地鲜叶制红茶，产量少，多在当地销售。",
+        "萎凋 → 揉捻 → 全发酵 → 干燥，多用夏叶。"
+      ],
+      "zh-TW": [
+        "韓國慶北盈德受東海海風影響，小農以本地鮮葉制紅茶，產量少，多在當地銷售。",
+        "萎凋 → 揉捻 → 全發酵 → 乾燥，多用夏葉。"
+      ]
+    },
+    "ko": {
+      "name": "영덕 홍차",
+      "oneLine": "동해 바람 맞은 소규모 차밭의 한국 홍차.",
+      "oxidation": "약 90%",
+      "ratioNote": "150ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "90도에서 3분, 2포 2분, 3포 2분 30초.",
+      "origin": "경상북도 영덕군 일대, 해발 100~300m의 동해안 구릉.",
+      "process": "위조 → 유념 → 산화 → 건조.",
+      "story": "생산량이 적어 전국 유통보다 지역 소비와 관광 판매 중심으로 나옵니다.",
+      "flavor": "몰트에 옅은 꽃 향, 부드러운 단맛. 하동 잭살차보다 가볍습니다.",
+      "pairing": "담백한 디저트, 말린 과일, 아침 차.",
+      "brewTip": "90도에서 3분. 잎이 여려 두 번이면 충분합니다.",
+      "keep": "밀봉해 서늘하고 건조하게.",
+      "keywords": "영덕 홍차 경북 동해안 한국 홍차"
+    },
+    "en": {
+      "name": "Yeongdeok Black Tea",
+      "oneLine": "A small Korean black tea from the east-coast hills.",
+      "oxidation": "about 90%",
+      "ratioNote": "3 g to 150 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "90 °C: 3 minutes, then 2, then 2½.",
+      "origin": "Yeongdeok county, Gyeongsangbuk-do, 100–300 m on the east coast.",
+      "process": "Withered, rolled, oxidised, dried.",
+      "story": "Output is small, so it sells locally and to visitors rather than nationwide.",
+      "flavor": "Malt with a faint floral note, soft sweetness; lighter than Hadong black tea.",
+      "pairing": "Plain desserts, dried fruit, morning tea.",
+      "brewTip": "Three minutes at 90 °C; the tender leaf gives two good infusions.",
+      "keep": "Sealed, cool and dry.",
+      "keywords": "Yeongdeok black tea Korea east coast"
+    },
+    "zh-CN": {
+      "name": "盈德红茶",
+      "oneLine": "东海海风里的小规模韩国红茶。",
+      "oxidation": "约90%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡3分钟，第二泡2分钟，第三泡2分30秒。",
+      "origin": "韩国庆尚北道盈德郡，海拔100~300米的东海丘陵。",
+      "process": "萎凋 → 揉捻 → 发酵 → 干燥。",
+      "story": "产量小，主要在当地与游客渠道销售。",
+      "flavor": "麦芽香带淡花香，甜柔，比河东红茶轻。",
+      "pairing": "清淡甜点、果干、晨间茶。",
+      "brewTip": "90度三分钟，两泡足够。",
+      "keep": "密封阴凉干燥。",
+      "keywords": "盈德红茶 韩国 庆北 东海"
+    },
+    "zh-TW": {
+      "name": "盈德紅茶",
+      "oneLine": "東海海風裡的小規模韓國紅茶。",
+      "oxidation": "約90%",
+      "ratioNote": "150毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡3分鐘，第二泡2分鐘，第三泡2分30秒。",
+      "origin": "韓國慶尚北道盈德郡，海拔100~300米的東海丘陵。",
+      "process": "萎凋 → 揉捻 → 發酵 → 乾燥。",
+      "story": "產量小，主要在當地與遊客渠道銷售。",
+      "flavor": "麥芽香帶淡花香，甜柔，比河東紅茶輕。",
+      "pairing": "清淡甜點、果乾、晨間茶。",
+      "brewTip": "90度三分鐘，兩泡足夠。",
+      "keep": "密封陰涼乾燥。",
+      "keywords": "盈德紅茶 韓國 慶北 東海"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "dark-fuzhuan",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "茯",
+    "sub": "Fu Brick Tea",
+    "alias": [
+      "복전차",
+      "금화복전"
+    ],
+    "hz": "茯磚茶",
+    "hs": "茯砖茶",
+    "rom": "Fu Zhuan Cha",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 100,
+    "traits": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "차砖 안쪽에 ‘금화(金花)’라 부르는 누런 균사가 피는 것으로 유명합니다. 습도와 온도를 맞춰 두면 이 균이 자랍니다.",
+        "살청 → 유념 → 악퇴 → 압착 → 발화(發花) 건조. 발화 단계에서 금화가 생깁니다."
+      ],
+      "en": [
+        "Famous for the yellow 'golden flowers' that bloom inside the brick — a mould encouraged by controlled warmth and humidity.",
+        "Fired, rolled, piled, pressed, then dried in a 'flowering' stage where the golden flowers develop."
+      ],
+      "zh-CN": [
+        "以砖内长出“金花”（黄色菌花）闻名，靠温湿度控制培育。",
+        "炒青 → 揉捻 → 渥堆 → 压砖 → 发花干燥，发花阶段生成金花。"
+      ],
+      "zh-TW": [
+        "以磚內長出「金花」（黃色菌花）聞名，靠溫溼度控制培育。",
+        "炒青 → 揉捻 → 渥堆 → 壓磚 → 發花乾燥，發花階段生成金花。"
+      ]
+    },
+    "ko": {
+      "name": "복전차 (금화복전)",
+      "oneLine": "차砖 안에 피는 노란 ‘금화’ — 후난 흑차의 표식.",
+      "oxidation": "후발효",
+      "ratioNote": "150ml에 5g, 세차 1회",
+      "rounds": "8회",
+      "steepBasis": "100도에서 30초, 2포 20초, 3포 25초. 이후 10초씩 늘립니다.",
+      "origin": "후난성 안화 일대, 해발 200~800m.",
+      "process": "살청 → 유념 → 악퇴 → 압착 → 발화 건조.",
+      "story": "명·청 시대에 변방으로 가는 압착차로 시작했고, 운반 중 발효가 진행되어 지금의 맛이 만들어졌습니다.",
+      "flavor": "버섯·흙·곡물 향, 부드럽고 둥근 단맛. 금화가 많은 차일수록 향이 부드럽습니다.",
+      "pairing": "기름진 고기, 중식, 유제품.",
+      "brewTip": "100도 끓는 물. 첫 물은 세차로 버리고, 끓여 마셔도 좋습니다.",
+      "keep": "습도 60% 안팎, 냄새 없는 곳. 금화는 보관 중에도 자랍니다.",
+      "keywords": "복전차 금화 안화 흑차 후발효"
+    },
+    "en": {
+      "name": "Fu Brick Tea",
+      "oneLine": "Yellow 'golden flowers' inside the brick — the mark of Hunan dark tea.",
+      "oxidation": "post-fermented",
+      "ratioNote": "5 g to 150 ml; rinse once",
+      "rounds": "8 infusions",
+      "steepBasis": "100 °C: 30 seconds, then 20, then 25; add 10 seconds after that.",
+      "origin": "Anhua, Hunan, 200–800 m.",
+      "process": "Fired, rolled, piled, pressed, then dried through a 'flowering' stage.",
+      "story": "It began as pressed tea for the frontier; fermentation during transport created today's taste.",
+      "flavor": "Mushroom, earth, grain; soft round sweetness, smoother the more golden flowers.",
+      "pairing": "Fatty meat, Chinese food, dairy.",
+      "brewTip": "Boiling water; rinse once, and it can also be boiled.",
+      "keep": "Around 60% humidity, away from smells — the flowers keep developing.",
+      "keywords": "Fu brick tea golden flowers Anhua dark tea"
+    },
+    "zh-CN": {
+      "name": "茯砖茶",
+      "oneLine": "砖内长出的黄色“金花”，湖南黑茶的标志。",
+      "oxidation": "后发酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡30秒，第二泡20秒，第三泡25秒，其后每泡加10秒。",
+      "origin": "湖南安化一带，海拔200~800米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 压砖 → 发花干燥。",
+      "story": "明清时作为边销紧压茶，运输中的发酵形成今日风味。",
+      "flavor": "菌香、土香与谷香，甜圆；金花越多越柔。",
+      "pairing": "油腻肉类、中餐、乳制品。",
+      "brewTip": "沸水，洗茶一次，也可煮饮。",
+      "keep": "湿度约六成、无异味处，金花可继续生长。",
+      "keywords": "茯砖茶 金花 安化 黑茶 后发酵"
+    },
+    "zh-TW": {
+      "name": "茯磚茶",
+      "oneLine": "磚內長出的黃色「金花」，湖南黑茶的標誌。",
+      "oxidation": "後發酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡30秒，第二泡20秒，第三泡25秒，其後每泡加10秒。",
+      "origin": "湖南安化一帶，海拔200~800米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 壓磚 → 發花乾燥。",
+      "story": "明清時作為邊銷緊壓茶，運輸中的發酵形成今日風味。",
+      "flavor": "菌香、土香與谷香，甜圓；金花越多越柔。",
+      "pairing": "油膩肉類、中餐、乳製品。",
+      "brewTip": "沸水，洗茶一次，也可煮飲。",
+      "keep": "溼度約六成、無異味處，金花可繼續生長。",
+      "keywords": "茯磚茶 金花 安化 黑茶 後發酵"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "dark-qianliang",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "兩",
+    "sub": "Qianliang Tea",
+    "alias": [
+      "천량차",
+      "화권차"
+    ],
+    "hz": "千兩茶",
+    "hs": "千两茶",
+    "rom": "Qianliang Cha",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      30,
+      20,
+      25
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 100,
+    "traits": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "대나무 껍질로 감아 압착한 긴 통차입니다. 옛 무게 단위로 1,000냥(약 36kg)에 해당해 이름이 붙었습니다.",
+        "살청 → 유념 → 악퇴 → 대나무 통에 압착 → 장기 건조. 통째로 두고 필요할 때 잘라 씁니다."
+      ],
+      "en": [
+        "A long log of tea compressed inside bamboo sheath; the name comes from its old weight of 1,000 liang, about 36 kg.",
+        "Fired, rolled, piled, pressed into bamboo, then dried for months; cut as needed."
+      ],
+      "zh-CN": [
+        "用竹篾捆压成长柱形，旧制重千两（约36公斤），故名。",
+        "炒青 → 揉捻 → 渥堆 → 竹篾压制成柱 → 长期干燥，饮用时锯取。"
+      ],
+      "zh-TW": [
+        "用竹篾捆壓成長柱形，舊制重千兩（約36公斤），故名。",
+        "炒青 → 揉捻 → 渥堆 → 竹篾壓製成柱 → 長期乾燥，飲用時鋸取。"
+      ]
+    },
+    "ko": {
+      "name": "천량차 (화권차)",
+      "oneLine": "대나무에 감아 압착한 긴 통차 — 필요할 때 잘라 마십니다.",
+      "oxidation": "후발효",
+      "ratioNote": "150ml에 5g, 세차 1회",
+      "rounds": "8회",
+      "steepBasis": "100도에서 30초, 2포 20초, 3포 25초.",
+      "origin": "후난성 안화 일대, 해발 200~700m.",
+      "process": "살청 → 유념 → 악퇴 → 대나무 통 압착 → 장기 건조.",
+      "story": "청대에 말과 배로 먼 곳까지 운반하기 좋게 만든 압착차에서 시작했습니다.",
+      "flavor": "대나무 향과 흙 향, 진한 단맛. 오래 둘수록 부드러워집니다.",
+      "pairing": "기름진 식사, 중식, 유제품.",
+      "brewTip": "100도. 단단히 압착되어 있어 첫 우림은 짧게, 이후 길게.",
+      "keep": "건조하고 통풍되는 곳. 대나무 껍질을 벗기지 않고 둡니다.",
+      "keywords": "천량차 화권차 안화 흑차 대나무 압착"
+    },
+    "en": {
+      "name": "Qianliang Tea",
+      "oneLine": "A log of tea pressed in bamboo, cut as you need it.",
+      "oxidation": "post-fermented",
+      "ratioNote": "5 g to 150 ml; rinse once",
+      "rounds": "8 infusions",
+      "steepBasis": "100 °C: 30 seconds, then 20, then 25.",
+      "origin": "Anhua, Hunan, 200–700 m.",
+      "process": "Fired, rolled, piled, pressed into bamboo, long-dried.",
+      "story": "A Qing-era form made to travel by horse and boat; the name records its old weight.",
+      "flavor": "Bamboo and earth, deep sweetness; softer the longer it is kept.",
+      "pairing": "Fatty meals, Chinese food, dairy.",
+      "brewTip": "Boiling water; short first infusion because the log is dense.",
+      "keep": "Dry and airy, bamboo sheath left on.",
+      "keywords": "Qianliang tea Anhua bamboo pressed dark tea"
+    },
+    "zh-CN": {
+      "name": "千两茶",
+      "oneLine": "竹篾压成的长柱茶，喝时锯取。",
+      "oxidation": "后发酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "湖南安化一带，海拔200~700米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 竹篾压柱 → 长期干燥。",
+      "story": "清代为便于马帮船运而制的紧压茶，名称记录了旧时重量。",
+      "flavor": "竹香与土香，甜厚，越陈越柔。",
+      "pairing": "油腻餐食、中餐、乳制品。",
+      "brewTip": "沸水，压得紧，首泡宜短。",
+      "keep": "干燥通风，保留竹篾。",
+      "keywords": "千两茶 花卷茶 安化 黑茶 竹压"
+    },
+    "zh-TW": {
+      "name": "千兩茶",
+      "oneLine": "竹篾壓成的長柱茶，喝時鋸取。",
+      "oxidation": "後發酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡30秒，第二泡20秒，第三泡25秒。",
+      "origin": "湖南安化一帶，海拔200~700米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 竹篾壓柱 → 長期乾燥。",
+      "story": "清代為便於馬幫船運而制的緊壓茶，名稱記錄了舊時重量。",
+      "flavor": "竹香與土香，甜厚，越陳越柔。",
+      "pairing": "油膩餐食、中餐、乳製品。",
+      "brewTip": "沸水，壓得緊，首泡宜短。",
+      "keep": "乾燥通風，保留竹篾。",
+      "keywords": "千兩茶 花卷茶 安化 黑茶 竹壓"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "dark-kangzhuan",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "康",
+    "sub": "Kangzhuan Tea",
+    "alias": [
+      "강전차",
+      "남로변차"
+    ],
+    "hz": "康磚茶",
+    "hs": "康砖茶",
+    "rom": "Kang Zhuan Cha",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      30,
+      25,
+      30
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 100,
+    "traits": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot s-milk w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "쓰촨 야안에서 만드는 압착 흑차로, 티베트로 가는 ‘남로변차’ 계열입니다. 티베트에서는 우유와 소금을 더해 마십니다.",
+        "살청 → 유념 → 악퇴 → 압착 → 건조. 굵은 잎과 줄기를 섞어 단단히 누릅니다."
+      ],
+      "en": [
+        "A pressed dark tea from Ya'an, Sichuan, part of the 'southern route' brick tea trade to Tibet, where it is boiled with milk and salt.",
+        "Fired, rolled, piled, pressed, dried; coarse leaf and stem pressed hard."
+      ],
+      "zh-CN": [
+        "四川雅安产的紧压黑茶，属销往西藏的“南路边茶”。",
+        "炒青 → 揉捻 → 渥堆 → 压制 → 干燥，粗叶带梗压紧。"
+      ],
+      "zh-TW": [
+        "四川雅安產的緊壓黑茶，屬銷往西藏的「南路邊茶」。",
+        "炒青 → 揉捻 → 渥堆 → 壓制 → 乾燥，粗葉帶梗壓緊。"
+      ]
+    },
+    "ko": {
+      "name": "강전차",
+      "oneLine": "티베트로 가던 쓰촨의 압착차 — 우유와 소금을 더해 마시는 차.",
+      "oxidation": "후발효",
+      "ratioNote": "150ml에 5g, 세차 1회",
+      "rounds": "7회",
+      "steepBasis": "100도에서 30초, 2포 25초, 3포 30초. 끓여 마셔도 좋습니다.",
+      "origin": "쓰촨성 야안 일대, 해발 600~1,200m.",
+      "process": "살청 → 유념 → 악퇴 → 압착 → 건조.",
+      "story": "청대에 티베트로 가는 차 무역의 주요 품목이었고, 지금도 그 지역에서 같은 방식으로 마십니다.",
+      "flavor": "흙과 곡물 향, 진하고 거친 단맛. 우유·버터와 만나면 부드러워집니다.",
+      "pairing": "육류, 유제품, 기름진 식사.",
+      "brewTip": "100도에서 길게. 우유와 소금을 더하는 티베트식도 좋습니다.",
+      "keep": "건조하고 통풍되는 곳.",
+      "keywords": "강전차 남로변차 쓰촨 흑차 티베트"
+    },
+    "en": {
+      "name": "Kangzhuan Tea",
+      "oneLine": "Sichuan's pressed brick for Tibet — boiled with milk and salt there.",
+      "oxidation": "post-fermented",
+      "ratioNote": "5 g to 150 ml; rinse once",
+      "rounds": "7 infusions",
+      "steepBasis": "100 °C: 30 seconds, then 25, then 30. It also boils well.",
+      "origin": "Ya'an, Sichuan, 600–1,200 m.",
+      "process": "Fired, rolled, piled, pressed, dried.",
+      "story": "A main item of the Qing-era tea trade to Tibet, where it is still drunk the same way.",
+      "flavor": "Earth and grain, strong and slightly rough; milk or butter softens it.",
+      "pairing": "Meat, dairy, rich meals.",
+      "brewTip": "Long at 100 °C; the Tibetan style adds milk and salt.",
+      "keep": "Dry and airy.",
+      "keywords": "Kangzhuan Sichuan brick tea Tibet dark tea"
+    },
+    "zh-CN": {
+      "name": "康砖茶",
+      "oneLine": "销往西藏的四川紧压黑茶，当地加奶加盐煮饮。",
+      "oxidation": "后发酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "7泡",
+      "steepBasis": "100度泡30秒，第二泡25秒，第三泡30秒，也可煮饮。",
+      "origin": "四川雅安一带，海拔600~1200米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 压制 → 干燥。",
+      "story": "清代销藏茶贸易的主要品类，当地至今沿用同样喝法。",
+      "flavor": "土香与谷香，浓而略粗，加奶或酥油后转柔。",
+      "pairing": "肉类、乳制品、油腻餐食。",
+      "brewTip": "100度久泡，也可加奶加盐。",
+      "keep": "干燥通风。",
+      "keywords": "康砖茶 南路边茶 四川 黑茶 西藏"
+    },
+    "zh-TW": {
+      "name": "康磚茶",
+      "oneLine": "銷往西藏的四川緊壓黑茶，當地加奶加鹽煮飲。",
+      "oxidation": "後發酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "7泡",
+      "steepBasis": "100度泡30秒，第二泡25秒，第三泡30秒，也可煮飲。",
+      "origin": "四川雅安一帶，海拔600~1200米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 壓制 → 乾燥。",
+      "story": "清代銷藏茶貿易的主要品類，當地至今沿用同樣喝法。",
+      "flavor": "土香與谷香，濃而略粗，加奶或酥油後轉柔。",
+      "pairing": "肉類、乳製品、油膩餐食。",
+      "brewTip": "100度久泡，也可加奶加鹽。",
+      "keep": "乾燥通風。",
+      "keywords": "康磚茶 南路邊茶 四川 黑茶 西藏"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "dark-tibetan",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "酥",
+    "sub": "Tibetan Butter Tea",
+    "alias": [
+      "장차",
+      "버터차",
+      "포차"
+    ],
+    "hz": "酥油茶",
+    "hs": "酥油茶",
+    "rom": "Suyou Cha",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "8g",
+    "water": "500ml",
+    "steeps": [
+      600
+    ],
+    "maxSteep": 1,
+    "oxidationValue": 100,
+    "traits": "t-morning t-afternoon a-roast a-herb b-full k-grain r-clean s-hot p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "티베트의 일상 음료입니다. 압착 흑차를 오래 끓여 진하게 우린 뒤 버터와 소금을 넣고 통에 넣어 섞습니다.",
+        "차를 끓여 농축한 ‘차고’를 만들어 두고, 마실 때마다 버터·소금과 함께 젓습니다."
+      ],
+      "en": [
+        "Tibet's everyday drink: brick tea boiled down to a strong concentrate, then churned with butter and salt.",
+        "The tea is boiled to a concentrate ('chaku') and kept; each serving is churned with butter and salt."
+      ],
+      "zh-CN": [
+        "西藏日常饮品：砖茶久熬成浓汁，加酥油与盐在茶桶中打匀。",
+        "先把茶熬成“茶膏”备用，喝时与酥油、盐一起打制。"
+      ],
+      "zh-TW": [
+        "西藏日常飲品：磚茶久熬成濃汁，加酥油與鹽在茶桶中打勻。",
+        "先把茶熬成「茶膏」備用，喝時與酥油、鹽一起打制。"
+      ]
+    },
+    "ko": {
+      "name": "쑤유차 (티베트 버터차)",
+      "oneLine": "진하게 끓인 흑차에 버터와 소금 — 티베트의 하루.",
+      "oxidation": "후발효",
+      "ratioNote": "물 500ml에 차 8g, 버터·소금은 취향껏",
+      "rounds": "1회 (농축액을 나눠 마심)",
+      "steepBasis": "100도에서 10분 이상 끓여 농축한 뒤 버터와 소금을 넣고 섞습니다.",
+      "origin": "티베트·칭하이·쓰촨 서부. 압착 흑차(강전차 등)를 씁니다.",
+      "process": "압착 흑차를 오래 끓여 농축 → 버터·소금과 함께 젓기.",
+      "story": "고지대에서 수분·열량·염분을 한 번에 얻기 위한 방식으로 자리 잡았습니다.",
+      "flavor": "버터의 고소함과 소금기, 흑차의 흙 향. 처음엔 낯설지만 몸이 데워집니다.",
+      "pairing": "츠ampa(볶은 보릿가루), 육류, 아침.",
+      "brewTip": "차를 진하게 끓이는 것이 핵심입니다. 버터는 무염을 씁니다.",
+      "keep": "농축액은 냉장 보관하고 데워 마십니다.",
+      "keywords": "쑤유차 버터차 티베트 장차 흑차"
+    },
+    "en": {
+      "name": "Tibetan Butter Tea",
+      "oneLine": "Strong brick tea churned with butter and salt — a Tibetan day.",
+      "oxidation": "post-fermented",
+      "ratioNote": "8 g to 500 ml water; butter and salt to taste",
+      "rounds": "1 brew, drunk as a concentrate",
+      "steepBasis": "Boil 10+ minutes at 100 °C to a concentrate, then churn with butter and salt.",
+      "origin": "Tibet, Qinghai and western Sichuan, using pressed dark tea.",
+      "process": "Pressed dark tea boiled down, then churned with butter and salt.",
+      "story": "A way to take water, calories and salt at once at altitude.",
+      "flavor": "Buttery and salty over dark tea's earth; strange at first, warming after.",
+      "pairing": "Tsampa (roasted barley flour), meat, breakfast.",
+      "brewTip": "The key is boiling the tea strong; use unsalted butter.",
+      "keep": "Refrigerate the concentrate and reheat to serve.",
+      "keywords": "Tibetan butter tea suyou cha brick tea Tibet"
+    },
+    "zh-CN": {
+      "name": "酥油茶",
+      "oneLine": "砖茶浓熬，加酥油与盐，西藏的一天。",
+      "oxidation": "后发酵",
+      "ratioNote": "500毫升水配8克茶，酥油与盐随口味",
+      "rounds": "煮1次，分次饮用",
+      "steepBasis": "100度煮10分钟以上成浓汁，再与酥油、盐打匀。",
+      "origin": "西藏、青海、川西，多用紧压黑茶。",
+      "process": "砖茶久煮浓缩 → 与酥油、盐同打。",
+      "story": "高原上一次补充水分、热量与盐分的饮法。",
+      "flavor": "酥油香与咸味压着黑茶的土香，初尝陌生，喝下暖身。",
+      "pairing": "糌粑、肉类、早餐。",
+      "brewTip": "关键在把茶熬浓；酥油用无盐的。",
+      "keep": "浓汁冷藏，饮前加热。",
+      "keywords": "酥油茶 藏茶 砖茶 西藏"
+    },
+    "zh-TW": {
+      "name": "酥油茶",
+      "oneLine": "磚茶濃熬，加酥油與鹽，西藏的一天。",
+      "oxidation": "後發酵",
+      "ratioNote": "500毫升水配8克茶，酥油與鹽隨口味",
+      "rounds": "煮1次，分次飲用",
+      "steepBasis": "100度煮10分鐘以上成濃汁，再與酥油、鹽打勻。",
+      "origin": "西藏、青海、川西，多用緊壓黑茶。",
+      "process": "磚茶久煮濃縮 → 與酥油、鹽同打。",
+      "story": "高原上一次補充水分、熱量與鹽分的飲法。",
+      "flavor": "酥油香與鹹味壓著黑茶的土香，初嘗陌生，喝下暖身。",
+      "pairing": "糌粑、肉類、早餐。",
+      "brewTip": "關鍵在把茶熬濃；酥油用無鹽的。",
+      "keep": "濃汁冷藏，飲前加熱。",
+      "keywords": "酥油茶 藏茶 磚茶 西藏"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "dark-laoqingzhuan",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "青",
+    "sub": "Lao Qingzhuan",
+    "alias": [
+      "노청전",
+      "조리교청전"
+    ],
+    "hz": "老青磚",
+    "hs": "老青砖",
+    "rom": "Lao Qingzhuan",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      30,
+      25,
+      30
+    ],
+    "maxSteep": 7,
+    "oxidationValue": 100,
+    "traits": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "후베이 자오리차오의 청전차입니다. 오래 묵힌 것을 ‘노청전’이라 부르며, 몽골·러시아로 가던 차 계열입니다.",
+        "살청 → 유념 → 악퇴 → 압착 → 건조. 잎과 줄기를 섞어 단단히 누릅니다."
+      ],
+      "en": [
+        "The green-brick dark tea of Zhaoliqiao, Hubei; aged bricks are called lao qingzhuan and this is the family that once travelled to Mongolia and Russia.",
+        "Fired, rolled, piled, pressed, dried; leaf and stem pressed hard."
+      ],
+      "zh-CN": [
+        "湖北赵李桥的青砖茶，陈放者称“老青砖”，曾销往蒙古与俄罗斯。",
+        "炒青 → 揉捻 → 渥堆 → 压制 → 干燥。"
+      ],
+      "zh-TW": [
+        "湖北趙李橋的青磚茶，陳放者稱「老青磚」，曾銷往蒙古與俄羅斯。",
+        "炒青 → 揉捻 → 渥堆 → 壓制 → 乾燥。"
+      ]
+    },
+    "ko": {
+      "name": "노청전 (청전차)",
+      "oneLine": "몽골과 러시아로 가던 후베이의 압착 흑차.",
+      "oxidation": "후발효",
+      "ratioNote": "150ml에 5g, 세차 1회",
+      "rounds": "7회",
+      "steepBasis": "100도에서 30초, 2포 25초, 3포 30초.",
+      "origin": "후베이성 츠비 자오리차오 일대, 해발 100~500m.",
+      "process": "살청 → 유념 → 악퇴 → 압착 → 건조.",
+      "story": "17세기 이후 몽골·러시아로 가는 차 무역의 주요 품목이었습니다.",
+      "flavor": "흙과 곡물 향, 부드러운 단맛. 오래 묵은 차는 향이 더 차분합니다.",
+      "pairing": "기름진 고기, 유제품, 중식.",
+      "brewTip": "100도에서 길게. 끓여 마시면 단맛이 올라옵니다.",
+      "keep": "건조하고 통풍되는 곳.",
+      "keywords": "노청전 청전차 후베이 자오리차오 흑차"
+    },
+    "en": {
+      "name": "Lao Qingzhuan",
+      "oneLine": "Hubei's pressed dark tea that once travelled to Mongolia and Russia.",
+      "oxidation": "post-fermented",
+      "ratioNote": "5 g to 150 ml; rinse once",
+      "rounds": "7 infusions",
+      "steepBasis": "100 °C: 30 seconds, then 25, then 30.",
+      "origin": "Zhaoliqiao, Chibi, Hubei, 100–500 m.",
+      "process": "Fired, rolled, piled, pressed, dried.",
+      "story": "From the 17th century it was a main item in the overland tea trade north.",
+      "flavor": "Earth and grain, soft sweetness; older bricks are calmer.",
+      "pairing": "Fatty meat, dairy, Chinese food.",
+      "brewTip": "Long at 100 °C; boiling brings out sweetness.",
+      "keep": "Dry and airy.",
+      "keywords": "Lao Qingzhuan Hubei Zhaoliqiao dark tea brick"
+    },
+    "zh-CN": {
+      "name": "老青砖",
+      "oneLine": "曾销往蒙古与俄罗斯的湖北紧压黑茶。",
+      "oxidation": "后发酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "7泡",
+      "steepBasis": "100度泡30秒，第二泡25秒，第三泡30秒。",
+      "origin": "湖北赤壁赵李桥一带，海拔100~500米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 压制 → 干燥。",
+      "story": "17世纪以后是北向陆路茶贸易的主要品类。",
+      "flavor": "土香与谷香，甜柔，陈放后更沉。",
+      "pairing": "油腻肉类、乳制品、中餐。",
+      "brewTip": "100度久泡，煮饮更甜。",
+      "keep": "干燥通风。",
+      "keywords": "老青砖 青砖茶 湖北 赵李桥 黑茶"
+    },
+    "zh-TW": {
+      "name": "老青磚",
+      "oneLine": "曾銷往蒙古與俄羅斯的湖北緊壓黑茶。",
+      "oxidation": "後發酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "7泡",
+      "steepBasis": "100度泡30秒，第二泡25秒，第三泡30秒。",
+      "origin": "湖北赤壁趙李橋一帶，海拔100~500米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 壓制 → 乾燥。",
+      "story": "17世紀以後是北向陸路茶貿易的主要品類。",
+      "flavor": "土香與谷香，甜柔，陳放後更沉。",
+      "pairing": "油膩肉類、乳製品、中餐。",
+      "brewTip": "100度久泡，煮飲更甜。",
+      "keep": "乾燥通風。",
+      "keywords": "老青磚 青磚茶 湖北 趙李橋 黑茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "dark-tianjian",
+    "group": "dark",
+    "kind": "tea",
+    "hanja": "尖",
+    "sub": "Tianjian Tea",
+    "alias": [
+      "천첨",
+      "상첨"
+    ],
+    "hz": "天尖茶",
+    "hs": "天尖茶",
+    "rom": "Tianjian Cha",
+    "temp": 100,
+    "tempRange": "100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      25,
+      15,
+      20
+    ],
+    "maxSteep": 8,
+    "oxidationValue": 100,
+    "traits": "t-afternoon t-night a-herb a-roast b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "안화 흑차의 ‘상첨(湘尖)’ 가운데 가장 높은 등급입니다. 압착하지 않고 느슨하게 두는 흑차입니다.",
+        "살청 → 유념 → 악퇴 → 건조 → 용기에 담아 숙성. 압착하지 않아 잎 모양이 남습니다."
+      ],
+      "en": [
+        "The top grade of Anhua's 'Xiangjian' dark teas, and unusual in not being pressed — the leaf stays loose.",
+        "Fired, rolled, piled, dried, then aged loose in containers."
+      ],
+      "zh-CN": [
+        "安化“湘尖”中等级最高者，不经压制，保持散叶。",
+        "炒青 → 揉捻 → 渥堆 → 干燥 → 装篓陈放。"
+      ],
+      "zh-TW": [
+        "安化「湘尖」中等級最高者，不經壓制，保持散葉。",
+        "炒青 → 揉捻 → 渥堆 → 乾燥 → 裝簍陳放。"
+      ]
+    },
+    "ko": {
+      "name": "천첨",
+      "oneLine": "압착하지 않은 안화 흑차의 최상급 — 잎 모양이 살아 있습니다.",
+      "oxidation": "후발효",
+      "ratioNote": "150ml에 5g, 세차 1회",
+      "rounds": "8회",
+      "steepBasis": "100도에서 25초, 2포 15초, 3포 20초.",
+      "origin": "후난성 안화 일대, 해발 300~800m.",
+      "process": "살청 → 유념 → 악퇴 → 건조 → 느슨하게 담아 숙성.",
+      "story": "청대에 ‘천첨’이라는 이름으로 공차에 올랐다는 기록이 있습니다.",
+      "flavor": "연기와 흙, 대추 같은 단맛. 압착 흑차보다 향이 가볍고 산뜻합니다.",
+      "pairing": "기름진 식사, 중식, 말린 과일.",
+      "brewTip": "100도에서 짧게 여러 번. 3포부터 단맛이 올라옵니다.",
+      "keep": "건조하고 통풍되는 곳, 냄새가 배지 않게.",
+      "keywords": "천첨 안화 흑차 상첨 산차"
+    },
+    "en": {
+      "name": "Tianjian Tea",
+      "oneLine": "Top-grade Anhua dark tea, left loose — the leaf shape survives.",
+      "oxidation": "post-fermented",
+      "ratioNote": "5 g to 150 ml; rinse once",
+      "rounds": "8 infusions",
+      "steepBasis": "100 °C: 25 seconds, then 15, then 20.",
+      "origin": "Anhua, Hunan, 300–800 m.",
+      "process": "Fired, rolled, piled, dried, then aged loose.",
+      "story": "Qing records list 'Tianjian' among the teas sent to court.",
+      "flavor": "Smoke and earth, date-like sweetness; lighter and fresher than pressed dark tea.",
+      "pairing": "Fatty meals, Chinese food, dried fruit.",
+      "brewTip": "Short, repeated infusions at 100 °C; sweetness from the third.",
+      "keep": "Dry and airy, away from strong smells.",
+      "keywords": "Tianjian Anhua dark tea loose Xiangjian"
+    },
+    "zh-CN": {
+      "name": "天尖茶",
+      "oneLine": "不压制的安化黑茶上品，叶片完整。",
+      "oxidation": "后发酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡25秒，第二泡15秒，第三泡20秒。",
+      "origin": "湖南安化一带，海拔300~800米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 干燥 → 装篓陈放。",
+      "story": "清代曾以“天尖”之名入贡。",
+      "flavor": "烟香、土香与枣甜，比紧压黑茶清轻。",
+      "pairing": "油腻餐食、中餐、果干。",
+      "brewTip": "100度短泡多道，第三泡起出甜。",
+      "keep": "干燥通风，避免串味。",
+      "keywords": "天尖茶 安化 黑茶 湘尖 散茶"
+    },
+    "zh-TW": {
+      "name": "天尖茶",
+      "oneLine": "不壓制的安化黑茶上品，葉片完整。",
+      "oxidation": "後發酵",
+      "ratioNote": "150毫升配5克，洗茶一次",
+      "rounds": "8泡",
+      "steepBasis": "100度泡25秒，第二泡15秒，第三泡20秒。",
+      "origin": "湖南安化一帶，海拔300~800米。",
+      "process": "炒青 → 揉捻 → 渥堆 → 乾燥 → 裝簍陳放。",
+      "story": "清代曾以「天尖」之名入貢。",
+      "flavor": "煙香、土香與棗甜，比緊壓黑茶清輕。",
+      "pairing": "油膩餐食、中餐、果乾。",
+      "brewTip": "100度短泡多道，第三泡起出甜。",
+      "keep": "乾燥通風，避免串味。",
+      "keywords": "天尖茶 安化 黑茶 湘尖 散茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "blend-guihua",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "桂",
+    "sub": "Osmanthus Tea",
+    "alias": [
+      "계화차",
+      "목서차"
+    ],
+    "hz": "桂花茶",
+    "hs": "桂花茶",
+    "rom": "Guihua Cha",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      150,
+      90,
+      120
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 60,
+    "traits": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "가을에 피는 계화(목서) 꽃을 차잎에 겹쳐 향을 옮깁니다. 광시 구이린과 푸젠이 대표 산지입니다.",
+        "차잎과 꽃을 층층이 쌓아 향을 옮기는 인향(窨制)을 몇 번 반복한 뒤 꽃을 골라냅니다."
+      ],
+      "en": [
+        "Autumn osmanthus blossom is layered with tea leaf to transfer its scent; Guilin in Guangxi and Fujian are the classic sources.",
+        "Leaf and blossom are stacked in layers to scent the tea, repeated a few times, then the blossom is picked out."
+      ],
+      "zh-CN": [
+        "用秋季桂花与茶坯窨制，广西桂林与福建为传统产区。",
+        "茶花层层堆窨数次，最后筛去花，只留茶。"
+      ],
+      "zh-TW": [
+        "用秋季桂花與茶坯窨制，廣西桂林與福建為傳統產區。",
+        "茶花層層堆窨數次，最後篩去花，只留茶。"
+      ]
+    },
+    "ko": {
+      "name": "계화차 (목서차)",
+      "oneLine": "가을 계화 꽃 향을 차잎에 옮긴, 살구빛 단맛의 차.",
+      "oxidation": "약 60% (베이스에 따름)",
+      "ratioNote": "200ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "85도에서 2분 30초, 2포 1분 30초, 3포 2분.",
+      "origin": "광시 구이린, 푸젠. 베이스는 녹차나 가벼운 우롱·홍차를 씁니다.",
+      "process": "차잎과 계화를 층층이 쌓아 향을 옮기는 인향을 반복한 뒤 꽃을 골라냅니다.",
+      "story": "계화는 중국에서 ‘가을의 향’으로 불리며, 차에 향을 옮기는 방식은 송대부터 기록이 있습니다.",
+      "flavor": "살구·복숭아 같은 달콤한 꽃 향, 부드러운 단맛. 꽃잎이 많으면 향이 더 진합니다.",
+      "pairing": "달지 않은 구운 과자, 견과, 과일.",
+      "brewTip": "85도. 끓는 물이면 꽃 향이 날아가고 떫음만 남습니다.",
+      "keep": "밀봉해 서늘하게. 꽃 향은 개봉 후 빠르게 줄어듭니다.",
+      "keywords": "계화차 목서차 구이린 인향 화차"
+    },
+    "en": {
+      "name": "Osmanthus Tea",
+      "oneLine": "Autumn osmanthus layered into the leaf — apricot-sweet.",
+      "oxidation": "about 60% (depends on base)",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C: 2½ minutes, then 1½, then 2.",
+      "origin": "Guilin in Guangxi and Fujian; the base is green, light oolong or black tea.",
+      "process": "Leaf and blossom are stacked repeatedly to transfer scent, then the blossom is removed.",
+      "story": "Osmanthus is called autumn's fragrance in China, and scenting tea with flowers is recorded from the Song.",
+      "flavor": "Apricot and peach-like florals, soft sweetness; more petals, more scent.",
+      "pairing": "Plain baked sweets, nuts, fruit.",
+      "brewTip": "85 °C; boiling water drives the flowers off and leaves tannin.",
+      "keep": "Sealed and cool — the flower scent fades quickly once opened.",
+      "keywords": "osmanthus tea guihua Guilin scented tea"
+    },
+    "zh-CN": {
+      "name": "桂花茶",
+      "oneLine": "把秋桂的香窨进茶里，甜似杏子。",
+      "oxidation": "约60%（随茶坯）",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分30秒，第二泡1分30秒，第三泡2分钟。",
+      "origin": "广西桂林、福建，茶坯用绿茶、轻乌龙或红茶。",
+      "process": "茶花层叠窨制数次后筛去花。",
+      "story": "桂花被称作秋天的香，窨花制茶自宋代有记载。",
+      "flavor": "杏、桃般的甜花香，柔甜；花多则香浓。",
+      "pairing": "原味烤点心、坚果、水果。",
+      "brewTip": "85度，沸水会冲散花香只剩涩。",
+      "keep": "密封阴凉，开封后花香易散。",
+      "keywords": "桂花茶 桂林 窨制 花茶"
+    },
+    "zh-TW": {
+      "name": "桂花茶",
+      "oneLine": "把秋桂的香窨進茶裡，甜似杏子。",
+      "oxidation": "約60%（隨茶坯）",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分30秒，第二泡1分30秒，第三泡2分鐘。",
+      "origin": "廣西桂林、福建，茶坯用綠茶、輕烏龍或紅茶。",
+      "process": "茶花層疊窨制數次後篩去花。",
+      "story": "桂花被稱作秋天的香，窨花制茶自宋代有記載。",
+      "flavor": "杏、桃般的甜花香，柔甜；花多則香濃。",
+      "pairing": "原味烤點心、堅果、水果。",
+      "brewTip": "85度，沸水會衝散花香只剩澀。",
+      "keep": "密封陰涼，開封後花香易散。",
+      "keywords": "桂花茶 桂林 窨制 花茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "blend-milk-oolong",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "奶",
+    "sub": "Milk Oolong",
+    "alias": [
+      "밀크우롱",
+      "금萱 밀크우롱"
+    ],
+    "hz": "奶香烏龍",
+    "hs": "奶香乌龙",
+    "rom": "Nai Xiang Oolong",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      40,
+      25,
+      30
+    ],
+    "maxSteep": 6,
+    "oxidationValue": 25,
+    "traits": "t-morning t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot s-iced w-gongfu p-dessert c-low m-calm",
+    "originCountry": {
+      "ko": "대만",
+      "en": "Taiwan",
+      "zh-CN": "台湾",
+      "zh-TW": "台灣"
+    },
+    "x": {
+      "ko": [
+        "대만 금훤(台茶12호) 품종은 우릴 때 크림 같은 향이 나 ‘밀크우롱’으로 불립니다. 향을 인공적으로 입히는 제품도 있습니다.",
+        "위조 → 요청 → 살청 → 구형 유념 → 건조. 가볍게 산화해 크림 향을 살립니다."
+      ],
+      "en": [
+        "Taiwan's Jin Xuan cultivar (TTES No. 12) brews with a creamy aroma, hence 'milk oolong'; some products add flavouring instead.",
+        "Withered, shaken, fired, ball-rolled, dried; light oxidation keeps the creamy note."
+      ],
+      "zh-CN": [
+        "台茶12号金萱本身带奶香，故称奶香乌龙；市面上也有加香产品。",
+        "萎凋 → 摇青 → 炒青 → 揉球 → 干燥，轻氧化保留奶香。"
+      ],
+      "zh-TW": [
+        "臺茶12號金萱本身帶奶香，故稱奶香烏龍；市面上也有加香產品。",
+        "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥，輕氧化保留奶香。"
+      ]
+    },
+    "ko": {
+      "name": "밀크우롱 (금훤)",
+      "oneLine": "품종 자체가 내는 크림 향 — 대만 금훤의 별명.",
+      "oxidation": "약 25%",
+      "ratioNote": "150ml에 5g",
+      "rounds": "6회",
+      "steepBasis": "90도에서 40초, 2포 25초, 3포 30초.",
+      "origin": "대만 난터우·자이 일대, 해발 600~1,200m.",
+      "process": "위조 → 요청 → 살청 → 구형 유념 → 건조.",
+      "story": "금훤은 대만 차 시험장이 개발한 품종으로, 크림 향과 부드러운 단맛이 특징입니다.",
+      "flavor": "우유·크림 같은 향, 부드러운 단맛, 떫음이 거의 없습니다.",
+      "pairing": "가벼운 디저트, 과일, 밀크티 변형.",
+      "brewTip": "90도에서 40초. 뜨거우면 크림 향이 줄고 떫음이 늘어납니다.",
+      "keep": "밀봉 냉장. 향이 가벼워 개봉 후 빨리 마십니다.",
+      "keywords": "밀크우롱 금훤 대만 우롱 크림향"
+    },
+    "en": {
+      "name": "Milk Oolong",
+      "oneLine": "A cultivar's own creaminess — Jin Xuan of Taiwan.",
+      "oxidation": "about 25%",
+      "ratioNote": "5 g to 150 ml",
+      "rounds": "6 infusions",
+      "steepBasis": "90 °C: 40 seconds, then 25, then 30.",
+      "origin": "Nantou and Chiayi, Taiwan, 600–1,200 m.",
+      "process": "Withered, shaken, fired, ball-rolled, dried.",
+      "story": "Jin Xuan was bred by Taiwan's tea research station and is known for its creamy aroma.",
+      "flavor": "Milk and cream, soft sweetness, hardly any astringency.",
+      "pairing": "Light desserts, fruit, milk-tea variations.",
+      "brewTip": "40 seconds at 90 °C; hotter water loses the cream and adds grip.",
+      "keep": "Sealed and cold; drink soon after opening.",
+      "keywords": "milk oolong Jin Xuan Taiwan creamy oolong"
+    },
+    "zh-CN": {
+      "name": "奶香乌龙",
+      "oneLine": "品种自带的奶香，金萱的别名。",
+      "oxidation": "约25%",
+      "ratioNote": "150毫升配5克",
+      "rounds": "6泡",
+      "steepBasis": "90度泡40秒，第二泡25秒，第三泡30秒。",
+      "origin": "台湾南投、嘉义一带，海拔600~1200米。",
+      "process": "萎凋 → 摇青 → 炒青 → 揉球 → 干燥。",
+      "story": "金萱为台湾茶业改良场育成品种，以奶香与柔甜著称。",
+      "flavor": "奶香柔甜，几乎不涩。",
+      "pairing": "清淡甜点、水果、奶茶变化。",
+      "brewTip": "90度40秒，水温高则奶香减、涩味增。",
+      "keep": "密封冷藏，开封后尽快喝完。",
+      "keywords": "奶香乌龙 金萱 台湾 乌龙"
+    },
+    "zh-TW": {
+      "name": "奶香烏龍",
+      "oneLine": "品種自帶的奶香，金萱的別名。",
+      "oxidation": "約25%",
+      "ratioNote": "150毫升配5克",
+      "rounds": "6泡",
+      "steepBasis": "90度泡40秒，第二泡25秒，第三泡30秒。",
+      "origin": "臺灣南投、嘉義一帶，海拔600~1200米。",
+      "process": "萎凋 → 搖青 → 炒青 → 揉球 → 乾燥。",
+      "story": "金萱為臺灣茶業改良場育成品種，以奶香與柔甜著稱。",
+      "flavor": "奶香柔甜，幾乎不澀。",
+      "pairing": "清淡甜點、水果、奶茶變化。",
+      "brewTip": "90度40秒，水溫高則奶香減、澀味增。",
+      "keep": "密封冷藏，開封後儘快喝完。",
+      "keywords": "奶香烏龍 金萱 臺灣 烏龍"
+    },
+    "originCountryCode": "tw"
+  },
+  {
+    "id": "blend-rose",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "玫",
+    "sub": "Rose Tea",
+    "alias": [
+      "장미차",
+      "매괴홍차"
+    ],
+    "hz": "玫瑰花茶",
+    "hs": "玫瑰花茶",
+    "rom": "Meigui Cha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      150,
+      90,
+      120
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 85,
+    "traits": "t-afternoon t-night a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-mid m-calm",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "말린 장미 꽃봉오리를 홍차나 녹차에 섞거나, 꽃만 우려 마시기도 합니다.",
+        "차잎과 말린 꽃을 섞어 두거나, 진한 차에 장미 향을 입혀 만듭니다."
+      ],
+      "en": [
+        "Dried rose buds are blended with black or green tea — or brewed on their own.",
+        "Leaf and dried blossom are blended, or a strong tea is scented with rose."
+      ],
+      "zh-CN": [
+        "干玫瑰花蕾与红茶或绿茶拼配，也可单用花冲泡。",
+        "茶坯与干花拼合，或以浓茶窨玫瑰香。"
+      ],
+      "zh-TW": [
+        "幹玫瑰花蕾與紅茶或綠茶拼配，也可單用花衝泡。",
+        "茶坯與乾花拼合，或以濃茶窨玫瑰香。"
+      ]
+    },
+    "ko": {
+      "name": "장미차 (매괴홍차)",
+      "oneLine": "말린 장미 봉오리의 향 — 홍차에 얹으면 더 진해집니다.",
+      "oxidation": "약 85% (홍차 베이스)",
+      "ratioNote": "200ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "90도에서 2분 30초, 2포 1분 30초. 꽃만 우리면 3분.",
+      "origin": "중국·이란 등. 홍차 베이스는 인도·스리랑카 차를 씁니다.",
+      "process": "말린 장미 봉오리를 홍차잎과 섞거나 차에 향을 입힙니다.",
+      "story": "장미는 중동과 중국에서 오래 차에 섞어 온 꽃입니다.",
+      "flavor": "장미 향과 꿀 같은 단맛, 홍차의 몰트가 뒤를 받칩니다.",
+      "pairing": "초콜릿, 견과, 과일 디저트.",
+      "brewTip": "90도에서 2분 30초. 꽃이 많으면 향이 비누처럼 느껴질 수 있어 짧게.",
+      "keep": "밀봉해 서늘하게. 꽃잎 색이 바래면 향도 줄어듭니다.",
+      "keywords": "장미차 매괴홍차 로즈티 꽃차"
+    },
+    "en": {
+      "name": "Rose Tea",
+      "oneLine": "Dried rose buds over black tea — deeper than the flower alone.",
+      "oxidation": "about 85% (black base)",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "90 °C: 2½ minutes, then 1½; 3 minutes if brewing buds alone.",
+      "origin": "China and Iran; the base tea comes from India and Sri Lanka.",
+      "process": "Dried rose buds blended with black leaf, or the tea scented with rose.",
+      "story": "Rose has been blended into tea in the Middle East and China for centuries.",
+      "flavor": "Rose and honey sweetness with malt behind.",
+      "pairing": "Chocolate, nuts, fruit desserts.",
+      "brewTip": "2½ minutes at 90 °C; too many petals turns it soapy, so keep it short.",
+      "keep": "Sealed and cool; faded petals mean faded scent.",
+      "keywords": "rose tea meigui scented black tea"
+    },
+    "zh-CN": {
+      "name": "玫瑰花茶",
+      "oneLine": "干玫瑰花蕾拼红茶，香比单花更厚。",
+      "oxidation": "约85%（红茶坯）",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡1分30秒；单冲花则3分钟。",
+      "origin": "中国、伊朗等地，茶坯多用印度、斯里兰卡红茶。",
+      "process": "干玫瑰花蕾与红茶拼合，或以浓茶窨玫瑰香。",
+      "story": "玫瑰入茶在中东与中国都有长久历史。",
+      "flavor": "玫瑰香与蜜甜，后段是红茶的麦芽味。",
+      "pairing": "巧克力、坚果、水果甜点。",
+      "brewTip": "90度两分半，花多易显皂感，宜短泡。",
+      "keep": "密封阴凉，花色褪则香减。",
+      "keywords": "玫瑰花茶 玫瑰红茶 花茶"
+    },
+    "zh-TW": {
+      "name": "玫瑰花茶",
+      "oneLine": "幹玫瑰花蕾拼紅茶，香比單花更厚。",
+      "oxidation": "約85%（紅茶坯）",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡1分30秒；單衝花則3分鐘。",
+      "origin": "中國、伊朗等地，茶坯多用印度、斯裡蘭卡紅茶。",
+      "process": "幹玫瑰花蕾與紅茶拼合，或以濃茶窨玫瑰香。",
+      "story": "玫瑰入茶在中東與中國都有長久歷史。",
+      "flavor": "玫瑰香與蜜甜，後段是紅茶的麥芽味。",
+      "pairing": "巧克力、堅果、水果甜點。",
+      "brewTip": "90度兩分半，花多易顯皂感，宜短泡。",
+      "keep": "密封陰涼，花色褪則香減。",
+      "keywords": "玫瑰花茶 玫瑰紅茶 花茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "blend-lychee",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "荔",
+    "sub": "Lychee Black Tea",
+    "alias": [
+      "여지홍차",
+      "리치홍차"
+    ],
+    "hz": "荔枝紅茶",
+    "hs": "荔枝红茶",
+    "rom": "Lizhi Hongcha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      150,
+      120,
+      150
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 90,
+    "traits": "t-morning t-afternoon a-fruit a-floral b-medium k-sweet r-clean s-hot s-iced p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "중국",
+      "en": "China",
+      "zh-CN": "中国",
+      "zh-TW": "中國"
+    },
+    "x": {
+      "ko": [
+        "광둥의 홍차에 여지 향을 입힌 차입니다. 여지는 광둥·푸젠 남부의 과일입니다.",
+        "홍차잎에 여지 향을 흡착시키거나 말린 여지를 섞어 만듭니다."
+      ],
+      "en": [
+        "Cantonese black tea scented with lychee, a fruit of southern Guangdong and Fujian.",
+        "Black leaf is scented with lychee, or dried fruit is blended in."
+      ],
+      "zh-CN": [
+        "广东红茶窨荔枝香，荔枝为粤闽南部水果。",
+        "茶坯吸附荔枝香，或拼入干果。"
+      ],
+      "zh-TW": [
+        "廣東紅茶窨荔枝香，荔枝為粵閩南部水果。",
+        "茶坯吸附荔枝香，或拼入乾果。"
+      ]
+    },
+    "ko": {
+      "name": "여지홍차",
+      "oneLine": "여지의 향이 홍차 위에 얹힌, 광둥의 과일 홍차.",
+      "oxidation": "약 90%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "90도에서 2분 30초, 2포 2분, 3포 2분 30초. 차갑게 마셔도 좋습니다.",
+      "origin": "광둥·푸젠 남부. 베이스는 중국 홍차.",
+      "process": "홍차잎에 여지 향을 입히거나 말린 여지를 섞습니다.",
+      "story": "여지는 광둥의 대표 과일로, 6~7월에 익습니다.",
+      "flavor": "여지의 달콤한 향과 홍차의 몰트. 얼음을 넣어도 향이 남습니다.",
+      "pairing": "과일 디저트, 아이스티.",
+      "brewTip": "90도에서 2분 30초. 아이스티는 두 배로 진하게 우립니다.",
+      "keep": "밀봉해 서늘하게.",
+      "keywords": "여지홍차 리치홍차 광둥 과일홍차"
+    },
+    "en": {
+      "name": "Lychee Black Tea",
+      "oneLine": "Lychee laid over black tea — Guangdong's fruit cup.",
+      "oxidation": "about 90%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "90 °C: 2½ minutes, then 2, then 2½. Good over ice.",
+      "origin": "Southern Guangdong and Fujian; the base is Chinese black tea.",
+      "process": "Black leaf scented with lychee, or dried fruit blended in.",
+      "story": "Lychee is Guangdong's signature fruit, ripe in June and July.",
+      "flavor": "Sweet lychee over malt; the aroma survives ice.",
+      "pairing": "Fruit desserts, iced tea.",
+      "brewTip": "2½ minutes at 90 °C; brew double strength for iced tea.",
+      "keep": "Sealed and cool.",
+      "keywords": "lychee black tea lizhi Guangdong fruit tea"
+    },
+    "zh-CN": {
+      "name": "荔枝红茶",
+      "oneLine": "荔枝香叠在红茶上，广东的果香茶。",
+      "oxidation": "约90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡2分钟，第三泡2分30秒，冷饮亦佳。",
+      "origin": "广东、闽南，茶坯为中国红茶。",
+      "process": "茶坯吸香或拼入干荔枝。",
+      "story": "荔枝是广东代表水果，六七月成熟。",
+      "flavor": "荔枝甜香与麦芽味，加冰仍香。",
+      "pairing": "水果甜点、冰茶。",
+      "brewTip": "90度两分半；做冰茶投茶加倍。",
+      "keep": "密封阴凉。",
+      "keywords": "荔枝红茶 广东 果香红茶"
+    },
+    "zh-TW": {
+      "name": "荔枝紅茶",
+      "oneLine": "荔枝香疊在紅茶上，廣東的果香茶。",
+      "oxidation": "約90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "90度泡2分30秒，第二泡2分鐘，第三泡2分30秒，冷飲亦佳。",
+      "origin": "廣東、閩南，茶坯為中國紅茶。",
+      "process": "茶坯吸香或拼入幹荔枝。",
+      "story": "荔枝是廣東代表水果，六七月成熟。",
+      "flavor": "荔枝甜香與麥芽味，加冰仍香。",
+      "pairing": "水果甜點、冰茶。",
+      "brewTip": "90度兩分半；做冰茶投茶加倍。",
+      "keep": "密封陰涼。",
+      "keywords": "荔枝紅茶 廣東 果香紅茶"
+    },
+    "originCountryCode": "cn"
+  },
+  {
+    "id": "blend-thaitea",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "泰",
+    "sub": "Thai Tea (Cha Yen)",
+    "alias": [
+      "차옌",
+      "타이 밀크티"
+    ],
+    "hz": "泰式奶茶",
+    "hs": "泰式奶茶",
+    "rom": "Cha Yen",
+    "temp": 95,
+    "tempRange": "95~100℃",
+    "leaf": "5g",
+    "water": "150ml",
+    "steeps": [
+      300
+    ],
+    "maxSteep": 1,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt a-roast b-full k-sweet r-clean s-iced s-milk p-dessert c-high m-energy",
+    "originCountry": {
+      "ko": "태국",
+      "en": "Thailand",
+      "zh-CN": "泰国",
+      "zh-TW": "泰國"
+    },
+    "x": {
+      "ko": [
+        "진하게 우린 홍차에 연유와 설탕을 더하고 얼음을 채운 태국의 차입니다. 붉은 주황색이 특징입니다.",
+        "잘게 부순 홍차를 진하게 우리고 연유·설탕을 더한 뒤 얼음 위에 붓습니다."
+      ],
+      "en": [
+        "Strong black tea with condensed milk and sugar, poured over ice — the bright orange Thai street drink.",
+        "Finely broken black tea brewed strong, sweetened with condensed milk, poured over ice."
+      ],
+      "zh-CN": [
+        "浓红茶加炼乳与糖，倒在冰上，呈橘红色。",
+        "碎红茶浓泡，加炼乳与糖，浇在冰块上。"
+      ],
+      "zh-TW": [
+        "濃紅茶加煉乳與糖，倒在冰上，呈橘紅色。",
+        "碎紅茶濃泡，加煉乳與糖，澆在冰塊上。"
+      ]
+    },
+    "ko": {
+      "name": "차옌 (타이 밀크티)",
+      "oneLine": "진한 홍차에 연유와 얼음 — 태국 거리의 주황색 잔.",
+      "oxidation": "약 95%",
+      "ratioNote": "150ml에 5g, 연유·설탕은 취향껏",
+      "rounds": "1회",
+      "steepBasis": "95도에서 5분 진하게. 연유와 설탕을 더한 뒤 얼음 위에 붓습니다.",
+      "origin": "태국 전역. 베이스는 세일론·아삼 계열의 잘게 부순 홍차.",
+      "process": "잘게 부순 홍차를 진하게 우리고 연유·설탕을 더합니다.",
+      "story": "태국에서 차는 20세기 이후 재배가 늘었고, 차옌은 길거리 음료로 자리 잡았습니다.",
+      "flavor": "아주 진한 몰트와 단맛, 연유의 크림감. 얼음이 녹으면 부드러워집니다.",
+      "pairing": "매운 태국 요리, 디저트.",
+      "brewTip": "5분 진하게. 연유 양으로 단맛을 조절합니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "차옌 태국 밀크티 연유 아이스티"
+    },
+    "en": {
+      "name": "Cha Yen (Thai Iced Tea)",
+      "oneLine": "Strong tea, condensed milk and ice — the orange glass of Thailand.",
+      "oxidation": "about 95%",
+      "ratioNote": "5 g to 150 ml; condensed milk and sugar to taste",
+      "rounds": "1 brew",
+      "steepBasis": "95 °C for 5 minutes, strong; sweeten and pour over ice.",
+      "origin": "Thailand; the base is finely broken Ceylon or Assam-type black tea.",
+      "process": "Finely broken leaf brewed strong, then condensed milk and sugar added.",
+      "story": "Tea growing expanded in Thailand in the 20th century and cha yen became a street staple.",
+      "flavor": "Very strong malt and sugar, creamy from the condensed milk; softer as the ice melts.",
+      "pairing": "Spicy Thai food, desserts.",
+      "brewTip": "Brew five minutes strong; control sweetness with the condensed milk.",
+      "keep": "Sealed and dry.",
+      "keywords": "cha yen Thai iced tea condensed milk"
+    },
+    "zh-CN": {
+      "name": "泰式奶茶",
+      "oneLine": "浓茶加炼乳与冰，泰国街头的橘色一杯。",
+      "oxidation": "约95%",
+      "ratioNote": "150毫升配5克，炼乳与糖随口味",
+      "rounds": "1次",
+      "steepBasis": "95度泡5分钟至浓，加炼乳与糖后浇在冰上。",
+      "origin": "泰国全境，茶坯多为锡兰或阿萨姆型碎红茶。",
+      "process": "碎红茶浓泡后加炼乳与糖。",
+      "story": "泰国茶叶种植在20世纪扩大，泰式奶茶成为街头饮品。",
+      "flavor": "浓麦芽与甜，炼乳带来奶油感，冰化后转柔。",
+      "pairing": "泰式辛香料理、甜点。",
+      "brewTip": "泡足五分钟，甜度用炼乳调节。",
+      "keep": "密封干燥。",
+      "keywords": "泰式奶茶 炼乳 冰茶 泰国"
+    },
+    "zh-TW": {
+      "name": "泰式奶茶",
+      "oneLine": "濃茶加煉乳與冰，泰國街頭的橘色一杯。",
+      "oxidation": "約95%",
+      "ratioNote": "150毫升配5克，煉乳與糖隨口味",
+      "rounds": "1次",
+      "steepBasis": "95度泡5分鐘至濃，加煉乳與糖後澆在冰上。",
+      "origin": "泰國全境，茶坯多為錫蘭或阿薩姆型碎紅茶。",
+      "process": "碎紅茶濃泡後加煉乳與糖。",
+      "story": "泰國茶葉種植在20世紀擴大，泰式奶茶成為街頭飲品。",
+      "flavor": "濃麥芽與甜，煉乳帶來奶油感，冰化後轉柔。",
+      "pairing": "泰式辛香料理、甜點。",
+      "brewTip": "泡足五分鐘，甜度用煉乳調節。",
+      "keep": "密封乾燥。",
+      "keywords": "泰式奶茶 煉乳 冰茶 泰國"
+    },
+    "originCountryCode": "th"
+  },
+  {
+    "id": "blend-yuenyeung",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "鴛",
+    "sub": "Yuenyeung",
+    "alias": [
+      "얀여엉",
+      "원앙차"
+    ],
+    "hz": "鴛鴦",
+    "hs": "鸳鸯",
+    "rom": "Yuenyeung",
+    "temp": 95,
+    "tempRange": "95~100℃",
+    "leaf": "6g",
+    "water": "150ml",
+    "steeps": [
+      300
+    ],
+    "maxSteep": 1,
+    "oxidationValue": 95,
+    "traits": "t-morning t-afternoon a-malt a-roast b-full k-sweet r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "홍콩",
+      "en": "Hong Kong",
+      "zh-CN": "香港",
+      "zh-TW": "香港"
+    },
+    "x": {
+      "ko": [
+        "홍콩 차찬텡의 단골 메뉴로, 진한 홍차와 커피를 7:3 안팎으로 섞고 연유나 우유를 더합니다.",
+        "홍차를 진하게 우리고 커피를 섞은 뒤 연유·우유로 농도를 맞춥니다."
+      ],
+      "en": [
+        "A cha chaan teng staple: strong milk tea blended with coffee, roughly seven to three, sweetened with condensed milk.",
+        "Strong black tea mixed with coffee, then adjusted with condensed or evaporated milk."
+      ],
+      "zh-CN": [
+        "茶餐厅常见饮品，浓奶茶与咖啡约七三混合，加炼乳调味。",
+        "浓红茶混咖啡，再用炼乳或淡奶调浓度。"
+      ],
+      "zh-TW": [
+        "茶餐廳常見飲品，濃奶茶與咖啡約七三混合，加煉乳調味。",
+        "濃紅茶混咖啡，再用煉乳或淡奶調濃度。"
+      ]
+    },
+    "ko": {
+      "name": "얀여엉 (원앙차)",
+      "oneLine": "홍차와 커피를 섞은 홍콩 차찬텡의 잔.",
+      "oxidation": "약 95%",
+      "ratioNote": "150ml에 6g, 커피·연유는 취향껏",
+      "rounds": "1회",
+      "steepBasis": "95도에서 5분 진하게 우리고 커피를 7:3 정도로 섞습니다.",
+      "origin": "홍콩 차찬텡. 베이스는 세일론·아삼 블렌드.",
+      "process": "진한 홍차에 커피를 섞고 연유나 우유로 농도를 맞춥니다.",
+      "story": "이름은 두 마리 새가 한 몸처럼 붙어 있는 원앙에서 왔습니다. 차와 커피가 섞인 모습을 빗댄 것입니다.",
+      "flavor": "홍차의 몰트와 커피의 쓴맛, 연유의 단맛이 겹칩니다.",
+      "pairing": "홍콩식 토스트, 계란 요리, 아침.",
+      "brewTip": "차를 진하게 우리는 것이 핵심입니다. 커피는 진한 에스프레소를 조금.",
+      "keep": "차잎은 밀봉해 건조하게.",
+      "keywords": "얀여엉 원앙차 홍콩 커피 홍차"
+    },
+    "en": {
+      "name": "Yuenyeung",
+      "oneLine": "Black tea and coffee in one Hong Kong cup.",
+      "oxidation": "about 95%",
+      "ratioNote": "6 g to 150 ml; coffee and condensed milk to taste",
+      "rounds": "1 brew",
+      "steepBasis": "Brew strong for 5 minutes at 95 °C, then mix with coffee about 7:3.",
+      "origin": "Hong Kong cha chaan teng, on a Ceylon–Assam base.",
+      "process": "Strong milk tea mixed with coffee, adjusted with condensed or evaporated milk.",
+      "story": "The name comes from the mandarin duck, a pair joined as one — tea and coffee in a single cup.",
+      "flavor": "Malt, coffee bitterness and condensed-milk sweetness together.",
+      "pairing": "Hong Kong toast, egg dishes, breakfast.",
+      "brewTip": "Brew the tea strong; add a little strong espresso.",
+      "keep": "Keep the leaf sealed and dry.",
+      "keywords": "yuenyeung Hong Kong coffee milk tea cha chaan teng"
+    },
+    "zh-CN": {
+      "name": "鸳鸯",
+      "oneLine": "红茶与咖啡同在一杯，香港茶餐厅的味道。",
+      "oxidation": "约95%",
+      "ratioNote": "150毫升配6克，咖啡与炼乳随口味",
+      "rounds": "1次",
+      "steepBasis": "95度泡5分钟至浓，再与咖啡约七三混合。",
+      "origin": "香港茶餐厅，茶坯为锡兰与阿萨姆拼配。",
+      "process": "浓奶茶混入咖啡，用炼乳或淡奶调浓淡。",
+      "story": "名字取自鸳鸯——两只鸟合为一体，喻茶与咖啡同杯。",
+      "flavor": "麦芽、咖啡的苦与炼乳的甜叠在一起。",
+      "pairing": "港式多士、蛋类料理、早餐。",
+      "brewTip": "茶要浓，咖啡用少量浓缩。",
+      "keep": "茶叶密封干燥。",
+      "keywords": "鸳鸯 香港 咖啡 奶茶 茶餐厅"
+    },
+    "zh-TW": {
+      "name": "鴛鴦",
+      "oneLine": "紅茶與咖啡同在一杯，香港茶餐廳的味道。",
+      "oxidation": "約95%",
+      "ratioNote": "150毫升配6克，咖啡與煉乳隨口味",
+      "rounds": "1次",
+      "steepBasis": "95度泡5分鐘至濃，再與咖啡約七三混合。",
+      "origin": "香港茶餐廳，茶坯為錫蘭與阿薩姆拼配。",
+      "process": "濃奶茶混入咖啡，用煉乳或淡奶調濃淡。",
+      "story": "名字取自鴛鴦——兩隻鳥合為一體，喻茶與咖啡同杯。",
+      "flavor": "麥芽、咖啡的苦與煉乳的甜疊在一起。",
+      "pairing": "港式多士、蛋類料理、早餐。",
+      "brewTip": "茶要濃，咖啡用少量濃縮。",
+      "keep": "茶葉密封乾燥。",
+      "keywords": "鴛鴦 香港 咖啡 奶茶 茶餐廳"
+    },
+    "originCountryCode": "hk"
+  },
+  {
+    "id": "blend-moroccan-mint",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "薄",
+    "sub": "Maghrebi Mint Tea",
+    "alias": [
+      "모로코 민트티",
+      "마그레브 민트차"
+    ],
+    "hz": "薄荷綠茶",
+    "hs": "薄荷绿茶",
+    "rom": "Maghrebi Mint Tea",
+    "temp": 85,
+    "tempRange": "80~90℃",
+    "leaf": "4g",
+    "water": "200ml",
+    "steeps": [
+      120,
+      90,
+      120
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 5,
+    "traits": "t-morning t-afternoon a-herb a-grass b-light k-sweet r-clean s-hot s-iced p-dessert c-mid m-refresh",
+    "originCountry": {
+      "ko": "모로코",
+      "en": "Morocco",
+      "zh-CN": "摩洛哥",
+      "zh-TW": "摩洛哥"
+    },
+    "x": {
+      "ko": [
+        "모로코를 비롯한 마그레브 지역의 민트차입니다. 중국 건차(군피우더)에 신선한 박하와 설탕을 넣고 높이 부어 마십니다.",
+        "군피우더 녹차를 짧게 우리고 박하 잎과 설탕을 넣은 뒤, 주전자를 높이 들어 부어 거품을 냅니다."
+      ],
+      "en": [
+        "The mint tea of Morocco and the wider Maghreb: Chinese gunpowder green with fresh spearmint and sugar, poured from a height.",
+        "Gunpowder green brewed briefly, spearmint and sugar added, then poured high to aerate."
+      ],
+      "zh-CN": [
+        "摩洛哥及马格里布地区的薄荷茶：中国珠茶加鲜薄荷与糖，高举茶壶冲注。",
+        "珠茶短泡，加薄荷与糖，高冲起泡。"
+      ],
+      "zh-TW": [
+        "摩洛哥及馬格里布地區的薄荷茶：中國珠茶加鮮薄荷與糖，高舉茶壺衝注。",
+        "珠茶短泡，加薄荷與糖，高衝起泡。"
+      ]
+    },
+    "ko": {
+      "name": "모로코 민트티",
+      "oneLine": "중국 건차에 신선한 박하와 설탕 — 높이 부어 마시는 차.",
+      "oxidation": "약 5% (녹차 베이스)",
+      "ratioNote": "200ml에 4g, 박하 한 줌·설탕은 취향껏",
+      "rounds": "3회",
+      "steepBasis": "85도에서 2분, 박하와 설탕을 넣고 다시 1분. 주전자를 높이 들어 부어 거품을 냅니다.",
+      "origin": "모로코·알제리·튀니지. 베이스는 중국 저장성의 군피우더 녹차.",
+      "process": "군피우더를 짧게 우리고 박하·설탕을 더한 뒤 높이 부어 섞습니다.",
+      "story": "19세기 이후 유럽을 거쳐 들어온 중국 녹차가 모로코의 민트차로 자리 잡았습니다.",
+      "flavor": "박하의 청량함과 진한 단맛, 녹차의 풀 향. 뜨거워도 청량합니다.",
+      "pairing": "단 과자, 쿠스쿠스, 식후.",
+      "brewTip": "85도에서 짧게. 박하는 마지막에 넣어야 향이 살아 있습니다.",
+      "keep": "차잎은 밀봉해 건조하게. 박하는 그때그때 신선한 잎을 씁니다.",
+      "keywords": "모로코 민트티 박하 군피우더 마그레브"
+    },
+    "en": {
+      "name": "Maghrebi Mint Tea",
+      "oneLine": "Gunpowder green with fresh mint and sugar, poured from a height.",
+      "oxidation": "about 5% (green base)",
+      "ratioNote": "4 g to 200 ml; a handful of mint and sugar to taste",
+      "rounds": "3 infusions",
+      "steepBasis": "85 °C for 2 minutes, then mint and sugar for another minute; pour high to froth.",
+      "origin": "Morocco, Algeria and Tunisia, on a Chinese gunpowder base.",
+      "process": "Gunpowder brewed briefly, mint and sugar added, then poured from a height.",
+      "story": "Chinese green tea arrived via Europe from the 19th century and became Morocco's mint tea.",
+      "flavor": "Cool mint, deep sugar, green-tea grass — refreshing even hot.",
+      "pairing": "Sweet pastries, couscous, after meals.",
+      "brewTip": "Short at 85 °C; add the mint last so the oil survives.",
+      "keep": "Leaf sealed and dry; use fresh mint each time.",
+      "keywords": "Moroccan mint tea gunpowder Maghreb spearmint"
+    },
+    "zh-CN": {
+      "name": "摩洛哥薄荷茶",
+      "oneLine": "中国珠茶加鲜薄荷与糖，高举冲注。",
+      "oxidation": "约5%（绿茶坯）",
+      "ratioNote": "200毫升配4克，薄荷一把、糖随口味",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分钟，加薄荷与糖再泡1分钟，高冲起泡。",
+      "origin": "摩洛哥、阿尔及利亚、突尼斯，茶坯为中国浙江珠茶。",
+      "process": "珠茶短泡后加薄荷与糖，再高冲混合。",
+      "story": "19世纪后经欧洲传入的中国绿茶，成为摩洛哥的薄荷茶。",
+      "flavor": "薄荷清凉、甜度高、绿茶草香。",
+      "pairing": "甜点心、库斯库斯、餐后。",
+      "brewTip": "85度短泡，薄荷最后放。",
+      "keep": "茶叶密封干燥，薄荷现取现用。",
+      "keywords": "摩洛哥薄荷茶 珠茶 马格里布 薄荷"
+    },
+    "zh-TW": {
+      "name": "摩洛哥薄荷茶",
+      "oneLine": "中國珠茶加鮮薄荷與糖，高舉衝注。",
+      "oxidation": "約5%（綠茶坯）",
+      "ratioNote": "200毫升配4克，薄荷一把、糖隨口味",
+      "rounds": "3泡",
+      "steepBasis": "85度泡2分鐘，加薄荷與糖再泡1分鐘，高衝起泡。",
+      "origin": "摩洛哥、阿爾及利亞、突尼西亞，茶坯為中國浙江珠茶。",
+      "process": "珠茶短泡後加薄荷與糖，再高衝混合。",
+      "story": "19世紀後經歐洲傳入的中國綠茶，成為摩洛哥的薄荷茶。",
+      "flavor": "薄荷清涼、甜度高、綠茶草香。",
+      "pairing": "甜點心、庫斯庫斯、餐後。",
+      "brewTip": "85度短泡，薄荷最後放。",
+      "keep": "茶葉密封乾燥，薄荷現取現用。",
+      "keywords": "摩洛哥薄荷茶 珠茶 馬格里布 薄荷"
+    },
+    "originCountryCode": "ma"
+  },
+  {
+    "id": "blend-russian-caravan",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "俄",
+    "sub": "Russian Caravan",
+    "alias": [
+      "러시안 캐러밴",
+      "상단차"
+    ],
+    "hz": "俄羅斯商隊茶",
+    "hs": "俄罗斯商队茶",
+    "rom": "Russian Caravan",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      210,
+      180,
+      210
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 90,
+    "traits": "t-morning t-afternoon a-roast a-malt b-full k-sweet r-smoke s-hot s-milk p-meal c-high m-cozy",
+    "originCountry": {
+      "ko": "러시아",
+      "en": "Russia",
+      "zh-CN": "俄罗斯",
+      "zh-TW": "俄羅斯"
+    },
+    "x": {
+      "ko": [
+        "중국 홍차와 훈연차를 섞은 블렌드입니다. 옛 육로 차 무역길에서 차가 연기 냄새를 머금었다는 이야기에서 이름이 왔습니다.",
+        "기문·정산소종 같은 중국 홍차를 중심으로 훈연 향이 나는 차를 조금 섞습니다."
+      ],
+      "en": [
+        "A blend of Chinese black teas with a smoked component; the name recalls the old overland caravan route and the smoke the tea picked up.",
+        "Mostly Chinese black teas such as Keemun with a little smoked tea."
+      ],
+      "zh-CN": [
+        "中国红茶与烟熏茶拼配，名字来自旧时陆路商队的烟味传说。",
+        "以祁门等中国红茶为主，少量烟熏茶。"
+      ],
+      "zh-TW": [
+        "中國紅茶與煙燻茶拼配，名字來自舊時陸路商隊的煙味傳說。",
+        "以祁門等中國紅茶為主，少量煙燻茶。"
+      ]
+    },
+    "ko": {
+      "name": "러시안 캐러밴",
+      "oneLine": "중국 홍차에 옅은 연기를 더한, 옛 상단길의 블렌드.",
+      "oxidation": "약 90%",
+      "ratioNote": "200ml에 3g",
+      "rounds": "3회",
+      "steepBasis": "95도에서 3분 30초, 2포 3분, 3포 3분 30초.",
+      "origin": "러시아의 차 문화에서 이름을 얻은 블렌드. 베이스는 중국 홍차.",
+      "process": "기문 등 중국 홍차에 훈연차를 소량 섞습니다.",
+      "story": "17~19세기 육로로 차를 실어 오는 동안 연기 냄새가 배었다는 이야기가 이름의 유래로 전합니다.",
+      "flavor": "몰트와 말린 과일, 옅은 솔 연기. 우유를 넣으면 연기가 부드러워집니다.",
+      "pairing": "아침 식사, 훈제 요리, 검은 빵.",
+      "brewTip": "95도에서 3분 30초. 연기 향이 강하면 우유를 조금 더합니다.",
+      "keep": "밀봉해 서늘하게. 연기 향이 다른 차로 옮지 않게 따로 둡니다.",
+      "keywords": "러시안 캐러밴 상단차 훈연 블렌드 홍차"
+    },
+    "en": {
+      "name": "Russian Caravan",
+      "oneLine": "Chinese black tea with a thread of smoke — the old caravan blend.",
+      "oxidation": "about 90%",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "95 °C: 3½ minutes, then 3, then 3½.",
+      "origin": "A blend named in Russian tea culture, on Chinese black tea.",
+      "process": "Chinese black teas such as Keemun with a little smoked tea.",
+      "story": "The name recalls tea carried overland for months, picking up the smoke of campfires.",
+      "flavor": "Malt, dried fruit, faint pine smoke; milk softens the smoke.",
+      "pairing": "Breakfast, smoked food, dark bread.",
+      "brewTip": "3½ minutes at 95 °C; add a little milk if the smoke is strong.",
+      "keep": "Sealed and cool, away from other teas.",
+      "keywords": "Russian Caravan smoked blend Keemun"
+    },
+    "zh-CN": {
+      "name": "俄罗斯商队茶",
+      "oneLine": "中国红茶带一缕烟香，旧商队路线的拼配。",
+      "oxidation": "约90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分30秒，第二泡3分钟，第三泡3分30秒。",
+      "origin": "得名于俄罗斯茶文化，茶坯为中国红茶。",
+      "process": "祁门等中国红茶拼少量烟熏茶。",
+      "story": "名字源自数月陆路运输中茶叶沾染篝火烟味的传说。",
+      "flavor": "麦芽与果干，带轻微松烟，加奶转柔。",
+      "pairing": "早餐、熏制食物、黑面包。",
+      "brewTip": "95度三分半，烟重可加奶。",
+      "keep": "密封阴凉，避免串味。",
+      "keywords": "俄罗斯商队茶 烟熏 拼配 红茶"
+    },
+    "zh-TW": {
+      "name": "俄羅斯商隊茶",
+      "oneLine": "中國紅茶帶一縷煙香，舊商隊路線的拼配。",
+      "oxidation": "約90%",
+      "ratioNote": "200毫升配3克",
+      "rounds": "3泡",
+      "steepBasis": "95度泡3分30秒，第二泡3分鐘，第三泡3分30秒。",
+      "origin": "得名於俄羅斯茶文化，茶坯為中國紅茶。",
+      "process": "祁門等中國紅茶拼少量煙燻茶。",
+      "story": "名字源自數月陸路運輸中茶葉沾染篝火煙味的傳說。",
+      "flavor": "麥芽與果乾，帶輕微松煙，加奶轉柔。",
+      "pairing": "早餐、燻制食物、黑麵包。",
+      "brewTip": "95度三分半，煙重可加奶。",
+      "keep": "密封陰涼，避免串味。",
+      "keywords": "俄羅斯商隊茶 煙燻 拼配 紅茶"
+    },
+    "originCountryCode": "ru"
+  },
+  {
+    "id": "blend-irish-breakfast",
+    "group": "blended",
+    "kind": "tea",
+    "hanja": "愛",
+    "sub": "Irish Breakfast",
+    "alias": [
+      "아일랜드 브렉퍼스트",
+      "아이리시 블렌드"
+    ],
+    "hz": "愛爾蘭早餐茶",
+    "hs": "爱尔兰早餐茶",
+    "rom": "Irish Breakfast",
+    "temp": 98,
+    "tempRange": "95~100℃",
+    "leaf": "4g",
+    "water": "200ml",
+    "steeps": [
+      240,
+      210,
+      240
+    ],
+    "maxSteep": 3,
+    "oxidationValue": 95,
+    "traits": "t-morning a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+    "originCountry": {
+      "ko": "아일랜드",
+      "en": "Ireland",
+      "zh-CN": "爱尔兰",
+      "zh-TW": "愛爾蘭"
+    },
+    "x": {
+      "ko": [
+        "아삼 비중을 높여 진하게 만든 아침 블렌드입니다. 잉글리시 브렉퍼스트보다 색이 짙고 힘이 있습니다.",
+        "아삼을 중심으로 실론·케냐를 섞어 진한 몰트와 색을 냅니다."
+      ],
+      "en": [
+        "A breakfast blend weighted toward Assam: darker and stronger than English Breakfast.",
+        "Mostly Assam with Ceylon and Kenyan leaf for malt and colour."
+      ],
+      "zh-CN": [
+        "以阿萨姆为主的浓强早餐拼配，比英式早餐更深更强。",
+        "以阿萨姆为主，拼锡兰与肯尼亚茶提色提味。"
+      ],
+      "zh-TW": [
+        "以阿薩姆為主的濃強早餐拼配，比英式早餐更深更強。",
+        "以阿薩姆為主，拼錫蘭與肯亞茶提色提味。"
+      ]
+    },
+    "ko": {
+      "name": "아일랜드 브렉퍼스트",
+      "oneLine": "아삼을 앞세운, 아침을 위한 가장 진한 블렌드.",
+      "oxidation": "약 95%",
+      "ratioNote": "200ml에 4g",
+      "rounds": "3회",
+      "steepBasis": "98도에서 4분, 2포 3분 30초, 3포 4분.",
+      "origin": "아일랜드의 차 문화에서 나온 블렌드. 베이스는 아삼·실론.",
+      "process": "아삼을 중심으로 실론·케냐를 섞습니다.",
+      "story": "아일랜드에서는 오래 진하고 우유를 넣은 홍차를 마셔 왔고, 그 취향이 블렌드로 굳어졌습니다.",
+      "flavor": "진한 몰트와 색, 우유를 넣으면 크림 같은 질감이 됩니다.",
+      "pairing": "아침 식사, 검은 빵, 버터.",
+      "brewTip": "98도에서 4분. 우유를 넣을 것이라면 잎을 조금 더.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "아일랜드 브렉퍼스트 아삼 아침 블렌드"
+    },
+    "en": {
+      "name": "Irish Breakfast",
+      "oneLine": "Assam-forward — the strongest of the breakfast blends.",
+      "oxidation": "about 95%",
+      "ratioNote": "4 g to 200 ml",
+      "rounds": "3 infusions",
+      "steepBasis": "98 °C: 4 minutes, then 3½, then 4.",
+      "origin": "A blend from Irish tea culture, on Assam and Ceylon.",
+      "process": "Assam leading, with Ceylon and Kenyan leaf.",
+      "story": "Strong tea with milk has long been the Irish habit, and the blend settled around it.",
+      "flavor": "Deep malt and colour; milk turns it creamy.",
+      "pairing": "Breakfast, dark bread, butter.",
+      "brewTip": "Four minutes at 98 °C; add a little more leaf if you take milk.",
+      "keep": "Sealed and dry.",
+      "keywords": "Irish breakfast Assam blend strong"
+    },
+    "zh-CN": {
+      "name": "爱尔兰早餐茶",
+      "oneLine": "阿萨姆为主，早餐拼配里最浓的一支。",
+      "oxidation": "约95%",
+      "ratioNote": "200毫升配4克",
+      "rounds": "3泡",
+      "steepBasis": "98度泡4分钟，第二泡3分30秒，第三泡4分钟。",
+      "origin": "源自爱尔兰饮茶习惯，茶坯为阿萨姆与锡兰。",
+      "process": "以阿萨姆为主，拼锡兰与肯尼亚。",
+      "story": "爱尔兰长年喝浓红茶加奶，这份口味固化成拼配。",
+      "flavor": "麦芽浓，汤色深，加奶后呈奶油质感。",
+      "pairing": "早餐、黑面包、黄油。",
+      "brewTip": "98度四分钟，加奶可多投茶。",
+      "keep": "密封干燥。",
+      "keywords": "爱尔兰早餐茶 阿萨姆 拼配"
+    },
+    "zh-TW": {
+      "name": "愛爾蘭早餐茶",
+      "oneLine": "阿薩姆為主，早餐拼配裡最濃的一支。",
+      "oxidation": "約95%",
+      "ratioNote": "200毫升配4克",
+      "rounds": "3泡",
+      "steepBasis": "98度泡4分鐘，第二泡3分30秒，第三泡4分鐘。",
+      "origin": "源自愛爾蘭飲茶習慣，茶坯為阿薩姆與錫蘭。",
+      "process": "以阿薩姆為主，拼錫蘭與肯亞。",
+      "story": "愛爾蘭長年喝濃紅茶加奶，這份口味固化成拼配。",
+      "flavor": "麥芽濃，湯色深，加奶後呈奶油質感。",
+      "pairing": "早餐、黑麵包、黃油。",
+      "brewTip": "98度四分鐘，加奶可多投茶。",
+      "keep": "密封乾燥。",
+      "keywords": "愛爾蘭早餐茶 阿薩姆 拼配"
+    },
+    "originCountryCode": "ie"
+  },
+  {
+    "id": "herb-cassia-seed",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "決",
+    "sub": "Cassia Seed Tea",
+    "alias": [
+      "결명자차",
+      "결명자"
+    ],
+    "hz": "決明子茶",
+    "hs": "决明子茶",
+    "rom": "Gyeolmyeongja-cha",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "5g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon t-night a-roast a-roast b-medium k-grain r-clean s-hot p-meal c-none m-calm",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "결명자(決明子) 씨를 볶아 우린 차입니다. 카페인이 없어 밤에도 마십니다.",
+        "씨를 볶아 향을 낸 뒤 5분 이상 우립니다. 볶은 정도에 따라 고소함과 쌉쌀함이 달라집니다."
+      ],
+      "en": [
+        "Roasted cassia seed, brewed without caffeine, so it suits the evening.",
+        "The seed is roasted for aroma, then steeped five minutes or more; roast level sets the balance of nutty and bitter."
+      ],
+      "zh-CN": [
+        "炒决明子冲泡，不含咖啡因，晚上也能喝。",
+        "炒香后冲泡五分钟以上，焙炒程度决定香与苦的比例。"
+      ],
+      "zh-TW": [
+        "炒決明子衝泡，不含咖啡因，晚上也能喝。",
+        "炒香後衝泡五分鐘以上，焙炒程度決定香與苦的比例。"
+      ]
+    },
+    "ko": {
+      "name": "결명자차",
+      "oneLine": "볶은 씨의 구수함 — 카페인 없이 밤에 마시는 차.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 5g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 5분. 끓이면 더 구수해집니다.",
+      "origin": "한국 전역. 결명자 씨를 볶아 씁니다.",
+      "process": "씨를 볶아 향을 낸 뒤 뜨거운 물에 우립니다.",
+      "story": "한국에서는 오래전부터 볶은 결명자를 물처럼 달여 마셨습니다.",
+      "flavor": "볶은 곡물의 고소함과 옅은 쌉쌀함, 끝에 약간의 단맛.",
+      "pairing": "식사, 기름진 음식, 밤.",
+      "brewTip": "5분 이상. 씨가 단단해 끓이면 맛이 더 납니다.",
+      "keep": "밀봉해 서늘하고 건조하게. 볶은 씨는 냄새를 잘 흡수합니다.",
+      "keywords": "결명자차 결명자 볶은차 무카페인"
+    },
+    "en": {
+      "name": "Cassia Seed Tea",
+      "oneLine": "Roasted seed sweetness — a caffeine-free evening cup.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "5 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C for 5 minutes; boiling makes it rounder.",
+      "origin": "Korea; the seed is sold roasted.",
+      "process": "The seed is roasted, then brewed.",
+      "story": "Roasted cassia seed has long been boiled as an everyday drink in Korea.",
+      "flavor": "Roasted grain, a faint bitterness, a little sweetness at the end.",
+      "pairing": "Meals, rich food, evening.",
+      "brewTip": "Five minutes or more; the hard seed benefits from boiling.",
+      "keep": "Sealed, cool and dry — roasted seed takes on smells.",
+      "keywords": "cassia seed tea gyeolmyeongja Korea caffeine free"
+    },
+    "zh-CN": {
+      "name": "决明子茶",
+      "oneLine": "炒籽的焦香，不含咖啡因的夜间茶。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分钟，煮后更醇。",
+      "origin": "韩国全境，用炒决明子。",
+      "process": "炒香后热水冲泡。",
+      "story": "韩国自古把炒决明子当日常饮品熬煮。",
+      "flavor": "炒谷香、微苦，尾端略甜。",
+      "pairing": "餐食、油腻食物、夜间。",
+      "brewTip": "五分钟以上，煮更出味。",
+      "keep": "密封阴凉干燥，易吸味。",
+      "keywords": "决明子茶 韩国 无咖啡因 炒制"
+    },
+    "zh-TW": {
+      "name": "決明子茶",
+      "oneLine": "炒籽的焦香，不含咖啡因的夜間茶。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分鐘，煮後更醇。",
+      "origin": "韓國全境，用炒決明子。",
+      "process": "炒香後熱水衝泡。",
+      "story": "韓國自古把炒決明子當日常飲品熬煮。",
+      "flavor": "炒谷香、微苦，尾端略甜。",
+      "pairing": "餐食、油膩食物、夜間。",
+      "brewTip": "五分鐘以上，煮更出味。",
+      "keep": "密封陰涼乾燥，易吸味。",
+      "keywords": "決明子茶 韓國 無咖啡因 炒制"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "herb-burdock",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "牛",
+    "sub": "Burdock Tea",
+    "alias": [
+      "우엉차",
+      "우엉뿌리차"
+    ],
+    "hz": "牛蒡茶",
+    "hs": "牛蒡茶",
+    "rom": "Ueong-cha",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "5g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon t-night a-roast a-roast b-medium k-sweet r-clean s-hot p-meal c-none m-cozy",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "우엉 뿌리를 얇게 썰어 말린 뒤 볶아 우린 차입니다. 카페인이 없습니다.",
+        "말린 우엉을 볶아 갈색이 돌면 뜨거운 물에 5분 이상 우립니다."
+      ],
+      "en": [
+        "Sliced burdock root, dried and roasted; caffeine-free.",
+        "Dried root is roasted until brown, then steeped five minutes or more."
+      ],
+      "zh-CN": [
+        "牛蒡根切片晾干后炒制，不含咖啡因。",
+        "干根炒至褐色后冲泡五分钟以上。"
+      ],
+      "zh-TW": [
+        "牛蒡根切片晾乾後炒制，不含咖啡因。",
+        "幹根炒至褐色後衝泡五分鐘以上。"
+      ]
+    },
+    "ko": {
+      "name": "우엉차",
+      "oneLine": "볶은 우엉 뿌리의 구수한 단맛 — 카페인 없는 차.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 5g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 5분. 끓이면 단맛이 올라옵니다.",
+      "origin": "한국·일본. 우엉 뿌리를 말려 볶아 씁니다.",
+      "process": "우엉을 얇게 썰어 말린 뒤 볶아 우립니다.",
+      "story": "한국에서는 우엉을 차로 볶아 마시는 방식이 오래 이어졌습니다.",
+      "flavor": "볶은 뿌리의 고소함과 은은한 단맛, 끝에 약한 쌉쌀함.",
+      "pairing": "식사, 기름진 음식, 밤.",
+      "brewTip": "5분 이상. 끓이면 단맛이 더 살아납니다.",
+      "keep": "밀봉해 건조하게. 습기를 먹으면 곰팡이가 생깁니다.",
+      "keywords": "우엉차 우엉 뿌리 볶은차 무카페인"
+    },
+    "en": {
+      "name": "Burdock Tea",
+      "oneLine": "Roasted burdock root — sweet, earthy, caffeine-free.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "5 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C for 5 minutes; boiling brings out sweetness.",
+      "origin": "Korea and Japan; the root is dried and roasted.",
+      "process": "Thin-sliced root is dried, roasted and brewed.",
+      "story": "Roasted burdock has long been drunk as a tea in Korea.",
+      "flavor": "Roasted earthiness with quiet sweetness and a mild bitter end.",
+      "pairing": "Meals, fatty food, evening.",
+      "brewTip": "Five minutes or more; boiling lifts the sweetness.",
+      "keep": "Sealed and dry — damp root moulds.",
+      "keywords": "burdock tea ueong Korea caffeine free roasted root"
+    },
+    "zh-CN": {
+      "name": "牛蒡茶",
+      "oneLine": "炒牛蒡根的焦甜，不含咖啡因。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分钟，煮后更甜。",
+      "origin": "韩国、日本，用干炒牛蒡根。",
+      "process": "切薄片晾干后炒制冲泡。",
+      "story": "韩国长期把牛蒡炒后当茶喝。",
+      "flavor": "烤根香、微甜，尾端轻苦。",
+      "pairing": "餐食、油腻食物、夜间。",
+      "brewTip": "五分钟以上，煮饮更甜。",
+      "keep": "密封干燥，受潮易霉。",
+      "keywords": "牛蒡茶 韩国 无咖啡因 炒根"
+    },
+    "zh-TW": {
+      "name": "牛蒡茶",
+      "oneLine": "炒牛蒡根的焦甜，不含咖啡因。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分鐘，煮後更甜。",
+      "origin": "韓國、日本，用幹炒牛蒡根。",
+      "process": "切薄片晾乾後炒制衝泡。",
+      "story": "韓國長期把牛蒡炒後當茶喝。",
+      "flavor": "烤根香、微甜，尾端輕苦。",
+      "pairing": "餐食、油膩食物、夜間。",
+      "brewTip": "五分鐘以上，煮飲更甜。",
+      "keep": "密封乾燥，受潮易黴。",
+      "keywords": "牛蒡茶 韓國 無咖啡因 炒根"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "herb-gugija",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "枸",
+    "sub": "Goji Berry Tea",
+    "alias": [
+      "구기자차",
+      "구기차"
+    ],
+    "hz": "枸杞茶",
+    "hs": "枸杞茶",
+    "rom": "Gugija-cha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "5g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon t-night a-fruit a-herb b-light k-sweet r-clean s-hot p-dessert c-none m-calm",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "말린 구기자 열매를 우린 차입니다. 한국에서는 청양, 중국에서는 닝샤의 구기자가 유명합니다.",
+        "말린 열매를 5분 이상 우리거나, 대추·감초와 함께 끓이기도 합니다."
+      ],
+      "en": [
+        "Dried goji berries steeped in hot water; Cheongyang in Korea and Ningxia in China are the noted sources.",
+        "Dried berries steeped five minutes or more, or boiled with jujube and licorice."
+      ],
+      "zh-CN": [
+        "干枸杞冲泡，韩国青阳与中国宁夏所产著名。",
+        "干果冲泡五分钟以上，或与红枣、甘草同煮。"
+      ],
+      "zh-TW": [
+        "幹枸杞衝泡，韓國青陽與中國寧夏所產著名。",
+        "乾果衝泡五分鐘以上，或與紅棗、甘草同煮。"
+      ]
+    },
+    "ko": {
+      "name": "구기자차",
+      "oneLine": "말린 구기자 열매의 옅은 단맛 — 노랗게 우러나는 차.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 5g",
+      "rounds": "2회",
+      "steepBasis": "90도에서 5분. 씨를 터뜨리듯 끓이면 더 진해집니다.",
+      "origin": "한국 충남 청양, 중국 닝샤. 말린 열매를 씁니다.",
+      "process": "말린 열매를 그대로 우리거나 대추·감초와 함께 끓입니다.",
+      "story": "구기자는 한국과 중국에서 오래 약재 겸 차 재료로 쓰였습니다.",
+      "flavor": "옅은 단맛과 약간의 쌉쌀함, 말린 과일 향. 물색은 연한 노랑입니다.",
+      "pairing": "대추, 감초, 견과.",
+      "brewTip": "90도에서 5분 이상. 열매를 씹어 먹어도 됩니다.",
+      "keep": "밀봉해 냉장. 당분이 있어 습기에 약합니다.",
+      "keywords": "구기자차 구기자 청양 열매차"
+    },
+    "en": {
+      "name": "Goji Berry Tea",
+      "oneLine": "Dried goji berries — pale sweetness, a yellow cup.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "5 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "90 °C for 5 minutes; boiling makes it stronger.",
+      "origin": "Cheongyang in Korea, Ningxia in China; dried berries.",
+      "process": "Dried berries steeped as they are, or boiled with jujube and licorice.",
+      "story": "Goji has long been used as both medicine and tea material in Korea and China.",
+      "flavor": "Light sweetness, a little bitterness, dried-fruit aroma; pale yellow liquor.",
+      "pairing": "Jujube, licorice, nuts.",
+      "brewTip": "Five minutes or more at 90 °C; the berries can be eaten after.",
+      "keep": "Sealed and refrigerated — the sugar makes them sensitive to damp.",
+      "keywords": "goji berry tea gugija Korea Ningxia"
+    },
+    "zh-CN": {
+      "name": "枸杞茶",
+      "oneLine": "干枸杞泡出的浅甜，汤色淡黄。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "90度泡5分钟，煮后更浓。",
+      "origin": "韩国青阳、中国宁夏，用干果。",
+      "process": "干果直接冲泡，或与红枣、甘草同煮。",
+      "story": "枸杞在韩中两地长期兼作药材与茶料。",
+      "flavor": "淡甜微苦，带果干香，汤色浅黄。",
+      "pairing": "红枣、甘草、坚果。",
+      "brewTip": "90度五分钟以上，果可嚼食。",
+      "keep": "密封冷藏，含糖易受潮。",
+      "keywords": "枸杞茶 青阳 宁夏 果茶"
+    },
+    "zh-TW": {
+      "name": "枸杞茶",
+      "oneLine": "幹枸杞泡出的淺甜，湯色淡黃。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "90度泡5分鐘，煮後更濃。",
+      "origin": "韓國青陽、中國寧夏，用乾果。",
+      "process": "乾果直接衝泡，或與紅棗、甘草同煮。",
+      "story": "枸杞在韓中兩地長期兼作藥材與茶料。",
+      "flavor": "淡甜微苦，帶果乾香，湯色淺黃。",
+      "pairing": "紅棗、甘草、堅果。",
+      "brewTip": "90度五分鐘以上，果可嚼食。",
+      "keep": "密封冷藏，含糖易受潮。",
+      "keywords": "枸杞茶 青陽 寧夏 果茶"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "herb-cornus",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "茱",
+    "sub": "Cornus Fruit Tea",
+    "alias": [
+      "산수유차",
+      "산수유"
+    ],
+    "hz": "山茱萸茶",
+    "hs": "山茱萸茶",
+    "rom": "Sansuyu-cha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "5g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-fruit a-herb b-medium k-crisp r-clean s-hot p-dessert c-none m-cozy",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "산수유나무의 붉은 열매를 말려 우린 차입니다. 신맛이 강해 꿀이나 대추를 곁들이기도 합니다.",
+        "말린 열매를 5분 이상 우리거나 대추와 함께 끓입니다."
+      ],
+      "en": [
+        "Dried red cornus fruit steeped as tea; sharply sour, often softened with honey or jujube.",
+        "Dried fruit steeped five minutes or more, or boiled with jujube."
+      ],
+      "zh-CN": [
+        "山茱萸的红色果实晒干冲泡，酸味强，常加蜂蜜或红枣。",
+        "干果泡五分钟以上，或与红枣同煮。"
+      ],
+      "zh-TW": [
+        "山茱萸的紅色果實曬乾衝泡，酸味強，常加蜂蜜或紅棗。",
+        "乾果泡五分鐘以上，或與紅棗同煮。"
+      ]
+    },
+    "ko": {
+      "name": "산수유차",
+      "oneLine": "붉은 열매의 강한 신맛 — 꿀을 곁들이는 차.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 5g",
+      "rounds": "2회",
+      "steepBasis": "90도에서 5분. 신맛이 강해 꿀이나 대추를 더하기도 합니다.",
+      "origin": "한국 전역, 특히 전남 구례·경남 산청. 말린 열매를 씁니다.",
+      "process": "붉게 익은 열매를 말려 우리거나 대추와 함께 끓입니다.",
+      "story": "산수유는 한국에서 오래 약재로 쓰였고, 열매를 차로 달이는 방식도 이어졌습니다.",
+      "flavor": "강한 신맛과 옅은 쓴맛, 붉은 물색. 꿀을 더하면 부드러워집니다.",
+      "pairing": "대추, 꿀, 견과.",
+      "brewTip": "90도에서 5분 이상. 신맛이 부담되면 대추를 함께 넣습니다.",
+      "keep": "밀봉해 냉장. 습기를 피합니다.",
+      "keywords": "산수유차 산수유 구례 열매차"
+    },
+    "en": {
+      "name": "Cornus Fruit Tea",
+      "oneLine": "Sharp red fruit — usually softened with honey.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "5 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "90 °C for 5 minutes; honey or jujube is often added.",
+      "origin": "Korea, notably Gurye and Sancheong; dried fruit.",
+      "process": "Ripe red fruit is dried, then steeped or boiled with jujube.",
+      "story": "Cornus has long been used as medicine in Korea, and the fruit was also brewed as tea.",
+      "flavor": "Strong sourness, a little bitterness, red liquor; honey softens it.",
+      "pairing": "Jujube, honey, nuts.",
+      "brewTip": "Five minutes or more at 90 °C; add jujube if the sourness is too much.",
+      "keep": "Sealed and refrigerated.",
+      "keywords": "cornus fruit tea sansuyu Korea sour"
+    },
+    "zh-CN": {
+      "name": "山茱萸茶",
+      "oneLine": "红色果实的强酸味，常配蜂蜜。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "90度泡5分钟，酸强可加蜂蜜或红枣。",
+      "origin": "韩国全境，求礼、山清等地，用干果。",
+      "process": "红果晒干后冲泡，或与红枣同煮。",
+      "story": "山茱萸在韩国长期入药，果实煮茶也相沿成习。",
+      "flavor": "酸味明显、微苦，汤色红，加蜜转柔。",
+      "pairing": "红枣、蜂蜜、坚果。",
+      "brewTip": "90度五分钟以上，可加红枣。",
+      "keep": "密封冷藏。",
+      "keywords": "山茱萸茶 求礼 果实茶"
+    },
+    "zh-TW": {
+      "name": "山茱萸茶",
+      "oneLine": "紅色果實的強酸味，常配蜂蜜。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配5克",
+      "rounds": "2泡",
+      "steepBasis": "90度泡5分鐘，酸強可加蜂蜜或紅棗。",
+      "origin": "韓國全境，求禮、山清等地，用乾果。",
+      "process": "紅果曬乾後衝泡，或與紅棗同煮。",
+      "story": "山茱萸在韓國長期入藥，果實煮茶也相沿成習。",
+      "flavor": "酸味明顯、微苦，湯色紅，加蜜轉柔。",
+      "pairing": "紅棗、蜂蜜、堅果。",
+      "brewTip": "90度五分鐘以上，可加紅棗。",
+      "keep": "密封冷藏。",
+      "keywords": "山茱萸茶 求禮 果實茶"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "herb-dandelion",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "蒲",
+    "sub": "Dandelion Tea",
+    "alias": [
+      "민들레차",
+      "민들레잎차"
+    ],
+    "hz": "蒲公英茶",
+    "hs": "蒲公英茶",
+    "rom": "Mindulle-cha",
+    "temp": 90,
+    "tempRange": "85~95℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-herb a-roast b-light k-crisp r-clean s-hot p-meal c-none m-refresh",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "민들레 잎이나 뿌리를 말려 우린 차입니다. 잎은 쌉쌀하고 뿌리는 볶으면 고소해집니다.",
+        "말린 잎은 3분, 볶은 뿌리는 5분 이상 우립니다."
+      ],
+      "en": [
+        "Dried dandelion leaf or root: the leaf is bitter, the roasted root nutty.",
+        "Leaf steeps three minutes; roasted root five minutes or more."
+      ],
+      "zh-CN": [
+        "蒲公英叶或根晒干冲泡，叶苦，炒根香。",
+        "叶泡三分钟，炒根泡五分钟以上。"
+      ],
+      "zh-TW": [
+        "蒲公英葉或根曬乾衝泡，葉苦，炒根香。",
+        "葉泡三分鐘，炒根泡五分鐘以上。"
+      ]
+    },
+    "ko": {
+      "name": "민들레차",
+      "oneLine": "봄 민들레의 쌉쌀함 — 뿌리를 볶으면 고소해집니다.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "90도에서 3분, 볶은 뿌리는 5분.",
+      "origin": "한국 전역. 봄에 잎과 뿌리를 채취해 말립니다.",
+      "process": "잎은 그늘에 말리고, 뿌리는 씻어 말린 뒤 볶습니다.",
+      "story": "한국에서는 민들레를 나물로도 차로도 오래 써 왔습니다.",
+      "flavor": "잎은 쌉쌀하고 풀 향이, 볶은 뿌리는 구수함과 옅은 단맛이 납니다.",
+      "pairing": "식후, 기름진 음식 뒤.",
+      "brewTip": "3g이면 충분합니다. 많으면 쌉쌀함이 강해집니다.",
+      "keep": "밀봉해 서늘하고 건조하게.",
+      "keywords": "민들레차 민들레 뿌리 볶은차"
+    },
+    "en": {
+      "name": "Dandelion Tea",
+      "oneLine": "Spring dandelion's bitterness — and a nutty roasted root.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "90 °C: 3 minutes for leaf, 5 for roasted root.",
+      "origin": "Korea; leaf and root gathered in spring and dried.",
+      "process": "Leaves shade-dried; roots washed, dried and roasted.",
+      "story": "Dandelion has long been eaten as a spring green and drunk as tea in Korea.",
+      "flavor": "Leaf is bitter and grassy; roasted root is toasty with light sweetness.",
+      "pairing": "After meals, after rich food.",
+      "brewTip": "3 g is enough; more turns sharply bitter.",
+      "keep": "Sealed, cool and dry.",
+      "keywords": "dandelion tea mindulle Korea roasted root"
+    },
+    "zh-CN": {
+      "name": "蒲公英茶",
+      "oneLine": "春日蒲公英的苦，炒根则带焦香。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "90度：叶泡3分钟，炒根泡5分钟。",
+      "origin": "韩国全境，春季采叶与根晒干。",
+      "process": "叶阴干，根洗净晒干后炒制。",
+      "story": "韩国自古把蒲公英当春菜也当茶饮。",
+      "flavor": "叶苦带草香，炒根焦香微甜。",
+      "pairing": "餐后、油腻饮食之后。",
+      "brewTip": "3克足够，多则苦。",
+      "keep": "密封阴凉干燥。",
+      "keywords": "蒲公英茶 韩国 炒根"
+    },
+    "zh-TW": {
+      "name": "蒲公英茶",
+      "oneLine": "春日蒲公英的苦，炒根則帶焦香。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "90度：葉泡3分鐘，炒根泡5分鐘。",
+      "origin": "韓國全境，春季採葉與根曬乾。",
+      "process": "葉陰乾，根洗淨曬乾後炒制。",
+      "story": "韓國自古把蒲公英當春菜也當茶飲。",
+      "flavor": "葉苦帶草香，炒根焦香微甜。",
+      "pairing": "餐後、油膩飲食之後。",
+      "brewTip": "3克足夠，多則苦。",
+      "keep": "密封陰涼乾燥。",
+      "keywords": "蒲公英茶 韓國 炒根"
+    },
+    "originCountryCode": "kr"
+  },
+  {
+    "id": "herb-cornsilk",
+    "group": "herbal",
+    "kind": "tea",
+    "hanja": "玉",
+    "sub": "Corn Silk Tea",
+    "alias": [
+      "옥수수수염차",
+      "옥수수대차"
+    ],
+    "hz": "玉米鬚茶",
+    "hs": "玉米须茶",
+    "rom": "Oksusu-suyeom-cha",
+    "temp": 95,
+    "tempRange": "90~100℃",
+    "leaf": "3g",
+    "water": "200ml",
+    "steeps": [
+      300,
+      300
+    ],
+    "maxSteep": 2,
+    "oxidationValue": 0,
+    "traits": "t-morning t-afternoon a-roast a-roast b-light k-sweet r-clean s-hot s-iced p-meal c-none m-refresh",
+    "originCountry": {
+      "ko": "한국",
+      "en": "South Korea",
+      "zh-CN": "韩国",
+      "zh-TW": "韓國"
+    },
+    "x": {
+      "ko": [
+        "옥수수 수염을 말려 볶아 우린 차입니다. 여름에 옥수수를 삶은 물과 비슷한 구수한 맛이 납니다.",
+        "수염을 말려 볶은 뒤 5분 이상 우립니다. 끓이면 더 구수합니다."
+      ],
+      "en": [
+        "Dried corn silk, roasted and steeped — much like the water corn has been boiled in.",
+        "Silk dried and roasted, then steeped five minutes or more; boiling makes it rounder."
+      ],
+      "zh-CN": [
+        "玉米须晒干炒制后冲泡，味道近似煮玉米的水。",
+        "须晒干炒后泡五分钟以上，煮更香。"
+      ],
+      "zh-TW": [
+        "玉米須曬乾炒制後衝泡，味道近似煮玉米的水。",
+        "須曬乾炒後泡五分鐘以上，煮更香。"
+      ]
+    },
+    "ko": {
+      "name": "옥수수수염차",
+      "oneLine": "옥수수를 삶은 물 같은 구수함 — 여름의 차.",
+      "oxidation": "무산화 · 카페인 없음",
+      "ratioNote": "200ml에 3g",
+      "rounds": "2회",
+      "steepBasis": "95도에서 5분. 끓이면 구수함이 올라옵니다.",
+      "origin": "한국 전역. 옥수수 수염을 말려 볶아 씁니다.",
+      "process": "수염을 말려 볶은 뒤 뜨거운 물에 우립니다.",
+      "story": "한국에서는 옥수수를 삶은 물을 마시던 습관이 차로 정리되었습니다.",
+      "flavor": "구수한 곡물 향과 옅은 단맛, 깔끔한 뒷맛.",
+      "pairing": "식사, 여름, 아이스티.",
+      "brewTip": "5분 이상. 차갑게 우려도 구수합니다.",
+      "keep": "밀봉해 건조하게.",
+      "keywords": "옥수수수염차 옥수수 수염 구수한차"
+    },
+    "en": {
+      "name": "Corn Silk Tea",
+      "oneLine": "The comfort of corn-boiling water — a summer cup.",
+      "oxidation": "none · caffeine-free",
+      "ratioNote": "3 g to 200 ml",
+      "rounds": "2 infusions",
+      "steepBasis": "95 °C for 5 minutes; boiling deepens it.",
+      "origin": "Korea; corn silk dried and roasted.",
+      "process": "Silk dried, roasted, then brewed.",
+      "story": "The Korean habit of drinking the water corn was boiled in became a tea of its own.",
+      "flavor": "Toasty grain, light sweetness, a clean finish.",
+      "pairing": "Meals, summer, iced tea.",
+      "brewTip": "Five minutes or more; it cold-brews well too.",
+      "keep": "Sealed and dry.",
+      "keywords": "corn silk tea oksusu Korea summer"
+    },
+    "zh-CN": {
+      "name": "玉米须茶",
+      "oneLine": "像煮玉米水一样的焦香，夏天的茶。",
+      "oxidation": "不发酵·无咖啡因",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分钟，煮后更香。",
+      "origin": "韩国全境，用晒干炒制的玉米须。",
+      "process": "玉米须晒干炒后冲泡。",
+      "story": "韩国原本喝煮玉米的水，后来整理成玉米须茶。",
+      "flavor": "谷香、微甜，收尾干净。",
+      "pairing": "餐食、夏季、冰茶。",
+      "brewTip": "五分钟以上，冷泡亦香。",
+      "keep": "密封干燥。",
+      "keywords": "玉米须茶 韩国 夏季"
+    },
+    "zh-TW": {
+      "name": "玉米須茶",
+      "oneLine": "像煮玉米水一樣的焦香，夏天的茶。",
+      "oxidation": "不發酵·無咖啡因",
+      "ratioNote": "200毫升配3克",
+      "rounds": "2泡",
+      "steepBasis": "95度泡5分鐘，煮後更香。",
+      "origin": "韓國全境，用曬乾炒制的玉米須。",
+      "process": "玉米須曬乾炒後衝泡。",
+      "story": "韓國原本喝煮玉米的水，後來整理成玉米須茶。",
+      "flavor": "谷香、微甜，收尾乾淨。",
+      "pairing": "餐食、夏季、冰茶。",
+      "brewTip": "五分鐘以上，冷泡亦香。",
+      "keep": "密封乾燥。",
+      "keywords": "玉米須茶 韓國 夏季"
+    },
+    "originCountryCode": "kr"
+  }
+];
+  TEAS = TEAS.concat(EXTRA_TEAS);
+
+  /* ── 신규 65종 취향 태그 ── */
+  Object.assign(TRAITS, {
+  "green-zhuyeqing": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "green-enshi-yulu": "t-morning t-afternoon a-grass a-herb b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+  "green-anji-baipian": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-refresh",
+  "green-gougunao": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "green-wuyuan-mingmei": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "green-mengding-ganlu": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-low m-calm",
+  "green-hanzhong-xianhao": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "green-huiming": "t-morning t-afternoon a-grass a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+  "green-boseong": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot s-iced w-quick p-meal c-mid m-refresh",
+  "green-sanxia-biluochun": "t-morning t-afternoon a-grass a-fruit b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-refresh",
+  "green-kabusecha": "t-morning t-afternoon a-grass a-herb b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+  "green-kamairicha": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot s-iced w-quick p-meal c-mid m-refresh",
+  "green-dafo-longjing": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "green-laoshan": "t-morning t-afternoon a-grass a-roast b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-refresh",
+  "white-xingongyi": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-low m-calm",
+  "white-yueguangbai": "t-afternoon t-night a-fruit a-floral b-medium k-sweet r-clean s-hot w-gongfu p-dessert c-low m-cozy",
+  "white-lingyun-baihao": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-quick p-dessert c-low m-calm",
+  "yellow-beigang-maojian": "t-morning t-afternoon a-roast a-grass b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+  "yellow-weishan-maojian": "t-morning t-afternoon a-roast a-floral b-medium k-sweet r-smoke s-hot w-quick p-meal c-mid m-cozy",
+  "yellow-wenzhou-huangtang": "t-morning t-afternoon a-roast a-floral b-light k-sweet r-clean s-hot w-quick p-meal c-low m-calm",
+  "yellow-wanxi-huangdacha": "t-morning t-afternoon a-roast b-full k-grain r-clean s-hot s-milk w-quick p-meal c-mid m-cozy",
+  "yellow-yuanan-luyuan": "t-morning t-afternoon a-roast a-floral b-medium k-sweet r-clean s-hot w-quick p-meal c-mid m-calm",
+  "oolong-rougui": "t-afternoon t-night a-roast a-floral b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-energy",
+  "oolong-shuixian": "t-afternoon t-night a-roast a-floral b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-cozy",
+  "oolong-dayuling": "t-morning t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+  "oolong-shanlinxi": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-calm",
+  "oolong-lishan": "t-morning t-afternoon a-fruit a-floral b-light k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+  "oolong-huangjingui": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-refresh",
+  "oolong-benshan": "t-morning t-afternoon a-floral a-grass b-medium k-sweet r-clean s-hot w-gongfu p-meal c-mid m-calm",
+  "oolong-foshou": "t-afternoon t-night a-fruit a-floral b-full k-sweet r-clean s-hot w-gongfu p-dessert c-mid m-cozy",
+  "oolong-muzha-tieguanyin": "t-afternoon t-night a-roast a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+  "oolong-dancong-milan": "t-afternoon t-night a-floral a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+  "oolong-dancong-yashixiang": "t-afternoon t-night a-floral a-fruit b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-energy",
+  "oolong-hongshui": "t-afternoon t-night a-fruit a-roast b-full k-sweet r-clean s-hot w-gongfu p-dessert c-high m-cozy",
+  "oolong-thai-doi": "t-morning t-afternoon a-floral a-grass b-light k-sweet r-clean s-hot s-iced w-gongfu p-dessert c-mid m-refresh",
+  "oolong-vietnam-mocchau": "t-morning t-afternoon a-grass a-floral b-medium k-sweet r-clean s-hot s-iced w-gongfu p-meal c-mid m-refresh",
+  "black-lapsang-unsmoked": "t-morning t-afternoon a-fruit a-malt b-medium k-sweet r-clean s-hot s-milk p-dessert c-mid m-cozy",
+  "black-yingde": "t-morning t-afternoon a-malt a-fruit b-full k-sweet r-clean s-hot s-milk p-meal c-high m-energy",
+  "black-rize": "t-morning t-afternoon a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+  "black-cameron": "t-morning t-afternoon a-malt a-roast b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+  "black-rwanda": "t-morning t-afternoon a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+  "black-dooars": "t-morning t-afternoon a-malt a-roast b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+  "black-darjeeling-autumn": "t-morning t-afternoon a-fruit a-malt b-medium k-sweet r-clean s-hot s-milk p-meal c-mid m-cozy",
+  "black-yeongdeok": "t-morning t-afternoon a-malt a-floral b-medium k-sweet r-clean s-hot s-milk p-dessert c-mid m-cozy",
+  "dark-fuzhuan": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+  "dark-qianliang": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+  "dark-kangzhuan": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot s-milk w-gongfu p-meal c-high m-cozy",
+  "dark-tibetan": "t-morning t-afternoon a-roast a-herb b-full k-grain r-clean s-hot p-meal c-high m-energy",
+  "dark-laoqingzhuan": "t-afternoon t-night a-herb a-roast b-full k-grain r-clean s-hot w-gongfu p-meal c-high m-cozy",
+  "dark-tianjian": "t-afternoon t-night a-herb a-roast b-full k-sweet r-clean s-hot w-gongfu p-meal c-high m-cozy",
+  "blend-guihua": "t-morning t-afternoon a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-mid m-calm",
+  "blend-milk-oolong": "t-morning t-afternoon a-floral a-fruit b-light k-sweet r-clean s-hot s-iced w-gongfu p-dessert c-low m-calm",
+  "blend-rose": "t-afternoon t-night a-floral a-fruit b-medium k-sweet r-clean s-hot w-quick p-dessert c-mid m-calm",
+  "blend-lychee": "t-morning t-afternoon a-fruit a-floral b-medium k-sweet r-clean s-hot s-iced p-dessert c-mid m-refresh",
+  "blend-thaitea": "t-morning t-afternoon a-malt a-roast b-full k-sweet r-clean s-iced s-milk p-dessert c-high m-energy",
+  "blend-yuenyeung": "t-morning t-afternoon a-malt a-roast b-full k-sweet r-clean s-hot s-milk p-meal c-high m-energy",
+  "blend-moroccan-mint": "t-morning t-afternoon a-herb a-grass b-light k-sweet r-clean s-hot s-iced p-dessert c-mid m-refresh",
+  "blend-russian-caravan": "t-morning t-afternoon a-roast a-malt b-full k-sweet r-smoke s-hot s-milk p-meal c-high m-cozy",
+  "blend-irish-breakfast": "t-morning a-malt b-full k-crisp r-clean s-hot s-milk p-meal c-high m-energy",
+  "herb-cassia-seed": "t-morning t-afternoon t-night a-roast a-roast b-medium k-grain r-clean s-hot p-meal c-none m-calm",
+  "herb-burdock": "t-morning t-afternoon t-night a-roast a-roast b-medium k-sweet r-clean s-hot p-meal c-none m-cozy",
+  "herb-gugija": "t-morning t-afternoon t-night a-fruit a-herb b-light k-sweet r-clean s-hot p-dessert c-none m-calm",
+  "herb-cornus": "t-morning t-afternoon a-fruit a-herb b-medium k-crisp r-clean s-hot p-dessert c-none m-cozy",
+  "herb-dandelion": "t-morning t-afternoon a-herb a-roast b-light k-crisp r-clean s-hot p-meal c-none m-refresh",
+  "herb-cornsilk": "t-morning t-afternoon a-roast a-roast b-light k-sweet r-clean s-hot s-iced p-meal c-none m-refresh"
+});
+
+  /* ── 162종 실물 사진 (tea_fai_research/tea_photos_map.json) ──
+     f=파일(images/teas/), m=exact|family, cr=저작자, lic=라이선스, lu=라이선스 주소, pg=원본 페이지 */
+  var PHOTOS = {
+  "black-assam": {
+    "f": "black-assam.jpg",
+    "m": "exact",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AAssam-Tee_SFTGFOP1.jpg"
+  },
+  "black-cameron": {
+    "f": "black-cameron.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-darjeeling-autumn": {
+    "f": "black-darjeeling-autumn.jpg",
+    "m": "exact",
+    "cr": "Vyacheslav Argenberg",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Fermented_tea_leaves.jpg"
+  },
+  "black-darjeeling-first": {
+    "f": "black-darjeeling-first.jpg",
+    "m": "exact",
+    "cr": "David J. Fred",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling-tea-first-flush-leaf-dry.jpg"
+  },
+  "black-darjeeling-second": {
+    "f": "black-darjeeling-second.jpg",
+    "m": "exact",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASchwarzer_Tee_Darjeeling_%28Second_Flush%29.jpg"
+  },
+  "black-dianhong": {
+    "f": "black-dianhong.jpg",
+    "m": "exact",
+    "cr": "Fumikas Sagisavas",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADianhong-Jinluo_tea.jpg"
+  },
+  "black-dimbula": {
+    "f": "black-dimbula.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-dooars": {
+    "f": "black-dooars.jpg",
+    "m": "exact",
+    "cr": "Kingshukdeb6",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADooars_Tea.jpg"
+  },
+  "black-jaksal": {
+    "f": "black-jaksal.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-jinjunmei": {
+    "f": "black-jinjunmei.jpg",
+    "m": "exact",
+    "cr": "Msrasnw",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Jun_Mei_tea.jpg"
+  },
+  "black-kandy": {
+    "f": "black-kandy.jpg",
+    "m": "exact",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-keemun": {
+    "f": "black-keemun.jpg",
+    "m": "exact",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Keemun_FTGFOP_(1).JPG"
+  },
+  "black-kenya": {
+    "f": "black-kenya.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-lapsang": {
+    "f": "black-lapsang.jpg",
+    "m": "exact",
+    "cr": "No machine-readable author provided. Deltabeignet assumed (based on copyright claims).",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Lapsang_souchong_tea.jpg"
+  },
+  "black-lapsang-unsmoked": {
+    "f": "black-lapsang-unsmoked.jpg",
+    "m": "exact",
+    "cr": "No machine-readable author provided. Deltabeignet assumed (based on copyright claims).",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Lapsang_souchong_tea.jpg"
+  },
+  "black-nepal": {
+    "f": "black-nepal.jpg",
+    "m": "family",
+    "cr": "Vyacheslav Argenberg",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Darjeeling_tea%2C_Black_tea.jpg"
+  },
+  "black-nilgiri": {
+    "f": "black-nilgiri.jpg",
+    "m": "exact",
+    "cr": "Badagnani (talk)",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Nilgiritea.jpg"
+  },
+  "black-nuwaraeliya": {
+    "f": "black-nuwaraeliya.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-rize": {
+    "f": "black-rize.jpg",
+    "m": "exact",
+    "cr": "Chriswan Sungkono",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Rize_tea.JPG"
+  },
+  "black-ruby18": {
+    "f": "black-ruby18.jpg",
+    "m": "exact",
+    "cr": "Alankang",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ATaiwanese_tea_no_18.jpg"
+  },
+  "black-ruhuna": {
+    "f": "black-ruhuna.jpg",
+    "m": "family",
+    "cr": "HeroidShehu",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
+  },
+  "black-rwanda": {
+    "f": "black-rwanda.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-sabaragamuwa": {
+    "f": "black-sabaragamuwa.jpg",
+    "m": "family",
+    "cr": "Charles R. Benedict",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea.jpg"
+  },
+  "black-sikkim": {
+    "f": "black-sikkim.jpg",
+    "m": "family",
+    "cr": "Vyacheslav Argenberg",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Darjeeling_tea%2C_Black_tea.jpg"
+  },
+  "black-udapussellawa": {
+    "f": "black-udapussellawa.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-uva": {
+    "f": "black-uva.jpg",
+    "m": "family",
+    "cr": "HeroidShehu",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
+  },
+  "black-yeongdeok": {
+    "f": "black-yeongdeok.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "black-yingde": {
+    "f": "black-yingde.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "blend-afternoon": {
+    "f": "blend-afternoon.jpg",
+    "m": "exact",
+    "cr": "Moody 75 from Phoenix, AZ (currently)",
+    "lic": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AAfternoon_Tea_-_English_Style.jpg"
+  },
+  "blend-earlgrey": {
+    "f": "blend-earlgrey.jpg",
+    "m": "exact",
+    "cr": "WJ Houtman",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AEarl_Grey_FBOP-Wilson_Ceylon_Teas.jpg"
+  },
+  "blend-englishbreakfast": {
+    "f": "blend-englishbreakfast.jpg",
+    "m": "exact",
+    "cr": "Lisaisanut",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Mug_of_English_Breakfast_Tea.jpg"
+  },
+  "blend-guihua": {
+    "f": "blend-guihua.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "blend-hongkong": {
+    "f": "blend-hongkong.jpg",
+    "m": "exact",
+    "cr": "Nikoletic126",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Milk_Tea,_Cha_Chaan_Teng-style_with_Black_and_White_cup.jpg"
+  },
+  "blend-irish-breakfast": {
+    "f": "blend-irish-breakfast.jpg",
+    "m": "exact",
+    "cr": "Lexane Sirac",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Milk_in_Irish_Breakfast_tea.jpg"
+  },
+  "blend-jasmine": {
+    "f": "blend-jasmine.jpg",
+    "m": "exact",
+    "cr": "Hayden Soloviev",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Loose_Jasmine_Tea_Leaves.jpg"
+  },
+  "blend-ladygrey": {
+    "f": "blend-ladygrey.jpg",
+    "m": "exact",
+    "cr": "Sjhan81",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ATwiningsLadyGrey_low.jpg"
+  },
+  "blend-lychee": {
+    "f": "blend-lychee.jpg",
+    "m": "exact",
+    "cr": "Andy Li",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AIced_lychee_tea_and_Es_teh_manis_-_Bali_2025-09-25.jpg"
+  },
+  "blend-masala": {
+    "f": "blend-masala.jpg",
+    "m": "exact",
+    "cr": "Ravi Daj",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMasala_tea.jpg"
+  },
+  "blend-milk-oolong": {
+    "f": "blend-milk-oolong.jpg",
+    "m": "family",
+    "cr": "Iateasquirrel at English Wikipedia",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHGY_Oolong_tea_leaf_close.jpg"
+  },
+  "blend-moroccan-mint": {
+    "f": "blend-moroccan-mint.jpg",
+    "m": "exact",
+    "cr": "calflier001",
+    "lic": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMINT_TEA_IN_JEMAA_EL_FNA_SQUARE_MOROCCO_APRIL_2013_%288697092910%29.jpg"
+  },
+  "blend-rose": {
+    "f": "blend-rose.jpg",
+    "m": "exact",
+    "cr": "Loppy poppy",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACup_of_rosebud_tea_with_dried_pink_rose_buds.jpg"
+  },
+  "blend-russian-caravan": {
+    "f": "blend-russian-caravan.jpg",
+    "m": "family",
+    "cr": "Vyacheslav Argenberg",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Darjeeling_tea%2C_Black_tea.jpg"
+  },
+  "blend-thaitea": {
+    "f": "blend-thaitea.jpg",
+    "m": "exact",
+    "cr": "Takeaway",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Cha_yen.JPG"
+  },
+  "blend-yuenyeung": {
+    "f": "blend-yuenyeung.jpg",
+    "m": "family",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
+  },
+  "dark-anhua": {
+    "f": "dark-anhua.jpg",
+    "m": "exact",
+    "cr": "Kasuga",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AAnhua_Fuzhuan_Fermented_Tea.jpg"
+  },
+  "dark-cheongtaejeon": {
+    "f": "dark-cheongtaejeon.jpg",
+    "m": "exact",
+    "cr": "EBS",
+    "lic": "KOGL Type 1",
+    "lu": "http://www.kogl.or.kr/info/licenseType1.do",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADoncha.png"
+  },
+  "dark-fuzhuan": {
+    "f": "dark-fuzhuan.jpg",
+    "m": "exact",
+    "cr": "Ash Crow",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALotus_scented_Fuzhuan_2012_Heicha_-_WikiTea.jpg"
+  },
+  "dark-kangzhuan": {
+    "f": "dark-kangzhuan.jpg",
+    "m": "family",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
+  },
+  "dark-laoqingzhuan": {
+    "f": "dark-laoqingzhuan.jpg",
+    "m": "family",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
+  },
+  "dark-liubao": {
+    "f": "dark-liubao.jpg",
+    "m": "exact",
+    "cr": "Cosmin Dordea",
+    "lic": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJinHua_%22golden_flower%22_from_Liu_Bao.jpg"
+  },
+  "dark-qianliang": {
+    "f": "dark-qianliang.jpg",
+    "m": "family",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
+  },
+  "dark-sheng": {
+    "f": "dark-sheng.jpg",
+    "m": "exact",
+    "cr": "Ash Crow",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYunnan_Sourcing_%22Golden_Pig%22_Raw_Pu-erh_Tea_Cake_-_opened_-_WikiTea_01.jpg"
+  },
+  "dark-shou": {
+    "f": "dark-shou.jpg",
+    "m": "exact",
+    "cr": "Ash Crow",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYunnan_Sourcing_-_15_Years_Aged_Melon_Ripe_Pu-Erh_Tea_Tuo_-_WikiTea.jpg"
+  },
+  "dark-tianjian": {
+    "f": "dark-tianjian.jpg",
+    "m": "family",
+    "cr": "soultea.de/André Helbig",
+    "lic": "CC BY 3.0",
+    "lu": "https://creativecommons.org/licenses/by/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
+  },
+  "dark-tibetan": {
+    "f": "dark-tibetan.jpg",
+    "m": "exact",
+    "cr": "《人民画报》",
+    "lic": "Public domain",
+    "lu": "",
+    "pg": "https://commons.wikimedia.org/wiki/File:1962-04_1962年_藏族人喝酥油茶.jpg"
+  },
+  "fruit-applecinnamon": {
+    "f": "fruit-applecinnamon.jpg",
+    "m": "exact",
+    "cr": "Ranjaniskitchen",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AApple-Cinnamon-Iced-Tea.jpg"
+  },
+  "fruit-berryhibiscus": {
+    "f": "fruit-berryhibiscus.jpg",
+    "m": "exact",
+    "cr": "Andy Li",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHibiscus_and_berry_iced_tea_-_Lost_in_the_Lanes_2025-07-08.jpg"
+  },
+  "fruit-bloodorange": {
+    "f": "fruit-bloodorange.jpg",
+    "m": "exact",
+    "cr": "Selena N. B. H. from Fayetteville, USA",
+    "lic": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ABlood_Orange_tea.jpg"
+  },
+  "fruit-daechu": {
+    "f": "fruit-daechu.jpg",
+    "m": "exact",
+    "cr": "by LWY",
+    "lic": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Korean.tea-Daechucha-01.jpg"
+  },
+  "fruit-gingerlemon": {
+    "f": "fruit-gingerlemon.jpg",
+    "m": "exact",
+    "cr": "Erasmus Kamugisha",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALemon_and_ginger_tea_%2CTanzania.jpg"
+  },
+  "fruit-mogwa": {
+    "f": "fruit-mogwa.jpg",
+    "m": "exact",
+    "cr": "Scudsvlad",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Mogwa-cha_1.jpg"
+  },
+  "fruit-omija": {
+    "f": "fruit-omija.jpg",
+    "m": "exact",
+    "cr": "Hyeon-Jeong Suk",
+    "lic": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Omijacha.jpg"
+  },
+  "fruit-passionfruit": {
+    "f": "fruit-passionfruit.jpg",
+    "m": "exact",
+    "cr": "Fumikas Sagisavas",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3APassion_fruit_lime_lemon_tea.jpg"
+  },
+  "fruit-peach": {
+    "f": "fruit-peach.jpg",
+    "m": "exact",
+    "cr": "Peachyeung316",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AA_chinese_peach_tea_set_in_china.jpg"
+  },
+  "fruit-yuja": {
+    "f": "fruit-yuja.jpg",
+    "m": "exact",
+    "cr": "croxriver",
+    "lic": "CC BY 2.5",
+    "lu": "https://creativecommons.org/licenses/by/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File:Yujacha_(yuja_tea).jpg"
+  },
+  "green-anji-baipian": {
+    "f": "green-anji-baipian.jpg",
+    "m": "exact",
+    "cr": "LinusBG",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Anji_bai_cha_leaves.jpg"
+  },
+  "green-biluochun": {
+    "f": "green-biluochun.jpg",
+    "m": "exact",
+    "cr": "Walter Grassroot",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3A%E6%97%A0%E9%94%A1%E6%BB%A8%E6%B9%96_%E9%9B%AA%E6%B5%AA%E5%B1%B1%E8%8C%B6%E5%9C%BA_%E7%A2%A7%E8%9E%BA%E6%98%A5.jpg"
+  },
+  "green-boseong": {
+    "f": "green-boseong.jpg",
+    "m": "exact",
+    "cr": "강응규",
+    "lic": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Boseong_green_tea.jpg"
+  },
+  "green-daejak": {
+    "f": "green-daejak.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-dafo-longjing": {
+    "f": "green-dafo-longjing.jpg",
+    "m": "family",
+    "cr": "Editor at Large",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
+  },
+  "green-enshi-yulu": {
+    "f": "green-enshi-yulu.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-genmaicha": {
+    "f": "green-genmaicha.jpg",
+    "m": "exact",
+    "cr": "No machine-readable author provided. Kyd assumed (based on copyright claims).",
+    "lic": "Public domain",
+    "lu": "",
+    "pg": "https://commons.wikimedia.org/wiki/File:Genmaicha.JPG"
+  },
+  "green-gougunao": {
+    "f": "green-gougunao.jpg",
+    "m": "family",
+    "cr": "Editor at Large",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
+  },
+  "green-gyokuro": {
+    "f": "green-gyokuro.jpg",
+    "m": "exact",
+    "cr": "Markus Kniebes",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ABlack_Japanese_teapot_and_gyokuro.jpg"
+  },
+  "green-hadong": {
+    "f": "green-hadong.jpg",
+    "m": "family",
+    "cr": "예향",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJakseol_green_tea_leaves.jpg"
+  },
+  "green-hanzhong-xianhao": {
+    "f": "green-hanzhong-xianhao.jpg",
+    "m": "family",
+    "cr": "Editor at Large",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
+  },
+  "green-hojicha": {
+    "f": "green-hojicha.jpg",
+    "m": "exact",
+    "cr": "FCartegnie",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Houjicha.jpg"
+  },
+  "green-houkui": {
+    "f": "green-houkui.jpg",
+    "m": "exact",
+    "cr": "Sebastian Stabinger",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Fresh_Hou_Kui_Green_Tea_Leaves.jpg"
+  },
+  "green-huiming": {
+    "f": "green-huiming.jpg",
+    "m": "family",
+    "cr": "The original uploader was Deathtiny42 at French Wikipedia.",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AFukuju_green_tea_leaves.jpg"
+  },
+  "green-jeju": {
+    "f": "green-jeju.jpg",
+    "m": "family",
+    "cr": "예향",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJakseol_green_tea_leaves_2.jpg"
+  },
+  "green-jukro": {
+    "f": "green-jukro.jpg",
+    "m": "family",
+    "cr": "Editor at Large",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
+  },
+  "green-jungjak": {
+    "f": "green-jungjak.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJungjak_tea_leaves.jpg"
+  },
+  "green-kabusecha": {
+    "f": "green-kabusecha.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-kamairicha": {
+    "f": "green-kamairicha.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Kamairicha.jpg"
+  },
+  "green-laoshan": {
+    "f": "green-laoshan.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ATwo_small_tasting_cups_of_Laoshan_green_tea.jpg"
+  },
+  "green-longjing": {
+    "f": "green-longjing.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Longjing_tea.jpg"
+  },
+  "green-luanguapian": {
+    "f": "green-luanguapian.jpg",
+    "m": "exact",
+    "cr": "PanShiBo",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Lu'an_Melon_Seed_tea.jpg"
+  },
+  "green-lushan": {
+    "f": "green-lushan.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-maofeng": {
+    "f": "green-maofeng.jpg",
+    "m": "exact",
+    "cr": "Qirille",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMaoFeng_Green_Tea_%E9%BB%84%E5%B1%B1%E6%AF%9B%E5%B3%B0.jpg"
+  },
+  "green-maojian": {
+    "f": "green-maojian.jpg",
+    "m": "exact",
+    "cr": "Francesc Fort",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AXinyang_Maojian.jpg"
+  },
+  "green-matcha": {
+    "f": "green-matcha.jpg",
+    "m": "exact",
+    "cr": "dungthuyvunguyen",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMatcha_layout_with_leaf%2C_tea%2C_and_powder.jpg"
+  },
+  "green-mengding-ganlu": {
+    "f": "green-mengding-ganlu.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-sanxia-biluochun": {
+    "f": "green-sanxia-biluochun.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "green-sejak": {
+    "f": "green-sejak.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ASejak_tea_leaves.jpg"
+  },
+  "green-sencha": {
+    "f": "green-sencha.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:2017_Kagoshima_sencha.jpg"
+  },
+  "green-wuyuan-mingmei": {
+    "f": "green-wuyuan-mingmei.jpg",
+    "m": "family",
+    "cr": "The original uploader was Deathtiny42 at French Wikipedia.",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AFukuju_green_tea_leaves.jpg"
+  },
+  "green-zhuyeqing": {
+    "f": "green-zhuyeqing.jpg",
+    "m": "family",
+    "cr": "Editor at Large",
+    "lic": "CC BY-SA 2.5",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
+  },
+  "herb-balloonflower": {
+    "f": "herb-balloonflower.jpg",
+    "m": "exact",
+    "cr": "이하원",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADoraji-cha.jpg"
+  },
+  "herb-barley": {
+    "f": "herb-barley.jpg",
+    "m": "exact",
+    "cr": "국립국어원",
+    "lic": "CC BY-SA 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Boricha_(barley_tea).jpg"
+  },
+  "herb-brownrice": {
+    "f": "herb-brownrice.jpg",
+    "m": "exact",
+    "cr": "Postcol",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Hyeonmi-nokcha_2.jpg"
+  },
+  "herb-buckwheat": {
+    "f": "herb-buckwheat.jpg",
+    "m": "exact",
+    "cr": "whdtns",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMemil-cha_%28buckwheat_tea%29.jpg"
+  },
+  "herb-burdock": {
+    "f": "herb-burdock.jpg",
+    "m": "family",
+    "cr": "Corn cheese",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHerbal_tea_in_white_mug.jpg"
+  },
+  "herb-cassia-seed": {
+    "f": "herb-cassia-seed.jpg",
+    "m": "exact",
+    "cr": "sks2015",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Gyeolmyeongja-cha.jpg"
+  },
+  "herb-chamomile": {
+    "f": "herb-chamomile.jpg",
+    "m": "exact",
+    "cr": "ianakoz",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALoose_leaf_chamomile_tea.jpg"
+  },
+  "herb-chrysanthemum": {
+    "f": "herb-chrysanthemum.jpg",
+    "m": "exact",
+    "cr": "by gliuoo",
+    "lic": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AKorean_chrysanthemum_tea-Gukhwacha-01.jpg"
+  },
+  "herb-cornsilk": {
+    "f": "herb-cornsilk.jpg",
+    "m": "exact",
+    "cr": "KQuhen",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACorn_silk_tea_cup.jpg"
+  },
+  "herb-cornus": {
+    "f": "herb-cornus.jpg",
+    "m": "family",
+    "cr": "Corn cheese",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHerbal_tea_in_white_mug.jpg"
+  },
+  "herb-dandelion": {
+    "f": "herb-dandelion.jpg",
+    "m": "exact",
+    "cr": "Fumikas Sagisavas",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADandelion_leaf_tea.jpg"
+  },
+  "herb-dunggulle": {
+    "f": "herb-dunggulle.jpg",
+    "m": "family",
+    "cr": "Corn cheese",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHerbal_tea_in_white_mug.jpg"
+  },
+  "herb-ginger": {
+    "f": "herb-ginger.jpg",
+    "m": "exact",
+    "cr": "congerdesign",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Ginger_tea.jpg"
+  },
+  "herb-gugija": {
+    "f": "herb-gugija.jpg",
+    "m": "family",
+    "cr": "Corn cheese",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHerbal_tea_in_white_mug.jpg"
+  },
+  "herb-hibiscus": {
+    "f": "herb-hibiscus.jpg",
+    "m": "exact",
+    "cr": "Emna Mizouni",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHibiscus_tea.jpg"
+  },
+  "herb-lavender": {
+    "f": "herb-lavender.jpg",
+    "m": "exact",
+    "cr": "Amanda Slater from Coventry, West Midlands, UK",
+    "lic": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ALavender_Tea_216_365_%2842030965680%29.jpg"
+  },
+  "herb-lemongrass": {
+    "f": "herb-lemongrass.jpg",
+    "m": "exact",
+    "cr": "City Foodsters",
+    "lic": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHerbal_Tea%2C_Lemongrass%2C_and_Mint_%2815484208472%29.jpg"
+  },
+  "herb-lotus": {
+    "f": "herb-lotus.jpg",
+    "m": "exact",
+    "cr": "경빈마마",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Lotus_leaf_tea.jpg"
+  },
+  "herb-mate": {
+    "f": "herb-mate.jpg",
+    "m": "exact",
+    "cr": "Lexspion",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADel_amerikai_yerba_mate_tea.jpg"
+  },
+  "herb-mugwort": {
+    "f": "herb-mugwort.jpg",
+    "m": "exact",
+    "cr": "이석분",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Ssukcha.jpg"
+  },
+  "herb-mulberry": {
+    "f": "herb-mulberry.jpg",
+    "m": "exact",
+    "cr": "백만볼투",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3APpongnip-cha.jpg"
+  },
+  "herb-peppermint": {
+    "f": "herb-peppermint.jpg",
+    "m": "exact",
+    "cr": "congerdesign",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Peppermint_tea_2.jpg"
+  },
+  "herb-persimmon": {
+    "f": "herb-persimmon.jpg",
+    "m": "exact",
+    "cr": "은국",
+    "lic": "CC BY 4.0",
+    "lu": "https://creativecommons.org/licenses/by/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADrying_persimmon_leaves.jpg"
+  },
+  "herb-rooibos": {
+    "f": "herb-rooibos.jpg",
+    "m": "exact",
+    "cr": "StockyPics",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ACup_of_rooibos_tea_%2823427608102%29.jpg"
+  },
+  "herb-ssanghwa": {
+    "f": "herb-ssanghwa.jpg",
+    "m": "exact",
+    "cr": "허수자",
+    "lic": "CC BY 2.0 kr",
+    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Ssanghwacha.jpg"
+  },
+  "herb-tteokcha": {
+    "f": "herb-tteokcha.jpg",
+    "m": "exact",
+    "cr": "EBS",
+    "lic": "KOGL Type 1",
+    "lu": "http://www.kogl.or.kr/info/licenseType1.do",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADoncha_and_tteokcha.png"
+  },
+  "oolong-alishan": {
+    "f": "oolong-alishan.jpg",
+    "m": "family",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-beauty": {
+    "f": "oolong-beauty.jpg",
+    "m": "family",
+    "cr": "The original uploader was Iateasquirrel at English Wikipedia.",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AQi_Lan_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-benshan": {
+    "f": "oolong-benshan.jpg",
+    "m": "family",
+    "cr": "User Iateasquirrel on en.wikipedia",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ABan_Tian_Yao_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-dahongpao": {
+    "f": "oolong-dahongpao.jpg",
+    "m": "exact",
+    "cr": "Iateasquirrel at English Wikipedia",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Da_Hong_Pao_Oolong_tea_leaf.jpg"
+  },
+  "oolong-dancong": {
+    "f": "oolong-dancong.jpg",
+    "m": "exact",
+    "cr": "Mx. Granger",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File:Duck_shit_aroma_tea_6.jpg"
+  },
+  "oolong-dancong-milan": {
+    "f": "oolong-dancong-milan.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AMi_Lan_Xiang_Oolong_Tea.jpg"
+  },
+  "oolong-dancong-yashixiang": {
+    "f": "oolong-dancong-yashixiang.jpg",
+    "m": "exact",
+    "cr": "Mx. Granger",
+    "lic": "CC0",
+    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ADuck_shit_aroma_tea_2.jpg"
+  },
+  "oolong-dayuling": {
+    "f": "oolong-dayuling.jpg",
+    "m": "family",
+    "cr": "Iateasquirrel at English Wikipedia",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHGY_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-dongding": {
+    "f": "oolong-dongding.jpg",
+    "m": "exact",
+    "cr": "Waliy sherpa",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Dong_Ding_tea.jpg"
+  },
+  "oolong-foshou": {
+    "f": "oolong-foshou.jpg",
+    "m": "family",
+    "cr": "The original uploader was Iateasquirrel at English Wikipedia.",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AQi_Lan_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-hongshui": {
+    "f": "oolong-hongshui.jpg",
+    "m": "family",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Suo_Chi_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-huangjingui": {
+    "f": "oolong-huangjingui.jpg",
+    "m": "exact",
+    "cr": "Peaceeverywhere",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Huang_Jin_Gui_Tea.jpeg"
+  },
+  "oolong-jin-xuan": {
+    "f": "oolong-jin-xuan.jpg",
+    "m": "exact",
+    "cr": "Difference engine",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File:Jin_Xuan_oolong_tea.jpg"
+  },
+  "oolong-lishan": {
+    "f": "oolong-lishan.jpg",
+    "m": "family",
+    "cr": "Iateasquirrel at English Wikipedia",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHGY_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-muzha-tieguanyin": {
+    "f": "oolong-muzha-tieguanyin.jpg",
+    "m": "family",
+    "cr": "Quelcrime",
+    "lic": "Public domain",
+    "lu": "",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ATieguanyin2.jpg"
+  },
+  "oolong-pouchong": {
+    "f": "oolong-pouchong.jpg",
+    "m": "exact",
+    "cr": "Richard Corner",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Spring_pouchong_tea_leaves_on_plate.jpg"
+  },
+  "oolong-rougui": {
+    "f": "oolong-rougui.jpg",
+    "m": "exact",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Rou_Gui_(Traditional)_Oolong_tea_leaf.jpg"
+  },
+  "oolong-shanlinxi": {
+    "f": "oolong-shanlinxi.jpg",
+    "m": "family",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-shuixian": {
+    "f": "oolong-shuixian.jpg",
+    "m": "exact",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AShui_Hsien_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-si-ji-chun": {
+    "f": "oolong-si-ji-chun.jpg",
+    "m": "family",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Suo_Chi_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-thai-doi": {
+    "f": "oolong-thai-doi.jpg",
+    "m": "family",
+    "cr": "",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf_close.jpg"
+  },
+  "oolong-tieguanyin": {
+    "f": "oolong-tieguanyin.jpg",
+    "m": "exact",
+    "cr": "No machine-readable author provided. Laubrau~commonswiki assumed (based on copyright claims).",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ATieguanyin.jpg"
+  },
+  "oolong-vietnam-mocchau": {
+    "f": "oolong-vietnam-mocchau.jpg",
+    "m": "family",
+    "cr": "たね",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_leaves.jpg"
+  },
+  "white-aged": {
+    "f": "white-aged.jpg",
+    "m": "family",
+    "cr": "KZZZ01",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AWhite_Tea_Withering.jpg"
+  },
+  "white-gongmei": {
+    "f": "white-gongmei.jpg",
+    "m": "family",
+    "cr": "KZZZ01",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AWhite_Tea_Withering.jpg"
+  },
+  "white-lingyun-baihao": {
+    "f": "white-lingyun-baihao.jpg",
+    "m": "family",
+    "cr": "KZZZ01",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AWhite_Tea_Withering.jpg"
+  },
+  "white-peony": {
+    "f": "white-peony.jpg",
+    "m": "exact",
+    "cr": "Badagnani (talk)",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3ABaimudan.JPG"
+  },
+  "white-shoumei": {
+    "f": "white-shoumei.jpg",
+    "m": "exact",
+    "cr": "User:Matros",
+    "lic": "Public domain",
+    "lu": "",
+    "pg": "https://commons.wikimedia.org/wiki/File:Shou_Mei_tea.JPG"
+  },
+  "white-silverneedle": {
+    "f": "white-silverneedle.jpg",
+    "m": "exact",
+    "cr": "LDFrancis",
+    "lic": "Public domain",
+    "lu": "",
+    "pg": "https://commons.wikimedia.org/wiki/File:Bai_Hao_Yinzhen_or_Silver_needle_White_Tea.JPG"
+  },
+  "white-xingongyi": {
+    "f": "white-xingongyi.jpg",
+    "m": "family",
+    "cr": "KZZZ01",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AWhite_Tea_Withering.jpg"
+  },
+  "white-yueguangbai": {
+    "f": "white-yueguangbai.jpg",
+    "m": "family",
+    "cr": "KZZZ01",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AWhite_Tea_Withering.jpg"
+  },
+  "yellow-beigang-maojian": {
+    "f": "yellow-beigang-maojian.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+  },
+  "yellow-huoshan": {
+    "f": "yellow-huoshan.jpg",
+    "m": "exact",
+    "cr": "Iateasquirrel",
+    "lic": "CC BY-SA 3.0",
+    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Huoshan_Huangya_tea_leaves_close.jpg"
+  },
+  "yellow-junshan": {
+    "f": "yellow-junshan.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+  },
+  "yellow-mengding": {
+    "f": "yellow-mengding.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%282%29.JPG"
+  },
+  "yellow-wanxi-huangdacha": {
+    "f": "yellow-wanxi-huangdacha.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%282%29.JPG"
+  },
+  "yellow-weishan-maojian": {
+    "f": "yellow-weishan-maojian.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%282%29.JPG"
+  },
+  "yellow-wenzhou-huangtang": {
+    "f": "yellow-wenzhou-huangtang.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+  },
+  "yellow-yuanan-luyuan": {
+    "f": "yellow-yuanan-luyuan.jpg",
+    "m": "family",
+    "cr": "Whiteness",
+    "lic": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+  }
+};
+
+  /* ── 162종 원산지 국가 ── */
+  var ORIGIN = {
+  "green-longjing": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-biluochun": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-maofeng": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-sencha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-gyokuro": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-matcha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-jeju": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "white-silverneedle": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-peony": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-shoumei": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-aged": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-gongmei": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-luanguapian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-houkui": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-maojian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-lushan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-hojicha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-genmaicha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-hadong": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "green-sejak": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "green-jungjak": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "green-daejak": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "green-jukro": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "yellow-junshan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-mengding": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-huoshan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-tieguanyin": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-dahongpao": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-dancong": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-dongding": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-alishan": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-beauty": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-si-ji-chun": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-jin-xuan": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-pouchong": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "black-darjeeling-first": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-darjeeling-second": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-assam": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-nilgiri": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-nuwaraeliya": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-udapussellawa": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-uva": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-dimbula": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-sabaragamuwa": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-kandy": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-ruhuna": {
+    "ko": "스리랑카",
+    "en": "Sri Lanka",
+    "zh-CN": "斯里兰卡",
+    "zh-TW": "斯里蘭卡",
+    "yue": "斯里蘭卡",
+    "code": "lk"
+  },
+  "black-keemun": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "black-lapsang": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "black-jinjunmei": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "black-dianhong": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-masala": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-sikkim": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-nepal": {
+    "ko": "네팔",
+    "en": "Nepal",
+    "zh-CN": "尼泊尔",
+    "zh-TW": "尼泊爾",
+    "yue": "尼泊爾",
+    "code": "np"
+  },
+  "black-kenya": {
+    "ko": "케냐",
+    "en": "Kenya",
+    "zh-CN": "肯尼亚",
+    "zh-TW": "肯亞",
+    "yue": "肯雅",
+    "code": "ke"
+  },
+  "black-jaksal": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "black-ruby18": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "dark-sheng": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-shou": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-anhua": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-liubao": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-cheongtaejeon": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "blend-earlgrey": {
+    "ko": "영국",
+    "en": "United Kingdom",
+    "zh-CN": "英国",
+    "zh-TW": "英國",
+    "yue": "英國",
+    "code": "uk"
+  },
+  "blend-ladygrey": {
+    "ko": "영국",
+    "en": "United Kingdom",
+    "zh-CN": "英国",
+    "zh-TW": "英國",
+    "yue": "英國",
+    "code": "uk"
+  },
+  "blend-englishbreakfast": {
+    "ko": "영국",
+    "en": "United Kingdom",
+    "zh-CN": "英国",
+    "zh-TW": "英國",
+    "yue": "英國",
+    "code": "uk"
+  },
+  "blend-afternoon": {
+    "ko": "영국",
+    "en": "United Kingdom",
+    "zh-CN": "英国",
+    "zh-TW": "英國",
+    "yue": "英國",
+    "code": "uk"
+  },
+  "blend-jasmine": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-hongkong": {
+    "ko": "홍콩",
+    "en": "Hong Kong",
+    "zh-CN": "香港",
+    "zh-TW": "香港",
+    "yue": "香港",
+    "code": "hk"
+  },
+  "fruit-daechu": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-ginger": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "fruit-yuja": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "fruit-omija": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-ssanghwa": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-dunggulle": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-buckwheat": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-barley": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-brownrice": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-persimmon": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-mulberry": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-lotus": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-balloonflower": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-mugwort": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-tteokcha": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-chamomile": {
+    "ko": "이집트",
+    "en": "Egypt",
+    "zh-CN": "埃及",
+    "zh-TW": "埃及",
+    "yue": "埃及",
+    "code": "eg"
+  },
+  "herb-peppermint": {
+    "ko": "영국",
+    "en": "United Kingdom",
+    "zh-CN": "英国",
+    "zh-TW": "英國",
+    "yue": "英國",
+    "code": "uk"
+  },
+  "herb-hibiscus": {
+    "ko": "수단",
+    "en": "Sudan",
+    "zh-CN": "苏丹",
+    "zh-TW": "蘇丹",
+    "yue": "蘇丹",
+    "code": "sd"
+  },
+  "herb-rooibos": {
+    "ko": "남아프리카공화국",
+    "en": "South Africa",
+    "zh-CN": "南非",
+    "zh-TW": "南非",
+    "yue": "南非",
+    "code": "za"
+  },
+  "herb-mate": {
+    "ko": "아르헨티나",
+    "en": "Argentina",
+    "zh-CN": "阿根廷",
+    "zh-TW": "阿根廷",
+    "yue": "阿根廷",
+    "code": "ar"
+  },
+  "herb-lavender": {
+    "ko": "프랑스",
+    "en": "France",
+    "zh-CN": "法国",
+    "zh-TW": "法國",
+    "yue": "法國",
+    "code": "fr"
+  },
+  "herb-lemongrass": {
+    "ko": "태국",
+    "en": "Thailand",
+    "zh-CN": "泰国",
+    "zh-TW": "泰國",
+    "yue": "泰國",
+    "code": "th"
+  },
+  "herb-chrysanthemum": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "fruit-mogwa": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "fruit-gingerlemon": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "fruit-applecinnamon": {
+    "ko": "독일",
+    "en": "Germany",
+    "zh-CN": "德国",
+    "zh-TW": "德國",
+    "yue": "德國",
+    "code": "de"
+  },
+  "fruit-peach": {
+    "ko": "독일",
+    "en": "Germany",
+    "zh-CN": "德国",
+    "zh-TW": "德國",
+    "yue": "德國",
+    "code": "de"
+  },
+  "fruit-berryhibiscus": {
+    "ko": "독일",
+    "en": "Germany",
+    "zh-CN": "德国",
+    "zh-TW": "德國",
+    "yue": "德國",
+    "code": "de"
+  },
+  "fruit-bloodorange": {
+    "ko": "독일",
+    "en": "Germany",
+    "zh-CN": "德国",
+    "zh-TW": "德國",
+    "yue": "德國",
+    "code": "de"
+  },
+  "fruit-passionfruit": {
+    "ko": "독일",
+    "en": "Germany",
+    "zh-CN": "德国",
+    "zh-TW": "德國",
+    "yue": "德國",
+    "code": "de"
+  },
+  "green-zhuyeqing": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-enshi-yulu": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-anji-baipian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-gougunao": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-wuyuan-mingmei": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-mengding-ganlu": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-hanzhong-xianhao": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-huiming": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-boseong": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "green-sanxia-biluochun": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "green-kabusecha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-kamairicha": {
+    "ko": "일본",
+    "en": "Japan",
+    "zh-CN": "日本",
+    "zh-TW": "日本",
+    "yue": "日本",
+    "code": "jp"
+  },
+  "green-dafo-longjing": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "green-laoshan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-xingongyi": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-yueguangbai": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "white-lingyun-baihao": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-beigang-maojian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-weishan-maojian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-wenzhou-huangtang": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-wanxi-huangdacha": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "yellow-yuanan-luyuan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-rougui": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-shuixian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-dayuling": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-shanlinxi": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-lishan": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-huangjingui": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-benshan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-foshou": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-muzha-tieguanyin": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-dancong-milan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-dancong-yashixiang": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "oolong-hongshui": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "oolong-thai-doi": {
+    "ko": "태국",
+    "en": "Thailand",
+    "zh-CN": "泰国",
+    "zh-TW": "泰國",
+    "yue": "泰國",
+    "code": "th"
+  },
+  "oolong-vietnam-mocchau": {
+    "ko": "베트남",
+    "en": "Vietnam",
+    "zh-CN": "越南",
+    "zh-TW": "越南",
+    "yue": "越南",
+    "code": "vn"
+  },
+  "black-lapsang-unsmoked": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "black-yingde": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "black-rize": {
+    "ko": "튀르키예",
+    "en": "Türkiye",
+    "zh-CN": "土耳其",
+    "zh-TW": "土耳其",
+    "yue": "土耳其",
+    "code": "tr"
+  },
+  "black-cameron": {
+    "ko": "말레이시아",
+    "en": "Malaysia",
+    "zh-CN": "马来西亚",
+    "zh-TW": "馬來西亞",
+    "yue": "馬來西亞",
+    "code": "my"
+  },
+  "black-rwanda": {
+    "ko": "르완다",
+    "en": "Rwanda",
+    "zh-CN": "卢旺达",
+    "zh-TW": "盧安達",
+    "yue": "盧安達",
+    "code": "rw"
+  },
+  "black-dooars": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-darjeeling-autumn": {
+    "ko": "인도",
+    "en": "India",
+    "zh-CN": "印度",
+    "zh-TW": "印度",
+    "yue": "印度",
+    "code": "in"
+  },
+  "black-yeongdeok": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "dark-fuzhuan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-qianliang": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-kangzhuan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-tibetan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-laoqingzhuan": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "dark-tianjian": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-guihua": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-milk-oolong": {
+    "ko": "대만",
+    "en": "Taiwan",
+    "zh-CN": "台湾",
+    "zh-TW": "台灣",
+    "yue": "台灣",
+    "code": "tw"
+  },
+  "blend-rose": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-lychee": {
+    "ko": "중국",
+    "en": "China",
+    "zh-CN": "中国",
+    "zh-TW": "中國",
+    "yue": "中國",
+    "code": "cn"
+  },
+  "blend-thaitea": {
+    "ko": "태국",
+    "en": "Thailand",
+    "zh-CN": "泰国",
+    "zh-TW": "泰國",
+    "yue": "泰國",
+    "code": "th"
+  },
+  "blend-yuenyeung": {
+    "ko": "홍콩",
+    "en": "Hong Kong",
+    "zh-CN": "香港",
+    "zh-TW": "香港",
+    "yue": "香港",
+    "code": "hk"
+  },
+  "blend-moroccan-mint": {
+    "ko": "모로코",
+    "en": "Morocco",
+    "zh-CN": "摩洛哥",
+    "zh-TW": "摩洛哥",
+    "yue": "摩洛哥",
+    "code": "ma"
+  },
+  "blend-russian-caravan": {
+    "ko": "러시아",
+    "en": "Russia",
+    "zh-CN": "俄罗斯",
+    "zh-TW": "俄羅斯",
+    "yue": "俄羅斯",
+    "code": "ru"
+  },
+  "blend-irish-breakfast": {
+    "ko": "아일랜드",
+    "en": "Ireland",
+    "zh-CN": "爱尔兰",
+    "zh-TW": "愛爾蘭",
+    "yue": "愛爾蘭",
+    "code": "ie"
+  },
+  "herb-cassia-seed": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-burdock": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-gugija": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-cornus": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-dandelion": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  },
+  "herb-cornsilk": {
+    "ko": "한국",
+    "en": "South Korea",
+    "zh-CN": "韩国",
+    "zh-TW": "韓國",
+    "yue": "韓國",
+    "code": "kr"
+  }
+};
+  /* ── END generated: research ── */
+
   var links = {
     channel: "https://www.youtube.com/@TeaFai",
     playlist: "https://youtu.be/5fkX0dfnHmE",
@@ -8017,8 +18165,26 @@ window.TEAFaiData = (function () {
     return fallback;
   }
 
+  function textFor(entry, lang) {
+    if (!entry) return {};
+    var chain = LANG_CHAIN[lang] || [lang, "ko"];
+    for (var i = 0; i < chain.length; i++) {
+      if (entry[chain[i]]) return normText(entry[chain[i]]);
+    }
+    return {};
+  }
+
+  function extraFor(entry, lang) {
+    if (!entry || !entry.x) return {};
+    var chain = LANG_CHAIN[lang] || [lang, "ko"];
+    for (var i = 0; i < chain.length; i++) {
+      if (entry.x[chain[i]]) return normExtra(entry.x[chain[i]]);
+    }
+    return {};
+  }
+
   function groupPost(g, lang) {
-    var text = normText(g[lang] || g.ko);
+    var text = textFor(g, lang);
     var o = {};
     var k;
     for (k in g) {
@@ -8033,13 +18199,13 @@ window.TEAFaiData = (function () {
   }
 
   function teaPost(entry, group, lang) {
-    var text = normText(entry[lang] || entry.ko);
-    var extra = normExtra(entry.x && entry.x[lang]);
+    var text = textFor(entry, lang);
+    var extra = extraFor(entry, lang);
     var o = {
       id: entry.id,
       group: entry.group,
       kind: "tea",
-      hanja: entry.h || group.hanja,
+      hanja: entry.h || entry.hanja || group.hanja,
       hz: entry.hz || "",
       hs: entry.hs || "",
       rom: entry.rom || "",
@@ -8054,7 +18220,11 @@ window.TEAFaiData = (function () {
       oxidationValue: num(entry.ox, entry.oxidationValue, group.oxidationValue),
       accent: group.accent,
       accentSoft: group.accentSoft,
-      groupName: group.name
+      groupName: group.name,
+      /* 실물 사진 · 원산지 — 카드와 상세에 함께 씁니다 */
+      photo: typeof PHOTOS !== "undefined" ? PHOTOS[entry.id] || null : null,
+      country: typeof ORIGIN !== "undefined" ? ORIGIN[entry.id] || null : null,
+      traits: (TRAITS && TRAITS[entry.id]) || ""
     };
     var k;
     for (k in text) o[k] = text[k];
@@ -8073,6 +18243,8 @@ window.TEAFaiData = (function () {
     TEAS: TEAS,
     MOODS: MOODS,
     links: links,
+    photos: typeof PHOTOS !== "undefined" ? PHOTOS : {},
+    origin: typeof ORIGIN !== "undefined" ? ORIGIN : {},
     lang: "ko",
     groups: [],
     teas: [],

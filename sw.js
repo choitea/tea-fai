@@ -2,7 +2,7 @@
    (온라인일 때는 네트워크를 먼저 보고, 새 파일이 오면 캐시를 갱신합니다.
     data/ 아래 파트너·추천 데이터는 캐시를 먼저 주고 뒤에서 갱신하는
     stale-while-revalidate 로 두어, 앱을 다시 설치하지 않아도 내용이 바뀝니다) */
-var CACHE = "teafai-v11";
+var CACHE = "teafai-v12";
 var DATA_PREFIX = "data/";
 var ASSETS = [
   "./",
@@ -12,6 +12,7 @@ var ASSETS = [
   "./supabase-adapter.js",
   "./data.js",
   "./app.js",
+  "./features.js",
   "./manifest.webmanifest",
   "./privacy.html",
   "./icons/icon-192.png",
@@ -19,7 +20,12 @@ var ASSETS = [
   "./icons/icon-maskable-512.png",
   "./icons/apple-touch-icon.png",
   "./icons/favicon-32.png",
-  "./icons/logo_tea_mark.svg"
+  "./icons/logo_tea_mark.svg",
+  "./icons/flags/ko.svg",
+  "./icons/flags/en.svg",
+  "./icons/flags/zh-CN.svg",
+  "./icons/flags/zh-TW.svg",
+  "./icons/flags/yue.svg"
 ];
 
 self.addEventListener("install", function (event) {

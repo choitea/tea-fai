@@ -16,6 +16,7 @@ css = (BASE / "styles.css").read_text(encoding="utf-8")
 data_js = (BASE / "data.js").read_text(encoding="utf-8")
 i18n_js = (BASE / "i18n.js").read_text(encoding="utf-8")
 app_js = (BASE / "app.js").read_text(encoding="utf-8")
+features_js = (BASE / "features.js").read_text(encoding="utf-8")
 supabase_js = (BASE / "supabase-adapter.js").read_text(encoding="utf-8")
 
 # PWA 전용 태그는 단일 파일에서 뺍니다
@@ -28,7 +29,7 @@ html = html.replace(
     "<style>\n" + css + "\n</style>",
 )
 html = html.replace(
-    '<script src="supabase-adapter.js"></script>\n    <script src="i18n.js"></script>\n    <script src="data.js"></script>\n    <script src="app.js"></script>',
+    '<script src="supabase-adapter.js"></script>\n    <script src="i18n.js"></script>\n    <script src="data.js"></script>\n    <script src="app.js"></script>\n    <script src="features.js"></script>',
     "<script>\n"
     + supabase_js
     + "\n</script>\n    <script>\n"
@@ -37,11 +38,13 @@ html = html.replace(
     + data_js
     + "\n</script>\n    <script>\n"
     + app_js
+    + "\n</script>\n    <script>\n"
+    + features_js
     + "\n</script>",
 )
 html = html.replace(
-    "<title>티키피디아 — 차 백과 &amp; 우림 타이머</title>",
-    "<title>티키피디아 — 차 백과 &amp; 우림 타이머 (단일 파일)</title>",
+    "<title>티키피디아 — 차 백과 · 스토어</title>",
+    "<title>티키피디아 — 차 백과 · 스토어 (단일 파일)</title>",
 )
 
 # 헤더의 茶 마크(SVG)는 단일 파일 혼자서도 보이도록 data URI로 품습니다
@@ -49,18 +52,24 @@ svg = (BASE / "icons" / "logo_tea_mark.svg").read_text(encoding="utf-8")
 svg_uri = "data:image/svg+xml;base64," + base64.b64encode(svg.encode("utf-8")).decode("ascii")
 html = html.replace('src="icons/logo_tea_mark.svg"', f'src="{svg_uri}"')
 
+# 국기 SVG 는 i18n.js 의 mountSwitcher 가 <img> 로 그리므로 data URI 로 함께 품습니다
+flags = {}
+for code, fname in (("ko", "ko"), ("en", "en"), ("zh-CN", "zh-CN"), ("zh-TW", "zh-TW"), ("yue", "yue")):
+    raw = (BASE / "icons" / "flags" / (fname + ".svg")).read_bytes()
+    flags[code] = "data:image/svg+xml;base64," + base64.b64encode(raw).decode("ascii")
+flag_js = "<script>window.TeaFaiFlags = " + json.dumps(flags) + ";</script>\n    "
+html = html.replace('<script src="i18n.js"></script>', flag_js + '<script src="i18n.js"></script>', 1)
+
 # 내장 데이터 사본
 shops = json.loads((BASE / "data" / "shops.json").read_text(encoding="utf-8"))
 affiliate = json.loads((BASE / "data" / "affiliate.json").read_text(encoding="utf-8"))
 teabags = json.loads((BASE / "data" / "teabags.json").read_text(encoding="utf-8"))
-cafes = json.loads((BASE / "data" / "cafes.json").read_text(encoding="utf-8"))
 plans = json.loads((BASE / "data" / "onboarding_plans.json").read_text(encoding="utf-8"))
 seed = json.dumps(
     {
         "shops": shops.get("shops", []),
         "affiliate": affiliate,
         "teabags": teabags,
-        "cafes": cafes,
         "plans": plans,
     },
     ensure_ascii=False,

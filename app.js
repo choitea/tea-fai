@@ -83,8 +83,26 @@
   }
 
   /* ---------------- 화면 전환 ---------------- */
-  var currentView = "home";
-  var VIEWS = ["home", "quiz", "timer", "guide", "shops", "community", "notes"];
+  /* 차 백과가 1번 탭이자 기본 첫 화면입니다. */
+  var currentView = "guide";
+  var VIEWS = ["guide", "timer", "store", "partner", "community", "notes", "quiz"];
+
+  /* 계열 버튼·백과 목록 순서 — 녹차·우롱차·홍차·흑차(보이차)·백차·황차 다음에
+     화차(가향차)·대용차·허브차·과일차가 옵니다. */
+  var GROUP_ORDER = ["green", "oolong", "black", "dark", "white", "yellow", "blended", "herbal", "herb", "fruit"];
+
+  function orderedGroups() {
+    var out = [];
+    GROUP_ORDER.forEach(function (id) {
+      D.groups.forEach(function (g) {
+        if (g.id === id) out.push(g);
+      });
+    });
+    D.groups.forEach(function (g) {
+      if (GROUP_ORDER.indexOf(g.id) < 0) out.push(g);
+    });
+    return out;
+  }
 
   function titleFor(view) {
     return t("title." + view);
@@ -97,20 +115,20 @@
       sec.classList.toggle("active", sec.id === "view-" + view);
     });
     $$(".tab").forEach(function (tab) {
-      /* 취향 테스트는 오늘의 차에서 열리므로 홈 탭을 켜 둡니다 */
-      var on = tab.getAttribute("data-view") === (view === "quiz" ? "home" : view);
+      /* 취향 테스트는 차 백과에서 열리므로 백과 탭을 켜 둡니다 */
+      var on = tab.getAttribute("data-view") === (view === "quiz" ? "guide" : view);
       tab.classList.toggle("active", on);
       if (on) tab.setAttribute("aria-current", "page");
       else tab.removeAttribute("aria-current");
     });
     document.title = titleFor(view);
     window.scrollTo(0, 0);
-    if (view === "home") renderRecentNote();
-    if (view === "shops") {
+    if (view === "partner") {
+      renderMemberPanel();
       renderPartnerShops();
-      renderCafeList();
     }
     if (view === "community") renderPostList();
+    if (view === "store") renderStore();
     if (view === "guide") {
       renderTeaList();
       renderBagList();
@@ -124,173 +142,12 @@
   });
 
   /* ============================================================
-     1. 오늘의 차
+     1. 차 백과 (기본 첫 화면) — 계열 필터 · 162종 · 실물 사진 · 원산지
      ============================================================ */
-  var homeState = { mood: null };
-
-  function moodById(id) {
-    for (var i = 0; i < D.moods.length; i++) if (D.moods[i].id === id) return D.moods[i];
-    return D.moods[0];
-  }
-  function defaultMoodId() {
-    var h = new Date().getHours();
-    if (h >= 5 && h < 11) return "morning";
-    if (h >= 11 && h < 15) return "aftermeal";
-    if (h >= 15 && h < 19) return "afternoon";
-    return "night";
-  }
-
-  function renderHomeDate() {
-    var node = $("#homeDate");
-    if (!node) return;
-    node.textContent = L.fmtDate(lang, new Date());
-  }
-
-  function renderMoodChips() {
-    var wrap = $("#moodChips");
-    if (!wrap) return;
-    wrap.innerHTML = "";
-    D.moods.forEach(function (m) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip";
-      btn.setAttribute("aria-pressed", String(m.id === homeState.mood));
-      btn.innerHTML = '<svg><use href="#ic-' + m.icon + '"/></svg><span>' + esc(m.label) + "</span>";
-      btn.addEventListener("click", function () {
-        homeState.mood = m.id;
-        renderMoodChips();
-        renderReco();
-      });
-      wrap.appendChild(btn);
-    });
-  }
-
-  function renderReco() {
-    var area = $("#recoArea");
-    if (!area) return;
-    var mood = moodById(homeState.mood);
-    var tea = D.byId(mood.teaId);
-    var alt = D.byId(mood.alt);
-    var oxText = /^\d/.test(tea.oxidation || "")
-      ? t("reco.ox", { value: tea.oxidation })
-      : tea.oxidation || "";
-
-    area.innerHTML =
-      '<article class="reco" data-glyph="' +
-      esc(tea.hanja) +
-      '">' +
-      '<div class="reco-top">' +
-      "<span>" +
-      esc(mood.label) +
-      "</span><span>·</span><span>" +
-      esc(t("reco.pick")) +
-      "</span>" +
-      "</div>" +
-      '<div class="reco-tea">' +
-      '<span class="reco-glyph" style="background:' +
-      tea.accent +
-      "33;border-color:" +
-      tea.accent +
-      '66">' +
-      esc(tea.hanja) +
-      "</span>" +
-      "<span>" +
-      '<span class="reco-name">' +
-      esc(tea.name) +
-      "</span>" +
-      '<span class="reco-sub">' +
-      esc(tea.sub) +
-      " · " +
-      esc(oxText) +
-      "</span></span>" +
-      "</div>" +
-      '<p class="reco-headline">' +
-      esc(mood.headline) +
-      "</p>" +
-      '<p class="reco-reason">' +
-      esc(mood.reason) +
-      "</p>" +
-      '<div class="reco-stats">' +
-      '<div class="reco-stat"><b>' +
-      esc(tea.temp) +
-      "℃</b><span>" +
-      esc(t("reco.temp")) +
-      "</span></div>" +
-      '<div class="reco-stat"><b>' +
-      esc(tea.leaf) +
-      "</b><span>" +
-      esc(t("reco.leaf", { water: tea.water })) +
-      "</span></div>" +
-      '<div class="reco-stat"><b>' +
-      esc(fmtDur(tea.steeps[0])) +
-      "</b><span>" +
-      esc(t("reco.first")) +
-      "</span></div>" +
-      "</div>" +
-      '<p class="reco-reason" style="font-size:12px;opacity:.7;margin-bottom:14px">' +
-      esc(mood.tip) +
-      "</p>" +
-      '<div class="reco-actions">' +
-      '<button class="btn btn-primary" type="button" id="recoBrew">' +
-      esc(t("reco.brew")) +
-      "</button>" +
-      '<button class="btn btn-ghost" type="button" id="recoAlt">' +
-      esc(t("reco.alt", { name: alt.name })) +
-      "</button>" +
-      "</div>" +
-      "</article>";
-
-    $("#recoBrew").addEventListener("click", function () {
-      setTimerTea(tea.id, 1);
-      go("timer");
-      toast(t("toast.recoSet", { name: tea.name, dur: fmtDur(tea.steeps[0]) }));
-    });
-    $("#recoAlt").addEventListener("click", function () {
-      setTimerTea(alt.id, 1);
-      go("timer");
-      toast(t("toast.toTimer", { name: alt.name }));
-    });
-  }
-
-  function renderRecentNote() {
-    var wrap = $("#recentNote");
-    if (!wrap) return;
-    var notes = loadNotes();
-    if (!notes.length) {
-      wrap.innerHTML = "";
-      return;
-    }
-    var n = notes[0];
-    var tea = D.byId(n.teaId);
-    wrap.innerHTML =
-      '<div class="section-head"><h2>' +
-      esc(t("home.recentTitle")) +
-      "</h2><span>" +
-      esc(t("home.recentSub")) +
-      "</span></div>" +
-      '<button class="note-item" type="button" id="recentNoteBtn" style="display:block;width:100%;text-align:left;padding-right:15px">' +
-      '<span class="note-top" style="display:flex"><span class="note-tea" style="background:' +
-      tea.accentSoft +
-      ";color:" +
-      tea.accent +
-      '">' +
-      esc(tea.name) +
-      '</span><span class="note-stars">' +
-      starsMark(n.rating) +
-      "</span>" +
-      '<span class="note-date">' +
-      esc(noteDate(n)) +
-      "</span></span>" +
-      '<span class="note-name" style="display:block;font-size:14.5px">' +
-      esc(n.name) +
-      "</span>" +
-      '<span class="note-text" style="display:block">' +
-      esc(n.note || t("home.recentEmpty")) +
-      "</span>" +
-      "</button>";
-    $("#recentNoteBtn").addEventListener("click", function () {
-      go("notes");
-    });
+  /* 취향 태그 비교의 기준 차 — 퀴즈 결과가 있으면 그 차 */
+  function referenceTeaId() {
+    if (quizState.result && quizState.result.best && quizState.result.best.tea) return quizState.result.best.tea.id;
+    return (D.teas[0] && D.teas[0].id) || "green-longjing";
   }
 
   /* ============================================================
@@ -732,11 +589,13 @@
      ============================================================ */
   var guideState = { q: "", filter: "all", open: null };
 
+  /* 계열 버튼: 전체 → 녹차·우롱차·홍차·흑차(보이차)·백차·황차 → 화차·대용차·허브차·과일차
+     가로 스크롤 없이 한눈에 보이도록 CSS(.chip-row.wrap)에서 줄바꿈합니다. */
   function renderFilterChips() {
     var wrap = $("#filterChips");
     if (!wrap) return;
     var items = [{ id: "all", name: t("guide.all") }].concat(
-      D.groups.map(function (g) {
+      orderedGroups().map(function (g) {
         return { id: g.id, name: g.name };
       })
     );
@@ -776,6 +635,47 @@
     ]
       .join(" ")
       .toLowerCase();
+  }
+
+  /* 원산지 배지 — 차 데이터의 country(4개 언어 + 광동어) 를 그대로 씁니다 */
+  function countryName(item) {
+    var c = item.country;
+    if (!c) return "";
+    return c[lang] || c.zh-TW || c.en || c.ko || "";
+  }
+
+  function photoSrc(photo) {
+    return "images/teas/" + photo.f;
+  }
+
+  /* 상세 안의 실물 사진 — 찍은 사람과 라이선스를 정확히 적습니다(CC BY-SA 등) */
+  function teaPhotoHtml(item) {
+    var p = item.photo;
+    if (!p) return "";
+    var tag = p.m === "exact" ? t("photo.exact") : t("photo.family");
+    var artist = p.cr || "Wikimedia Commons";
+    var lic = p.lu
+      ? '<a href="' + esc(p.lu) + '" target="_blank" rel="noopener">' + esc(p.lic || "") + "</a>"
+      : esc(p.lic || "");
+    var src = p.pg
+      ? ' · <a href="' + esc(p.pg) + '" target="_blank" rel="noopener">' + esc(t("photo.source")) + "</a>"
+      : "";
+    return (
+      '<figure class="tea-photo">' +
+      '<img src="' +
+      esc(photoSrc(p)) +
+      '" alt="' +
+      esc(item.name) +
+      '" loading="lazy" width="480" height="320" onerror="this.style.display=\'none\'" />' +
+      '<figcaption><span class="ph-tag">' +
+      esc(tag) +
+      "</span>" +
+      esc(artist) +
+      " · " +
+      lic +
+      src +
+      "</figcaption></figure>"
+    );
   }
 
   function cardHtml(item) {
@@ -818,6 +718,19 @@
       })
       .join("");
 
+    /* 계열 카드는 사진이 없으니 漢字 배지를, 품종 카드는 실제 찻잎 사진을 씁니다 */
+    var lead = isGroup
+      ? '<span class="tea-glyph" style="background:' + item.accentSoft + ";color:" + item.accent + '">' + esc(item.hanja) + "</span>"
+      : item.photo
+        ? '<span class="tea-thumb"><img src="' + esc(photoSrc(item.photo)) + '" alt="" loading="lazy" width="54" height="54" /></span>'
+        : '<span class="tea-glyph" style="background:' + item.accentSoft + ";color:" + item.accent + '">' + esc(item.hanja) + "</span>";
+
+    var country = isGroup ? "" : countryName(item);
+    var meta =
+      esc(item.groupName) +
+      (isGroup ? " · " + esc(t("unit.teas", { n: item.count })) : " · " + esc(item.rounds || "")) +
+      (country ? '<span class="origin-badge">' + esc(country) + "</span>" : "");
+
     return (
       '<article class="tea-card' +
       (open ? " open" : "") +
@@ -831,20 +744,13 @@
       open +
       '">' +
       '<div class="tea-head">' +
-      '<span class="tea-glyph" style="background:' +
-      item.accentSoft +
-      ";color:" +
-      item.accent +
-      '">' +
-      esc(item.hanja) +
-      "</span>" +
+      lead +
       '<span class="tea-title"><b>' +
       esc(item.name) +
       '</b><span class="tea-native">' +
       nativeLine.join(" · ") +
       '</span><span class="tea-meta">' +
-      esc(item.groupName) +
-      (isGroup ? " · " + esc(t("unit.teas", { n: item.count })) : " · " + esc(item.rounds || "")) +
+      meta +
       "</span></span>" +
       '<span class="tea-caret"><svg width="17" height="17"><use href="#ic-caret"/></svg></span>' +
       "</div>" +
@@ -871,8 +777,16 @@
       "</div>" +
       "</button>" +
       '<div class="tea-more"><div><div class="tea-more-inner">' +
+      (isGroup ? "" : teaPhotoHtml(item)) +
       detailHtml +
       (isGroup ? "" : teaShopBlockHtml(item.id) + buyBlockHtml(item)) +
+      (isGroup
+        ? ""
+        : '<button class="btn btn-outline btn-block" type="button" data-store-tea="' +
+          item.id +
+          '"><svg width="15" height="15" style="vertical-align:-2px;margin-right:5px"><use href="#ic-store"/></svg>' +
+          esc(t("store.forTea")) +
+          "</button>") +
       '<button class="btn btn-dark btn-block" type="button" data-timer="' +
       item.id +
       '">' +
@@ -889,7 +803,7 @@
     var q = guideState.q.trim().toLowerCase();
     var out = [];
 
-    D.groups.forEach(function (g) {
+    orderedGroups().forEach(function (g) {
       if (guideState.filter !== "all" && guideState.filter !== g.id) return;
       var cards = [g].concat(D.teasOf(g.id)).filter(function (item) {
         if (!q) return true;
@@ -949,6 +863,13 @@
         setTimerTea(id, 1);
         go("timer");
         toast(t("toast.toTimer", { name: D.byId(id).name }));
+      });
+    });
+    /* 이 차 사기 → 스토어에서 같은 이름으로 찾아 줍니다 */
+    $$("[data-store-tea]", list).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-store-tea");
+        openStoreFor(id);
       });
     });
   }
@@ -1099,7 +1020,6 @@
         });
         saveNotes(next);
         renderNotes();
-        renderRecentNote();
         toast(t("toast.deleted"));
       });
     });
@@ -1136,7 +1056,6 @@
     noteState.rating = 0;
     renderStarRow();
     renderNotes();
-    renderRecentNote();
     toast(t("toast.saved"));
   }
 
@@ -1278,7 +1197,7 @@
   function quizBack() {
     window.clearTimeout(quizState.timer);
     if (quizState.step === 0) {
-      go("home");
+      go("guide");
       return;
     }
     quizState.step -= 1;
@@ -1733,8 +1652,7 @@
 
   /* 취향 태그가 겹치는 수 — 퀴즈 결과가 있으면 그 차, 없으면 오늘의 차 기준 */
   function tasteMatch(shop) {
-    var refId = quizState.result ? quizState.result.best.tea.id : moodById(homeState.mood).teaId;
-    var mine = traitList(refId);
+    var mine = traitList(referenceTeaId());
     var n = 0;
     (shop.tasteTags || []).forEach(function (tag) {
       if (mine.indexOf(tag) >= 0) n += 1;
@@ -1948,6 +1866,7 @@
   }
 
   function teaShopBlockHtml(teaId) {
+    if (window.TeaFaiExtra && !window.TeaFaiExtra.unlocked()) return "";
     var list = shopsForTea(teaId);
     if (!list.length) return "";
     return (
@@ -2152,7 +2071,8 @@
           "</a>"
       );
     }
-    shopsForTea(tea.id).forEach(function (shop) {
+    var shopList = window.TeaFaiExtra && !window.TeaFaiExtra.unlocked() ? [] : shopsForTea(tea.id);
+    shopList.forEach(function (shop) {
       links.push(
         '<a class="de-link" href="' +
           esc(mapHref(shop)) +
@@ -2174,7 +2094,6 @@
      5. 티백 검색 — 브랜드·차종·향미로 찾고 그대로 우리기
      ============================================================ */
   var BAGS_KEY = "teafai.bags.v1";
-  var CAFES_KEY = "teafai.cafes.v1";
   var PLANS_KEY = "teafai.plans.v1";
   var POSTS_KEY = "teafai.posts.v1";
   var APPS_KEY = "teafai.applications.v1";
@@ -2190,11 +2109,6 @@
   var TAG_KEYS = ["a-floral", "a-fruit", "a-roast", "a-grass", "a-malt", "a-herb", "k-sweet", "k-crisp"];
 
   /* 파트너 매장은 shops.json 의 지역 표기가 달라 슬러그로 지역을 맞춥니다 */
-  var PARTNER_REGION = {
-    "hongkongtea-bulgwang": "eunpyeong",
-    "pungsungh-buffet-sindang": "jung"
-  };
-
   function anyText(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
@@ -2211,16 +2125,13 @@
   function loadFeatureData() {
     var seed = seedJson() || {};
     FEATURE.bags = cacheOrSeed(BAGS_KEY, seed.teabags);
-    FEATURE.cafes = cacheOrSeed(CAFES_KEY, seed.cafes);
+    FEATURE.cafes = null; /* 무료 찻집 데이터는 삭제했습니다 */
     FEATURE.plans = cacheOrSeed(PLANS_KEY, seed.plans);
     renderFeatureSections();
 
     if (!("fetch" in window) || location.protocol === "file:") return;
     Promise.all([
       readJson("data/teabags.json", BAGS_KEY).catch(function () {
-        return null;
-      }),
-      readJson("data/cafes.json", CAFES_KEY).catch(function () {
         return null;
       }),
       readJson("data/onboarding_plans.json", PLANS_KEY).catch(function () {
@@ -2232,12 +2143,8 @@
         FEATURE.bags = res[0];
         changed = true;
       }
-      if (res[1] && res[1].cafes) {
-        FEATURE.cafes = res[1];
-        changed = true;
-      }
-      if (res[2] && res[2].plans) {
-        FEATURE.plans = res[2];
+      if (res[1] && res[1].plans) {
+        FEATURE.plans = res[1];
         changed = true;
       }
       if (changed) renderFeatureSections();
@@ -2250,7 +2157,6 @@
     renderRegionChips();
     renderCafeTagChips();
     renderPartnerShops();
-    renderCafeList();
     renderApplyMeta();
     renderPostForm();
     renderPostList();
@@ -2567,10 +2473,7 @@
   function partnerMatches(shop) {
     var q = cafeQuery();
     if (cafeState.tag !== "all" && (shop.tasteTags || []).indexOf(cafeState.tag) < 0) return false;
-    if (cafeState.region !== "all") {
-      var reg = PARTNER_REGION[shop.slug];
-      if (reg && reg !== cafeState.region) return false;
-    }
+    if (cafeState.region !== "all" && l10n(shop.region) !== cafeState.region) return false;
     if (!q) return true;
     var hay = [anyText(shop.name), anyText(shop.region), anyText(shop.near), anyText(shop.address), anyText(shop.desc)]
       .concat(
@@ -2583,23 +2486,39 @@
     return hay.indexOf(q) >= 0;
   }
 
+  /* 지역 칩 — 입점 파트너 매장의 지역 표기에서 그대로 만듭니다
+     (서울 주요 찻집 14곳의 무료 데이터는 삭제했습니다) */
+  function partnerRegions() {
+    var out = [];
+    (PARTNER.shops || []).forEach(function (shop) {
+      var name = l10n(shop.region);
+      if (name && out.indexOf(name) < 0) out.push(name);
+    });
+    return out;
+  }
+
   function renderRegionChips() {
     var wrap = $("#regionChips");
-    if (!wrap || !FEATURE.cafes) return;
+    if (!wrap) return;
+    var regions = partnerRegions();
+    if (cafeState.region !== "all" && regions.indexOf(cafeState.region) < 0) cafeState.region = "all";
     wrap.innerHTML = "";
     [{ id: "all", name: t("cafe.regionAll") }]
-      .concat(FEATURE.cafes.regions || [])
+      .concat(
+        regions.map(function (name) {
+          return { id: name, name: name };
+        })
+      )
       .forEach(function (r) {
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = "chip small";
         btn.setAttribute("aria-pressed", String(cafeState.region === r.id));
-        btn.textContent = l10n(r.name);
+        btn.textContent = r.name;
         btn.addEventListener("click", function () {
           cafeState.region = r.id;
           renderRegionChips();
           renderPartnerShops();
-          renderCafeList();
         });
         wrap.appendChild(btn);
       });
@@ -2625,7 +2544,6 @@
           cafeState.tag = item.id;
           renderCafeTagChips();
           renderPartnerShops();
-          renderCafeList();
         });
         wrap.appendChild(btn);
       });
@@ -2636,6 +2554,12 @@
     var head = $("#partnerHead");
     var count = $("#partnerCount");
     if (!row) return;
+    /* 비구독 상태에서는 파트너 목록·지역 검색을 열지 않습니다(잠금 카드만 보입니다) */
+    if (window.TeaFaiExtra && !window.TeaFaiExtra.unlocked()) {
+      row.innerHTML = "";
+      if (count) count.textContent = "";
+      return;
+    }
     var shops = (PARTNER.shops || []).filter(partnerMatches).sort(function (a, b) {
       return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0) || (b.tier || 0) - (a.tier || 0);
     });
@@ -2763,30 +2687,9 @@
     );
   }
 
+  /* 무료 찻집 디렉터리는 삭제했습니다 — 파트너 목록만 남습니다. */
   function renderCafeList() {
-    var list = $("#cafeList");
-    if (!list) return;
-    var cafes = FEATURE.cafes
-      ? (FEATURE.cafes.cafes || []).filter(cafeMatches).sort(function (a, b) {
-          return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0);
-        })
-      : [];
-    var count = $("#cafeCount");
-    if (count) count.textContent = t("cafe.count", { n: cafes.length });
-    var note = $("#cafeNote");
-    if (note) note.textContent = FEATURE.cafes ? t("cafe.note") : "";
-    if (!cafes.length) {
-      list.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
-      return;
-    }
-    list.innerHTML = cafes.map(cafeCardHtml).join("");
-    $$("[data-cafe-more]", list).forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var slug = btn.getAttribute("data-cafe-more");
-        cafeState.open = cafeState.open === slug ? null : slug;
-        renderCafeList();
-      });
-    });
+    return null;
   }
 
   /* ============================================================
@@ -3587,7 +3490,6 @@
       cafeInput.addEventListener("input", function () {
         cafeState.q = cafeInput.value;
         renderPartnerShops();
-        renderCafeList();
       });
     }
     openGuideTab(guideState.tab || "leaf", false);
@@ -3610,13 +3512,54 @@
   }
 
   /* ============================================================
+     스토어 · 파트너 회원 — features.js 로 넘깁니다
+     ============================================================ */
+  function renderStore() {
+    if (window.TeaFaiExtra) window.TeaFaiExtra.renderStore();
+  }
+  function renderMemberPanel() {
+    if (window.TeaFaiExtra) window.TeaFaiExtra.renderMemberPanel();
+  }
+  function openStoreFor(id) {
+    if (window.TeaFaiExtra) window.TeaFaiExtra.openStoreFor(id);
+  }
+
+  /* features.js 가 쓰는 공용 함수 — app.js 안의 것을 그대로 넘겨 줍니다 */
+  window.TeaFaiApp = {
+    t: t,
+    esc: esc,
+    go: go,
+    toast: toast,
+    D: D,
+    L: L,
+    l10n: l10n,
+    won: won,
+    fmtDur: fmtDur,
+    storeGet: storeGet,
+    storeSet: storeSet,
+    bagBrandName: function (bag) {
+      return bagBrandName(bag);
+    },
+    renderPartnerShops: function () {
+      renderPartnerShops();
+    },
+    partner: PARTNER,
+    feature: FEATURE
+  };
+  try {
+    Object.defineProperty(window.TeaFaiApp, "lang", {
+      get: function () {
+        return lang;
+      }
+    });
+  } catch (e) {
+    window.TeaFaiApp.lang = lang;
+  }
+
+  /* ============================================================
      언어 전환 · 시작
      ============================================================ */
   function rerender() {
-    renderHomeDate();
-    renderMoodChips();
-    renderReco();
-    renderRecentNote();
     renderGroupChips();
     renderTeaChips();
     renderSteepRow();
@@ -3635,7 +3578,8 @@
     renderRegionChips();
     renderCafeTagChips();
     renderPartnerShops();
-    renderCafeList();
+    renderMemberPanel();
+    renderStore();
     renderCommFilters();
     renderPostForm();
     renderPostList();
@@ -3662,12 +3606,6 @@
     L.setDocumentLang(lang);
     D.use(lang);
     L.mountSwitcher($("#langSwitch"), lang, setLang);
-
-    renderHomeDate();
-    homeState.mood = defaultMoodId();
-    renderMoodChips();
-    renderReco();
-    renderRecentNote();
 
     var lastTea = storeGet(LAST_TEA_KEY, null);
     var startId = lastTea && D.byId(lastTea).id === lastTea ? lastTea : D.teas[0].id;
@@ -3702,12 +3640,14 @@
     $("#noteForm").addEventListener("submit", submitNote);
     loadPartnerData();
     loadFeatureData();
+    if (window.TeaFaiExtra) window.TeaFaiExtra.init();
 
     document.title = titleFor(currentView);
 
     var hash = (location.hash || "").replace("#", "");
     if (hash === "quiz") openQuiz();
-    else if (VIEWS.indexOf(hash) >= 0 && hash !== "home") go(hash);
+    else if (VIEWS.indexOf(hash) >= 0 && hash !== "guide") go(hash);
+    else go("guide");
     window.addEventListener("hashchange", function () {
       var h = (location.hash || "").replace("#", "");
       if (h === "quiz") openQuiz();

@@ -6,6 +6,10 @@
    · 테이블 정의는 tea_fai_platform/schema.sql 과 맞춰 두었습니다.
        커뮤니티 글  → public.community_posts   (§15)
        입점 신청    → public.shop_applications (§6)
+       새 티백 등록 → public.community_posts (post_type=bag, 제목에 [새 티백])
+       사업자 상품  → public.community_posts (post_type=bag, 제목에 [사업자 상품])
+     두 등록은 새 표를 만들지 않고 이미 RLS 가 열린 community_posts 에 쌓습니다
+     (앱 안의 백과·스토어 반영은 운영자가 검수한 뒤 합니다).
    · anon 키는 공개되어도 되는 키지만, 쓰기 권한은 RLS 정책으로만
      열립니다. 서버를 붙일 때는 schema.sql 의 정책을 먼저 적용하세요.
    ============================================================ */
@@ -117,7 +121,7 @@ window.TeaFaiSupabase = (function () {
       tea_name: String(p.teaName || "").slice(0, 120) || null,
       nickname: String(p.nickname || "").slice(0, 20),
       body: String(p.body || "").slice(0, 1000),
-      lang: p.lang || "ko",
+      lang: p.lang === "yue" ? "zh-TW" : p.lang || "ko",
       status: "published"
     };
   }
@@ -196,6 +200,52 @@ window.TeaFaiSupabase = (function () {
     return request("POST", cfg().tables.applications, applicationRow(app), null, "return=minimal");
   }
 
+  /* ---------- 새 티백 등록 (스마트렌즈) ---------- */
+  /* community_posts 는 post_type 이 review|bag|question 만 허용합니다.
+     새 티백은 post_type=bag 으로, 본문 첫 줄에 표식을 남겨 구분합니다. */
+  function submitTeaBag(entry) {
+    var e = entry || {};
+    var lines = ["[새 티백] 스마트렌즈 등록"];
+    if (e.brand) lines.push("브랜드: " + e.brand);
+    if (e.type) lines.push("차 종류: " + e.type);
+    if (e.barcode) lines.push("바코드: " + e.barcode);
+    if (e.note) lines.push("메모: " + e.note);
+    var row = {
+      client_id: String(e.id || "tb" + Date.now()),
+      post_type: "bag",
+      rating: null,
+      teabag_id: null,
+      tea_name: String(e.name || "").slice(0, 120),
+      nickname: String(e.brand || "티백 등록").slice(0, 20),
+      body: lines.join("\n").slice(0, 1000),
+      lang: e.lang === "yue" ? "zh-TW" : e.lang || "ko",
+      status: "published"
+    };
+    return request("POST", cfg().tables.posts, row, null, "return=minimal");
+  }
+
+  /* ---------- 사업자 회원의 자사 찻잎·차 상품 등록 ---------- */
+  function submitShopTea(entry) {
+    var e = entry || {};
+    var lines = ["[사업자 상품] 찻잎·차 등록"];
+    if (e.price) lines.push("가격: " + e.price + "원");
+    if (e.weight) lines.push("용량: " + e.weight);
+    if (e.origin) lines.push("산지: " + e.origin);
+    if (e.note) lines.push("소개: " + e.note);
+    var row = {
+      client_id: String(e.id || "bz" + Date.now()),
+      post_type: "bag",
+      rating: null,
+      teabag_id: null,
+      tea_name: String(e.name || "").slice(0, 120),
+      nickname: String(e.owner || "사업자 등록").slice(0, 20),
+      body: lines.join("\n").slice(0, 1000),
+      lang: e.lang === "yue" ? "zh-TW" : e.lang || "ko",
+      status: "published"
+    };
+    return request("POST", cfg().tables.posts, row, null, "return=minimal");
+  }
+
   /* 화면에 현재 저장 위치를 알려 줄 문구용 */
   function mode() {
     return isConfigured() ? "server" : "local";
@@ -207,6 +257,8 @@ window.TeaFaiSupabase = (function () {
     submitPost: submitPost,
     fetchPosts: fetchPosts,
     submitApplication: submitApplication,
+    submitTeaBag: submitTeaBag,
+    submitShopTea: submitShopTea,
     postRow: postRow,
     applicationRow: applicationRow
   };
