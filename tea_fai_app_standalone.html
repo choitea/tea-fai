@@ -2040,7 +2040,7 @@ window.TEAFaiI18N = (function () {
       "reco.leaf": "{water} 물",
       "reco.first": "첫 우리",
       "reco.brew": "바로 우리기",
-      "reco.alt": "{name}로 보기",
+      "reco.alt": "{name} 보기",
       "reco.ox": "산화 {value}",
       "toast.recoSet": "{name} {dur}로 맞춰 두었습니다",
       "toast.toTimer": "{name} 타이머로 이동했습니다",
@@ -3557,7 +3557,7 @@ window.TEAFaiData = (function () {
       id: "scented",
       kind: "group",
       hanja: "香",
-      sub: "Scented & Herbal",
+      sub: "Scented & Blended",
       accent: "#6F6486",
       accentSoft: "#ECE8F1",
       temp: 96,
@@ -3565,82 +3565,72 @@ window.TEAFaiData = (function () {
       leaf: "3g",
       water: "200ml",
       steeps: [180, 240, 240],
-      maxSteep: 3,
+      maxSteep: 2,
       oxidationValue: 90,
       ko: {
-        name: "가향차 · 홍콩티 · 허브차",
-        oneLine: "꽃과 향, 그리고 카페인 없이 마시는 잔까지 — 차의 울타리 밖도 담았습니다.",
-        oxidation: "차에 따라 다름",
-        ratioNote: "잎차 3g에 200ml, 꽃차는 2~3g, 밀크티 블렌드는 8g에 200ml",
-        rounds: "1~3회",
-        steepBasis: "향을 입힌 차는 3분 안쪽이 향의 정점입니다. 꽃차·허브차는 5분 이상 우려도 쓰지 않습니다.",
+        name: "가향차 · 블렌딩",
+        oneLine: "향을 입히고 차를 섞어 만드는 차 — 홍콩 티하우스의 한 잔까지.",
+        oxidation: "베이스에 따름",
+        ratioNote: "3g에 200ml, 밀크티 블렌드는 8g에 200ml",
+        rounds: "1~2회",
+        steepBasis: "향을 입힌 차는 3분 안쪽이 향의 정점입니다.",
         process:
-          "가향은 분무·껍질 첨가·꽃잎 첨가·인향 네 갈래로 이루어집니다. 자스민은 밤에 핀 꽃을 홍차·녹차에 여러 번 겹쳐 향을 옮기고, 국화·캐모마일·루이보스는 꽃과 잎을 말려 그대로 우립니다.",
-        varieties: ["얼그레이", "자스민(모리화차)", "홍콩식 밀크티 블렌드", "국화차", "루이보스", "캐모마일"],
+          "가향은 분무·껍질 첨가·꽃잎 첨가·인향 네 갈래로 이루어집니다. 자스민은 밤에 핀 꽃을 여러 번 겹쳐 향을 옮기고, 홍콩 밀크티는 여러 홍차를 섞어 진하게 우립니다.",
+        varieties: ["얼그레이·레이디 그레이", "잉글리시 브렉퍼스트·애프터눈 티", "자스민(모리화차)", "홍콩식 밀크티"],
         flavor:
-          "베르가못은 시트러스와 꽃, 자스민은 달콤한 흰 꽃, 국화는 청량한 약재향, 루이보스는 바닐라와 무화과, 캐모마일은 사과와 꿀에 가깝습니다.",
-        pairing:
-          "가향 홍차는 스콘·마들렌·약과, 자스민은 중식과 디저트, 국화는 호두·대추, 루이보스는 우유와 잘 맞습니다. 캐모마일은 꿀 한 스푼이면 충분합니다.",
-        keep:
-          "가향차는 개봉 후 3개월이 향의 정점입니다. 불투명 밀봉 용기에 담아 열·빛·습기를 피하고, 허브차는 1년 안에 드세요.",
+          "베르가못은 시트러스와 꽃, 자스민은 달콤한 흰 꽃, 홍콩 밀크티는 진한 몰트와 연유의 단맛입니다.",
+        pairing: "가향 홍차는 스콘·마들렌·약과, 자스민은 중식과 디저트, 밀크티는 파인애플 번과 달걀 타르트.",
+        keep: "가향차는 개봉 후 3개월이 향의 정점입니다. 불투명 밀봉 용기에 담아 열·빛·습기를 피합니다.",
         brewTip:
-          "꽃차와 허브차는 끓는 물 95도에서 5분, 뚜껑을 덮어 향을 잡습니다. 밀크티 블렌드는 5분 진하게 우려야 얼음과 우유에 향이 지지 않습니다.",
-        keywords: "얼그레이 자스민 모리화 홍콩 밀크티 국화 루이보스 캐모마일 허브 카페인 꽃차"
+          "티백은 90~95도에 2분 30초~3분. 밀크티 블렌드는 5분 진하게 우려야 얼음과 우유에 향이 지지 않습니다.",
+        keywords: "얼그레이 레이디그레이 잉글리시브렉퍼스트 애프터눈 자스민 모리화 홍콩 밀크티 블렌딩"
       },
       en: {
-        name: "Scented · Hong Kong · Herbal",
-        oneLine: "Flowers, fragrance, and cups without caffeine — the teas beyond the tea bush.",
-        oxidation: "Varies by tea",
-        ratioNote: "3 g leaf to 200 ml; 2–3 g for flowers; 8 g to 200 ml for a milk-tea blend",
-        rounds: "1–3 infusions",
-        steepBasis: "For scented tea, the aroma peaks within 3 minutes. Flower and herbal teas can steep 5 minutes without turning bitter.",
+        name: "Scented & Blended",
+        oneLine: "Teas that are scented, layered and blended — down to a Hong Kong tea-house cup.",
+        oxidation: "Follows the base",
+        ratioNote: "3 g to 200 ml; 8 g to 200 ml for a milk-tea blend",
+        rounds: "1–2 infusions",
+        steepBasis: "A scented tea peaks within three minutes.",
         process:
-          "Scenting has four routes: spraying, adding peel, adding petals, and absorption (yinxiang). Jasmine is layered with flowers picked at night, again and again; chrysanthemum, chamomile and rooibos are simply dried and steeped.",
-        varieties: ["Earl Grey", "Jasmine", "Hong Kong milk tea blend", "Chrysanthemum", "Rooibos", "Chamomile"],
+          "Scenting has four routes: spraying, adding peel, adding petals, and absorption. Jasmine is layered with night flowers again and again; Hong Kong milk tea blends several black teas and brews them strong.",
+        varieties: ["Earl Grey · Lady Grey", "English Breakfast · Afternoon Tea", "Jasmine", "Hong Kong milk tea"],
         flavor:
-          "Bergamot is citrus and flower, jasmine a sweet white blossom, chrysanthemum a cool medicinal note, rooibos vanilla and fig, chamomile apple and honey.",
-        pairing:
-          "Scented black tea with scones, madeleines and yakgwa; jasmine with Chinese food and desserts; chrysanthemum with walnuts and dates; rooibos with milk. Chamomile needs only a spoon of honey.",
-        keep: "A scented tea peaks within three months of opening. Keep it opaque and sealed, away from heat, light and damp; drink herbal teas within a year.",
-        brewTip:
-          "Flower and herbal teas take boiling water at 95 °C for 5 minutes with a lid on to hold the aroma. A milk-tea blend needs a strong 5-minute steep so milk and ice don't flatten it.",
-        keywords: "earl grey jasmine hong kong milk tea chrysanthemum rooibos chamomile herbal caffeine free flower"
+          "Bergamot is citrus and flower, jasmine a sweet white blossom, Hong Kong milk tea strong malt with the sweetness of evaporated milk.",
+        pairing: "Scented black tea with scones, madeleines and yakgwa; jasmine with Chinese food and desserts; milk tea with a pineapple bun and an egg tart.",
+        keep: "A scented tea peaks within three months of opening; keep it opaque and sealed, away from heat, light and damp.",
+        brewTip: "A tea bag at 90–95 °C for 2½–3 minutes; a milk-tea blend needs five strong minutes so ice and milk don't flatten it.",
+        keywords: "earl grey lady grey english breakfast afternoon jasmine hong kong milk tea blend"
       },
       "zh-CN": {
-        name: "加香茶 · 港式 · 花草茶",
-        oneLine: "花香、港式，还有不含咖啡因的一杯——茶树之外的茶也收进来了。",
-        oxidation: "因茶而异",
-        ratioNote: "叶茶3克配200毫升，花茶2~3克，奶茶拼配8克配200毫升",
-        rounds: "1~3泡",
-        steepBasis: "加香茶在3分钟以内香气最好。花草茶泡5分钟以上也不苦涩。",
-        process:
-          "加香有喷雾、加果皮、加花瓣、窨香四种方式。茉莉用夜里开的花一层层与茶坯窨制，菊花、洋甘菊、路易波士则直接干燥后冲泡。",
-        varieties: ["伯爵茶", "茉莉花茶", "港式奶茶拼配", "菊花茶", "路易波士", "洋甘菊"],
-        flavor:
-          "佛手柑是柑橘与花香，茉莉是甜润的白花，菊花是清凉的药香，路易波士像香草与无花果，洋甘菊接近苹果与蜂蜜。",
-        pairing:
-          "加香红茶配司康、玛德莲、药果；茉莉配中餐与甜点；菊花配核桃、红枣；路易波士加牛奶很好。洋甘菊加一勺蜂蜜就够。",
-        keep: "加香茶开封后3个月是香气顶点。放在不透光密封罐，避开热、光与湿气；花草茶请在一年内喝完。",
-        brewTip: "花草茶用95度沸水泡5分钟，盖上盖子留住香气。奶茶拼配要泡足5分钟，才不会在冰和牛奶里失味。",
-        keywords: "伯爵 茉莉 港式奶茶 菊花 路易波士 洋甘菊 花草 无咖啡因 花茶"
+        name: "加香茶 · 拼配茶",
+        oneLine: "加香、调和出来的茶——一直到港式茶餐厅的一杯。",
+        oxidation: "随基底而变",
+        ratioNote: "3克配200毫升，奶茶拼配8克配200毫升",
+        rounds: "1~2泡",
+        steepBasis: "加香茶在3分钟以内香气最好。",
+        process: "加香有喷雾、加果皮、加花瓣、窨香四种。茉莉用夜里开的花反复窨制，港式奶茶把几种红茶拼配浓泡。",
+        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶", "港式奶茶"],
+        flavor: "佛手柑是柑橘与花香，茉莉是甜润的白花，港式奶茶是浓麦芽与淡奶的甜。",
+        pairing: "加香红茶配司康、玛德莲、药果；茉莉配中餐与甜点；奶茶配菠萝包与蛋挞。",
+        keep: "加香茶开封后3个月是香气顶点，放在不透光密封罐，避开热、光与湿气。",
+        brewTip: "茶包90~95度泡2分30秒~3分钟；奶茶拼配要泡足5分钟。",
+        keywords: "伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 拼配"
       },
       "zh-TW": {
-        name: "加香茶 · 港式 · 花草茶",
-        oneLine: "花香、港式，還有不含咖啡因的一杯——茶樹之外的茶也收進來了。",
-        oxidation: "因茶而異",
-        ratioNote: "葉茶3公克配200毫升，花茶2~3公克，奶茶拼配8公克配200毫升",
-        rounds: "1~3泡",
-        steepBasis: "加香茶在3分鐘以內香氣最好。花草茶泡5分鐘以上也不苦澀。",
-        process:
-          "加香有噴霧、加果皮、加花瓣、窨香四種方式。茉莉用夜裡開的花一層層與茶坯窨製，菊花、洋甘菊、路易波士則直接乾燥後沖泡。",
-        varieties: ["伯爵茶", "茉莉花茶", "港式奶茶拼配", "菊花茶", "路易波士", "洋甘菊"],
-        flavor:
-          "佛手柑是柑橘與花香，茉莉是甜潤的白花，菊花是清涼的藥香，路易波士像香草與無花果，洋甘菊接近蘋果與蜂蜜。",
-        pairing:
-          "加香紅茶配司康、瑪德蓮、藥果；茉莉配中餐與甜點；菊花配核桃、紅棗；路易波士加牛奶很好。洋甘菊加一勺蜂蜜就夠。",
-        keep: "加香茶開封後3個月是香氣頂點。放在不透光密封罐，避開熱、光與濕氣；花草茶請在一年內喝完。",
-        brewTip: "花草茶用95度沸水泡5分鐘，蓋上蓋子留住香氣。奶茶拼配要泡足5分鐘，才不會在冰和牛奶裡失味。",
-        keywords: "伯爵 茉莉 港式奶茶 菊花 路易波士 洋甘菊 花草 無咖啡因 花茶"
+        name: "加香茶 · 拼配茶",
+        oneLine: "加香、調和出來的茶——一直到港式茶餐廳的一杯。",
+        oxidation: "隨基底而變",
+        ratioNote: "3公克配200毫升，奶茶拼配8公克配200毫升",
+        rounds: "1~2泡",
+        steepBasis: "加香茶在3分鐘以內香氣最好。",
+        process: "加香有噴霧、加果皮、加花瓣、窨香四種。茉莉用夜裡開的花反覆窨製，港式奶茶把幾種紅茶拼配濃泡。",
+        varieties: ["伯爵茶·仕女伯爵", "英式早餐·下午茶", "茉莉花茶", "港式奶茶"],
+        flavor: "佛手柑是柑橘與花香，茉莉是甜潤的白花，港式奶茶是濃麥芽與淡奶的甜。",
+        pairing: "加香紅茶配司康、瑪德蓮、藥果；茉莉配中餐與甜點；奶茶配菠蘿包與蛋撻。",
+        keep: "加香茶開封後3個月是香氣頂點，放在不透光密封罐，避開熱、光與濕氣。",
+        brewTip: "茶包90~95度泡2分30秒~3分鐘；奶茶拼配要泡足5分鐘。",
+        keywords: "伯爵 仕女伯爵 英式早餐 下午茶 茉莉 港式奶茶 拼配"
       }
     },
     {

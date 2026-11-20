@@ -126,7 +126,7 @@ window.TEAFaiI18N = (function () {
       "reco.leaf": "{water} 물",
       "reco.first": "첫 우리",
       "reco.brew": "바로 우리기",
-      "reco.alt": "{name}로 보기",
+      "reco.alt": "{name} 보기",
       "reco.ox": "산화 {value}",
       "toast.recoSet": "{name} {dur}로 맞춰 두었습니다",
       "toast.toTimer": "{name} 타이머로 이동했습니다",
