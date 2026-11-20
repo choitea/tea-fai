@@ -2161,6 +2161,8 @@
     renderPostForm();
     renderPostList();
     renderBagMode();
+    /* 티백 목록이 늦게 도착하면 스토어의 티백 상품도 다시 그립니다 */
+    renderStore();
   }
 
   /* ---------------- 티백 ---------------- */

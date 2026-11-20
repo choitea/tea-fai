@@ -4528,7 +4528,7 @@ body.modal-open {
 
   /* 펼친 카드의 사진·설명이 읽기 좋게 */
   .tea-more-inner {
-    padding: 0 18px 18px;
+    padding: 6px 18px 18px;
   }
 
   /* 계열 칩은 넓은 화면에서 한 줄에 다 들어갑니다 */
