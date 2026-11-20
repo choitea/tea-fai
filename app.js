@@ -1917,6 +1917,19 @@
     );
   }
 
+  /* 제휴 상품 항목은 4개 언어 문구를 갖고 오므로 현재 언어로 풀어 씁니다 */
+  function affItem(it) {
+    return {
+      kind: it.kind,
+      url: String(it.url || ""),
+      paid: it.paid !== false,
+      badge: l10n(it.badge),
+      label: l10n(it.label),
+      title: l10n(it.title) || l10n(it.name) || "",
+      price_krw: it.price_krw || null
+    };
+  }
+
   /* 추천 찻잎·다구 — 실제 제휴 링크가 오면 items 로, 그 전에는 둘러보기(검색) 링크 */
   function buyPack(tea) {
     var aff = PARTNER.affiliate;
@@ -1928,14 +1941,16 @@
         if (it.active === false || it.is_active === false) return false;
         if (it.tea_id && it.tea_id !== tea.id) return false;
         if (it.group_id && it.group_id !== tea.group) return false;
+        if (it.tea_ids && it.tea_ids.indexOf(tea.id) < 0) return false;
+        if (it.group_ids && it.group_ids.indexOf(tea.group) < 0) return false;
         return true;
       })
       .sort(function (a, b) {
         return (b.priority || 0) - (a.priority || 0);
       })
       .forEach(function (it) {
-        if (it.kind === "leaf" && !leaf) leaf = it;
-        else if (it.kind === "teaware" && !teaware) teaware = it;
+        if (it.kind === "leaf" && !leaf) leaf = affItem(it);
+        else if (it.kind === "teaware" && !teaware) teaware = affItem(it);
       });
 
     var koName = koNameOf(tea.id);
