@@ -4780,16 +4780,17 @@ body.modal-open {
   .lang-switch {
     gap: 1px;
   }
+  /* 좁은 화면에서는 부제(Teakipedia)를 접고 이름만 남깁니다 — 6개 국기 버튼과 함께 한 줄에 */
   .brand-name {
-    font-size: 15.5px;
+    font-size: 14px;
+    letter-spacing: -0.01em;
   }
-  /* 좁은 화면에서는 부제(Teakipedia)를 접어 브랜드 이름이 잘리지 않게 합니다 */
   .brand-name em {
     display: none;
   }
   .brand-mark {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 }
 

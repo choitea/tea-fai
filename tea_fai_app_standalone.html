@@ -4810,16 +4810,17 @@ body.modal-open {
   .lang-switch {
     gap: 1px;
   }
+  /* 좁은 화면에서는 부제(Teakipedia)를 접고 이름만 남깁니다 — 6개 국기 버튼과 함께 한 줄에 */
   .brand-name {
-    font-size: 15.5px;
+    font-size: 14px;
+    letter-spacing: -0.01em;
   }
-  /* 좁은 화면에서는 부제(Teakipedia)를 접어 브랜드 이름이 잘리지 않게 합니다 */
   .brand-name em {
     display: none;
   }
   .brand-mark {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 }
 
@@ -27800,10 +27801,9 @@ window.TEAFaiData = (function () {
     var text = textFor(entry, lang);
     /* 일본어는 아직 차별 문구를 다 옮기지 않았습니다. 이름만은 한자(원어)로 보여 주고,
        나머지 설명은 영어 문구로 내려갑니다. */
-    if (lang === "ja" && (!text || !text.name)) {
+    if (lang === "ja") {
       var kanji = entry.hz || entry.hs || "";
-      if (kanji) text = { name: kanji, oneLine: text.oneLine };
-      else if (!text || !text.name) text = textFor(entry, "en");
+      if (kanji) text = { name: kanji, oneLine: text && text.oneLine };
     }
     var extra = extraFor(entry, lang);
     var o = {

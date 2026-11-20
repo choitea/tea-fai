@@ -18398,10 +18398,9 @@ window.TEAFaiData = (function () {
     var text = textFor(entry, lang);
     /* 일본어는 아직 차별 문구를 다 옮기지 않았습니다. 이름만은 한자(원어)로 보여 주고,
        나머지 설명은 영어 문구로 내려갑니다. */
-    if (lang === "ja" && (!text || !text.name)) {
+    if (lang === "ja") {
       var kanji = entry.hz || entry.hs || "";
-      if (kanji) text = { name: kanji, oneLine: text.oneLine };
-      else if (!text || !text.name) text = textFor(entry, "en");
+      if (kanji) text = { name: kanji, oneLine: text && text.oneLine };
     }
     var extra = extraFor(entry, lang);
     var o = {
