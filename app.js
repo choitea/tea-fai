@@ -97,7 +97,8 @@
       sec.classList.toggle("active", sec.id === "view-" + view);
     });
     $$(".tab").forEach(function (tab) {
-      var on = tab.getAttribute("data-view") === view;
+      /* 취향 테스트는 오늘의 차에서 열리므로 홈 탭을 켜 둡니다 */
+      var on = tab.getAttribute("data-view") === (view === "quiz" ? "home" : view);
       tab.classList.toggle("active", on);
       if (on) tab.setAttribute("aria-current", "page");
       else tab.removeAttribute("aria-current");
