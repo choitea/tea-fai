@@ -122,19 +122,38 @@ window.TeaFaiSupabase = (function () {
     };
   }
 
+  /* teas 카탈로그(93종)가 시드되어 있는지 한 번만 확인해 둡니다.
+     비어 있는 동안에는 tea_id 를 보내지 않아 외래키 오류 없이 저장됩니다. */
+  var teaCatalog = null;
+  function hasTeaCatalog() {
+    if (!teaCatalog) {
+      teaCatalog = request("GET", "teas", null, "?select=id&limit=1").then(function (res) {
+        if (res && res.ok) return !!(res.data && res.data.length);
+        return null; // 판단할 수 없으면 서버에 맡기고 폴백을 씁니다
+      });
+    }
+    return teaCatalog;
+  }
+
   function submitPost(post) {
     var row = postRow(post);
-    return request("POST", cfg().tables.posts, row).then(function (res) {
-      /* teas 카탈로그(93종) 시드가 아직 없는 프로젝트에서는 tea_id 가
-         외래키(23503)에 걸립니다. 그때는 차 이름만 남기고 다시 저장합니다. */
-      if (res && !res.ok && row.tea_id && (res.status === 409 || res.status === 400) &&
-          /23503|foreign key/i.test(String(res.reason || ""))) {
-        var retry = {};
-        for (var k in row) if (k !== "tea_id") retry[k] = row[k];
-        return request("POST", cfg().tables.posts, retry);
-      }
-      return res;
-    });
+    var ready = row.tea_id ? hasTeaCatalog() : Promise.resolve(null);
+    return ready
+      .then(function (hasTeas) {
+        if (hasTeas === false) delete row.tea_id;
+        return request("POST", cfg().tables.posts, row);
+      })
+      .then(function (res) {
+        /* 카탈로그 상태를 알 수 없을 때를 대비한 안전망:
+           외래키(23503) 에 걸리면 차 이름만 남기고 다시 저장합니다. */
+        if (res && !res.ok && row.tea_id && (res.status === 409 || res.status === 400) &&
+            /23503|foreign key/i.test(String(res.reason || ""))) {
+          var retry = {};
+          for (var k in row) if (k !== "tea_id") retry[k] = row[k];
+          return request("POST", cfg().tables.posts, retry);
+        }
+        return res;
+      });
   }
 
   /* 공개 글 읽기 — 최신순. 실패하면 로컬 글만 보여 줍니다. */
