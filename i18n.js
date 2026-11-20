@@ -194,7 +194,7 @@ window.TEAFaiI18N = (function () {
       "guide.sourceText":
         "《찻잎의 시간, 오늘의 한 잔》, 《최초의 가향 홍차 — 얼그레이의 모든 것》(최티).",
       "guide.sourceNote":
-        "수치는 책의 부록 표와 각 장의 서술을 그대로 옮겼습니다. 입맛에 맞춰 ±10초로 조율해 보세요.",
+        "수치는 책의 부록 표와 각 장의 서술을 기준으로 하고, 산지·등급은 스리랑카 티보드 7대 산지, 인도 티보드 GI, 일본 농림수산성 음용 기준, 중국 6대 다류 분류로 교차 확인했습니다. 농장과 해에 따라 달라지는 값은 검증된 범위로 적었습니다. 입맛에 맞춰 ±10초로 조율해 보세요.",
       "notes.kicker": "Tasting notes",
       "notes.title": "시음 노트",
       "notes.lead": "오늘 우린 차를 한 줄로 남겨 두면, 다음 잔이 조금 더 정확해집니다.",
@@ -336,7 +336,7 @@ window.TEAFaiI18N = (function () {
       "guide.sourceText":
         "Time of Tea Leaves, Today's Cup; The First Scented Black Tea — Everything About Earl Grey (Choi Ti).",
       "guide.sourceNote":
-        "Figures follow the appendix tables and chapter text of the books. Adjust by ±10 seconds to your taste.",
+        "Figures follow the books' appendix tables and chapter text; origins and grades were cross-checked against the Sri Lanka Tea Board's seven regions, the Tea Board of India GI register, Japan's MAFF brewing standards and China's six tea families. Where a value varies by garden or season, a verified range is given. Adjust by ±10 seconds to your taste.",
       "notes.kicker": "Notebook",
       "notes.title": "Tasting notes",
       "notes.lead":
@@ -476,7 +476,7 @@ window.TEAFaiI18N = (function () {
       "guide.sourceText":
         "《茶叶的时间，今天的一杯》《最初的加香红茶——伯爵茶的一切》（Choi Ti）。",
       "guide.sourceNote":
-        "数值照书末附表与各章叙述原样搬来。可按口味用±10秒微调。",
+        "数值依据书末附表与各章叙述，产地与等级按斯里兰卡茶叶局七大产区、印度茶叶局GI、日本农林水产省冲泡标准、中国六大茶类分类交叉核对。因茶园与年份而异的值以已验证的范围标注。可按口味用±10秒微调。",
       "notes.kicker": "品饮",
       "notes.title": "品茶笔记",
       "notes.lead": "把今天泡的茶用一句话记下，下一杯会更准确。",
@@ -615,7 +615,7 @@ window.TEAFaiI18N = (function () {
       "guide.sourceText":
         "《茶葉的時間，今天的一杯》《最初的加香紅茶——伯爵茶的一切》（Choi Ti）。",
       "guide.sourceNote":
-        "數值照書末附表與各章敘述原樣搬來。可按口味用±10秒微調。",
+        "數值依據書末附表與各章敘述，產地與等級按斯里蘭卡茶葉局七大產區、印度茶葉局GI、日本農林水產省沖泡標準、中國六大茶類分類交叉核對。因茶園與年份而異的值以已驗證的範圍標註。可按口味用±10秒微調。",
       "notes.kicker": "品飲",
       "notes.title": "品茶筆記",
       "notes.lead": "把今天泡的茶用一句話記下，下一杯會更準確。",
