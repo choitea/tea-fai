@@ -13,6 +13,7 @@
 | `app.js` | 탭 전환, 우림 타이머, 차 백과, 시음 노트(localStorage) |
 | `manifest.webmanifest` | PWA 설치 정보 (이름·아이콘·테마 색) |
 | `sw.js` | 오프라인 캐시 (앱 껍데기 캐시 우선) |
+| `privacy.html` | 개인정보처리방침 (회원가입·서버 전송 없음, 기기 저장소에만 보관) |
 | `icons/icon-192.png`, `icons/icon-512.png`, `icons/icon-maskable-512.png` | 홈 화면 아이콘 |
 | `tea_fai_app_standalone.html` | CSS/JS를 모두 인라인한 단일 파일 (파일로 바로 열기) |
 | `preview_home.png` · `preview_timer.png` · `preview_guide.png` · `preview_notes.png` | 390×844 화면 캡처 |
@@ -21,6 +22,9 @@
 
 ## 바로 열기
 
+- **웹에서 바로 쓰기 (설치 없이)**: <https://choitea.github.io/tea-fai/>
+  - 폰 브라우저에서 주소를 열고 메뉴 → **홈 화면에 추가**를 누르면 주소창 없는 앱으로 설치됩니다.
+  - 개인정보처리방침: <https://choitea.github.io/tea-fai/privacy.html>
 - **단일 파일**: `tea_fai_app_standalone.html`을 브라우저로 열면 끝 (인터넷 없이도 동작).
 - **앱처럼 설치**: 아래처럼 로컬 서버를 띄운 뒤 `http://<PC IP>:8000/index.html`을 폰 크롬에서 연다.
   주소창 메뉴 → **홈 화면에 추가**를 누르면 주소창 없는 앱으로 실행되고 오프라인에서도 열립니다.
