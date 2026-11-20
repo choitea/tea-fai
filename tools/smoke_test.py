@@ -157,6 +157,7 @@ CHECK = r"""
 
   out.storeItems = window.TeaFaiExtra ? 1 : 0;
   out.memberUnlocked = window.TeaFaiExtra ? window.TeaFaiExtra.unlocked() : null;
+  out.rank = window.TeaFaiExtra ? window.TeaFaiExtra.rank() : null;
 
   try {
     var filter = document.querySelector('#filterChips');
@@ -193,9 +194,11 @@ CHECK = r"""
 """
 
 
-def main():
+def run(plan=None):
     ctx = quickjs.Context()
     ctx.eval(STUB)
+    if plan:
+        ctx.eval("localStorage.setItem('teafai.member.v1', %r)" % json.dumps({"plan": plan}))
     files = ["supabase-adapter.js", "i18n.js", "data.js", "app.js", "features.js"]
     for f in files:
         src = (HERE / f).read_text(encoding="utf-8")
@@ -215,6 +218,17 @@ def main():
     except Exception as e:
         print("[check error]", str(e)[:600])
         sys.exit(1)
+    result["plan"] = plan or "none"
+    html = ctx.eval("document.querySelector('#bizMount').innerHTML")
+    result["bizHtml"] = len(html)
+    result["hasShopForm"] = "shopForm" in html
+    result["hasProductForm"] = 'id="bizForm"' in html
+    result["partnerHidden"] = ctx.eval("document.querySelector('#partnerMain').hidden")
+    return result
+
+
+def main():
+    result = run(None)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     ok = (
         not result["errors"]
@@ -227,6 +241,20 @@ def main():
         and result["lensHtml"] > 100
         and result["leafCount"] == "162"
     )
+    maker = run("maker")
+    personal = run("personal")
+    print(json.dumps({"maker": {k: maker[k] for k in ("rank", "bizHtml", "partnerHidden")},
+                      "personal": {k: personal[k] for k in ("rank", "bizHtml", "partnerHidden")}},
+                     ensure_ascii=False, indent=2))
+    tiers = (
+        maker["errors"] == []
+        and maker["bizHtml"] > 800
+        and maker["partnerHidden"] is False
+        and personal["bizHtml"] > 50
+        and not personal["hasShopForm"]
+        and not personal["hasProductForm"]
+    )
+    ok = ok and tiers
     print("SMOKE:", "PASS" if ok else "FAIL")
     sys.exit(0 if ok else 2)
 
