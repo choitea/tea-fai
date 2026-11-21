@@ -16,7 +16,9 @@
   --amber-light: #d9a66a;
   --amber-soft: #f3e6d6;
   --shadow: 0 1px 2px rgba(36, 62, 50, 0.04), 0 8px 24px -18px rgba(36, 62, 50, 0.25);
-  --serif: "Nanum Myeongjo", "Noto Serif KR", "Noto Serif CJK KR", "Apple SD Gothic Neo", serif;
+  /* 한글은 바탕체 대신 조금 두꺼운 고딕(Pretendard)으로 통일합니다 */
+  --serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
   --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
   --safe-top: env(safe-area-inset-top, 0px);
@@ -4880,4 +4882,45 @@ body.modal-open {
     font-size: 10px;
     gap: 2px;
   }
+}
+
+/* ============================================================
+   한글 타이포그래피 — 바탕체 대신 Pretendard 고딕
+   (제목 700 · 차 이름 600~700 · 본문 500)
+   ============================================================ */
+html[lang="ko"] {
+  --serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+}
+
+body {
+  font-weight: 500;
+}
+
+.view-head h1,
+.card h3,
+.tea-name,
+.brand-name,
+.sheet-title,
+.section-head h2,
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.card p,
+.guide-lead,
+.member-note,
+.tea-oneline {
+  font-weight: 500;
+}
+
+/* 작은 라벨·수치는 조금 가볍게 두어 제목과 대비를 줍니다 */
+.eyebrow,
+.meta-k,
+.stat-k,
+.chip {
+  font-weight: 600;
 }
