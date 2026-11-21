@@ -857,7 +857,7 @@
       })
       .join("");
 
-    /* 계열 카드는 사진이 없으니 漢字 배지를, 품종 카드는 실제 찻잎 사진을 씁니다 */
+    /* 계열 카드는 사진이 없으니 한자 배지를, 품종 카드는 실제 찻잎 사진을 씁니다 */
     var lead = isGroup
       ? '<span class="tea-glyph" style="background:' + item.accentSoft + ";color:" + item.accent + '">' + esc(item.hanja) + "</span>"
       : item.photo
@@ -1728,7 +1728,7 @@
   function l10n(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    /* 광동어는 粵語 문구를 먼저 쓰고, 없으면 번체 중국어 → 영어 */
+    /* 광동어는 광동어 문구를 먼저 쓰고, 없으면 번체 중국어 → 영어 */
     var key = lang === "yue" ? "yue" : lang;
     var out = obj[key];
     if (!out && key === "yue") out = obj["zh-TW"];

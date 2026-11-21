@@ -650,7 +650,7 @@ window.TEAFaiI18N = (function () {
       "pv.vLastTea": "The tea type you picked most recently",
       "pv.kLang": "Language",
       "pv.vLang":
-        "The language you chose with the language switch (한국어 · EN · 简中 · 繁中 · 日 · 粵), so the app opens in it next time",
+        "The language you chose with the language switch (Korean, English, Simplified or Traditional Chinese, Japanese, Cantonese), so the app opens in it next time",
       "pv.kView": "View style",
       "pv.vView": "Whether the tea guide and store show a one-column list or a two-column grid",
       "pv.kPosts": "Community posts",
