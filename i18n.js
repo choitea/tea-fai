@@ -3766,7 +3766,8 @@ window.TEAFaiI18N = (function () {
       "partner.plansTitle": "회원 등급 안내",
       "partner.soon": "추후 지원 예정",
       "upload.soonTitle": "매장·제품 직접 등록 (추후 지원 예정)",
-      "upload.soonBody": "찻집·제조사 회원 등급이 열리면 매장 정보와 제품을 앱에서 직접 올릴 수 있습니다. 그 전까지는 위의 '내 매장 입점 신청'으로 보내 주시면 확인 뒤 등록해 드립니다."
+      "upload.soonBody": "찻집·제조사 회원 등급이 열리면 매장 정보와 제품을 앱에서 직접 올릴 수 있습니다. 그 전까지는 위의 '내 매장 입점 신청'으로 보내 주시면 확인 뒤 등록해 드립니다.",
+      "apply.lead": "매장 정보를 보내 주시면 확인 뒤 파트너 목록에 올려 드립니다. 오픈 기간에는 신청·등록이 모두 무료입니다."
     },
     en: {
       "member.lockTitle": "The partner list and map are free right now",
@@ -3786,7 +3787,8 @@ window.TEAFaiI18N = (function () {
       "partner.plansTitle": "Membership tiers",
       "partner.soon": "Coming later",
       "upload.soonTitle": "Listing shops and products yourself (coming later)",
-      "upload.soonBody": "When the Tea house and Maker tiers open you can upload shop details and products in the app. Until then, send them through ‘List my shop’ above and we will add them after a check."
+      "upload.soonBody": "When the Tea house and Maker tiers open you can upload shop details and products in the app. Until then, send them through ‘List my shop’ above and we will add them after a check.",
+      "apply.lead": "Send your shop details and we will check them and add you to the partner list. Applying and listing are free during the launch period."
     },
     "zh-CN": {
       "member.lockTitle": "目前合作店列表与地图全部免费",
@@ -3806,7 +3808,8 @@ window.TEAFaiI18N = (function () {
       "partner.plansTitle": "会员等级说明",
       "partner.soon": "后续支持",
       "upload.soonTitle": "直接登记门店·产品（后续支持）",
-      "upload.soonBody": "茶馆·厂商会员等级开放后，可在应用中直接上传门店信息与产品。在此之前，请通过上方“申请入驻我的门店”提交，我们确认后为您登记。"
+      "upload.soonBody": "茶馆·厂商会员等级开放后，可在应用中直接上传门店信息与产品。在此之前，请通过上方“申请入驻我的门店”提交，我们确认后为您登记。",
+      "apply.lead": "发送门店信息，我们确认后会将门店加入合作店列表。上线期间申请与登记全部免费。"
     },
     "zh-TW": {
       "member.lockTitle": "目前合作店列表與地圖全部免費",
@@ -3826,7 +3829,8 @@ window.TEAFaiI18N = (function () {
       "partner.plansTitle": "會員等級說明",
       "partner.soon": "後續支援",
       "upload.soonTitle": "直接登記門店·產品（後續支援）",
-      "upload.soonBody": "茶館·廠商會員等級開放後，可在應用中直接上傳門店資訊與產品。在此之前，請透過上方「申請入駐我的門店」提交，我們確認後為您登記。"
+      "upload.soonBody": "茶館·廠商會員等級開放後，可在應用中直接上傳門店資訊與產品。在此之前，請透過上方「申請入駐我的門店」提交，我們確認後為您登記。",
+      "apply.lead": "發送門店資訊，我們確認後會將門店加入合作店列表。上線期間申請與登記全部免費。"
     },
     ja: {
       "member.lockTitle": "今はパートナーの一覧と地図がすべて無料です",
@@ -3846,7 +3850,8 @@ window.TEAFaiI18N = (function () {
       "partner.plansTitle": "会員ランクのご案内",
       "partner.soon": "今後対応予定",
       "upload.soonTitle": "店舗・製品の直接登録（今後対応予定）",
-      "upload.soonBody": "茶館・メーカー会員ランクが始まると、店舗情報や製品をアプリから直接登録できます。それまでは上の「自分の店を登録申請」からお送りください。確認後に登録します。"
+      "upload.soonBody": "茶館・メーカー会員ランクが始まると、店舗情報や製品をアプリから直接登録できます。それまでは上の「自分の店を登録申請」からお送りください。確認後に登録します。",
+      "apply.lead": "店舗情報をお送りください。確認後にパートナー一覧へ掲載します。オープン期間は申請・登録とも無料です。"
     }
   };
 
@@ -3869,7 +3874,9 @@ window.TEAFaiI18N = (function () {
     "partner.plansTitle": "會員等級介紹",
     "partner.soon": "遲啲先有",
     "upload.soonTitle": "自己登記舖頭同產品（遲啲先有）",
-    "upload.soonBody": "茶館、廠商會員一開，就可以喺應用度直接上傳舖頭資料同產品。之前請用上面「申請我間舖入駐」send 過嚟，我哋睇完會幫你登記。"
+    "upload.soonBody": "茶館、廠商會員一開，就可以喺應用度直接上傳舖頭資料同產品。之前請用上面「申請我間舖入駐」send 過嚟，我哋睇完會幫你登記。",
+    "apply.lead": "send 舖頭資料過嚟，我哋睇完會幫你擺上合作舖頭名單。開張期間申請同登記都係免費。",
+    "partner.listTitle": "合作舖頭"
   };
 
   var dictFor = {};
