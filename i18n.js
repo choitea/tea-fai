@@ -982,7 +982,7 @@ window.TEAFaiI18N = (function () {
       "quiz.kicker": "Find your cup",
       "quiz.title": "What tea suits me?",
       "quiz.lead":
-        "Answer ten questions and we pick from 97 teas — the six tea families, everyday teas, herbs, blends and fruit teas.",
+        "Answer ten questions and we pick from 161 teas — the six tea families, everyday teas, herbs, blends and fruit teas.",
       "quiz.progress": "{n} / {total}",
       "quiz.backAria": "Previous question",
       "quiz.a11yProgress": "Progress",
@@ -1054,7 +1054,7 @@ window.TEAFaiI18N = (function () {
       "quiz.kicker": "Find your cup",
       "quiz.title": "找到适合我的茶",
       "quiz.lead":
-        "答完10题，就从六大茶类到代用茶、花草茶、拼配茶、水果茶共97款中为你挑选。",
+        "答完10题，就从六大茶类到代用茶、花草茶、拼配茶、水果茶共161款中为你挑选。",
       "quiz.progress": "{n} / {total}",
       "quiz.backAria": "上一题",
       "quiz.a11yProgress": "进度",
@@ -1126,7 +1126,7 @@ window.TEAFaiI18N = (function () {
       "quiz.kicker": "Find your cup",
       "quiz.title": "找到適合我的茶",
       "quiz.lead":
-        "答完10題，就從六大茶類到代用茶、花草茶、拼配茶、水果茶共97款中為你挑選。",
+        "答完10題，就從六大茶類到代用茶、花草茶、拼配茶、水果茶共161款中為你挑選。",
       "quiz.progress": "{n} / {total}",
       "quiz.backAria": "上一題",
       "quiz.a11yProgress": "進度",
@@ -3062,7 +3062,7 @@ window.TEAFaiI18N = (function () {
     "quiz.cardCta": "開始",
     "quiz.kicker": "Find your cup",
     "quiz.title": "搵啱自己飲嘅茶",
-    "quiz.lead": "答完10條，就由六大茶類到代用茶、花草茶、拼配茶、水果茶一共97款入面幫你揀。",
+    "quiz.lead": "答完10條，就由六大茶類到代用茶、花草茶、拼配茶、水果茶一共161款入面幫你揀。",
     "quiz.progress": "{n} / {total}",
     "quiz.backAria": "上一題",
     "quiz.a11yProgress": "進度",

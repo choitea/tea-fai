@@ -2,7 +2,7 @@
    (온라인일 때는 네트워크를 먼저 보고, 새 파일이 오면 캐시를 갱신합니다.
     data/ 아래 파트너·추천 데이터는 캐시를 먼저 주고 뒤에서 갱신하는
     stale-while-revalidate 로 두어, 앱을 다시 설치하지 않아도 내용이 바뀝니다) */
-var CACHE = "teafai-v32";
+var CACHE = "teafai-v33";
 var DATA_PREFIX = "data/";
 var ASSETS = [
   "./",
@@ -11,6 +11,7 @@ var ASSETS = [
   "./i18n.js",
   "./supabase-adapter.js",
   "./data.js",
+  "./data_yue.js",
   "./app.js",
   "./features.js",
   "./manifest.webmanifest",

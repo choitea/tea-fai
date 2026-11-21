@@ -153,6 +153,12 @@ CHECK = r"""
   out.teaWithPhoto = D.teas.filter(function (t) { return t.photo && t.photo.f; }).length;
   out.teaWithCountry = D.teas.filter(function (t) { return t.country && t.country.ko; }).length;
   out.yueTeas = D.use('yue').teas.filter(function (t) { return !!t.name; }).length;
+  out.yueCantonese = D.use('yue').teas.filter(function (t) {
+    return t.oneLine && /嘅|係|唔|冇|喺|啲|咁/.test(t.oneLine);
+  }).length;
+  out.yueQuantities = D.use('yue').teas.filter(function (t) {
+    return t.id === "fruit-yuja" || t.id === "fruit-omija" || t.id === "fruit-mogwa" || t.id === "fruit-gingerlemon";
+  }).map(function (t) { return t.leaf + " / " + t.tempRange; });
   D.use('ko');
 
   out.storeItems = window.TeaFaiExtra ? 1 : 0;
@@ -199,7 +205,7 @@ def run(plan=None):
     ctx.eval(STUB)
     if plan:
         ctx.eval("localStorage.setItem('teafai.member.v1', %r)" % json.dumps({"plan": plan}))
-    files = ["supabase-adapter.js", "i18n.js", "data.js", "app.js", "features.js"]
+    files = ["supabase-adapter.js", "i18n.js", "data.js", "data_yue.js", "app.js", "features.js"]
     for f in files:
         src = (HERE / f).read_text(encoding="utf-8")
         try:
@@ -240,6 +246,7 @@ def main():
         and result["memberHtml"] > 100
         and result["lensHtml"] > 100
         and result["leafCount"] == "161"
+        and result["yueCantonese"] == 161
     )
     maker = run("maker")
     personal = run("personal")
