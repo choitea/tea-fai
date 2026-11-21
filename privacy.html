@@ -99,6 +99,9 @@
       }
 
       .lang-switch .lang-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
         padding: 4px 7px;
         border-radius: 999px;
         font-size: 10.5px;
@@ -106,6 +109,14 @@
         line-height: 1.25;
         color: var(--muted);
         white-space: nowrap;
+      }
+
+      .lang-switch .lang-flag {
+        display: block;
+        width: 18px;
+        height: 12px;
+        border-radius: 2px;
+        flex: 0 0 auto;
       }
 
       .lang-switch .lang-btn[aria-pressed="true"] {
