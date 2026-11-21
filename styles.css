@@ -4287,6 +4287,17 @@ body.modal-open {
   }
 }
 
+/* 차 백과 상단: 제목 없이 설명 문장만 (여백만 살짝) */
+.guide-head {
+  margin: 2px 0 10px;
+}
+.guide-lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 /* 본문은 찻잎 위에 (헤더·탭바는 원래의 fixed 유지) */
 .viewport {
   position: relative;
