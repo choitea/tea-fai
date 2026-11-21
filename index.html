@@ -56,6 +56,17 @@
           <circle cx="11" cy="11" r="6.5" />
           <path d="m16 16 4 4" />
         </symbol>
+        <symbol id="ic-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+          <rect x="3.5" y="3.5" width="7.2" height="7.2" rx="1.7" />
+          <rect x="13.3" y="3.5" width="7.2" height="7.2" rx="1.7" />
+          <rect x="3.5" y="13.3" width="7.2" height="7.2" rx="1.7" />
+          <rect x="13.3" y="13.3" width="7.2" height="7.2" rx="1.7" />
+        </symbol>
+        <symbol id="ic-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3.2" y="3.6" width="5.4" height="5.4" rx="1.4" />
+          <rect x="3.2" y="13.4" width="5.4" height="5.4" rx="1.4" />
+          <path d="M11.6 6.3h9.2M11.6 16.1h9.2" />
+        </symbol>
         <symbol id="ic-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="m6 9.5 6 6 6-6" />
         </symbol>
@@ -223,6 +234,7 @@
         </div>
 
         <div id="leafPanel">
+        <div class="search-row">
           <div class="search-box">
             <svg><use href="#ic-search" /></svg>
             <input
@@ -235,6 +247,11 @@
               data-i18n-aria="a11y.search"
             />
           </div>
+          <button class="view-toggle" type="button" id="viewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
+            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+          </button>
+        </div>
           <!-- 계열 버튼은 가로 스크롤 없이 여러 줄로 한눈에 보입니다 -->
           <div class="chip-row wrap" id="filterChips" role="group" aria-label="차류 필터" data-i18n-aria="a11y.filter"></div>
           <div id="teaList" style="margin-top: 14px"></div>
@@ -398,17 +415,23 @@
 
         <div id="lensMount"></div>
 
-        <div class="search-box">
-          <svg><use href="#ic-search" /></svg>
-          <input
-            type="search"
-            id="storeSearchInput"
-            placeholder="차 이름·브랜드·다구로 찾기"
-            data-i18n-ph="store.search"
-            autocomplete="off"
-            aria-label="스토어 검색"
-            data-i18n-aria="a11y.search"
-          />
+        <div class="search-row">
+          <div class="search-box">
+            <svg><use href="#ic-search" /></svg>
+            <input
+              type="search"
+              id="storeSearchInput"
+              placeholder="차 이름·브랜드·다구로 찾기"
+              data-i18n-ph="store.search"
+              autocomplete="off"
+              aria-label="스토어 검색"
+              data-i18n-aria="a11y.search"
+            />
+          </div>
+          <button class="view-toggle" type="button" id="storeViewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
+            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+          </button>
         </div>
         <div class="chip-row wrap" id="storeCats" role="group" aria-label="상품 분류" data-i18n-aria="a11y.filter"></div>
         <p class="store-count" id="storeCount" aria-live="polite"></p>

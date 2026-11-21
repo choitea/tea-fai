@@ -618,6 +618,59 @@
      ============================================================ */
   var guideState = { q: "", filter: "all", open: null };
 
+  /* ---------- 보기 방식: 1열 리스트 ↔ 2열 그리드 ---------- */
+  var VIEW_KEY = "teafai.viewmode.v1";
+  var viewPref = storeGet(VIEW_KEY, null);
+  if (viewPref !== "grid" && viewPref !== "list") viewPref = null;
+
+  function narrowScreen() {
+    if (window.matchMedia) return window.matchMedia("(max-width: 899px)").matches;
+    return (window.innerWidth || 390) < 900;
+  }
+
+  /* 저장한 값이 없으면 지금까지의 기본 모양을 그대로 씁니다 (폰=리스트, PC=그리드) */
+  function viewMode() {
+    if (viewPref) return viewPref;
+    return narrowScreen() ? "list" : "grid";
+  }
+
+  function applyViewMode() {
+    var mode = viewMode();
+    ["view-guide", "view-store"].forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      sec.classList.toggle("mode-grid", mode === "grid");
+      sec.classList.toggle("mode-list", mode === "list");
+    });
+    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+      var btn = $(sel);
+      if (!btn) return;
+      var label = mode === "grid" ? t("view.toList") : t("view.toGrid");
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+    });
+  }
+
+  function bindViewToggle() {
+    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+      var btn = $(sel);
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        viewPref = viewMode() === "grid" ? "list" : "grid";
+        storeSet(VIEW_KEY, viewPref);
+        applyViewMode();
+      });
+    });
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(max-width: 899px)");
+      var onChange = function () {
+        if (!viewPref) applyViewMode();
+      };
+      if (mq.addEventListener) mq.addEventListener("change", onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    }
+  }
+
   /* 계열 버튼: 전체 → 녹차·우롱차·홍차·흑차(보이차)·백차·황차 → 화차·대용차·허브차·과일차
      가로 스크롤 없이 한눈에 보이도록 CSS(.chip-row.wrap)에서 줄바꿈합니다. */
   function renderFilterChips() {
@@ -3709,6 +3762,7 @@
     renderPartnerShops();
     renderMemberPanel();
     renderStore();
+    applyViewMode();
     renderCommFilters();
     renderPostForm();
     renderPostList();
@@ -3757,6 +3811,8 @@
       });
     }
     renderTeaList();
+    bindViewToggle();
+    applyViewMode();
 
     renderNoteSelect();
     renderStarRow();

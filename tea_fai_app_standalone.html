@@ -4961,6 +4961,258 @@ h3 {
   font-weight: 600;
 }
 
+/* ============================================================
+   보기 방식 전환 — 1열 리스트 ↔ 2열 그리드
+   (검색줄 오른쪽 버튼, 선택은 localStorage 에 남습니다)
+   ============================================================ */
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.search-row .search-box {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.view-toggle {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.view-toggle:hover {
+  border-color: #d8cdb6;
+  color: var(--ink);
+}
+
+.view-toggle:active {
+  transform: scale(0.97);
+}
+
+/* 버튼에는 지금 눌러 바뀔 모양의 아이콘을 보여 줍니다 */
+.view-toggle .ic-grid,
+.view-toggle .ic-list {
+  display: none;
+}
+
+.mode-list .view-toggle .ic-grid {
+  display: block;
+}
+
+.mode-grid .view-toggle .ic-list {
+  display: block;
+}
+
+/* ---------- 폰: 2열 그리드 ---------- */
+@media (max-width: 899px) {
+  .mode-grid #teaList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: start;
+  }
+
+  .mode-grid #teaList .group-head {
+    grid-column: 1 / -1;
+    margin: 16px 2px 2px;
+  }
+
+  .mode-grid #teaList .group-head:first-child {
+    margin-top: 2px;
+  }
+
+  .mode-grid #teaList .tea-card + .tea-card {
+    margin-top: 0;
+  }
+
+  .mode-grid #teaList .tea-card {
+    border-radius: 16px;
+  }
+
+  /* 계열 요약 카드와 펼친 카드는 두 칸을 다 씁니다 */
+  .mode-grid #teaList .tea-card.is-group,
+  .mode-grid #teaList .tea-card.open {
+    grid-column: 1 / -1;
+  }
+
+  /* 카드: 찻잎 사진이 위, 이름·원산지·핵심 정보가 아래 */
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-main {
+    padding: 0 0 11px;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-head {
+    display: block;
+    position: relative;
+    gap: 0;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-thumb,
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-glyph {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    font-size: 30px;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-title {
+    padding: 8px 11px 0;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-title b {
+    font-size: 14px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-native {
+    display: none;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-meta {
+    font-size: 9.5px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .origin-badge {
+    font-size: 9px;
+    padding: 1px 5px;
+  }
+
+  /* 펼침 표시는 사진 위 오른쪽 모서리에 작게 */
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-caret {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 253, 248, 0.86);
+    color: var(--ink-soft);
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-caret svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* 그리드 카드에서는 설명·산화도 막대를 접고 수치만 남깁니다 */
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-oneline,
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .ox {
+    display: none;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-facts {
+    padding: 0 11px;
+    margin-top: 7px;
+    gap: 8px;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-fact:nth-child(2) {
+    display: none;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-fact span {
+    font-size: 8.6px;
+  }
+
+  .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-fact b {
+    font-size: 11px;
+  }
+
+  .mode-grid #teaList .tea-card.open .tea-title,
+  .mode-grid #teaList .tea-card.is-group .tea-title {
+    padding: 0;
+  }
+
+  /* 스토어: 상품도 두 칸으로 */
+  .mode-grid .store-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: start;
+  }
+
+  .mode-grid .store-list .store-item {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 8px;
+    padding: 0 0 12px;
+    border-radius: 16px;
+  }
+
+  .mode-grid .store-list .store-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    font-size: 34px;
+  }
+
+  .mode-grid .store-list .store-body {
+    padding: 0 11px;
+  }
+
+  .mode-grid .store-list .store-body b {
+    font-size: 12.5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .mode-grid .store-list .store-sub {
+    font-size: 10px;
+  }
+
+  .mode-grid .store-list .store-cta {
+    justify-content: center;
+  }
+}
+
+/* ---------- PC: 1열 리스트로 볼 때 ---------- */
+@media (min-width: 900px) {
+  .mode-list #teaList {
+    display: block;
+    max-width: 860px;
+  }
+
+  .mode-list #teaList .tea-card + .tea-card {
+    margin-top: 11px;
+  }
+
+  .mode-list #teaList .group-head {
+    margin: 22px 2px 8px;
+  }
+
+  .mode-list .store-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 860px;
+  }
+}
+
 </style>
   </head>
   <body>
@@ -4985,6 +5237,17 @@ h3 {
         <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
           <circle cx="11" cy="11" r="6.5" />
           <path d="m16 16 4 4" />
+        </symbol>
+        <symbol id="ic-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+          <rect x="3.5" y="3.5" width="7.2" height="7.2" rx="1.7" />
+          <rect x="13.3" y="3.5" width="7.2" height="7.2" rx="1.7" />
+          <rect x="3.5" y="13.3" width="7.2" height="7.2" rx="1.7" />
+          <rect x="13.3" y="13.3" width="7.2" height="7.2" rx="1.7" />
+        </symbol>
+        <symbol id="ic-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3.2" y="3.6" width="5.4" height="5.4" rx="1.4" />
+          <rect x="3.2" y="13.4" width="5.4" height="5.4" rx="1.4" />
+          <path d="M11.6 6.3h9.2M11.6 16.1h9.2" />
         </symbol>
         <symbol id="ic-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="m6 9.5 6 6 6-6" />
@@ -5153,6 +5416,7 @@ h3 {
         </div>
 
         <div id="leafPanel">
+        <div class="search-row">
           <div class="search-box">
             <svg><use href="#ic-search" /></svg>
             <input
@@ -5165,6 +5429,11 @@ h3 {
               data-i18n-aria="a11y.search"
             />
           </div>
+          <button class="view-toggle" type="button" id="viewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
+            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+          </button>
+        </div>
           <!-- 계열 버튼은 가로 스크롤 없이 여러 줄로 한눈에 보입니다 -->
           <div class="chip-row wrap" id="filterChips" role="group" aria-label="차류 필터" data-i18n-aria="a11y.filter"></div>
           <div id="teaList" style="margin-top: 14px"></div>
@@ -5328,17 +5597,23 @@ h3 {
 
         <div id="lensMount"></div>
 
-        <div class="search-box">
-          <svg><use href="#ic-search" /></svg>
-          <input
-            type="search"
-            id="storeSearchInput"
-            placeholder="차 이름·브랜드·다구로 찾기"
-            data-i18n-ph="store.search"
-            autocomplete="off"
-            aria-label="스토어 검색"
-            data-i18n-aria="a11y.search"
-          />
+        <div class="search-row">
+          <div class="search-box">
+            <svg><use href="#ic-search" /></svg>
+            <input
+              type="search"
+              id="storeSearchInput"
+              placeholder="차 이름·브랜드·다구로 찾기"
+              data-i18n-ph="store.search"
+              autocomplete="off"
+              aria-label="스토어 검색"
+              data-i18n-aria="a11y.search"
+            />
+          </div>
+          <button class="view-toggle" type="button" id="storeViewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
+            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+          </button>
         </div>
         <div class="chip-row wrap" id="storeCats" role="group" aria-label="상품 분류" data-i18n-aria="a11y.filter"></div>
         <p class="store-count" id="storeCount" aria-live="polite"></p>
@@ -6068,6 +6343,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "차 백과",
       "guide.search": "차 이름, 향, 산지로 찾기",
       "a11y.search": "차 백과 검색",
+      "view.toGrid": "2열 그리드로 보기",
+      "view.toList": "1열 리스트로 보기",
       "a11y.filter": "차류 필터",
       "guide.all": "전체",
       "guide.empty":
@@ -6190,6 +6467,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "Tea guide",
       "guide.search": "Search by name, aroma or origin",
       "a11y.search": "Search the tea guide",
+      "view.toGrid": "Switch to 2-column grid",
+      "view.toList": "Switch to 1-column list",
       "a11y.filter": "Filter by tea type",
       "guide.all": "All",
       "guide.empty":
@@ -6311,6 +6590,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "茶百科",
       "guide.search": "按茶名、香气、产地搜索",
       "a11y.search": "搜索茶百科",
+      "view.toGrid": "切换为两列网格",
+      "view.toList": "切换为单列列表",
       "a11y.filter": "按茶类筛选",
       "guide.all": "全部",
       "guide.empty":
@@ -6431,6 +6712,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "茶百科",
       "guide.search": "按茶名、香氣、產地搜尋",
       "a11y.search": "搜尋茶百科",
+      "view.toGrid": "切換為兩欄網格",
+      "view.toList": "切換為單欄清單",
       "a11y.filter": "按茶類篩選",
       "guide.all": "全部",
       "guide.empty":
@@ -8761,6 +9044,8 @@ window.TEAFaiI18N = (function () {
     "brand.sub": "Teakipedia",
     "a11y.tabbar": "メイン画面",
     "a11y.search": "茶葉を検索",
+    "view.toGrid": "2列グリッドで見る",
+    "view.toList": "1列リストで見る",
     "a11y.filter": "茶類で絞り込む",
     "a11y.group": "茶類を選ぶ",
     "a11y.tea": "お茶を選ぶ",
@@ -28701,6 +28986,59 @@ window.TEAFaiData = (function () {
      ============================================================ */
   var guideState = { q: "", filter: "all", open: null };
 
+  /* ---------- 보기 방식: 1열 리스트 ↔ 2열 그리드 ---------- */
+  var VIEW_KEY = "teafai.viewmode.v1";
+  var viewPref = storeGet(VIEW_KEY, null);
+  if (viewPref !== "grid" && viewPref !== "list") viewPref = null;
+
+  function narrowScreen() {
+    if (window.matchMedia) return window.matchMedia("(max-width: 899px)").matches;
+    return (window.innerWidth || 390) < 900;
+  }
+
+  /* 저장한 값이 없으면 지금까지의 기본 모양을 그대로 씁니다 (폰=리스트, PC=그리드) */
+  function viewMode() {
+    if (viewPref) return viewPref;
+    return narrowScreen() ? "list" : "grid";
+  }
+
+  function applyViewMode() {
+    var mode = viewMode();
+    ["view-guide", "view-store"].forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      sec.classList.toggle("mode-grid", mode === "grid");
+      sec.classList.toggle("mode-list", mode === "list");
+    });
+    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+      var btn = $(sel);
+      if (!btn) return;
+      var label = mode === "grid" ? t("view.toList") : t("view.toGrid");
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+    });
+  }
+
+  function bindViewToggle() {
+    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+      var btn = $(sel);
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        viewPref = viewMode() === "grid" ? "list" : "grid";
+        storeSet(VIEW_KEY, viewPref);
+        applyViewMode();
+      });
+    });
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(max-width: 899px)");
+      var onChange = function () {
+        if (!viewPref) applyViewMode();
+      };
+      if (mq.addEventListener) mq.addEventListener("change", onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    }
+  }
+
   /* 계열 버튼: 전체 → 녹차·우롱차·홍차·흑차(보이차)·백차·황차 → 화차·대용차·허브차·과일차
      가로 스크롤 없이 한눈에 보이도록 CSS(.chip-row.wrap)에서 줄바꿈합니다. */
   function renderFilterChips() {
@@ -31792,6 +32130,7 @@ window.TEAFaiData = (function () {
     renderPartnerShops();
     renderMemberPanel();
     renderStore();
+    applyViewMode();
     renderCommFilters();
     renderPostForm();
     renderPostList();
@@ -31840,6 +32179,8 @@ window.TEAFaiData = (function () {
       });
     }
     renderTeaList();
+    bindViewToggle();
+    applyViewMode();
 
     renderNoteSelect();
     renderStarRow();

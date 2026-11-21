@@ -172,6 +172,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "차 백과",
       "guide.search": "차 이름, 향, 산지로 찾기",
       "a11y.search": "차 백과 검색",
+      "view.toGrid": "2열 그리드로 보기",
+      "view.toList": "1열 리스트로 보기",
       "a11y.filter": "차류 필터",
       "guide.all": "전체",
       "guide.empty":
@@ -294,6 +296,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "Tea guide",
       "guide.search": "Search by name, aroma or origin",
       "a11y.search": "Search the tea guide",
+      "view.toGrid": "Switch to 2-column grid",
+      "view.toList": "Switch to 1-column list",
       "a11y.filter": "Filter by tea type",
       "guide.all": "All",
       "guide.empty":
@@ -415,6 +419,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "茶百科",
       "guide.search": "按茶名、香气、产地搜索",
       "a11y.search": "搜索茶百科",
+      "view.toGrid": "切换为两列网格",
+      "view.toList": "切换为单列列表",
       "a11y.filter": "按茶类筛选",
       "guide.all": "全部",
       "guide.empty":
@@ -535,6 +541,8 @@ window.TEAFaiI18N = (function () {
       "guide.title": "茶百科",
       "guide.search": "按茶名、香氣、產地搜尋",
       "a11y.search": "搜尋茶百科",
+      "view.toGrid": "切換為兩欄網格",
+      "view.toList": "切換為單欄清單",
       "a11y.filter": "按茶類篩選",
       "guide.all": "全部",
       "guide.empty":
@@ -2865,6 +2873,8 @@ window.TEAFaiI18N = (function () {
     "brand.sub": "Teakipedia",
     "a11y.tabbar": "メイン画面",
     "a11y.search": "茶葉を検索",
+    "view.toGrid": "2列グリッドで見る",
+    "view.toList": "1列リストで見る",
     "a11y.filter": "茶類で絞り込む",
     "a11y.group": "茶類を選ぶ",
     "a11y.tea": "お茶を選ぶ",
