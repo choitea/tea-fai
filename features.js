@@ -58,50 +58,50 @@
     {
       id: "milk-hongkong",
       q: "홍콩 밀크티",
-      title: { ko: "홍콩식 밀크티 (완제품·분말)", en: "Hong Kong style milk tea", "zh-CN": "港式奶茶", "zh-TW": "港式奶茶", ja: "香港式ミルクティー" },
-      note: { ko: "진한 홍차에 연유를 넣은 홍콩식", en: "Strong black tea with evaporated milk", "zh-CN": "浓红茶加淡奶", "zh-TW": "濃紅茶加淡奶" }
+      title: { ko: "홍콩식 밀크티 (완제품·분말)", en: "Hong Kong style milk tea", "zh-CN": "港式奶茶", "zh-TW": "港式奶茶", ja: "香港式ミルクティー", yue: "港式奶茶（現成·粉）" },
+      note: { ko: "진한 홍차에 연유를 넣은 홍콩식", en: "Strong black tea with evaporated milk", "zh-CN": "浓红茶加淡奶", "zh-TW": "濃紅茶加淡奶", yue: "濃紅茶加淡奶嘅港式" }
     },
     {
       id: "milk-powder",
       q: "밀크티 파우더",
-      title: { ko: "밀크티 파우더·베이스", en: "Milk tea powder or base", "zh-CN": "奶茶粉·基底", "zh-TW": "奶茶粉·基底", ja: "ミルクティーパウダー" },
+      title: { ko: "밀크티 파우더·베이스", en: "Milk tea powder or base", "zh-CN": "奶茶粉·基底", "zh-TW": "奶茶粉·基底", ja: "ミルクティーパウダー", yue: "奶茶粉·基底" },
       note: { ko: "집에서 밀크티 만들 때 쓰는 베이스", en: "For making milk tea at home", "zh-CN": "在家做奶茶用", "zh-TW": "在家做奶茶用" }
     },
     {
       id: "milk-tapioca",
       q: "타피오카 펄",
-      title: { ko: "타피오카 펄 (버블티)", en: "Tapioca pearls for bubble tea", "zh-CN": "珍珠粉圆", "zh-TW": "珍珠粉圓", ja: "タピオカパール" },
+      title: { ko: "타피오카 펄 (버블티)", en: "Tapioca pearls for bubble tea", "zh-CN": "珍珠粉圆", "zh-TW": "珍珠粉圓", ja: "タピオカパール", yue: "珍珠（珍珠奶茶用）" },
       note: { ko: "버블티용 펄", en: "Pearls for bubble tea", "zh-CN": "做珍珠奶茶用", "zh-TW": "做珍珠奶茶用" }
     },
     {
       id: "milk-evap",
       q: "연유",
-      title: { ko: "연유 (홍콩 밀크티용)", en: "Evaporated milk", "zh-CN": "淡奶", "zh-TW": "淡奶", ja: "エバミルク" },
+      title: { ko: "연유 (홍콩 밀크티용)", en: "Evaporated milk", "zh-CN": "淡奶", "zh-TW": "淡奶", ja: "エバミルク", yue: "淡奶（港式奶茶用）" },
       note: { ko: "홍콩 밀크티의 진한 맛", en: "The body of Hong Kong milk tea", "zh-CN": "港式奶茶的厚度", "zh-TW": "港式奶茶的厚度" }
     },
     {
       id: "black-ceylon-bag",
       q: "실론 홍차 티백",
-      title: { ko: "실론 홍차 티백 (대용량)", en: "Ceylon black tea bags, large pack", "zh-CN": "锡兰红茶茶包（大包装）", "zh-TW": "錫蘭紅茶茶包（大包裝）", ja: "セイロン紅茶ティーバッグ" },
-      note: { ko: "밀크티 베이스로 좋은 진한 홍차", en: "A strong tea for milk tea", "zh-CN": "适合做奶茶基底", "zh-TW": "適合做奶茶基底" }
+      title: { ko: "실론 홍차 티백 (대용량)", en: "Ceylon black tea bags, large pack", "zh-CN": "锡兰红茶茶包（大包装）", "zh-TW": "錫蘭紅茶茶包（大包裝）", ja: "セイロン紅茶ティーバッグ", yue: "錫蘭紅茶茶包（大包）" },
+      note: { ko: "밀크티 베이스로 좋은 진한 홍차", en: "A strong tea for milk tea", "zh-CN": "适合做奶茶基底", "zh-TW": "適合做奶茶基底", yue: "啱做奶茶基底嘅濃紅茶" }
     },
     {
       id: "black-assam-bag",
       q: "아삼 홍차",
-      title: { ko: "아삼 홍차", en: "Assam black tea", "zh-CN": "阿萨姆红茶", "zh-TW": "阿薩姆紅茶", ja: "アッサム紅茶" },
-      note: { ko: "몰트 향이 진한 홍차", en: "Malty and full", "zh-CN": "麦芽香浓", "zh-TW": "麥芽香濃" }
+      title: { ko: "아삼 홍차", en: "Assam black tea", "zh-CN": "阿萨姆红茶", "zh-TW": "阿薩姆紅茶", ja: "アッサム紅茶", yue: "阿薩姆紅茶" },
+      note: { ko: "몰트 향이 진한 홍차", en: "Malty and full", "zh-CN": "麦芽香浓", "zh-TW": "麥芽香濃", yue: "麥芽香濃嘅紅茶" }
     },
     {
       id: "black-earlgrey-bulk",
       q: "얼그레이 티백",
-      title: { ko: "얼그레이 티백 (대용량)", en: "Earl Grey tea bags, large pack", "zh-CN": "伯爵茶包（大包装）", "zh-TW": "伯爵茶包（大包裝）", ja: "アールグレイ ティーバッグ" },
-      note: { ko: "매일 마시는 베르가못 홍차", en: "Everyday bergamot black tea", "zh-CN": "日常佛手柑红茶", "zh-TW": "日常佛手柑紅茶" }
+      title: { ko: "얼그레이 티백 (대용량)", en: "Earl Grey tea bags, large pack", "zh-CN": "伯爵茶包（大包装）", "zh-TW": "伯爵茶包（大包裝）", ja: "アールグレイ ティーバッグ", yue: "伯爵茶包（大包）" },
+      note: { ko: "매일 마시는 베르가못 홍차", en: "Everyday bergamot black tea", "zh-CN": "日常佛手柑红茶", "zh-TW": "日常佛手柑紅茶", yue: "日日飲嘅佛手柑紅茶" }
     },
     {
       id: "black-chai",
       q: "마살라 차이",
-      title: { ko: "마살라 차이 (향신료 홍차)", en: "Masala chai", "zh-CN": "玛萨拉香料红茶", "zh-TW": "瑪薩拉香料紅茶", ja: "マサラチャイ" },
-      note: { ko: "우유와 향신료를 넣어 끓이는 인도 홍차", en: "Indian spiced milk tea", "zh-CN": "印度香料奶茶", "zh-TW": "印度香料奶茶" }
+      title: { ko: "마살라 차이 (향신료 홍차)", en: "Masala chai", "zh-CN": "玛萨拉香料红茶", "zh-TW": "瑪薩拉香料紅茶", ja: "マサラチャイ", yue: "瑪薩拉香料茶" },
+      note: { ko: "우유와 향신료를 넣어 끓이는 인도 홍차", en: "Indian spiced milk tea", "zh-CN": "印度香料奶茶", "zh-TW": "印度香料奶茶", yue: "加奶同香料一齊煲嘅印度紅茶" }
     }
   ];
 
@@ -115,8 +115,10 @@
   function normTitle(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    var key = lang() === "yue" ? "zh-TW" : lang();
-    return obj[key] || obj.en || obj.ko || "";
+    var key = lang() === "yue" ? "yue" : lang();
+    var out = obj[key];
+    if (!out && key === "yue") out = obj["zh-TW"];
+    return out || obj.en || obj.ko || "";
   }
 
   function storeItems() {

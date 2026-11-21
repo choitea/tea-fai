@@ -1728,9 +1728,11 @@
   function l10n(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    /* 광동어는 번체 중국어, 일본어는 일본어 문구를 쓰고 없으면 영어로 */
-    var key = lang === "yue" ? "zh-TW" : lang;
-    return obj[key] || obj.en || obj.ko || "";
+    /* 광동어는 粵語 문구를 먼저 쓰고, 없으면 번체 중국어 → 영어 */
+    var key = lang === "yue" ? "yue" : lang;
+    var out = obj[key];
+    if (!out && key === "yue") out = obj["zh-TW"];
+    return out || obj.en || obj.ko || "";
   }
 
   function seedJson() {
@@ -2306,7 +2308,7 @@
   function anyText(obj) {
     if (obj == null) return "";
     if (typeof obj === "string") return obj;
-    return [obj.ko, obj.en, obj["zh-CN"], obj["zh-TW"]].filter(Boolean).join(" ");
+    return [obj.ko, obj.en, obj["zh-CN"], obj["zh-TW"], obj.yue].filter(Boolean).join(" ");
   }
 
   function cacheOrSeed(key, seedVal) {
