@@ -198,6 +198,8 @@ CHECK = r"""
         : 'missing';
     out.partnerShopsHtml = others ? others.innerHTML.length : -1;
     out.partnerShopsText = others ? others.innerHTML.indexOf('준비 중') >= 0 : false;
+    var othersHead = document.querySelector('#partnerOthersHead');
+    out.othersHeadHidden = othersHead ? othersHead.hidden : null;
   } catch (e) { out.errors.push('partners: ' + e); }
 
   try {
@@ -298,6 +300,21 @@ def main():
     )
     maker = run("maker", shops=shops)
     personal = run("personal", shops=shops)
+
+    # 다른 입점 매장이 생겼을 때: 고정 매장은 그대로 맨 위, 나머지는 아래 목록으로
+    with_other = dict(shops)
+    extra = json.loads(json.dumps(shops["shops"][0], ensure_ascii=False))
+    extra.update(
+        {
+            "slug": "test-partner-shop",
+            "pinned": 0,
+            "tier": 1,
+            "name": {"ko": "테스트 찻집", "en": "Test tea room", "zh-CN": "测试茶馆", "zh-TW": "測試茶館", "ja": "テスト茶館", "yue": "測試茶館"},
+            "region": {"ko": "서울 마포구", "en": "Mapo-gu, Seoul", "zh-CN": "首尔 麻浦区", "zh-TW": "首爾 麻浦區", "ja": "ソウル 麻浦区", "yue": "首爾 麻浦區"},
+        }
+    )
+    with_other["shops"] = shops["shops"] + [extra]
+    other = run(None, shops=with_other)
     print(json.dumps({"maker": {k: maker[k] for k in ("rank", "bizHtml", "partnerHidden")},
                       "personal": {k: personal[k] for k in ("rank", "bizHtml", "partnerHidden")}},
                      ensure_ascii=False, indent=2))
@@ -309,7 +326,17 @@ def main():
         and not personal["hasShopForm"]
         and not personal["hasProductForm"]
     )
-    ok = ok and tiers
+    mixed = (
+        other["errors"] == []
+        and other["pinnedOrder"] == "hongkong-first"
+        and other["pinnedHtml"] > 200
+        and other["partnerShopsHtml"] > 200
+        and other["partnerShopsText"] is False
+        and other["othersHeadHidden"] is False
+    )
+    print(json.dumps({"other": {k: other[k] for k in ("pinnedOrder", "partnerShopsHtml", "partnerShopsText", "othersHeadHidden")}},
+                     ensure_ascii=False, indent=2))
+    ok = ok and tiers and mixed
     print("SMOKE:", "PASS" if ok else "FAIL")
     sys.exit(0 if ok else 2)
 
