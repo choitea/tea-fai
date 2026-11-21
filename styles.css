@@ -1164,6 +1164,10 @@ a {
   margin-top: 13px;
 }
 
+.field[hidden] {
+  display: none;
+}
+
 .field > label {
   display: block;
   font-size: 10.5px;
@@ -1269,6 +1273,13 @@ a {
   font-weight: 600;
   padding: 3px 9px;
   border-radius: 999px;
+}
+
+/* 목록에 없어 직접 적은 차 */
+.note-tea-custom {
+  background: var(--paper-3);
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
 }
 
 .note-stars {

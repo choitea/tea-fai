@@ -232,7 +232,7 @@
             <input
               type="search"
               id="searchInput"
-              placeholder="차 이름, 향, 산지로 찾기"
+              placeholder="차 이름, 향, 산지, 나라로 찾기"
               data-i18n-ph="guide.searchLeaf"
               autocomplete="off"
               aria-label="차 백과 검색"
@@ -529,6 +529,16 @@
           <div class="field">
             <label for="noteTea" data-i18n="notes.formTea">차 종류</label>
             <select id="noteTea"></select>
+          </div>
+          <div class="field" id="noteTeaCustomField" hidden>
+            <label for="noteTeaCustom" data-i18n="notes.customName">차 이름</label>
+            <input
+              type="text"
+              id="noteTeaCustom"
+              placeholder="예: 보이차, 2018 생차"
+              data-i18n-ph="notes.customPh"
+              maxlength="40"
+            />
           </div>
           <div class="field">
             <label for="noteName" data-i18n="notes.formName">이름 · 산지</label>

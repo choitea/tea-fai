@@ -615,6 +615,48 @@
     });
   }
 
+  /* 원산지 국가 이름 — 검색창에 나라 이름만 넣어도 그 나라 차가 나오게 합니다.
+     나라마다 흔히 쓰는 다른 표기(영문·한글 약칭)도 함께 넣습니다. */
+  var ORIGIN_ALIAS = {
+    kr: "대한민국 코리아 Korea Republic of Korea",
+    cn: "중국 China",
+    tw: "대만 타이완 Taiwan",
+    jp: "일본 Japan",
+    in: "인도 India",
+    lk: "스리랑카 실론 Ceylon Sri Lanka",
+    th: "태국 Thailand",
+    vn: "베트남 Vietnam",
+    np: "네팔 Nepal",
+    ke: "케냐 Kenya",
+    za: "남아공 남아프리카 South Africa",
+    hk: "홍콩 Hong Kong",
+    my: "말레이시아 Malaysia",
+    ru: "러시아 Russia",
+    tr: "튀르키예 터키 Türkiye Turkey",
+    ma: "모로코 Morocco",
+    eg: "이집트 Egypt",
+    sd: "수단 Sudan",
+    rw: "르완다 Rwanda",
+    ar: "아르헨티나 Argentina",
+    ie: "아일랜드 Ireland",
+    uk: "영국 United Kingdom England Britain UK",
+    de: "독일 Germany",
+    fr: "프랑스 France"
+  };
+
+  function originText(item) {
+    var c = (item && item.country) || null;
+    if (!c && item && item.id && D.origin) c = D.origin[item.id] || null;
+    if (!c) return "";
+    var parts = [c.ko, c.en, c["zh-CN"], c["zh-TW"], c.yue, c.ja, c.code];
+    if (c.code && ORIGIN_ALIAS[c.code]) parts.push(ORIGIN_ALIAS[c.code]);
+    return parts
+      .filter(function (v) {
+        return !!v;
+      })
+      .join(" ");
+  }
+
   function haystack(item) {
     return [
       item.name,
@@ -623,6 +665,7 @@
       item.process,
       item.story,
       item.origin,
+      originText(item),
       item.flavor,
       item.pairing,
       item.keep,
@@ -893,13 +936,28 @@
      4. 시음 노트
      ============================================================ */
   var noteState = { rating: 0 };
+  /* 목록에 없는 차는 직접 이름을 적어 남길 수 있습니다 */
+  var CUSTOM_TEA = "__custom__";
+
+  function isCustomTea(v) {
+    return v === CUSTOM_TEA;
+  }
+
+  /* 노트 한 건이 가리키는 차 — 직접 적은 이름이 있으면 그것을 먼저 씁니다 */
+  function noteTeaOf(n) {
+    var custom = n && n.customTea ? String(n.customTea).trim() : "";
+    if (custom) return { name: custom, accent: "", accentSoft: "", custom: true };
+    var tea = D.byId(n && n.teaId);
+    return tea || { name: "", accent: "", accentSoft: "", custom: true };
+  }
 
   function loadNotes() {
     var raw = storeGet(NOTES_KEY, []);
     if (!Array.isArray(raw)) return [];
     return raw
       .filter(function (n) {
-        return n && n.id && D.byId(n.teaId);
+        if (!n || !n.id) return false;
+        return !!(n.customTea && String(n.customTea).trim()) || !!D.byId(n.teaId);
       })
       .sort(function (a, b) {
         return b.createdAt - a.createdAt;
@@ -916,20 +974,48 @@
     var sel = $("#noteTea");
     if (!sel) return;
     var prev = sel.value;
-    var html = D.groups
-      .map(function (g) {
-        var opts = D.teasOf(g.id)
-          .map(function (tea) {
-            return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
-          })
-          .join("");
-        return '<optgroup label="' + esc(g.name) + '">' + opts + "</optgroup>";
-      })
-      .join("");
+    var html =
+      '<option value="' +
+      CUSTOM_TEA +
+      '">' +
+      esc(t("notes.custom")) +
+      "</option>" +
+      D.groups
+        .map(function (g) {
+          var opts = D.teasOf(g.id)
+            .map(function (tea) {
+              return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
+            })
+            .join("");
+          return '<optgroup label="' + esc(g.name) + '">' + opts + "</optgroup>";
+        })
+        .join("");
     sel.innerHTML = html;
     var last = storeGet(LAST_TEA_KEY, null);
-    if (prev) sel.value = prev;
+    if (prev && (isCustomTea(prev) || D.byId(prev).id === prev)) sel.value = prev;
     else if (last && D.byId(last).id === last) sel.value = last;
+    syncNoteCustom();
+  }
+
+  /* '직접 작성'을 고르면 바로 아래에 차 이름 입력칸을 펼칩니다 */
+  function syncNoteCustom() {
+    var sel = $("#noteTea");
+    var field = $("#noteTeaCustomField");
+    if (!sel || !field) return;
+    if (isCustomTea(sel.value)) field.removeAttribute("hidden");
+    else field.setAttribute("hidden", "");
+  }
+
+  function bindNoteCustom() {
+    var sel = $("#noteTea");
+    var input = $("#noteTeaCustom");
+    if (sel) {
+      sel.addEventListener("change", function () {
+        syncNoteCustom();
+        if (isCustomTea(sel.value) && input) input.focus();
+      });
+    }
+    syncNoteCustom();
   }
 
   function renderStarRow() {
@@ -980,15 +1066,15 @@
 
     list.innerHTML = notes
       .map(function (n) {
-        var tea = D.byId(n.teaId);
+        var tea = noteTeaOf(n);
         return (
           '<article class="note-item">' +
           '<div class="note-top">' +
-          '<span class="note-tea" style="background:' +
-          tea.accentSoft +
-          ";color:" +
-          tea.accent +
-          '">' +
+          '<span class="note-tea' +
+          (tea.custom ? " note-tea-custom" : "") +
+          '"' +
+          (tea.custom ? "" : ' style="background:' + tea.accentSoft + ";color:" + tea.accent + '"') +
+          ">" +
           esc(tea.name) +
           "</span>" +
           '<span class="note-stars">' +
@@ -1030,6 +1116,15 @@
     var teaId = $("#noteTea").value;
     var name = $("#noteName").value.trim();
     var text = $("#noteText").value.trim();
+    var customEl = $("#noteTeaCustom");
+    var customName = isCustomTea(teaId) && customEl ? customEl.value.trim() : "";
+    if (isCustomTea(teaId) && !customName) {
+      toast(t("toast.customNeeded"));
+      if (customEl) customEl.focus();
+      return;
+    }
+    /* 직접 적은 차는 그 이름을 노트 이름으로도 씁니다 */
+    if (!name && customName) name = customName;
     if (!name) {
       toast(t("toast.nameNeeded"));
       $("#noteName").focus();
@@ -1043,7 +1138,8 @@
     var now = Date.now();
     notes.push({
       id: "n" + now + Math.random().toString(36).slice(2, 6),
-      teaId: teaId,
+      teaId: isCustomTea(teaId) ? null : teaId,
+      customTea: customName || null,
       name: name,
       rating: noteState.rating,
       note: text,
@@ -3642,6 +3738,7 @@
     bindApply();
     bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
+    bindNoteCustom();
     loadPartnerData();
     loadFeatureData();
     if (window.TeaFaiExtra) window.TeaFaiExtra.init();

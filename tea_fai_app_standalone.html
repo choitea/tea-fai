@@ -1194,6 +1194,10 @@ a {
   margin-top: 13px;
 }
 
+.field[hidden] {
+  display: none;
+}
+
 .field > label {
   display: block;
   font-size: 10.5px;
@@ -1299,6 +1303,13 @@ a {
   font-weight: 600;
   padding: 3px 9px;
   border-radius: 999px;
+}
+
+/* 목록에 없어 직접 적은 차 */
+.note-tea-custom {
+  background: var(--paper-3);
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
 }
 
 .note-stars {
@@ -5156,7 +5167,7 @@ h3 {
             <input
               type="search"
               id="searchInput"
-              placeholder="차 이름, 향, 산지로 찾기"
+              placeholder="차 이름, 향, 산지, 나라로 찾기"
               data-i18n-ph="guide.searchLeaf"
               autocomplete="off"
               aria-label="차 백과 검색"
@@ -5453,6 +5464,16 @@ h3 {
           <div class="field">
             <label for="noteTea" data-i18n="notes.formTea">차 종류</label>
             <select id="noteTea"></select>
+          </div>
+          <div class="field" id="noteTeaCustomField" hidden>
+            <label for="noteTeaCustom" data-i18n="notes.customName">차 이름</label>
+            <input
+              type="text"
+              id="noteTeaCustom"
+              placeholder="예: 보이차, 2018 생차"
+              data-i18n-ph="notes.customPh"
+              maxlength="40"
+            />
           </div>
           <div class="field">
             <label for="noteName" data-i18n="notes.formName">이름 · 산지</label>
@@ -6085,6 +6106,9 @@ window.TEAFaiI18N = (function () {
       "unit.cup": "잔",
       "unit.point": "점",
       "notes.formTea": "차 종류",
+      "notes.custom": "✏️ 직접 작성",
+      "notes.customName": "차 이름",
+      "notes.customPh": "예: 보이차, 2018 생차",
       "notes.formName": "이름 · 산지",
       "notes.namePh": "예: 하동 우전, 2026 봄",
       "notes.formRating": "별점",
@@ -6099,6 +6123,7 @@ window.TEAFaiI18N = (function () {
         "아직 기록이 없습니다.<br />오늘 우린 차 한 잔을 남겨 보세요. 차 종류와 별점만 있으면 됩니다.",
       "a11y.delete": "{name} 기록 삭제",
       "toast.nameNeeded": "차 이름을 적어 주세요 (예: 하동 우전)",
+      "toast.customNeeded": "직접 적을 차 이름을 먼저 넣어 주세요",
       "toast.ratingNeeded": "별점을 골라 주세요",
       "toast.saved": "시음 노트에 남겼습니다",
       "toast.deleted": "기록을 삭제했습니다",
@@ -6206,6 +6231,9 @@ window.TEAFaiI18N = (function () {
       "unit.cup": " cups",
       "unit.point": " / 5",
       "notes.formTea": "Tea",
+      "notes.custom": "✏️ Custom tea",
+      "notes.customName": "Tea name",
+      "notes.customPh": "e.g. Pu-erh, 2018 raw",
       "notes.formName": "Name · origin",
       "notes.namePh": "e.g. Hadong Ujeon, spring 2026",
       "notes.formRating": "Rating",
@@ -6220,6 +6248,7 @@ window.TEAFaiI18N = (function () {
         "Nothing logged yet.<br />Leave a note about the cup you steeped today. Tea type and a rating are enough.",
       "a11y.delete": "Delete the note for {name}",
       "toast.nameNeeded": "Please write the tea's name (e.g. Hadong Ujeon)",
+      "toast.customNeeded": "Please type the tea's name first",
       "toast.ratingNeeded": "Please pick a rating",
       "toast.saved": "Saved to your tasting notes",
       "toast.deleted": "Note deleted",
@@ -6323,6 +6352,9 @@ window.TEAFaiI18N = (function () {
       "unit.cup": "杯",
       "unit.point": "分",
       "notes.formTea": "茶类",
+      "notes.custom": "✏️ 手动输入",
+      "notes.customName": "茶名",
+      "notes.customPh": "例：普洱茶，2018年生茶",
       "notes.formName": "名称 · 产地",
       "notes.namePh": "例：河东雨前，2026年春",
       "notes.formRating": "评分",
@@ -6337,6 +6369,7 @@ window.TEAFaiI18N = (function () {
         "还没有记录。<br />把今天泡的一杯茶记下来吧。只要茶类和评分就够了。",
       "a11y.delete": "删除{name}的记录",
       "toast.nameNeeded": "请填写茶名（例：河东雨前）",
+      "toast.customNeeded": "请先填写要记录的茶名",
       "toast.ratingNeeded": "请选择评分",
       "toast.saved": "已记入品茶笔记",
       "toast.deleted": "记录已删除",
@@ -6440,6 +6473,9 @@ window.TEAFaiI18N = (function () {
       "unit.cup": "杯",
       "unit.point": "分",
       "notes.formTea": "茶類",
+      "notes.custom": "✏️ 手動輸入",
+      "notes.customName": "茶名",
+      "notes.customPh": "例：普洱茶，2018年生茶",
       "notes.formName": "名稱 · 產地",
       "notes.namePh": "例：河東雨前，2026年春",
       "notes.formRating": "評分",
@@ -6454,6 +6490,7 @@ window.TEAFaiI18N = (function () {
         "還沒有記錄。<br />把今天泡的一杯茶記下來吧。只要茶類和評分就夠了。",
       "a11y.delete": "刪除{name}的記錄",
       "toast.nameNeeded": "請填寫茶名（例：河東雨前）",
+      "toast.customNeeded": "請先填寫要記錄的茶名",
       "toast.ratingNeeded": "請選擇評分",
       "toast.saved": "已記入品茶筆記",
       "toast.deleted": "記錄已刪除",
@@ -7161,7 +7198,7 @@ window.TEAFaiI18N = (function () {
       "guide.tabLeaf": "잎차",
       "guide.tabBag": "티백",
       "guide.searchBag": "티백 이름·브랜드·향으로 찾기",
-      "guide.searchLeaf": "차 이름, 향, 산지로 찾기",
+      "guide.searchLeaf": "차 이름, 향, 산지, 나라로 찾기",
       "bag.count": "{n}종",
       "bag.brandAll": "전체 브랜드",
       "bag.typeAll": "전체 차종",
@@ -7314,7 +7351,7 @@ window.TEAFaiI18N = (function () {
       "guide.tabLeaf": "Loose leaf",
       "guide.tabBag": "Tea bags",
       "guide.searchBag": "Search tea bags by name, brand or aroma",
-      "guide.searchLeaf": "Search by name, aroma or origin",
+      "guide.searchLeaf": "Search by name, aroma, origin or country",
       "bag.count": "{n} teas",
       "bag.brandAll": "All brands",
       "bag.typeAll": "All types",
@@ -7467,7 +7504,7 @@ window.TEAFaiI18N = (function () {
       "guide.tabLeaf": "原叶茶",
       "guide.tabBag": "茶包",
       "guide.searchBag": "按茶包名称、品牌或香气查找",
-      "guide.searchLeaf": "按茶名、香气、产地查找",
+      "guide.searchLeaf": "按茶名、香气、产地、国家查找",
       "bag.count": "{n} 种",
       "bag.brandAll": "全部品牌",
       "bag.typeAll": "全部茶类",
@@ -7620,7 +7657,7 @@ window.TEAFaiI18N = (function () {
       "guide.tabLeaf": "原葉茶",
       "guide.tabBag": "茶包",
       "guide.searchBag": "依茶包名稱、品牌或香氣尋找",
-      "guide.searchLeaf": "依茶名、香氣、產地尋找",
+      "guide.searchLeaf": "依茶名、香氣、產地、國家尋找",
       "bag.count": "{n} 種",
       "bag.brandAll": "全部品牌",
       "bag.typeAll": "全部茶類",
@@ -8223,7 +8260,7 @@ window.TEAFaiI18N = (function () {
     "guide.channel": "Tea Fai 頻道",
     "guide.all": "全部",
     "guide.search": "搵茶名、香氣、產地",
-    "guide.searchLeaf": "搵茶名、香氣、產地",
+    "guide.searchLeaf": "搵茶名、香氣、產地、國家",
     "guide.searchBag": "搵茶包名、品牌、香氣",
     "guide.empty": "搵唔到「{q}」。試下其他字。",
     "guide.ox": "發酵度",
@@ -8264,6 +8301,10 @@ window.TEAFaiI18N = (function () {
     "notes.statCups": "記低咗幾杯",
     "notes.statAvg": "平均星數",
     "notes.formTea": "茶款",
+    "notes.custom": "✏️ 自行輸入",
+    "notes.customName": "茶名",
+    "notes.customPh": "例：普洱茶，2018年生茶",
+    "toast.customNeeded": "寫低要記嘅茶名先。",
     "notes.formName": "名·產地",
     "notes.formRating": "星數",
     "notes.formText": "一句感想",
@@ -8766,7 +8807,7 @@ window.TEAFaiI18N = (function () {
     "guide.title": "茶百科",
     "guide.lead": "発酵度、製茶、香り、食べ合わせ、保存まで — 161種を、実際の茶葉写真と産地でまとめました。",
     "guide.search": "茶名・香り・産地で探す",
-    "guide.searchLeaf": "茶名・香り・産地で探す",
+    "guide.searchLeaf": "茶名・香り・産地・国で探す",
     "guide.searchBag": "ティーバッグ名・ブランド・香りで探す",
     "guide.all": "すべて",
     "guide.empty": "「{q}」は見つかりません。別の言葉で試してください。",
@@ -8952,6 +8993,10 @@ window.TEAFaiI18N = (function () {
     "notes.statCups": "記録した杯数",
     "notes.statAvg": "平均の星",
     "notes.formTea": "茶の種類",
+    "notes.custom": "✏️ 直接入力",
+    "notes.customName": "茶の名前",
+    "notes.customPh": "例：プーアル茶、2018年の生茶",
+    "toast.customNeeded": "記録する茶の名前を入れてください。",
     "notes.formName": "名前・産地",
     "notes.formRating": "星",
     "notes.formText": "ひとこと",
@@ -28673,6 +28718,48 @@ window.TEAFaiData = (function () {
     });
   }
 
+  /* 원산지 국가 이름 — 검색창에 나라 이름만 넣어도 그 나라 차가 나오게 합니다.
+     나라마다 흔히 쓰는 다른 표기(영문·한글 약칭)도 함께 넣습니다. */
+  var ORIGIN_ALIAS = {
+    kr: "대한민국 코리아 Korea Republic of Korea",
+    cn: "중국 China",
+    tw: "대만 타이완 Taiwan",
+    jp: "일본 Japan",
+    in: "인도 India",
+    lk: "스리랑카 실론 Ceylon Sri Lanka",
+    th: "태국 Thailand",
+    vn: "베트남 Vietnam",
+    np: "네팔 Nepal",
+    ke: "케냐 Kenya",
+    za: "남아공 남아프리카 South Africa",
+    hk: "홍콩 Hong Kong",
+    my: "말레이시아 Malaysia",
+    ru: "러시아 Russia",
+    tr: "튀르키예 터키 Türkiye Turkey",
+    ma: "모로코 Morocco",
+    eg: "이집트 Egypt",
+    sd: "수단 Sudan",
+    rw: "르완다 Rwanda",
+    ar: "아르헨티나 Argentina",
+    ie: "아일랜드 Ireland",
+    uk: "영국 United Kingdom England Britain UK",
+    de: "독일 Germany",
+    fr: "프랑스 France"
+  };
+
+  function originText(item) {
+    var c = (item && item.country) || null;
+    if (!c && item && item.id && D.origin) c = D.origin[item.id] || null;
+    if (!c) return "";
+    var parts = [c.ko, c.en, c["zh-CN"], c["zh-TW"], c.yue, c.ja, c.code];
+    if (c.code && ORIGIN_ALIAS[c.code]) parts.push(ORIGIN_ALIAS[c.code]);
+    return parts
+      .filter(function (v) {
+        return !!v;
+      })
+      .join(" ");
+  }
+
   function haystack(item) {
     return [
       item.name,
@@ -28681,6 +28768,7 @@ window.TEAFaiData = (function () {
       item.process,
       item.story,
       item.origin,
+      originText(item),
       item.flavor,
       item.pairing,
       item.keep,
@@ -28951,13 +29039,28 @@ window.TEAFaiData = (function () {
      4. 시음 노트
      ============================================================ */
   var noteState = { rating: 0 };
+  /* 목록에 없는 차는 직접 이름을 적어 남길 수 있습니다 */
+  var CUSTOM_TEA = "__custom__";
+
+  function isCustomTea(v) {
+    return v === CUSTOM_TEA;
+  }
+
+  /* 노트 한 건이 가리키는 차 — 직접 적은 이름이 있으면 그것을 먼저 씁니다 */
+  function noteTeaOf(n) {
+    var custom = n && n.customTea ? String(n.customTea).trim() : "";
+    if (custom) return { name: custom, accent: "", accentSoft: "", custom: true };
+    var tea = D.byId(n && n.teaId);
+    return tea || { name: "", accent: "", accentSoft: "", custom: true };
+  }
 
   function loadNotes() {
     var raw = storeGet(NOTES_KEY, []);
     if (!Array.isArray(raw)) return [];
     return raw
       .filter(function (n) {
-        return n && n.id && D.byId(n.teaId);
+        if (!n || !n.id) return false;
+        return !!(n.customTea && String(n.customTea).trim()) || !!D.byId(n.teaId);
       })
       .sort(function (a, b) {
         return b.createdAt - a.createdAt;
@@ -28974,20 +29077,48 @@ window.TEAFaiData = (function () {
     var sel = $("#noteTea");
     if (!sel) return;
     var prev = sel.value;
-    var html = D.groups
-      .map(function (g) {
-        var opts = D.teasOf(g.id)
-          .map(function (tea) {
-            return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
-          })
-          .join("");
-        return '<optgroup label="' + esc(g.name) + '">' + opts + "</optgroup>";
-      })
-      .join("");
+    var html =
+      '<option value="' +
+      CUSTOM_TEA +
+      '">' +
+      esc(t("notes.custom")) +
+      "</option>" +
+      D.groups
+        .map(function (g) {
+          var opts = D.teasOf(g.id)
+            .map(function (tea) {
+              return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
+            })
+            .join("");
+          return '<optgroup label="' + esc(g.name) + '">' + opts + "</optgroup>";
+        })
+        .join("");
     sel.innerHTML = html;
     var last = storeGet(LAST_TEA_KEY, null);
-    if (prev) sel.value = prev;
+    if (prev && (isCustomTea(prev) || D.byId(prev).id === prev)) sel.value = prev;
     else if (last && D.byId(last).id === last) sel.value = last;
+    syncNoteCustom();
+  }
+
+  /* '직접 작성'을 고르면 바로 아래에 차 이름 입력칸을 펼칩니다 */
+  function syncNoteCustom() {
+    var sel = $("#noteTea");
+    var field = $("#noteTeaCustomField");
+    if (!sel || !field) return;
+    if (isCustomTea(sel.value)) field.removeAttribute("hidden");
+    else field.setAttribute("hidden", "");
+  }
+
+  function bindNoteCustom() {
+    var sel = $("#noteTea");
+    var input = $("#noteTeaCustom");
+    if (sel) {
+      sel.addEventListener("change", function () {
+        syncNoteCustom();
+        if (isCustomTea(sel.value) && input) input.focus();
+      });
+    }
+    syncNoteCustom();
   }
 
   function renderStarRow() {
@@ -29038,15 +29169,15 @@ window.TEAFaiData = (function () {
 
     list.innerHTML = notes
       .map(function (n) {
-        var tea = D.byId(n.teaId);
+        var tea = noteTeaOf(n);
         return (
           '<article class="note-item">' +
           '<div class="note-top">' +
-          '<span class="note-tea" style="background:' +
-          tea.accentSoft +
-          ";color:" +
-          tea.accent +
-          '">' +
+          '<span class="note-tea' +
+          (tea.custom ? " note-tea-custom" : "") +
+          '"' +
+          (tea.custom ? "" : ' style="background:' + tea.accentSoft + ";color:" + tea.accent + '"') +
+          ">" +
           esc(tea.name) +
           "</span>" +
           '<span class="note-stars">' +
@@ -29088,6 +29219,15 @@ window.TEAFaiData = (function () {
     var teaId = $("#noteTea").value;
     var name = $("#noteName").value.trim();
     var text = $("#noteText").value.trim();
+    var customEl = $("#noteTeaCustom");
+    var customName = isCustomTea(teaId) && customEl ? customEl.value.trim() : "";
+    if (isCustomTea(teaId) && !customName) {
+      toast(t("toast.customNeeded"));
+      if (customEl) customEl.focus();
+      return;
+    }
+    /* 직접 적은 차는 그 이름을 노트 이름으로도 씁니다 */
+    if (!name && customName) name = customName;
     if (!name) {
       toast(t("toast.nameNeeded"));
       $("#noteName").focus();
@@ -29101,7 +29241,8 @@ window.TEAFaiData = (function () {
     var now = Date.now();
     notes.push({
       id: "n" + now + Math.random().toString(36).slice(2, 6),
-      teaId: teaId,
+      teaId: isCustomTea(teaId) ? null : teaId,
+      customTea: customName || null,
       name: name,
       rating: noteState.rating,
       note: text,
@@ -31700,6 +31841,7 @@ window.TEAFaiData = (function () {
     bindApply();
     bindQuiz();
     $("#noteForm").addEventListener("submit", submitNote);
+    bindNoteCustom();
     loadPartnerData();
     loadFeatureData();
     if (window.TeaFaiExtra) window.TeaFaiExtra.init();
