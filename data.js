@@ -15694,1293 +15694,1293 @@ window.TEAFaiData = (function () {
   /* ── 162종 실물 사진 (tea_fai_research/tea_photos_map.json) ──
      f=파일(images/teas/), m=exact|family, cr=저작자, lic=라이선스, lu=라이선스 주소, pg=원본 페이지 */
   var PHOTOS = {
-  "black-assam": {
-    "f": "black-assam.jpg",
+  "green-longjing": {
+    "f": "green-longjing.jpg",
     "m": "exact",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAssam-Tee_SFTGFOP1.jpg"
-  },
-  "black-cameron": {
-    "f": "black-cameron.jpg",
-    "m": "family",
-    "cr": "Oleg Guijinsky og",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackened_tea_leaves_%28Unsplash%29.jpg"
-  },
-  "black-darjeeling-autumn": {
-    "f": "black-darjeeling-autumn.jpg",
-    "m": "exact",
-    "cr": "Vyacheslav Argenberg",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Fermented_tea_leaves.jpg"
-  },
-  "black-darjeeling-first": {
-    "f": "black-darjeeling-first.jpg",
-    "m": "exact",
-    "cr": "David J. Fred",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling-tea-first-flush-leaf-dry.jpg"
-  },
-  "black-darjeeling-second": {
-    "f": "black-darjeeling-second.jpg",
-    "m": "exact",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASchwarzer_Tee_Darjeeling_%28Second_Flush%29.jpg"
-  },
-  "black-dianhong": {
-    "f": "black-dianhong.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADianhong-Jinluo_tea.jpg"
-  },
-  "black-dimbula": {
-    "f": "black-dimbula.jpg",
-    "m": "family",
-    "cr": "Patrick Kolencherry",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
-  },
-  "black-dooars": {
-    "f": "black-dooars.jpg",
-    "m": "family",
-    "cr": "Oraola",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAssam-hajua.jpg"
-  },
-  "black-jaksal": {
-    "f": "black-jaksal.jpg",
-    "m": "family",
-    "cr": "TV하동OBN열린방송",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJaekseol-cha.jpg"
-  },
-  "black-jinjunmei": {
-    "f": "black-jinjunmei.jpg",
-    "m": "exact",
-    "cr": "Msrasnw",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Jun_Mei_tea.jpg"
-  },
-  "black-kandy": {
-    "f": "black-kandy.jpg",
-    "m": "family",
-    "cr": "HeroidShehu",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
-  },
-  "black-keemun": {
-    "f": "black-keemun.jpg",
-    "m": "exact",
-    "cr": "Whiteness",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Keemun_FTGFOP_(1).JPG"
-  },
-  "black-kenya": {
-    "f": "black-kenya.jpg",
-    "m": "family",
-    "cr": "Naresh.limbu at English Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACTC_tea.jpg"
-  },
-  "black-lapsang": {
-    "f": "black-lapsang.jpg",
-    "m": "exact",
-    "cr": "No machine-readable author provided. Sjhan81 assumed (based on copyright claims).",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJacksonsLapsangSouchong_low.jpg"
-  },
-  "black-lapsang-unsmoked": {
-    "f": "black-lapsang-unsmoked.jpg",
-    "m": "family",
-    "cr": "Maša Sinreih in Valentina Vivod",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ATheae_folium_%22lapsang_souchong%221.JPG"
-  },
-  "black-nepal": {
-    "f": "black-nepal.jpg",
-    "m": "family",
-    "cr": "Vyacheslav Argenberg",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling%2C_India%2C_Fermented_tea_leaves.jpg"
-  },
-  "black-nilgiri": {
-    "f": "black-nilgiri.jpg",
-    "m": "exact",
-    "cr": "Badagnani (talk)",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Nilgiritea.jpg"
-  },
-  "black-nuwaraeliya": {
-    "f": "black-nuwaraeliya.jpg",
-    "m": "family",
-    "cr": "Patrick Kolencherry",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
-  },
-  "black-rize": {
-    "f": "black-rize.jpg",
-    "m": "family",
-    "cr": "Oleg Guijinsky og",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackened_tea_leaves_%28Unsplash%29.jpg"
-  },
-  "black-ruby18": {
-    "f": "black-ruby18.jpg",
-    "m": "family",
-    "cr": "David Monniaux",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALapsang_souchong_dsc07639.jpg"
-  },
-  "black-ruhuna": {
-    "f": "black-ruhuna.jpg",
-    "m": "family",
-    "cr": "HeroidShehu",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
-  },
-  "black-rwanda": {
-    "f": "black-rwanda.jpg",
-    "m": "exact",
-    "cr": "RebeccaRwanda",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AOrthodox_variety_from_Rutsiro_tea_factory.jpg"
-  },
-  "black-sabaragamuwa": {
-    "f": "black-sabaragamuwa.jpg",
-    "m": "family",
-    "cr": "Oleg Guijinsky og",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackened_tea_leaves_%28Unsplash%29.jpg"
-  },
-  "black-sikkim": {
-    "f": "black-sikkim.jpg",
-    "m": "family",
-    "cr": "David J. Fred",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADarjeeling-tea-first-flush-leaf-dry.jpg"
-  },
-  "black-udapussellawa": {
-    "f": "black-udapussellawa.jpg",
-    "m": "family",
-    "cr": "HeroidShehu",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
-  },
-  "black-uva": {
-    "f": "black-uva.jpg",
-    "m": "family",
-    "cr": "HeroidShehu",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_tea_Leafs.JPG"
-  },
-  "black-yeongdeok": {
-    "f": "black-yeongdeok.jpg",
-    "m": "family",
-    "cr": "TV하동OBN열린방송",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJaekseol-cha.jpg"
-  },
-  "black-yingde": {
-    "f": "black-yingde.jpg",
-    "m": "family",
-    "cr": "Oleg Guijinsky og",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackened_tea_leaves_%28Unsplash%29.jpg"
-  },
-  "blend-afternoon": {
-    "f": "blend-afternoon.jpg",
-    "m": "family",
-    "cr": "Mike1024",
-    "lic": "Public domain",
+    "cr": "teain.ru",
+    "lic": "",
     "lu": "",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALoose_leaf_darjeeling_tea_twinings.jpg"
-  },
-  "blend-earlgrey": {
-    "f": "blend-earlgrey.jpg",
-    "m": "exact",
-    "cr": "WJ Houtman",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AEarl_Grey_FBOP-Wilson_Ceylon_Teas.jpg"
-  },
-  "blend-englishbreakfast": {
-    "f": "blend-englishbreakfast.jpg",
-    "m": "family",
-    "cr": "Oleg Guijinsky og",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackened_tea_leaves_%28Unsplash%29.jpg"
-  },
-  "blend-guihua": {
-    "f": "blend-guihua.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_osmanthus%F0%9F%8C%BC.jpg"
-  },
-  "blend-hongkong": {
-    "f": "blend-hongkong.jpg",
-    "m": "exact",
-    "cr": "Naresh.limbu at English Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACTC_tea.jpg"
-  },
-  "blend-irish-breakfast": {
-    "f": "blend-irish-breakfast.jpg",
-    "m": "family",
-    "cr": "David Monniaux",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALapsang_souchong_dsc07642.jpg"
-  },
-  "blend-jasmine": {
-    "f": "blend-jasmine.jpg",
-    "m": "exact",
-    "cr": "Hayden Soloviev",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Loose_Jasmine_Tea_Leaves.jpg"
-  },
-  "blend-ladygrey": {
-    "f": "blend-ladygrey.jpg",
-    "m": "exact",
-    "cr": "Sjhan81",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ATwiningsLadyGrey_low.jpg"
-  },
-  "blend-lychee": {
-    "f": "blend-lychee.jpg",
-    "m": "family",
-    "cr": "USAGI-WRP",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAssam_CTC_Hanamizuki_2009.JPG"
-  },
-  "blend-masala": {
-    "f": "blend-masala.jpg",
-    "m": "family",
-    "cr": "Retro Lenses",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAnise_and_cinnamon.jpg"
-  },
-  "blend-moroccan-mint": {
-    "f": "blend-moroccan-mint.jpg",
-    "m": "exact",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AGr%C3%BCner_Tee_Gunpowder.jpg"
-  },
-  "blend-rose": {
-    "f": "blend-rose.jpg",
-    "m": "exact",
-    "cr": "Maor X",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ARose_petals_and_buds.jpg"
-  },
-  "blend-russian-caravan": {
-    "f": "blend-russian-caravan.jpg",
-    "m": "family",
-    "cr": "Copyright © 2005 David Monniaux",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALapsang_souchong_dsc07642_cropped.jpg"
-  },
-  "blend-thaitea": {
-    "f": "blend-thaitea.jpg",
-    "m": "family",
-    "cr": "USAGI-WRP",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAssam_CTC_Hanamizuki_2009.JPG"
-  },
-  "blend-yuenyeung": {
-    "f": "blend-yuenyeung.jpg",
-    "m": "family",
-    "cr": "Patrick Kolencherry",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACeylon_black_tea_leaves.jpg"
-  },
-  "dark-anhua": {
-    "f": "dark-anhua.jpg",
-    "m": "exact",
-    "cr": "Kasuga",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AAnhua_Fuzhuan_Fermented_Tea.jpg"
-  },
-  "dark-cheongtaejeon": {
-    "f": "dark-cheongtaejeon.jpg",
-    "m": "exact",
-    "cr": "EBS",
-    "lic": "KOGL Type 1",
-    "lu": "http://www.kogl.or.kr/info/licenseType1.do",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADoncha_and_tteokcha_3.png"
-  },
-  "dark-fuzhuan": {
-    "f": "dark-fuzhuan.jpg",
-    "m": "exact",
-    "cr": "Ash Crow",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALotus_scented_Fuzhuan_2012_Heicha_-_WikiTea.jpg"
-  },
-  "dark-kangzhuan": {
-    "f": "dark-kangzhuan.jpg",
-    "m": "exact",
-    "cr": "Sjschen at English Wikipedia",
-    "lic": "Public domain",
-    "lu": "",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlackTeaBrick.jpg"
-  },
-  "dark-laoqingzhuan": {
-    "f": "dark-laoqingzhuan.jpg",
-    "m": "family",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
-  },
-  "dark-liubao": {
-    "f": "dark-liubao.jpg",
-    "m": "exact",
-    "cr": "Cosmin Dordea",
-    "lic": "CC BY-SA 2.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJinHua_%22golden_flower%22_from_Liu_Bao.jpg"
-  },
-  "dark-qianliang": {
-    "f": "dark-qianliang.jpg",
-    "m": "family",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
-  },
-  "dark-sheng": {
-    "f": "dark-sheng.jpg",
-    "m": "exact",
-    "cr": "Scott Wilson (Yunnan Sourcing)",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3APuerh_Dragon_Pearl_Tea.jpg"
-  },
-  "dark-shou": {
-    "f": "dark-shou.jpg",
-    "m": "family",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
-  },
-  "dark-tianjian": {
-    "f": "dark-tianjian.jpg",
-    "m": "family",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY 3.0",
-    "lu": "https://creativecommons.org/licenses/by/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASoultea-Pu-erh-first-grade.jpg"
-  },
-  "dark-tibetan": {
-    "f": "dark-tibetan.jpg",
-    "m": "exact",
-    "cr": "Atoutibet",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABriques_de_th%C3%A9_tib%C3%A9tain.jpg"
-  },
-  "fruit-applecinnamon": {
-    "f": "fruit-applecinnamon.jpg",
-    "m": "family",
-    "cr": "A Girl With Tea from USA",
-    "lic": "CC BY 2.0",
-    "lu": "https://creativecommons.org/licenses/by/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AZingiber_Ginger_Coconut_Rooibos_-_Teavana_tisane.jpg"
-  },
-  "fruit-berryhibiscus": {
-    "f": "fruit-berryhibiscus.jpg",
-    "m": "family",
-    "cr": "Jugemu",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_hibiscus_flowers.jpg"
-  },
-  "fruit-bloodorange": {
-    "f": "fruit-bloodorange.jpg",
-    "m": "exact",
-    "cr": "Selena N. B. H. from Fayetteville, USA",
-    "lic": "CC BY 2.0",
-    "lu": "https://creativecommons.org/licenses/by/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABlood_orange_fruit_tisane.jpg"
-  },
-  "fruit-daechu": {
-    "f": "fruit-daechu.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AGray_dates.jpg"
-  },
-  "fruit-gingerlemon": {
-    "f": "fruit-gingerlemon.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_ginger_slices.jpg"
-  },
-  "fruit-mogwa": {
-    "f": "fruit-mogwa.jpg",
-    "m": "exact",
-    "cr": "Golf Bravo",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AQuince-israel.jpg"
-  },
-  "fruit-omija": {
-    "f": "fruit-omija.jpg",
-    "m": "exact",
-    "cr": "Korea.net",
-    "lic": "CC BY-SA 2.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASchisandra_sinensis_dried_berries.jpg"
-  },
-  "fruit-passionfruit": {
-    "f": "fruit-passionfruit.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3APassion_fruit_lime_lemon_tea.jpg"
-  },
-  "fruit-peach": {
-    "f": "fruit-peach.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_yellow_peach.jpg"
-  },
-  "fruit-yuja": {
-    "f": "fruit-yuja.jpg",
-    "m": "exact",
-    "cr": "경빈마마",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACitrus_junos_fruits_4.jpg"
-  },
-  "green-anji-baipian": {
-    "f": "green-anji-baipian.jpg",
-    "m": "exact",
-    "cr": "LinusBG",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Anji_bai_cha_leaves.jpg"
+    "pg": "https://teain.ru/product/chaj-kitaj/lunczzin/"
   },
   "green-biluochun": {
     "f": "green-biluochun.jpg",
     "m": "exact",
-    "cr": "Walter Grassroot",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3A%E6%97%A0%E9%94%A1%E6%BB%A8%E6%B9%96_%E9%9B%AA%E6%B5%AA%E5%B1%B1%E8%8C%B6%E5%9C%BA_%E7%A2%A7%E8%9E%BA%E6%98%A5.jpg"
-  },
-  "green-boseong": {
-    "f": "green-boseong.jpg",
-    "m": "family",
-    "cr": "예향",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_jakseol_green_tea_leaves.jpg"
-  },
-  "green-daejak": {
-    "f": "green-daejak.jpg",
-    "m": "family",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJungjak_tea_leaves.jpg"
-  },
-  "green-dafo-longjing": {
-    "f": "green-dafo-longjing.jpg",
-    "m": "family",
-    "cr": "Editor at Large",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
-  },
-  "green-enshi-yulu": {
-    "f": "green-enshi-yulu.jpg",
-    "m": "family",
-    "cr": "soultea.de/André Helbig",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASencha_Japanischer_Gr%C3%BCner_Tee.jpg"
-  },
-  "green-genmaicha": {
-    "f": "green-genmaicha.jpg",
-    "m": "exact",
-    "cr": "No machine-readable author provided. Kyd assumed (based on copyright claims).",
-    "lic": "Public domain",
+    "cr": "indonesian.alibaba.com",
+    "lic": "",
     "lu": "",
-    "pg": "https://commons.wikimedia.org/wiki/File:Genmaicha.JPG"
-  },
-  "green-gougunao": {
-    "f": "green-gougunao.jpg",
-    "m": "family",
-    "cr": "Editor at Large",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
-  },
-  "green-gyokuro": {
-    "f": "green-gyokuro.jpg",
-    "m": "exact",
-    "cr": "Rama",
-    "lic": "CC BY-SA 2.0 fr",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AGyokuro_img_0067.jpg"
-  },
-  "green-hadong": {
-    "f": "green-hadong.jpg",
-    "m": "family",
-    "cr": "예향",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_jakseol_green_tea_leaves.jpg"
-  },
-  "green-hanzhong-xianhao": {
-    "f": "green-hanzhong-xianhao.jpg",
-    "m": "family",
-    "cr": "Editor at Large",
-    "lic": "CC BY-SA 2.5",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.5",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALeaves_of_green_tea.jpg"
-  },
-  "green-hojicha": {
-    "f": "green-hojicha.jpg",
-    "m": "exact",
-    "cr": "Francois Mathieu",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHojicha_Dark_Roast.jpg"
-  },
-  "green-houkui": {
-    "f": "green-houkui.jpg",
-    "m": "exact",
-    "cr": "Sebastian Stabinger",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AFresh_Hou_Kui_Green_Tea_01.JPG"
-  },
-  "green-huiming": {
-    "f": "green-huiming.jpg",
-    "m": "family",
-    "cr": "The original uploader was Deathtiny42 at French Wikipedia.",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AFukuju_green_tea_leaves.jpg"
-  },
-  "green-jeju": {
-    "f": "green-jeju.jpg",
-    "m": "family",
-    "cr": "예향",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADrying_jakseol_green_tea_leaves.jpg"
-  },
-  "green-jukro": {
-    "f": "green-jukro.jpg",
-    "m": "family",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJungjak_tea_leaves.jpg"
-  },
-  "green-jungjak": {
-    "f": "green-jungjak.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJungjak_tea_leaves.jpg"
-  },
-  "green-kabusecha": {
-    "f": "green-kabusecha.jpg",
-    "m": "family",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3A2018_Uji_lightly_steamed_sencha.jpg"
-  },
-  "green-kamairicha": {
-    "f": "green-kamairicha.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AKamairicha.jpg"
-  },
-  "green-laoshan": {
-    "f": "green-laoshan.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALaoshan_green_tea.jpg"
-  },
-  "green-longjing": {
-    "f": "green-longjing.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Longjing_tea.jpg"
-  },
-  "green-luanguapian": {
-    "f": "green-luanguapian.jpg",
-    "m": "exact",
-    "cr": "PanShiBo",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Lu'an_Melon_Seed_tea.jpg"
-  },
-  "green-lushan": {
-    "f": "green-lushan.jpg",
-    "m": "family",
-    "cr": "Alessandro Martini",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AGreen_tea_3_appearances.jpg"
+    "pg": "https://indonesian.alibaba.com/product-detail/early-spring-High-quality-Single-Buds-1787593731.html"
   },
   "green-maofeng": {
     "f": "green-maofeng.jpg",
     "m": "exact",
-    "cr": "Qirille",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AMaoFeng_Green_Tea_%E9%BB%84%E5%B1%B1%E6%AF%9B%E5%B3%B0.jpg"
-  },
-  "green-maojian": {
-    "f": "green-maojian.jpg",
-    "m": "exact",
-    "cr": "Francesc Fort",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AXinyang_Maojian.jpg"
-  },
-  "green-matcha": {
-    "f": "green-matcha.jpg",
-    "m": "exact",
-    "cr": "Matcha Tea",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AMatcha_tea.jpg"
-  },
-  "green-mengding-ganlu": {
-    "f": "green-mengding-ganlu.jpg",
-    "m": "family",
-    "cr": "CEphoto, Uwe Aranas",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AZhu-Ye-Qing-Tea-02.jpg"
-  },
-  "green-sanxia-biluochun": {
-    "f": "green-sanxia-biluochun.jpg",
-    "m": "family",
-    "cr": "예향",
-    "lic": "CC BY 2.0 kr",
-    "lu": "https://creativecommons.org/licenses/by/2.0/kr/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_jakseol_green_tea_leaves.jpg"
-  },
-  "green-sejak": {
-    "f": "green-sejak.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASejak_tea_leaves.jpg"
+    "cr": "domtea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://domtea.ru/catalog/green-tea/tproduct/490575267-572332362081-huan-shan-mao-fen-vorsistie-piki-s-zhelt"
   },
   "green-sencha": {
     "f": "green-sencha.jpg",
     "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:2017_Kagoshima_sencha.jpg"
-  },
-  "green-wuyuan-mingmei": {
-    "f": "green-wuyuan-mingmei.jpg",
-    "m": "family",
-    "cr": "The original uploader was Deathtiny42 at French Wikipedia.",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AFukuju_green_tea_leaves.jpg"
-  },
-  "green-zhuyeqing": {
-    "f": "green-zhuyeqing.jpg",
-    "m": "exact",
-    "cr": "CEphoto, Uwe Aranas",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AZhu-Ye-Qing-Tea-02.jpg"
-  },
-  "herb-balloonflower": {
-    "f": "herb-balloonflower.jpg",
-    "m": "family",
-    "cr": "이승우",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADoraji-jeonggwa.jpg"
-  },
-  "herb-barley": {
-    "f": "herb-barley.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_barley_tea_%281%29.jpg"
-  },
-  "herb-brownrice": {
-    "f": "herb-brownrice.jpg",
-    "m": "exact",
-    "cr": "Bebada",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ARoasted_brown_rice.jpg"
-  },
-  "herb-buckwheat": {
-    "f": "herb-buckwheat.jpg",
-    "m": "exact",
-    "cr": "Candrichuk",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AKasha_or_roasted_buckwheat.jpg"
-  },
-  "herb-burdock": {
-    "f": "herb-burdock.jpg",
-    "m": "family",
-    "cr": "Resimke",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHarvested_Burdock_Root.jpg"
-  },
-  "herb-cassia-seed": {
-    "f": "herb-cassia-seed.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACassia_seed_%2820240131%29.jpg"
-  },
-  "herb-chamomile": {
-    "f": "herb-chamomile.jpg",
-    "m": "exact",
-    "cr": "Rillke",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AMatricariae_flos_dried.jpg"
-  },
-  "herb-chrysanthemum": {
-    "f": "herb-chrysanthemum.jpg",
-    "m": "exact",
-    "cr": "Peachyeung316",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_Chrysanthemum_and_Dried_Honeysuckles.jpg"
-  },
-  "herb-cornsilk": {
-    "f": "herb-cornsilk.jpg",
-    "m": "family",
-    "cr": "W.carter",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ACorn_silk_in_a_field_by_Myrstigen_1.jpg"
-  },
-  "herb-cornus": {
-    "f": "herb-cornus.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_Henan_Nanyang_cornelian_cherries.jpg"
-  },
-  "herb-dandelion": {
-    "f": "herb-dandelion.jpg",
-    "m": "exact",
-    "cr": "Stinkie Pinkie",
-    "lic": "CC BY 2.0",
-    "lu": "https://creativecommons.org/licenses/by/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AKorean_tea-Dried_dandelions.jpg"
-  },
-  "herb-dunggulle": {
-    "f": "herb-dunggulle.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_polygonatum_odoratum_slices.jpg"
-  },
-  "herb-ginger": {
-    "f": "herb-ginger.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_ginger_slices_%281%29.jpg"
-  },
-  "herb-gugija": {
-    "f": "herb-gugija.jpg",
-    "m": "exact",
-    "cr": "Wstefano at English Wikipedia",
-    "lic": "Public domain",
+    "cr": "www.51miz.com",
+    "lic": "",
     "lu": "",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_wolfberry_closeup.jpg"
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-p7rtwgAzdH3F99c9cd9_z&e3Bip4s"
   },
-  "herb-hibiscus": {
-    "f": "herb-hibiscus.jpg",
+  "green-gyokuro": {
+    "f": "green-gyokuro.jpg",
     "m": "exact",
-    "cr": "পাপৰি বৰা",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_hibiscus_flowers_2.jpg"
-  },
-  "herb-lavender": {
-    "f": "herb-lavender.jpg",
-    "m": "exact",
-    "cr": "Rillke",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALavandulae_flos_dried.jpg"
-  },
-  "herb-lemongrass": {
-    "f": "herb-lemongrass.jpg",
-    "m": "family",
-    "cr": "Niman Lakra",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ALemon_Grass_Edited_Photo.jpg"
-  },
-  "herb-lotus": {
-    "f": "herb-lotus.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_lotus_leaf_tea.jpg"
-  },
-  "herb-mate": {
-    "f": "herb-mate.jpg",
-    "m": "exact",
-    "cr": "Lexspion",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADel_amerikai_yerba_mate_tea.jpg"
-  },
-  "herb-mugwort": {
-    "f": "herb-mugwort.jpg",
-    "m": "family",
-    "cr": "Tamilselvi v",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AArtemisia_princeps_tea.jpg"
-  },
-  "herb-mulberry": {
-    "f": "herb-mulberry.jpg",
-    "m": "exact",
-    "cr": "François Nguyen",
-    "lic": "CC BY 2.0",
-    "lu": "https://creativecommons.org/licenses/by/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_mulberry_leaves.jpg"
-  },
-  "herb-peppermint": {
-    "f": "herb-peppermint.jpg",
-    "m": "exact",
-    "cr": "Fumikas Sagisavas",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_mint_leaves_tea.jpg"
-  },
-  "herb-persimmon": {
-    "f": "herb-persimmon.jpg",
-    "m": "exact",
-    "cr": "은국",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADrying_persimmon_leaves.jpg"
-  },
-  "herb-rooibos": {
-    "f": "herb-rooibos.jpg",
-    "m": "exact",
-    "cr": "Veganlover1993",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ARooibostea.jpg"
-  },
-  "herb-ssanghwa": {
-    "f": "herb-ssanghwa.jpg",
-    "m": "family",
-    "cr": "Zmu'az4Z",
-    "lic": "CC BY 4.0",
-    "lu": "https://creativecommons.org/licenses/by/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADried_herbal_materials_in_sacks.jpg"
-  },
-  "herb-tteokcha": {
-    "f": "herb-tteokcha.jpg",
-    "m": "exact",
-    "cr": "EBS",
-    "lic": "KOGL Type 1",
-    "lu": "http://www.kogl.or.kr/info/licenseType1.do",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADoncha_and_tteokcha.png"
-  },
-  "oolong-alishan": {
-    "f": "oolong-alishan.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHGY_Oolong_tea_leaf.jpg"
-  },
-  "oolong-beauty": {
-    "f": "oolong-beauty.jpg",
-    "m": "family",
-    "cr": "The original uploader was Iateasquirrel at English Wikipedia.",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AQi_Lan_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-benshan": {
-    "f": "oolong-benshan.jpg",
-    "m": "family",
-    "cr": "User Iateasquirrel on en.wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABan_Tian_Yao_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-dahongpao": {
-    "f": "oolong-dahongpao.jpg",
-    "m": "exact",
-    "cr": "Iateasquirrel at English Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File:Da_Hong_Pao_Oolong_tea_leaf.jpg"
-  },
-  "oolong-dancong": {
-    "f": "oolong-dancong.jpg",
-    "m": "exact",
-    "cr": "Mx. Granger",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADuck_shit_aroma_tea_2.jpg"
-  },
-  "oolong-dancong-milan": {
-    "f": "oolong-dancong-milan.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AMi_Lan_Xiang_Oolong_Tea.jpg"
-  },
-  "oolong-dancong-yashixiang": {
-    "f": "oolong-dancong-yashixiang.jpg",
-    "m": "exact",
-    "cr": "Mx. Granger",
-    "lic": "CC0",
-    "lu": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ADuck_shit_aroma_tea_2.jpg"
-  },
-  "oolong-dayuling": {
-    "f": "oolong-dayuling.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf.jpg"
-  },
-  "oolong-dongding": {
-    "f": "oolong-dongding.jpg",
-    "m": "exact",
-    "cr": "Waliy sherpa",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Dong_Ding_tea.jpg"
-  },
-  "oolong-foshou": {
-    "f": "oolong-foshou.jpg",
-    "m": "family",
-    "cr": "The original uploader was Iateasquirrel at English Wikipedia.",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AQi_Lan_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-hongshui": {
-    "f": "oolong-hongshui.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Suo_Chi_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-huangjingui": {
-    "f": "oolong-huangjingui.jpg",
-    "m": "exact",
-    "cr": "Peaceeverywhere",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Huang_Jin_Gui_Tea.jpeg"
-  },
-  "oolong-jin-xuan": {
-    "f": "oolong-jin-xuan.jpg",
-    "m": "exact",
-    "cr": "Difference engine",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File:Jin_Xuan_oolong_tea.jpg"
-  },
-  "oolong-lishan": {
-    "f": "oolong-lishan.jpg",
-    "m": "family",
-    "cr": "Iateasquirrel at English Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHGY_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-muzha-tieguanyin": {
-    "f": "oolong-muzha-tieguanyin.jpg",
-    "m": "family",
-    "cr": "Quelcrime",
-    "lic": "Public domain",
+    "cr": "www.51miz.com",
+    "lic": "",
     "lu": "",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ATieguanyin2.jpg"
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Fp7rtwgAzdH3F8mannbc_z&e3Bip4s"
   },
-  "oolong-pouchong": {
-    "f": "oolong-pouchong.jpg",
+  "green-matcha": {
+    "f": "green-matcha.jpg",
     "m": "exact",
-    "cr": "Richard Corner",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File:Spring_pouchong_tea_leaves_on_plate.jpg"
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/High-Quality-Matcha-Powder-Smooth-Rich_1601818787592.html"
   },
-  "oolong-rougui": {
-    "f": "oolong-rougui.jpg",
-    "m": "exact",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File:Rou_Gui_(Traditional)_Oolong_tea_leaf.jpg"
-  },
-  "oolong-shanlinxi": {
-    "f": "oolong-shanlinxi.jpg",
+  "green-jeju": {
+    "f": "green-jeju.jpg",
     "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-shuixian": {
-    "f": "oolong-shuixian.jpg",
-    "m": "exact",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AShui_Hsien_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-si-ji-chun": {
-    "f": "oolong-si-ji-chun.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Suo_Chi_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-thai-doi": {
-    "f": "oolong-thai-doi.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHMG_Oolong_tea_leaf_close.jpg"
-  },
-  "oolong-tieguanyin": {
-    "f": "oolong-tieguanyin.jpg",
-    "m": "exact",
-    "cr": "Maximilian Wimmer",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AMaxim-2b-TinKuanYinLeaves.JPG"
-  },
-  "oolong-vietnam-mocchau": {
-    "f": "oolong-vietnam-mocchau.jpg",
-    "m": "family",
-    "cr": "User:Iateasquirrel",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AJin_Fo_Oolong_tea_leaf.jpg"
-  },
-  "white-aged": {
-    "f": "white-aged.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3APai-mu-tan.jpeg"
-  },
-  "white-gongmei": {
-    "f": "white-gongmei.jpg",
-    "m": "family",
-    "cr": "User Iateasquirrel on en.wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABai_Hao_Yin_Zhen_tea_leaf_%28Fuding%29.jpg"
-  },
-  "white-lingyun-baihao": {
-    "f": "white-lingyun-baihao.jpg",
-    "m": "family",
-    "cr": "User Iateasquirrel on en.wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABai_Hao_Yin_Zhen_tea_leaf_%28Fuding%29.jpg"
-  },
-  "white-peony": {
-    "f": "white-peony.jpg",
-    "m": "exact",
-    "cr": "Badagnani (talk)",
-    "lic": "CC BY-SA 3.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/3.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABaimudan.JPG"
-  },
-  "white-shoumei": {
-    "f": "white-shoumei.jpg",
-    "m": "exact",
-    "cr": "Joannalllu",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AHongshan_White-hair_Tea.jpg"
+    "cr": "russian.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://russian.alibaba.com/product-detail/China-Manufacturer-Good-Quality-Jasmine-Green-1600588553575.html"
   },
   "white-silverneedle": {
     "f": "white-silverneedle.jpg",
     "m": "exact",
-    "cr": "User Iateasquirrel on en.wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ABai_Hao_Yin_Zhen_tea_leaf_%28Fuding%29.jpg"
+    "cr": "tealao.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tealao.com/ru/tea/baihao-yinzhen"
   },
-  "white-xingongyi": {
-    "f": "white-xingongyi.jpg",
-    "m": "family",
-    "cr": "",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3APai-mu-tan.jpeg"
-  },
-  "white-yueguangbai": {
-    "f": "white-yueguangbai.jpg",
-    "m": "family",
-    "cr": "Retromoderns",
-    "lic": "CC BY-SA 2.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/2.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3ASilver_Needle_Tea.jpg"
-  },
-  "yellow-beigang-maojian": {
-    "f": "yellow-beigang-maojian.jpg",
-    "m": "family",
-    "cr": "Whiteness",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
-  },
-  "yellow-huoshan": {
-    "f": "yellow-huoshan.jpg",
+  "white-peony": {
+    "f": "white-peony.jpg",
     "m": "exact",
-    "cr": "Iateasquirrel",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File:Huoshan_Huangya_tea_leaves_close.jpg"
+    "cr": "shop.teaworks.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shop.teaworks.ru/bai-mu-dan-2026-iii/"
+  },
+  "white-shoumei": {
+    "f": "white-shoumei.jpg",
+    "m": "exact",
+    "cr": "teain.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teain.ru/product/chaj-kitaj/fudin-shou-mej/"
+  },
+  "white-aged": {
+    "f": "white-aged.jpg",
+    "m": "exact",
+    "cr": "fragrantica.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.fragrantica.ru/news/Aromatnoe-caepitie-Cast-2-belyj-zelenyj-cernyj-caj-i-uluny-16405.html"
+  },
+  "white-gongmei": {
+    "f": "white-gongmei.jpg",
+    "m": "exact",
+    "cr": "domtea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://domtea.ru/catalog/white-tea/tproduct/491302852-110871838781-gun-mei-podarochnie-brovi"
+  },
+  "green-luanguapian": {
+    "f": "green-luanguapian.jpg",
+    "m": "exact",
+    "cr": "roll.sohu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F65ss_z&e3Bf5i7_z&e3Bv54AzdH3FwAzdH3Fb98dc8nmm_8d8bm9dm0"
+  },
+  "green-houkui": {
+    "f": "green-houkui.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Non-fermented-High-Mountain-Taiping-Houkui_1601757692898.html"
+  },
+  "green-maojian": {
+    "f": "green-maojian.jpg",
+    "m": "exact",
+    "cr": "domtea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://domtea.ru/catalog/green-tea/tproduct/490575267-437973062421-sin-yan-mao-tszyan-vorsistie-piki-iz-sin"
+  },
+  "green-lushan": {
+    "f": "green-lushan.jpg",
+    "m": "exact",
+    "cr": "joom.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.joom.com/ru-ua/products/65409e990f2f0b019c1f3a27"
+  },
+  "green-hojicha": {
+    "f": "green-hojicha.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "green-genmaicha": {
+    "f": "green-genmaicha.jpg",
+    "m": "exact",
+    "cr": "ru.teaandwhisk.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://ru.teaandwhisk.com/collections/sale/products/77-shizuoka-royal-genmaicha-green-tea"
+  },
+  "green-hadong": {
+    "f": "green-hadong.jpg",
+    "m": "exact",
+    "cr": "roll.sohu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F65ss_z&e3Bf5i7_z&e3Bv54AzdH3FwAzdH3Fbbanlm99d_8dam98nmb"
+  },
+  "green-sejak": {
+    "f": "green-sejak.jpg",
+    "m": "exact",
+    "cr": "what-cha.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://what-cha.com/products/korea-dong-cheon-sejak-jaksulcha-semi-wild-green-tea/?setCurrencyId=3"
+  },
+  "green-jungjak": {
+    "f": "green-jungjak.jpg",
+    "m": "exact",
+    "cr": "teamania.ch",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teamania.ch/en/green-tea/chinese-green-tea/"
+  },
+  "green-daejak": {
+    "f": "green-daejak.jpg",
+    "m": "exact",
+    "cr": "steepster.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://steepster.com/teas/what-cha/55465-korea-dong-cheon-daejak-semi-wild-green-tea"
+  },
+  "green-jukro": {
+    "f": "green-jukro.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
   },
   "yellow-junshan": {
     "f": "yellow-junshan.jpg",
     "m": "exact",
-    "cr": "Commonsenses at Japanese Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AKunzanginshin%281%29.jpg"
+    "cr": "shop.teaworks.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shop.teaworks.ru/tsziun-shan-in-chzhen-khuan-chzhen-i/"
   },
   "yellow-mengding": {
     "f": "yellow-mengding.jpg",
-    "m": "family",
-    "cr": "Whiteness",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%282%29.JPG"
+    "m": "exact",
+    "cr": "teatrekker.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.teatrekker.com/product/mengding-mountain-snow-buds/"
   },
-  "yellow-wanxi-huangdacha": {
-    "f": "yellow-wanxi-huangdacha.jpg",
+  "yellow-huoshan": {
+    "f": "yellow-huoshan.jpg",
+    "m": "exact",
+    "cr": "shop.teaworks.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shop.teaworks.ru/khuan-shan-mao-fen-2025-p/"
+  },
+  "oolong-tieguanyin": {
+    "f": "oolong-tieguanyin.jpg",
     "m": "family",
-    "cr": "Whiteness",
+    "cr": "teajewel.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teajewel.com/products/hong-shui-red-water-oolong"
+  },
+  "oolong-dahongpao": {
+    "f": "oolong-dahongpao.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-p7rtwgAzdH3F99c9cd9_z&e3Bip4s"
+  },
+  "oolong-dancong": {
+    "f": "oolong-dancong.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Wholesale-Direct-From-Manufacturer-Phoenix-Dancong_1601702295765.html"
+  },
+  "oolong-dongding": {
+    "f": "oolong-dongding.jpg",
+    "m": "exact",
+    "cr": "teain.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teain.ru/product/chaj-tajvan/dundin-ulun-chen-cha/"
+  },
+  "oolong-alishan": {
+    "f": "oolong-alishan.jpg",
+    "m": "exact",
+    "cr": "tealevel.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tealevel.ru/oolong-about"
+  },
+  "oolong-beauty": {
+    "f": "oolong-beauty.jpg",
+    "m": "exact",
+    "cr": "mbd.baidu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F4k1_z&e3Bkwt17_z&e3Bv54AzdH3Fgjofrw2jAzdH3F1wpwAzdH3F1pswg1tg2f7rj6?gt1=1p_c0l0na89n0la9nl8d8n"
+  },
+  "oolong-si-ji-chun": {
+    "f": "oolong-si-ji-chun.jpg",
+    "m": "exact",
+    "cr": "curioustea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.curioustea.com/tea/archive/four-seasons-black-pearl/"
+  },
+  "oolong-jin-xuan": {
+    "f": "oolong-jin-xuan.jpg",
+    "m": "exact",
+    "cr": "evergreen-teashop.de",
+    "lic": "",
+    "lu": "",
+    "pg": "https://evergreen-teashop.de/en/blogs/tee-geschichten/der-mythos-jin-xuan-milky-oolong-warum-ist-dieser-tee-so-beliebt-bei-teeliebhabern-taiwanesischer-teesorten"
+  },
+  "oolong-pouchong": {
+    "f": "oolong-pouchong.jpg",
+    "m": "exact",
+    "cr": "mingtaoxuan.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://mingtaoxuan.com/collections/oolong-tea/products/wen-shan-pouchong-jade"
+  },
+  "black-darjeeling-first": {
+    "f": "black-darjeeling-first.jpg",
+    "m": "exact",
+    "cr": "www.veer.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bejj6_z&e3Bv54AzdH3Fri5p5AzdH3F9nc9naldl"
+  },
+  "black-darjeeling-second": {
+    "f": "black-darjeeling-second.jpg",
+    "m": "exact",
+    "cr": "shopozz.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shopozz.ru/items/226805660081-darjeeling-first-flush-tea--2026-fresh-gielie-sftgfop1-loose-leaf-blend-1-kg"
+  },
+  "black-assam": {
+    "f": "black-assam.jpg",
+    "m": "exact",
+    "cr": "tw.iherb.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fpo_z&e3Btij6k_z&e3Bv54AzdH3Fr6AzdH3FF65gptj6-Nwp76ws-P6517vpf-O62wgtv-Fwt6-T6w1j-Affw4-Tjw-Ttrry-G5s1jg-FOP-8m-5z-9cn-2AzdH3Fn8daa"
+  },
+  "black-nilgiri": {
+    "f": "black-nilgiri.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "black-nuwaraeliya": {
+    "f": "black-nuwaraeliya.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "black-udapussellawa": {
+    "f": "black-udapussellawa.jpg",
+    "m": "exact",
+    "cr": "Patrick Kolencherry",
+    "lic": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Ceylon_black_tea_leaves.jpg"
+  },
+  "black-uva": {
+    "f": "black-uva.jpg",
+    "m": "exact",
+    "cr": "henryshouseofcoffee.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://henryshouseofcoffee.com/collections/black/products/ceylon"
+  },
+  "black-dimbula": {
+    "f": "black-dimbula.jpg",
+    "m": "exact",
+    "cr": "amitea.co.il",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.amitea.co.il/products/luan-gua-pian"
+  },
+  "black-sabaragamuwa": {
+    "f": "black-sabaragamuwa.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/TeaZone-Organic-Ceylon-Black-Tea-Leaves_11000027253714.html"
+  },
+  "black-kandy": {
+    "f": "black-kandy.jpg",
+    "m": "family",
+    "cr": "orangepekoeteas.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.orangepekoeteas.com/tea/darjeeling-margarets-hope-second-flush"
+  },
+  "black-ruhuna": {
+    "f": "black-ruhuna.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "black-keemun": {
+    "f": "black-keemun.jpg",
+    "m": "exact",
+    "cr": "tbvl.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tbvl.ru/tao/124360005/17890754881.html"
+  },
+  "black-lapsang": {
+    "f": "black-lapsang.jpg",
+    "m": "exact",
+    "cr": "mbd.baidu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F4k1_z&e3Bkwt17_z&e3Bv54AzdH3Fgjofrw2jAzdH3F1wpwAzdH3F1pswg1tg2f7rj6?gt1=1p_ca9bdbn9m98d0nbbdna"
+  },
+  "black-jinjunmei": {
+    "f": "black-jinjunmei.jpg",
+    "m": "exact",
+    "cr": "<a href=\"//commons.wikimedia.org/wiki/User:Difference_engine\" title=\"User:Difference engine\">Difference engine</a>",
     "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%282%29.JPG"
+    "lu": "https://creativecommons.org/licenses/",
+    "pg": "https://commons.wikimedia.org/wiki/File:Jin_Jun_Mei.jpg"
+  },
+  "black-dianhong": {
+    "f": "black-dianhong.jpg",
+    "m": "exact",
+    "cr": "teasenz.eu",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teasenz.eu/products/teasenz-yunnan-gold-dian-hong"
+  },
+  "blend-masala": {
+    "f": "blend-masala.jpg",
+    "m": "exact",
+    "cr": "smithtea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.smithtea.com/collections/subscribe-and-save/products/masala-chai"
+  },
+  "black-sikkim": {
+    "f": "black-sikkim.jpg",
+    "m": "family",
+    "cr": "shopozz.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shopozz.ru/items/226805660081-darjeeling-first-flush-tea--2026-fresh-gielie-sftgfop1-loose-leaf-blend-1-kg"
+  },
+  "black-nepal": {
+    "f": "black-nepal.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/FRESH-2024-BPS-BLACK-TEA-ORTHODOX_10000015101147.html"
+  },
+  "black-kenya": {
+    "f": "black-kenya.jpg",
+    "m": "exact",
+    "cr": "oregoncoffeeandtea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://oregoncoffeeandtea.com/shop-1-black-teas/golden-dragon"
+  },
+  "black-jaksal": {
+    "f": "black-jaksal.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Famous-Chinese-tea-High-grade-rock_11000017686670.html"
+  },
+  "black-ruby18": {
+    "f": "black-ruby18.jpg",
+    "m": "family",
+    "cr": "tbvl.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tbvl.ru/tao/124360005/17890754881.html"
+  },
+  "dark-sheng": {
+    "f": "dark-sheng.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "dark-shou": {
+    "f": "dark-shou.jpg",
+    "m": "exact",
+    "cr": "britishtea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://britishtea.com/en-au/collections/organic-pu-erh/products/organic-pu-erh"
+  },
+  "dark-anhua": {
+    "f": "dark-anhua.jpg",
+    "m": "family",
+    "cr": "ru.teaandwhisk.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://ru.teaandwhisk.com/collections/pu-erh-and-hei-cha/products/2006-mini-brick-shou-puerh"
+  },
+  "dark-liubao": {
+    "f": "dark-liubao.jpg",
+    "m": "exact",
+    "cr": "detail.youzan.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F1jpwts_z&e3By57zwg_z&e3Bv54AzdH3Ffi5oAzdH3F2551f?u654_f576vj=2k5x_fj5&wstwf=dxkt323pfics40l"
+  },
+  "dark-cheongtaejeon": {
+    "f": "dark-cheongtaejeon.jpg",
+    "m": "exact",
+    "cr": "thetea.ua",
+    "lic": "",
+    "lu": "",
+    "pg": "https://thetea.ua/ru/product/portsiynyy-shu-puer-puerna-krykhta-mini-tocha-5-h"
+  },
+  "blend-earlgrey": {
+    "f": "blend-earlgrey.jpg",
+    "m": "exact",
+    "cr": "chinese.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://chinese.alibaba.com/product-detail/TOP-SALE-2024-PS-BPS-BLACK-11000012886424.html"
+  },
+  "blend-ladygrey": {
+    "f": "blend-ladygrey.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "blend-englishbreakfast": {
+    "f": "blend-englishbreakfast.jpg",
+    "m": "exact",
+    "cr": "chinese.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://chinese.alibaba.com/product-detail/TOP-SALE-2024-PS-BPS-BLACK-11000012886424.html"
+  },
+  "blend-afternoon": {
+    "f": "blend-afternoon.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "blend-jasmine": {
+    "f": "blend-jasmine.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/New-premium-natural-fresh-jasmine-flowers_1453723922.html"
+  },
+  "blend-hongkong": {
+    "f": "blend-hongkong.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Chinese-black-tea-Leaves-Loose-Bulk_1600795782252.html"
+  },
+  "fruit-daechu": {
+    "f": "fruit-daechu.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/2021-Superfood-Certified-Organic-Dry-Red_1600162046351.html"
+  },
+  "herb-ginger": {
+    "f": "herb-ginger.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "fruit-yuja": {
+    "f": "fruit-yuja.jpg",
+    "m": "exact",
+    "cr": "wellingtonbakehouse.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://wellingtonbakehouse.com/2018/05/31/candied-yuzu-peel/"
+  },
+  "fruit-omija": {
+    "f": "fruit-omija.jpg",
+    "m": "exact",
+    "cr": "steepster.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://steepster.com/teas/rishi-tea/104495-schisandra-berry-blush"
+  },
+  "herb-ssanghwa": {
+    "f": "herb-ssanghwa.jpg",
+    "m": "family",
+    "cr": "www.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bwstkwkw_z&e3Bv54AzdH3Fr6517vp-1jpwtsAzdH3Fit2i-q7wstpy-16tj1-655p-k7615vh-655p_8maadl9nldddb_z&e3Bip4s"
+  },
+  "herb-dunggulle": {
+    "f": "herb-dunggulle.jpg",
+    "m": "exact",
+    "cr": "zybb.njucm.edu.cn",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fzykk_z&e3Bg37v4_z&e3Bj17_z&e3BvgAzdH3F4AzdH3Fyw5vwt_tgu5_z&e3Bwfr?7gt1=9ma"
+  },
+  "herb-buckwheat": {
+    "f": "herb-buckwheat.jpg",
+    "m": "exact",
+    "cr": "www.veer.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bejj6_z&e3Bv54AzdH3Fri5p5AzdH3F90n8lbcbc_z&e3Bip4s"
+  },
+  "herb-barley": {
+    "f": "herb-barley.jpg",
+    "m": "exact",
+    "cr": "www.veer.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bejj6_z&e3Bv54AzdH3Fri5p5AzdH3F9ncb0l98c"
+  },
+  "herb-brownrice": {
+    "f": "herb-brownrice.jpg",
+    "m": "exact",
+    "cr": "baijiahao.baidu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fkwt3twiw5_z&e3Bkwt17_z&e3Bv54AzdH3Ff?t1=8b9nn990anb8cdc98d8&ou6=frt1j6&u56=rv"
+  },
+  "herb-persimmon": {
+    "f": "herb-persimmon.jpg",
+    "m": "exact",
+    "cr": "lapsangstore.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://lapsangstore.com/ja/pages/tea-origin-hunan"
+  },
+  "herb-mulberry": {
+    "f": "herb-mulberry.jpg",
+    "m": "exact",
+    "cr": "chinese.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://chinese.alibaba.com/product-detail/Natural-Mulberry-Leaf-Herbal-Tea-Dried-1600389571446.html"
+  },
+  "herb-lotus": {
+    "f": "herb-lotus.jpg",
+    "m": "exact",
+    "cr": "www.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bwstkwkw_z&e3Bv54AzdH3Fr6517vp-1jpwtsAzdH3Fuwvp56y-f7rrsy-kjfp-r6tvj-ks7j-s5p7f_8maadnll9c8bb_z&e3Bip4s"
+  },
+  "herb-balloonflower": {
+    "f": "herb-balloonflower.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "herb-mugwort": {
+    "f": "herb-mugwort.jpg",
+    "m": "exact",
+    "cr": "xoteas.com.au",
+    "lic": "",
+    "lu": "",
+    "pg": "https://xoteas.com.au/product/mugwort-tea-certified-organic/"
+  },
+  "herb-tteokcha": {
+    "f": "herb-tteokcha.jpg",
+    "m": "exact",
+    "cr": "taooftea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://taooftea.com/product/2011-burma-border-sheng/"
+  },
+  "herb-chamomile": {
+    "f": "herb-chamomile.jpg",
+    "m": "exact",
+    "cr": "es.valleyoftea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://es.valleyoftea.com/collections/italian-cuisine-1"
+  },
+  "herb-peppermint": {
+    "f": "herb-peppermint.jpg",
+    "m": "exact",
+    "cr": "www.hellorf.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bijss56u_z&e3Bv54AzdH3Ft4w2jAzdH3Ffi5oAzdH3F809ammb8dm"
+  },
+  "herb-hibiscus": {
+    "f": "herb-hibiscus.jpg",
+    "m": "family",
+    "cr": "heavenlytealeaves.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.heavenlytealeaves.com/collections/recommended-products-seguno/products/hibiscus-herbal-tea"
+  },
+  "herb-rooibos": {
+    "f": "herb-rooibos.jpg",
+    "m": "exact",
+    "cr": "porterhill.co.uk",
+    "lic": "",
+    "lu": "",
+    "pg": "https://porterhill.co.uk/products/fruit-rooibos"
+  },
+  "herb-mate": {
+    "f": "herb-mate.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Vanilla-chocolate-black-tea-dried-fruit_1601029817132.html"
+  },
+  "herb-lavender": {
+    "f": "herb-lavender.jpg",
+    "m": "exact",
+    "cr": "mbd.baidu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F4k1_z&e3Bkwt17_z&e3Bv54AzdH3Fgjofrw2jAzdH3F1wpwAzdH3F1pswg1tg2f7rj6?gt1=1p_90dc0l8mbmbmanc0cam"
+  },
+  "herb-lemongrass": {
+    "f": "herb-lemongrass.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Premium-Quality-Spring-Tea-China-Famous_1601115000185.html"
+  },
+  "herb-chrysanthemum": {
+    "f": "herb-chrysanthemum.jpg",
+    "m": "exact",
+    "cr": "www.tradewheel.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bp6w1joijjs_z&e3Bv54AzdH3Fv5AzdH3F27wg2xt-tgg5e-sp1-88nccclAzdH3F"
+  },
+  "fruit-mogwa": {
+    "f": "fruit-mogwa.jpg",
+    "m": "exact",
+    "cr": "redmall.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://redmall.ru/taobao/dlya-zdorovya/produkti-pitaniya/dobavki-k-blyudam/myaso-kategoriya-suhoyi-tovari/sushenie-produkti/drugie-sushenie-produkti/_l093275496844.html"
+  },
+  "fruit-gingerlemon": {
+    "f": "fruit-gingerlemon.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "fruit-applecinnamon": {
+    "f": "fruit-applecinnamon.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "fruit-peach": {
+    "f": "fruit-peach.jpg",
+    "m": "exact",
+    "cr": "shop.thesourcebulkfoods.com.au",
+    "lic": "",
+    "lu": "",
+    "pg": "https://shop.thesourcebulkfoods.com.au/product/australian-dried-peaches/"
+  },
+  "fruit-berryhibiscus": {
+    "f": "fruit-berryhibiscus.jpg",
+    "m": "exact",
+    "cr": "heavenlytealeaves.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.heavenlytealeaves.com/collections/recommended-products-seguno/products/hibiscus-herbal-tea"
+  },
+  "fruit-bloodorange": {
+    "f": "fruit-bloodorange.jpg",
+    "m": "exact",
+    "cr": "bluewindmill.hk",
+    "lic": "",
+    "lu": "",
+    "pg": "https://bluewindmill.hk/product-category/%E6%B0%B4%E6%9E%9C%E6%B7%B7%E5%90%88%E8%8C%B6/?v=0446c16e2e66"
+  },
+  "fruit-passionfruit": {
+    "f": "fruit-passionfruit.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/China-Manufacturer-s-Healthy-Frozen-Dried_1600424043487.html"
+  },
+  "green-zhuyeqing": {
+    "f": "green-zhuyeqing.jpg",
+    "m": "family",
+    "cr": "othertea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://othertea.ru/chaj/japonskij-chaj/japonskij-chaj-hodzicha"
+  },
+  "green-enshi-yulu": {
+    "f": "green-enshi-yulu.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-f7vwtAzdH3F99ndb8cAzdH3Fr_caAzdH3F"
+  },
+  "green-anji-baipian": {
+    "f": "green-anji-baipian.jpg",
+    "m": "exact",
+    "cr": "fineteachina.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://fineteachina.com/product/anji-bai-cha-a/"
+  },
+  "green-gougunao": {
+    "f": "green-gougunao.jpg",
+    "m": "exact",
+    "cr": "baijiahao.baidu.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fkwt3twiw5_z&e3Bkwt17_z&e3Bv54AzdH3Ff?t1=8bdcda0md9cc8dnb9cn&ou6=frt1j6&u56=rv"
+  },
+  "green-wuyuan-mingmei": {
+    "f": "green-wuyuan-mingmei.jpg",
+    "m": "exact",
+    "cr": "russian.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://russian.alibaba.com/product-detail/An-Ji-Bai-Cha-Hot-Sale-1601158555319.html"
+  },
+  "green-mengding-ganlu": {
+    "f": "green-mengding-ganlu.jpg",
+    "m": "exact",
+    "cr": "loopteas.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.loopteas.com/sipology-blooming-tea/"
+  },
+  "green-hanzhong-xianhao": {
+    "f": "green-hanzhong-xianhao.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "green-huiming": {
+    "f": "green-huiming.jpg",
+    "m": "family",
+    "cr": "joom.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.joom.ru/ru/products/67e379216d2ec501e8b744e0"
+  },
+  "green-boseong": {
+    "f": "green-boseong.jpg",
+    "m": "exact",
+    "cr": "russian.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://russian.alibaba.com/product-detail/China-Manufacturer-Good-Quality-Jasmine-Green-1600588553575.html"
+  },
+  "green-sanxia-biluochun": {
+    "f": "green-sanxia-biluochun.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "green-kabusecha": {
+    "f": "green-kabusecha.jpg",
+    "m": "exact",
+    "cr": "oldteashop.fi",
+    "lic": "",
+    "lu": "",
+    "pg": "https://oldteashop.fi/en/products/kabusecha-asuka-luomu-25-g-vihrea-tee"
+  },
+  "green-kamairicha": {
+    "f": "green-kamairicha.jpg",
+    "m": "exact",
+    "cr": "teegschwendner.de",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.teegschwendner.de/en/Japan-Kamairicha-organic/100719"
+  },
+  "green-dafo-longjing": {
+    "f": "green-dafo-longjing.jpg",
+    "m": "exact",
+    "cr": "teain.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teain.ru/product/chaj-kitaj/lunczzin/"
+  },
+  "green-laoshan": {
+    "f": "green-laoshan.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "white-xingongyi": {
+    "f": "white-xingongyi.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "white-yueguangbai": {
+    "f": "white-yueguangbai.jpg",
+    "m": "exact",
+    "cr": "curioustea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.curioustea.com/tea/white-tea/yue-guang-bai-white-moonlight/"
+  },
+  "white-lingyun-baihao": {
+    "f": "white-lingyun-baihao.jpg",
+    "m": "exact",
+    "cr": "tdragon.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tdragon.ru/white_tea"
+  },
+  "yellow-beigang-maojian": {
+    "f": "yellow-beigang-maojian.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
   },
   "yellow-weishan-maojian": {
     "f": "yellow-weishan-maojian.jpg",
-    "m": "family",
-    "cr": "Commonsenses at Japanese Wikipedia",
-    "lic": "CC BY-SA 3.0",
-    "lu": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AKunzanginshin%281%29.jpg"
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Chinese-Famous-Tea-Maojian-green-tea_1601258112566.html"
   },
   "yellow-wenzhou-huangtang": {
     "f": "yellow-wenzhou-huangtang.jpg",
-    "m": "family",
-    "cr": "Whiteness",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+    "m": "exact",
+    "cr": "thehongkongcookery.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.thehongkongcookery.com/2022/04/longan-jujube-tea.html?m=1"
+  },
+  "yellow-wanxi-huangdacha": {
+    "f": "yellow-wanxi-huangdacha.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
   },
   "yellow-yuanan-luyuan": {
     "f": "yellow-yuanan-luyuan.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "oolong-rougui": {
+    "f": "oolong-rougui.jpg",
     "m": "family",
-    "cr": "Whiteness",
-    "lic": "CC BY-SA 4.0",
-    "lu": "https://creativecommons.org/licenses/by-sa/4.0",
-    "pg": "https://commons.wikimedia.org/wiki/File%3AYellow-Tea-Hunan_%281%29.JPG"
+    "cr": "globalteahut.org",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3F2s5kwspjwi7p_z&e3B562AzdH3Fv5ssjvpt5gfAzdH3Fgjo-pjw-pjwow6jAzdH3Fr6517vpfAzdH3Fiwsvy5g"
+  },
+  "oolong-shuixian": {
+    "f": "oolong-shuixian.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "oolong-dayuling": {
+    "f": "oolong-dayuling.jpg",
+    "m": "family",
+    "cr": "evergreen-teashop.de",
+    "lic": "",
+    "lu": "",
+    "pg": "https://evergreen-teashop.de/en/collections/high-mountain-oolong-tee"
+  },
+  "oolong-shanlinxi": {
+    "f": "oolong-shanlinxi.jpg",
+    "m": "family",
+    "cr": "tearoma.ee",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tearoma.ee/et/product/shui-xian"
+  },
+  "oolong-lishan": {
+    "f": "oolong-lishan.jpg",
+    "m": "family",
+    "cr": "geotea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://geotea.ru/product/chay-zheltyy-mendin-huan-ya-zheltyy-chay-iz-mendin-700-vesna-2024g"
+  },
+  "oolong-huangjingui": {
+    "f": "oolong-huangjingui.jpg",
+    "m": "exact",
+    "cr": "curioustea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.curioustea.com/tea/oolong-tea/huang-jin-gui-golden-osmanthus-oolong/"
+  },
+  "oolong-benshan": {
+    "f": "oolong-benshan.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "oolong-foshou": {
+    "f": "oolong-foshou.jpg",
+    "m": "exact",
+    "cr": "teamania.ch",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teamania.ch/en/fo-shou/"
+  },
+  "oolong-muzha-tieguanyin": {
+    "f": "oolong-muzha-tieguanyin.jpg",
+    "m": "exact",
+    "cr": "curioustea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.curioustea.com/tea/oolong-tea/muzha-tie-guan-yin-oolong/"
+  },
+  "oolong-dancong-milan": {
+    "f": "oolong-dancong-milan.jpg",
+    "m": "exact",
+    "cr": "teasenz.eu",
+    "lic": "",
+    "lu": "",
+    "pg": "https://teasenz.eu/collections/chinese-tea"
+  },
+  "oolong-dancong-yashixiang": {
+    "f": "oolong-dancong-yashixiang.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/_1600588583359.html"
+  },
+  "oolong-hongshui": {
+    "f": "oolong-hongshui.jpg",
+    "m": "exact",
+    "cr": "tearoma.ee",
+    "lic": "",
+    "lu": "",
+    "pg": "https://tearoma.ee/et/product/shui-xian"
+  },
+  "oolong-thai-doi": {
+    "f": "oolong-thai-doi.jpg",
+    "m": "exact",
+    "cr": "krasnoyarsk.domcoffee.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.krasnoyarsk.domcoffee.ru/catalog/chay/travyanoy/chay_ronnefeldt_teastar_mae_salong_oolong_mae_salong_oolong_100_g/"
+  },
+  "oolong-vietnam-mocchau": {
+    "f": "oolong-vietnam-mocchau.jpg",
+    "m": "exact",
+    "cr": "curioustea.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.curioustea.com/tea/oolong-tea/moc-chau-green-heart-oolong/"
+  },
+  "black-lapsang-unsmoked": {
+    "f": "black-lapsang-unsmoked.jpg",
+    "m": "exact",
+    "cr": "Yandex Market",
+    "lic": "",
+    "lu": "",
+    "pg": "https://market.yandex.ru/card/chzhenshan-syaochzhun-khua-syan-malyy-sort-s-toy-samoy-gory-s-tsvetochnym-aromatom-ves-250-gr/5609840845?utm_source_service=img&icookie=2cmC7k0NZV4hXyYN%2FuWNnILBgKKqywlsvs6bQPGkoSQ6GJilEbY1iLcnRW0zK36%2FemXR83NtUSZStcSbePvzE5QBlOs%3D&wprid=1795229659511110-6189944153673821413-ywmr7qpx7zrsp42v-BAL&src_pof=972"
+  },
+  "black-yingde": {
+    "f": "black-yingde.jpg",
+    "m": "exact",
+    "cr": "domtea.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://domtea.ru/catalog/red-tea/tproduct/491303244-323700043461-dyan-hun-krasnii-chai-iz-yunnani"
+  },
+  "black-rize": {
+    "f": "black-rize.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-f7vwtAzdH3F99ndb8cAzdH3Fr_caAzdH3F"
+  },
+  "black-cameron": {
+    "f": "black-cameron.jpg",
+    "m": "exact",
+    "cr": "nutsaboutlife.com.au",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.nutsaboutlife.com.au/collections/all/products/organic-black-tea"
+  },
+  "black-rwanda": {
+    "f": "black-rwanda.jpg",
+    "m": "exact",
+    "cr": "zdrowesmaczki.pl",
+    "lic": "",
+    "lu": "",
+    "pg": "https://zdrowesmaczki.pl/en_US/p/Black-tea-Rwanda-OP-100g-Bio-Flavo/364"
+  },
+  "black-dooars": {
+    "f": "black-dooars.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "black-darjeeling-autumn": {
+    "f": "black-darjeeling-autumn.jpg",
+    "m": "family",
+    "cr": "ru.teaandwhisk.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://ru.teaandwhisk.com/collections/new-items/products/golden-tips-yingde-black-tea"
+  },
+  "black-yeongdeok": {
+    "f": "black-yeongdeok.jpg",
+    "m": "exact",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/showroom/black-tea-pakistan.html"
+  },
+  "dark-fuzhuan": {
+    "f": "dark-fuzhuan.jpg",
+    "m": "exact",
+    "cr": "nutsaboutlife.com.au",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.nutsaboutlife.com.au/collections/all/products/organic-black-tea"
+  },
+  "dark-qianliang": {
+    "f": "dark-qianliang.jpg",
+    "m": "family",
+    "cr": "xgtea.shop",
+    "lic": "",
+    "lu": "",
+    "pg": "https://xgtea.shop/products/2005-xiaguan-ye-sheng-tuo-raw-pu-erh-tea"
+  },
+  "dark-kangzhuan": {
+    "f": "dark-kangzhuan.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "dark-tibetan": {
+    "f": "dark-tibetan.jpg",
+    "m": "exact",
+    "cr": "",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "dark-laoqingzhuan": {
+    "f": "dark-laoqingzhuan.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "dark-tianjian": {
+    "f": "dark-tianjian.jpg",
+    "m": "family",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "blend-guihua": {
+    "f": "blend-guihua.jpg",
+    "m": "exact",
+    "cr": "joom.ru",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.joom.ru/ru/products/60754e2e2f5898017cec5767"
+  },
+  "blend-rose": {
+    "f": "blend-rose.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-f7vwtAzdH3Fdb8dmddAzdH3Fr_8AzdH3F"
+  },
+  "blend-lychee": {
+    "f": "blend-lychee.jpg",
+    "m": "family",
+    "cr": "chinese.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://chinese.alibaba.com/product-detail/TOP-SALE-2024-PS-BPS-BLACK-11000012886424.html"
+  },
+  "blend-thaitea": {
+    "f": "blend-thaitea.jpg",
+    "m": "family",
+    "cr": "amitea.co.il",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.amitea.co.il/products/luan-gua-pian"
+  },
+  "blend-yuenyeung": {
+    "f": "blend-yuenyeung.jpg",
+    "m": "exact",
+    "cr": "amitea.co.il",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.amitea.co.il/pages/big-tea-sets"
+  },
+  "blend-moroccan-mint": {
+    "f": "blend-moroccan-mint.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "blend-russian-caravan": {
+    "f": "blend-russian-caravan.jpg",
+    "m": "exact",
+    "cr": "www.51miz.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bc84tz_z&e3Bv54AzdH3Ff5-fij3tAzdH3Fnndnnn0_z&e3Bip4s"
+  },
+  "blend-irish-breakfast": {
+    "f": "blend-irish-breakfast.jpg",
+    "m": "family",
+    "cr": "chinese.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://chinese.alibaba.com/product-detail/TOP-SALE-2024-PS-BPS-BLACK-11000012886424.html"
+  },
+  "herb-cassia-seed": {
+    "f": "herb-cassia-seed.jpg",
+    "m": "family",
+    "cr": "www.veer.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bejj6_z&e3Bv54AzdH3Fri5p5AzdH3F90n8lbcbc_z&e3Bip4s"
+  },
+  "herb-burdock": {
+    "f": "herb-burdock.jpg",
+    "m": "exact",
+    "cr": "www.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bwstkwkw_z&e3Bv54AzdH3Fr6517vp-1jpwtsAzdH3Fit2i-q7wstpy-16tj1-655p-k7615vh-655p_8maadl9nldddb_z&e3Bip4s"
+  },
+  "herb-gugija": {
+    "f": "herb-gugija.jpg",
+    "m": "exact",
+    "cr": "www.hellorf.com",
+    "lic": "",
+    "lu": "",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fooo_z&e3Bijss56u_z&e3Bv54AzdH3Ft4w2jAzdH3Ffi5oAzdH3Fitdd9a099aam?fpwptfptvfTyrj=Fwsfj"
+  },
+  "herb-cornus": {
+    "f": "herb-cornus.jpg",
+    "m": "exact",
+    "cr": "commons.wikimedia.org",
+    "lic": "",
+    "lu": "",
+    "pg": ""
+  },
+  "herb-dandelion": {
+    "f": "herb-dandelion.jpg",
+    "m": "exact",
+    "cr": "russian.alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://russian.alibaba.com/product-detail/China-Manufacturer-Good-Quality-Jasmine-Green-1600588553575.html"
+  },
+  "herb-cornsilk": {
+    "f": "herb-cornsilk.jpg",
+    "m": "family",
+    "cr": "alibaba.com",
+    "lic": "",
+    "lu": "",
+    "pg": "https://www.alibaba.com/product-detail/Premium-Quality-Spring-Tea-China-Famous_1601115000185.html"
   }
 };
 

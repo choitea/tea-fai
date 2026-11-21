@@ -3785,7 +3785,7 @@ body.modal-open {
 .tea-photo img {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 14px;
   display: block;
@@ -5470,4 +5470,142 @@ h3 {
 .sc-maps.sc-maps-top {
   margin-top: 4px;
   flex-wrap: wrap;
+}
+
+/* ---------- 티백 카드: 1열 리스트 ↔ 3열 그리드 (잎차 #viewToggle 과 같은 상태 공유) ---------- */
+.bag-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.bag-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bag-thumb {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+}
+
+.bag-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bag-thumb.empty {
+  color: var(--muted);
+  background: var(--paper-3);
+}
+
+/* 리스트 모드에서는 desktop 2열 기본값을 풀어 한 줄로 */
+#bagPanel.mode-list #bagList {
+  display: block;
+}
+
+#bagPanel.mode-list #bagList .bag-card + .bag-card {
+  margin-top: 10px;
+}
+
+/* 3열 그리드 — 잎차 카드와 같은 결(사진 위, 이름 가운데) */
+#bagPanel.mode-grid #bagList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+
+#bagPanel.mode-grid #bagList .bag-card + .bag-card {
+  margin-top: 0;
+}
+
+#bagPanel.mode-grid #bagList .bag-card {
+  border-radius: 16px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card.open {
+  grid-column: 1 / -1;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-main {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 0 8px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-thumb {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: 0;
+  border-radius: 15px;
+  background: #fff;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-thumb img {
+  object-fit: contain;
+  padding: 7px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-body {
+  padding: 6px 8px 0;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-top {
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-brand {
+  flex: 0 1 auto;
+  text-align: center;
+  font-size: 8.6px;
+  letter-spacing: 0.06em;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-caff {
+  display: none;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-line {
+  text-align: center;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-line b {
+  font-size: 11.5px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-line span {
+  font-size: 9px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-note {
+  display: none;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-brew {
+  justify-content: center;
+  padding: 4px 8px 0;
+  font-size: 9px;
+}
+
+#bagPanel.mode-grid #bagList .bag-card:not(.open) .bag-caret {
+  display: none;
 }

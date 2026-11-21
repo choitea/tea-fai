@@ -636,13 +636,13 @@
 
   function applyViewMode() {
     var mode = viewMode();
-    ["view-guide", "view-store"].forEach(function (id) {
+    ["view-guide", "view-store", "bagPanel"].forEach(function (id) {
       var sec = document.getElementById(id);
       if (!sec) return;
       sec.classList.toggle("mode-grid", mode === "grid");
       sec.classList.toggle("mode-list", mode === "list");
     });
-    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+    ["#viewToggle", "#storeViewToggle", "#bagViewToggle"].forEach(function (sel) {
       var btn = $(sel);
       if (!btn) return;
       var label = mode === "grid" ? t("view.toList") : t("view.toGrid");
@@ -666,7 +666,7 @@
   }
 
   function bindViewToggle() {
-    ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
+    ["#viewToggle", "#storeViewToggle", "#bagViewToggle"].forEach(function (sel) {
       var btn = $(sel);
       if (!btn) return;
       btn.addEventListener("click", function () {
@@ -796,6 +796,7 @@
     var lic = p.lu
       ? '<a href="' + esc(p.lu) + '" target="_blank" rel="noopener">' + esc(p.lic || "") + "</a>"
       : esc(p.lic || "");
+    var licBit = lic ? " \u00b7 " + lic : "";
     var src = p.pg
       ? ' · <a href="' + esc(p.pg) + '" target="_blank" rel="noopener">' + esc(t("photo.source")) + "</a>"
       : "";
@@ -805,13 +806,12 @@
       esc(photoSrc(p)) +
       '" alt="' +
       esc(item.name) +
-      '" loading="lazy" width="480" height="320" onerror="this.style.display=\'none\'" />' +
+      '" loading="lazy" width="560" height="560" onerror="this.style.display=\'none\'" />' +
       '<figcaption><span class="ph-tag">' +
       esc(tag) +
       "</span>" +
       esc(artist) +
-      " · " +
-      lic +
+      licBit +
       src +
       "</figcaption></figure>"
     );
@@ -2524,7 +2524,10 @@
       '" aria-expanded="' +
       open +
       '">' +
-      '<span class="bag-top"><span class="bag-brand">' +
+      (bag.photo && bag.photo.f
+        ? '<span class="bag-thumb"><img src="' + esc(bag.photo.f) + '" alt="" loading="lazy" width="560" height="560" /></span>'
+        : '<span class="bag-thumb empty"><svg width="22" height="22"><use href="#ic-bag"/></svg></span>') +
+      '<span class="bag-body"><span class="bag-top"><span class="bag-brand">' +
       esc(bagBrandLabel(bag)) +
       '</span><span class="bag-caff' +
       (bag.caffeine ? " on" : "") +
@@ -2543,7 +2546,7 @@
       "</p>" +
       '<span class="bag-brew"><span>' +
       esc(t("bag.brew", { temp: bag.temp, dur: fmtDur(bag.seconds) })) +
-      "</span><span class=\"bag-caret\"><svg width=\"15\" height=\"15\"><use href=\"#ic-caret\"/></svg></span></span>" +
+      "</span><span class=\"bag-caret\"><svg width=\"15\" height=\"15\"><use href=\"#ic-caret\"/></svg></span></span></span>" +
       "</button>" +
       '<div class="bag-more"><div><div class="bag-more-inner">' +
       '<div class="detail"><h4>' +

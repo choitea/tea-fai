@@ -1,7 +1,7 @@
 {
  "version": 1,
  "updated": "2026-11-21",
- "note": "티백 33종·13개 브랜드. 제품명은 각 브랜드가 실제로 판매하는 라인만 실었습니다. 오설록 제품의 우림 온도·시간은 오설록 공식 상품 안내(녹차 70℃ 1분 30초, 홍차·발효차·허브티 90℃ 2~3분)를 따랐고, 그 밖의 브랜드는 제품별 안내가 확인되지 않아 같은 차종의 일반 기준으로 적었습니다(brewSource: category). pack·향미 표기는 브랜드 공개 설명을 요약했습니다. 타 브랜드 밀크티 완제품은 넣지 않았습니다.",
+ "note": "티백 33종·13개 브랜드. 제품명은 각 브랜드가 실제로 판매하는 라인만 실었습니다. 오설록 제품의 우림 온도·시간은 오설록 공식 상품 안내(녹차 70℃ 1분 30초, 홍차·발효차·허브티 90℃ 2~3분)를 따랐고, 그 밖의 브랜드는 제품별 안내가 확인되지 않아 같은 차종의 일반 기준으로 적었습니다(brewSource: category). pack·향미 표기는 브랜드 공개 설명을 요약했습니다. 타 브랜드 밀크티 완제품은 넣지 않았습니다. 제품 사진은 각 브랜드·판매처의 공개 상품 이미지를 카드용으로 정리해 넣었습니다(출처는 각 항목의 photo 필드).",
  "brands": {
   "twinings": {
    "name": "Twinings",
@@ -125,7 +125,12 @@
     "zh-TW": "佛手柑香清晰浮在醇厚紅茶之上，加奶後香氣依然，可作奶茶基底。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/twinings-earl-grey.jpg",
+    "cr": "officemag.ru",
+    "pg": "https://www.officemag.ru/catalog/goods/620265/"
+   }
   },
   {
    "id": "twinings-english-breakfast",
@@ -156,7 +161,12 @@
     "zh-TW": "阿薩姆與錫蘭的強勁拼配，濃泡後加少許牛奶適合早餐。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/twinings-english-breakfast.jpg",
+    "cr": "thanopoulos.gr",
+    "pg": "https://www.thanopoulos.gr/en/products/prwino-rofhmata/tsai-botana/twinings-english-breakfast-tsai-40tem-669857d6fab9240002ea0ef4/"
+   }
   },
   {
    "id": "twinings-lady-grey",
@@ -187,7 +197,12 @@
     "zh-TW": "在伯爵茶上添檸檬與橙香，輕快明亮，純飲或冰飲比加奶更合適。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/twinings-lady-grey.jpg",
+    "cr": "twinings.co.uk",
+    "pg": "https://twinings.co.uk/products/lady-grey-loose-tea-caddy-100g?gclid=Cj0KEQjw1ee_BRD3hK6x993YzeoBEiQA5RH_BCMBki5DY0NeWNQhbJ5VW72SSf6WD0JqylwdV7V3mcUaAr7o8P8HAQ"
+   }
   },
   {
    "id": "twinings-pure-camomile",
@@ -218,7 +233,12 @@
     "zh-TW": "帶有蘋果般的甜花香，無咖啡因，適合睡前，沸水沖泡約四分鐘。"
    },
    "brewSource": "category",
-   "guideGroup": "herb"
+   "guideGroup": "herb",
+   "photo": {
+    "f": "images/teabags/twinings-pure-camomile.jpg",
+    "cr": "usmall.ru",
+    "pg": "https://usmall.ru/product/16281504-twinings-pure-herbal-tea-pure-camomile-caffeine-free-50-tea-bags-265-oz-75-g-twinings?variant=141347736&color=no-color&size=2.65%20oz%20%2875%20g%29"
+   }
   },
   {
    "id": "ahmad-earl-grey",
@@ -249,7 +269,12 @@
     "zh-TW": "以錫蘭為基底的伯爵茶，佛手柑柔和展開；大盒裝適合每日一杯。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/ahmad-earl-grey.jpg",
+    "cr": "tornado.shop",
+    "pg": "https://tornado.shop/chay-kofe-kakao/listovoy-chay/chay-ahmad-erl-grey-100g-chernyy/"
+   }
   },
   {
    "id": "ahmad-english-breakfast",
@@ -280,7 +305,12 @@
     "zh-TW": "麥芽甜香與收斂感平衡的日常拼配，加奶加糖也不失骨架。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/ahmad-english-breakfast.jpg",
+    "cr": "Yandex Market",
+    "pg": "https://market.yandex.ru/card/ahmad-tea-chay-chernyy-english-breakfast-angliyskiy-zavtrak-listovoy-200-g/5736621022?utm_source_service=img&icookie=HYsriIZK2aDnr%2F3IZUr5WjcNd4MLH%2BjJzJwfxU%2FAR8Br6jFtGUF2cbYgM1TrMzlYvKTgxHN2yDVP%2Fwd19iSFq0kPHAU%3D&wprid=1795236116744132-10291682304973728390-tpmpbylodt7zpyoc-BAL&src_pof=972"
+   }
   },
   {
    "id": "ahmad-english-tea-no1",
@@ -310,7 +340,12 @@
     "zh-TW": "極淡佛手柑的柔和紅茶，覺得伯爵茶香氣過濃時可選它。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/ahmad-english-tea-no1.jpg",
+    "cr": "officemag.ru",
+    "pg": "https://www.officemag.ru/catalog/goods/620023/"
+   }
   },
   {
    "id": "ahmad-camomile-lemongrass",
@@ -341,7 +376,12 @@
     "zh-TW": "洋甘菊的甜花香加上檸檬草的柑橘感，適合餐後或夜晚。"
    },
    "brewSource": "category",
-   "guideGroup": "herb"
+   "guideGroup": "herb",
+   "photo": {
+    "f": "images/teabags/ahmad-camomile-lemongrass.jpg",
+    "cr": "migros.com.tr",
+    "pg": "https://www.migros.com.tr/ahmad-tea-special-blend-dokme-cay-400-g-p-2faa9c"
+   }
   },
   {
    "id": "dilmah-earl-grey",
@@ -372,7 +412,12 @@
     "zh-TW": "斯里蘭卡高地茶葉添佛手柑，湯色清亮、收尾乾淨。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/dilmah-earl-grey.jpg",
+    "cr": "rimi.ee",
+    "pg": "https://www.rimi.ee/epood/en/products/drinks/coffee-tea-cocoa/black-tea/tee-must-earl-grey-dilmah-20x1-5g/p/154062"
+   }
   },
   {
    "id": "dilmah-english-breakfast",
@@ -402,7 +447,12 @@
     "zh-TW": "錫蘭明亮酸度與麥芽平衡，濃泡加奶即成柔順奶茶。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/dilmah-english-breakfast.jpg",
+    "cr": "fairprice.com.sg",
+    "pg": "https://www.fairprice.com.sg/product/dilmah-tea-bag-english-breakfast-25s-x-2g-10381329"
+   }
   },
   {
    "id": "dilmah-jasmine-green",
@@ -433,7 +483,12 @@
     "zh-TW": "茉莉花香柔柔覆在綠茶青味上，80℃兩分鐘內出湯可避免苦澀。"
    },
    "brewSource": "category",
-   "guideGroup": "green"
+   "guideGroup": "green",
+   "photo": {
+    "f": "images/teabags/dilmah-jasmine-green.jpg",
+    "cr": "za.iherb.com",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fzw_z&e3Btij6k_z&e3Bv54AzdH3Fr6517vp-6jetjofAzdH3FTotgtg2f-G6jjg-Tjw-Jwf4tgj-dc-Tjw-Bw2f-8-0m-5z-ca-2AzdH3F9nn0cAzdH3F?r=8"
+   }
   },
   {
    "id": "twg-1837-black",
@@ -465,7 +520,12 @@
     "zh-TW": "TWG 招牌拼配，果香與花香層層疊起；葉片細，短時間也能出味。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/twg-1837-black.jpg",
+    "cr": "Yandex Market",
+    "pg": "https://market.yandex.ru/product--chai-chernyi-twg-1837/672924177?no-pda-redir=1&no-pda-redir=1&was_redir=2&utm_source_service=img&icookie=BsJRppVqFPl%2BVInX40kZwm2IuLBrBpEkdmRaQdtm%2Bkk%2FN7fLPPNPakIxUdkpVj4it2RTSQeSpjhX7ur0ET5HD2j3HWU%3D&wprid=1795236726928014-14608120596196602189-dyqo63xmx7xf7cak-BAL&src_pof=972"
+   }
   },
   {
    "id": "twg-earl-grey-french-blue",
@@ -496,7 +556,12 @@
     "zh-TW": "佛手柑加上藍色矢車菊花瓣，香氣濃郁，加奶後仍然清晰。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/twg-earl-grey-french-blue.jpg",
+    "cr": "asiateacompany.com",
+    "pg": "https://www.asiateacompany.com/en/products/twg-collector-s-teedose-french-earl-grey-tea-1kg"
+   }
   },
   {
    "id": "twg-moroccan-mint",
@@ -529,7 +594,12 @@
     "zh-TW": "綠茶加薄荷，清爽，冷熱皆宜；加一點糖便是北非喝法。"
    },
    "brewSource": "category",
-   "guideGroup": "green"
+   "guideGroup": "green",
+   "photo": {
+    "f": "images/teabags/twg-moroccan-mint.jpg",
+    "cr": "Yandex Market",
+    "pg": "https://market.yandex.ru/card/marokkanskiy-myatnyy-chay-twg-2-x-120g/5137721955?utm_source_service=img&icookie=LwSoCl6qjbQ6VkhLfcXm6dPgB85erwphEqRg9hiHyvFYr9YBBW3bHoIrnln15HpWYvlYsk01WrHUhdrgV8mDj70ITRw%3D&wprid=1795236737253989-5707965066937829947-xre5sxnduclqyzmy-BAL&src_pof=972"
+   }
   },
   {
    "id": "mariage-earl-grey-french-blue",
@@ -561,7 +631,12 @@
     "zh-TW": "佛手柑與花瓣交織的法國伯爵茶標竿，餘香悠長，適合配甜點。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/mariage-earl-grey-french-blue.jpg",
+    "cr": "Yandex Market",
+    "pg": "https://market.yandex.ru/card/chay-mariage-freres-earl-grey-frantsuzskiy-siniy-2x100g/5137719404?utm_source_service=img&icookie=I9VPVf6V1rmf1Wrf%2FQAGGjVVfGwkyW4oWqJ5dFHd6naLNVlp5bIDhGt0gdUvBE9uU%2BVihSJ1yJABSzlXLDn40377MF0%3D&wprid=1795236748105238-16425230702188696174-v6inu6mbs7kzt4yx-BAL&src_pof=972"
+   }
   },
   {
    "id": "mariage-marco-polo",
@@ -592,7 +667,12 @@
     "zh-TW": "中國紅茶添果香與花香，香氣華美而口感柔和，初次嘗試也輕鬆。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/mariage-marco-polo.jpg",
+    "cr": "wendywutours.co.uk",
+    "pg": "https://www.wendywutours.co.uk/blog/china/chinese-tea-a-first-timers-guide/?shared=email&msg=fail"
+   }
   },
   {
    "id": "harney-paris",
@@ -624,7 +704,12 @@
     "zh-TW": "黑加侖與香草融合的柔和紅茶，加奶後宛如甜點。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/harney-paris.jpg",
+    "cr": "cn.iherb.com",
+    "pg": "ippr_z2C$qAzdH3FAzdH3Fvg_z&e3Btij6k_z&e3Bv54AzdH3FHw6gjy-S5gf-Pw6tf-Tjw-da-Tjw-Swvijpf-8-9-5z-9a-2AzdH3F9d0cl"
+   }
   },
   {
    "id": "harney-earl-grey-supreme",
@@ -654,7 +739,12 @@
     "zh-TW": "帶銀針的茶葉配佛手柑，比一般伯爵茶更柔順圓潤。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/harney-earl-grey-supreme.jpg",
+    "cr": "usmall.ru",
+    "pg": "https://usmall.ru/product/16274215-harney-sons-ht-tea-blends-winter-white-earl-grey-20-sachets-14-oz-40-g-harney-sons"
+   }
   },
   {
    "id": "lupicia-momo-oolong",
@@ -687,7 +777,12 @@
     "zh-TW": "蜜桃香與烏龍自身的花香自然銜接，香濃而味輕，冰飲也合適。"
    },
    "brewSource": "category",
-   "guideGroup": "oolong"
+   "guideGroup": "oolong",
+   "photo": {
+    "f": "images/teabags/lupicia-momo-oolong.jpg",
+    "cr": "shopozz.ru",
+    "pg": "https://shopozz.ru/items/365691150477-lupicia-tea-honey-momo-oolong-super-grade"
+   }
   },
   {
    "id": "yorkshire-tea",
@@ -718,7 +813,12 @@
     "zh-TW": "阿薩姆、錫蘭與非洲茶葉拼配，湯色深紅；200毫升水泡四分鐘，加奶為標準喝法。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/yorkshire-tea.jpg",
+    "cr": "shopozz.ru",
+    "pg": "https://shopozz.ru/items/366626768768-yorkshire-tea-gold-black-tea-bags-160ct-pack-of-1"
+   }
   },
   {
    "id": "yorkshire-gold",
@@ -749,7 +849,12 @@
     "zh-TW": "比經典款更細膩、更甜，不加奶也柔順。"
    },
    "brewSource": "category",
-   "guideGroup": "black"
+   "guideGroup": "black",
+   "photo": {
+    "f": "images/teabags/yorkshire-gold.jpg",
+    "cr": "kellys-expat-shopping.nl",
+    "pg": "https://www.kellys-expat-shopping.nl/en/yorkshire-gold-80-tea-bags.html"
+   }
   },
   {
    "id": "osulloc-jeju-pure-green",
@@ -781,7 +886,12 @@
     "zh-TW": "濟州茶葉經蒸青與鍋炒，按品牌說明以70℃沖泡一分半。"
    },
    "brewSource": "brand",
-   "guideGroup": "green"
+   "guideGroup": "green",
+   "photo": {
+    "f": "images/teabags/osulloc-jeju-pure-green.jpg",
+    "cr": "shopozz.ru",
+    "pg": "https://shopozz.ru/items/116478486904-osulloc-pure-green-tea-mild-clean-tasting-aroma-usda-organic-premium-blended-"
+   }
   },
   {
    "id": "osulloc-sejak",
@@ -812,7 +922,12 @@
     "zh-TW": "穀雨前後嫩葉製成的濟州有機綠茶，官方風味筆記為堅果、蘭香與甜味。"
    },
    "brewSource": "brand",
-   "guideGroup": "green"
+   "guideGroup": "green",
+   "photo": {
+    "f": "images/teabags/osulloc-sejak.jpg",
+    "cr": "shopozz.ru",
+    "pg": "https://shopozz.ru/items/374753975579-osulloc-pure-green-tea-premium-organic-blended-tea-from-jeju-20-tea-bags"
+   }
   },
   {
    "id": "osulloc-jeju-hojicha",
@@ -844,7 +959,12 @@
     "zh-TW": "濟州綠茶焙炒，香濃均衡、咖啡因較低，適合夜晚或加奶。"
    },
    "brewSource": "brand",
-   "guideGroup": "green"
+   "guideGroup": "green",
+   "photo": {
+    "f": "images/teabags/osulloc-jeju-hojicha.jpg",
+    "cr": "osulloc.com",
+    "pg": "https://www.osulloc.com/kr/ko/shop/search/main/product?isSet=N&q=%EC%84%B8%EC%9E%91&p=0&size=24&sort=ranked&searchType=product"
+   }
   },
   {
    "id": "osulloc-peach-camomile",
@@ -876,7 +996,12 @@
     "zh-TW": "洋甘菊、檸檬草與洛神花加上蜜桃香，無咖啡因，甜潤適合冰飲。"
    },
    "brewSource": "brand",
-   "guideGroup": "herb"
+   "guideGroup": "herb",
+   "photo": {
+    "f": "images/teabags/osulloc-peach-camomile.jpg",
+    "cr": "osulloc.com",
+    "pg": "https://www.osulloc.com/kr/ko/shop/search/main/product?isSet=Y&totalCount=169&prdTotalCount=5&reviewTotalCount=164&photoReviewTotalCount=77&sort=ranked&searchType=product&reviewType=&q=%EC%BA%90%EB%AA%A8%EB%A7%88%EC%9D%BC%20%EB%B8%94%EB%A0%8C%EB%93%9C"
+   }
   },
   {
    "id": "osulloc-yuja-earlgrey",
@@ -907,7 +1032,12 @@
     "zh-TW": "佛手柑香中添濟州柚子的清爽，熱飲香氣突出，冷飲甜味更明顯。"
    },
    "brewSource": "brand",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/osulloc-yuja-earlgrey.jpg",
+    "cr": "osulloc.com",
+    "pg": "https://www.osulloc.com/kr/ko/shop/search/main/product?isSet=N&q=%EC%84%B8%EC%9E%91&p=0&size=24&sort=ranked&searchType=product"
+   }
   },
   {
    "id": "osulloc-volcanic-oolong",
@@ -938,7 +1068,12 @@
     "zh-TW": "濟州茶葉約三成發酵，花香與焙火香同時上揚。"
    },
    "brewSource": "brand",
-   "guideGroup": "oolong"
+   "guideGroup": "oolong",
+   "photo": {
+    "f": "images/teabags/osulloc-volcanic-oolong.jpg",
+    "cr": "osulloc.com",
+    "pg": "https://www.osulloc.com/kr/ko/shop/search/main/product?isSet=N&q=%EC%84%B8%EC%9E%91&p=0&size=24&sort=ranked&searchType=product"
+   }
   },
   {
    "id": "damtuh-camomile",
@@ -1032,7 +1167,12 @@
     "zh-TW": "南非路易波士湯色紅亮、甘甜，無咖啡因，與牛奶相合。"
    },
    "brewSource": "category",
-   "guideGroup": "herb"
+   "guideGroup": "herb",
+   "photo": {
+    "f": "images/teabags/damtuh-rooibos.jpg",
+    "cr": "sayweee.com",
+    "pg": "https://www.sayweee.com/en/product/Damtuh-Instant-Original-Coffee-Mix-1200g/1975492"
+   }
   },
   {
    "id": "dongsuh-hyeonmi-green",
@@ -1064,7 +1204,12 @@
     "zh-TW": "糙米焦香與綠茶青味各半，大容量適合佐餐日常飲用。"
    },
    "brewSource": "category",
-   "guideGroup": "herbal"
+   "guideGroup": "herbal",
+   "photo": {
+    "f": "images/teabags/dongsuh-hyeonmi-green.jpg",
+    "cr": "joom.ru",
+    "pg": "https://www.joom.ru/ru/products/61d7cae2b3d8620116f629dc?adj_campaign=recommendations&adj_t=1czb62l6"
+   }
   },
   {
    "id": "ssanggye-muscat-black",
@@ -1096,7 +1241,12 @@
     "zh-TW": "麝香葡萄香清晰覆在紅茶上，明亮，適合冰茶。"
    },
    "brewSource": "category",
-   "guideGroup": "blended"
+   "guideGroup": "blended",
+   "photo": {
+    "f": "images/teabags/ssanggye-muscat-black.jpg",
+    "cr": "sktea.com",
+    "pg": "https://sktea.com/product/티클립스-머스캣홍차-20입/2368/"
+   }
   },
   {
    "id": "lipton-rooibos",
@@ -1127,7 +1277,12 @@
     "zh-TW": "輕鬆易飲的路易波士茶包，甜味溫潤，可加少許牛奶或蜂蜜。"
    },
    "brewSource": "category",
-   "guideGroup": "herb"
+   "guideGroup": "herb",
+   "photo": {
+    "f": "images/teabags/lipton-rooibos.jpg",
+    "cr": "shopozz.ru",
+    "pg": "https://shopozz.ru/items/304298903217-lipton-----refresh--orange-flavored-herbal-tea-3-boxes--84-bags------"
+   }
   }
  ]
 }

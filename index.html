@@ -261,17 +261,23 @@
 
           <!-- 티백: 검색 · 브랜드/향미 · 차종/카페인 칩 -->
           <div id="bagFilters" hidden>
-            <div class="search-box">
-              <svg><use href="#ic-search" /></svg>
-              <input
-                type="search"
-                id="bagSearchInput"
-                placeholder="티백 이름·브랜드·향으로 찾기"
-                data-i18n-ph="guide.searchBag"
-                autocomplete="off"
-                aria-label="티백 검색"
-                data-i18n-aria="a11y.search"
-              />
+            <div class="search-row">
+              <div class="search-box">
+                <svg><use href="#ic-search" /></svg>
+                <input
+                  type="search"
+                  id="bagSearchInput"
+                  placeholder="티백 이름·브랜드·향으로 찾기"
+                  data-i18n-ph="guide.searchBag"
+                  autocomplete="off"
+                  aria-label="티백 검색"
+                  data-i18n-aria="a11y.search"
+                />
+              </div>
+              <button class="view-toggle" type="button" id="bagViewToggle" aria-label="3열 그리드로 보기" title="3열 그리드로 보기">
+                <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+                <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+              </button>
             </div>
             <div class="bag-filters">
               <label class="field-inline">
