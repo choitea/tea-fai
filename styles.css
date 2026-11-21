@@ -4422,6 +4422,24 @@ body.modal-open {
   margin-top: 0;
 }
 
+/* 안내 문장은 한 줄로 줄여 고정 높이를 아끼고, 펼쳤을 때만 다시 보입니다 */
+.store-sticky .lens-note {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+  font-size: 10.5px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.store-sticky .lens-result .lens-note {
+  display: block;
+  -webkit-line-clamp: unset;
+  font-size: 12px;
+}
+
 .store-sticky .search-row,
 .store-sticky .search-box {
   margin-bottom: 8px;
@@ -4432,11 +4450,17 @@ body.modal-open {
 }
 
 @media (min-width: 900px) {
-  /* 넓은 화면에서는 스마트렌즈 안내 한 줄을 되살립니다 */
+  /* 넓은 화면에서는 안내 문장을 같은 줄에 두 줄까지만 보여 줍니다 */
   .store-sticky .lens-lead {
-    display: block;
-    flex: 1 1 100%;
-    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    flex: 1 1 260px;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    font-size: 11.5px;
+    line-height: 1.45;
   }
 }
 
@@ -5340,6 +5364,15 @@ h3 {
   .mode-grid .store-list .store-cta {
     justify-content: center;
     font-size: 9.5px;
+  }
+}
+
+/* 520~899px(폴드 펼친 화면·태블릿)에서는 폭에 맞춰 칸을 늘립니다.
+   세 칸으로 두면 카드 하나가 너무 커져 화면이 비어 보입니다. */
+@media (min-width: 520px) and (max-width: 899px) {
+  .mode-grid #teaList,
+  .mode-grid .store-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
 
