@@ -849,7 +849,7 @@ window.TEAFaiI18N = (function () {
       "quiz.origin": "산지",
       "quiz.firstSteep": "윤차",
       "quiz.q1": "주로 언제, 왜 차를 마시나요?",
-      "quiz.q1a": "아침에 눈을 뜨우고 집중할 때",
+      "quiz.q1a": "아침에 눈을 뜨고 집중할 때",
       "quiz.q1b": "식후에 개운하게",
       "quiz.q1c": "오후에 잠깐 쉬어 갈 때",
       "quiz.q1d": "밤에, 카페인 걱정 없이",
