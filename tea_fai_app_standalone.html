@@ -53,6 +53,8 @@
     "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* 차 백과 상단 컨트롤이 붙는 높이 = 브랜드 헤더 높이 */
+  --guide-top: calc(54px + var(--safe-top));
 }
 
 * {
@@ -4369,9 +4371,45 @@ body.modal-open {
   line-height: 1.5;
 }
 
-/* 계열 필터가 줄바꿈되며 늘어나므로 목록 위 여백을 조금 줄입니다 */
-#leafPanel .chip-row.wrap {
-  margin-top: 2px;
+/* ---------- 차 백과: 상단 컨트롤 고정 ----------
+   취향 테스트 카드·잎차/티백 탭·검색창·계열 칩을 헤더 바로 아래에 붙여 두고,
+   찻잎 카드만 그 아래에서 스크롤됩니다. 배경을 불투명하게 깔아
+   올라오는 카드가 비쳐 보이지 않게 합니다. */
+.guide-sticky {
+  position: sticky;
+  top: var(--guide-top);
+  z-index: 20;
+  margin: 0 -18px;
+  padding: 0 18px 10px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 12px 16px -16px rgba(36, 62, 50, 0.4);
+}
+
+/* 고정 블록 안쪽 세로 여백은 조금 촘촘하게 — 목록에 남는 높이를 넓힙니다 */
+.guide-sticky .quiz-strip {
+  margin-bottom: 10px;
+}
+
+.guide-sticky .seg {
+  margin-bottom: 10px;
+}
+
+.guide-sticky .search-row,
+.guide-sticky .search-box {
+  margin-bottom: 8px;
+}
+
+.guide-sticky .bag-filters {
+  margin-bottom: 6px;
+}
+
+.guide-sticky .bag-source {
+  margin: 6px 0 0;
+}
+
+.guide-sticky .chip-row.wrap {
+  margin-top: 0;
 }
 
 @media (max-width: 374px) {
@@ -4397,6 +4435,7 @@ body.modal-open {
   :root {
     --page-max: 1180px;
     --header-h: 68px;
+    --guide-top: var(--header-h);
   }
 
   html {
@@ -4508,6 +4547,12 @@ body.modal-open {
     margin: 0 auto;
     padding: 0 28px;
     animation: none;
+  }
+
+  /* 차 백과 고정 영역도 컨테이너 폭에 맞춰 양옆 여백을 맞춥니다 */
+  .guide-sticky {
+    margin: 0 -28px;
+    padding: 0 28px 12px;
   }
 
   .view-head {
@@ -5067,8 +5112,10 @@ h3 {
     font-size: 30px;
   }
 
+  /* 카드 이름·부제는 가운데로 (펼친 카드 본문은 읽기 좋게 왼쪽 정렬 그대로) */
   .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-title {
     padding: 8px 11px 0;
+    text-align: center;
   }
 
   .mode-grid #teaList .tea-card:not(.is-group):not(.open) .tea-title b {
@@ -5092,9 +5139,16 @@ h3 {
     text-overflow: ellipsis;
   }
 
+  /* 원산지 배지는 글자 폭만큼만 차지하고 아래 줄 가운데에 놓입니다
+     (.tea-title span 의 display:block 을 되돌려 카드 폭으로 늘어나지 않게) */
   .mode-grid #teaList .tea-card:not(.is-group):not(.open) .origin-badge {
+    display: block;
+    width: -webkit-fit-content;
+    width: fit-content;
+    margin: 3px auto 0;
+    text-align: left;
     font-size: 9px;
-    padding: 1px 5px;
+    padding: 1px 7px;
   }
 
   /* 펼침 표시는 사진 위 오른쪽 모서리에 작게 */
@@ -5397,45 +5451,81 @@ h3 {
     <main class="viewport">
       <!-- ───────── 1. 차 백과 (기본 화면) ───────── -->
       <section class="view active" id="view-guide" aria-label="차 백과" data-i18n-aria="tab.guide">
-        <button class="quiz-strip" type="button" id="quizBanner">
-          <span class="qs-spark" aria-hidden="true">✦</span>
-          <span class="qs-text">
-            <b data-i18n="quiz.cardTitle">나에게 맞는 차 찾기</b>
-            <span data-i18n="quiz.cardSub">10문항 · 1분이면 161종 중 내게 맞는 차를 찾아드립니다.</span>
-          </span>
-          <span class="qs-cta"><span data-i18n="quiz.cardCta">시작</span><svg width="13" height="13"><use href="#ic-arrow" /></svg></span>
-        </button>
+        <!-- 취향 테스트 카드 · 잎차/티백 탭 · 검색창 · 계열 칩 — 스크롤해도 위에 붙어 있습니다 -->
+        <div class="guide-sticky" id="guideSticky">
+          <button class="quiz-strip" type="button" id="quizBanner">
+            <span class="qs-spark" aria-hidden="true">✦</span>
+            <span class="qs-text">
+              <b data-i18n="quiz.cardTitle">나에게 맞는 차 찾기</b>
+              <span data-i18n="quiz.cardSub">10문항 · 1분이면 161종 중 내게 맞는 차를 찾아드립니다.</span>
+            </span>
+            <span class="qs-cta"><span data-i18n="quiz.cardCta">시작</span><svg width="13" height="13"><use href="#ic-arrow" /></svg></span>
+          </button>
 
-        <div class="seg" role="group" aria-label="잎차·티백 전환" data-i18n-aria="a11y.filter">
-          <button class="seg-btn active" type="button" id="segLeaf" data-guide-tab="leaf" aria-pressed="true">
-            <svg width="15" height="15"><use href="#ic-leaf" /></svg><span data-i18n="guide.tabLeaf">잎차</span><em id="segLeafCount"></em>
-          </button>
-          <button class="seg-btn" type="button" id="segBag" data-guide-tab="bag" aria-pressed="false">
-            <svg width="15" height="15"><use href="#ic-bag" /></svg><span data-i18n="guide.tabBag">티백</span><em id="segBagCount"></em>
-          </button>
+          <div class="seg" role="group" aria-label="잎차·티백 전환" data-i18n-aria="a11y.filter">
+            <button class="seg-btn active" type="button" id="segLeaf" data-guide-tab="leaf" aria-pressed="true">
+              <svg width="15" height="15"><use href="#ic-leaf" /></svg><span data-i18n="guide.tabLeaf">잎차</span><em id="segLeafCount"></em>
+            </button>
+            <button class="seg-btn" type="button" id="segBag" data-guide-tab="bag" aria-pressed="false">
+              <svg width="15" height="15"><use href="#ic-bag" /></svg><span data-i18n="guide.tabBag">티백</span><em id="segBagCount"></em>
+            </button>
+          </div>
+
+          <!-- 잎차: 검색 · 보기 전환 · 계열 칩 -->
+          <div id="leafFilters">
+            <div class="search-row">
+              <div class="search-box">
+                <svg><use href="#ic-search" /></svg>
+                <input
+                  type="search"
+                  id="searchInput"
+                  placeholder="차 이름, 향, 산지, 나라로 찾기"
+                  data-i18n-ph="guide.searchLeaf"
+                  autocomplete="off"
+                  aria-label="차 백과 검색"
+                  data-i18n-aria="a11y.search"
+                />
+              </div>
+              <button class="view-toggle" type="button" id="viewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
+                <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+                <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+              </button>
+            </div>
+            <!-- 계열 버튼은 가로 스크롤 없이 여러 줄로 한눈에 보입니다 -->
+            <div class="chip-row wrap" id="filterChips" role="group" aria-label="차류 필터" data-i18n-aria="a11y.filter"></div>
+          </div>
+
+          <!-- 티백: 검색 · 브랜드/향미 · 차종/카페인 칩 -->
+          <div id="bagFilters" hidden>
+            <div class="search-box">
+              <svg><use href="#ic-search" /></svg>
+              <input
+                type="search"
+                id="bagSearchInput"
+                placeholder="티백 이름·브랜드·향으로 찾기"
+                data-i18n-ph="guide.searchBag"
+                autocomplete="off"
+                aria-label="티백 검색"
+                data-i18n-aria="a11y.search"
+              />
+            </div>
+            <div class="bag-filters">
+              <label class="field-inline">
+                <span data-i18n="bag.brand">브랜드</span>
+                <select id="bagBrand"></select>
+              </label>
+              <label class="field-inline">
+                <span data-i18n="bag.tagsTitle">향미</span>
+                <select id="bagTag"></select>
+              </label>
+            </div>
+            <div class="chip-row wrap" id="bagTypeChips" role="group" aria-label="차종 필터" data-i18n-aria="a11y.filter"></div>
+            <div class="chip-row wrap" id="bagCaffChips" role="group" aria-label="카페인 필터" data-i18n-aria="a11y.filter"></div>
+            <p class="bag-source" id="bagCount" aria-live="polite"></p>
+          </div>
         </div>
 
         <div id="leafPanel">
-        <div class="search-row">
-          <div class="search-box">
-            <svg><use href="#ic-search" /></svg>
-            <input
-              type="search"
-              id="searchInput"
-              placeholder="차 이름, 향, 산지, 나라로 찾기"
-              data-i18n-ph="guide.searchLeaf"
-              autocomplete="off"
-              aria-label="차 백과 검색"
-              data-i18n-aria="a11y.search"
-            />
-          </div>
-          <button class="view-toggle" type="button" id="viewToggle" aria-label="2열 그리드로 보기" title="2열 그리드로 보기">
-            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
-            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
-          </button>
-        </div>
-          <!-- 계열 버튼은 가로 스크롤 없이 여러 줄로 한눈에 보입니다 -->
-          <div class="chip-row wrap" id="filterChips" role="group" aria-label="차류 필터" data-i18n-aria="a11y.filter"></div>
           <div id="teaList" style="margin-top: 14px"></div>
 
           <div class="channel-block">
@@ -5485,31 +5575,6 @@ h3 {
         </div>
 
         <div id="bagPanel" hidden>
-          <div class="search-box">
-            <svg><use href="#ic-search" /></svg>
-            <input
-              type="search"
-              id="bagSearchInput"
-              placeholder="티백 이름·브랜드·향으로 찾기"
-              data-i18n-ph="guide.searchBag"
-              autocomplete="off"
-              aria-label="티백 검색"
-              data-i18n-aria="a11y.search"
-            />
-          </div>
-          <div class="bag-filters">
-            <label class="field-inline">
-              <span data-i18n="bag.brand">브랜드</span>
-              <select id="bagBrand"></select>
-            </label>
-            <label class="field-inline">
-              <span data-i18n="bag.tagsTitle">향미</span>
-              <select id="bagTag"></select>
-            </label>
-          </div>
-          <div class="chip-row wrap" id="bagTypeChips" role="group" aria-label="차종 필터" data-i18n-aria="a11y.filter"></div>
-          <div class="chip-row wrap" id="bagCaffChips" role="group" aria-label="카페인 필터" data-i18n-aria="a11y.filter"></div>
-          <p class="bag-source" id="bagCount" aria-live="polite"></p>
           <div id="bagList"></div>
           <p class="app-footer" style="margin-top: 18px">
             <span data-i18n="bag.note">우림 온도·시간은 브랜드 안내를 먼저 따르고, 확인되지 않은 제품은 같은 차종의 기준으로 적었습니다. 티백마다 조금씩 다를 수 있어요.</span>
@@ -32049,8 +32114,12 @@ window.TEAFaiData = (function () {
     guideState.tab = tab === "bag" ? "bag" : "leaf";
     var leafPanel = $("#leafPanel");
     var bagPanel = $("#bagPanel");
+    var leafFilters = $("#leafFilters");
+    var bagFilters = $("#bagFilters");
     if (leafPanel) leafPanel.hidden = guideState.tab !== "leaf";
     if (bagPanel) bagPanel.hidden = guideState.tab !== "bag";
+    if (leafFilters) leafFilters.hidden = guideState.tab !== "leaf";
+    if (bagFilters) bagFilters.hidden = guideState.tab !== "bag";
     $$("[data-guide-tab]").forEach(function (btn) {
       var on = btn.getAttribute("data-guide-tab") === guideState.tab;
       btn.classList.toggle("active", on);

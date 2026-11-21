@@ -3681,8 +3681,12 @@
     guideState.tab = tab === "bag" ? "bag" : "leaf";
     var leafPanel = $("#leafPanel");
     var bagPanel = $("#bagPanel");
+    var leafFilters = $("#leafFilters");
+    var bagFilters = $("#bagFilters");
     if (leafPanel) leafPanel.hidden = guideState.tab !== "leaf";
     if (bagPanel) bagPanel.hidden = guideState.tab !== "bag";
+    if (leafFilters) leafFilters.hidden = guideState.tab !== "leaf";
+    if (bagFilters) bagFilters.hidden = guideState.tab !== "bag";
     $$("[data-guide-tab]").forEach(function (btn) {
       var on = btn.getAttribute("data-guide-tab") === guideState.tab;
       btn.classList.toggle("active", on);
