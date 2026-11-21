@@ -4575,9 +4575,14 @@ body.modal-open {
   /* 넓은 화면에서는 고정 영역을 두 칸으로: 왼쪽 취향 테스트·탭, 오른쪽 검색·칩 */
   .guide-sticky {
     display: grid;
-    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
-    column-gap: 32px;
+    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+    column-gap: 24px;
     align-items: start;
+  }
+
+  /* 계열 칩 12개가 한 줄에 들어가도록 조금만 좁힙니다 */
+  .guide-sticky .chip-row.wrap .chip {
+    padding: 7px 12px;
   }
 
   .guide-sticky .quiz-strip,
