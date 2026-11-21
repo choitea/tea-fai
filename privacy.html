@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>개인정보처리방침 — 티키피디아(Teakipedia)</title>
-    <meta name="description" content="티키피디아(Teakipedia) 앱의 개인정보처리방침. 본 앱은 회원가입이 없습니다. 시음 노트·타이머 설정·커뮤니티 글은 기기 브라우저의 로컬 저장소에 보관하고, 입점 신청서를 직접 보낼 때만 적어 주신 매장 정보가 운영자에게 전달됩니다." />
+    <meta name="description" content="티키피디아(Teakipedia) 앱의 개인정보처리방침. 회원가입은 없지만, 커뮤니티 글·찻집 등록 신청·제조사 차 등록은 HTTPS로 암호화되어 서버에 저장되고, 시음 노트·앱 설정은 기기 브라우저에만 저장됩니다." />
     <meta name="theme-color" content="#F7F3EB" />
     <meta name="color-scheme" content="light" />
     <link rel="icon" type="image/png" href="icons/icon-192.png" />
@@ -320,38 +320,66 @@
         <h1 data-i18n="pv.h1">티키피디아 개인정보처리방침</h1>
         <p class="lead" data-i18n-html="pv.lead">
           티키피디아(Teakipedia)는 차 백과와 우림 타이머, 시음 노트, 찻집 찾기, 커뮤니티를 담은 앱입니다.
-          <span class="key">회원가입이 없고, 이용자를 식별하는 개인정보를 따로 수집하지 않습니다.</span>
-          시음 노트·타이머 설정·언어·커뮤니티 글은 기기 브라우저 저장소에 남고,
-          입점 신청서를 직접 보낼 때만 적어 주신 매장 정보가 운영자에게 전달됩니다.
+          <span class="key">회원가입과 로그인이 없고, 앱을 쓰는 것만으로는 개인정보를 수집하지 않습니다.</span>
+          다만 커뮤니티 글, 찻집 등록 신청, 제조사 차 등록처럼 직접 ‘보내기’를 누른 내용은 암호화되어 서버에
+          저장되고, 시음 노트와 앱 설정은 기기 안에만 남습니다.
         </p>
         <ul class="meta">
-          <li data-i18n="pv.metaDate">시행일 2026년 11월 20일</li>
-          <li data-i18n="pv.metaVersion">버전 1.0</li>
+          <li data-i18n="pv.metaDate">시행일 2026년 11월 21일</li>
+          <li data-i18n="pv.metaVersion">버전 1.1</li>
           <li data-i18n="pv.metaContact">문의 rotroka@gmail.com</li>
         </ul>
       </div>
 
       <section>
-        <h2><span class="num">01</span> <span data-i18n="pv.s1.title">수집하는 개인정보</span></h2>
-        <p data-i18n-html="pv.s1.body">
-          티키피디아는 이름, 휴대폰 번호, 이메일, 주소, 위치, 사진, 연락처, 기기 식별자를
-          <span class="key">계정 정보로 수집하지 않습니다.</span> 회원가입과 로그인이 없습니다.
-          다만 입점 신청 화면에서 직접 적어 보내는 매장 정보(매장명, 담당자, 연락처, 주소, 메뉴,
-          영업시간, SNS·지도 링크, 메모, 선택한 플랜)는 입점 검토 목적으로만 쓰며,
-          보내지 않으면 기기에만 남습니다.
+        <h2><span class="num">01</span> <span data-i18n="pv.s1.title">수집·이용하는 정보</span></h2>
+        <p data-i18n="pv.s1.body">
+          티키피디아는 계정을 만들지 않습니다. 아래 네 화면에서 ‘보내기’를 눌렀을 때만 적어 주신 내용이
+          HTTPS로 암호화되어 서버(Supabase, 서울 리전)로 전송되고, 그 서버에 저장됩니다.
         </p>
-        <div class="card">
-          <p data-i18n-html="pv.account"><span class="key">계정</span> — 만들지 않습니다. 앱을 설치하면 바로 사용합니다.</p>
-          <p data-i18n-html="pv.server"><span class="key">서버</span> — 티키피디아는 이용자 데이터를 받아 두는 서버를 운영하지 않습니다. 커뮤니티 글과 입점 신청서는 기기에 저장되며, 11항의 선택적 서버 연결은 아직 켜져 있지 않습니다.</p>
-          <p data-i18n-html="pv.ads"><span class="key">광고·분석</span> — 광고 SDK, 접속 통계, 이용 행태 분석 도구를 넣지 않았습니다.</p>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="pv.thKind">보내는 화면</th>
+              <th data-i18n="pv.thItems">보내는 정보</th>
+              <th data-i18n="pv.thWhy">쓰는 목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="pv.r1.k">커뮤니티 글</td>
+              <td data-i18n="pv.r1.v">닉네임, 글 종류, 별점, 차·티백 이름, 본문, 작성 시각</td>
+              <td data-i18n="pv.r1.why">앱의 공개 글 목록에 게시, 운영자의 게시·숨김 관리</td>
+            </tr>
+            <tr>
+              <td data-i18n="pv.r2.k">찻집 회원 매장 등록</td>
+              <td data-i18n="pv.r2.v">매장명, 담당자 이름, 매장 연락처, 지역·주소, 영업시간, 대표 차 메뉴, 취향 태그, SNS·지도 링크, 메모</td>
+              <td data-i18n="pv.r2.why">입점 검토와 파트너 매장 정보 반영</td>
+            </tr>
+            <tr>
+              <td data-i18n="pv.r3.k">제조사 회원 차 등록</td>
+              <td data-i18n="pv.r3.v">제품명, 종류(찻잎·티백·다구), 가격, 용량, 산지, 소개</td>
+              <td data-i18n="pv.r3.why">제품 등록 검토와 스토어 반영</td>
+            </tr>
+            <tr>
+              <td data-i18n="pv.r4.k">새 티백 등록 (스마트렌즈)</td>
+              <td data-i18n="pv.r4.v">제품명, 브랜드, 차 종류, 바코드, 메모</td>
+              <td data-i18n="pv.r4.why">티백 목록 반영 검토</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note" data-i18n="pv.s1.note">
+          전송 구간은 모두 암호화되며, 앱에는 광고 SDK·접속 통계·이용 행태 분석 도구가 없습니다. 위치, 연락처,
+          사진, 기기 식별자, 결제 카드 정보는 수집하지 않습니다. 스마트렌즈로 고른 사진은 기기 안에서만 읽고
+          서버로 올리지 않습니다.
+        </p>
       </section>
 
       <section>
-        <h2><span class="num">02</span> <span data-i18n="pv.s2.title">기기에 저장되는 정보</span></h2>
-        <p data-i18n-html="pv.s2.body">
-          앱은 이용 편의를 위해 아래 정보를 <span class="key">이용자 기기의 브라우저 로컬 저장소(localStorage)</span>에만
-          저장합니다. 이 값들은 서버로 전송되지 않고, 이용자 기기 밖에서는 확인할 수 없습니다.
+        <h2><span class="num">02</span> <span data-i18n="pv.s2.title">기기에만 저장되는 정보</span></h2>
+        <p data-i18n="pv.s2.body">
+          아래 값은 이용자 기기의 브라우저 로컬 저장소(localStorage)에 저장되며, 외부 서버로 전송되지 않습니다.
+          1항의 화면에서 보낸 글·신청서도 기기에 사본으로 남습니다.
         </p>
         <table>
           <thead>
@@ -375,31 +403,50 @@
             </tr>
             <tr>
               <td><span data-i18n="pv.kLang">언어 설정</span><br /><code>teafai.lang.v1</code></td>
-              <td data-i18n="pv.vLang">언어 전환(한국어 · EN · 简中 · 繁中)으로 고른 언어 — 다음에 열 때 그 언어로 시작합니다</td>
+              <td data-i18n="pv.vLang">언어 전환(한국어 · EN · 简中 · 繁中 · 日 · 粵)으로 고른 언어 — 다음에 열 때 그 언어로 시작합니다</td>
+            </tr>
+            <tr>
+              <td><span data-i18n="pv.kView">보기 방식</span><br /><code>teafai.viewmode.v1</code></td>
+              <td data-i18n="pv.vView">차 백과·스토어를 목록(1열)으로 볼지 그리드(2열)로 볼지</td>
             </tr>
             <tr>
               <td><span data-i18n="pv.kPosts">커뮤니티 글</span><br /><code>teafai.posts.v1</code></td>
-              <td data-i18n="pv.vPosts">이용자가 적은 닉네임, 글 종류, 별점, 차·티백 이름, 본문, 작성 시각</td>
+              <td data-i18n="pv.vPosts">보낸 글의 기기 사본 — 닉네임, 글 종류, 별점, 차·티백 이름, 본문, 작성 시각</td>
             </tr>
             <tr>
               <td><span data-i18n="pv.kReacts">좋아요·도움돼요</span><br /><code>teafai.reactions.v1</code></td>
               <td data-i18n="pv.vReacts">어떤 글에 좋아요·도움돼요를 눌렀는지 (기기 안에서만 셉니다)</td>
             </tr>
             <tr>
-              <td><span data-i18n="pv.kApps">입점 신청 내역</span><br /><code>teafai.applications.v1</code></td>
-              <td data-i18n="pv.vApps">신청서에 적은 매장명, 담당자, 연락처, 주소, 메뉴, 영업시간, SNS·지도 링크, 메모, 선택한 플랜</td>
+              <td><span data-i18n="pv.kApps">등록 신청 내역</span><br /><code>teafai.applications.v1</code></td>
+              <td data-i18n="pv.vApps">보낸 신청서의 기기 사본 — 매장명, 담당자, 연락처, 주소, 메뉴, 영업시간, SNS·지도 링크, 메모</td>
+            </tr>
+            <tr>
+              <td><span data-i18n="pv.kMember">회원 등급</span><br /><code>teafai.member.v1</code></td>
+              <td data-i18n="pv.vMember">Google Play에서 확인한 구독 등급과 구독한 상품 ID</td>
             </tr>
           </tbody>
         </table>
         <p class="note" data-i18n="pv.s2.note">
-          저장된 값은 앱 안에서 언제든지 확인·삭제할 수 있고, 앱을 삭제하거나 브라우저의 사이트 데이터를 지우면
-          함께 삭제됩니다. 티키피디아는 이 값들의 사본을 갖지 않으므로, 삭제된 기록을 되살릴 수 없습니다.
+          기기에 저장된 값은 앱 안에서 언제든지 확인·삭제할 수 있고, 앱을 삭제하거나 브라우저의 사이트 데이터를
+          지우면 함께 삭제됩니다. 서버로 보낸 글·신청서는 기기 저장소를 지워도 서버에 남으므로, 함께 지우려면
+          10항의 방법으로 요청해 주세요.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">03</span> <span data-i18n="pv.s3.title">오프라인 사용을 위한 임시 저장</span></h2>
+        <h2><span class="num">03</span> <span data-i18n="pv.s3.title">서버에 저장된 정보의 공개와 보관</span></h2>
         <p data-i18n="pv.s3.body">
+          커뮤니티 글은 공개를 전제로 받습니다. 운영자가 확인해 게시하면 다른 이용자에게 보이고, 게시·숨김
+          여부는 운영자가 정합니다. 찻집 등록 신청, 제조사 차 등록, 새 티백 등록은 운영자만 확인하며, 검토를
+          마치면 매장·제품 정보만 앱에 반영됩니다. 서버에 저장된 정보는 검토와 게시에 필요한 동안 보관하고,
+          이용자가 10항의 방법으로 삭제를 요청하면 내용을 확인한 뒤 지체 없이 삭제합니다.
+        </p>
+      </section>
+
+      <section>
+        <h2><span class="num">04</span> <span data-i18n="pv.s4.title">오프라인 사용을 위한 임시 저장</span></h2>
+        <p data-i18n="pv.s4.body">
           티키피디아는 인터넷이 없어도 열리도록 앱의 화면 파일(HTML·CSS·JS·아이콘)을 기기의 브라우저 캐시에
           임시로 저장합니다(서비스 워커). 이는 앱 자체 파일의 사본일 뿐이며, 이용자의 개인정보나 기록이
           아닙니다. 앱을 새로 고치면 최신 파일로 자동 갱신됩니다.
@@ -407,73 +454,86 @@
       </section>
 
       <section>
-        <h2><span class="num">04</span> <span data-i18n="pv.s4.title">기기 권한</span></h2>
-        <p data-i18n-html="pv.s4.body">
-          티키피디아는 카메라, 마이크, 위치, 연락처, 사진, 알림, 저장 공간 등
-          <span class="key">어떤 기기 권한도 요청하지 않습니다.</span> 타이머 종료는 앱 화면 안의 표시와
-          알림음으로 알려 드리며, 푸시 알림이나 백그라운드 알림을 보내지 않습니다.
-        </p>
-      </section>
-
-      <section>
-        <h2><span class="num">05</span> <span data-i18n="pv.s5.title">외부 링크</span></h2>
+        <h2><span class="num">05</span> <span data-i18n="pv.s5.title">기기 권한</span></h2>
         <p data-i18n="pv.s5.body">
-          앱 안에는 티파이(Tea Fai)의 유튜브 채널, 네이버 블로그, 유페이퍼 전자책 서점, 그리고 찻집의
-          네이버·카카오·구글 지도로 가는 링크가 있습니다. 링크를 누르면 이용자의 브라우저가 해당 사이트를
-          엽니다. 그때부터는 그 사이트의 개인정보처리방침이 적용되며, 티키피디아는 해당 사이트에 이용자
-          정보를 넘기지 않습니다. 입점 신청서를 메일로 보내면 이용자의 메일 앱이 열리고, 보낸 내용은
-          운영자 메일함에 남습니다.
+          티키피디아는 카메라, 마이크, 위치, 연락처, 사진, 알림, 저장 공간 등
+          <span class="key">어떤 기기 권한도 요청하지 않습니다.</span> 스마트렌즈는 기기의 파일 선택기로 사진을
+          고르는 방식이며, 고른 사진은 앱 화면 안에서만 읽습니다. 타이머 종료는 앱 화면 안의 표시와 알림음으로
+          알려 드리며, 푸시 알림이나 백그라운드 알림을 보내지 않습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">06</span> <span data-i18n="pv.s6.title">제3자 제공 및 처리 위탁</span></h2>
+        <h2><span class="num">06</span> <span data-i18n="pv.s6.title">인앱 정기구독과 결제</span></h2>
         <p data-i18n="pv.s6.body">
-          수집하는 개인정보가 없으므로 제3자에게 제공하거나 처리를 위탁하는 정보도 없습니다. 이용자의 기록을
-          판매·공유·열람하는 일은 없습니다.
+          개인 회원·찻집 회원·제조사 회원의 월정액은 Google Play 인앱 결제로 처리됩니다. 결제 수단과 카드
+          정보는 Google Play가 다루며, 티키피디아는 카드 번호를 직접 받거나 저장하지 않습니다. 앱은 Google
+          Play가 알려 주는 구독 상태(구매한 상품과 유효 여부)만 확인해 회원 등급을 열고, 확인한 등급은 기기에
+          저장합니다. 구독 해지와 환불은 Google Play의 정책과 절차를 따릅니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">07</span> <span data-i18n="pv.s7.title">아동의 개인정보</span></h2>
+        <h2><span class="num">07</span> <span data-i18n="pv.s7.title">외부 링크와 쿠팡파트너스</span></h2>
         <p data-i18n="pv.s7.body">
-          티키피디아는 만 14세 미만 아동을 포함한 어떤 이용자의 개인정보도 수집하지 않습니다. 앱은 모든
-          연령이 안전하게 사용할 수 있으며, 개인정보를 입력하는 칸 자체가 없습니다.
+          앱에는 티파이(Tea Fai)의 유튜브 채널, 네이버 블로그, 유페이퍼 전자책 서점, 그리고 찻집의
+          네이버·카카오·구글 지도로 가는 링크가 있습니다. 스토어 화면에서는 쿠팡 상품이나 검색 결과로 가는
+          제휴 링크도 있습니다. 링크를 누르면 이용자의 브라우저가 해당 사이트를 열고, 그때부터는 그 사이트의
+          개인정보처리방침이 적용됩니다. 티키피디아는 해당 사이트에 이용자 정보를 넘기지 않습니다.
+        </p>
+        <p class="note" data-i18n="pv.s7.note">
+          이 포스팅은 쿠팡 파트너스 활동의 일환으로 이에 따른 일정액의 수수료를 제공받습니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">08</span> <span data-i18n="pv.s8.title">이용자의 권리</span></h2>
-        <p data-i18n-html="pv.s8.body">
-          이용자는 언제든지 앱의 <span class="key">시음 노트</span> 화면에서 자신이 적은 기록을 확인하고
-          하나씩 삭제할 수 있습니다. 모든 기록을 한 번에 지우려면 기기 브라우저에서 이 사이트의 데이터를
-          삭제하거나 앱을 삭제하면 됩니다. 언어 설정도 함께 지워집니다. 티키피디아는 기기 밖에 사본을 두지
-          않으므로 별도의 삭제 요청 절차가 필요하지 않습니다.
+        <h2><span class="num">08</span> <span data-i18n="pv.s8.title">제3자 제공 및 처리 위탁</span></h2>
+        <p data-i18n="pv.s8.body">
+          티키피디아는 서버 저장과 결제를 위해 아래 업체에 처리를 맡깁니다. 이용자의 정보를 판매하거나, 이
+          목적 밖으로 넘기지 않습니다.
         </p>
+        <div class="card">
+          <p data-i18n-html="pv.s8.supabase"><span class="key">Supabase Inc.</span> — 커뮤니티 글과 등록 신청의 저장(데이터베이스 호스팅). 서버 리전은 대한민국(서울)입니다.</p>
+          <p data-i18n-html="pv.s8.google"><span class="key">Google LLC</span> — Google Play 인앱 결제와 구독 상태 확인.</p>
+        </div>
       </section>
 
       <section>
-        <h2><span class="num">09</span> <span data-i18n="pv.s9.title">처리방침의 변경</span></h2>
+        <h2><span class="num">09</span> <span data-i18n="pv.s9.title">아동의 개인정보</span></h2>
         <p data-i18n="pv.s9.body">
-          앱 기능이 바뀌어 이 방침의 내용을 고칠 때에는 새 방침과 시행일을 이 페이지에 먼저 올립니다.
-          개인정보 수집이 새로 생기는 변경이라면 앱 안에서도 알려 드립니다.
+          티키피디아는 만 14세 미만 아동의 개인정보를 알면서 수집하지 않습니다. 커뮤니티에는 닉네임만 적도록
+          하고, 글에 실명·연락처·주소를 적지 않도록 안내합니다. 보호자가 아동이 보낸 글·신청서가 서버에
+          저장된 것을 알게 되면 12항의 문의처로 삭제를 요청할 수 있으며, 요청을 받으면 확인 후 지체 없이
+          삭제합니다.
         </p>
       </section>
 
       <section>
-        <h2><span class="num">10</span> <span data-i18n="pv.s10.title">문의</span></h2>
-        <p data-i18n="pv.s10.body">개인정보처리방침에 대해 궁금한 점이나 요청이 있으면 아래로 알려 주세요.</p>
-        <p class="contact"><span data-i18n="brand.name">티키피디아</span> (Teakipedia) · <a href="mailto:rotroka@gmail.com">rotroka@gmail.com</a></p>
+        <h2><span class="num">10</span> <span data-i18n="pv.s10.title">이용자의 권리와 삭제 요청</span></h2>
+        <p data-i18n="pv.s10.body">
+          이용자는 언제든지 앱의 시음 노트 화면에서 자신이 적은 기록을 확인하고 하나씩 삭제할 수 있습니다.
+          기기에 저장된 값을 한 번에 지우려면 브라우저에서 이 사이트의 데이터를 삭제하거나 앱을 삭제하면
+          됩니다. 서버에 저장된 커뮤니티 글·등록 신청을 지우려면 문의처(rotroka@gmail.com)로 글의 닉네임과
+          작성 시각, 또는 신청한 매장명을 알려 주세요. 계정이 없어 본인 확인이 필요한 경우에는 확인에 꼭
+          필요한 정보만 따로 요청합니다.
+        </p>
       </section>
 
       <section>
-        <h2><span class="num">11</span> <span data-i18n="pv.s11.title">입점 신청과 커뮤니티</span></h2>
+        <h2><span class="num">11</span> <span data-i18n="pv.s11.title">처리방침의 변경</span></h2>
         <p data-i18n="pv.s11.body">
-          입점 신청서는 검토를 위해서만 받습니다. 신청서는 기기에 저장되고, 이용자가 직접 복사하거나
-          메일로 보내면 운영자 메일(rotroka@naver.com)로 전달됩니다. 운영자는 신청서에 적힌 연락처로만
-          회신하며, 매장 정보를 다른 목적으로 쓰거나 다른 곳에 넘기지 않습니다. 커뮤니티에 남긴 글은
-          닉네임과 내용이 기기에 저장됩니다. 앱에 서버가 연결되면 공개로 표시된 글은 다른 이용자에게
-          보일 수 있고, 이때 운영자는 글을 게시·숨김 처리할 수 있습니다. 서버는 현재 연결되어 있지 않습니다.
+          앱 기능이 바뀌어 이 방침을 고칠 때에는 새 방침과 시행일을 이 페이지에 먼저 올립니다. 개인정보를
+          새로 수집하거나 서버로 보내는 항목이 늘어나는 변경이라면 앱 안에서도 알려 드립니다.
+        </p>
+      </section>
+
+      <section>
+        <h2><span class="num">12</span> <span data-i18n="pv.s12.title">문의</span></h2>
+        <p data-i18n="pv.s12.body">개인정보처리방침에 대해 궁금한 점이나 삭제 요청은 아래로 알려 주세요.</p>
+        <p class="contact">
+          <span data-i18n="pv.operator">최티 (ChoiTea)</span>
+          <span data-i18n="pv.operatorRole">— 티키피디아 운영자·개발자</span><br />
+          <a href="mailto:rotroka@gmail.com">rotroka@gmail.com</a>
         </p>
       </section>
 

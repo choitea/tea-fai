@@ -1483,13 +1483,18 @@ a {
   color: var(--amber);
 }
 
-@media (min-width: 420px) {
+/* 420~899px(폴드 펼친 화면·태블릿): 예전에는 430px 로 폭을 묶어 양옆 빈 여백이
+   크게 생겼습니다. 이제 양옆 8px만 남기고 화면 폭을 그대로 씁니다. */
+@media (min-width: 420px) and (max-width: 899px) {
   .view {
-    max-width: 430px;
-    margin: 0 auto;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .app-header {
-    padding-inline: max(18px, calc((100vw - 430px) / 2 + 18px));
+    padding-inline: 8px;
   }
 }
 
@@ -4472,7 +4477,7 @@ body.modal-open {
     display: flex;
     align-items: center;
     gap: 28px;
-    padding: 0 max(28px, calc((100vw - var(--page-max)) / 2));
+    padding: 0 max(8px, calc((100vw - var(--page-max)) / 2));
     background: rgba(247, 243, 235, 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -4562,14 +4567,14 @@ body.modal-open {
   .view {
     max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 8px;
     animation: none;
   }
 
   /* 차 백과 고정 영역도 컨테이너 폭에 맞춰 양옆 여백을 맞춥니다 */
   .guide-sticky {
-    margin: 0 -20px;
-    padding: 0 20px 12px;
+    margin: 0 -8px;
+    padding: 0 8px 12px;
   }
 
   /* 넓은 화면에서는 고정 영역을 두 칸으로: 왼쪽 취향 테스트·탭, 오른쪽 검색·칩 */
@@ -4928,7 +4933,7 @@ body.modal-open {
 
 @media (max-width: 430px) {
   .app-header {
-    padding-inline: 14px;
+    padding-inline: 8px;
   }
   .lang-btn {
     padding: 2px 4px 2px 3px;
@@ -6882,38 +6887,44 @@ window.TEAFaiI18N = (function () {
     ko: {
       "pv.title": "개인정보처리방침 — 티키피디아(Teakipedia)",
       "pv.desc":
-        "티키피디아(Teakipedia) 앱의 개인정보처리방침. 회원가입이 없고, 시음 노트·타이머 설정·언어·커뮤니티 글은 기기 브라우저 저장소에 보관하며, 입점 신청서를 직접 보낼 때만 매장 정보가 운영자에게 전달됩니다.",
-      "pv.kPosts": "커뮤니티 글",
-      "pv.vPosts": "닉네임, 글 종류, 별점, 차·티백 이름, 본문, 작성 시각",
-      "pv.kReacts": "좋아요·도움돼요",
-      "pv.vReacts": "어떤 글에 좋아요·도움돼요를 눌렀는지 (기기 안에서만 셉니다)",
-      "pv.kApps": "입점 신청 내역",
-      "pv.vApps": "매장명, 담당자, 연락처, 주소, 메뉴, 영업시간, SNS·지도 링크, 메모, 선택한 플랜",
-      "pv.s11.title": "입점 신청과 커뮤니티",
-      "pv.s11.body":
-        "입점 신청서·새 티백 등록·사업자 상품 등록은 검토를 위해서만 받습니다. 이 내용은 기기에 저장되는 동시에 운영 서버(Supabase, 서울 리전)로 보내져 운영자만 확인합니다. 운영자는 신청서에 적힌 연락처로만 회신합니다. 커뮤니티 글은 닉네임과 내용이 기기에 저장되고, 공개 글로 서버에 보내져 다른 이용자에게 보일 수 있습니다. 구독 상태는 기기에만 저장됩니다."
+        "티키피디아(Teakipedia) 앱의 개인정보처리방침. 회원가입은 없지만, 커뮤니티 글·찻집 등록 신청·제조사 차 등록은 HTTPS로 암호화되어 서버에 저장되고, 시음 노트·앱 설정은 기기 브라우저에만 저장됩니다."
     },
     en: {
       "pv.title": "Privacy Policy — Teakipedia",
       "pv.desc":
-        "Privacy policy for the Teakipedia app. There is no sign-up. Tasting notes, timer settings, language and community posts stay in your device's browser storage; only a listing application you choose to send carries shop details to the operator.",
+        "Privacy policy for the Teakipedia app. There is no sign-up, but community posts, tea-house listing applications and maker product entries are sent encrypted over HTTPS and stored on the server; tasting notes and app settings stay in your device's browser.",
       "pv.back": "Back to the app",
       "pv.kicker": "Privacy Policy",
       "pv.h1": "Teakipedia Privacy Policy",
       "pv.lead":
-        'Teakipedia is an app with a tea guide, a steeping timer, tasting notes, a tea-room directory and a community. It has <span class="key">no sign-up and collects no personal data that identifies you.</span> Tasting notes, timer settings, language and community posts stay in your device\'s browser storage; only a listing application you choose to send carries the shop details you enter to the operator.',
-      "pv.metaDate": "Effective 20 November 2026",
-      "pv.metaVersion": "Version 1.0",
+        'Teakipedia is an app with a tea guide, a steeping timer, tasting notes, a tea-room directory and a community. It has <span class="key">no sign-up or sign-in, and simply using the app collects no personal data.</span> Only what you choose to send — a community post, a tea-house listing application, a maker product entry — is encrypted and stored on our server; tasting notes and app settings stay on your device.',
+      "pv.metaDate": "Effective 21 November 2026",
+      "pv.metaVersion": "Version 1.1",
       "pv.metaContact": "Contact rotroka@gmail.com",
-      "pv.s1.title": "Personal data we collect",
+      "pv.s1.title": "What we collect and use",
       "pv.s1.body":
-        'Teakipedia <span class="key">collects no account data</span> — no name, mobile number, email, address, location, photos, contacts or device identifier — and there is no sign-up or sign-in. The one exception is a listing application: the shop details you type there (shop name, contact person, contact, address, menu, hours, SNS or map link, note, chosen plan) are used only to review the listing, and stay on your device unless you send them.',
-      "pv.account": "<b>Account</b> — none. Install the app and use it straight away.",
-      "pv.server": "<b>Server</b> — Teakipedia runs no server that stores your data. Community posts and applications sit on your device; the optional server connection described in section 11 is not enabled.",
-      "pv.ads": "<b>Ads and analytics</b> — no advertising SDK, no traffic statistics, no behaviour analytics.",
-      "pv.s2.title": "What is stored on your device",
+        "Teakipedia does not create an account. Only when you press send on one of the four screens below is what you entered sent over HTTPS to our server (Supabase, Seoul region) and stored there.",
+      "pv.thKind": "Screen",
+      "pv.thItems": "What is sent",
+      "pv.thWhy": "Why",
+      "pv.r1.k": "Community post",
+      "pv.r1.v": "Nickname, post type, rating, tea or tea bag name, body, time written",
+      "pv.r1.why": "Shown in the app's public feed; the operator publishes or hides posts",
+      "pv.r2.k": "Tea-house listing application",
+      "pv.r2.v":
+        "Shop name, contact person, shop contact, region and address, opening hours, signature tea menu, taste tags, social or map links, note",
+      "pv.r2.why": "Reviewing the listing and adding the shop to the partner directory",
+      "pv.r3.k": "Maker product entry",
+      "pv.r3.v": "Product name, type (leaf, tea bag, teaware), price, weight, origin, description",
+      "pv.r3.why": "Reviewing the product and adding it to the store",
+      "pv.r4.k": "New tea bag (Smart Lens)",
+      "pv.r4.v": "Product name, brand, tea type, barcode, note",
+      "pv.r4.why": "Reviewing the addition to the tea bag list",
+      "pv.s1.note":
+        "All transfers are encrypted, and the app contains no advertising SDK, traffic statistics or behaviour analytics. We do not collect your location, contacts, photos, device identifiers or card details. A photo chosen in Smart Lens is read only on your device and never uploaded.",
+      "pv.s2.title": "What stays only on your device",
       "pv.s2.body":
-        'For convenience the app stores the items below <span class="key">only in your device\'s browser local storage (localStorage)</span>. They are never sent to a server and cannot be seen from outside your device.',
+        "The values below are stored in your device's browser local storage (localStorage) and are never sent to a server. Posts and applications sent from the screens in section 1 also leave a copy on your device.",
       "pv.thItem": "Item",
       "pv.thWhat": "Contents",
       "pv.kNotes": "Tasting notes",
@@ -6924,66 +6935,96 @@ window.TEAFaiI18N = (function () {
       "pv.vLastTea": "The tea type you picked most recently",
       "pv.kLang": "Language",
       "pv.vLang":
-        "The language you chose with the language switch (한국어 · EN · 简中 · 繁中), so the app opens in it next time",
-      "pv.s2.note":
-        "You can check or delete these values in the app at any time; they go when you delete the app or clear the site's data in your browser. Teakipedia keeps no copy, so a deleted record cannot be restored.",
-      "pv.s3.title": "Temporary storage for offline use",
-      "pv.s3.body":
-        "So the app opens without a connection, Teakipedia keeps a copy of its own screen files (HTML, CSS, JS, icons) in your browser cache through a service worker. That is a copy of the app itself, not your personal data or your notes. When the app is updated, the files refresh automatically.",
-      "pv.s4.title": "Device permissions",
-      "pv.s4.body":
-        'Teakipedia <span class="key">requests no device permissions</span> — no camera, microphone, location, contacts, photos, notifications or storage. The end of a timer is announced inside the app by the screen and the chime; no push or background notification is sent.',
-      "pv.s5.title": "External links",
-      "pv.s5.body":
-        "The app links to a YouTube channel, a Naver blog and a Upaper e-book store. Tapping a link opens that site in your browser, and from then on its own privacy policy applies. Teakipedia passes no information about you to those sites.",
-      "pv.s6.title": "Sharing with third parties",
-      "pv.s6.body":
-        "Because no personal data is collected, there is nothing to provide to third parties or to entrust for processing. Your records are never sold, shared or read.",
-      "pv.s7.title": "Children's privacy",
-      "pv.s7.body":
-        "Teakipedia collects no personal data from anyone, including children under 14. The app is safe for all ages, and there is no field anywhere to enter personal information.",
-      "pv.s8.title": "Your rights",
-      "pv.s8.body":
-        'You can view and delete the records you wrote one by one on the app\'s <span class="key">Tasting notes</span> screen at any time. To clear everything at once, delete this site\'s data in your browser or delete the app; the chosen language goes with it. Teakipedia keeps no copy outside your device, so there is no separate deletion request to make.',
-      "pv.s9.title": "Changes to this policy",
-      "pv.s9.body":
-        "If the app's features change and this policy needs editing, the new policy and its effective date are posted on this page first. If a change would introduce any collection of personal data, the app itself will tell you too.",
-      "pv.s10.title": "Contact",
-      "pv.s10.body": "If you have a question or a request about this policy, write to us.",
-      "pv.footer":
-        "Teakipedia — Tea guide & steeping timer · made from Time of Tea Leaves, Today's Cup and The First Scented Black Tea — Everything About Earl Grey.",
-      "pv.openApp": "Open the app",
+        "The language you chose with the language switch (한국어 · EN · 简中 · 繁中 · 日 · 粵), so the app opens in it next time",
+      "pv.kView": "View style",
+      "pv.vView": "Whether the tea guide and store show a one-column list or a two-column grid",
       "pv.kPosts": "Community posts",
-      "pv.vPosts": "Nickname, post type, rating, tea or tea bag name, body, time written",
+      "pv.vPosts":
+        "A copy on your device of what you sent — nickname, post type, rating, tea or tea bag name, body, time written",
       "pv.kReacts": "Likes and helpful votes",
       "pv.vReacts": "Which posts you liked or marked helpful (counted on this device only)",
       "pv.kApps": "Listing applications",
-      "pv.vApps": "Shop name, contact person, contact, address, menu, hours, SNS or map link, note, chosen plan",
-      "pv.s11.title": "Listing applications and the community",
+      "pv.vApps":
+        "A copy on your device of what you sent — shop name, contact person, contact, address, menu, hours, social or map link, note",
+      "pv.kMember": "Membership level",
+      "pv.vMember": "The plan Google Play confirmed and the product ID you subscribed to",
+      "pv.s2.note":
+        "You can check or delete these values in the app at any time; they go when you delete the app or clear the site's data in your browser. Posts and applications already sent stay on the server even after you clear the device storage, so ask for their deletion as described in section 10.",
+      "pv.s3.title": "Who sees what is on the server, and for how long",
+      "pv.s3.body":
+        "Community posts are meant to be public. Once the operator publishes a post it is visible to other users, and the operator decides whether it is published or hidden. Tea-house listing applications, maker product entries and new tea bag entries are read only by the operator, and after review only the shop or product details are added to the app. Information on the server is kept for as long as the review and publication need it; if you ask for deletion as described in section 10, we check the request and delete the content without delay.",
+      "pv.s4.title": "Temporary storage for offline use",
+      "pv.s4.body":
+        "So the app opens without a connection, Teakipedia keeps a copy of its own screen files (HTML, CSS, JS, icons) in your browser cache through a service worker. That is a copy of the app itself, not your personal data or your notes. When the app is updated, the files refresh automatically.",
+      "pv.s5.title": "Device permissions",
+      "pv.s5.body":
+        'Teakipedia <span class="key">requests no device permissions</span> — no camera, microphone, location, contacts, photos, notifications or storage. Smart Lens opens the device file picker to choose a photo, and the photo is read only inside the app. The end of a timer is announced inside the app by the screen and the chime; no push or background notification is sent.',
+      "pv.s6.title": "In-app subscriptions and payment",
+      "pv.s6.body":
+        "The monthly plans for personal, tea-house and maker members are handled by Google Play in-app billing. Google Play handles the payment method and card details; Teakipedia never receives or stores a card number. The app only reads the subscription state Google Play reports (the product purchased and whether it is valid) to unlock a membership level, and stores that level on your device. Cancelling and refunds follow Google Play's policies and procedures.",
+      "pv.s7.title": "External links and the Coupang Partners programme",
+      "pv.s7.body":
+        "The app links to the Tea Fai YouTube channel, a Naver blog, the Upaper e-book store, and the Naver, Kakao and Google maps of partner tea houses. The store screen also has affiliate links to Coupang products and search results. Tapping a link opens that site in your browser, and from then on its own privacy policy applies. Teakipedia passes no information about you to those sites.",
+      "pv.s7.note":
+        "This posting is part of our Coupang Partners activity, and we receive a small commission from it.",
+      "pv.s8.title": "Sharing with third parties and processing on our behalf",
+      "pv.s8.body":
+        "Teakipedia entrusts the following providers with storage and payment. We never sell your information or pass it on for any other purpose.",
+      "pv.s8.supabase":
+        '<span class="key">Supabase Inc.</span> — storage (database hosting) for community posts and listing applications. The server region is Seoul, Republic of Korea.',
+      "pv.s8.google": '<span class="key">Google LLC</span> — Google Play in-app billing and subscription status checks.',
+      "pv.s9.title": "Children's privacy",
+      "pv.s9.body":
+        "Teakipedia does not knowingly collect personal data from children under 14. The community asks for a nickname only, and we advise against writing a real name, contact number or address in a post. If a guardian learns that a post or application sent by a child is stored on the server, they can ask for deletion at the contact in section 12, and we delete it without delay after checking.",
+      "pv.s10.title": "Your rights and deletion requests",
+      "pv.s10.body":
+        "You can view and delete the records you wrote one by one on the app's Tasting notes screen at any time. To clear everything stored on your device at once, delete this site's data in your browser or delete the app. To delete a community post or listing application stored on the server, write to rotroka@gmail.com with the nickname and time of the post, or the shop name you applied with. Because there are no accounts, we may ask for the minimum information needed to confirm the request.",
+      "pv.s11.title": "Changes to this policy",
       "pv.s11.body":
-        "A listing application, a newly registered tea bag and a business member's own product are used only for review. They are kept on your device and also sent to the operator's server (Supabase, Seoul region), where only the operator reads them; the operator replies only through the contact given. Community posts keep their nickname and text on your device and are sent to the server as public posts, so other users may see them. Subscription state stays on your device."
+        "If the app's features change and this policy needs editing, the new policy and its effective date are posted on this page first. If a change would add a new kind of personal data collection or a new item sent to the server, the app itself will tell you too.",
+      "pv.s12.title": "Contact",
+      "pv.s12.body": "If you have a question about this policy or want to request deletion, write to us below.",
+      "pv.operator": "ChoiTea",
+      "pv.operatorRole": "— operator and developer of Teakipedia",
+      "pv.footer":
+        "Teakipedia — Tea guide & steeping timer · made from Time of Tea Leaves, Today's Cup and The First Scented Black Tea — Everything About Earl Grey.",
+      "pv.openApp": "Open the app"
     },
     "zh-CN": {
       "pv.title": "隐私政策 — 茶基百科",
       "pv.desc":
-        "Teakipedia 应用的隐私政策。本应用无需注册。品茶笔记、计时设定、语言与社区贴文保存在设备浏览器中；只有您主动发送的入驻申请会把门店信息送达运营者。",
+        "Teakipedia 应用的隐私政策。本应用无需注册；社区贴文、茶馆入驻申请与厂商商品登记会经 HTTPS 加密发送到服务器，品茶笔记与应用设定只保存在设备浏览器中。",
       "pv.back": "返回应用",
       "pv.kicker": "Privacy Policy",
       "pv.h1": "茶基百科 隐私政策",
       "pv.lead":
-        'Teakipedia 是一款包含茶百科、冲泡计时、品茶笔记、茶馆查找与社区的应用。<span class="key">无需注册，也不收集可识别您的个人信息。</span>品茶笔记、计时设定、语言与社区贴文只留在设备浏览器中；只有您主动送出的入驻申请才会把填写的门店信息送达运营者。',
-      "pv.metaDate": "生效日 2026年11月20日",
-      "pv.metaVersion": "版本 1.0",
+        'Teakipedia 是一款包含茶百科、冲泡计时、品茶笔记、茶馆查找与社区的应用。<span class="key">无需注册与登录，仅使用应用不会收集个人信息。</span>只有您主动按下“发送”的内容（社区贴文、茶馆入驻申请、厂商商品登记）会经加密保存到服务器；品茶笔记与应用设定只留在本机。',
+      "pv.metaDate": "生效日 2026年11月21日",
+      "pv.metaVersion": "版本 1.1",
       "pv.metaContact": "联系 rotroka@gmail.com",
-      "pv.s1.title": "收集的个人信息",
+      "pv.s1.title": "收集与利用的信息",
       "pv.s1.body":
-        'Teakipedia <span class="key">不收集账户性的个人信息</span>——姓名、手机号码、电子邮件、地址、位置、照片、通讯录、设备识别码都不收集，也没有注册与登录。唯一的例外是入驻申请：您在其中填写的门店信息（门店名称、联系人、联系方式、地址、菜单、营业时间、社交或地图链接、备注、所选方案）仅用于审核，若不发送则只留在本机。',
-      "pv.account": "<b>账户</b>——不设立。安装后即可使用。",
-      "pv.server": "<b>服务器</b>——Teakipedia 不运营存放使用者数据的服务器。社区贴文与入驻申请保存在本机；第11节提到的可选服务器连接尚未启用。",
-      "pv.ads": "<b>广告与分析</b>——没有广告 SDK、访问统计或行为分析工具。",
-      "pv.s2.title": "保存在设备上的信息",
+        "Teakipedia 不建立账户。只有在下列四个画面按下“发送”时，您填写的内容才会经 HTTPS 加密发送到服务器（Supabase，首尔区域）并保存在那里。",
+      "pv.thKind": "发送画面",
+      "pv.thItems": "发送的信息",
+      "pv.thWhy": "用途",
+      "pv.r1.k": "社区贴文",
+      "pv.r1.v": "昵称、贴文类型、评分、茶或茶包名称、正文、发布时间",
+      "pv.r1.why": "在应用的公开贴文列表中显示，由运营者决定公开或隐藏",
+      "pv.r2.k": "茶馆会员门店登记",
+      "pv.r2.v": "门店名称、联系人、门店联系方式、地区与地址、营业时间、代表茶菜单、风味标签、社交或地图链接、备注",
+      "pv.r2.why": "审核入驻并将门店信息加入合作名单",
+      "pv.r3.k": "厂商会员商品登记",
+      "pv.r3.v": "商品名称、种类（茶叶、茶包、茶具）、价格、容量、产地、介绍",
+      "pv.r3.why": "审核商品并加入商店",
+      "pv.r4.k": "新茶包登记（智能镜头）",
+      "pv.r4.v": "商品名称、品牌、茶类、条形码、备注",
+      "pv.r4.why": "审核并加入茶包列表",
+      "pv.s1.note":
+        "传输全程加密，应用内没有广告 SDK、流量统计或行为分析工具。不收集位置、通讯录、照片、设备识别码与支付卡信息。智能镜头选择的照片只在本机读取，不会上传。",
+      "pv.s2.title": "只保存在设备上的信息",
       "pv.s2.body":
-        '为了使用方便，应用将下列信息<span class="key">只保存在使用者设备的浏览器本地存储（localStorage）</span>中。这些值不会传送到服务器，设备之外也无法查看。',
+        "下列内容保存在使用者设备的浏览器本地存储（localStorage）中，不会传送到服务器。第1节画面中发送的贴文与申请也会在本机留一份副本。",
       "pv.thItem": "保存项",
       "pv.thWhat": "内容",
       "pv.kNotes": "品茶笔记",
@@ -6993,66 +7034,93 @@ window.TEAFaiI18N = (function () {
       "pv.kLastTea": "最近选择的茶",
       "pv.vLastTea": "最后选择的茶类",
       "pv.kLang": "语言设定",
-      "pv.vLang": "用语言切换选择的语言（한국어 · EN · 简中 · 繁中），下次打开时以该语言显示",
-      "pv.s2.note":
-        "保存的值随时可以在应用内查看、删除；删除应用或清除浏览器中此网站的数据时会一起删除。Teakipedia 不持有这些值的副本，所以已删除的记录无法恢复。",
-      "pv.s3.title": "为了离线使用而临时保存",
-      "pv.s3.body":
-        "为了让应用在没有网络时也能打开，Teakipedia 通过服务工作者把应用的画面文件（HTML、CSS、JS、图标）临时保存在设备浏览器缓存中。那只是应用本身的副本，不是使用者的个人信息或记录。应用更新时画面文件会自动换成最新版本。",
-      "pv.s4.title": "设备权限",
-      "pv.s4.body":
-        'Teakipedia <span class="key">不请求任何设备权限</span>——相机、麦克风、位置、通讯录、照片、通知、存储空间都不请求。计时结束只在应用画面内以显示和提示音告知，不发送推送或后台通知。',
-      "pv.s5.title": "外部链接",
-      "pv.s5.body":
-        "应用内有前往 YouTube 频道、Naver 博客、Upaper 电子书书店的链接。点击链接后由使用者的浏览器打开该网站，此后适用该网站的隐私政策，Teakipedia 不会把使用者信息交给该网站。",
-      "pv.s6.title": "第三方提供与委托处理",
-      "pv.s6.body":
-        "因为不收集个人信息，也没有向第三方提供或委托处理的信息。不会出售、共享或查看使用者的记录。",
-      "pv.s7.title": "儿童的隐私",
-      "pv.s7.body":
-        "Teakipedia 不收集包括未满14岁儿童在内任何使用者的个人信息。所有年龄都可以安全使用，应用里也没有填写个人信息的栏位。",
-      "pv.s8.title": "使用者的权利",
-      "pv.s8.body":
-        '使用者随时可以在应用的<span class="key">品茶笔记</span>画面查看自己写的记录并逐条删除。若要一次全部清除，请在设备浏览器中删除此网站的数据或删除应用，所选语言设定也会一起清除。Teakipedia 不在设备之外保存副本，因此不需要另外提出删除请求。',
-      "pv.s9.title": "政策的变更",
-      "pv.s9.body":
-        "应用功能改变而需要修改本政策时，会先在本页公布新的政策和生效日。若变更会新增个人信息的收集，也会在应用内告知。",
-      "pv.s10.title": "联系",
-      "pv.s10.body": "对本隐私政策有疑问或请求，请用下面的方式告诉我们。",
-      "pv.footer":
-        "茶基百科 — 茶百科与冲泡计时 · 依据《茶叶的时间，今天的一杯》《最初的加香红茶——伯爵茶的一切》制作的应用。",
-      "pv.openApp": "打开应用",
+      "pv.vLang": "用语言切换选择的语言（한국어 · EN · 简中 · 繁中 · 日 · 粵），下次打开时以该语言显示",
+      "pv.kView": "显示方式",
+      "pv.vView": "茶百科与商店以单列列表还是双列网格显示",
       "pv.kPosts": "社区贴文",
-      "pv.vPosts": "昵称、贴文类型、评分、茶或茶包名称、正文、发布时间",
+      "pv.vPosts": "所发送贴文的本机副本——昵称、贴文类型、评分、茶或茶包名称、正文、发布时间",
       "pv.kReacts": "赞与有帮助",
       "pv.vReacts": "您对哪些贴文点过赞或有帮助（仅在本机统计）",
-      "pv.kApps": "入驻申请",
-      "pv.vApps": "门店名称、联系人、联系方式、地址、菜单、营业时间、社交或地图链接、备注、所选方案",
-      "pv.s11.title": "入驻申请与社区",
+      "pv.kApps": "登记申请",
+      "pv.vApps": "所发送申请的本机副本——门店名称、联系人、联系方式、地址、菜单、营业时间、社交或地图链接、备注",
+      "pv.kMember": "会员等级",
+      "pv.vMember": "Google Play 确认的订阅等级与订阅的商品 ID",
+      "pv.s2.note":
+        "本机保存的值随时可以在应用内查看、删除；删除应用或清除浏览器中此网站的数据时会一起删除。已发送到服务器的贴文与申请在清除本机数据后仍留在服务器，如需一并删除，请按第10节的方法提出。",
+      "pv.s3.title": "服务器上信息的公开与保存",
+      "pv.s3.body":
+        "社区贴文以公开为前提收集。运营者确认并发布后，其他使用者可以看到，公开或隐藏由运营者决定。茶馆入驻申请、厂商商品登记与新茶包登记只有运营者查看，审核结束后只把门店与商品信息加入应用。服务器上的信息在审核与发布所需的期间保存；若您按第10节的方法提出删除，我们确认后会立即删除。",
+      "pv.s4.title": "为了离线使用而临时保存",
+      "pv.s4.body":
+        "为了让应用在没有网络时也能打开，Teakipedia 通过服务工作者把应用的画面文件（HTML、CSS、JS、图标）临时保存在设备浏览器缓存中。那只是应用本身的副本，不是使用者的个人信息或记录。应用更新时画面文件会自动换成最新版本。",
+      "pv.s5.title": "设备权限",
+      "pv.s5.body":
+        'Teakipedia <span class="key">不请求任何设备权限</span>——相机、麦克风、位置、通讯录、照片、通知、存储空间都不请求。智能镜头通过设备的文件选择器选取照片，所选照片只在应用内读取。计时结束只在应用画面内以显示和提示音告知，不发送推送或后台通知。',
+      "pv.s6.title": "应用内定期订阅与支付",
+      "pv.s6.body":
+        "个人会员、茶馆会员、厂商会员的月费通过 Google Play 应用内购买处理。支付方式与卡片信息由 Google Play 处理，Teakipedia 不会直接收取或保存卡号。应用只读取 Google Play 告知的订阅状态（购买的商品与是否有效）来开启会员等级，并将该等级保存在本机。取消订阅与退款依 Google Play 的政策与流程。",
+      "pv.s7.title": "外部链接与 Coupang 合作伙伴",
+      "pv.s7.body":
+        "应用内有前往 Tea Fai YouTube 频道、Naver 博客、Upaper 电子书书店，以及合作茶馆的 Naver、Kakao、Google 地图的链接。商店画面还有前往 Coupang 商品或搜索结果的推广链接。点击链接后由使用者的浏览器打开该网站，此后适用该网站的隐私政策，Teakipedia 不会把使用者信息交给该网站。",
+      "pv.s7.note": "本贴文是 Coupang 合作伙伴活动的一部分，我们会因此获得一定金额的佣金。",
+      "pv.s8.title": "第三方提供与委托处理",
+      "pv.s8.body":
+        "Teakipedia 为服务器存储与支付，将处理委托给下列企业。不会出售使用者信息，也不会用于目的之外的用途。",
+      "pv.s8.supabase":
+        '<span class="key">Supabase Inc.</span> —— 保存社区贴文与登记申请（数据库托管）。服务器区域为大韩民国（首尔）。',
+      "pv.s8.google": '<span class="key">Google LLC</span> —— Google Play 应用内购买与订阅状态确认。',
+      "pv.s9.title": "儿童的隐私",
+      "pv.s9.body":
+        "Teakipedia 不会在知情的情况下收集未满14岁儿童的个人信息。社区只请填写昵称，并提醒不要在贴文中写真实姓名、联系方式或地址。若监护人得知儿童发送的贴文或申请保存在服务器上，可通过第12节的联系方式请求删除，我们确认后会立即删除。",
+      "pv.s10.title": "使用者的权利与删除请求",
+      "pv.s10.body":
+        "使用者随时可以在应用的品茶笔记画面查看自己写的记录并逐条删除。若要一次清除本机保存的值，请在浏览器中删除此网站的数据或删除应用。若要删除服务器上的社区贴文或登记申请，请写信到 rotroka@gmail.com，告知贴文昵称与发布时间，或申请的门店名称。由于没有账户，必要时我们会另行请求确认所需的最少信息。",
+      "pv.s11.title": "政策的变更",
       "pv.s11.body":
-        "入驻申请、新茶包登记与商家商品登记仅用于审核。这些内容保存在本机，同时送到运营服务器（Supabase，首尔区域），仅运营者查看；运营者只通过登记的联系方式回复。社区贴文的昵称与内容保存在本机，并作为公开贴文送到服务器，其他使用者可能看到。订阅状态只保存在本机。"
+        "应用功能改变而需要修改本政策时，会先在本页公布新的政策和生效日。若变更会新增个人信息的收集或新增发送到服务器的项目，也会在应用内告知。",
+      "pv.s12.title": "联系",
+      "pv.s12.body": "对本隐私政策有疑问或需要请求删除，请通过下面的方式联系。",
+      "pv.operator": "ChoiTea",
+      "pv.operatorRole": "—— Teakipedia 运营者兼开发者",
+      "pv.footer":
+        "茶基百科 — 茶百科与冲泡计时 · 依据《茶叶的时间，今天的一杯》《最初的加香红茶——伯爵茶的一切》制作的应用。",
+      "pv.openApp": "打开应用"
     },
     "zh-TW": {
       "pv.title": "隱私權政策 — 茶基百科",
       "pv.desc":
-        "Teakipedia 應用的隱私權政策。本應用無需註冊。品茶筆記、計時設定、語言與社群貼文保存在裝置瀏覽器中；只有您主動送出的入駐申請會把門店資訊送達營運者。",
+        "Teakipedia 應用的隱私權政策。本應用無需註冊；社群貼文、茶館入駐申請與廠商商品登記會經 HTTPS 加密送到伺服器，品茶筆記與應用設定只保存在裝置瀏覽器中。",
       "pv.back": "返回應用",
       "pv.kicker": "Privacy Policy",
       "pv.h1": "茶基百科 隱私權政策",
       "pv.lead":
-        'Teakipedia 是一款包含茶百科、沖泡計時、品茶筆記、茶館查找與社群的應用。<span class="key">無需註冊，也不收集可識別您的個人資訊。</span>品茶筆記、計時設定、語言與社群貼文只留在裝置瀏覽器中；只有您主動送出的入駐申請才會把填寫的門店資訊送達營運者。',
-      "pv.metaDate": "生效日 2026年11月20日",
-      "pv.metaVersion": "版本 1.0",
+        'Teakipedia 是一款包含茶百科、沖泡計時、品茶筆記、茶館查找與社群的應用。<span class="key">無需註冊與登入，僅使用應用不會收集個人資訊。</span>只有您主動按下「送出」的內容（社群貼文、茶館入駐申請、廠商商品登記）會經加密保存到伺服器；品茶筆記與應用設定只留在本機。',
+      "pv.metaDate": "生效日 2026年11月21日",
+      "pv.metaVersion": "版本 1.1",
       "pv.metaContact": "聯絡 rotroka@gmail.com",
-      "pv.s1.title": "收集的個人資訊",
+      "pv.s1.title": "收集與利用的資訊",
       "pv.s1.body":
-        'Teakipedia <span class="key">不收集帳號性的個人資訊</span>——姓名、手機號碼、電子郵件、地址、位置、照片、通訊錄、裝置識別碼都不收集，也沒有註冊與登入。唯一的例外是入駐申請：您在其中填寫的門店資訊（門店名稱、聯絡人、聯絡方式、地址、菜單、營業時間、社群或地圖連結、備註、所選方案）僅用於審核，若不送出則只留在本機。',
-      "pv.account": "<b>帳號</b>——不設立。安裝後即可使用。",
-      "pv.server": "<b>伺服器</b>——Teakipedia 不營運存放使用者資料的伺服器。社群貼文與入駐申請保存在本機；第11節提到的可選伺服器連接尚未啟用。",
-      "pv.ads": "<b>廣告與分析</b>——沒有廣告 SDK、流量統計或行為分析工具。",
-      "pv.s2.title": "保存在裝置上的資訊",
+        "Teakipedia 不建立帳號，也沒有登入。只有在下列四個畫面按下「送出」時，您填寫的內容才會經 HTTPS 加密送到伺服器（Supabase，首爾區域）並保存在那裡。",
+      "pv.thKind": "送出畫面",
+      "pv.thItems": "送出的資訊",
+      "pv.thWhy": "用途",
+      "pv.r1.k": "社群貼文",
+      "pv.r1.v": "暱稱、貼文類型、評分、茶或茶包名稱、正文、發布時間",
+      "pv.r1.why": "在應用的公開貼文列表顯示，由營運者決定公開或隱藏",
+      "pv.r2.k": "茶館會員門店登記",
+      "pv.r2.v": "門店名稱、聯絡人、門店聯絡方式、地區與地址、營業時間、代表茶菜單、風味標籤、社群或地圖連結、備註",
+      "pv.r2.why": "審核入駐並把門店資訊加入合作名單",
+      "pv.r3.k": "廠商會員商品登記",
+      "pv.r3.v": "商品名稱、種類（茶葉、茶包、茶具）、價格、容量、產地、介紹",
+      "pv.r3.why": "審核商品並加入商店",
+      "pv.r4.k": "新茶包登記（智慧鏡頭）",
+      "pv.r4.v": "商品名稱、品牌、茶類、條碼、備註",
+      "pv.r4.why": "審核並加入茶包列表",
+      "pv.s1.note":
+        "傳輸全程加密，應用內沒有廣告 SDK、流量統計或行為分析工具。不收集位置、通訊錄、照片、裝置識別碼與支付卡資訊。智慧鏡頭選擇的照片只在本機讀取，不會上傳。",
+      "pv.s2.title": "只保存在裝置上的資訊",
       "pv.s2.body":
-        '為了使用方便，應用將下列資訊<span class="key">只保存在使用者裝置的瀏覽器本機儲存（localStorage）</span>中。這些值不會傳送到伺服器，裝置之外也無法查看。',
+        "下列內容保存在使用者裝置的瀏覽器本機儲存（localStorage）中，不會傳送到伺服器。第1節畫面送出的貼文與申請也會在本機留一份副本。",
       "pv.thItem": "保存項",
       "pv.thWhat": "內容",
       "pv.kNotes": "品茶筆記",
@@ -7062,44 +7130,57 @@ window.TEAFaiI18N = (function () {
       "pv.kLastTea": "最近選擇的茶",
       "pv.vLastTea": "最後選擇的茶類",
       "pv.kLang": "語言設定",
-      "pv.vLang": "用語言切換選擇的語言（한국어 · EN · 简中 · 繁中），下次開啟時以該語言顯示",
-      "pv.s2.note":
-        "保存的值隨時可以在應用內查看、刪除；刪除應用或清除瀏覽器中此網站的資料時會一起刪除。Teakipedia 不持有這些值的副本，所以已刪除的記錄無法恢復。",
-      "pv.s3.title": "為了離線使用而暫時保存",
-      "pv.s3.body":
-        "為了讓應用在沒有網路時也能開啟，Teakipedia 透過 Service Worker 把應用的畫面檔案（HTML、CSS、JS、圖示）暫時保存在裝置瀏覽器快取中。那只是應用本身的副本，不是使用者的個人資訊或記錄。應用更新時畫面檔案會自動換成最新版本。",
-      "pv.s4.title": "裝置權限",
-      "pv.s4.body":
-        'Teakipedia <span class="key">不請求任何裝置權限</span>——相機、麥克風、位置、通訊錄、照片、通知、儲存空間都不請求。計時結束只在應用畫面內以顯示和提示音告知，不發送推播或背景通知。',
-      "pv.s5.title": "外部連結",
-      "pv.s5.body":
-        "應用內有前往 YouTube 頻道、Naver 部落格、Upaper 電子書書店的連結。點擊連結後由使用者的瀏覽器開啟該網站，此後適用該網站的隱私權政策，Teakipedia 不會把使用者資訊交給該網站。",
-      "pv.s6.title": "第三方提供與委託處理",
-      "pv.s6.body":
-        "因為不收集個人資訊，也沒有向第三方提供或委託處理的資訊。不會出售、共享或查看使用者的記錄。",
-      "pv.s7.title": "兒童的隱私",
-      "pv.s7.body":
-        "Teakipedia 不收集包括未滿14歲兒童在內任何使用者的個人資訊。所有年齡都可以安全使用，應用裡也沒有填寫個人資訊的欄位。",
-      "pv.s8.title": "使用者的權利",
-      "pv.s8.body":
-        '使用者隨時可以在應用的<span class="key">品茶筆記</span>畫面查看自己寫的記錄並逐條刪除。若要一次全部清除，請在裝置瀏覽器中刪除此網站的資料或刪除應用，所選語言設定也會一起清除。Teakipedia 不在裝置之外保存副本，因此不需要另外提出刪除請求。',
-      "pv.s9.title": "政策的變更",
-      "pv.s9.body":
-        "應用功能改變而需要修改本政策時，會先在本頁公布新的政策和生效日。若變更會新增個人資訊的收集，也會在應用內告知。",
-      "pv.s10.title": "聯絡",
-      "pv.s10.body": "對本隱私權政策有疑問或請求，請用下面的方式告訴我們。",
-      "pv.footer":
-        "茶基百科 — 茶百科與沖泡計時 · 依據《茶葉的時間，今天的一杯》《最初的加香紅茶——伯爵茶的一切》製作的應用。",
-      "pv.openApp": "開啟應用",
+      "pv.vLang": "用語言切換選擇的語言（한국어 · EN · 简中 · 繁中 · 日 · 粵），下次開啟時以該語言顯示",
+      "pv.kView": "顯示方式",
+      "pv.vView": "茶百科與商店以單欄列表還是雙欄格狀顯示",
       "pv.kPosts": "社群貼文",
-      "pv.vPosts": "暱稱、貼文類型、評分、茶或茶包名稱、正文、發布時間",
+      "pv.vPosts": "所送出貼文的本機副本——暱稱、貼文類型、評分、茶或茶包名稱、正文、發布時間",
       "pv.kReacts": "讚與有幫助",
       "pv.vReacts": "您對哪些貼文點過讚或有幫助（僅在本機統計）",
-      "pv.kApps": "入駐申請",
-      "pv.vApps": "門店名稱、聯絡人、聯絡方式、地址、菜單、營業時間、社群或地圖連結、備註、所選方案",
-      "pv.s11.title": "入駐申請與社群",
+      "pv.kApps": "登記申請",
+      "pv.vApps": "所送出申請的本機副本——門店名稱、聯絡人、聯絡方式、地址、菜單、營業時間、社群或地圖連結、備註",
+      "pv.kMember": "會員等級",
+      "pv.vMember": "Google Play 確認的訂閱等級與訂閱的商品 ID",
+      "pv.s2.note":
+        "本機保存的值隨時可以在應用內查看、刪除；刪除應用或清除瀏覽器中此網站的資料時會一起刪除。已送到伺服器的貼文與申請在清除本機資料後仍留在伺服器，如需一併刪除，請按第10節的方法提出。",
+      "pv.s3.title": "伺服器上資訊的公開與保存",
+      "pv.s3.body":
+        "社群貼文以公開為前提收集。營運者確認並發布後，其他使用者可以看到，公開或隱藏由營運者決定。茶館入駐申請、廠商商品登記與新茶包登記只有營運者查看，審核結束後只把門店與商品資訊加入應用。伺服器上的資訊在審核與發布所需的期間保存；若您按第10節的方法提出刪除，我們確認後會立即刪除。",
+      "pv.s4.title": "為了離線使用而暫時保存",
+      "pv.s4.body":
+        "為了讓應用在沒有網路時也能開啟，Teakipedia 透過 Service Worker 把應用的畫面檔案（HTML、CSS、JS、圖示）暫時保存在裝置瀏覽器快取中。那只是應用本身的副本，不是使用者的個人資訊或記錄。應用更新時畫面檔案會自動換成最新版本。",
+      "pv.s5.title": "裝置權限",
+      "pv.s5.body":
+        'Teakipedia <span class="key">不請求任何裝置權限</span>——相機、麥克風、位置、通訊錄、照片、通知、儲存空間都不請求。智慧鏡頭透過裝置的檔案選擇器選取照片，所選照片只在應用內讀取。計時結束只在應用畫面內以顯示和提示音告知，不發送推播或背景通知。',
+      "pv.s6.title": "應用內定期訂閱與付款",
+      "pv.s6.body":
+        "個人會員、茶館會員、廠商會員的月費透過 Google Play 應用內購買處理。付款方式與卡片資訊由 Google Play 處理，Teakipedia 不會直接收取或保存卡號。應用只讀取 Google Play 告知的訂閱狀態（購買的商品與是否有效）來開啟會員等級，並把該等級保存在本機。取消訂閱與退款依 Google Play 的政策與流程。",
+      "pv.s7.title": "外部連結與 Coupang 合作夥伴",
+      "pv.s7.body":
+        "應用內有前往 Tea Fai YouTube 頻道、Naver 部落格、Upaper 電子書書店，以及合作茶館的 Naver、Kakao、Google 地圖的連結。商店畫面還有前往 Coupang 商品或搜尋結果的推廣連結。點擊連結後由使用者的瀏覽器開啟該網站，此後適用該網站的隱私權政策，Teakipedia 不會把使用者資訊交給該網站。",
+      "pv.s7.note": "本貼文是 Coupang 合作夥伴活動的一部分，我們會因此獲得一定金額的佣金。",
+      "pv.s8.title": "第三方提供與委託處理",
+      "pv.s8.body":
+        "Teakipedia 為伺服器儲存與付款，把處理委託給下列企業。不會出售使用者資訊，也不會用於目的之外的用途。",
+      "pv.s8.supabase":
+        '<span class="key">Supabase Inc.</span> —— 保存社群貼文與登記申請（資料庫託管）。伺服器區域為大韓民國（首爾）。',
+      "pv.s8.google": '<span class="key">Google LLC</span> —— Google Play 應用內購買與訂閱狀態確認。',
+      "pv.s9.title": "兒童的隱私",
+      "pv.s9.body":
+        "Teakipedia 不會在知情的情況下收集未滿14歲兒童的個人資訊。社群只請填寫暱稱，並提醒不要在貼文中寫真實姓名、聯絡方式或地址。若監護人得知兒童送出的貼文或申請保存在伺服器上，可透過第12節的聯絡方式請求刪除，我們確認後會立即刪除。",
+      "pv.s10.title": "使用者的權利與刪除請求",
+      "pv.s10.body":
+        "使用者隨時可以在應用的品茶筆記畫面查看自己寫的記錄並逐條刪除。若要一次清除本機保存的值，請在瀏覽器中刪除此網站的資料或刪除應用。若要刪除伺服器上的社群貼文或登記申請，請寫信到 rotroka@gmail.com，告知貼文暱稱與發布時間，或申請的門店名稱。由於沒有帳號，必要時我們會另行請求確認所需的最少資訊。",
+      "pv.s11.title": "政策的變更",
       "pv.s11.body":
-        "入駐申請、新茶包登記與商家商品登記僅用於審核。這些內容保存在本機，同時送到營運伺服器（Supabase，首爾區域），僅營運者查看；營運者只透過登記的聯絡方式回覆。社群貼文的暱稱與內容保存在本機，並作為公開貼文送到伺服器，其他使用者可能看到。訂閱狀態只保存在本機。"
+        "應用功能改變而需要修改本政策時，會先在本頁公布新的政策和生效日。若變更會新增個人資訊的收集或新增送到伺服器的項目，也會在應用內告知。",
+      "pv.s12.title": "聯絡",
+      "pv.s12.body": "對本隱私權政策有疑問或需要請求刪除，請透過下面的方式聯絡。",
+      "pv.operator": "ChoiTea",
+      "pv.operatorRole": "—— Teakipedia 營運者兼開發者",
+      "pv.footer":
+        "茶基百科 — 茶百科與沖泡計時 · 依據《茶葉的時間，今天的一杯》《最初的加香紅茶——伯爵茶的一切》製作的應用。",
+      "pv.openApp": "開啟應用"
     }
   };
 

@@ -1453,13 +1453,18 @@ a {
   color: var(--amber);
 }
 
-@media (min-width: 420px) {
+/* 420~899px(폴드 펼친 화면·태블릿): 예전에는 430px 로 폭을 묶어 양옆 빈 여백이
+   크게 생겼습니다. 이제 양옆 8px만 남기고 화면 폭을 그대로 씁니다. */
+@media (min-width: 420px) and (max-width: 899px) {
   .view {
-    max-width: 430px;
-    margin: 0 auto;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   .app-header {
-    padding-inline: max(18px, calc((100vw - 430px) / 2 + 18px));
+    padding-inline: 8px;
   }
 }
 
@@ -4442,7 +4447,7 @@ body.modal-open {
     display: flex;
     align-items: center;
     gap: 28px;
-    padding: 0 max(28px, calc((100vw - var(--page-max)) / 2));
+    padding: 0 max(8px, calc((100vw - var(--page-max)) / 2));
     background: rgba(247, 243, 235, 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -4532,14 +4537,14 @@ body.modal-open {
   .view {
     max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 8px;
     animation: none;
   }
 
   /* 차 백과 고정 영역도 컨테이너 폭에 맞춰 양옆 여백을 맞춥니다 */
   .guide-sticky {
-    margin: 0 -20px;
-    padding: 0 20px 12px;
+    margin: 0 -8px;
+    padding: 0 8px 12px;
   }
 
   /* 넓은 화면에서는 고정 영역을 두 칸으로: 왼쪽 취향 테스트·탭, 오른쪽 검색·칩 */
@@ -4898,7 +4903,7 @@ body.modal-open {
 
 @media (max-width: 430px) {
   .app-header {
-    padding-inline: 14px;
+    padding-inline: 8px;
   }
   .lang-btn {
     padding: 2px 4px 2px 3px;
