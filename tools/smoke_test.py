@@ -232,14 +232,14 @@ def main():
     print(json.dumps(result, ensure_ascii=False, indent=2))
     ok = (
         not result["errors"]
-        and result["teas"] == 162
-        and result["teaWithPhoto"] == 162
-        and result["teaWithCountry"] == 162
+        and result["teas"] == 161
+        and result["teaWithPhoto"] == 161
+        and result["teaWithCountry"] == 161
         and result["teaListHtml"] > 1000
         and result["storeHtml"] > 1000
         and result["memberHtml"] > 100
         and result["lensHtml"] > 100
-        and result["leafCount"] == "162"
+        and result["leafCount"] == "161"
     )
     maker = run("maker")
     personal = run("personal")

@@ -88,8 +88,8 @@
   var VIEWS = ["guide", "timer", "store", "partner", "community", "notes", "quiz"];
 
   /* 계열 버튼·백과 목록 순서 — 녹차·우롱차·홍차·흑차(보이차)·백차·황차 다음에
-     화차(가향차)·대용차·허브차·과일차가 옵니다. */
-  var GROUP_ORDER = ["green", "oolong", "black", "dark", "white", "yellow", "blended", "herbal", "herb", "fruit"];
+     블렌딩차·대용차·전통차·허브차·과일차가 옵니다. */
+  var GROUP_ORDER = ["green", "oolong", "black", "dark", "white", "yellow", "blended", "everyday", "traditional", "herb", "fruit"];
 
   function orderedGroups() {
     var out = [];
@@ -142,7 +142,7 @@
   });
 
   /* ============================================================
-     1. 차 백과 (기본 첫 화면) — 계열 필터 · 162종 · 실물 사진 · 원산지
+     1. 차 백과 (기본 첫 화면) — 계열 필터 · 161종 · 실물 사진 · 원산지
      ============================================================ */
   /* 취향 태그 비교의 기준 차 — 퀴즈 결과가 있으면 그 차 */
   function referenceTeaId() {
@@ -1118,7 +1118,7 @@
         { key: "quiz.q6a", tags: { "k-sweet": 7, "b-medium": 1 } },
         { key: "quiz.q6b", tags: { "k-crisp": 7, "r-clean": 1 } },
         { key: "quiz.q6c", tags: { "k-blend": 10, "a-fruit": 2, "a-floral": 2 }, groups: ["blended"] },
-        { key: "quiz.q6d", tags: { "k-grain": 10, "a-roast": 2 }, groups: ["herbal", "herb"] }
+        { key: "quiz.q6d", tags: { "k-grain": 10, "a-roast": 2 }, groups: ["everyday", "traditional", "herb"] }
       ]
     },
     {
