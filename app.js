@@ -2902,6 +2902,7 @@
       teaId: "blend-earlgrey",
       teaName: "얼그레이",
       nickname: "베르가못",
+      yue: { teaName: "伯爵茶", nickname: "佛手柑", body: "96度沖3分鐘。加奶之前先飲一啖，佛手柑香即刻標上嚟。第二泡沖4分鐘就啱啱好。" },
       body: "96도에서 3분. 우유를 넣기 전에 한 모금 마셔 보니 베르가못이 확 올라옵니다. 두 번째 우리는 4분이 딱이었어요.",
       likes: 14,
       helpful: 9,
@@ -2916,6 +2917,7 @@
       bagId: "twinings-earl-grey",
       teaName: "트와이닝스 얼그레이",
       nickname: "주전자",
+      yue: { teaName: "Twinings 伯爵茶", nickname: "茶壺", body: "公司茶水房日日飲嘅茶包。95度飲水機水沖3分鐘，香已經夠。加奶會有啲淋，我多數淨飲。" },
       body: "회사 탕비실에서 늘 마시는 티백. 95도 정수기 물에 3분 두면 향이 충분합니다. 우유를 넣으면 조금 눅눅해져서 저는 맨잔으로 마십니다.",
       likes: 8,
       helpful: 6,
@@ -2930,6 +2932,7 @@
       teaId: null,
       teaName: "",
       nickname: "첫잔",
+      yue: { teaName: "", nickname: "第一杯", body: "話綠茶要70度沖，但我冇溫度計。滾水倒去另一個杯一次，大約會係幾多度？" },
       body: "녹차를 70도에서 우리라고 하는데 온도계가 없습니다. 끓인 물을 다른 컵에 한 번 옮기면 대략 몇 도쯤 될까요?",
       likes: 5,
       helpful: 11,
@@ -2944,6 +2947,7 @@
       bagId: "osulloc-sejak",
       teaName: "오설록 세작 20입",
       nickname: "제주바람",
+      yue: { teaName: "Osulloc 細雀 20包", nickname: "濟州風", body: "70度1分30秒，跟到足，冇澀味，仲留低果仁般嘅甜。茶包都有啲似原葉茶嘅質感。" },
       body: "70도 1분 30초, 정확히 지켰더니 떫지 않고 견과 같은 단맛이 남습니다. 티백인데도 잎차 같은 결이 있어요.",
       likes: 21,
       helpful: 13,
@@ -2958,6 +2962,7 @@
       teaId: "green-hojicha",
       teaName: "호지차",
       nickname: "저녁차",
+      yue: { teaName: "焙茶", nickname: "夜晚茶", body: "90度1分30秒。咖啡因低，夜晚飲都瞓得着。加少少奶，焙香更出。" },
       body: "90도에서 1분 30초. 카페인이 낮아 밤에 마셔도 잠이 잘 옵니다. 우유를 조금 넣으면 고소함이 더 살아나요.",
       likes: 6,
       helpful: 4,
@@ -2997,7 +3002,12 @@
     var react = loadReactions()[p.id] || {};
     var likeN = (p.likes || 0) + (react.like ? 1 : 0);
     var helpN = (p.helpful || 0) + (react.help ? 1 : 0);
-    var subject = p.teaName || "";
+    /* 예시 글은 광동어 문구를 따로 갖고 있습니다(직접 쓴 글은 그대로) */
+    var yv = lang === "yue" && p.yue ? p.yue : null;
+    function pv(field, fallback) {
+      return (yv && yv[field]) || fallback || "";
+    }
+    var subject = pv("teaName", p.teaName);
     return (
       '<article class="post" data-post="' +
       esc(p.id) +
@@ -3012,10 +3022,10 @@
       "</div>" +
       (subject ? '<b class="post-subject">' + esc(subject) + "</b>" : "") +
       '<p class="post-body">' +
-      esc(p.body).replace(/\n/g, "<br />") +
+      esc(pv("body", p.body)).replace(/\n/g, "<br />") +
       "</p>" +
       '<div class="post-foot"><span class="post-nick">' +
-      esc(p.nickname) +
+      esc(pv("nickname", p.nickname)) +
       "</span><span class=\"post-date\">" +
       esc(p.createdAt ? L.fmtDateTime(lang, p.createdAt) : "") +
       '</span></div><div class="post-actions">' +

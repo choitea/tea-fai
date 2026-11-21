@@ -5,7 +5,8 @@
     "ko": "쿠팡파트너스 활동의 일환으로, 이 링크를 통해 구매하시면 일정액의 수수료를 받습니다.",
     "en": "As a Coupang Partners affiliate, we receive a small commission when you buy through this link.",
     "zh-CN": "本站参与 Coupang Partners（酷澎合作伙伴）活动，您通过此链接购买时我们会获得一定比例的佣金。",
-    "zh-TW": "本站參與 Coupang Partners（酷澎合作夥伴）活動，您透過此連結購買時我們會獲得一定比例的佣金。"
+    "zh-TW": "本站參與 Coupang Partners（酷澎合作夥伴）活動，您透過此連結購買時我們會獲得一定比例的佣金。",
+    "yue": "本站參加 Coupang Partners（酷澎合作夥伴）活動，你經呢條連結買嘢，我哋會收到少少佣金。"
   },
   "note": "쿠팡파트너스에서 발급한 단축 URL(link.coupang.com)만 items 에 넣습니다. tea_ids·group_ids 로 그 차(계열)에만 연결하고, 같은 kind(leaf·teaware)가 여럿이면 priority 가 높은 하나만 표시됩니다. 연결된 상품이 없는 차는 browse 의 검색 링크로 넘어갑니다. price_krw 는 발급 시점 판매가이고, paid:true 항목이 표시될 때만 대가성 문구가 함께 나옵니다.",
   "items": [

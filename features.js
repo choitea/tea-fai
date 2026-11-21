@@ -65,19 +65,19 @@
       id: "milk-powder",
       q: "밀크티 파우더",
       title: { ko: "밀크티 파우더·베이스", en: "Milk tea powder or base", "zh-CN": "奶茶粉·基底", "zh-TW": "奶茶粉·基底", ja: "ミルクティーパウダー", yue: "奶茶粉·基底" },
-      note: { ko: "집에서 밀크티 만들 때 쓰는 베이스", en: "For making milk tea at home", "zh-CN": "在家做奶茶用", "zh-TW": "在家做奶茶用" }
+      note: { ko: "집에서 밀크티 만들 때 쓰는 베이스", en: "For making milk tea at home", "zh-CN": "在家做奶茶用", "zh-TW": "在家做奶茶用", yue: "喺屋企整奶茶用嘅基底" }
     },
     {
       id: "milk-tapioca",
       q: "타피오카 펄",
       title: { ko: "타피오카 펄 (버블티)", en: "Tapioca pearls for bubble tea", "zh-CN": "珍珠粉圆", "zh-TW": "珍珠粉圓", ja: "タピオカパール", yue: "珍珠（珍珠奶茶用）" },
-      note: { ko: "버블티용 펄", en: "Pearls for bubble tea", "zh-CN": "做珍珠奶茶用", "zh-TW": "做珍珠奶茶用" }
+      note: { ko: "버블티용 펄", en: "Pearls for bubble tea", "zh-CN": "做珍珠奶茶用", "zh-TW": "做珍珠奶茶用", yue: "整珍珠奶茶用嘅珍珠" }
     },
     {
       id: "milk-evap",
       q: "연유",
       title: { ko: "연유 (홍콩 밀크티용)", en: "Evaporated milk", "zh-CN": "淡奶", "zh-TW": "淡奶", ja: "エバミルク", yue: "淡奶（港式奶茶用）" },
-      note: { ko: "홍콩 밀크티의 진한 맛", en: "The body of Hong Kong milk tea", "zh-CN": "港式奶茶的厚度", "zh-TW": "港式奶茶的厚度" }
+      note: { ko: "홍콩 밀크티의 진한 맛", en: "The body of Hong Kong milk tea", "zh-CN": "港式奶茶的厚度", "zh-TW": "港式奶茶的厚度", yue: "港式奶茶嘅厚度" }
     },
     {
       id: "black-ceylon-bag",
