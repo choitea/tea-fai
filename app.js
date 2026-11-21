@@ -651,6 +651,20 @@
     });
   }
 
+  /* 상단 고정 영역이 브랜드 헤더 바로 아래에 붙도록 헤더 높이를 재서
+     CSS 변수(--guide-top)에 넣습니다. 헤더는 폰에서 두 줄이라
+     글꼴·언어에 따라 높이가 달라집니다. */
+  function syncHeaderHeight() {
+    var header = $(".app-header");
+    if (!header || typeof header.getBoundingClientRect !== "function") return;
+    var h = Math.round(header.getBoundingClientRect().height);
+    if (!h || h <= 0) return;
+    var root = document.documentElement;
+    if (root && root.style && typeof root.style.setProperty === "function") {
+      root.style.setProperty("--guide-top", h + "px");
+    }
+  }
+
   function bindViewToggle() {
     ["#viewToggle", "#storeViewToggle"].forEach(function (sel) {
       var btn = $(sel);
@@ -3774,6 +3788,7 @@
     renderBagMode();
     if (currentView === "quiz") renderQuiz();
     document.title = titleFor(currentView);
+    syncHeaderHeight();
   }
 
   function setLang(next) {
@@ -3786,6 +3801,7 @@
     D.use(lang);
     L.mountSwitcher($("#langSwitch"), lang, setLang);
     rerender();
+    syncHeaderHeight();
   }
 
   function init() {
@@ -3833,6 +3849,8 @@
     if (window.TeaFaiExtra) window.TeaFaiExtra.init();
 
     document.title = titleFor(currentView);
+    syncHeaderHeight();
+    window.addEventListener("resize", syncHeaderHeight);
 
     var hash = (location.hash || "").replace("#", "");
     if (hash === "quiz") openQuiz();
