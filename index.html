@@ -424,27 +424,30 @@
           <p data-i18n="store.lead">찻잎·다구·티백·밀크티 완제품을 한자리에서 보고 쿠팡에서 바로 삽니다. 가격은 판매처 기준입니다.</p>
         </div>
 
-        <div id="lensMount"></div>
+        <!-- 스마트렌즈 바·검색창·분류 칩은 스크롤해도 헤더 아래에 붙어 있습니다 -->
+        <div class="store-sticky" id="storeSticky">
+          <div id="lensMount"></div>
 
-        <div class="search-row">
-          <div class="search-box">
-            <svg><use href="#ic-search" /></svg>
-            <input
-              type="search"
-              id="storeSearchInput"
-              placeholder="차 이름·브랜드·다구로 찾기"
-              data-i18n-ph="store.search"
-              autocomplete="off"
-              aria-label="스토어 검색"
-              data-i18n-aria="a11y.search"
-            />
+          <div class="search-row">
+            <div class="search-box">
+              <svg><use href="#ic-search" /></svg>
+              <input
+                type="search"
+                id="storeSearchInput"
+                placeholder="차 이름·브랜드·다구로 찾기"
+                data-i18n-ph="store.search"
+                autocomplete="off"
+                aria-label="스토어 검색"
+                data-i18n-aria="a11y.search"
+              />
+            </div>
+            <button class="view-toggle" type="button" id="storeViewToggle" aria-label="3열 그리드로 보기" title="3열 그리드로 보기">
+              <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
+              <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
+            </button>
           </div>
-          <button class="view-toggle" type="button" id="storeViewToggle" aria-label="3열 그리드로 보기" title="3열 그리드로 보기">
-            <svg class="ic-grid" width="19" height="19" aria-hidden="true"><use href="#ic-grid" /></svg>
-            <svg class="ic-list" width="19" height="19" aria-hidden="true"><use href="#ic-list" /></svg>
-          </button>
+          <div class="chip-row wrap" id="storeCats" role="group" aria-label="상품 분류" data-i18n-aria="a11y.filter"></div>
         </div>
-        <div class="chip-row wrap" id="storeCats" role="group" aria-label="상품 분류" data-i18n-aria="a11y.filter"></div>
         <p class="store-count" id="storeCount" aria-live="polite"></p>
         <div id="storeList" class="store-list"></div>
         <p class="store-disclosure" id="storeDisclosure"></p>
