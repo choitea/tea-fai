@@ -104,6 +104,35 @@
     return out;
   }
 
+  /* 찻잎 정렬은 지금 고른 언어의 차 이름 기준입니다
+     (한국어는 가나다순, 영어는 A–Z, 중국어·일본어는 그 언어의 차자 순). */
+  var NAME_LOCALE = {
+    ko: "ko",
+    en: "en",
+    "zh-CN": "zh-Hans-CN",
+    "zh-TW": "zh-Hant-TW",
+    ja: "ja",
+    yue: "zh-Hant-HK"
+  };
+
+  function sortedTeas(groupId) {
+    var list = D.teasOf(groupId).slice();
+    var loc = NAME_LOCALE[lang] || lang || "ko";
+    list.sort(function (a, b) {
+      var x = String(a.name || "");
+      var y = String(b.name || "");
+      var r;
+      try {
+        r = x.localeCompare(y, loc);
+      } catch (e) {
+        r = x < y ? -1 : x > y ? 1 : 0;
+      }
+      if (r !== 0) return r;
+      return String(a.id).localeCompare(String(b.id));
+    });
+    return list;
+  }
+
   function titleFor(view) {
     return t("title." + view);
   }
@@ -219,7 +248,7 @@
         '<span class="dot" style="background:' + g.accent + '"></span><span>' + esc(g.name) + "</span>";
       btn.addEventListener("click", function () {
         if (timer.groupId === g.id) return;
-        var list = D.teasOf(g.id);
+        var list = sortedTeas(g.id);
         if (list.length) setTimerTea(list[0].id, 1);
       });
       wrap.appendChild(btn);
@@ -230,7 +259,7 @@
     var wrap = $("#teaChips");
     if (!wrap) return;
     wrap.innerHTML = "";
-    var list = D.teasOf(timer.groupId);
+    var list = sortedTeas(timer.groupId);
     list.forEach(function (tea) {
       var btn = document.createElement("button");
       btn.type = "button";
@@ -848,7 +877,7 @@
 
     orderedGroups().forEach(function (g) {
       if (guideState.filter !== "all" && guideState.filter !== g.id) return;
-      var cards = [g].concat(D.teasOf(g.id)).filter(function (item) {
+      var cards = [g].concat(sortedTeas(g.id)).filter(function (item) {
         if (!q) return true;
         return haystack(item).indexOf(q) >= 0;
       });
@@ -982,7 +1011,7 @@
       "</option>" +
       D.groups
         .map(function (g) {
-          var opts = D.teasOf(g.id)
+          var opts = sortedTeas(g.id)
             .map(function (tea) {
               return '<option value="' + tea.id + '">' + esc(tea.name) + "</option>";
             })
@@ -2152,7 +2181,7 @@
       });
       $$("[data-open-guide]", box).forEach(function (b) {
         b.addEventListener("click", function () {
-          openTeaInGuide(view.group ? D.teasOf(view.group)[0].id : timer.teaId);
+          openTeaInGuide(view.group ? sortedTeas(view.group)[0].id : timer.teaId);
         });
       });
       return;
@@ -2502,7 +2531,7 @@
     $$("[data-bag-guide]", list).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var group = btn.getAttribute("data-bag-guide");
-        var list2 = D.teasOf(group);
+        var list2 = sortedTeas(group);
         if (list2.length) openTeaInGuide(list2[0].id);
       });
     });
@@ -3055,7 +3084,7 @@
       var html = '<option value="">' + esc(t("comm.subjectNone")) + "</option>";
       D.groups.forEach(function (g) {
         html += '<optgroup label="' + esc(g.name) + '">';
-        D.teasOf(g.id).forEach(function (tea) {
+        sortedTeas(g.id).forEach(function (tea) {
           html += '<option value="tea:' + esc(tea.id) + '">' + esc(tea.name) + "</option>";
         });
         html += "</optgroup>";
