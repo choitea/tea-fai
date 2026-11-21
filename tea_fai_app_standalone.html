@@ -5497,6 +5497,11 @@ h3 {
   display: none;
 }
 
+.sc-maps.sc-maps-top {
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
 </style>
   </head>
   <body>
@@ -34398,6 +34403,8 @@ window.TEAFaiDataYue = (function () {
         .join("") +
       "</div>" +
       (match ? '<span class="sc-match">' + esc(t("shop.match", { n: match })) + "</span>" : "") +
+      /* 고정 매장은 카드 앞면에 지도 핀 링크(네이버·카카오·구글)를 바로 보여 줍니다 */
+      (shop.pinned && mapLinks ? '<div class="sc-maps sc-maps-top">' + mapLinks + "</div>" : "") +
       '<div class="sc-actions">' +
       '<a class="sc-btn primary" href="' +
       esc(mapHref(shop)) +
