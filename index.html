@@ -462,16 +462,18 @@
         <div class="view-head" style="margin-bottom: 12px">
           <p class="eyebrow" data-i18n="partner.kicker">Partners</p>
           <h1 id="partnerTitle" data-i18n="partner.title">파트너</h1>
-          <p data-i18n="partner.lead">티키피디아와 함께하는 찻집입니다. 회원은 목록과 지도에서 전국의 파트너를 찾을 수 있습니다.</p>
+          <p data-i18n="partner.lead">티키피디아와 함께하는 찻집입니다. 지금은 오픈 무료 기간이라 로그인·결제 없이 누구나 목록과 지도를 볼 수 있습니다.</p>
+          <p class="partner-free" data-i18n="partner.freeLine">오픈 무료 체험 중 — 로그인·결제 없이 바로 볼 수 있습니다</p>
         </div>
 
-        <div id="memberPanel"></div>
-
-        <div id="partnerMain" hidden>
+        <div id="partnerMain">
           <div class="section-head">
             <h2 data-i18n="partner.listTitle">파트너 매장</h2>
             <span id="partnerCount"></span>
           </div>
+
+          <div class="shop-row" id="partnerPinned"></div>
+
           <div class="search-box">
             <svg><use href="#ic-search" /></svg>
             <input
@@ -487,10 +489,21 @@
           <div class="chip-row wrap" id="regionChips" role="group" aria-label="지역 필터" data-i18n-aria="a11y.filter"></div>
           <div class="chip-row wrap" id="cafeTagChips" role="group" aria-label="취향 태그" data-i18n-aria="cafe.tagLabel"></div>
 
+          <div class="section-head sub" id="partnerOthersHead" hidden>
+            <h2 data-i18n="partner.othersTitle">다른 파트너 매장</h2>
+            <span id="partnerOthersCount"></span>
+          </div>
           <div class="shop-row" id="partnerShops"></div>
-          <div id="bizMount"></div>
-          <div id="myApps" class="my-apps" hidden></div>
         </div>
+
+        <div class="partner-apply">
+          <button class="btn btn-dark btn-block" type="button" data-apply-open data-i18n="apply.title">내 매장 입점 신청</button>
+          <p class="member-note" data-i18n="partner.applyNote">오픈 기간에는 입점 신청과 등록이 무료입니다. 유료 회원 등급은 추후 지원 예정입니다.</p>
+        </div>
+
+        <div id="memberPanel"></div>
+        <div id="bizMount"></div>
+        <div id="myApps" class="my-apps" hidden></div>
       </section>
 
       <!-- ───────── 5. 커뮤니티 ───────── -->

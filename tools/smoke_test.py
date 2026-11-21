@@ -8,7 +8,7 @@ quickjs 로 한 번 돌려 봅니다. 브라우저 없이 잡을 수 있는 실�
   · 스크립트가 문법 오류 없이 로드되는지
   · init() 이 예외 없이 끝나는지 (없는 id 를 잡으려다 터지는지)
   · 주요 화면(guide·timer·store·partner·community·notes)으로 전환되는지
-  · 계열 버튼 순서·개수, 스토어 상품 수, 회원 잠금 상태, 5개 언어 전환
+  · 계열 버튼 순서·개수, 스토어 상품 수, 파트너 고정 매장 순서, 6개 언어 전환
 """
 import json
 import re
@@ -183,7 +183,22 @@ CHECK = r"""
   try {
     var member = document.querySelector('#memberPanel');
     out.memberHtml = member.innerHTML.length;
+    out.memberFree = member.innerHTML.indexOf('무료') >= 0;
   } catch (e) { out.errors.push('member: ' + e); }
+
+  try {
+    window.TeaFaiApp.renderPartnerShops();
+    var pinned = document.querySelector('#partnerPinned');
+    var others = document.querySelector('#partnerShops');
+    var pin = pinned ? pinned.innerHTML : '';
+    out.pinnedHtml = pin.length;
+    out.pinnedOrder =
+      pin.indexOf('홍콩티') >= 0 && pin.indexOf('풍성한뷔페') >= 0
+        ? (pin.indexOf('홍콩티') < pin.indexOf('풍성한뷔페') ? 'hongkong-first' : 'pungsungh-first')
+        : 'missing';
+    out.partnerShopsHtml = others ? others.innerHTML.length : -1;
+    out.partnerShopsText = others ? others.innerHTML.indexOf('준비 중') >= 0 : false;
+  } catch (e) { out.errors.push('partners: ' + e); }
 
   try {
     var lens = document.querySelector('#lensMount');
@@ -200,11 +215,16 @@ CHECK = r"""
 """
 
 
-def run(plan=None):
+def run(plan=None, shops=None):
     ctx = quickjs.Context()
     ctx.eval(STUB)
     if plan:
         ctx.eval("localStorage.setItem('teafai.member.v1', %r)" % json.dumps({"plan": plan}))
+    if shops:
+        ctx.eval(
+            "localStorage.setItem('teafai.shops.v1', %r)"
+            % json.dumps({"version": shops.get("version"), "shops": shops.get("shops")}, ensure_ascii=False)
+        )
     files = ["supabase-adapter.js", "i18n.js", "data.js", "data_yue.js", "app.js", "features.js"]
     for f in files:
         src = (HERE / f).read_text(encoding="utf-8")
@@ -234,7 +254,31 @@ def run(plan=None):
 
 
 def main():
-    result = run(None)
+    shops_path = HERE / "data" / "shops.json"
+    shops = json.loads(shops_path.read_text(encoding="utf-8"))
+    # 파트너 고정 매장이 6개 언어 문구와 pinned 순서를 갖추고 있는지
+    shop_ok = True
+    for shop in shops.get("shops", []):
+        if not shop.get("pinned"):
+            shop_ok = False
+        for field in ("name", "region", "address", "near", "hoursNote", "desc"):
+            got = shop.get(field) or {}
+            if not all(got.get(code) for code in ("ko", "en", "zh-CN", "zh-TW", "ja", "yue")):
+                print(f"[shops] {shop.get('slug')} {field} 언어 누락")
+                shop_ok = False
+        for menu in shop.get("menus", []):
+            got = menu.get("name") or {}
+            if not all(got.get(code) for code in ("ko", "en", "zh-CN", "zh-TW", "ja", "yue")):
+                print(f"[shops] {shop.get('slug')} 메뉴 언어 누락")
+                shop_ok = False
+        if not (shop.get("maps") or {}).get("naver") or not (shop.get("maps") or {}).get("google"):
+            print(f"[shops] {shop.get('slug')} 지도 링크 누락")
+            shop_ok = False
+    first_pin = max((shop.get("pinned") or 0, shop.get("slug")) for shop in shops["shops"])[1]
+    if first_pin != "hongkongtea-bulgwang":
+        shop_ok = False
+
+    result = run(None, shops=shops)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     ok = (
         not result["errors"]
@@ -247,9 +291,13 @@ def main():
         and result["lensHtml"] > 100
         and result["leafCount"] == "161"
         and result["yueCantonese"] == 161
+        and result["pinnedOrder"] == "hongkong-first"
+        and result["pinnedHtml"] > 200
+        and result["partnerShopsText"] is True
+        and shop_ok
     )
-    maker = run("maker")
-    personal = run("personal")
+    maker = run("maker", shops=shops)
+    personal = run("personal", shops=shops)
     print(json.dumps({"maker": {k: maker[k] for k in ("rank", "bizHtml", "partnerHidden")},
                       "personal": {k: personal[k] for k in ("rank", "bizHtml", "partnerHidden")}},
                      ensure_ascii=False, indent=2))

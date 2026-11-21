@@ -1937,9 +1937,11 @@
       esc(shop.slug) +
       '">' +
       '<div class="sc-top">' +
-      (shop.sponsor
-        ? '<span class="sc-badge top">' + esc(t("cafe.top")) + "</span>"
-        : '<span class="sc-badge">' + esc(t("shop.partner")) + "</span>") +
+      (shop.pinned
+        ? '<span class="sc-badge top">' + esc(t("partner.featuredBadge")) + "</span>"
+        : shop.sponsor
+          ? '<span class="sc-badge top">' + esc(t("cafe.top")) + "</span>"
+          : '<span class="sc-badge">' + esc(t("shop.partner")) + "</span>") +
       (stateText ? '<span class="sc-state' + stateCls + '">' + esc(stateText) + "</span>" : "") +
       "</div>" +
       '<b class="sc-name">' +
@@ -1967,6 +1969,8 @@
         .join("") +
       "</div>" +
       (match ? '<span class="sc-match">' + esc(t("shop.match", { n: match })) + "</span>" : "") +
+      /* 고정 매장은 카드 앞면에 지도 핀 링크(네이버·카카오·구글)를 바로 보여 줍니다 */
+      (shop.pinned && mapLinks ? '<div class="sc-maps sc-maps-top">' + mapLinks + "</div>" : "") +
       '<div class="sc-actions">' +
       '<a class="sc-btn primary" href="' +
       esc(mapHref(shop)) +
@@ -2062,7 +2066,7 @@
   }
 
   function teaShopBlockHtml(teaId) {
-    if (window.TeaFaiExtra && !window.TeaFaiExtra.unlocked()) return "";
+    /* 파트너 목록·지도는 로그인·결제 없이 누구나 봅니다(오픈 무료 기간) */
     var list = shopsForTea(teaId);
     if (!list.length) return "";
     return (
@@ -2267,7 +2271,7 @@
           "</a>"
       );
     }
-    var shopList = window.TeaFaiExtra && !window.TeaFaiExtra.unlocked() ? [] : shopsForTea(tea.id);
+    var shopList = shopsForTea(tea.id);
     shopList.forEach(function (shop) {
       links.push(
         '<a class="de-link" href="' +
@@ -2747,29 +2751,53 @@
       });
   }
 
+  /* 파트너 목록 — 고정 매장(pinned)을 맨 위에 두고, 그 아래에 나머지 입점 매장을 잇습니다.
+     오픈 무료 기간이라 로그인·결제 없이 누구나 바로 봅니다. */
+  function pinnedShops() {
+    return (PARTNER.shops || [])
+      .filter(function (shop) {
+        return shop.pinned;
+      })
+      .sort(function (a, b) {
+        return (b.pinned || 0) - (a.pinned || 0);
+      });
+  }
+
   function renderPartnerShops() {
     var row = $("#partnerShops");
+    var pinnedRow = $("#partnerPinned");
     var head = $("#partnerHead");
     var count = $("#partnerCount");
+    var othersHead = $("#partnerOthersHead");
+    var othersCount = $("#partnerOthersCount");
     if (!row) return;
-    /* 비구독 상태에서는 파트너 목록·지역 검색을 열지 않습니다(잠금 카드만 보입니다) */
-    if (window.TeaFaiExtra && !window.TeaFaiExtra.unlocked()) {
-      row.innerHTML = "";
-      if (count) count.textContent = "";
-      return;
-    }
-    var shops = (PARTNER.shops || []).filter(partnerMatches).sort(function (a, b) {
+
+    var pinned = pinnedShops();
+    var rest = (PARTNER.shops || []).filter(function (shop) {
+      return !shop.pinned;
+    });
+    var others = rest.filter(partnerMatches).sort(function (a, b) {
       return (b.sponsor ? 1 : 0) - (a.sponsor ? 1 : 0) || (b.tier || 0) - (a.tier || 0);
     });
-    if (!shops.length) {
-      row.innerHTML = '<div class="empty">' + esc(t("cafe.empty")) + "</div>";
-      if (head) head.hidden = false;
-      if (count) count.textContent = t("cafe.count", { n: 0 });
+
+    if (head) head.hidden = false;
+    if (count) count.textContent = t("cafe.partnerSub", { n: pinned.length + others.length });
+
+    if (pinnedRow) {
+      pinnedRow.hidden = !pinned.length;
+      pinnedRow.innerHTML = pinned.map(shopCardHtml).join("");
+      if (pinned.length) bindShop(pinnedRow);
+    }
+
+    if (othersHead) othersHead.hidden = !others.length;
+    if (othersCount) othersCount.textContent = others.length ? t("cafe.count", { n: others.length }) : "";
+
+    if (!others.length) {
+      /* 아직 다른 입점 매장이 없으면 안내 문구로 다음 자리를 채웁니다 */
+      row.innerHTML = '<div class="empty">' + esc(t(rest.length ? "cafe.empty" : "partner.othersEmpty")) + "</div>";
       return;
     }
-    if (head) head.hidden = false;
-    if (count) count.textContent = t("cafe.partnerSub", { n: shops.length });
-    row.innerHTML = shops.map(shopCardHtml).join("");
+    row.innerHTML = others.map(shopCardHtml).join("");
     bindShop(row);
   }
 

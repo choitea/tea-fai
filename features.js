@@ -639,24 +639,24 @@
       esc(t("member." + plan)) +
       '</b><span class="pb-price">' +
       esc(t("member." + plan + "Price")) +
-      "</span></div><ul>" +
+      '</span></div><span class="pb-soon">' +
+      esc(t("partner.soon")) +
+      "</span><ul>" +
       feats
         .map(function (f) {
           return "<li>" + esc(t(f)) + "</li>";
         })
         .join("") +
-      "</ul>" +
-      '<button class="btn btn-outline btn-block" type="button" data-subscribe="' +
-      escape(plan) +
-      '" style="margin-top:9px">' +
-      esc(t("member.subscribe")) +
-      "</button></div>"
+      "</ul></div>"
     );
   }
 
+  /* 파트너 탭은 오픈 무료 기간입니다 — 잠금 카드 대신 무료 안내와
+     회원 등급(추후 지원 예정)을 보여 주고, 입점 신청은 열어 둡니다. */
   function renderMemberPanel() {
     var box = $("#memberPanel");
     var main = $("#partnerMain");
+    if (main) main.hidden = false;
     if (!box) return;
     var state = memberState();
     if (state.plan !== "none") {
@@ -669,55 +669,47 @@
         '<p class="member-note">' +
         esc(t("member.upgrade")) +
         "</p>";
-      if (main) main.hidden = false;
       renderUploads();
       return;
     }
-    if (main) main.hidden = true;
+
     box.innerHTML =
-      '<div class="lock-card">' +
-      '<div class="lock-icon"><svg width="20" height="20"><use href="#ic-lock"/></svg></div>' +
-      "<h3>" +
-      esc(t("member.lockTitle")) +
+      '<div class="section-head"><h2>' +
+      esc(t("partner.plansTitle")) +
+      "</h2></div>" +
+      '<div class="lock-card free">' +
+      '<span class="free-pill">' +
+      esc(t("partner.freePill")) +
+      "</span><h3>" +
+      esc(t("member.freeTitle")) +
       "</h3><p>" +
-      esc(t("member.lockBody")) +
-      "</p>" +
+      esc(t("member.freeBody")) +
+      "</p></div>" +
       '<div class="plan-grid three">' +
       PLAN_ORDER.map(planBoxHtml).join("") +
       "</div>" +
-      '<div class="member-actions">' +
-      '<button class="btn btn-outline" type="button" data-restore>' +
-      esc(t("member.restore")) +
-      "</button>" +
-      "</div>" +
       '<p class="member-note">' +
-      esc(t("member.webNote")) +
-      "</p></div>";
+      esc(t("member.priceNote")) +
+      "</p>";
 
-    var restore = $("[data-restore]", box);
-    if (restore)
-      restore.addEventListener("click", function () {
-        startSubscribe("personal");
-      });
-    PLAN_ORDER.forEach(function (plan) {
-      var b = $("[data-subscribe=" + plan + "]", box);
-      if (b)
-        b.addEventListener("click", function () {
-          startSubscribe(plan);
-        });
-    });
+    renderUploads();
   }
 
   /* ---------------- 찻집 회원 · 제조사 회원 업로드 ---------------- */
   function renderUploads() {
     var mount = $("#bizMount");
     if (!mount) return;
-    if (!unlocked()) {
-      mount.innerHTML = "";
-      return;
-    }
     var shop = canUploadShop();
     var prod = canUploadProduct();
+    if (!shop && !prod) {
+      mount.innerHTML =
+        '<div class="section-head"><h2>' +
+        esc(t("upload.soonTitle")) +
+        '</h2></div><p class="member-note" style="margin-top:-6px">' +
+        esc(t("upload.soonBody")) +
+        "</p>";
+      return;
+    }
     mount.innerHTML =
       (shop
         ? '<div class="section-head"><h2>' +
