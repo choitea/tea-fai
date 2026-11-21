@@ -4330,15 +4330,11 @@ body.modal-open {
   }
 }
 
-/* 차 백과 상단: 제목 없이 설명 문장만 (여백만 살짝) */
-.guide-head {
-  margin: 2px 0 10px;
-}
-.guide-lead {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
+/* 차 백과: 별도 상단 머리말 없이 취향 테스트 카드가 바로 시작 */
+@media (max-width: 899px) {
+  #view-guide {
+    padding-top: 12px;
+  }
 }
 
 /* 본문은 찻잎 위에 (헤더·탭바는 원래의 fixed 유지) */
@@ -4952,7 +4948,6 @@ h3 {
 }
 
 .card p,
-.guide-lead,
 .member-note,
 .tea-oneline {
   font-weight: 500;
@@ -5138,11 +5133,7 @@ h3 {
 
     <main class="viewport">
       <!-- ───────── 1. 차 백과 (기본 화면) ───────── -->
-      <section class="view active" id="view-guide" aria-labelledby="guideTitle">
-        <div class="view-head guide-head">
-          <p class="guide-lead" id="guideTitle" data-i18n="guide.lead">산화도, 제다, 향미, 페어링, 보관까지 — 161종을 실제 찻잎 사진과 원산지로 정리했습니다.</p>
-        </div>
-
+      <section class="view active" id="view-guide" aria-label="차 백과" data-i18n-aria="tab.guide">
         <button class="quiz-strip" type="button" id="quizBanner">
           <span class="qs-spark" aria-hidden="true">✦</span>
           <span class="qs-text">
@@ -6075,7 +6066,6 @@ window.TEAFaiI18N = (function () {
         "이 차는 1~2회가 적정입니다. 세 번째 포는 향이 줄고 떫은맛이 앞서니 짧게 즐기세요. ({basis})",
       "guide.kicker": "Teakipedia",
       "guide.title": "차 백과",
-      "guide.lead": "산화도, 제다, 향미, 페어링, 보관까지 — 161종을 정리했습니다.",
       "guide.search": "차 이름, 향, 산지로 찾기",
       "a11y.search": "차 백과 검색",
       "a11y.filter": "차류 필터",
@@ -6198,8 +6188,6 @@ window.TEAFaiI18N = (function () {
         "One or two infusions suit this tea. A third loses aroma and leads with astringency, so keep it short. ({basis})",
       "guide.kicker": "Teakipedia",
       "guide.title": "Tea guide",
-      "guide.lead":
-        "Oxidation, processing, flavour, pairing and storage across 161 teas.",
       "guide.search": "Search by name, aroma or origin",
       "a11y.search": "Search the tea guide",
       "a11y.filter": "Filter by tea type",
@@ -6321,7 +6309,6 @@ window.TEAFaiI18N = (function () {
       "timer.thirdNote": "这款茶适合1~2泡。第三泡香气减弱、涩味突前，请短泡享用。（{basis}）",
       "guide.kicker": "Teakipedia",
       "guide.title": "茶百科",
-      "guide.lead": "从发酵度、制茶、香气、搭配到保存——共161种。",
       "guide.search": "按茶名、香气、产地搜索",
       "a11y.search": "搜索茶百科",
       "a11y.filter": "按茶类筛选",
@@ -6442,7 +6429,6 @@ window.TEAFaiI18N = (function () {
       "timer.thirdNote": "這款茶適合1~2泡。第三泡香氣減弱、澀味突前，請短泡享用。（{basis}）",
       "guide.kicker": "Teakipedia",
       "guide.title": "茶百科",
-      "guide.lead": "從發酵度、製茶、香氣、搭配到保存——共161種。",
       "guide.search": "按茶名、香氣、產地搜尋",
       "a11y.search": "搜尋茶百科",
       "a11y.filter": "按茶類篩選",
@@ -7816,7 +7802,6 @@ window.TEAFaiI18N = (function () {
       "title.store": "스토어 — 티키피디아",
       "title.partner": "파트너 — 티키피디아",
       "a11y.tabbar": "주요 화면",
-      "guide.lead": "산화도, 제다, 향미, 페어링, 보관까지 — 161종을 실제 찻잎 사진과 원산지로 정리했습니다.",
       "guide.origin": "원산지",
       "guide.quiz": "취향 테스트",
       "guide.channel": "티파이 채널",
@@ -7918,7 +7903,6 @@ window.TEAFaiI18N = (function () {
       "title.store": "Store — Teakipedia",
       "title.partner": "Partners — Teakipedia",
       "a11y.tabbar": "Main screens",
-      "guide.lead": "Oxidation, processing, flavour, pairing and storage — 161 teas, each with a real leaf photo and its country of origin.",
       "guide.origin": "Origin",
       "guide.quiz": "Taste test",
       "guide.channel": "Tea Fai channels",
@@ -8020,7 +8004,6 @@ window.TEAFaiI18N = (function () {
       "title.store": "商店 — 茶百科应用",
       "title.partner": "合作店 — 茶百科应用",
       "a11y.tabbar": "主要页面",
-      "guide.lead": "从发酵度、制茶、香气、搭配到保存——共161种，配上真实茶叶照片与产地。",
       "guide.origin": "产地",
       "guide.quiz": "口味测试",
       "guide.channel": "Tea Fai 频道",
@@ -8122,7 +8105,6 @@ window.TEAFaiI18N = (function () {
       "title.store": "商店 — 茶百科應用",
       "title.partner": "合作店 — 茶百科應用",
       "a11y.tabbar": "主要頁面",
-      "guide.lead": "從發酵度、製茶、香氣、搭配到保存——共161種，配上真實茶葉照片與產地。",
       "guide.origin": "產地",
       "guide.quiz": "口味測試",
       "guide.channel": "Tea Fai 頻道",
@@ -8254,7 +8236,6 @@ window.TEAFaiI18N = (function () {
     "state.paused": "停咗",
     "state.done": "完成",
     "guide.title": "茶百科",
-    "guide.lead": "發酵度、製茶、香氣、配搭到保存——共161種，配埋真實茶葉相片同產地。",
     "guide.origin": "產地",
     "guide.quiz": "口味測試",
     "guide.channel": "Tea Fai 頻道",
@@ -8805,7 +8786,6 @@ window.TEAFaiI18N = (function () {
     "title.quiz": "お茶の好み診断 — ティーキペディア",
     "guide.kicker": "Teakipedia",
     "guide.title": "茶百科",
-    "guide.lead": "発酵度、製茶、香り、食べ合わせ、保存まで — 161種を、実際の茶葉写真と産地でまとめました。",
     "guide.search": "茶名・香り・産地で探す",
     "guide.searchLeaf": "茶名・香り・産地・国で探す",
     "guide.searchBag": "ティーバッグ名・ブランド・香りで探す",
@@ -28787,7 +28767,7 @@ window.TEAFaiData = (function () {
   function countryName(item) {
     var c = item.country;
     if (!c) return "";
-    return c[lang] || c.zh-TW || c.en || c.ko || "";
+    return c[lang] || c["zh-TW"] || c.en || c.ko || "";
   }
 
   function photoSrc(photo) {

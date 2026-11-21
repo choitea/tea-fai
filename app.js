@@ -684,7 +684,7 @@
   function countryName(item) {
     var c = item.country;
     if (!c) return "";
-    return c[lang] || c.zh-TW || c.en || c.ko || "";
+    return c[lang] || c["zh-TW"] || c.en || c.ko || "";
   }
 
   function photoSrc(photo) {

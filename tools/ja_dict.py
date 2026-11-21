@@ -14,7 +14,6 @@ JA = {
   "title.community": "コミュニティ — ティーキペディア", "title.notes": "テイスティングノート — ティーキペディア",
   "title.quiz": "お茶の好み診断 — ティーキペディア",
   "guide.kicker": "Teakipedia", "guide.title": "茶百科",
-  "guide.lead": "発酵度、製茶、香り、食べ合わせ、保存まで — 10の茶類162種を、実際の茶葉写真と産地でまとめました。",
   "guide.search": "茶名・香り・産地で探す", "guide.searchLeaf": "茶名・香り・産地で探す",
   "guide.searchBag": "ティーバッグ名・ブランド・香りで探す",
   "guide.all": "すべて", "guide.empty": "「{q}」は見つかりません。別の言葉で試してください。",

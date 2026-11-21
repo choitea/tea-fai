@@ -55,13 +55,13 @@
 
 ## 바로 열기
 
-- **웹에서 바로 쓰기 (설치 없이)**: <https://choitea.github.io/tea-fai/>
+- **웹에서 바로 쓰기 (설치 없이)**: <https://choitea.github.io/teakipedia/>
   - 폰 브라우저에서 주소를 열고 메뉴 → **홈 화면에 추가**를 누르면 주소창 없는 앱으로 설치됩니다.
-  - 개인정보처리방침: <https://choitea.github.io/tea-fai/privacy.html>
+  - 개인정보처리방침: <https://choitea.github.io/teakipedia/privacy.html>
 - **단일 파일**: `tea_fai_app_standalone.html`을 브라우저로 열면 끝 (인터넷 없이도 동작).
 - **앱처럼 설치**: 아래처럼 로컬 서버를 띄운 뒤 `http://<PC IP>:8000/index.html`을 폰 크롬에서 연다.
   주소창 메뉴 → **홈 화면에 추가**를 누르면 주소창 없는 앱으로 실행되고 오프라인에서도 열립니다.
-- **APK 바로 설치**: <https://choitea.github.io/tea-fai/teakipedia-release.apk> (안드로이드, 1.33MB)
+- **APK 바로 설치**: <https://choitea.github.io/teakipedia/teakipedia-release.apk> (안드로이드, 1.33MB)
   폰 브라우저에서 내려받아 열면 "출처를 알 수 없는 앱 설치" 확인을 한 번 거쳐 설치됩니다.
 
   ```bash

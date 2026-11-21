@@ -4300,15 +4300,11 @@ body.modal-open {
   }
 }
 
-/* 차 백과 상단: 제목 없이 설명 문장만 (여백만 살짝) */
-.guide-head {
-  margin: 2px 0 10px;
-}
-.guide-lead {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
+/* 차 백과: 별도 상단 머리말 없이 취향 테스트 카드가 바로 시작 */
+@media (max-width: 899px) {
+  #view-guide {
+    padding-top: 12px;
+  }
 }
 
 /* 본문은 찻잎 위에 (헤더·탭바는 원래의 fixed 유지) */
@@ -4922,7 +4918,6 @@ h3 {
 }
 
 .card p,
-.guide-lead,
 .member-note,
 .tea-oneline {
   font-weight: 500;
